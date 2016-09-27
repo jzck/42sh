@@ -26,8 +26,10 @@ int		builtin_setenv(char **av, char **env);
 int		builtin_unsetenv(char **av, char **env);
 int		builtin_env(char **av, char **env);
 
-void	ft_format_vars(char **av, char **env);
+void	ft_expand_vars(char **av, char **env);
 char	*ft_env_getval(char **env, char *key);
+
+int		ft_path_access(char *execpath, char *execname);
 char	*ft_path_findexec(char **path, char *execname);
 
 #endif

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ft_format_vars(char **av, char **env)
+void	ft_expand_vars(char **av, char **env)
 {
 	while (*av)
 	{
