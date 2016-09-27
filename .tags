@@ -1,0 +1,13 @@
+Mmain	src/main.c	/^int		main(void)$/
+builtin_cd	src/builtin.c	/^int		builtin_cd(char **av, char **env)$/
+builtin_echo	src/builtin.c	/^int		builtin_echo(char **av, char **env)$/
+builtin_env	src/lib_builtin_env.c	/^int		builtin_env(char **av, char **env)$/
+builtin_exit	src/builtin.c	/^int		builtin_exit(char **av, char **env)$/
+builtin_setenv	src/lib_builtin_env.c	/^int		builtin_setenv(char **av, char **env)$/
+builtin_unsetenv	src/lib_builtin_env.c	/^int		builtin_unsetenv(char **av, char **env)$/
+ft_builtin_exec	src/builtin.c	/^int		ft_builtin_exec(char **av, char **env)$/
+ft_cmd_exec	src/ft_cmd.c	/^int		ft_cmd_exec(char *cmd)$/
+ft_cmd_getav	src/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
+ft_env_getval	src/lib_env.c	/^char	*ft_env_getval(char **env, char *key)$/
+ft_format_vars	src/lib_format.c	/^void	ft_format_vars(char **av, char **env)$/
+ft_path_findexec	src/lib_path.c	/^char	*ft_path_findexec(char **path, char *execname/
