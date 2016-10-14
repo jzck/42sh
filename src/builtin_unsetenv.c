@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-int		builtin_env(char **av, char ***env_p)
+int		builtin_unsetenv(char **av, char ***env)
 {
-	(void)env_p;
+	(void)env;
 	ft_printf("builtin: %s\n", av[0]);
 	return (0);
 }

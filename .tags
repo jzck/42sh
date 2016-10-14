@@ -1,13 +1,14 @@
 Mmain	src/main.c	/^int		main(void)$/
-builtin_cd	src/builtin.c	/^int		builtin_cd(char **av, char **env)$/
-builtin_echo	src/builtin.c	/^int		builtin_echo(char **av, char **env)$/
-builtin_env	src/builtin_env.c	/^int		builtin_env(char **av, char **env)$/
-builtin_exit	src/builtin.c	/^int		builtin_exit(char **av, char **env)$/
-builtin_setenv	src/builtin_env.c	/^int		builtin_setenv(char **av, char **env)$/
-builtin_unsetenv	src/builtin_env.c	/^int		builtin_unsetenv(char **av, char **env)$/
-ft_builtin_exec	src/builtin.c	/^int		ft_builtin_exec(char **av, char **env)$/
-ft_cmd_exec	src/ft_cmd.c	/^int		ft_cmd_exec(char *cmd)$/
+builtin_cd	src/builtin_cd.c	/^int		builtin_cd(char **av, char ***env)$/
+builtin_echo	src/builtin_echo.c	/^int		builtin_echo(char **av, char ***env_p)$/
+builtin_env	src/builtin_env.c	/^int		builtin_env(char **av, char ***env_p)$/
+builtin_exit	src/builtin_exit.c	/^int		builtin_exit(char **av, char ***env_p)$/
+builtin_setenv	src/builtin_setenv.c	/^int		builtin_setenv(char **av, char ***env_p)$/
+builtin_unsetenv	src/builtin_unsetenv.c	/^int		builtin_unsetenv(char **av, char ***env)$/
+ft_builtin	src/builtin.c	/^int		ft_builtin(char **av, char ***env_p)$/
+ft_cmd_exec	src/ft_cmd.c	/^int		ft_cmd_exec(char *execpath, char **argv, char/
 ft_cmd_getav	src/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
+ft_cmd_process	src/ft_cmd.c	/^int		ft_cmd_process(char *cmd)$/
 ft_env_getval	src/lib_env.c	/^char	*ft_env_getval(char **env, char *key)$/
 ft_expand_vars	src/lib_expansion.c	/^void	ft_expand_vars(char **av, char **env)$/
 ft_path_access	src/lib_path.c	/^int		ft_path_access(char *execpath, char *execname/

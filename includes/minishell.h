@@ -15,16 +15,17 @@ typedef struct	s_builtin
 
 extern t_builtin	g_builtin[];
 
-int		ft_cmd_exec(char *cmd);
+int		ft_cmd_process(char *cmd);
+int		ft_cmd_exec(char *execpath, char **argv, char ***env_p);
 char	**ft_cmd_getav(char *cmd);
 
-int		ft_builtin_exec(char **av, char **env);
-int		builtin_echo(char **av, char **env);
-int		builtin_cd(char **av, char **env);
-int		builtin_exit(char **av, char **env);
-int		builtin_setenv(char **av, char **env);
-int		builtin_unsetenv(char **av, char **env);
-int		builtin_env(char **av, char **env);
+int		ft_builtin(char **av, char ***env);
+int		builtin_echo(char **av, char ***env);
+int		builtin_cd(char **av, char ***env);
+int		builtin_exit(char **av, char ***env);
+int		builtin_setenv(char **av, char ***env);
+int		builtin_unsetenv(char **av, char ***env);
+int		builtin_env(char **av, char ***env);
 
 void	ft_expand_vars(char **av, char **env);
 char	*ft_env_getval(char **env, char *key);

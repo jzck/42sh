@@ -6,14 +6,10 @@ int		main(void)
 
 	while (1)
 	{
-		ft_printf(SHELL_PROMPT);
-		/* if (get_next_line(0, &line) == 1) */
-		/* 	continue ; */
-		/* if (get_next_line(0, &line) == 0) */
-		/* 	ft_cmd_exec(line); */
+		ft_putstr(SHELL_PROMPT);
 		if (get_next_line(0, &line) == -1)
 			return (1);
-		ft_cmd_exec(line);
+		ft_cmd_process(line);
 	}
 	return (0);
 }
