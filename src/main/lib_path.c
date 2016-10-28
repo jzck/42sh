@@ -18,7 +18,7 @@ char	*ft_path_findexec(char **path, char *execname)
 	struct dirent	*dirent;
 
 	i = -1;
-	while (path[++i])
+	while (path && path[++i])
 	{
 		if (!(dir = opendir(path[i])))
 			continue ;

@@ -1,25 +1,20 @@
 #include "minishell.h"
-extern char **environ;
 
-int		ft_cmd_process(char *cmd)
+int		ft_cmd_process(char **argv, char ***env_p)
 {
 	char	**path;
 	char	*execpath;
-	char	**argv;
 
-	/* path = NULL; */
-	environ = ft_sstrdup(environ);
-	path = ft_strsplit(ft_env_getval(environ, "PATH"), ':');
-	argv = ft_cmd_getav(cmd);
-	ft_expand_vars(argv, environ);
-	if (ft_builtin(argv, &environ))
+	path = ft_strsplit(ft_env_getval(*env_p, "PATH"), ':');
+	ft_expand_dollar(argv, *env_p);
+	if (ft_builtin(argv, env_p))
 		return (0);
 	else if (ft_strchr(argv[0], '/'))
-		execpath = cmd;
+		execpath = argv[0];
 	else if (!(execpath = ft_path_findexec(path, argv[0])))
 		return (-1);
 	ft_printf("%s @ %s\n", argv[0], execpath);
-	return (ft_cmd_exec(execpath, argv, &environ));
+	return (ft_cmd_exec(execpath, argv, env_p));
 }
 
 int		ft_cmd_exec(char *execpath, char **argv, char ***env_p)

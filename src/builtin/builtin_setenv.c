@@ -15,7 +15,6 @@ int		builtin_setenv(char **av, char ***env_p)
 		str = ft_str3join(av[0], "=", av[1]);
 		while (*env)
 		{
-			/* ft_printf("%s\n", env[i]); */
 			if (ft_strcmp(*env, av[0]) == '=')
 			{
 				*env = str;

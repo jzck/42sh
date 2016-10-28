@@ -2,6 +2,8 @@
 
 char	*ft_env_getval(char **env, char *key)
 {
+	if (!env)
+		return (NULL);
 	while (*env)
 	{
 		/* ft_printf("%s\n", env[i]); */
