@@ -1,7 +1,6 @@
 #include "minishell.h"
 
 t_stof g_keys[] = {
-	{FT_KEY_C_D,		NULL},
 	{FT_KEY_C_K,		NULL},
 	{FT_KEY_TAB,		NULL},
 	{FT_KEY_C_H,		&ft_line_start},
@@ -25,6 +24,7 @@ t_stof g_keys[] = {
 
 	{FT_KEY_ENTER,		&ft_key_enter},
 	{FT_KEY_DEL,		&ft_key_del},
+	{FT_KEY_C_D,		&ft_key_ctrl_d},
 	{NULL,				&ft_key_basic},
 };
 

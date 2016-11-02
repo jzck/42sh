@@ -10,28 +10,31 @@ builtin_exit	src/builtin/builtin_exit.c	/^int		builtin_exit(char **av, char ***e
 builtin_setenv	src/builtin/builtin_setenv.c	/^int		builtin_setenv(char **av, char ***env_p)$/
 builtin_unsetenv	src/builtin/builtin_unsetenv.c	/^int		builtin_unsetenv(char **av, char ***env_p)$/
 ft_builtin	src/builtin/builtin.c	/^int		ft_builtin(char **av, char ***env_p)$/
-ft_clear_line	src/user-interaction/ft_clear_line.c	/^int		ft_clear_line(t_data *data, t_dlist **input_c/
-ft_cmd_exec	src/user-interaction/ft_cmd.c	/^int		ft_cmd_exec(char *execpath, char **argv, char/
-ft_cmd_getav	src/user-interaction/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
-ft_cmd_process	src/user-interaction/ft_cmd.c	/^int		ft_cmd_process(char **argv, char ***env_p)$/
-ft_cursor_left	src/user-interaction/ft_cursor_left.c	/^int		ft_cursor_left(t_data *data, t_dlist **input_/
-ft_cursor_right	src/user-interaction/ft_cursor_right.c	/^int		ft_cursor_right(t_data *data, t_dlist **input/
+ft_clear_line	src/line-editing/ft_clear_line.c	/^int		ft_clear_line(t_data *data, t_dlist **input_c/
+ft_cmd_exec	src/main/ft_cmd.c	/^int		ft_cmd_exec(char *execpath, char **argv, char/
+ft_cmd_getav	src/main/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
+ft_cmd_process	src/main/ft_cmd.c	/^int		ft_cmd_process(char **argv, char ***env_p)$/
+ft_cursor_left	src/line-editing/ft_cursor_left.c	/^int		ft_cursor_left(t_data *data, t_dlist **input_/
+ft_cursor_right	src/line-editing/ft_cursor_right.c	/^int		ft_cursor_right(t_data *data, t_dlist **input/
 ft_env_getval	src/main/lib_env.c	/^char	*ft_env_getval(char **env, char *key)$/
 ft_expand_dollar	src/main/lib_expansion.c	/^void	ft_expand_dollar(char **av, char **env)$/
-ft_history_add	src/user-interaction/ft_history_add.c	/^int		ft_history_add(t_data *data, t_dlist *input_c/
-ft_history_down	src/user-interaction/ft_history_down.c	/^int		ft_history_down(t_data *data, t_dlist **input/
-ft_history_up	src/user-interaction/ft_history_up.c	/^int		ft_history_up(t_data *data, t_dlist **input_c/
-ft_input_is_escaped	src/user-interaction/ft_input_is_escaped.c	/^int		ft_input_is_escaped(t_dlist *input_chain)$/
-ft_interactive_sh	src/user-interaction/ft_interactive_sh.c	/^int		ft_interactive_sh(t_data *data)$/
-ft_key_basic	src/user-interaction/ft_key_basic.c	/^int	ft_key_basic(t_data *data, t_dlist **input_cha/
-ft_key_del	src/user-interaction/ft_key_del.c	/^int		ft_key_del(t_data *data, t_dlist **input_chai/
-ft_key_enter	src/user-interaction/ft_key_enter.c	/^int		ft_key_enter(t_data *data, t_dlist **input_ch/
-ft_line_end	src/user-interaction/ft_line_end.c	/^int		ft_line_end(t_data *data, t_dlist **input_cha/
-ft_line_go_down	src/user-interaction/ft_line_down.c	/^int		ft_line_go_down(t_dlist **input_chain)$/
-ft_line_go_up	src/user-interaction/ft_line_up.c	/^int		ft_line_go_up(t_dlist **input_chain)$/
-ft_line_start	src/user-interaction/ft_line_start.c	/^int		ft_line_start(t_data *data, t_dlist **input_c/
+ft_history_add	src/line-editing/ft_history_add.c	/^int		ft_history_add(t_data *data, t_dlist *input_c/
+ft_history_down	src/line-editing/ft_history_down.c	/^int		ft_history_down(t_data *data, t_dlist **input/
+ft_history_up	src/line-editing/ft_history_up.c	/^int		ft_history_up(t_data *data, t_dlist **input_c/
+ft_input_is_escaped	src/line-editing/ft_input_is_escaped.c	/^int		ft_input_is_escaped(t_dlist *input_chain)$/
+ft_interactive_sh	src/line-editing/ft_interactive_sh.c	/^int		ft_interactive_sh(t_data *data)$/
+ft_key_basic	src/line-editing/ft_key_basic.c	/^int	ft_key_basic(t_data *data, t_dlist **input_cha/
+ft_key_ctrl_d	src/line-editing/ft_key_ctrl_d.c	/^int		ft_key_ctrl_d(t_data *data, t_dlist **input_c/
+ft_key_del	src/line-editing/ft_key_del.c	/^int		ft_key_del(t_data *data, t_dlist **input_chai/
+ft_key_enter	src/line-editing/ft_key_enter.c	/^int		ft_key_enter(t_data *data, t_dlist **input_ch/
+ft_line_end	src/line-editing/ft_line_end.c	/^int		ft_line_end(t_data *data, t_dlist **input_cha/
+ft_line_go_down	src/line-editing/ft_line_down.c	/^int		ft_line_go_down(t_dlist **input_chain)$/
+ft_line_go_up	src/line-editing/ft_line_up.c	/^int		ft_line_go_up(t_dlist **input_chain)$/
+ft_line_start	src/line-editing/ft_line_start.c	/^int		ft_line_start(t_data *data, t_dlist **input_c/
 ft_path_access	src/main/lib_path.c	/^int		ft_path_access(char *execpath, char *execname/
 ft_path_findexec	src/main/lib_path.c	/^char	*ft_path_findexec(char **path, char *execname/
+ft_prompt	src/main/ft_prompt.c	/^int		ft_prompt(void)$/
 ft_tc_init	src/main/lib_tc.c	/^int		ft_tc_init(t_data *data)$/
-ft_word_left	src/user-interaction/ft_word_left.c	/^int		ft_word_left(t_data *data, t_dlist **input_ch/
-ft_word_right	src/user-interaction/ft_word_right.c	/^int		ft_word_right(t_data *data, t_dlist **input_c/
+ft_word_left	src/line-editing/ft_word_left.c	/^int		ft_word_left(t_data *data, t_dlist **input_ch/
+ft_word_right	src/line-editing/ft_word_right.c	/^int		ft_word_right(t_data *data, t_dlist **input_c/
+sig_handler	src/main/sig_handler.c	/^void	sig_handler(int signo)$/

@@ -1,3 +1,3 @@
-while [ 1 ]
-	sleep
+while [ 1 ]; do
+	sleep 1
 done
