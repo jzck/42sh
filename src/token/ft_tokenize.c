@@ -23,7 +23,7 @@ int		ft_tokenize(t_list **alst, char *str)
 		token  = (*alst)->content;
 	if (!*str)
 		return (0);
-	else if (token->type == TOKEN_OPERATOR && !quoted)
+	else if ((token->type & TOKEN_OPERATOR) && !quoted)
 	{
 		if (can_be_used_in_op)
 			token_append(token, *str);
@@ -32,8 +32,25 @@ int		ft_tokenize(t_list **alst, char *str)
 	}
 	else if (can_be_first_of_op && !quoted)
 	{
-		
+		(*alst)->next = ft_lstnew(token_init(), sizeof(t_token));
+		(*alst) = (*alst)->next;
+		token = (*alst)->content;
+		token->type = TOKEN_UNKNOWN;
 	}
+	else if (*str == '\n' && !quoted)
+		ft_tokenize(&(*alst)->next, str + 1);
+	else if (*str == ' ' && !quoted)
+		ft_tokenize(&(*alst)->next, str + 1);
+	else if (token->type == TOKEN_WORD)
+		token_append(token, *str);
+	else if (*str = '#')
+	{
+		while (*str && *str != '\n')
+			str++;
+		ft_tokenize(alst, str);
+	}
+	(*alst)->next = ft_lstnew(token_init(), sizeof(t_token));
+	token->type = TOKEN_WORD;
+	token_append(token, *str);
 	ft_tokenize(&(*alst)->next, str + 1);
-	ft_tokenize(alst, str + 1);
 }

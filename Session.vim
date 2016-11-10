@@ -3,12 +3,12 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/minishell
+cd ~/42/minishell
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +26 includes/minishell.h
+badd +1 includes/minishell.h
 badd +1 src/user-interaction/ft_word_left.c
 badd +11 src/user-interaction/ft_cursor_left.c
 badd +8 src/user-interaction/ft_interactive_sh.c
@@ -17,7 +17,7 @@ badd +18 src/user-interaction/ft_cursor_right.c
 badd +7 src/user-interaction/ft_clear_line.c
 badd +1 src/user-interaction/ft_line_start.c
 badd +5 src/user-interaction/ft_line_end.c
-badd +24 src/main/main.c
+badd +1 src/main/main.c
 badd +12 src/builtin/builtin_exit.c
 badd +1 src/user-interaction/ft_cmd.c
 badd +8 src/line-editing/ft_cmd.c
@@ -51,9 +51,11 @@ badd +22 src/line-editing/ft_tc_init.c
 badd +33 libft/includes/libft.h
 badd +5 libft/includes/get_next_line.h
 badd +22 src/token/token_init.c
-badd +19 src/token/includes/token.h
+badd +1 src/token/includes/token.h
 badd +15 src/token/token_recognition.c
+argglobal
 silent! argdel *
+set stal=2
 edit includes/minishell.h
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -64,8 +66,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -76,12 +78,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 52 - ((51 * winheight(0) + 37) / 75)
+let s:l = 43 - ((18 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-52
-normal! 042l
+43
+normal! 046|
 wincmd w
 argglobal
 edit src/line-editing/includes/line_editing.h
@@ -94,15 +96,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 46 - ((45 * winheight(0) + 37) / 75)
+let s:l = 46 - ((25 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 46
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 tabedit src/main/main.c
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -113,8 +115,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -125,12 +127,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 22 - ((19 * winheight(0) + 37) / 75)
+let s:l = 2 - ((1 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-22
-normal! 09l
+2
+normal! 016|
 wincmd w
 argglobal
 edit src/line-editing/ft_interactive_sh.c
@@ -143,15 +145,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 56 - ((55 * winheight(0) + 37) / 75)
+let s:l = 15 - ((14 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-56
-normal! 012l
+15
+normal! 016|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 tabedit src/token/includes/token.h
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -162,8 +164,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -174,12 +176,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 18 - ((17 * winheight(0) + 37) / 75)
+let s:l = 19 - ((18 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-18
-normal! 0
+19
+normal! 029|
 wincmd w
 argglobal
 edit src/token/ft_tokenize.c
@@ -192,15 +194,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 35 - ((34 * winheight(0) + 37) / 75)
+let s:l = 28 - ((11 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-35
-normal! 01l
+28
+normal! 08|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 91 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 90 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
+exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 tabedit src/token/token_init.c
 set splitbelow splitright
 set nosplitbelow
@@ -217,13 +219,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 19 - ((18 * winheight(0) + 37) / 75)
+let s:l = 19 - ((10 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 19
-normal! 031l
+normal! 035|
 tabnext 3
+set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

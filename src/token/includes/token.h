@@ -13,14 +13,23 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# define TOKEN_WORD			0b000001
-# define TOKEN_OPERATOR		0b000010
+# define TK_WORD		0x001
+# define TK_NEWLINE		0x002
+# define TK_IOHERE		0b00000100
+# define TK_DLESS		0b00001000
+# define TK_DGREAT		0b00010000
+# define TK_LESS		0b00100000
+# define TK_GREAT		0b00100000
+# define TK_LESSAND		0b00100000
+# define TK_GREATAND	0b01000000
+# define TK_OPERATOR	0b01111100
 
 typedef struct s_token	t_token;
 
 struct s_token
 {
 	int		type;
+	int		id;
 	char	*content;
 	char	*size;
 };
