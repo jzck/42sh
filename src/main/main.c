@@ -1,29 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/10 13:35:14 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/10 15:43:18 by jhalford         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
 extern char	**environ;
 int			g_mode;
 
 int		main(void)
 {
 	t_data	data;
+	char	*cmd;
 	char	**av;
+	t_list	*token;
 
 	data.env = ft_sstrdup(environ);
-	data.history = ft_dlst_new(NULL, 0);
-	ft_tc_init(&data);
+	token = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGINT\n");
 	while (1)
 	{
 		g_mode = MODE_INPUT;
-		ft_prompt();
 		if (ft_interactive_sh(&data))
 			return (1);
+		cmd = ft_strdup(data.history->prev->content);
 		g_mode = MODE_EXEC;
-		/* ft_printf("got string:'%s'\n", data.history->prev->content); */
-		av = ft_cmd_getav(data.history->prev->content);
-		if (av && av[0])
-			ft_cmd_process(av, &data.env);
+
+		/* (void)av; */
+		/* ft_printf("got string:'%s'\n", cmd); */
+
+		/* av = ft_cmd_getav(cmd); */
+		/* if (av && av[0]) */
+		/* 	ft_cmd_process(av, &data.env); */
+
+		(void)av;
+		if (ft_tokenize(&token, cmd))
+			return (1);
 	}
 	return (0);
 }
-

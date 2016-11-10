@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_word_left.c                                     :+:      :+:    :+:   */
+/*   token_recognition.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:36 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 13:44:36 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/10 15:37:22 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/10 15:48:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "token.h"
 
-int		ft_word_left(t_data *data, t_dlist **input_chain, char *buf)
+int		token_recognition(t_list *alst, char *str)
 {
-	ft_cursor_left(data, input_chain, buf);
-	while (FT_WS(*(char *)(*input_chain)->content))
-	{
-		if (!ft_cursor_left(data, input_chain, buf))
-			return (0) ;
-	}
-	while (!FT_WS(*(char *)(*input_chain)->content))
-	{
-		if (!ft_cursor_left(data, input_chain, buf))
-			return (0);
-	}
-	return (0);
+
 }

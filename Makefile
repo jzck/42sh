@@ -11,7 +11,7 @@ D_OBJ	=	obj
 F_OBJ	=	$(notdir $(F_SRC:.c=.o))
 DF_OBJ	:=	$(addprefix $(D_OBJ)/, $(F_OBJ))
 
-D_INC	=	includes libft/includes
+D_INC	=	includes libft/includes src/line-editing/includes
 O_INC	=	$(addprefix -I, $(D_INC))
 
 D_SER	=	libft
@@ -41,6 +41,9 @@ $(D_OBJ)/%.o: $(D_SRC)/*/%.c $(D_INC)
 
 libft:
 	@$(MAKE) -C libft/ 2>/dev/null
+
+line-editing:
+	@$(MAKE) -C line-editing 2>/dev/null
 
 $(NAME): $(DF_OBJ) libft/libft.a
 	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)

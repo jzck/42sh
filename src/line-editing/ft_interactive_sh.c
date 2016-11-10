@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_interactive_sh.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/10 13:44:21 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/10 14:59:44 by jhalford         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "line_editing.h"
 
 t_stof g_keys[] = {
 	{FT_KEY_C_K,		NULL},
@@ -38,15 +50,19 @@ int		ft_interactive_sh(t_data *data)
 
 	(void)data;
 	null = '\0';
+	if (!data->history)
+		data->history = ft_dlst_new(NULL, 0);
 	input_chain = ft_dlst_new(&null, sizeof(char));
+	ft_tc_init(data);
+	ft_prompt();
 	while (1)
 	{
 		ft_bzero(buf, 20);
-		ret = read(0, buf, 20);
+		/* ret = read(0, buf, 20); */
 		/* ft_printf("read=%i: %#x,%#x,%#x\n", ret, buf[0], buf[1], buf[2]); */
-		/* continue ; */
+		continue ;
 		i = 0;
-		while (g_keys[i].name && ft_strequ(buf, g_keys[i].name) == 0)
+		while (g_keys[i].name && ft_strcmp(buf, g_keys[i].name) == 0)
 			i++;
 		if (!g_keys[i].f)
 			continue ;

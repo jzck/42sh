@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_word_left.c                                     :+:      :+:    :+:   */
+/*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:36 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 13:44:36 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/10 14:22:34 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/10 14:22:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_editing.h"
 
-int		ft_word_left(t_data *data, t_dlist **input_chain, char *buf)
+int		ft_prompt(void)
 {
-	ft_cursor_left(data, input_chain, buf);
-	while (FT_WS(*(char *)(*input_chain)->content))
-	{
-		if (!ft_cursor_left(data, input_chain, buf))
-			return (0) ;
-	}
-	while (!FT_WS(*(char *)(*input_chain)->content))
-	{
-		if (!ft_cursor_left(data, input_chain, buf))
-			return (0);
-	}
+	ft_putstr(SHELL_PROMPT);
 	return (0);
 }

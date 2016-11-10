@@ -11,9 +11,9 @@ builtin_setenv	src/builtin/builtin_setenv.c	/^int		builtin_setenv(char **av, cha
 builtin_unsetenv	src/builtin/builtin_unsetenv.c	/^int		builtin_unsetenv(char **av, char ***env_p)$/
 ft_builtin	src/builtin/builtin.c	/^int		ft_builtin(char **av, char ***env_p)$/
 ft_clear_line	src/line-editing/ft_clear_line.c	/^int		ft_clear_line(t_data *data, t_dlist **input_c/
-ft_cmd_exec	src/main/ft_cmd.c	/^int		ft_cmd_exec(char *execpath, char **argv, char/
-ft_cmd_getav	src/main/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
-ft_cmd_process	src/main/ft_cmd.c	/^int		ft_cmd_process(char **argv, char ***env_p)$/
+ft_cmd_exec	src/minishell-exec/ft_cmd.c	/^int		ft_cmd_exec(char *execpath, char **argv, char/
+ft_cmd_getav	src/minishell-exec/ft_cmd.c	/^char	**ft_cmd_getav(char *cmd)$/
+ft_cmd_process	src/minishell-exec/ft_cmd.c	/^int		ft_cmd_process(char **argv, char ***env_p)$/
 ft_cursor_left	src/line-editing/ft_cursor_left.c	/^int		ft_cursor_left(t_data *data, t_dlist **input_/
 ft_cursor_right	src/line-editing/ft_cursor_right.c	/^int		ft_cursor_right(t_data *data, t_dlist **input/
 ft_env_getval	src/main/lib_env.c	/^char	*ft_env_getval(char **env, char *key)$/
@@ -33,8 +33,9 @@ ft_line_go_up	src/line-editing/ft_line_up.c	/^int		ft_line_go_up(t_dlist **input
 ft_line_start	src/line-editing/ft_line_start.c	/^int		ft_line_start(t_data *data, t_dlist **input_c/
 ft_path_access	src/main/lib_path.c	/^int		ft_path_access(char *execpath, char *execname/
 ft_path_findexec	src/main/lib_path.c	/^char	*ft_path_findexec(char **path, char *execname/
-ft_prompt	src/main/ft_prompt.c	/^int		ft_prompt(void)$/
-ft_tc_init	src/main/lib_tc.c	/^int		ft_tc_init(t_data *data)$/
+ft_prompt	src/line-editing/ft_prompt.c	/^int		ft_prompt(void)$/
+ft_tc_init	src/line-editing/ft_tc_init.c	/^int		ft_tc_init(t_data *data)$/
+ft_tokenize	src/token/ft_tokenize.c	/^t_list	*ft_tokenize(char *str)$/
 ft_word_left	src/line-editing/ft_word_left.c	/^int		ft_word_left(t_data *data, t_dlist **input_ch/
 ft_word_right	src/line-editing/ft_word_right.c	/^int		ft_word_right(t_data *data, t_dlist **input_c/
 sig_handler	src/main/sig_handler.c	/^void	sig_handler(int signo)$/

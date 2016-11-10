@@ -14,7 +14,6 @@ int		ft_cmd_process(char **argv, char ***env_p)
 		execpath = argv[0];
 	else if (!(execpath = ft_path_findexec(path, argv[0])))
 		return (-1);
-	/* ft_printf("%s @ %s\n", argv[0], execpath); */
 	return (ft_cmd_exec(execpath, argv, env_p));
 }
 
