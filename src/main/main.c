@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:35:14 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 15:43:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:10:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		main(void)
 			return (1);
 		cmd = ft_strdup(data.history->prev->content);
 		g_mode = MODE_EXEC;
+
+		ft_printf("got command:'%s'\n", cmd);
 
 		/* (void)av; */
 		/* ft_printf("got string:'%s'\n", cmd); */

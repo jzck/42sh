@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_init.c                                       :+:      :+:    :+:   */
+/*   token_delimit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/11 17:47:14 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/11 17:47:31 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/11 20:25:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "token.h"
 
-t_token		*token_init(t_list **alst)
+int		token_delimit(t_token *token)
 {
-	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token) + 1);
-	token->type = 0;
-	token->size = 10;
-	token->data = ft_strnew(token->size);
-	return (token);
 }
