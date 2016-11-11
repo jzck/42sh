@@ -13,16 +13,20 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# define TK_WORD		0x001
-# define TK_NEWLINE		0x002
-# define TK_IOHERE		0b00000100
-# define TK_DLESS		0b00001000
-# define TK_DGREAT		0b00010000
-# define TK_LESS		0b00100000
-# define TK_GREAT		0b00100000
-# define TK_LESSAND		0b00100000
-# define TK_GREATAND	0b01000000
-# define TK_OPERATOR	0b01111100
+# define TK_WORD		0x0001
+# define TK_NEWLINE		0x0002
+# define TK_IOHERE		0x0004
+
+# define TK_LESS		0x0010
+# define TK_GREAT		0x0020
+# define TK_DLESS		0x0048
+# define TK_DGREAT		0x0080
+# define TK_LESSAND		0x0100
+# define TK_GREATAND	0x0200
+# define TK_SCOLON		0x0400
+# define TK_PIPE		0x0800
+
+# define TK_OP_MIN		TK_LESS
 
 typedef struct s_token	t_token;
 

@@ -176,11 +176,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 19 - ((18 * winheight(0) + 20) / 40)
+let s:l = 29 - ((27 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-19
+29
 normal! 029|
 wincmd w
 argglobal
@@ -194,13 +194,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((11 * winheight(0) + 20) / 40)
+let s:l = 36 - ((19 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-28
-normal! 08|
+36
+normal! 028|
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 89 + 89) / 178)
 exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 tabedit src/token/token_init.c
