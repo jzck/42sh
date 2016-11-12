@@ -18,8 +18,8 @@ int	ft_key_basic(t_data *data, t_dlist **input_chain, char *buf)
 	char	*res;
 
 	(void)data;
-	new = ft_dlst_new(&buf[0], sizeof(char));
-	ft_dlst_add_after(input_chain, new);
+	new = ft_dlstnew(&buf[0], sizeof(char));
+	ft_dlstadd_after(input_chain, new);
 	if ((res = tgetstr("IC", NULL)) != NULL)
 	{
 		tputs(tgoto(res, 0, 0), 1, &ft_putchar);

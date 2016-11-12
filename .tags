@@ -35,7 +35,14 @@ ft_path_access	src/main/lib_path.c	/^int		ft_path_access(char *execpath, char *e
 ft_path_findexec	src/main/lib_path.c	/^char	*ft_path_findexec(char **path, char *execname/
 ft_prompt	src/line-editing/ft_prompt.c	/^int		ft_prompt(void)$/
 ft_tc_init	src/line-editing/ft_tc_init.c	/^int		ft_tc_init(t_data *data)$/
-ft_tokenize	src/token/ft_tokenize.c	/^t_list	*ft_tokenize(char *str)$/
+ft_tokenize	src/token/ft_tokenize.c	/^int		ft_tokenize(t_list **alst, char *str)$/
 ft_word_left	src/line-editing/ft_word_left.c	/^int		ft_word_left(t_data *data, t_dlist **input_ch/
 ft_word_right	src/line-editing/ft_word_right.c	/^int		ft_word_right(t_data *data, t_dlist **input_c/
+is_separator	src/token/token_getnext.c	/^static int is_separator(char c)$/
+is_stop_char	src/token/token_getnext.c	/^static int is_stop_char(char c)$/
 sig_handler	src/main/sig_handler.c	/^void	sig_handler(int signo)$/
+token_append	src/token/token_append.c	/^int		token_append(t_token *token, char c)$/
+token_free	src/token/token_free.c	/^void	token_free(void *data, size_t size)$/
+token_getnext	src/token/token_getnext.c	/^t_token		*token_getnext(int *pos, char *line)$/
+token_init	src/token/token_init.c	/^t_token		*token_init()$/
+token_print	src/token/token_print.c	/^void	token_print(t_list *lst)$/

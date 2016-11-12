@@ -12,12 +12,13 @@
 
 #include "token.h"
 
-int		token_append(t_token *token, char str)
+int		token_append(t_token *token, char c)
 {
-	if (ft_strlen(token->data) <= token->size)
+	if ((int)ft_strlen(token->data) >= token->size)
 	{
-		token->data = (char *)ft_realloc(token->size + 10);
+		token->data = (char *)ft_realloc(token->data, token->size + 10);
 		token->size += 10;
 	}
-	ft_strcat(token->data, &str);
+	ft_strcat(token->data, (char[2]){c, '\0'});
+	return (0);
 }

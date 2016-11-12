@@ -1,16 +1,6 @@
 #include "minishell.h"
 
-int		ft_path_access(char *execpath, char *execname)
-{
-	if (access(execpath, X_OK) == -1)
-	{
-		ft_printf("minishell: permission denied: %s\n", execname);
-		return (1);
-	}
-	return (0);
-}
-
-char	*ft_path_findexec(char **path, char *execname)
+char	*ft_findexec(char **path, char *file)
 {
 	int				i;
 	DIR				*dir;
@@ -24,7 +14,7 @@ char	*ft_path_findexec(char **path, char *execname)
 			continue ;
 		while ((dirent = readdir(dir)))
 		{
-			if (ft_strcmp(dirent->d_name, execname))
+			if (ft_strcmp(dirent->d_name, file))
 				continue ;
 			if (path[i][ft_strlen(path[i])] != '/')
 				ft_strcat(path[i], "/");
@@ -32,6 +22,5 @@ char	*ft_path_findexec(char **path, char *execname)
 			return (execpath);
 		}
 	}
-	ft_printf("minishell: command not found: %s\n", execname);
 	return (NULL);
 }

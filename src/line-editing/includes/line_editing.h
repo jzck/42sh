@@ -20,6 +20,7 @@
 # define SHELL_PROMPT	"$> "
 # define BUFF_SIZE		32
 # define READ_BUF		32
+# define FT_KEY_C_C		"\x3"
 # define FT_KEY_C_D		"\x4"
 # define FT_KEY_C_H		"\x8"
 # define FT_KEY_TAB		"\x9"
@@ -27,6 +28,7 @@
 # define FT_KEY_C_K		"\xb"
 # define FT_KEY_C_L		"\xc"
 # define FT_KEY_C_U		"\x15"
+# define FT_KEY_C_Z		"\x1a"
 # define FT_KEY_ESC		"\x1b"
 # define FT_KEY_UP		"\x1b\x5b\x41"
 # define FT_KEY_DOWN	"\x1b\x5b\x42"
@@ -52,7 +54,7 @@ struct	s_data
 
 extern t_stof	g_keys[];
 
-int		ft_tc_init(t_data *data);
+int		ft_set_termios(t_data *data, int input_mode);
 int		ft_interactive_sh(t_data *data);
 int		ft_prompt(void);
 int		ft_input_is_escaped(t_dlist *input_chain);
@@ -74,5 +76,6 @@ key_press	ft_key_del;
 key_press	ft_key_enter;
 key_press	ft_key_basic;
 key_press	ft_key_ctrl_d;
+key_press	ft_key_ctrl_c;
 
 #endif

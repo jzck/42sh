@@ -12,10 +12,10 @@
 
 #include "line_editing.h"
 
-int		ft_tc_init(t_data *data)
+int		ft_set_termios(t_data *data, int input_mode)
 {
-	char	*term_name;
 	struct termios	term;
+	char			*term_name;
 
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		return (-1);
@@ -24,7 +24,10 @@ int		ft_tc_init(t_data *data)
 	if (tcgetattr(0, &term) == -1)
 		return (-1);
 	term.c_lflag &= ~(ICANON); // Met le terminal en mode canonique.
-	term.c_lflag &= ~(ECHO); // les touches tapées ne s'inscriront plus dans le terminal
+	if (input_mode == 1)
+		term.c_lflag &= ~(ISIG) & ~(ECHO);
+	else
+		term.c_lflag |= ISIG | ECHO;
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &term) == -1)

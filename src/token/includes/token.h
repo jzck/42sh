@@ -13,60 +13,33 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 
-typedef long long		t_type;
+# include "libft.h"
 
-# define TK_WORD		0x0001
-# define TK_NEWLINE		0x0002
-# define TK_IOHERE		0x0004
-# define TK_LESS		0x0010
-# define TK_GREAT		0x0020
-# define TK_DLESS		0x0040
-# define TK_DGREAT		0x0080
-# define TK_LESSAND		0x0100
-# define TK_GREATAND	0x0200
-# define TK_SCOLON		0x0400
-# define TK_PIPE		0x0800
-# define TK_UNKNOWN		0x1000
+# define TK_LESS		0x0001
+# define TK_GREAT		0x0002
+# define TK_DLESS		0x0004
+# define TK_DGREAT		0x0008
+# define TK_LESSAND		0x0010
+# define TK_GREATAND	0x0020
+# define TK_SEMI		0x0040
+# define TK_PIPE		0x0080
+# define TK_WORD		0x0100
 
-# define TK_OPERATOR	1 & (~TK_WORD | ~TK_NEWLINE | ~TK_IOHERE)
-# define OPERATOR_ST	"<>;|0123456789"
-
-# define NUM_BEFORE		0x0001
-# define WORD_AFTER		0x0002
-# define MIN_END		0x0004
-
-
-typedef struct s_operator	t_operator;
+typedef long long			t_type;
 typedef struct s_token		t_token;
-typedef struct s_redir		t_redir;
-
-struct s_operator
-{
-	t_type	type;
-	char	symbol[3];
-	t_type	format;
-};
-
-struct s_redir
-{
-	t_type	type;
-	int		fd;
-	char	*filename;
-};
 
 struct s_token
 {
 	t_type	type;
-	char	*content;
-	char	*size;
+	char	*data;
+	int		size;
 };
 
-extern t_operator	g_ops[];
-
 t_token	*token_init();
+t_token	*token_getnext(int *pos,char *line);
 int		ft_tokenize(t_list **alst, char *str);
-int		token_recognition(t_list *alst, char *str);
-int		token_append(t_token *token, char str);
-int		token_delimit(t_token *token);
+int		token_append(t_token *token, char c);
+void	token_free(void *data, size_t size);
+void	token_print(t_list *lst);
 
 #endif

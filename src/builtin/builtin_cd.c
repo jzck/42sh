@@ -5,7 +5,50 @@
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
 #define CDERR_1 "cd: no such file or directory: %s\n"
 
-int		builtin_cd(char **av, char ***env_p)
+static char		*builtin_cd_special(char **av, char **env)
+{
+	char	*target;
+
+	if (!*av)
+	{
+		if (!(target = ft_getenv(env, "HOME")))
+			return (NULL);
+	}
+	else if (ft_strcmp(*av, "-") == 0)
+		target = ft_getenv(env, "OLDPWD");
+	else
+		target = *av;
+	return (target);
+}
+
+static int		builtin_cd_opts(char **av, int *opts)
+{
+	int		i;
+	int		j;
+	int		tmp_opts;
+
+	i = 1;
+	tmp_opts = 0;
+	if (av)
+		while (av[i] && av[i][0] == '-' && av[i][1])
+		{
+			j = 0;
+			while (av[i][++j])
+			{
+				if (av[i][j] == 'P')
+					tmp_opts |= CDOPT_P;
+				else if (av[i][j] == 'L')
+					tmp_opts |= CDOPT_L;
+				else
+					return (i);
+			}
+			*opts |= tmp_opts;
+			i++;
+		}
+	return (i);
+}
+
+int				builtin_cd(char **av, char ***env_p)
 {
 	int		i;
 	int		opts;
@@ -31,47 +74,4 @@ int		builtin_cd(char **av, char ***env_p)
 	builtin_setenv(pwd, env_p);
 	builtin_setenv(oldpwd, env_p);
 	return (0);
-}
-
-char	*builtin_cd_special(char **av, char **env)
-{
-	char	*target;
-
-	if (!*av)
-	{
-		if (!(target = ft_env_getval(env, "HOME")))
-			return (NULL);
-	}
-	else if (ft_strcmp(*av, "-") == 0)
-		target = ft_env_getval(env, "OLDPWD");
-	else
-		target = *av;
-	return (target);
-}
-
-int		builtin_cd_opts(char **av, int *opts)
-{
-	int		i;
-	int		j;
-	int		tmp_opts;
-
-	i = 1;
-	tmp_opts = 0;
-	if (av)
-		while (av[i] && av[i][0] == '-' && av[i][1])
-		{
-			j = 0;
-			while (av[i][++j])
-			{
-				if (av[i][j] == 'P')
-					tmp_opts |= CDOPT_P;
-				else if (av[i][j] == 'L')
-					tmp_opts |= CDOPT_L;
-				else
-					return (i);
-			}
-			*opts |= tmp_opts;
-			i++;
-		}
-	return (i);
 }

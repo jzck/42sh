@@ -22,5 +22,6 @@ int		ft_key_enter(t_data *data, t_dlist **input_chain, char *buf)
 	}
 	ft_putchar('\n');
 	ft_history_add(data, *input_chain);
+	ft_dlstdel(input_chain, ft_lst_cfree);
 	return (2);
 }

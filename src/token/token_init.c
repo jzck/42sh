@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "token.h"
 
-t_token		*token_init(t_list **alst)
+t_token		*token_init()
 {
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token) + 1);
+	token = (t_token *)malloc(sizeof(t_token));
 	token->type = 0;
 	token->size = 10;
 	token->data = ft_strnew(token->size);

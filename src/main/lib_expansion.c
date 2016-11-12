@@ -9,7 +9,7 @@ void	ft_expand_dollar(char **av, char **env)
 		if ((dollar = ft_strchr(*av, '$')))
 		{
 			*dollar = '\0';
-			*av = ft_strjoin(*av, ft_env_getval(env, dollar + 1));
+			*av = ft_strjoin(*av, ft_getenv(env, dollar + 1));
 		}
 		av++;
 	}

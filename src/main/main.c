@@ -13,39 +13,29 @@
 #include "minishell.h"
 
 extern char	**environ;
-int			g_mode;
 
 int		main(void)
 {
 	t_data	data;
-	char	*cmd;
-	char	**av;
 	t_list	*token;
 
 	data.env = ft_sstrdup(environ);
-	token = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGINT\n");
 	while (1)
 	{
-		g_mode = MODE_INPUT;
 		if (ft_interactive_sh(&data))
 			return (1);
-		cmd = ft_strdup(data.history->prev->content);
-		g_mode = MODE_EXEC;
+		/* ft_printf("got command:'%s'\n", data.history->prev->content); */
+		if (ft_tokenize(&token, data.history->prev->content))
+			return (1);
+		/* token_print(token); */
+		/* t_btree	*ast = ft_parse(&ast, token); */
+		ft_lstdel(&token, &token_free);
 
-		ft_printf("got command:'%s'\n", cmd);
-
-		/* (void)av; */
-		/* ft_printf("got string:'%s'\n", cmd); */
-
-		/* av = ft_cmd_getav(cmd); */
+		/* char **av = ft_cmd_getav(data.history->prev->content); */
 		/* if (av && av[0]) */
 		/* 	ft_cmd_process(av, &data.env); */
-
-		(void)av;
-		if (ft_tokenize(&token, cmd))
-			return (1);
 	}
 	return (0);
 }

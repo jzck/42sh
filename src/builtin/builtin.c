@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+
 t_stof g_builtin[] = {
 	{"echo",		&builtin_echo},
 	{"cd",			&builtin_cd},
