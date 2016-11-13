@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "lexer_parser.h"
 
 int		ft_tokenize(t_list **alst, char *str)
 {

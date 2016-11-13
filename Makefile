@@ -11,7 +11,8 @@ D_OBJ	=	obj
 F_OBJ	=	$(notdir $(F_SRC:.c=.o))
 DF_OBJ	:=	$(addprefix $(D_OBJ)/, $(F_OBJ))
 
-D_INC	=	includes libft/includes src/line-editing/includes src/token/includes
+D_INC	=	includes libft/includes
+F_INC   :=  $(shell find $(D_INC) -type f -regex ".*\.h$$")
 O_INC	=	$(addprefix -I, $(D_INC))
 
 D_SER	=	libft/
@@ -30,27 +31,32 @@ RM		=	/bin/rm -rf
 
 all: $(NAME)
 
-$(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/
+$(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/minishell.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c src/line-editing/includes
+$(D_OBJ)/%.o: $(D_SRC)/builtin/%.c includes/minishell.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/builtin/%.c includes/
+$(D_OBJ)/%.o: $(D_SRC)/minishell-exec/%.c includes/minishell.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/token/%.c src/token/includes
+$(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/line_editing.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/minishell-exec/%.c includes/
+$(D_OBJ)/%.o: $(D_SRC)/lexer-parser/%.c includes/lexer_parser.h
+	@$(MKDIR) $(D_OBJ)
+	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
+	@echo "Compiling "$<"..."
+
+$(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."

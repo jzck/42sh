@@ -15,7 +15,8 @@
 
 # include "libft.h"
 # include "line_editing.h"
-# include "token.h"
+# include "lexer_parser.h"
+# include "exec.h"
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
