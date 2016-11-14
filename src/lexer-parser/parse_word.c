@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_enter.c                                     :+:      :+:    :+:   */
+/*   parse_less.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 17:58:14 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/14 17:48:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "lexer_parser.h"
 
-int		ft_key_enter(t_data *data, t_dlist **input_chain, char *buf)
+int		parse_word(t_btree **ast, t_list *start, t_list *lst)
 {
-	if (ft_input_is_escaped(*input_chain))
-	{
-		ft_key_basic(data, input_chain, buf);
-		ft_printf("> ");
-		return (0);
-	}
-	ft_putchar('\n');
-	ft_history_add(data, *input_chain);
-	ft_dlstdel(input_chain, ft_lst_cfree);
-	return (2);
+	t_astnode	*item;
+	t_token		*tok;
+
+	(void)start;
+	item = (*ast)->item;
+	tok = lst->content;
+	item->type = TK_COMMAND;
+	item->u_data.sstr = ft_sstradd(item->u_data.sstr, tok->data);
+	ft_parse(ast, lst->next);
+	ft_lstdelone(&lst, &token_free);
+	return (0);
 }

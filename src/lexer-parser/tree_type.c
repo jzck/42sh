@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_enter.c                                     :+:      :+:    :+:   */
+/*   tree_type.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 17:58:14 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/14 18:21:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "lexer_parser.h"
 
-int		ft_key_enter(t_data *data, t_dlist **input_chain, char *buf)
+void	tree_type(t_btree *tree)
 {
-	if (ft_input_is_escaped(*input_chain))
-	{
-		ft_key_basic(data, input_chain, buf);
-		ft_printf("> ");
-		return (0);
-	}
-	ft_putchar('\n');
-	ft_history_add(data, *input_chain);
-	ft_dlstdel(input_chain, ft_lst_cfree);
-	return (2);
+	t_astnode	*item;
+
+	item = tree->item;
+	ft_printf("%i", item->type);
 }

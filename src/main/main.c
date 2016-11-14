@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:35:14 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/11 17:10:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/14 18:28:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		main(void)
 	t_list	*token;
 	t_btree	*ast;
 
+	ast = NULL;
 	data.env = ft_sstrdup(environ);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGINT\n");
@@ -31,11 +32,14 @@ int		main(void)
 		if (ft_tokenize(&token, data.history->prev->content))
 			return (1);
 		token_print(token);
+		/* (void)ast; */
 		if (ft_parse(&ast, token))
 			return (1);
+		btree_print(ast, &tree_type);
+		ft_printf("root: %i\n", ((t_astnode*)ast->item)->type);
 		ft_lstdel(&token, &token_free);
-		if (ft_exec(ast))
-			return (1);
+		/* if (ft_exec(ast)) */
+		/* 	return (1); */
 
 		/* char **av = ft_cmd_getav(data.history->prev->content); */
 		/* if (av && av[0]) */

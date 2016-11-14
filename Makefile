@@ -3,8 +3,6 @@ CC		=	gcc
 TAGFILE	=	.tags
 
 D_SRC	=	src
-# F_SRC	:=	$(shell ls -1 $(D_SRC) | grep "\.c$$")
-# F_SRC	:=	$(addprefix $(D_SRC)/, $(F_SRC))
 F_SRC   :=  $(shell find $(D_SRC) -type f -regex ".*\.c$$")
 
 D_OBJ	=	obj
@@ -61,10 +59,10 @@ $(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-libft/libft.a:
+libft:
 	@$(MAKE) -C libft/ 2>/dev/null
 
-$(NAME): $(DF_OBJ) libft/libft.a
+$(NAME): $(DF_OBJ) libft
 	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
 
 clean:

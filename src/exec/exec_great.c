@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_enter.c                                     :+:      :+:    :+:   */
+/*   exec_great.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 17:58:14 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/14 17:27:51 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/14 17:44:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "exec.h"
 
-int		ft_key_enter(t_data *data, t_dlist **input_chain, char *buf)
+int		exec_great(t_btree *ast)
 {
-	if (ft_input_is_escaped(*input_chain))
-	{
-		ft_key_basic(data, input_chain, buf);
-		ft_printf("> ");
-		return (0);
-	}
-	ft_putchar('\n');
-	ft_history_add(data, *input_chain);
-	ft_dlstdel(input_chain, ft_lst_cfree);
-	return (2);
+	(void)ast;
+	ft_putendl("exec_great");
+	return (0);
 }

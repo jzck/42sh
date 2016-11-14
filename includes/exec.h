@@ -17,5 +17,8 @@ int		ft_exec(t_btree *ast);
 int		ft_exec(t_btree *ast);
 int		exec_semi(t_btree *ast);
 int		exec_pipe(t_btree *ast);
+int		exec_less(t_btree *ast);
+int		exec_great(t_btree *ast);
+int		exec_command(t_btree *ast);
 
 #endif

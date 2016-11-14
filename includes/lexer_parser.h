@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/11 20:44:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/14 18:22:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,24 @@
 # define TK_SEMI		0x0040
 # define TK_PIPE		0x0080
 # define TK_WORD		0x0100
+# define TK_COMMAND		0x0200
+
+# define TK_REDIR		0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20
 
 typedef long long			t_type;
-typedef struct s_astnode	t_astnode;
 typedef struct s_token		t_token;
 typedef struct s_parser		t_parser;
+typedef struct s_astnode	t_astnode;
+typedef struct s_redir		t_redir;
 
-struct s_astnode
+struct s_redir
 {
-	t_type	type;
-	union	u_astdata
+	int		n;
+	union u_word
 	{
-		int		a;
-	} data;
+		char	*word;
+		int		fd;
+	} u_word;
 };
 
 struct s_token
@@ -52,6 +57,16 @@ struct s_parser
 	int		(*f)(t_btree **ast, t_list *start, t_list *token);
 };
 
+struct s_astnode
+{
+	t_type	type;
+	union u_astdata
+	{
+		t_redir	redir;
+		char	**sstr;
+	} u_data;
+};
+
 extern t_parser		g_parser[];
 
 t_token	*token_init();
@@ -64,4 +79,13 @@ void	token_print(t_list *lst);
 
 int		ft_parse(t_btree **ast, t_list *token);
 int		parse_separator(t_btree **ast, t_list *start, t_list *lst);
+int		parse_less(t_btree **ast, t_list *start, t_list *lst);
+int		parse_great(t_btree **ast, t_list *start, t_list *lst);
+int		parse_dless(t_btree **ast, t_list *start, t_list *lst);
+int		parse_dgreat(t_btree **ast, t_list *start, t_list *lst);
+int		parse_lessand(t_btree **ast, t_list *start, t_list *lst);
+int		parse_greatand(t_btree **ast, t_list *start, t_list *lst);
+int		parse_word(t_btree **ast, t_list *start, t_list *lst);
+
+void	tree_type(t_btree *tree);
 #endif
