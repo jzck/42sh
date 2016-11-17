@@ -39,27 +39,29 @@ t_stof g_keys[] = {
 	{FT_KEY_C_D,		&ft_key_ctrl_d},
 	{FT_KEY_C_C,		&ft_key_ctrl_c},
 	{FT_KEY_C_Z,		NULL},
-	{NULL,				&ft_key_basic},
+	{NULL,				&ft_key_default},
 };
 
 int		ft_interactive_sh(t_data *data)
 {
-	char	buf[20];
-	t_dlist	*input_chain;
+	char	buf[4];
 	char	null;
 	int		ret;
 	int		i;
 
 	null = '\0';
-	if (!data->history)
-		data->history = ft_dlstnew(NULL, 0);
-	input_chain = ft_dlstnew(&null, sizeof(char));
+
+	ft_strdel(&data->input);
+	data->input = ft_memalloc(10);
+	data->input_pos = 0;
+	data->quoting = 0;
+	data->backslach = 0;
 	ft_set_termios(data, 1);
 	ft_prompt();
 	while (1)
 	{
-		ft_bzero(buf, 20);
-		ret = read(0, buf, 20);
+		ft_bzero(buf, 4);
+		ret = read(0, buf, 4);
 		/* ft_printf("read=%i: %#x,%#x,%#x\n", ret, buf[0], buf[1], buf[2]); */
 		/* continue ; */
 		i = 0;
@@ -67,8 +69,7 @@ int		ft_interactive_sh(t_data *data)
 			i++;
 		if (!g_keys[i].f)
 			continue ;
-		ret = (*g_keys[i].f)(data, &input_chain, buf);
-		if (ret < 0)
+		if ((ret = (*g_keys[i].f)(data, buf)) < 0)
 			return (-1);
 		else if (ret == 2)
 		{

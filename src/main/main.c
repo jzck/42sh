@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-extern char	**environ;
-
 int		main(void)
 {
 	t_data	data;
@@ -21,23 +19,25 @@ int		main(void)
 	t_btree	*ast;
 
 	ast = NULL;
-	data.env = ft_sstrdup(environ);
+	if (data_init(&data))
+		return (1);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		ft_printf("\ncan't catch SIGINT\n");
 	while (1)
 	{
 		if (ft_interactive_sh(&data))
 			return (1);
-		ft_printf("got command:'%s'\n", data.history->prev->content);
-		if (ft_tokenize(&token, data.history->prev->content))
-			return (1);
-		token_print(token);
+		ft_printf("got command:'%s'\n", data.input);
+		/* if (ft_tokenize(&token, data.history->prev->content)) */
+		/* 	return (1); */
+		/* token_print(token); */
 		/* (void)ast; */
-		if (ft_parse(&ast, token))
-			return (1);
-		btree_print(ast, &tree_type);
-		ft_printf("root: %i\n", ((t_astnode*)ast->item)->type);
-		ft_lstdel(&token, &token_free);
+		/* if (ft_parse(&ast, token)) */
+		/* 	return (1); */
+		/* btree_print(ast, &tree_type); */
+		/* ft_printf("root: %i\n", ((t_astnode*)ast->item)->type); */
+		/* ft_lstdel(&token, &token_free); */
+		token = NULL;
 		/* if (ft_exec(ast)) */
 		/* 	return (1); */
 

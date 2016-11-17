@@ -50,6 +50,13 @@ struct	s_data
 	char	**env;
 	t_dlist	*history;
 	t_dlist	*input_mem;
+
+	char	*input;
+	int		input_pos;
+	t_quote state_now;
+	t_quote state_last;
+	char	quoted;
+	char	backslash;
 };
 
 extern t_stof	g_keys[];
@@ -58,9 +65,9 @@ int		ft_set_termios(t_data *data, int input_mode);
 int		ft_interactive_sh(t_data *data);
 int		ft_prompt(void);
 int		ft_input_is_escaped(t_dlist *input_chain);
-int		ft_history_add(t_data *data, t_dlist *input_chain);
+int		ft_history_add(t_data *data);
 
-typedef	int		key_press(t_data *data, t_dlist **input_chain, char *buf);
+typedef	int		key_press(t_data *data, char *buf);
 key_press	ft_clear_line;
 key_press	ft_line_up;
 key_press	ft_line_down;
@@ -74,8 +81,8 @@ key_press	ft_word_left;
 key_press	ft_word_right;
 key_press	ft_key_del;
 key_press	ft_key_enter;
-key_press	ft_key_basic;
 key_press	ft_key_ctrl_d;
 key_press	ft_key_ctrl_c;
+key_press	ft_key_default;
 
 #endif

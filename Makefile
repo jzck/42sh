@@ -25,9 +25,12 @@ D_FLAGS	=
 MKDIR	=	mkdir -p
 RM		=	/bin/rm -rf
 
-.PHONY: all clean fclean re tags test libft
+.PHONY: all clean fclean re tags test
 
 all: $(NAME)
+
+$(NAME): $(DF_OBJ) libft
+	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
 
 $(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/minishell.h
 	@$(MKDIR) $(D_OBJ)
@@ -62,9 +65,6 @@ $(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
 libft:
 	@$(MAKE) -C libft/ 2>/dev/null
 
-$(NAME): $(DF_OBJ) libft
-	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
-
 clean:
 	$(RM) $(D_OBJ)
 
@@ -72,3 +72,4 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+	@$(MAKE) re -C libft/ 2>/dev/null

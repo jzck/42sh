@@ -18,11 +18,13 @@ int		ft_tokenize(t_list **alst, char *str)
 	char	*cmd;
 	int		pos;
 
+	pos = 0;
 	cmd = ft_strdup(str);
 	while ((token = token_getnext(&pos, cmd)))
 	{
 		*alst = ft_lstnew(token, sizeof(*token));
 		alst = &(*alst)->next;
+		free(token);
 	}
 	ft_strdel(&cmd);
 	return (0);

@@ -12,18 +12,17 @@
 
 #include "line_editing.h"
 
-int		ft_cursor_right(t_data *data, t_dlist **input_chain, char *buf)
+int		ft_cursor_right(t_data *data, char *buf)
 {
 	char	*res;
 
 	res = NULL;
 	(void)buf;
-	(void)data;
-	if (*(char*)(*input_chain)->content == '\n')
+	if (!data->input[data->input_pos])
 		return (0);
-	if (!(*input_chain)->next)
+	if (data->input[data->input_pos] == '\n')
 		return (0);
-	*input_chain = (*input_chain)->next;
+	data->input_pos++;
 	if ((res = tgetstr("nd", NULL)) == NULL)
 		return (-1);
 	tputs(tgoto(res, 0, 0), 0, &ft_putchar);

@@ -12,17 +12,19 @@
 
 #include "line_editing.h"
 
-int		ft_key_del(t_data *data, t_dlist **input_chain, char *buf)
+int		ft_key_del(t_data *data, char *buf)
 {
 	char	*res;
 
 	(void)data;
 	(void)buf;
-	if (!(*input_chain)->prev)
+
+	if (!data->input_pos)
 		return (0);
-	if (*(char*)(*input_chain)->content == '\n')
+	if (data->input[data->input_pos - 1] == '\n')
 		return (0);
-	ft_dlstdelone(input_chain, &ft_lst_cfree);
+	ft_strsqueeze(data->input, data->input_pos - 1);
+	data->input_pos--;
 	if ((res = tgetstr("le", NULL)) == NULL)
 	{
 		ft_printf("le error\n");

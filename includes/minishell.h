@@ -26,6 +26,7 @@ extern t_stof	g_builtins[];
 extern pid_t	g_pid;
 
 void	sig_handler(int signo);
+int		data_init(t_data *data);
 
 int		ft_cmd_process(char **argv, char ***env_p);
 int		ft_cmd_exec(char *execpath, char **argv, char ***env_p);

@@ -12,19 +12,17 @@
 
 #include "line_editing.h"
 
-int		ft_word_right(t_data *data, t_dlist **input_chain, char *buf)
+int		ft_word_right(t_data *data, char *buf)
 {
-	ft_cursor_right(data, input_chain, buf);
-	while (!FT_WS(*(char *)(*input_chain)->content))
+	while (!FT_WS(data->input[data->input_pos]))
 	{
-		if (!ft_cursor_right(data, input_chain, buf))
+		if (!ft_cursor_right(data, buf))
 			return (0);
 	}
-	while (FT_WS(*(char *)(*input_chain)->content))
+	while (FT_WS(data->input[data->input_pos]))
 	{
-		if (!ft_cursor_right(data, input_chain, buf))
+		if (!ft_cursor_right(data, buf))
 			return (0) ;
 	}
-	ft_cursor_left(data, input_chain, buf);
 	return (0);
 }

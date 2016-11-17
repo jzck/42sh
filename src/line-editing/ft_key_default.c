@@ -12,20 +12,22 @@
 
 #include "line_editing.h"
 
-int	ft_key_basic(t_data *data, t_dlist **input_chain, char *buf)
+int	ft_key_default(t_data *data, char *buf)
 {
-	t_dlist	*new;
 	char	*res;
+	char	*tmp;
 
-	(void)data;
-	new = ft_dlstnew(&buf[0], sizeof(char));
-	ft_dlstadd_after(input_chain, new);
-	if ((res = tgetstr("IC", NULL)) != NULL)
+	tmp = data->input;
+	data->input = ft_strinsert(data->input, *buf, data->input_pos);
+	data->input_pos++;
+	ft_strdel(&tmp);
+	quote_update(data, *buf);
+	if ((res = tgetstr("IC", NULL)))
 	{
 		tputs(tgoto(res, 0, 0), 1, &ft_putchar);
 		ft_putchar(buf[0]);
 		return (0);
 	}
-	ft_putchar(buf[0]);
-	return (0);
+	else
+		return (-1);
 }
