@@ -1,7 +1,9 @@
 #ifndef EXEC_H
 # define EXEC_H
-# include "lexer_parser.h"
 
+# include "minishell.h"
+
+typedef long long		t_type;
 typedef struct s_exec	t_exec;
 
 struct s_exec

@@ -25,7 +25,7 @@ D_FLAGS	=
 MKDIR	=	mkdir -p
 RM		=	/bin/rm -rf
 
-.PHONY: all clean fclean re tags test
+.PHONY: all clean fclean re libft
 
 all: $(NAME)
 
@@ -52,7 +52,12 @@ $(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/line_editing.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/lexer-parser/%.c includes/lexer_parser.h
+$(D_OBJ)/%.o: $(D_SRC)/lexer/%.c includes/lexer.h
+	@$(MKDIR) $(D_OBJ)
+	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
+	@echo "Compiling "$<"..."
+
+$(D_OBJ)/%.o: $(D_SRC)/parser/%.c includes/parser.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."

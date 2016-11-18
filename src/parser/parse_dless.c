@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,13 +6,13 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 16:14:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:28:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_parser.h"
+#include "parser.h"
 
-int		parse_lessand(t_btree **ast, t_list *start, t_list *lst)
+int		parse_dless(t_btree **ast, t_list *start, t_list *lst)
 {
 	t_astnode	*item;
 	t_token		*tok;

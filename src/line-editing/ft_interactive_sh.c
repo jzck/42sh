@@ -54,8 +54,7 @@ int		ft_interactive_sh(t_data *data)
 	ft_strdel(&data->input);
 	data->input = ft_memalloc(10);
 	data->input_pos = 0;
-	data->quoting = 0;
-	data->backslach = 0;
+	data->state_now = Q_NONE;
 	ft_set_termios(data, 1);
 	ft_prompt();
 	while (1)

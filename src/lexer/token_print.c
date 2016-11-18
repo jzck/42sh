@@ -1,4 +1,4 @@
-#include "lexer_parser.h"
+#include "lexer.h"
 
 void	token_print(t_list *lst)
 {

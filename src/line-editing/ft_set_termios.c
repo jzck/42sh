@@ -24,7 +24,7 @@ int		ft_set_termios(t_data *data, int input_mode)
 	if (tcgetattr(0, &term) == -1)
 		return (-1);
 	term.c_lflag &= ~(ICANON); // Met le terminal en mode canonique.
-	if (input_mode == 1)
+	if (input_mode)
 		term.c_lflag &= ~(ISIG) & ~(ECHO);
 	else
 		term.c_lflag |= ISIG | ECHO;

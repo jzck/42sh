@@ -13,7 +13,7 @@
 #ifndef LINE_EDITING_H
 # define LINE_EDITING_H
 
-# include "libft.h"
+# include "minishell.h"
 # include <curses.h>
 # include <term.h>
 
@@ -45,26 +45,11 @@
 
 typedef struct s_data	t_data;
 
-struct	s_data
-{
-	char	**env;
-	t_dlist	*history;
-	t_dlist	*input_mem;
-
-	char	*input;
-	int		input_pos;
-	t_quote state_now;
-	t_quote state_last;
-	char	quoted;
-	char	backslash;
-};
-
 extern t_stof	g_keys[];
 
 int		ft_set_termios(t_data *data, int input_mode);
 int		ft_interactive_sh(t_data *data);
 int		ft_prompt(void);
-int		ft_input_is_escaped(t_dlist *input_chain);
 int		ft_history_add(t_data *data);
 
 typedef	int		key_press(t_data *data, char *buf);

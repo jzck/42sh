@@ -23,7 +23,8 @@ int		ft_key_del(t_data *data, char *buf)
 		return (0);
 	if (data->input[data->input_pos - 1] == '\n')
 		return (0);
-	ft_strsqueeze(data->input, data->input_pos - 1);
+	ft_strcpy(data->input + data->input_pos - 1,
+				data->input + data->input_pos);
 	data->input_pos--;
 	if ((res = tgetstr("le", NULL)) == NULL)
 	{

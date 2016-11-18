@@ -1,4 +1,4 @@
-#include "lexer_parser.h"
+#include "lexer.h"
 
 int		token_cmp_type(t_type data, t_type ref)
 {

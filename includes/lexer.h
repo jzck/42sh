@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include "libft.h"
+# include "minishell.h"
 
 # define TK_LESS		0x0001
 # define TK_GREAT		0x0002
@@ -29,19 +29,25 @@
 # define TK_REDIR		0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20
 
 typedef long long			t_type;
+typedef enum e_lexstate		t_lexstate;
 typedef struct s_token		t_token;
-typedef struct s_parser		t_parser;
-typedef struct s_astnode	t_astnode;
-typedef struct s_redir		t_redir;
+typedef int					t_lexer(t_list **alst,
+										char *str);
 
-struct s_redir
+enum	e_lexstate
 {
-	int		n;
-	union u_word
-	{
-		char	*word;
-		int		fd;
-	} u_word;
+	DEFAULT,
+	DELIM,
+	SEP,
+	WORD,
+	NUMBER,
+	GREAT,
+	LESS,
+	GREATAND,
+	LESSAND,
+	QUOTE,
+	DQUOTE,
+	BACKSLASH,
 };
 
 struct s_token
@@ -51,41 +57,30 @@ struct s_token
 	int		size;
 };
 
-struct s_parser
-{
-	t_type	type;
-	int		(*f)(t_btree **ast, t_list *start, t_list *token);
-};
+extern t_lexer		*g_lexer[];
 
-struct s_astnode
-{
-	t_type	type;
-	union u_astdata
-	{
-		t_redir	redir;
-		char	**sstr;
-	} u_data;
-};
-
-extern t_parser		g_parser[];
-
+/* t_token	*token_getnext(int *pos,char *line); */
 t_token	*token_init();
-t_token	*token_getnext(int *pos,char *line);
-int		ft_tokenize(t_list **alst, char *str);
+int		ft_tokenize(t_list **alst, char *str, t_lexstate state);
 int		token_append(t_token *token, char c);
 void	token_free(void *data, size_t size);
 int		token_cmp_type(t_type data, t_type ref);
 void	token_print(t_list *lst);
 
-int		ft_parse(t_btree **ast, t_list *token);
-int		parse_separator(t_btree **ast, t_list *start, t_list *lst);
-int		parse_less(t_btree **ast, t_list *start, t_list *lst);
-int		parse_great(t_btree **ast, t_list *start, t_list *lst);
-int		parse_dless(t_btree **ast, t_list *start, t_list *lst);
-int		parse_dgreat(t_btree **ast, t_list *start, t_list *lst);
-int		parse_lessand(t_btree **ast, t_list *start, t_list *lst);
-int		parse_greatand(t_btree **ast, t_list *start, t_list *lst);
-int		parse_word(t_btree **ast, t_list *start, t_list *lst);
+int		ft_is_delim(char c);
 
-void	tree_type(t_btree *tree);
+t_lexer	lexer_default;
+t_lexer	lexer_delim;
+t_lexer	lexer_sep;
+t_lexer	lexer_word;
+t_lexer	lexer_number;
+t_lexer	lexer_greatand;
+t_lexer	lexer_lessand;
+t_lexer	lexer_quote;
+t_lexer	lexer_dquote;
+t_lexer	lexer_backslash;
+
+t_lexer	lexer_less;
+t_lexer	lexer_great;
+
 #endif

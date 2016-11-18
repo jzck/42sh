@@ -15,13 +15,13 @@
 int		ft_key_enter(t_data *data, char *buf)
 {
 	(void)buf;
-	if (data->quoting || data->backslash)
+	if (data->state_now == Q_NONE)
 	{
-		ft_key_basic(data, buf);
-		ft_printf("> ");
-		return (0);
+		ft_putchar('\n');
+		ft_history_add(data);
+		return (2);
 	}
-	ft_putchar('\n');
-	ft_history_add(data);
-	return (2);
+	ft_key_default(data, buf);
+	ft_printf("> ");
+	return (0);
 }

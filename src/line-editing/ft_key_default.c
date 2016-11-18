@@ -21,7 +21,7 @@ int	ft_key_default(t_data *data, char *buf)
 	data->input = ft_strinsert(data->input, *buf, data->input_pos);
 	data->input_pos++;
 	ft_strdel(&tmp);
-	quote_update(data, *buf);
+	qstate_update(data, *buf);
 	if ((res = tgetstr("IC", NULL)))
 	{
 		tputs(tgoto(res, 0, 0), 1, &ft_putchar);

@@ -1,4 +1,4 @@
-#include "lexer_parser.h"
+#include "parser.h"
 
 int		parse_separator(t_btree **ast, t_list *start, t_list *lst)
 {

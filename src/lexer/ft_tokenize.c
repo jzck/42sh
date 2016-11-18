@@ -10,22 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_parser.h"
+#include "lexer.h"
 
-int		ft_tokenize(t_list **alst, char *str)
+t_lexer		*g_lexer[] =
+{
+	&lexer_default,
+	&lexer_delim,
+	&lexer_sep,
+	&lexer_word,
+	&lexer_number,
+	&lexer_great,
+	&lexer_less,
+	&lexer_greatand,
+	&lexer_lessand,
+	&lexer_quote,
+	&lexer_dquote,
+	&lexer_backslash,
+};
+
+int		ft_is_delim(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n');
+}
+
+int		ft_tokenize(t_list **alst, char *str, t_lexstate state)
 {
 	t_token	*token;
-	char	*cmd;
-	int		pos;
 
-	pos = 0;
-	cmd = ft_strdup(str);
-	while ((token = token_getnext(&pos, cmd)))
-	{
+	if (!*str)
+		return (0);
+	token = token_init();
+	if (!*alst)
 		*alst = ft_lstnew(token, sizeof(*token));
-		alst = &(*alst)->next;
-		free(token);
+	if (ft_is_delim(*str))
+		state = DELIM;
+	if (*str == ';' || *str == '|')
+		state = SEP;
+	else if (*str == '\'')
+	{
+		state = QUOTE;
+		str++;
 	}
-	ft_strdel(&cmd);
-	return (0);
+	else if (*str == '\"')
+	{
+		state = DQUOTE;
+		str++;
+	}
+	else if (*str == '\\')
+		state = BACKSLASH;
+	return ((*g_lexer[state])(alst, str));
 }
