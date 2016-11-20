@@ -15,7 +15,7 @@ int		lexer_sep(t_list **alst, char *str)
 		token = token_init();
 		*alst = ft_lstnew(token, sizeof(*token));
 	}
-	token->type = *str == ';' ? TK_SEMI : TK_PIPE;
-	token_append(token, *str);
+	token = (*alst)->content;
+	token->type = (*str == ';') ? TK_SEMI : TK_PIPE;
 	return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
 }

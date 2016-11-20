@@ -1,6 +1,6 @@
 #include "lexer.h"
 
-int		token_cmp_type(t_type data, t_type ref)
+int		token_cmp_type(t_token *token, t_type *ref)
 {
-	return (data != ref);
+	return (token->type - *ref);
 }

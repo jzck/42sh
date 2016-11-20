@@ -26,24 +26,28 @@ t_parser	g_parser[] =
 	{0, 0},
 };
 
-int		ft_parse(t_btree **ast, t_list *start)
+int		ft_parse(t_btree **ast, t_list **start)
 {
 	t_list		*lst;
 	t_astnode	item;
 	int			i;
 
 	i = 0;
-	if(!start)
+	if(!*start)
 		return (0);
 	if (!*ast)
+	{
 		*ast = btree_create_node(&item, sizeof(item));
+		((t_astnode *)(*ast)->item)->u_data.sstr = NULL;
+	}
 	while (g_parser[i].type)
 	{
-		if ((lst = ft_lst_find(start, &g_parser[i].type, &token_cmp_type)))
+		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
 		{
+			/* ft_printf("found token:%#06llx\n", g_parser[i].type); */
 			item.type = g_parser[i].type;
 			if (g_parser[i].f)
-				(*g_parser[i].f)(ast, start, lst);
+				(*g_parser[i].f)(ast, start, &lst);
 			return (0);
 		}
 		else

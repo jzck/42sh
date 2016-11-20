@@ -6,15 +6,9 @@ int		lexer_number(t_list **alst, char *str)
 
 	token = (*alst)->content;
 	if (*str == '>')
-	{
-		token_append(token, *str);
-		return (lexer_great(alst, str + 1));
-	}
+		return (ft_tokenize(alst, str, GREAT));
 	else if (*str == '<')
-	{
-		token_append(token, *str);
-		return (lexer_less(alst, str + 1));
-	}
+		return (ft_tokenize(alst, str, LESS));
 	else if (ft_isdigit(*str))
 	{
 		token_append(token, *str);

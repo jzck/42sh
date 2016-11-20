@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_less.c                                       :+:      :+:    :+:   */
+/*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,21 @@
 
 #include "parser.h"
 
-int		parse_word(t_btree **ast, t_list *start, t_list *lst)
+int		parse_word(t_btree **ast, t_list **start, t_list **lst)
 {
-	t_astnode	*item;
-	t_token		*tok;
+	t_astnode	*node;
+	t_token		*token;
 
 	(void)start;
-	item = (*ast)->item;
-	tok = lst->content;
-	item->type = TK_COMMAND;
-	item->u_data.sstr = ft_sstradd(item->u_data.sstr, tok->data);
-	ft_parse(ast, lst->next);
-	ft_lstdelone(&lst, &token_free);
+	token = (*lst)->content;
+	node = (*ast)->item;
+	node->type = TK_COMMAND;
+	ft_printf("adding '%s' to sstr\n", token->data);
+	node->u_data.sstr = ft_sstradd(node->u_data.sstr, token->data);
+	/* ft_printf("added '%s'\n", node->u_data.sstr[0]); */
+	ft_sstrprint(node->u_data.sstr, ',');
+	ft_putchar('\n');
+	ft_parse(ast, &(*lst)->next);
+	ft_lstdelone(lst, &token_free);
 	return (0);
 }

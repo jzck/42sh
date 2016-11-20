@@ -18,7 +18,6 @@ int		main(void)
 	t_list	*token;
 	t_btree	*ast;
 
-	ast = NULL;
 	if (data_init(&data))
 		return (1);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
@@ -27,15 +26,17 @@ int		main(void)
 	{
 		if (ft_interactive_sh(&data))
 			return (1);
-		ft_printf("got command:'%s'\n", data.input);
+		ft_printf("command='%s'\n", data.input);
 		if (ft_tokenize(&token, data.input, DEFAULT))
 			return (1);
 		token_print(token);
-		if (ft_parse(&ast, token))
+		ast = NULL;
+		if (ft_parse(&ast, &token))
 			return (1);
-		btree_print(ast, &tree_type);
-		ft_printf("root: %i\n", ((t_astnode*)ast->item)->type);
-		ft_lstdel(&token, &token_free);
+		btree_print(ast, &ft_putast);
+		ft_printf("\n--- INFIX BREAKDOWN ---\n");
+		btree_apply_infix(ast, &ft_putast2);
+		/* ft_lstdel(&token, &token_free); */
 		token = NULL;
 		/* if (ft_exec(ast)) */
 		/* 	return (1); */

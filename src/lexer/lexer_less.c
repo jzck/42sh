@@ -5,21 +5,22 @@ int		lexer_less(t_list **alst, char *str)
 	t_token		*token;
 
 	token = (*alst)->content;
-	if (*str == '&')
+	token_append(token, str[0]);
+	if (*(str + 1) == '&')
 	{
-		token_append(token, *str);
-		return (lexer_lessand(alst, str + 1));
+		token->type = TK_LESSAND;
+		token_append(token, str[1]);
+		return (lexer_lessand(alst, str + 2));
 	}
-	else if (*str == '<')
+	else if (*(str + 1) == '<')
 	{
 		token->type = TK_DLESS;
-		token_append(token, *str);
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+		token_append(token, str[1]);
+		return (ft_tokenize(&(*alst)->next, str + 2, DEFAULT));
 	}
 	else
 	{
 		token->type = TK_LESS;
-		token_append(token, *str);
-		return (ft_tokenize(alst, str + 1, DEFAULT));
+		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
 	}
 }

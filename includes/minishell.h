@@ -53,7 +53,6 @@ extern pid_t	g_pid;
 void	sig_handler(int signo);
 int		data_init(t_data *data);
 
-void	qstate_update(t_data *data, char c);
 
 int		ft_cmd_process(char **argv, char ***env_p);
 int		ft_cmd_exec(char *execpath, char **argv, char ***env_p);
@@ -68,7 +67,9 @@ int		builtin_unsetenv(char **av, char ***env);
 int		builtin_env(char **av, char ***env);
 
 void	ft_expand_dollar(char **av, char **env);
-
 char	*ft_findexec(char **path, char *file);
+
+char	*ft_putast(void *node);
+void	ft_putast2(void *node);
 
 #endif

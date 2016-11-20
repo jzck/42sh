@@ -23,17 +23,18 @@ typedef struct s_redir		t_redir;
 struct s_parser
 {
 	t_type	type;
-	int		(*f)(t_btree **ast, t_list *start, t_list *token);
+	int		(*f)(t_btree **ast, t_list **start, t_list **token);
 };
 
 struct s_redir
 {
 	int		n;
+	int		close;
 	union u_word
 	{
 		char	*word;
 		int		fd;
-	} word;
+	} u_word;
 };
 
 struct s_astnode
@@ -48,16 +49,14 @@ struct s_astnode
 
 extern t_parser		g_parser[];
 
-int		ft_parse(t_btree **ast, t_list *token);
-int		parse_separator(t_btree **ast, t_list *start, t_list *lst);
-int		parse_less(t_btree **ast, t_list *start, t_list *lst);
-int		parse_great(t_btree **ast, t_list *start, t_list *lst);
-int		parse_dless(t_btree **ast, t_list *start, t_list *lst);
-int		parse_dgreat(t_btree **ast, t_list *start, t_list *lst);
-int		parse_lessand(t_btree **ast, t_list *start, t_list *lst);
-int		parse_greatand(t_btree **ast, t_list *start, t_list *lst);
-int		parse_word(t_btree **ast, t_list *start, t_list *lst);
-
-void	tree_type(t_btree *tree);
+int		ft_parse(t_btree **ast, t_list **token);
+int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
+int		parse_less(t_btree **ast, t_list **start, t_list **lst);
+int		parse_great(t_btree **ast, t_list **start, t_list **lst);
+int		parse_dless(t_btree **ast, t_list **start, t_list **lst);
+int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst);
+int		parse_lessand(t_btree **ast, t_list **start, t_list **lst);
+int		parse_greatand(t_btree **ast, t_list **start, t_list **lst);
+int		parse_word(t_btree **ast, t_list **start, t_list **lst);
 
 #endif
