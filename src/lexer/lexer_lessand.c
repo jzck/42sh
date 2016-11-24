@@ -5,7 +5,7 @@ int		lexer_lessand(t_list **alst, char *str)
 	t_token		*token;
 
 	token = (*alst)->content;
-	token->type = LESSAND;
+	token->type = TK_LESSAND;
 	if (ft_isdigit(*str))
 	{
 		token_append(token, *str);

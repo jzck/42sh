@@ -18,34 +18,41 @@ void	ft_putast2(void *nodein)
 
 	node = nodein;
 	if (node->type == TK_SEMI)
-		ft_putendl(";");
+		ft_putendl("SEMI");
 	else if (node->type == TK_PIPE)
-		ft_putendl("|");
+		ft_putendl("PIPE");
 	else if (node->type == TK_COMMAND)
 	{
 		ft_putstr("COMMAND: ");
-		ft_putstr(node->u_data.sstr[0]);
-		/* ft_sstrprint(node->u_data.sstr, ','); */
-		/* char **sstr = node->u_data.sstr; */
-		/* while (*sstr) */
-			/* ft_printf("%s,", *sstr++); */
+		ft_sstrprint(node->u_data.sstr, ',');
 		ft_putchar('\n');
 	}
-	if (node->type | TK_REDIR)
+	else if (node->type & TK_REDIR)
 	{
 		ft_putnbr(node->u_data.redir.n);
-		if (node->type == TK_GREAT)
-			ft_putendl(">:");
-		else if (node->type == TK_LESS)
-			ft_putendl("<:");
-		else if (node->type == TK_DGREAT)
-			ft_putendl(">>:");
-		else if (node->type == TK_DLESS)
-			ft_putendl("<<:");
-		else if (node->type == TK_GREATAND)
-			ft_putendl(">&:");
-		else if (node->type == TK_LESSAND)
-			ft_putendl("<&:");
+		if (node->type == TK_GREATAND || node->type == TK_LESSAND)
+		{
+			if (node->type == TK_GREATAND)
+				ft_putstr(">&:");
+			else
+				ft_putstr("<&:");
+			ft_putnbr(node->u_data.redir.u_word.fd);
+			if (node->u_data.redir.close)
+				ft_putstr(" (closed)");
+		}
+		else
+		{
+			if (node->type == TK_GREAT)
+				ft_putendl(">:");
+			else if (node->type == TK_LESS)
+				ft_putstr("<:");
+			else if (node->type == TK_DGREAT)
+				ft_putstr(">>:");
+			else if (node->type == TK_DLESS)
+				ft_putstr("<<:");
+			ft_putstr(node->u_data.redir.u_word.word);
+		}
+		ft_putchar('\n');
 	}
 	else
 		ft_putendl("OTHER");

@@ -38,8 +38,8 @@ int		main(void)
 		btree_apply_infix(ast, &ft_putast2);
 		/* ft_lstdel(&token, &token_free); */
 		token = NULL;
-		/* if (ft_exec(ast)) */
-		/* 	return (1); */
+		if (ft_exec(ast))
+			return (1);
 
 	}
 	return (0);

@@ -25,6 +25,8 @@
 # include <sys/types.h>
 # include <signal.h>
 
+# define SHELL_NAME		"minishell"
+
 typedef enum e_qstate	t_qstate;
 typedef struct s_data	t_data;
 

@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -17,22 +16,16 @@ int		parse_lessand(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*tok;
-	t_token		*next_tok;
+	char		*and;
 
 	node = (*ast)->item;
-	node->type = TK_DGREAT;
-	if (!(*lst)->next)
-		return (1);
+	node->type = TK_LESSAND;
 	tok = (*lst)->content;
-	next_tok = (*lst)->next->content;
-	if (next_tok->type != TK_WORD)
-		return (1);
-	node->u_data.redir.u_word.word = ft_strdup(next_tok->data);
-	/* ft_lst_delif(&start, lst->content, &ft_addrcmp, &token_free); */
-	/* ft_lst_delif(&start, lst->next->content, &ft_addrcmp, &token_free); */
-	/* ft_parse(&(*ast)->right, (*lst)->next->next); */
-	ft_lstdelone(lst, &token_free);
-	ft_lstdelone(&(*lst)->next, &token_free);
+	and = ft_strchr(tok->data, '&');
+	node->u_data.redir.u_word.fd = ft_atoi(and + 1);
+	node->u_data.redir.close =
+		tok->data[ft_strlen(tok->data) - 1] == '-' ? 1 : 0;
+	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_parse(&(*ast)->left, start);
 	return (0);
 }

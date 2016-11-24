@@ -5,7 +5,7 @@ int		lexer_greatand(t_list **alst, char *str)
 	t_token		*token;
 
 	token = (*alst)->content;
-	token->type = GREATAND;
+	token->type = TK_GREATAND;
 	if (ft_isdigit(*str))
 	{
 		token_append(token, *str);

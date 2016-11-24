@@ -22,10 +22,7 @@ int		ft_exec(t_btree *ast)
 	while (g_exec[i].type)
 	{
 		if (item->type == g_exec[i].type)
-		{
-			(*g_exec[i].f)(ast);
-			return (0);
-		}
+			return ((*g_exec[i].f)(ast));
 		i++;
 	}
 	return (0);

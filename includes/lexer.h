@@ -26,11 +26,12 @@
 # define TK_WORD		0x0100
 # define TK_COMMAND		0x0200
 
-# define TK_REDIR		0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20
+# define TK_REDIR		(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 
 typedef long long			t_type;
 typedef enum e_lexstate		t_lexstate;
 typedef struct s_token		t_token;
+typedef struct s_data		t_data;
 typedef int					t_lexer(t_list **alst,
 										char *str);
 

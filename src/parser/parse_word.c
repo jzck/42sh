@@ -21,11 +21,7 @@ int		parse_word(t_btree **ast, t_list **start, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = TK_COMMAND;
-	ft_printf("adding '%s' to sstr\n", token->data);
 	node->u_data.sstr = ft_sstradd(node->u_data.sstr, token->data);
-	/* ft_printf("added '%s'\n", node->u_data.sstr[0]); */
-	ft_sstrprint(node->u_data.sstr, ',');
-	ft_putchar('\n');
 	ft_parse(ast, &(*lst)->next);
 	ft_lstdelone(lst, &token_free);
 	return (0);
