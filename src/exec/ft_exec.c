@@ -10,7 +10,7 @@ t_exec	g_exec[] =
 	{0, 0},
 };
 
-int		ft_exec(t_btree *ast)
+int		ft_exec(t_btree *ast, t_data *data)
 {
 	t_astnode	*item;
 	int			i;
@@ -22,7 +22,7 @@ int		ft_exec(t_btree *ast)
 	while (g_exec[i].type)
 	{
 		if (item->type == g_exec[i].type)
-			return ((*g_exec[i].f)(ast));
+			return ((*g_exec[i].f)(ast, data));
 		i++;
 	}
 	return (0);

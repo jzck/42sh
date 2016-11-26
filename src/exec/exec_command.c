@@ -12,9 +12,15 @@
 
 #include "exec.h"
 
-int		exec_command(t_btree *ast)
+int		exec_command(t_btree *ast, t_data *data)
 {
-	(void)ast;
-	ft_putendl("exec_commands");
+	t_astnode	*node;
+
+	node = ast->item;
+	ft_putstr_fd("befor exec: ", 2);
+	ft_sstrprint(((t_astnode*)ast->item)->u_data.sstr, ',');
+	ft_putchar('\n');
+	ft_cmd_process(node->u_data.sstr, &data->env);
+	ft_putstr_fd("after exec\n", 2);
 	return (0);
 }

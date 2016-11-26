@@ -12,9 +12,11 @@
 
 #include "exec.h"
 
-int		exec_great(t_btree *ast)
+int		exec_great(t_btree *ast, t_data *data)
 {
 	(void)ast;
 	ft_putendl("exec_great");
+	ft_exec(ast->left, data);
+	ft_exec(ast->right, data);
 	return (0);
 }

@@ -14,7 +14,7 @@ int		ft_cmd_process(char **argv, char ***env_p)
 		execpath = argv[0];
 	else if (!(execpath = ft_findexec(path, argv[0])))
 	{
-		ft_printf("minishell: command not found: %s\n", argv[0]);
+		ft_dprintf(2, "minishell: command not found: %s\n", argv[0]);
 		return (-1);
 	}
 	return (ft_cmd_exec(execpath, argv, env_p));
@@ -25,12 +25,10 @@ int		ft_cmd_exec(char *execpath, char **argv, char ***env_p)
 	pid_t	pid;
 	int		status;
 	char	**environ;
-	char	**sstr;
 
-	sstr = NULL;
 	if (access(execpath, X_OK) == -1)
 	{
-		ft_printf("minishell: permission denied: %s\n", argv[0]);
+		ft_dprintf(2, "minishell: permission denied: %s\n", argv[0]);
 		return (-1);
 	}
 	if ((pid = fork()) == -1)
@@ -44,14 +42,7 @@ int		ft_cmd_exec(char *execpath, char **argv, char ***env_p)
 	{
 		g_pid = pid;
 		wait(&status);
-		sstr = ft_sstradd(sstr, "?");
-		sstr = ft_sstradd(sstr, ft_itoa(status));
-		builtin_setenv(sstr, env_p);
+		builtin_setenv((char*[2]){"?", ft_itoa(status)}, env_p);
 	}
 	return (0);
-}
-
-char	**ft_cmd_getav(char *cmd)
-{
-	return (ft_split_whitespaces(cmd));
 }

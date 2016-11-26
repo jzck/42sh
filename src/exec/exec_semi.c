@@ -1,8 +1,8 @@
 #include "exec.h"
 
-int		exec_semi(t_btree *ast)
+int		exec_semi(t_btree *ast, t_data *data)
 {
-	ft_exec(ast->left);
-	ft_exec(ast->right);
+	ft_exec(ast->left, data);
+	ft_exec(ast->right, data);
 	return (0);
 }
