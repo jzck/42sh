@@ -25,11 +25,11 @@ D_FLAGS	=
 MKDIR	=	mkdir -p
 RM		=	/bin/rm -rf
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(DF_OBJ) libft
+$(NAME): libft/libft.a $(DF_OBJ)
 	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
 
 $(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/minishell.h
@@ -67,7 +67,7 @@ $(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-libft:
+libft/libft.a:
 	@$(MAKE) -C libft/ 2>/dev/null
 
 clean:
@@ -75,6 +75,6 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	@$(MAKE) fclean -C libft/ 2>/dev/null
 
 re: fclean all
-	@$(MAKE) re -C libft/ 2>/dev/null
