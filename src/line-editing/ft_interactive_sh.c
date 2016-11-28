@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:44:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/11 14:39:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/28 19:28:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int		ft_interactive_sh(t_data *data)
 	ft_strdel(&data->input);
 	data->input = ft_memalloc(10);
 	data->input_pos = 0;
-	data->state_now = Q_NONE;
+	data->qstack = ft_lstnew(NULL, sizeof(t_qstate));
+	*((t_qstate*)data->qstack->content) = Q_NONE;
 	ft_set_termios(data, 1);
 	ft_prompt();
 	while (1)
@@ -72,6 +73,7 @@ int		ft_interactive_sh(t_data *data)
 			return (-1);
 		else if (ret == 2)
 		{
+			ft_lstdel(&data->qstack, &ft_lst_cfree);
 			ft_set_termios(data, 0);
 			return (0);
 		}

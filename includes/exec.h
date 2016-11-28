@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/27 22:57:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:26:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 # include "minishell.h"
 # define PIPE_READ		0
 # define PIPE_WRITE		1
-# define STDIN			0
-# define STDOUT			1
 
-typedef long long		t_type;
 typedef struct s_exec	t_exec;
 
 struct s_exec
@@ -36,6 +33,10 @@ int		exec_semi(t_btree *ast, t_data *data);
 int		exec_pipe(t_btree *ast, t_data *data);
 int		exec_less(t_btree *ast, t_data *data);
 int		exec_great(t_btree *ast, t_data *data);
+int		exec_dgreat(t_btree *ast, t_data *data);
 int		exec_command(t_btree *ast, t_data *data);
+
+int		ft_cmd_process(char **argv, t_data *data);
+int		ft_cmd_exec(char *execpath, char **argv, t_data *data);
 
 #endif

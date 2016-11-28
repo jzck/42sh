@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/27 23:07:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:16:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_exec	g_exec[] =
 	{TK_PIPE, &exec_pipe},
 	{TK_LESS, &exec_less},
 	{TK_GREAT, &exec_great},
+	{TK_DGREAT, &exec_dgreat},
 	{TK_COMMAND, &exec_command},
 	{0, 0},
 };

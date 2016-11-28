@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:44:26 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 13:44:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:54:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int		ft_key_del(t_data *data, char *buf)
 
 	(void)data;
 	(void)buf;
-
 	if (!data->input_pos)
 		return (0);
 	if (data->input[data->input_pos - 1] == '\n')
 		return (0);
+	qstate_update(data, -1);
 	ft_strcpy(data->input + data->input_pos - 1,
 				data->input + data->input_pos);
 	data->input_pos--;

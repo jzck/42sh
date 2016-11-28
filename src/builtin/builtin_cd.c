@@ -1,6 +1,6 @@
 #include "minishell.h"
-#define CDOPT_L 0b001
-#define CDOPT_P 0b010
+#define CDOPT_L 0x001
+#define CDOPT_P 0x002
 #define HAS_CDOPT_P(x) (x & CD_OPT_P)
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
 #define CDERR_1 "cd: no such file or directory: %s\n"
@@ -48,20 +48,17 @@ static int		builtin_cd_opts(char **av, int *opts)
 	return (i);
 }
 
-int				builtin_cd(char **av, char ***env_p)
+int				builtin_cd(char **av, t_data *data)
 {
 	int		i;
 	int		opts;
 	char	*target;
-	char	*oldpwd[2];
-	char	*pwd[2];
 
 	opts = 0;
 	i = builtin_cd_opts(av, &opts);
-	if (!(target = builtin_cd_special(av + i, *env_p)))
+	if (!(target = builtin_cd_special(av + i, data->env)))
 		return (0);
-	oldpwd[0] = ft_strdup("OLDPWD");
-	oldpwd[1] = getcwd(NULL, 0);
+	builtin_setenv((char*[3]){"OLDPWD", getcwd(NULL, 0)}, data);
 	if (chdir(target))
 	{
 		ft_printf(CDERR_1, target);
@@ -69,9 +66,6 @@ int				builtin_cd(char **av, char ***env_p)
 	}
 	else if (target != av[i])
 		ft_printf("%s\n", target);
-	pwd[0] = ft_strdup("PWD");
-	pwd[1] = getcwd(NULL, 0);
-	builtin_setenv(pwd, env_p);
-	builtin_setenv(oldpwd, env_p);
+	builtin_setenv((char*[3]){"PWD", getcwd(NULL, 0)}, data);
 	return (0);
 }

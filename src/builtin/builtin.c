@@ -1,5 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/28 14:21:34 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/28 14:27:36 by jhalford         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 t_stof g_builtin[] = {
 	{"echo",		&builtin_echo},
@@ -11,24 +22,18 @@ t_stof g_builtin[] = {
 	{NULL,			NULL},
 };
 
-int		ft_builtin(char **av, char ***env_p)
+int		ft_builtin(char **av, t_data *data)
 {
 	int		i;
 	int		ret;
-	char	*exitval[2];
-	char	**env;
 
 	i = 0;
-	env = *env_p;
-	exitval[0] = ft_strdup("?");
 	while (g_builtin[i].name)
 	{
 		if (ft_strcmp(g_builtin[i].name, *av) == 0)
 		{
-			ret = (g_builtin[i].f)(av, env_p);
-			exitval[1] = ft_strdup(ft_itoa(ret));
-			builtin_setenv(exitval, &env);
-			*env_p = env;
+			ret = (g_builtin[i].f)(av, data);
+			builtin_setenv((char*[3]){"?", ft_itoa(ret)}, data);
 			return (1);
 		}
 		i++;

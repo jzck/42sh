@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_dquote.c                                     :+:      :+:    :+:   */
+/*   exec_dgreat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:43:39 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/28 18:36:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "exec.h"
 
-int		lexer_dquote(t_list **alst, char *str)
+int		exec_dgreat(t_btree *ast, t_data *data)
 {
-	t_token		*token;
+	t_astnode	*node;
+	int			fd;
 
-	token = (*alst)->content;
-	token->type = TK_WORD;
-	if (*str == '\"')
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
-	if (*str == '\\')
-	{
-		token_append(token, *str);
-		token_append(token, *(str + 1));
-		return (lexer_dquote(alst, str + 2));
-	}
-	token_append(token, *str);
-	return (lexer_dquote(alst, str + 1));
+	node = ast->item;
+	fd = open(node->u_data.redir.u_word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	data->fdout = fd;
+
+	ft_exec(ast->left, data);
+
+	data->fdout = STDOUT;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:08 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 17:45:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:19:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 int		exec_less(t_btree *ast, t_data *data)
 {
-	(void)ast;
-	ft_putendl("exec_less");
-	ft_exec(ast->left, data);
-	ft_exec(ast->right, data);
-	return (0);
+	t_astnode	*node;
+	int			fd;
+
+	node = ast->item;
+	fd = open(node->u_data.redir.u_word.word, O_RDONLY);
+	dup2(fd, node->u_data.redir.n);
+	close(fd);
+
+	return (ft_exec(ast->left, data));
 }

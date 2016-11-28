@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_setenv.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/28 14:29:13 by jhalford         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int		builtin_setenv(char **av, char ***env_p)
+int		builtin_setenv(char **av, t_data *data)
 {
 	char	*str;
 	char	**env;
 
-	env = *env_p;
+	env = data->env;
 	if (ft_strcmp(av[0], "setenv") == 0)
 		av++;
 	if (!av[0])
-		ft_sstrprint(*env_p, '\n');
+		ft_sstrprint(data->env, '\n');
 	else
 	{
 		str = ft_str3join(av[0], "=", av[1]);
@@ -22,7 +34,7 @@ int		builtin_setenv(char **av, char ***env_p)
 			}
 			env++;
 		}
-		*env_p = ft_sstradd(*env_p, str);
+		data->env = ft_sstradd(data->env, str);
 	}
 	return (0);
 }

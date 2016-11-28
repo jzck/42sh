@@ -67,8 +67,13 @@ $(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-libft/libft.a:
-	@$(MAKE) -C libft/ 2>/dev/null
+libft/libft.a: libft/src/*/*.c
+	@echo "libft/libft.a"
+	@$(MAKE) -C libft 2>/dev/null
+
+libft:
+	@echo "libft"
+	@$(MAKE) -C libft 2>/dev/null
 
 clean:
 	$(RM) $(D_OBJ)
