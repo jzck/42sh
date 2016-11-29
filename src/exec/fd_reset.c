@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_enter.c                                     :+:      :+:    :+:   */
+/*   fd_reset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 15:56:36 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:56:36 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/29 19:20:05 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/29 19:47:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "minishell.h"
 
-int		ft_key_enter(t_data *data, char *buf)
+void	fd_reset(t_data	*data)
 {
-	(void)buf;
-	if (*(t_qstate*)data->qstack->content == Q_NONE)
-	{
-		ft_putchar('\n');
-		ft_history_add(data);
-		return (2);
-	}
-	ft_key_default(data, buf);
-	ft_printf("> ");
-	return (0);
+	dup2(data->save_in, STDIN);
+	dup2(data->save_out, STDOUT);
+	data->fdin = STDIN;
+	data->fdout = STDOUT;
 }

@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_enter.c                                     :+:      :+:    :+:   */
+/*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 15:56:36 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:56:36 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/29 20:21:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "minishell.h"
 
-int		ft_key_enter(t_data *data, char *buf)
+void	fd_redirect(t_data *data)
 {
-	(void)buf;
-	if (*(t_qstate*)data->qstack->content == Q_NONE)
+	if (data->fdin != STDIN)
 	{
-		ft_putchar('\n');
-		ft_history_add(data);
-		return (2);
+		/* ft_dprintf(2, "redirecting input: %i->STDIN\n", data->fdin); */
+		dup2(data->fdin, STDIN);
+		close(data->fdin);
 	}
-	ft_key_default(data, buf);
-	ft_printf("> ");
-	return (0);
+	if (data->fdout != STDOUT)
+	{
+		/* ft_dprintf(2, "redirecting output: %i->STDOUT\n", data->fdout); */
+		dup2(data->fdout, STDOUT);
+		close(data->fdout);
+	}
 }

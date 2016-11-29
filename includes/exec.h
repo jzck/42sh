@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:26:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:22:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int		exec_less(t_btree *ast, t_data *data);
 int		exec_great(t_btree *ast, t_data *data);
 int		exec_dgreat(t_btree *ast, t_data *data);
 int		exec_command(t_btree *ast, t_data *data);
+
+void	fd_redirect(t_data *data);
+void	fd_reset(t_data	*data);
 
 int		ft_cmd_process(char **argv, t_data *data);
 int		ft_cmd_exec(char *execpath, char **argv, t_data *data);

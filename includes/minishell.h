@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:32:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/29 20:08:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ struct	s_data
 	t_list		*qstack;
 	int			fdin;
 	int			fdout;
+	int			save_in;
+	int			save_out;
 };
 
 extern t_stof	g_builtins[];

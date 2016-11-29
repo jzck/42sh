@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:10:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:19:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		exec_pipe(t_btree *ast, t_data *data)
 
 	ft_exec(ast->left, data);
 
+	if (data->fdout != STDOUT)
+		close(data->fdout);
 	data->fdout = STDOUT;
 	data->fdin = fds[PIPE_READ];
 
