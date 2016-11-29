@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:44:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 19:02:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/29 13:50:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_key_enter(t_data *data, char *buf)
 {
 	(void)buf;
-	if (data->state_now == Q_NONE)
+	if (*(t_qstate*)data->qstack->content == Q_NONE)
 	{
 		ft_putchar('\n');
 		ft_history_add(data);

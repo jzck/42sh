@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:53:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/29 15:32:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,11 @@ enum	e_qstate
 
 struct	s_data
 {
-	char	**env;
-	t_dlist	*history;
-
+	char		**env;
+	t_dlist		*history;
 	char		*input;
 	int			input_pos;
 	t_list		*qstack;
-	t_qstate	state_now;
-	t_qstate	state_last;
 	int			fdin;
 	int			fdout;
 };
