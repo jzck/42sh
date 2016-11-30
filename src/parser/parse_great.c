@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 17:47:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/30 21:45:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int		parse_great(t_btree **ast, t_list **start, t_list **lst)
 		return (1);
 	node->u_data.redir.n = ft_atoi(tok->data);
 	node->u_data.redir.u_word.word = ft_strdup(next_tok->data);
+
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_lst_delif(start, (*lst)->next->content, &ft_addrcmp, &token_free);
+
 	ft_parse(&(*ast)->left, start);
 	return (0);
 }

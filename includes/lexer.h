@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:36:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/30 21:07:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 
 # include "minishell.h"
 
-# define TK_LESS		0x0001
-# define TK_GREAT		0x0002
-# define TK_DLESS		0x0004
-# define TK_DGREAT		0x0008
-# define TK_LESSAND		0x0010
-# define TK_GREATAND	0x0020
-# define TK_SEMI		0x0040
-# define TK_PIPE		0x0080
-# define TK_WORD		0x0100
-# define TK_COMMAND		0x0200
+# define TK_LESS		0x00000001
+# define TK_GREAT		0x00000002
+# define TK_DLESS		0x00000004
+# define TK_DGREAT		0x00000008
+# define TK_LESSAND		0x00000010
+# define TK_GREATAND	0x00000020
+# define TK_SEMI		0x00000040
+# define TK_PIPE		0x00000080
+# define TK_AND_IF		0x00000100
+# define TK_OR_IF		0x00000200
+# define TK_AMP			0x00000400
+# define TK_WORD		0x00100000
+# define TK_COMMAND		0x00200000
 
 # define TK_REDIR		(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 

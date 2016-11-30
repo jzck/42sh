@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:16:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/30 20:52:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_exec	g_exec[] =
 {
+	{TK_AND_IF, &exec_and_if},
+	{TK_OR_IF, &exec_or_if},
 	{TK_SEMI, &exec_semi},
 	{TK_PIPE, &exec_pipe},
 	{TK_LESS, &exec_less},

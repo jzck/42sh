@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 11:30:08 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 16:38:17 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/30 21:05:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_parser	g_parser[] =
 {
-	{TK_SEMI, &parse_separator},
+	{TK_SEMI | TK_AMP, &parse_separator},
+	{TK_AND_IF | TK_OR_IF, &parse_separator},
 	{TK_PIPE, &parse_separator},
 	{TK_LESS, &parse_less},
 	{TK_GREAT, &parse_great},
@@ -44,14 +45,11 @@ int		ft_parse(t_btree **ast, t_list **start)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
 		{
-			/* ft_printf("found token:%#06llx\n", g_parser[i].type); */
-			item.type = g_parser[i].type;
 			if (g_parser[i].f)
 				(*g_parser[i].f)(ast, start, &lst);
 			return (0);
 		}
-		else
-			i++;
+		i++;
 	}
 	return (0);
 }

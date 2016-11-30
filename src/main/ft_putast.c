@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 14:47:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/30 21:48:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ char	*ft_putast(void *nodein)
 	t_astnode	*node;
 
 	node = nodein;
-	if (node->type == TK_SEMI)
+	if (node->type == TK_AMP)
+		return ("  &  ");
+	else if (node->type == TK_SEMI)
 		return ("  ;  ");
+	else if (node->type == TK_AND_IF)
+		return (" &&  ");
+	else if (node->type == TK_OR_IF)
+		return (" ||  ");
 	else if (node->type == TK_PIPE)
 		return ("  |  ");
 	else if (node->type == TK_COMMAND)

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 19:22:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/11/30 21:07:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ extern t_exec	g_exec[];
 int		ft_exec(t_btree *ast, t_data *data);
 
 int		exec_semi(t_btree *ast, t_data *data);
+int		exec_or_if(t_btree *ast, t_data *data);
+int		exec_and_if(t_btree *ast, t_data *data);
 int		exec_pipe(t_btree *ast, t_data *data);
+
 int		exec_less(t_btree *ast, t_data *data);
 int		exec_great(t_btree *ast, t_data *data);
 int		exec_dgreat(t_btree *ast, t_data *data);
