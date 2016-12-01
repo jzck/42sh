@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/30 21:48:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:28:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		main(void)
 		/* ft_dprintf(STDERR, "\n--- INFIX BREAKDOWN ---\n"); */
 		/* btree_apply_infix(ast, &ft_putast2); */
 		/* ft_lstdel(&token, &token_free); */
-		/* if (ft_exec(ast, &data)) */
-		/* 	return (1); */
+		if (ft_exec(ast, &data))
+			return (1);
 	}
 	return (0);
 }
