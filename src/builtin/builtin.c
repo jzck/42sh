@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 19:45:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:12:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,20 @@ int		ft_builtin(char **av, t_data *data)
 	{
 		if (ft_strcmp(g_builtin[i].name, *av) == 0)
 		{
-			fd_redirect(data);
-			ret = (g_builtin[i].f)(av, data);
-			builtin_setenv((char*[3]){"?", ft_itoa(ret)}, data);
-			fd_reset(data);
+			if (data->fdout != STDOUT)
+			{
+				if (fork() == 0)
+				{
+					fd_redirect(data);
+					ret = (g_builtin[i].f)(av, data);
+					exit(ret);
+				}
+			}
+			else
+			{
+				ret = (g_builtin[i].f)(av, data);
+				builtin_setenv((char*[3]){"?", ft_itoa(ret)}, data);
+			}
 			return (1);
 		}
 		i++;

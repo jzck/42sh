@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_interactive_sh.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:44:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:32:42 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/01 12:14:12 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/01 12:29:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int		ft_interactive_sh(t_data *data)
 	data->input_pos = 0;
 	data->qstack = ft_lstnew(NULL, sizeof(t_qstate));
 	*((t_qstate*)data->qstack->content) = Q_NONE;
-	ft_set_termios(data, 1);
+	if (ft_set_termios(data, 1))
+		return (-1);
 	ft_prompt();
 	while (1)
 	{

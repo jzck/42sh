@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_tc.c                                           :+:      :+:    :+:   */
+/*   ft_set_termios.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 14:27:57 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 14:39:28 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/01 12:29:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		ft_set_termios(t_data *data, int input_mode)
 
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		return (-1);
+	ft_debug();
 	if (tgetent(NULL, term_name) != 1)
 		return (-1);
 	if (tcgetattr(0, &term) == -1)
