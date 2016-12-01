@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 14:26:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 14:46:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_set_termios(t_data *data, int input_mode)
 	if (input_mode)
 		term.c_lflag &= ~(ICANON) & ~(ISIG) & ~(ECHO);
 	else
-		term.c_lflag |= ICANON | ECHO;
+		term.c_lflag |= ICANON | ISIG | ECHO;
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &term) == -1)

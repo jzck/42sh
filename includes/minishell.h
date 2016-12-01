@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 12:13:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 14:46:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ struct	s_data
 	t_list		*qstack;
 	int			fdin;
 	int			fdout;
-	int			save_in;
-	int			save_out;
 };
 
 extern t_stof	g_builtins[];
@@ -57,6 +55,7 @@ extern pid_t	g_pid;
 
 void	sig_handler(int signo);
 int		data_init(t_data *data);
+void	ft_cleanup(void);
 
 int		ft_builtin(char **av, t_data *data);
 int		builtin_echo(char **av, t_data *data);

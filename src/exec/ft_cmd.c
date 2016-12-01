@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 13:47:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 14:46:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_cmd_exec(char *execpath, char **argv, t_data *data)
 		g_pid = pid;
 		if (data->fdout == STDOUT)
 		{
-			ft_printf("[waiting for PID = %i]\n", pid);
+			ft_dprintf(2, "[waiting for PID = %i]\n", pid);
 			waitpid(pid, &status, 0);
 			builtin_setenv((char*[3]){"?", ft_itoa(status)}, data);
 		}
