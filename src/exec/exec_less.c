@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:08 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 20:29:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:52:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		exec_less(t_btree *ast, t_data *data)
 	int			fd;
 
 	node = ast->item;
-	fd = open(node->u_data.redir.u_word.word, O_RDONLY);
+	fd = open(node->data.redir.word.word, O_RDONLY);
 	data->fdin = fd;
 
 	ft_exec(ast->left, data);

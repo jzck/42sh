@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 14:46:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:31:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,17 @@
 # include <signal.h>
 # include <fcntl.h>
 
+typedef long long		t_type;
 
-typedef enum e_qstate	t_qstate;
-typedef struct s_data	t_data;
-
-enum	e_qstate
+typedef enum	e_qstate
 {
 	Q_NONE,
 	Q_QUOTE,
 	Q_DQUOTE,
 	Q_BACKSLASH,
-};
+}				t_qstate;
 
-struct	s_data
+typedef struct	s_data
 {
 	char		**env;
 	t_dlist		*history;
@@ -48,7 +46,9 @@ struct	s_data
 	t_list		*qstack;
 	int			fdin;
 	int			fdout;
-};
+	char		*aol_status;
+	int			aol_search;
+}				t_data;
 
 extern t_stof	g_builtins[];
 extern pid_t	g_pid;

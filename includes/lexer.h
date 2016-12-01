@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 12:15:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:21:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@
 
 # define TK_REDIR		(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 
-typedef long long			t_type;
-typedef enum e_lexstate		t_lexstate;
-typedef struct s_token		t_token;
-typedef struct s_data		t_data;
-typedef int					t_lexer(t_list **alst,
-										char *str);
-
 enum	e_lexstate
 {
 	DEFAULT,
@@ -54,16 +47,19 @@ enum	e_lexstate
 	BACKSLASH,
 };
 
-struct s_token
+struct	s_token
 {
-	t_type	type;
-	char	*data;
-	int		size;
+	t_type		type;
+	char		*data;
+	int			size;
 };
 
-extern t_lexer		*g_lexer[];
+typedef struct s_data	t_data;
+typedef struct s_token	t_token;
+typedef enum e_lexstate	t_lexstate;
 
-/* t_token	*token_getnext(int *pos,char *line); */
+extern int	(*g_lexer[])(t_list **alst, char *str);
+
 t_token	*token_init();
 int		ft_tokenize(t_list **alst, char *str, t_lexstate state);
 int		token_append(t_token *token, char c);
@@ -74,18 +70,17 @@ void	token_print(t_list *lst);
 int		ft_is_delim(char c);
 void	qstate_update(t_data *data, char c);
 
-t_lexer	lexer_default;
-t_lexer	lexer_delim;
-t_lexer	lexer_sep;
-t_lexer	lexer_word;
-t_lexer	lexer_number;
-t_lexer	lexer_greatand;
-t_lexer	lexer_lessand;
-t_lexer	lexer_quote;
-t_lexer	lexer_dquote;
-t_lexer	lexer_backslash;
-
-t_lexer	lexer_less;
-t_lexer	lexer_great;
+int		lexer_default(t_list **alst, char *str);
+int		lexer_delim(t_list **alst, char *str);
+int		lexer_sep(t_list **alst, char *str);
+int		lexer_word(t_list **alst, char *str);
+int		lexer_number(t_list **alst, char *str);
+int		lexer_less(t_list **alst, char *str);
+int		lexer_great(t_list **alst, char *str);
+int		lexer_lessand(t_list **alst, char *str);
+int		lexer_greatand(t_list **alst, char *str);
+int		lexer_quote(t_list **alst, char *str);
+int		lexer_dquote(t_list **alst, char *str);
+int		lexer_backslash(t_list **alst, char *str);
 
 #endif

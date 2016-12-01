@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/14 16:14:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:37:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		parse_lessand(t_btree **ast, t_list **start, t_list **lst)
 	node->type = TK_LESSAND;
 	tok = (*lst)->content;
 	and = ft_strchr(tok->data, '&');
-	node->u_data.redir.u_word.fd = ft_atoi(and + 1);
-	node->u_data.redir.close =
+	node->data.redir.word.fd = ft_atoi(and + 1);
+	node->data.redir.close =
 		tok->data[ft_strlen(tok->data) - 1] == '-' ? 1 : 0;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_parse(&(*ast)->left, start);

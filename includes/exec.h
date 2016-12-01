@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/30 22:47:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:47:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct s_exec	t_exec;
 
-struct s_exec
+struct	s_exec
 {
 	t_type	type;
 	int		(*f)(t_btree *ast, t_data *data);

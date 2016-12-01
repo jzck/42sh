@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 12:15:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:35:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,41 @@
 
 # include "minishell.h"
 
-typedef long long			t_type;
 typedef struct s_parser		t_parser;
 typedef struct s_astnode	t_astnode;
 typedef struct s_redir		t_redir;
+typedef union u_astdata		t_astdata;
+typedef union u_word		t_word;
 
-struct s_parser
+struct	s_parser
 {
 	t_type	type;
 	int		(*f)(t_btree **ast, t_list **start, t_list **token);
 };
 
-struct s_redir
+union	u_word
+{
+	char	*word;
+	int		fd;
+};
+
+struct	s_redir
 {
 	int		n;
 	int		close;
-	union u_word
-	{
-		char	*word;
-		int		fd;
-	} u_word;
+	t_word	word;
 };
 
-struct s_astnode
+union	u_astdata
 {
-	t_type	type;
-	union u_astdata
-	{
-		t_redir	redir;
-		char	**sstr;
-	} u_data;
+	t_redir	redir;
+	char	**sstr;
+};
+
+struct	s_astnode
+{
+	t_type		type;
+	t_astdata	data;
 };
 
 extern t_parser		g_parser[];

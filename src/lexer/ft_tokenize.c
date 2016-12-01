@@ -6,13 +6,13 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/30 16:57:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:21:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_lexer		*g_lexer[] =
+int		(*g_lexer[])(t_list **alst, char *str) =
 {
 	&lexer_default,
 	&lexer_delim,

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:38:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 12:13:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:59:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,23 @@ int		ft_interactive_sh(t_data *data);
 int		ft_prompt(void);
 int		ft_history_add(t_data *data);
 
-typedef	int		key_press(t_data *data, char *buf);
-key_press	ft_clear_line;
-key_press	ft_line_up;
-key_press	ft_line_down;
-key_press	ft_line_start;
-key_press	ft_line_end;
-key_press	ft_history_up;
-key_press	ft_history_down;
-key_press	ft_cursor_left;
-key_press	ft_cursor_right;
-key_press	ft_word_left;
-key_press	ft_word_right;
-key_press	ft_key_del;
-key_press	ft_key_enter;
-key_press	ft_key_ctrl_d;
-key_press	ft_key_ctrl_c;
-key_press	ft_key_default;
+int		ft_clear_line(t_data *data, char *buf);
+int		ft_line_up(t_data *data, char *buf);
+int		ft_line_down(t_data *data, char *buf);
+int		ft_line_start(t_data *data, char *buf);
+int		ft_line_end(t_data *data, char *buf);
+
+int		ft_key_del(t_data *data, char *buf);
+int		ft_key_enter(t_data *data, char *buf);
+int		ft_key_ctrl_d(t_data *data, char *buf);
+int		ft_key_ctrl_c(t_data *data, char *buf);
+int		ft_key_default(t_data *data, char *buf);
+
+int		ft_history_up(t_data *data, char *buf);
+int		ft_history_down(t_data *data, char *buf);
+int		ft_cursor_left(t_data *data, char *buf);
+int		ft_cursor_right(t_data *data, char *buf);
+int		ft_word_left(t_data *data, char *buf);
+int		ft_word_right(t_data *data, char *buf);
 
 #endif

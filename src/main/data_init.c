@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 14:46:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:31:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		data_init(t_data *data)
 	data->history = NULL;
 	data->fdin = STDIN;
 	data->fdout = STDOUT;
+	data->aol_status = NULL;
+	data->aol_search = 0;
 	if (!(data->history = ft_dlstnew(NULL, 0)))
 		return (-1);
 	return (0);

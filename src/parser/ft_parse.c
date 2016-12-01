@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/30 21:05:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:53:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_parse(t_btree **ast, t_list **start)
 	if (!*ast)
 	{
 		*ast = btree_create_node(&item, sizeof(item));
-		((t_astnode *)(*ast)->item)->u_data.sstr = NULL;
+		((t_astnode *)(*ast)->item)->data.sstr = NULL;
 	}
 	while (g_parser[i].type)
 	{
