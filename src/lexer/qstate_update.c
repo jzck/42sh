@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:56:40 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:57:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:36:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	qstate_update(t_data *data, char c)
 
 	list = &data->qstack;
 	state = (*list)->content;
-	/* ft_printf("befor state: %i\n", *state); */
 	if (c == -1)
 	{
 		tmp = ft_lstpop(list);
@@ -32,27 +31,11 @@ void	qstate_update(t_data *data, char c)
 	new = (*list)->content;
 	*new = *state;
 	if (*state == Q_NONE)
-	{
-		if (c == '\\')
-			*new = Q_BACKSLASH;
-		else if (c == '\"')
-			*new = Q_DQUOTE;
-		else if (c == '\'')
-			*new = Q_QUOTE;
-	}
+		qstate_none(new, c);
 	else if (*state == Q_QUOTE)
-	{
-		if (c == '\'')
-			*new = Q_NONE;
-	}
+		qstate_quote(new, c);
 	else if (*state == Q_DQUOTE)
-	{
-		if (c == '\\')
-			*new = Q_BACKSLASH;
-		else if (c == '\"')
-			*new = Q_NONE;
-	}
+		qstate_dquote(new, c);
 	else if (*state == Q_BACKSLASH)
 		*new = *(t_qstate*)(*list)->next->next->content;
-	/* ft_printf("new  state: %i\n", *new); */
 }

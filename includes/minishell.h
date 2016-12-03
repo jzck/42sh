@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 17:31:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:54:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,7 @@
 
 typedef long long		t_type;
 
-typedef enum	e_qstate
-{
-	Q_NONE,
-	Q_QUOTE,
-	Q_DQUOTE,
-	Q_BACKSLASH,
-}				t_qstate;
-
-typedef struct	s_data
+struct	s_data
 {
 	char		**env;
 	t_dlist		*history;
@@ -48,7 +40,10 @@ typedef struct	s_data
 	int			fdout;
 	char		*aol_status;
 	int			aol_search;
-}				t_data;
+};
+
+typedef struct s_data	t_data;
+typedef enum e_qstate	t_qstate;
 
 extern t_stof	g_builtins[];
 extern pid_t	g_pid;

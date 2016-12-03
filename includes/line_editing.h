@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:38:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 15:59:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:51:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,16 @@
 # define FT_KEY_BSLASH	"\x5c"
 # define FT_KEY_DEL		"\x7f"
 
+enum	e_qstate
+{
+	Q_NONE,
+	Q_QUOTE,
+	Q_DQUOTE,
+	Q_BACKSLASH,
+};
+
 typedef struct s_data	t_data;
+typedef enum e_qstate	t_qstate;
 
 extern t_stof	g_keys[];
 
@@ -70,5 +79,9 @@ int		ft_cursor_left(t_data *data, char *buf);
 int		ft_cursor_right(t_data *data, char *buf);
 int		ft_word_left(t_data *data, char *buf);
 int		ft_word_right(t_data *data, char *buf);
+
+void	qstate_none(t_qstate *new, char c);
+void	qstate_quote(t_qstate *new, char c);
+void	qstate_dquote(t_qstate *new, char c);
 
 #endif

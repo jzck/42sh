@@ -6,11 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 17:22:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:06:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 extern pid_t	g_pid;
 
 int		ft_cmd_process(char **argv, t_data *data)
@@ -44,7 +45,6 @@ int		ft_cmd_exec(char *execpath, char **argv, t_data *data)
 		ft_dprintf(2, "%s: permission denied: %s\n", SHELL_NAME, argv[0]);
 		return (-1);
 	}
-	/* ft_dprintf(2, "gonna fork, in=%i, out=%i\n", data->fdin, data->fdout); */
 	if ((pid = fork()) == -1)
 		return (-1);
 	else if (pid == 0)
@@ -53,12 +53,10 @@ int		ft_cmd_exec(char *execpath, char **argv, t_data *data)
 		environ = ft_sstrdup(data->env);
 		execve(execpath, argv, environ);
 	}
-	else
+	else if ((g_pid = pid))
 	{
-		g_pid = pid;
 		if (data->fdout == STDOUT)
 		{
-			ft_dprintf(2, "[waiting for PID = %i]\n", pid);
 			waitpid(pid, &status, 0);
 			builtin_setenv((char*[3]){"?", ft_itoa(status)}, data);
 		}

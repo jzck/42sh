@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 18:43:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:43:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		lexer_dquote(t_list **alst, char *str)
 		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
 	if (*str == '\\')
 	{
-		token_append(token, *str);
 		token_append(token, *(str + 1));
 		return (lexer_dquote(alst, str + 2));
 	}

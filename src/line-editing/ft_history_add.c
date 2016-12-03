@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:43:40 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 13:43:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:51:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		ft_history_add(t_data *data)
 	if (data->history)
 		while (data->history->next)
 			data->history = data->history->next;
-	if (!data->history->prev || ft_strcmp(str, (char *)data->history->prev->content))
+	if (!data->history->prev
+			|| ft_strcmp(str, (char *)data->history->prev->content))
 	{
 		new = ft_dlstnew(str, sizeof(char) * (ft_strlen(str) + 1));
 		ft_dlstadd_before(&data->history, new);

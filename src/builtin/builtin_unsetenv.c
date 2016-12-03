@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:29:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 14:29:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 11:55:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		builtin_unsetenv(char **av, t_data *data)
 	int		j;
 
 	env = data->env;
-	/* ft_printf("builtin: %s\n", av[0]); */
 	i = 1;
 	while (av[i])
 	{

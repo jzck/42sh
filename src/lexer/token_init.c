@@ -6,13 +6,13 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/11 17:47:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:07:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_token		*token_init()
+t_token		*token_init(void)
 {
 	t_token	*token;
 

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 17:18:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 11:58:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_exec(t_btree *ast, t_data *data)
 
 	i = 0;
 	item = ast->item;
-	if(!ast)
+	if (!ast)
 		return (0);
 	while (g_exec[i].type)
 	{

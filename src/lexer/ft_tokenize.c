@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:21:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 12:50:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,13 @@ int		ft_tokenize(t_list **alst, char *str, t_lexstate state)
 		*alst = ft_lstnew(token, sizeof(*token));
 	if (ft_is_delim(*str))
 		state = DELIM;
-	if (*str == '&' || *str == ';' || *str == '|')
+	else if (*str == '&' || *str == ';' || *str == '|')
 		state = SEP;
-	else if (*str == '\'')
-	{
-		state = QUOTE;
-		str++;
-	}
-	else if (*str == '\"')
-	{
-		state = DQUOTE;
-		str++;
-	}
 	else if (*str == '\\')
 		state = BACKSLASH;
+	else if (*str == '\'')
+		return ((*g_lexer[QUOTE])(alst, str + 1));
+	else if (*str == '\"')
+		return ((*g_lexer[DQUOTE])(alst, str + 1));
 	return ((*g_lexer[state])(alst, str));
 }
