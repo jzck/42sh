@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:57:43 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 15:57:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:30:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int		ft_key_del(t_data *data, char *buf)
 
 	(void)data;
 	(void)buf;
-	if (!data->input_pos)
+	if (!data->line.input_pos)
 		return (0);
-	if (data->input[data->input_pos - 1] == '\n')
+	if (data->line.input[data->line.input_pos - 1] == '\n')
 		return (0);
 	qstate_update(data, -1);
-	ft_strcpy(data->input + data->input_pos - 1,
-				data->input + data->input_pos);
-	data->input_pos--;
+	ft_strcpy(data->line.input + data->line.input_pos - 1,
+				data->line.input + data->line.input_pos);
+	data->line.input_pos--;
 	if ((res = tgetstr("le", NULL)) == NULL)
 	{
 		ft_printf("le error\n");

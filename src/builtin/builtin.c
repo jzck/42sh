@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:55:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:17:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_builtin(char **av, t_data *data)
 	while (g_builtin[++i].name)
 		if (ft_strcmp(g_builtin[i].name, *av) == 0)
 		{
-			if (data->fdout != STDOUT)
+			if (data->exec.fdout != STDOUT)
 			{
 				if (fork() == 0)
 				{

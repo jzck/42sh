@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:54:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:44:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
+	struct s_tmp{
+		char	str[5];
+		t_type	type;
+	};
+
+/* 	struct s_tmp[] = */
+/* 	{ */
+/* 		{TK_AMP, "  &  "}, */
+/* 		{TK_SEMI, "  &  "}, */
+/* 		{TK_AND_IF, "  &  "}, */
+/* 		{TK_OR_IF, "  &  "}, */
+/* 		{TK_PIPE, "  &  "}, */
+/* 		{TK_COMMAND, "  &  "}, */
+/* 		{TK_GREAT, "  &  "}, */
+/* 		{TK_AMP, "  &  "}, */
+/* 		{TK_AMP, "  &  "}, */
+/* 	} */
 
 	node = nodein;
 	if (node->type == TK_AMP)
@@ -28,13 +45,7 @@ char	*ft_putast(void *nodein)
 	else if (node->type == TK_PIPE)
 		return ("  |  ");
 	else if (node->type == TK_COMMAND)
-	{
-		/*char **sstr = node->u_data.sstr; */
-		/* while (*sstr) */
-		/* 	ft_printf("%s,", *sstr++); */
-		/* return (ft_itoa_base(node->type, "0123456789abcdef", "")); */
 		return (" COM ");
-	}
 	else if (node->type == TK_GREAT)
 		return ("  >  ");
 	else if (node->type == TK_LESS)

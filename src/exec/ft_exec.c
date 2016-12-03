@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:58:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:25:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_exec	g_exec[] =
+t_execfunc	g_execfunc[] =
 {
 	{TK_AND_IF, &exec_and_if},
 	{TK_OR_IF, &exec_or_if},
@@ -34,10 +34,10 @@ int		ft_exec(t_btree *ast, t_data *data)
 	item = ast->item;
 	if (!ast)
 		return (0);
-	while (g_exec[i].type)
+	while (g_execfunc[i].type)
 	{
-		if (item->type == g_exec[i].type)
-			return ((*g_exec[i].f)(ast, data));
+		if (item->type == g_execfunc[i].type)
+			return ((*g_execfunc[i].f)(ast, data));
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:51 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:56:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:22:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		exec_great(t_btree *ast, t_data *data)
 
 	node = ast->item;
 	fd = open(node->data.redir.word.word, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	data->fdout = fd;
+	data->exec.fdout = fd;
 	ft_exec(ast->left, data);
-	data->fdout = STDOUT;
+	data->exec.fdout = STDOUT;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:53:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:50:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_parse(t_btree **ast, t_list **start)
 	int			i;
 
 	i = 0;
-	if(!*start)
+	if (!*start)
 		return (0);
 	if (!*ast)
 	{

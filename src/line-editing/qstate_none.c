@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   qstate_none.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:22:33 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/03 12:08:48 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 12:51:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "line_editing.h"
 
-int		exec_dgreat(t_btree *ast, t_data *data)
+void	qstate_none(t_qstate *new, char c)
 {
-	t_astnode	*node;
-	int			fd;
-
-	node = ast->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data->exec.fdout = fd;
-	ft_exec(ast->left, data);
-	data->exec.fdout = STDOUT;
-	return (0);
+	if (c == '\\')
+		*new = Q_BACKSLASH;
+	else if (c == '\"')
+		*new = Q_DQUOTE;
+	else if (c == '\'')
+		*new = Q_QUOTE;
 }

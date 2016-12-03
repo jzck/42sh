@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   input_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:22:33 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/03 13:35:03 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 15:34:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
-int		exec_dgreat(t_btree *ast, t_data *data)
+int		input_init(t_data *data)
 {
-	t_astnode	*node;
-	int			fd;
+	char	null;
 
-	node = ast->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data->exec.fdout = fd;
-	ft_exec(ast->left, data);
-	data->exec.fdout = STDOUT;
+	null = '\0';
+	ft_strdel(&data->line.input);
+	data->line.input = ft_memalloc(10);
+	data->line.input_pos = 0;
+	data->line.qstack = ft_lstnew(NULL, sizeof(t_qstate));
+	*((t_qstate*)data->line.qstack->content) = Q_NONE;
+	if (ft_set_termios(data, 1))
+		return (-1);
+	ft_prompt();
 	return (0);
 }

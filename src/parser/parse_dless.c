@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dless.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:37:20 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/03 13:31:40 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 13:31:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ int		parse_dless(t_btree **ast, t_list **start, t_list **lst)
 	ft_parse(&(*ast)->left, start);
 	return (0);
 }
-

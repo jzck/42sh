@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:45:23 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/29 13:49:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:37:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_key_default(t_data *data, char *buf)
 	char	*res;
 	char	*tmp;
 
-	tmp = data->input;
-	data->input = ft_strinsert(data->input, *buf, data->input_pos);
-	data->input_pos++;
+	tmp = data->line.input;
+	data->line.input = ft_strinsert(data->line.input, *buf, data->line.input_pos);
+	data->line.input_pos++;
 	ft_strdel(&tmp);
 	qstate_update(data, *buf);
 	if ((res = tgetstr("IC", NULL)))

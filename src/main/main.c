@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 13:15:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:33:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(void)
 			return (1);
 		/* ft_dprintf(STDERR, "command='%s'\n", data.input); */
 		token = NULL;
-		if (ft_tokenize(&token, data.input, DEFAULT))
+		if (ft_tokenize(&token, data.line.input, DEFAULT))
 			return (1);
 		if (!token)
 			continue ;

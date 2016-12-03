@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 12:54:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:27:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,37 @@
 # include <fcntl.h>
 
 typedef long long		t_type;
+typedef struct s_line	t_line;
+typedef struct s_comp	t_comp;
+typedef struct s_exec	t_exec;
 
-struct	s_data
+struct	s_line
 {
-	char		**env;
 	t_dlist		*history;
-	char		*input;
 	int			input_pos;
 	t_list		*qstack;
+	char		*input;
+};
+
+struct	s_comp
+{
+	int			a;
+};
+
+struct	s_exec
+{
 	int			fdin;
 	int			fdout;
 	char		*aol_status;
 	int			aol_search;
+};
+
+struct	s_data
+{
+	char		**env;
+	t_exec		exec;
+	t_line		line;
+	t_comp		comp;
 };
 
 typedef struct s_data	t_data;

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:43:10 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/10 13:43:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:26:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int		ft_cursor_left(t_data *data, char *buf)
 
 	res = NULL;
 	(void)buf;
-	if (!data->input_pos)
+	if (!data->line.input_pos)
 		return (0);
-	if (data->input[data->input_pos - 1] == '\n')
+	if (data->line.input[data->line.input_pos - 1] == '\n')
 		return (0);
-	data->input_pos--;
+	data->line.input_pos--;
 	if (!(res = tgetstr("le", NULL)))
 		return (-1);
 	tputs(tgoto(res, 0, 0), 0, &ft_putchar);

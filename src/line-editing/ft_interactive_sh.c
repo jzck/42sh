@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:12 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 12:54:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:37:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,11 @@ t_stof g_keys[] = {
 int		ft_interactive_sh(t_data *data)
 {
 	char	buf[4];
-	char	null;
 	int		ret;
 	int		i;
 
-	null = '\0';
-
-	ft_strdel(&data->input);
-	data->input = ft_memalloc(10);
-	data->input_pos = 0;
-	data->qstack = ft_lstnew(NULL, sizeof(t_qstate));
-	*((t_qstate*)data->qstack->content) = Q_NONE;
-	if (ft_set_termios(data, 1))
+	if ((input_init(data)))
 		return (-1);
-	ft_prompt();
 	while (1)
 	{
 		ft_bzero(buf, 4);
@@ -69,7 +60,7 @@ int		ft_interactive_sh(t_data *data)
 			return (-1);
 		else if (ret == 2)
 		{
-			ft_lstdel(&data->qstack, &ft_lst_cfree);
+			ft_lstdel(&data->line.qstack, &ft_lst_cfree);
 			ft_set_termios(data, 0);
 			return (0);
 		}

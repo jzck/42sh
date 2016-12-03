@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:56:40 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 12:36:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:36:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	qstate_update(t_data *data, char c)
 	t_list		**list;
 	t_list		*tmp;
 
-	list = &data->qstack;
+	list = &data->line.qstack;
 	state = (*list)->content;
 	if (c == -1)
 	{

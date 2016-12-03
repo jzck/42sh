@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:47:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:30:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 # define PIPE_READ		0
 # define PIPE_WRITE		1
 
-typedef struct s_exec	t_exec;
+typedef struct s_execfunc	t_execfunc;
 
-struct	s_exec
+struct	s_execfunc
 {
 	t_type	type;
 	int		(*f)(t_btree *ast, t_data *data);
 };
 
-extern t_exec	g_exec[];
+extern t_execfunc	g_execfunc[];
 
 int		ft_exec(t_btree *ast, t_data *data);
 

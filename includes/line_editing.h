@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:38:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 12:51:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:44:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ typedef enum e_qstate	t_qstate;
 
 extern t_stof	g_keys[];
 
-int		ft_set_termios(t_data *data, int input_mode);
 int		ft_interactive_sh(t_data *data);
+int		input_init(t_data *data);
+int		ft_set_termios(t_data *data, int input_mode);
 int		ft_prompt(void);
+
 int		ft_history_add(t_data *data);
 
 int		ft_clear_line(t_data *data, char *buf);

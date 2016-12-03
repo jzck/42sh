@@ -6,11 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:43:22 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 14:46:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:31:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 pid_t	g_pid;
 
 void	sig_handler(int signo)

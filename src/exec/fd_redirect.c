@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:58:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:24:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	fd_redirect(t_data *data)
 {
-	if (data->fdin != STDIN)
+	if (data->exec.fdin != STDIN)
 	{
-		dup2(data->fdin, STDIN);
-		close(data->fdin);
+		dup2(data->exec.fdin, STDIN);
+		close(data->exec.fdin);
 	}
-	if (data->fdout != STDOUT)
+	if (data->exec.fdout != STDOUT)
 	{
-		dup2(data->fdout, STDOUT);
-		close(data->fdout);
+		dup2(data->exec.fdout, STDOUT);
+		close(data->exec.fdout);
 	}
 }
