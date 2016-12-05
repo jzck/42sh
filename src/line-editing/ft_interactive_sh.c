@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:12 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:37:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:03:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_stof g_keys[] = {
 	{FT_KEY_C_K, NULL},
-	{FT_KEY_TAB, NULL},
+	{FT_KEY_TAB, &ft_key_default},
 	{FT_KEY_C_H, &ft_line_start},
 	{FT_KEY_C_L, &ft_line_end},
 	{FT_KEY_C_U, &ft_clear_line},

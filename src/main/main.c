@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:33:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/05 12:11:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		main(void)
 	t_btree	*ast;
 
 	token = NULL;
+	ast = NULL;
 	if (data_init(&data))
 		return (1);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
@@ -34,14 +35,12 @@ int		main(void)
 		if (!token)
 			continue ;
 		token_print(token);
-		ast = NULL;
 		if (ft_parse(&ast, &token))
 			return (1);
 		btree_print(STDERR, ast, &ft_putast);
 		/* ft_dprintf(STDERR, "\n--- INFIX BREAKDOWN ---\n"); */
 		/* btree_apply_infix(ast, &ft_putast2); */
-		/* ft_lstdel(&token, &token_free); */
-		if (ft_exec(ast, &data))
+		if (ft_exec(&ast, &data))
 			return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 12:08:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/05 12:33:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_astnode	t_astnode;
 typedef struct s_redir		t_redir;
 typedef union u_astdata		t_astdata;
 typedef union u_word		t_word;
+typedef long long		t_type;
 
 struct	s_parser
 {

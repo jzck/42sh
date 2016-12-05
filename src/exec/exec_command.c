@@ -6,17 +6,18 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:56:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/05 12:12:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_command(t_btree *ast, t_data *data)
+int		exec_command(t_btree **ast, t_data *data)
 {
 	t_astnode	*node;
 
-	node = ast->item;
+	node = (*ast)->item;
 	ft_cmd_process(node->data.sstr, data);
+	btree_delone(ast, &ast_free);
 	return (0);
 }

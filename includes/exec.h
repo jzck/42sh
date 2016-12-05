@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:30:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/05 12:22:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,29 @@ typedef struct s_execfunc	t_execfunc;
 struct	s_execfunc
 {
 	t_type	type;
-	int		(*f)(t_btree *ast, t_data *data);
+	int		(*f)(t_btree **ast, t_data *data);
 };
 
 extern t_execfunc	g_execfunc[];
 
-int		ft_exec(t_btree *ast, t_data *data);
+int		ft_exec(t_btree **ast, t_data *data);
 
-int		exec_semi(t_btree *ast, t_data *data);
-int		exec_or_if(t_btree *ast, t_data *data);
-int		exec_and_if(t_btree *ast, t_data *data);
-int		exec_pipe(t_btree *ast, t_data *data);
+int		exec_semi(t_btree **ast, t_data *data);
+int		exec_or_if(t_btree **ast, t_data *data);
+int		exec_and_if(t_btree **ast, t_data *data);
+int		exec_pipe(t_btree **ast, t_data *data);
 
-int		exec_less(t_btree *ast, t_data *data);
-int		exec_great(t_btree *ast, t_data *data);
-int		exec_dgreat(t_btree *ast, t_data *data);
-int		exec_command(t_btree *ast, t_data *data);
+int		exec_less(t_btree **ast, t_data *data);
+int		exec_great(t_btree **ast, t_data *data);
+int		exec_dgreat(t_btree **ast, t_data *data);
+int		exec_command(t_btree **ast, t_data *data);
 
 void	fd_redirect(t_data *data);
 void	fd_reset(t_data	*data);
 
 int		ft_cmd_process(char **argv, t_data *data);
 int		ft_cmd_exec(char *execpath, char **argv, t_data *data);
+
+void	ast_free(void *data, size_t content_size);
 
 #endif

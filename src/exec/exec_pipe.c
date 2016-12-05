@@ -6,28 +6,29 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:23:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/05 12:14:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_pipe(t_btree *ast, t_data *data)
+int		exec_pipe(t_btree **ast, t_data *data)
 {
 	int		fds[2];
 
 	pipe(fds);
 	ft_dprintf(2, "pipe %i->%i\n", fds[PIPE_WRITE], fds[PIPE_READ]);
 	data->exec.fdout = fds[PIPE_WRITE];
-	ft_exec(ast->left, data);
+	ft_exec(&(*ast)->left, data);
 	if (data->exec.fdout != STDOUT)
 		close(data->exec.fdout);
 	data->exec.fdout = STDOUT;
 	data->exec.fdin = fds[PIPE_READ];
-	ft_exec(ast->right, data);
+	ft_exec(&(*ast)->right, data);
 	close(fds[PIPE_WRITE]);
 	close(fds[PIPE_READ]);
 	data->exec.fdin = STDIN;
 	data->exec.fdout = STDOUT;
+	btree_delone(ast, &ast_free);
 	return (0);
 }
