@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 12:14:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/06 20:26:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		exec_pipe(t_btree **ast, t_data *data)
 	int		fds[2];
 
 	pipe(fds);
-	ft_dprintf(2, "pipe %i->%i\n", fds[PIPE_WRITE], fds[PIPE_READ]);
+	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
 	data->exec.fdout = fds[PIPE_WRITE];
 	ft_exec(&(*ast)->left, data);
 	if (data->exec.fdout != STDOUT)

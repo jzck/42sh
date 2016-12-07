@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 14:29:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:29:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ int		builtin_setenv(char **av, t_data *data)
 	char	**env;
 
 	env = data->env;
+	DG("doing setenv now");
 	if (ft_strcmp(av[0], "setenv") == 0)
 		av++;
 	if (!av[0])
+	{
 		ft_sstrprint(data->env, '\n');
+		ft_putchar('\n');
+	}
 	else
 	{
 		str = ft_str3join(av[0], "=", av[1]);
@@ -29,12 +33,14 @@ int		builtin_setenv(char **av, t_data *data)
 		{
 			if (ft_strcmp(*env, av[0]) == '=')
 			{
+				ft_strdel(env);
 				*env = str;
 				return (0);
 			}
 			env++;
 		}
 		data->env = ft_sstradd(data->env, str);
+		ft_strdel(&str);
 	}
 	return (0);
 }

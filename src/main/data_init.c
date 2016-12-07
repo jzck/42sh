@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:32:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:15:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ extern char	**environ;
 
 int		data_init(t_data *data)
 {
+	char		*term_name;
+
 	atexit(&ft_cleanup);
+	data->line.input = NULL;
 	data->env = ft_sstrdup(environ);
 	data->line.history = NULL;
 	data->exec.fdin = STDIN;
@@ -24,6 +27,10 @@ int		data_init(t_data *data)
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;
 	if (!(data->line.history = ft_dlstnew(NULL, 0)))
+		return (-1);
+	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
+		return (-1);
+	if (tgetent(NULL, term_name) != 1)
 		return (-1);
 	return (0);
 }

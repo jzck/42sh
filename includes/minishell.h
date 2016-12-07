@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 12:32:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:09:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ extern pid_t	g_pid;
 
 void	sig_handler(int signo);
 int		data_init(t_data *data);
+void	data_exit(t_data *data);
 void	ft_cleanup(void);
 
 int		ft_builtin(char **av, t_data *data);
@@ -80,7 +81,7 @@ int		builtin_unsetenv(char **av, t_data *data);
 int		builtin_env(char **av, t_data *data);
 
 void	ft_expand_dollar(char **av, char **env);
-char	*ft_findexec(char **path, char *file);
+char	*ft_findexec(char *path, char *file);
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

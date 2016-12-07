@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:48:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/07 14:20:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 int		ft_set_termios(t_data *data, int input_mode)
 {
 	struct termios	term;
-	char			*term_name;
 
-	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
-		return (-1);
-	if (tgetent(NULL, term_name) != 1)
-		return (-1);
+	(void)data;
 	if (tcgetattr(0, &term) == -1)
 		return (-1);
 	if (input_mode)

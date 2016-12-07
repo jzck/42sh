@@ -1,0 +1,10 @@
+{
+	tgetent_1
+	Memcheck:Leak
+	obj:*ncurses*
+}
+{
+	valgrind_1
+	Memcheck:Leak
+	obj:*valgrind*
+}

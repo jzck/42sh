@@ -20,7 +20,7 @@ D_LIB	=	ft ncurses
 O_LIB	=	$(addprefix -l, $(D_LIB))
 
 W_FLAGS	=	-Wall -Wextra -Werror
-D_FLAGS	=
+D_FLAGS	=	-g
 
 MKDIR	=	mkdir -p
 RM		=	/bin/rm -rf

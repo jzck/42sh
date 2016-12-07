@@ -20,7 +20,10 @@ int		builtin_env(char **av, t_data *data)
 	i = 1;
 	env = NULL;
 	if (!av[1])
+	{
 		ft_sstrprint(data->env, '\n');
+		ft_putchar('\n');
+	}
 	else
 	{
 		while (av[i] && ft_strchr(av[i], '='))

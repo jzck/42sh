@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 13:44:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/06 20:09:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,8 @@ char	*ft_putast(void *nodein)
 	else if (node->type == TK_LESSAND)
 		return (" <&  ");
 	else
+	{
+		ft_printf("type=%02i\n", node->type);
 		return ("OTHER");
+	}
 }

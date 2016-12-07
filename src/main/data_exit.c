@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   data_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 13:17:56 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/07 18:12:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	token_free(void *data, size_t size)
+void	data_exit(t_data *data)
 {
-	t_token		*token;
-
-	(void)size;
-	token = data;
-	ft_strdel(&token->data);
-	free(token);
+	ft_strdel(&data->line.input);
+	ft_dlstdel(&data->line.history, &ft_lst_bfree);
+	ft_lstdel(&data->line.qstack, &ft_lst_cfree);
+	ft_sstrfree(data->env);
 }

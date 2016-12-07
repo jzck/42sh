@@ -43,7 +43,7 @@ int		ft_builtin(char **av, t_data *data)
 			else
 			{
 				ret = (g_builtin[i].f)(av, data);
-				builtin_setenv((char*[3]){"?", ft_itoa(ret)}, data);
+				set_exitstatus(data, ret);
 			}
 			return (1);
 		}

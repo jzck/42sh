@@ -6,33 +6,40 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:37:49 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 13:37:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/06 18:05:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_findexec(char **path, char *file)
+char	*ft_findexec(char *path, char *file)
 {
 	int				i;
 	DIR				*dir;
 	char			*execpath;
+	char			**spath;
 	struct dirent	*dirent;
 
 	i = -1;
-	while (path && path[++i])
+	spath = ft_strsplit(path, ':');
+	while (spath && spath[++i])
 	{
-		if (!(dir = opendir(path[i])))
+		if (!(dir = opendir(spath[i])))
 			continue ;
 		while ((dirent = readdir(dir)))
 		{
 			if (ft_strcmp(dirent->d_name, file))
 				continue ;
-			if (path[i][ft_strlen(path[i])] != '/')
-				ft_strcat(path[i], "/");
-			execpath = ft_strjoin(path[i], dirent->d_name);
+			if (spath[i][ft_strlen(spath[i])] != '/')
+				execpath = ft_str3join(spath[i], "/", dirent->d_name);
+			else
+				execpath = ft_strjoin(spath[i], dirent->d_name);
+			ft_sstrfree(spath);
+			closedir(dir);
 			return (execpath);
 		}
+		closedir(dir);
 	}
+	ft_sstrfree(spath);
 	return (NULL);
 }

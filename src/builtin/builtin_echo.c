@@ -21,7 +21,7 @@ int		builtin_echo(char **av, t_data *data)
 		ft_printf("%s", *av);
 		av++;
 		if (*av)
-			ft_putstr(" ");
+			ft_putchar(' ');
 	}
 	ft_putchar('\n');
 	return (0);

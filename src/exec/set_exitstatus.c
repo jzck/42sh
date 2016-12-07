@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   set_exitstatus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 13:17:56 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/07 16:29:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	token_free(void *data, size_t size)
+void	set_exitstatus(t_data *data, int status)
 {
-	t_token		*token;
+	char	*astatus;
 
-	(void)size;
-	token = data;
-	ft_strdel(&token->data);
-	free(token);
+	astatus = ft_itoa(status);
+	builtin_setenv((char*[3]){"?", astatus}, data);
+	ft_strdel(&astatus);
 }

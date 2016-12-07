@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 12:22:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/06 18:23:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	fd_reset(t_data	*data);
 
 int		ft_cmd_process(char **argv, t_data *data);
 int		ft_cmd_exec(char *execpath, char **argv, t_data *data);
+char	*ft_findexec(char *path, char *file);
 
 void	ast_free(void *data, size_t content_size);
+
+void	set_exitstatus(t_data *data, int status);
 
 #endif
