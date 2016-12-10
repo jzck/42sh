@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:46:36 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 02:20:10 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:05:12 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		rl_dquote_function(t_line *line, long int input)
 {
-	if (!RL_IS(line->bitset, RL_ESC))
+	if (RL_NOT(line->bitset, RL_ESC))
 	{
 		if (RL_IS(line->bitset, RL_DQUOTE))
 			RL_UNSET(line->bitset, RL_DQUOTE);

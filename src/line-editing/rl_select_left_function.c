@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:06:59 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 12:37:28 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:08:10 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		rl_select_left_function(t_line *line, long int input)
 
 	if (!line->pos)
 		return (0);
-	if (!RL_IS(line->bitset, RL_SELECT))
+	if (RL_NOT(line->bitset, RL_SELECT))
 		line->select = line->pos;
 	ret = rl_left_function(line, input);
 	RL_SET(line->bitset, RL_SELECT);

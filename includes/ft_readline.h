@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 18:26:46 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 11:49:42 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@
 /*
  * Bitset manipulation : X is the bitset and Y is the bit to manipulate
  * IS : Is Y set in X
+ * NOT : Is Y not set in X
  * SET : Set Y in X
  * UNSET : Unset Y from X
 */
 
 # define RL_IS(X, Y) (X & Y)
+# define RL_NOT(X, Y) (!RL_IS(X, Y))
 # define RL_SET(X, Y) (X |= Y)
 # define RL_UNSET(X, Y) (X &= ~Y)
 

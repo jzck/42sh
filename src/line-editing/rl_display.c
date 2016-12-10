@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:38:39 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 13:16:11 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 11:52:18 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		rl_reset_display_post(t_line *line)
 	curs_clear_post(&line->curs);
 	if (len == 0)
 		return ;
-	if (!RL_IS(line->bitset, RL_SELECT) || (RL_IS(line->bitset, RL_SELECT) && line->select < line->pos))
+	if (RL_NOT(line->bitset, RL_SELECT) || (RL_IS(line->bitset, RL_SELECT) && line->select < line->pos))
 	{
 		curs_write_static(&line->curs, line->input + line->pos, len);
 		return;
@@ -40,7 +40,7 @@ void		rl_reset_display_ante(t_line *line)
 	if (!line->pos)
 		return ;
 	curs_backward(&line->curs, line->pos);
-	if (!RL_IS(line->bitset, RL_SELECT) || (RL_IS(line->bitset, RL_SELECT) && line->select > line->pos))
+	if (RL_NOT(line->bitset, RL_SELECT) || (RL_IS(line->bitset, RL_SELECT) && line->select > line->pos))
 	{
 		curs_write(&line->curs, line->input, line->pos);
 		return ;

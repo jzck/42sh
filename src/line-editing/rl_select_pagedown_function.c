@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 03:16:57 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 13:29:15 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:08:30 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		rl_select_pagedown_function(t_line *line, long int input)
 
 	if (line->pos == line->used)
 		return (0);
-	if (!RL_IS(line->bitset, RL_SELECT))
+	if (RL_NOT(line->bitset, RL_SELECT))
 		line->select = line->pos;
 	ret = rl_pagedown_function(line, input);
 	RL_SET(line->bitset, RL_SELECT);

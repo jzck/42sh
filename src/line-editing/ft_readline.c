@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:03:48 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/09 18:27:49 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 11:50:51 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void				rl_toogle_bitset(t_line *line, int set)
 			RL_UNSET(line->bitset, RL_ESC);
 			esc = 0;
 		}
-		if ((select && !RL_IS(line->bitset, RL_SELECT)) || (!select && RL_IS(line->bitset, RL_SELECT)))
+		if ((select && RL_NOT(line->bitset, RL_SELECT)) || (!select && RL_IS(line->bitset, RL_SELECT)))
 		{
 			rl_reset_display(line);
 		}
@@ -75,7 +75,7 @@ static int				rl_finish(t_line *line)
 		write(1, "\n", 1);
 		if (rl_stack_line(line) < 0)
 			return (-1);
-		if (!RL_IS(line->bitset, RL_FINISH))
+		if (RL_NOT(line->bitset, RL_FINISH))
 		{
 			if (curs_coo_setup(&line->curs) < 0)
 				return (-1);
