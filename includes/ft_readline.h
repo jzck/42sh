@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 11:49:42 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/10 12:20:20 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "libft.h"
 # include "ft_curs.h"
+
+/*
+ * Input-Key Mapping
+*/
+
+# define LINUX
+//# define MACOSX
 # include "ft_input.h"
 
 /*
@@ -88,6 +95,9 @@ struct s_line
 	char					*clipboard;
 	t_curs					curs;
 	t_list					*stack;
+	/*COMPATIBILITY*/
+	t_dlist					*history;
+	t_list					*qstack;
 };
 
 /*

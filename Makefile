@@ -19,7 +19,7 @@ O_SER	=	$(addprefix -L, $(D_SER))
 D_LIB	=	ft ncurses
 O_LIB	=	$(addprefix -l, $(D_LIB))
 
-W_FLAGS	=	-Wall -Wextra -Werror
+W_FLAGS	=	-Wall -Wextra #-Werror
 D_FLAGS	=	-g
 
 MKDIR	=	mkdir -p
@@ -30,7 +30,7 @@ RM		=	/bin/rm -rf
 all: $(NAME)
 
 $(NAME): libft/libft.a $(DF_OBJ)
-	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
+	$(CC) $(O_INC) $(O_SER) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS) $(O_LIB)
 
 $(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/minishell.h
 	@$(MKDIR) $(D_OBJ)
