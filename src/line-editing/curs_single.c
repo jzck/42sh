@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   curs_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 17:04:53 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 16:40:41 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_curs.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+/*
+ *	Save cursor reference or return a previous saved reference
+*/
 
-typedef struct s_data	t_data;
+t_curs				*curs_single(t_curs *curs, int set)
+{
+	static t_curs	*single;
 
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+	if (set)
+		single = curs;
+	return (single);
+}

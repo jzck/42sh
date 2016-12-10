@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_end_function.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 19:29:15 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 12:04:48 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
-
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+int			rl_end_function(t_line *line, long int input)
+{
+	if (RL_IS(line->bitset, RL_SELECT))
+		RL_UNSET(line->bitset, RL_SELECT);
+	if (line->pos == line->used)
+		return (0);
+	curs_forward(&line->curs, line->used - line->pos);
+	line->pos = line->used;
+	return (0);
+	(void)input;
+}

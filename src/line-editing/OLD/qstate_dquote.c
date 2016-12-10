@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   qstate_dquote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/03 12:10:09 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 12:26:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "line_editing.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
-
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+void	qstate_dquote(t_qstate *new, char c)
+{
+	if (c == '\\')
+		*new = Q_BACKSLASH;
+	else if (c == '\"')
+		*new = Q_NONE;
+}

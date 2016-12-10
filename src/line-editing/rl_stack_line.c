@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_stack_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/09 01:06:54 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/10 09:54:10 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+int			rl_stack_line(t_line *line)
+{
+	t_list	*elem;
 
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+	elem = ft_lstnew(line->input, line->used);
+	if (elem == NULL)
+		return (-1);
+	ft_lsteadd(&line->stack, elem);
+	ft_memdel((void **)&line->input);
+	line->pos = 0;
+	line->size = 0;
+	line->used = 0;
+	return (0);
+}

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_copy_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/09 14:01:31 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 18:22:38 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
-
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+int			rl_copy_function(t_line *line, long int input)
+{
+	if (line->clipboard)
+		ft_memdel((void **)&line->clipboard);
+	if (rl_clipboard_new(line) < 0)
+		return (-1);
+	return (0);
+	(void)input;
+}

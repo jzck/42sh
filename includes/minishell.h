@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 18:09:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 10:28:20 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef long long		t_type;
 typedef struct s_line	t_line;
 typedef struct s_comp	t_comp;
 typedef struct s_exec	t_exec;
-
+/*
 struct	s_line
 {
 	t_dlist		*history;
@@ -39,7 +39,7 @@ struct	s_line
 	t_list		*qstack;
 	char		*input;
 };
-
+*/
 struct	s_comp
 {
 	int			a;

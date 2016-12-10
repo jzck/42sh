@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_pagedown_function.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 19:32:26 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 12:04:19 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+int			rl_pagedown_function(t_line *line, long int input)
+{
+	int		len;
 
-typedef struct s_data	t_data;
+	if (RL_IS(line->bitset, RL_SELECT))
+		RL_UNSET(line->bitset, RL_SELECT);
+	if (line->pos == line->used)
+		return (0);
+	len = line->used - line->pos;
+	len = (line->curs.win_co > len ? len : line->curs.win_co);
+	curs_forward(&line->curs, len);
+	line->pos += len;
+	return (0);
+	(void)input;
+}
 
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif

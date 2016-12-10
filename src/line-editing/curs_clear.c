@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   curs_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 17:28:50 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 16:51:33 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_curs.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+/*
+ * Clear screen and keep track of cursoe's coordonate
+*/
 
-typedef struct s_data	t_data;
+void		curs_clear(t_curs *curs)
+{
+	ft_putstr(tgetstr("cl", NULL));
+	curs->li = 0;
+	curs->co = 0;
+}
 
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
+/*
+ * Clear screen after cursor position without moving cursor
+*/
 
-#endif
+void		curs_clear_post(t_curs *curs)
+{
+	ft_putstr(tgetstr("cd", NULL));
+	(void)curs;
+}

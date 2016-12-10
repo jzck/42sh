@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_nl_function.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 19:03:22 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 13:02:00 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
-
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+int		rl_nl_function(t_line *line, long int input)
+{
+	if (RL_IS(line->bitset, RL_SELECT))
+		RL_UNSET(line->bitset, RL_SELECT);
+	if (!RL_IS(line->bitset, RL_QUOTING))
+		RL_SET(line->bitset, RL_FINISH);
+	RL_SET(line->bitset, RL_STACK);
+	return (0);
+	(void)input;
+}

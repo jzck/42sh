@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   curs_goto.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 17:10:22 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 16:58:26 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_curs.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+/*
+ * Move the cursor to the given coordonate // scroll screen if line is unreachable
+*/
 
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+void		curs_goto(t_curs *curs, int li, int co)
+{
+	if (co >= curs->win_co)
+		co = curs->win_co - 1;
+	if (li >= curs->win_li)
+	{
+		ft_putstr(tgetstr("sf", NULL));
+		li = curs->win_li - 1;
+	}
+	ft_putstr(tgoto(tgetstr("cm", NULL), co, li));
+	curs->li = li;
+	curs->co = co;
+}

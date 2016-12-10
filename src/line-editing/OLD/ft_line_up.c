@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   ft_line_up.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/11/10 13:44:35 by jhalford          #+#    #+#             */
+/*   Updated: 2016/11/10 13:44:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "line_editing.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
+int		ft_line_go_up(t_dlist **input_chain)
+{
+	char	*res;
 
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+	(void)input_chain;
+	if ((res = tgetstr("up", NULL)) == NULL)
+		return (-1);
+	tputs(tgoto(res, 0, 0), 0, &ft_putchar);
+	return (0);
+}

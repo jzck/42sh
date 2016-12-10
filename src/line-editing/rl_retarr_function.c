@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editing.h                                     :+:      :+:    :+:   */
+/*   rl_retarr_function.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 09:41:50 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:24:12 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/08 20:06:50 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/09 12:04:31 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITING_H
-# define LINE_EDITING_H
+#include "ft_readline.h"
 
-# include "ft_readline.h"
-# include "minishell.h"
-
-typedef struct s_data	t_data;
-
-t_data					**data_singleton(void);
-int						ft_interactive_sh(t_data *data);
-
-#endif
+int		rl_retarr_function(t_line *line, long int input)
+{
+	if (RL_IS(line->bitset, RL_SELECT))
+		RL_UNSET(line->bitset, RL_SELECT);
+	if (!line->pos)
+		return (0);
+	input_remove(line, 1);
+	curs_backward(&line->curs, 1);
+	line->pos -= 1;	
+	rl_reset_display_post(line);
+	return (0);
+	(void)input;
+}
