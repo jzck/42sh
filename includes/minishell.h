@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:12:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:56:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ typedef enum e_qstate	t_qstate;
 extern t_stof	g_builtins[];
 extern pid_t	g_pid;
 
-void	sigint_handler(int signo);
-void	sigstop_handler(int signo);
 int		data_init(t_data *data);
 void	data_exit(t_data *data);
 void	ft_cleanup(void);

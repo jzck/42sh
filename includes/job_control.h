@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:36:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:20:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ struct	s_job
 	char	*command;
 };
 
+extern t_data	*g_data;
+
 void	job_new(t_data *data, char **av, pid_t pid);
 void	job_announce(t_job *job);
+
+void	sigchld_handler(int signo);
+void	sigint_handler(int signo);
+void	sigtstp_handler(int signo);
 
 #endif

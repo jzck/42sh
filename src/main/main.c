@@ -6,11 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:16:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:58:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_data	*g_data;
 
 int		main(void)
 {
@@ -20,6 +22,7 @@ int		main(void)
 
 	token = NULL;
 	ast = NULL;
+	g_data = &data;
 	if (data_init(&data))
 		return (1);
 	DG("{inv}{bol}{gre}start of shell");

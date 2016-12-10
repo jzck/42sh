@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:51:54 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:37:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:58:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	job_new(t_data *data, char **av, pid_t pid, t_type type)
+void	job_new(t_data *data, char **av, pid_t pid)
 {
 	t_job	job;
 

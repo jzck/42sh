@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:35:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:58:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int		data_init(t_data *data)
 	if (signal(SIGTSTP, sigtstp_handler) == SIG_ERR)
 		ft_dprintf(STDERR, "\ncan't catch SIGTSTP\n");
 	if (signal(SIGCHLD, sigchld_handler) == SIG_ERR)
+		ft_dprintf(STDERR, "\ncan't catch SIGCHLD\n");
 	return (0);
 }
