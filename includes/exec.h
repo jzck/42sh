@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/06 18:23:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:09:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ extern t_execfunc	g_execfunc[];
 int		ft_exec(t_btree **ast, t_data *data);
 
 int		exec_semi(t_btree **ast, t_data *data);
+int		exec_ampersand(t_btree **ast, t_data *data);
 int		exec_or_if(t_btree **ast, t_data *data);
 int		exec_and_if(t_btree **ast, t_data *data);
 int		exec_pipe(t_btree **ast, t_data *data);

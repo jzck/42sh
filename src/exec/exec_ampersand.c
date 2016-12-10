@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   exec_ampersand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 12:43:22 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 13:31:33 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/10 16:01:30 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/10 16:53:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-pid_t	g_pid;
-
-void	sig_handler(int signo)
+int		exec_ampersand(t_btree **ast, t_data *data)
 {
-	(void)signo;
-	if (signo == SIGINT)
-	{
-		if (g_pid)
-			kill(g_pid, SIGINT);
-		if (kill(g_pid, 0) == 0)
-			ft_putendl("");
-	}
+	data->exec.amp = 1;
+	ft_exec(&(*ast)->left, data);
+	data->exec.amp = 0;
+	ft_exec(&(*ast)->right, data);
+	btree_delone(ast, &ast_free);
+	return (0);
 }

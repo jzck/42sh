@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/09 21:50:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:34:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_cmd_process(char **argv, t_data *data)
 	if (ft_builtin(argv, data))
 		return (0);
 	else if (ft_strchr(argv[0], '/'))
-		execpath = argv[0];
+		execpath = ft_strdup(argv[0]);
 	else if (!(execpath = ft_findexec(ft_getenv(data->env, "PATH"), argv[0])))
 	{
 		ft_dprintf(2, "%s: command not found: %s\n", SHELL_NAME, argv[0]);
@@ -54,7 +54,9 @@ int		ft_cmd_exec(char *execpath, char **argv, t_data *data)
 	{
 		ft_strdel(&execpath);
 		g_pid = pid;
-		if (data->exec.fdout == STDOUT)
+		if (data->exec.amp)
+			job_new(data, argv, pid);
+		else if (data->exec.fdout == STDOUT)
 		{
 			waitpid(pid, &status, 0);
 			set_exitstatus(data, status);

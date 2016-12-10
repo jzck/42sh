@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/09 22:15:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:16:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int		main(void)
 	ast = NULL;
 	if (data_init(&data))
 		return (1);
-	if (signal(SIGINT, sig_handler) == SIG_ERR)
-		ft_dprintf(STDERR, "\ncan't catch SIGINT\n");
 	DG("{inv}{bol}{gre}start of shell");
 	while (1)
 	{

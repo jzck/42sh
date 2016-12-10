@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 13:37:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/10 17:22:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_execfunc	g_execfunc[] =
 	{TK_AND_IF, &exec_and_if},
 	{TK_OR_IF, &exec_or_if},
 	{TK_SEMI, &exec_semi},
+	{TK_AMP, &exec_ampersand},
 	{TK_PIPE, &exec_pipe},
 	{TK_LESS, &exec_less},
 	{TK_GREAT, &exec_great},
@@ -31,9 +32,9 @@ int		ft_exec(t_btree **ast, t_data *data)
 	int			i;
 
 	i = 0;
-	item = (*ast)->item;
 	if (!*ast)
 		return (0);
+	item = (*ast)->item;
 	while (g_execfunc[i].type)
 	{
 		if (item->type == g_execfunc[i].type)

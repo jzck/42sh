@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_init.c                                       :+:      :+:    :+:   */
+/*   job_announce.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 13:35:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:16:40 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/10 17:05:49 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/10 17:26:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-int		input_init(t_data *data)
+void	job_announce(t_job *job)
 {
-	char	null;
-
-	null = '\0';
-	ft_strdel(&data->line.input);
-	data->line.input = ft_memalloc(10);
-	data->line.input_pos = 0;
-	data->line.qstack = ft_lstnew(NULL, sizeof(t_qstate));
-	*((t_qstate*)data->line.qstack->content) = Q_NONE;
-	if (ft_set_termios(data, 1))
-		return (-1);
-	ft_prompt();
-	return (0);
+	ft_printf("[%i] %i\n", job->id, job->pid);
 }

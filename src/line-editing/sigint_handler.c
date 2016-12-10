@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_init.c                                       :+:      :+:    :+:   */
+/*   sigint_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 13:35:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:16:40 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/10 15:14:47 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/10 15:31:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		input_init(t_data *data)
-{
-	char	null;
+pid_t	g_pid;
 
-	null = '\0';
-	ft_strdel(&data->line.input);
-	data->line.input = ft_memalloc(10);
-	data->line.input_pos = 0;
-	data->line.qstack = ft_lstnew(NULL, sizeof(t_qstate));
-	*((t_qstate*)data->line.qstack->content) = Q_NONE;
-	if (ft_set_termios(data, 1))
-		return (-1);
-	ft_prompt();
-	return (0);
+void	sigint_handler(int signo)
+{
+	(void)signo;
+	if (signo == SIGINT)
+	{
+		DG("got SIGINT");
+		if (g_pid)
+			kill(g_pid, SIGINT);
+		if (kill(g_pid, 0) == 0)
+			ft_putendl("");
+	}
 }

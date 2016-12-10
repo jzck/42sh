@@ -42,11 +42,6 @@ $(D_OBJ)/%.o: $(D_SRC)/builtin/%.c includes/minishell.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/minishell-exec/%.c includes/minishell.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
-
 $(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/line_editing.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
@@ -63,6 +58,11 @@ $(D_OBJ)/%.o: $(D_SRC)/parser/%.c includes/parser.h
 	@echo "Compiling "$<"..."
 
 $(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
+	@$(MKDIR) $(D_OBJ)
+	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
+	@echo "Compiling "$<"..."
+
+$(D_OBJ)/%.o: $(D_SRC)/job-control/%.c includes/job_control.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."

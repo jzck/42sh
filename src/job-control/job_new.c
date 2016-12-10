@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_init.c                                       :+:      :+:    :+:   */
+/*   job_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 13:35:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:16:40 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/10 16:51:54 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/10 17:37:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-int		input_init(t_data *data)
+void	job_new(t_data *data, char **av, pid_t pid, t_type type)
 {
-	char	null;
+	t_job	job;
 
-	null = '\0';
-	ft_strdel(&data->line.input);
-	data->line.input = ft_memalloc(10);
-	data->line.input_pos = 0;
-	data->line.qstack = ft_lstnew(NULL, sizeof(t_qstate));
-	*((t_qstate*)data->line.qstack->content) = Q_NONE;
-	if (ft_set_termios(data, 1))
-		return (-1);
-	ft_prompt();
-	return (0);
+	DG("got new job");
+	job.command = ft_sstrcat(av, ' ');
+	job.pid = pid;
+	job.id = 42;
+	ft_lstadd(&data->jobc.list, ft_lstnew(&job, sizeof(job)));
+	job_announce(data->jobc.list->content);
 }
