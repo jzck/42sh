@@ -76,6 +76,8 @@ typedef enum e_qstate	t_qstate;
 extern t_stof	g_builtins[];
 extern pid_t	g_pid;
 
+t_data		*data_singleton();
+
 int		data_init(t_data *data);
 void	data_exit(t_data *data);
 void	ft_cleanup(void);

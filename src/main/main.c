@@ -12,27 +12,26 @@
 
 #include "minishell.h"
 
-t_data	*g_data;
-
 int		main(void)
 {
-	t_data	data;
 	t_list	*token;
 	t_btree	*ast;
+	/* t_data	data; */
+	t_data	*data;
 
 	token = NULL;
 	ast = NULL;
-	g_data = &data;
-	if (data_init(&data))
+	data = data_singleton();
+	if (data_init(data))
 		return (1);
 	DG("{inv}{bol}{gre}start of shell");
 	while (1)
 	{
-		if (ft_interactive_sh(&data))
+		if (ft_interactive_sh(data))
 			return (1);
-		DG("{inv}{mag}got command '%s'", data.line.input);
+		DG("{inv}{mag}got command '%s'", data->line.input);
 		token = NULL;
-		if (ft_tokenize(&token, data.line.input, DEFAULT))
+		if (ft_tokenize(&token, data->line.input, DEFAULT))
 			return (1);
 		if (!token)
 			continue ;
@@ -42,7 +41,7 @@ int		main(void)
 		btree_print(STDERR, ast, &ft_putast);
 		/* ft_dprintf(STDERR, "\n--- INFIX BREAKDOWN ---\n"); */
 		/* btree_apply_infix(ast, &ft_putast2); */
-		if (ft_exec(&ast, &data))
+		if (ft_exec(&ast, data))
 			return (1);
 	}
 	return (0);

@@ -18,6 +18,7 @@ void	job_new(t_data *data, char **av, pid_t pid)
 
 	DG("got new job");
 	job.command = ft_sstrcat(av, ' ');
+	DG("job command '%s'", job.command);
 	job.pid = pid;
 	job.id = 42;
 	ft_lstadd(&data->jobc.list, ft_lstnew(&job, sizeof(job)));

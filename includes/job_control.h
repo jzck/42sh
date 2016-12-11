@@ -29,6 +29,8 @@ extern t_data	*g_data;
 void	job_new(t_data *data, char **av, pid_t pid);
 void	job_announce(t_job *job);
 
+int		ft_cmppid(t_job *job, pid_t *pid);
+
 void	sigchld_handler(int signo);
 void	sigint_handler(int signo);
 void	sigtstp_handler(int signo);

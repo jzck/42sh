@@ -12,20 +12,31 @@
 
 #include "minishell.h"
 
-t_data	*g_data;
-
 void	sigchld_handler(int signo)
 {
+	int		status;
+	pid_t	pid;
 	t_job	*job;
+	t_list	*start;
 	t_list	*list;
 
 	(void)signo;
 	DG("got SIGCHLD");
-	list = g_data->jobc.list;
+	start = data_singleton()->jobc.list;
+	pid = waitpid(-1, &status, WNOHANG);
+	DG("SIGCHLD pid=%i", pid);
+	/* start = NULL; */
+	list = start ? ft_lst_find(start, &pid, ft_cmppid) : NULL;
 	if (list)
+	{
 		job = list->content;
+		if (status == 0)
+			ft_printf("[%i]  + done\t%s\n", job->id, job->command);
+		else
+			ft_printf("[%i]  + exit %i\t%s\n", job->id, status, job->command);
+		ft_prompt();
+	}
 	else
-		job = NULL;
-	if (job)
-		DG("job pid=%i", job->pid);
+		DG("SIGCHLD but no find");
+
 }
