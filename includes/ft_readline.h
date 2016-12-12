@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 12:50:39 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:38:54 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ft_curs.h"
 
 /*
- * Input-Key Mapping
+ * Input-Key Mapping !!! LINUX Or MACOSX !!!
 */
 
 # define LINUX
@@ -88,9 +88,9 @@ typedef int					(*t_input_function)(t_line *, long int);
  *	pos : cursor position in the destination buffer
  *	size : allocated size of the destination buffer
  *	used : actual used size in the destination buffer
- *	select : start position of the select area in the destination buffer
+ *	select : start position of the video (aka selected) area in the destination buffer
  *	clipboard : duplication of the copied/cuted part of the destination buffer
- *	stack : list of stacked line. (lines are stacked when a quoted new line appear)
+ *	stack : list of stacked line. (lines are stacked when a quoted (or escaped) new line appear)
 */
 
 struct s_line
@@ -98,11 +98,11 @@ struct s_line
 	int						bitset;
 	char					*prompt;
 	char					*input;
+	char					*clipboard;
 	int						pos;
 	int						size;
 	int						used;
 	int						select;
-	char					*clipboard;
 	t_curs					curs;
 	t_list					*stack;
 	/*COMPATIBILITY*/
@@ -185,7 +185,7 @@ int	rl_esc_function(t_line *line, long int input);		/* Backslash */
 int	rl_quote_function(t_line *line, long int input);	/* Simple quote */
 int	rl_dquote_function(t_line *line, long int input);	/* Double quote */
 int	rl_nl_function(t_line *line, long int input);		/* New line */
-int	rl_comp_function(t_line *line, long int input);		/* New line */
+int	rl_comp_function(t_line *line, long int input);		/* Tabulation */
 int	rl_left_function(t_line *line, long int input);		/* Left move */
 int	rl_right_function(t_line *line, long int input);	/* Right move */
 int	rl_wleft_function(t_line *line, long int input);	/* Word left move */
