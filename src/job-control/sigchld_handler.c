@@ -25,18 +25,17 @@ void	sigchld_handler(int signo)
 	start = data_singleton()->jobc.list;
 	pid = waitpid(-1, &status, WNOHANG);
 	DG("SIGCHLD pid=%i", pid);
-	/* start = NULL; */
 	list = start ? ft_lst_find(start, &pid, ft_cmppid) : NULL;
 	if (list)
 	{
 		job = list->content;
 		if (status == 0)
-			ft_printf("[%i]  + done\t%s\n", job->id, job->command);
+			ft_printf("[%i]  + %i done\t%s\n", job->id, pid, job->command);
+		else if (status == 9)
+			ft_printf("[%i]  + %i killed\t%s\n", job->id, pid, job->command);
 		else
-			ft_printf("[%i]  + exit %i\t%s\n", job->id, status, job->command);
+			ft_printf("[%i]  + %i exit %i\t%s\n",
+					job->id, pid, status, job->command);
 		ft_prompt();
 	}
-	else
-		DG("SIGCHLD but no find");
-
 }
