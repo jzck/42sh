@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 12:20:20 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:50:39 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@
 */
 
 # define RL_OFFSET 1024
+
+/*
+ * Readline possible prompt
+*/
+
+# define RL_PROMPT_DEFAULT "$> "
+# define RL_PROMPT_ESC "> "
+# define RL_PROMPT_QUOTE "quote> "
+# define RL_PROMPT_DQUOTE "double quote> "
 
 /*
  * Bitset manipulation : X is the bitset and Y is the bit to manipulate
@@ -65,6 +74,7 @@
 # define RL_DQUOTE 0x40
 # define RL_QUOTING (RL_ESC|RL_QUOTE|RL_DQUOTE)
 
+typedef struct s_data		t_data;
 typedef struct s_line		t_line;
 typedef struct s_input		t_input;
 typedef int					(*t_input_function)(t_line *, long int);
@@ -112,6 +122,8 @@ struct s_input
 	t_input_function		function;
 };
 
+# include "minishell.h"
+
 /*
  * Readline setup/cleanup/teardown
 */
@@ -132,9 +144,14 @@ void						input_remove(t_line *line, int size);
  * Readline internal function
 */
 
+void						rl_set_prompt(t_line *line);
 void						rl_put_prompt(t_line *line);
+int							rl_previous_word(t_line *line);
+int							rl_next_word(t_line *line);
 int							rl_clipboard_new(t_line *line);
 int							rl_clipboard_new_cut(t_line *line);
+void						rl_toogle_bitset(t_line *line, int set);
+int							rl_finish(t_line *line);
 int							rl_stack_line(t_line *line);
 int							rl_merge_line(t_line *line);
 
@@ -168,6 +185,7 @@ int	rl_esc_function(t_line *line, long int input);		/* Backslash */
 int	rl_quote_function(t_line *line, long int input);	/* Simple quote */
 int	rl_dquote_function(t_line *line, long int input);	/* Double quote */
 int	rl_nl_function(t_line *line, long int input);		/* New line */
+int	rl_comp_function(t_line *line, long int input);		/* New line */
 int	rl_left_function(t_line *line, long int input);		/* Left move */
 int	rl_right_function(t_line *line, long int input);	/* Right move */
 int	rl_wleft_function(t_line *line, long int input);	/* Word left move */

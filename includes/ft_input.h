@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 02:05:22 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 10:42:43 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 10:48:33 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #  define RL_INSERT_CODE 0x7e325b1b
 #  define RL_CLEAR_CODE 0xc
 #  define RL_NL_CODE 0xa
+#  define RL_COMP_CODE 0x9
 #  define RL_LEFT_CODE 0x445b1b
 #  define RL_RIGHT_CODE 0x435b1b
 #  define RL_WLEFT_CODE 0x44323b315b1b
@@ -52,6 +53,7 @@
 #  define RL_INSERT_CODE 0x53323b315b1b
 #  define RL_CLEAR_CODE 0xc
 #  define RL_NL_CODE 0xa
+#  define RL_COMP_CODE 0x9
 #  define RL_LEFT_CODE 0x445b1b
 #  define RL_RIGHT_CODE 0x435b1b
 #  define RL_WLEFT_CODE 0x44323b315b1b

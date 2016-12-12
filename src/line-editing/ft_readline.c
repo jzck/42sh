@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:03:48 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/10 11:50:51 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 10:48:50 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_input			g_input[] = {\
 	{RL_NL_CODE,				rl_nl_function},\
+	{RL_COMP_CODE,				rl_comp_function},\
 	{RL_INSERT_CODE,			rl_insert_function},\
 	{RL_CLEAR_CODE,				rl_clear_function},\
 	{RL_RETARR_CODE,			rl_retarr_function},\
@@ -42,50 +43,6 @@ static t_input			g_input[] = {\
 	{RL_PASTE_CODE,				rl_paste_function},\
 	{0x0,						rl_default_function}\
 };
-
-static void				rl_toogle_bitset(t_line *line, int set)
-{
-	static int			esc;
-	static int			select;
-
-	if (!set)
-	{
-		esc = RL_IS(line->bitset, RL_ESC);
-		select = RL_IS(line->bitset, RL_SELECT);
-	}
-	else
-	{
-		if (esc)
-		{
-			RL_UNSET(line->bitset, RL_ESC);
-			esc = 0;
-		}
-		if ((select && RL_NOT(line->bitset, RL_SELECT)) || (!select && RL_IS(line->bitset, RL_SELECT)))
-		{
-			rl_reset_display(line);
-		}
-	}
-}
-
-static int				rl_finish(t_line *line)
-{
-	if (RL_IS(line->bitset, RL_STACK))
-	{
-		rl_end_function(line, 0);
-		write(1, "\n", 1);
-		if (rl_stack_line(line) < 0)
-			return (-1);
-		if (RL_NOT(line->bitset, RL_FINISH))
-		{
-			if (curs_coo_setup(&line->curs) < 0)
-				return (-1);
-			line->prompt = (RL_IS(line->bitset, RL_ESC) ? "> " : "quote> ");
-			rl_put_prompt(line);
-		}
-		RL_UNSET(line->bitset, RL_STACK);
-	}
-	return (RL_IS(line->bitset, RL_FINISH));
-}
 
 static t_input_function	rl_get_function(long int input)
 {

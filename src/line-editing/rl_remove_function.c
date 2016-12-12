@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rl_default_function.c                              :+:      :+:    :+:   */
+/*   rl_remove_function.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 18:30:38 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 11:50:26 by sbenning         ###   ########.fr       */
+/*   Created: 2016/12/12 12:45:08 by sbenning          #+#    #+#             */
+/*   Updated: 2016/12/12 12:46:39 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_readline.h"
 
-int		rl_default_function(t_line *line, long int input)
+int		rl_retarr_function(t_line *line, long int input)
 {
-	if (!ft_isprint(input))
-		return (0);
 	if (RL_IS(line->bitset, RL_SELECT))
 		RL_UNSET(line->bitset, RL_SELECT);
-	if (RL_IS(line->bitset, RL_INSERT))
-	{
-		if (input_move(line, (char *)&input, sizeof(char)) < 0)
-			return (-1);
-	}
-	else
-	{
-		if (input_maj(line, (char *)&input, sizeof(char)) < 0)
-			return (-1);
-	}
+	if (!line->pos)
+		return (0);
+	input_remove(line, 1);
+	curs_backward(&line->curs, 1);
+	line->pos -= 1;	
 	rl_reset_display_post(line);
-	curs_forward(&line->curs, sizeof(char));
-	line->pos += 1;
-/*	curs_write(&line->curs, (char *)&input, sizeof(char));
-	line->pos += 1;
+	return (0);
+	(void)input;
+}
+
+int		rl_suppr_function(t_line *line, long int input)
+{
+	if (RL_IS(line->bitset, RL_SELECT))
+		RL_UNSET(line->bitset, RL_SELECT);
+	if (line->pos == line->used)
+		return (0);
+	input_remove(line, -1);
 	rl_reset_display_post(line);
-*/	return (0);
+	return (0);
+	(void)input;
 }
