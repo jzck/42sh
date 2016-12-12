@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_termios.c                                   :+:      :+:    :+:   */
+/*   job_update_id.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:35:27 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/12 13:33:08 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/12 17:27:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "minishell.h"
 
-int		ft_set_termios(t_data *data, int input_mode)
+void	job_update_id(void)
 {
-	struct termios	term;
+	int		*id;
+	t_jobc	*jobc;
+	t_list	*start;
 
-	(void)data;
-	if (tcgetattr(0, &term) == -1)
-		return (-1);
-	if (input_mode)
-		term.c_lflag &= ~(ICANON) & ~(ISIG) & ~(ECHO);
-	else
-		term.c_lflag |= ICANON | ISIG | ECHO;
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSADRAIN, &term) == -1)
-		return (-1);
-	return (0);
+	jobc = &data_singleton()->jobc;
+	id = &jobc->current_id;
+	start = jobc->list;
+	while (ft_lst_find(start, id, job_cmp_id))
+	{
+		*id += 1;
+		DG("id = %i", *id);
+	}
 }

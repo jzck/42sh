@@ -6,16 +6,16 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 20:52:05 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:19:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:00:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_semi(t_btree **ast, t_data *data)
+int		exec_semi(t_btree **ast)
 {
-	ft_exec(&(*ast)->left, data);
-	ft_exec(&(*ast)->right, data);
+	ft_exec(&(*ast)->left);
+	ft_exec(&(*ast)->right);
 	btree_delone(ast, &ast_free);
 	return (0);
 }

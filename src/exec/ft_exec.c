@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:22:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:11:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_execfunc	g_execfunc[] =
 	{0, 0},
 };
 
-int		ft_exec(t_btree **ast, t_data *data)
+int		ft_exec(t_btree **ast)
 {
 	t_astnode	*item;
 	int			i;
@@ -38,7 +38,7 @@ int		ft_exec(t_btree **ast, t_data *data)
 	while (g_execfunc[i].type)
 	{
 		if (item->type == g_execfunc[i].type)
-			return ((*g_execfunc[i].f)(ast, data));
+			return ((*g_execfunc[i].f)(ast));
 		i++;
 	}
 	return (0);

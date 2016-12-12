@@ -6,14 +6,17 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:24:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:54:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fd_redirect(t_data *data)
+void	fd_redirect(void)
 {
+	t_data	*data;
+
+	data = data_singleton();
 	if (data->exec.fdin != STDIN)
 	{
 		dup2(data->exec.fdin, STDIN);

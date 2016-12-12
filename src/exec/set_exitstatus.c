@@ -6,17 +6,17 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 16:29:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:54:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_exitstatus(t_data *data, int status)
+void	set_exitstatus(int status)
 {
 	char	*astatus;
 
 	astatus = ft_itoa(status);
-	builtin_setenv((char*[3]){"?", astatus}, data);
+	builtin_setenv((char*[3]){"?", astatus}, data_singleton());
 	ft_strdel(&astatus);
 }

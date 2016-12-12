@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 14:28:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:03:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		builtin_env(char **av, t_data *data)
 			i++;
 		}
 		if (av[i])
-			ft_cmd_process(av + i, data);
+			ft_cmd_process(av + i);
 	}
 	return (0);
 }

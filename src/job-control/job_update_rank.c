@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_termios.c                                   :+:      :+:    :+:   */
+/*   job_shiftstatus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:35:27 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/12 13:05:10 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/12 17:23:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "job_control.h"
 
-int		ft_set_termios(t_data *data, int input_mode)
+void	job_update_rank()
 {
-	struct termios	term;
+	t_jobc	*jobc;
+	t_job	*job;
+	t_list	*list;
 
-	(void)data;
-	if (tcgetattr(0, &term) == -1)
-		return (-1);
-	if (input_mode)
-		term.c_lflag &= ~(ICANON) & ~(ISIG) & ~(ECHO);
+	jobc = &data_singleton()->jobc;
+	list = jobc->list;
+	if (list)
+	{
+		job = list->content;
+		jobc->rank[0] = job->id;
+		jobc->rank[1] = list->next ? ((t_job*)list->next->content)->id : 0;
+	}
 	else
-		term.c_lflag |= ICANON | ISIG | ECHO;
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSADRAIN, &term) == -1)
-		return (-1);
-	return (0);
+	{
+		jobc->rank[0] = 0;
+		jobc->rank[1] = 0;
+	}
+	DG("updated rank: %i,%i", jobc->rank[0], jobc->rank[1]);
 }

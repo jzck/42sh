@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:58:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:11:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ int		main(void)
 {
 	t_list	*token;
 	t_btree	*ast;
-	/* t_data	data; */
 	t_data	*data;
 
 	token = NULL;
 	ast = NULL;
 	data = data_singleton();
-	if (data_init(data))
-		return (1);
+	shell_init();
 	DG("{inv}{bol}{gre}start of shell");
 	while (1)
 	{
@@ -41,7 +39,7 @@ int		main(void)
 		btree_print(STDERR, ast, &ft_putast);
 		/* ft_dprintf(STDERR, "\n--- INFIX BREAKDOWN ---\n"); */
 		/* btree_apply_infix(ast, &ft_putast2); */
-		if (ft_exec(&ast, data))
+		if (ft_exec(&ast))
 			return (1);
 	}
 	return (0);

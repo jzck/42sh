@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:35:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:16:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:35:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int		input_init(t_data *data)
 	data->line.input_pos = 0;
 	data->line.qstack = ft_lstnew(NULL, sizeof(t_qstate));
 	*((t_qstate*)data->line.qstack->content) = Q_NONE;
+	ft_prompt();
 	if (ft_set_termios(data, 1))
 		return (-1);
-	ft_prompt();
+	data->mode = MODE_INPUT;
 	return (0);
 }

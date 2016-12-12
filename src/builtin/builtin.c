@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:17:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:56:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ t_stof g_builtin[] = {
 	{NULL, NULL},
 };
 
-int		ft_builtin(char **av, t_data *data)
+int		ft_builtin(char **av)
 {
 	int		i;
 	int		ret;
+	t_data	*data;
 
 	i = -1;
+	data = data_singleton();
 	while (g_builtin[++i].name)
 		if (ft_strcmp(g_builtin[i].name, *av) == 0)
 		{
@@ -35,7 +37,7 @@ int		ft_builtin(char **av, t_data *data)
 			{
 				if (fork() == 0)
 				{
-					fd_redirect(data);
+					fd_redirect();
 					ret = (g_builtin[i].f)(av, data);
 					exit(ret);
 				}
@@ -43,7 +45,7 @@ int		ft_builtin(char **av, t_data *data)
 			else
 			{
 				ret = (g_builtin[i].f)(av, data);
-				set_exitstatus(data, ret);
+				set_exitstatus(ret);
 			}
 			return (1);
 		}

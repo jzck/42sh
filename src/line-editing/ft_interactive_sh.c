@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:12 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:18:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:42:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "line_editing.h"
+#include "minishell.h"
 
 t_stof g_keys[] = {
 	{FT_KEY_C_K, NULL},
@@ -60,6 +60,7 @@ int		ft_interactive_sh(t_data *data)
 			return (-1);
 		else if (ret == 2)
 		{
+			data->mode = MODE_EXEC;
 			ft_lstdel(&data->line.qstack, &ft_lst_cfree);
 			ft_set_termios(data, 0);
 			return (0);

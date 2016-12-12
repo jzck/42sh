@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 17:05:49 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:26:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:54:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	job_announce(t_job *job)
 {
-	ft_printf("[%i] %i\n", job->id, job->pid);
+	ft_printf("{mag}[%i] %i{eoc}\n", job->id, job->pid);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 17:56:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:56:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ typedef struct s_line	t_line;
 typedef struct s_comp	t_comp;
 typedef struct s_exec	t_exec;
 typedef struct s_jobc	t_jobc;
+typedef enum e_mode		t_mode;
+
+enum	e_mode
+{
+	MODE_INPUT,
+	MODE_EXEC,
+};
 
 struct	s_line
 {
@@ -47,23 +54,10 @@ struct	s_comp
 	int		a;
 };
 
-struct	s_exec
-{
-	int		fdin;
-	int		fdout;
-	int		amp;
-	char	*aol_status;
-	int		aol_search;
-};
-
-struct	s_jobc
-{
-	t_list	*list;
-};
-
 struct	s_data
 {
 	char	**env;
+	t_mode	mode;
 	t_line	line;
 	t_comp	comp;
 	t_exec	exec;
@@ -78,11 +72,12 @@ extern pid_t	g_pid;
 
 t_data		*data_singleton();
 
-int		data_init(t_data *data);
-void	data_exit(t_data *data);
-void	ft_cleanup(void);
+void	shell_init(void);
+void	shell_exit(void);
+int		data_init(void);
+void	data_exit(void);
 
-int		ft_builtin(char **av, t_data *data);
+int		ft_builtin(char **av);
 int		builtin_echo(char **av, t_data *data);
 int		builtin_cd(char **av, t_data *data);
 int		builtin_exit(char **av, t_data *data);
