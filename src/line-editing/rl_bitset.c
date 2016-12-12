@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 10:31:34 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 12:24:16 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:26:06 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int				rl_finish(t_line *line)
 		return (1);
 	if (curs_coo_setup(&line->curs) < 0)
 		return (-1);
-	line->prompt = (RL_IS(line->bitset, RL_ESC) ? "> " : "quote> ");
 	rl_set_prompt(line);
 	rl_put_prompt(line);
 	return (0);

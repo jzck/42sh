@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:07:47 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 12:20:55 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:24:28 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		rl_setup(t_line *line)
 	if (curs_setup(&line->curs) < 0)
 		return (-1);
 	RL_SET(line->bitset, RL_INSERT);
-	line->prompt = "$> ";
 	rl_set_prompt(line);
 	return (0);
 }
