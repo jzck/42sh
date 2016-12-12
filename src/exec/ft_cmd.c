@@ -55,7 +55,7 @@ int		ft_cmd_exec(char *execpath, char **argv)
 	{
 		ft_strdel(&execpath);
 		g_pid = pid;
-		if (data_singleton()->exec.amp)
+		if (data_singleton()->exec.foreground)
 			job_new(argv, pid);
 		else if (data_singleton()->exec.fdout == STDOUT)
 		{

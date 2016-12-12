@@ -17,19 +17,34 @@
 # include <termios.h>
 # include "libft.h"
 
-typedef struct s_job	t_job;
-typedef struct s_jobc	t_jobc;
+typedef struct s_job		t_job;
+typedef struct s_process	t_process;
+typedef struct s_jobc		t_jobc;
 
 struct	s_job
 {
 	int		id;
-	pid_t	pid;
+	pid_t	pgid;
+	char	notified;
 	char	*command;
+	int		foreground;
+	t_list	*first_process;
+};
+
+struct	s_process
+{
+	char	**argv;
+	pid_t	pid;
+	int		fdin;
+	int		fdout;
+	char	completed;
+	char	stopped;
+	int		status;
 };
 
 struct	s_jobc
 {
-	t_list			*list;
+	t_list			*first_job;
 	pid_t			shell_pgid;
 	int				current_id;
 	int				rank[2];

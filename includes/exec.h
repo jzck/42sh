@@ -23,9 +23,6 @@ typedef long long			t_type;
 
 struct	s_exec
 {
-	int		fdin;
-	int		fdout;
-	int		amp;
 	char	*aol_status;
 	int		aol_search;
 };

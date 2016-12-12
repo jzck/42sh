@@ -14,9 +14,9 @@
 
 int		exec_ampersand(t_btree **ast)
 {
-	data_singleton()->exec.amp = 1;
+	data_singleton()->exec.foreground = 1;
 	ft_exec(&(*ast)->left);
-	data_singleton()->exec.amp = 0;
+	data_singleton()->exec.foreground = 0;
 	ft_exec(&(*ast)->right);
 	btree_delone(ast, &ast_free);
 	return (0);
