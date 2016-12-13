@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_announce.c                                     :+:      :+:    :+:   */
+/*   job_is_completed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 17:05:49 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 12:54:09 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 15:24:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	job_announce(t_job *job)
+int		job_is_completed(t_job *job)
 {
-	ft_printf("{mag}[%i] %i{eoc}\n", job->id, job->pid);
+	t_list		*lst;
+	t_process	*process;
+
+	lst = job->lst;
+	while (lst)
+	{
+		process = lst->content;
+		if (!(process->attributes & PROCESS_COMPLETED))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
 }

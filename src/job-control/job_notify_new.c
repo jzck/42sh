@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_redirect.c                                      :+:      :+:    :+:   */
+/*   job_notify_new.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:13:24 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 14:27:01 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 14:58:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-void	fd_redirect(void)
+void	job_notify_new(t_job *job)
 {
-	t_data	*data;
+	t_list	*process;
 
-	data = data_singleton();
-	if (data->exec.fdin != STDIN)
+	process = job->first_process;
+	ft_printf("{mag}[%i]", job->id);
+	while (process)
 	{
-		dup2(data->exec.fdin, STDIN);
-		close(data->exec.fdin);
+		ft_printf(" %i", ((t_process*)process->content)->pid);
+		process=process->next;
 	}
-	if (data->exec.fdout != STDOUT)
-	{
-		dup2(data->exec.fdout, STDOUT);
-		close(data->exec.fdout);
-	}
+	ft_printf("{eoc}\n");
 }

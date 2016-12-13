@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:13:58 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 17:51:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef TYPES_H
+# define TYPES_H
 
-int		exec_dgreat(t_btree **ast)
-{
-	t_astnode	*node;
-	int			fd;
+typedef struct s_job		t_job;
+typedef struct s_jobc		t_jobc;
+typedef struct s_execmap	t_execmap;
+typedef struct s_process	t_process;
+typedef long long			t_type;
+typedef long long			t_flag;
+typedef int		(t_execf)(const char *path, char *const argv[], char *const envp[]);
 
-	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data_singleton()->exec.process.fdout = fd;
-	ft_exec(&(*ast)->left);
-	data_singleton()->exec.process.fdout = STDOUT;
-	btree_delone(ast, &ast_free);
-	return (0);
-}
+#endif

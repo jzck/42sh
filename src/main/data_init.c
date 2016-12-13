@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:50:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 13:38:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int		data_init(void)
 	data->jobc.current_id = 1;
 	data->jobc.rank[0] = 0;
 	data->jobc.rank[1] = 0;
+	data->jobc.job.id = 0;
+	data->jobc.job.pgid = 0;
+	data->jobc.job.notified = 0;
+	data->jobc.job.foreground = 0;
 	if (!(data->line.history = ft_dlstnew(NULL, 0)))
 		return (-1);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)

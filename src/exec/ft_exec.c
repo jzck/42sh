@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 18:11:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:40:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_execfunc	g_execfunc[] =
+t_execmap	g_execmap[] =
 {
 	{TK_AND_IF, &exec_and_if},
 	{TK_OR_IF, &exec_or_if},
@@ -35,10 +35,10 @@ int		ft_exec(t_btree **ast)
 	if (!*ast)
 		return (0);
 	item = (*ast)->item;
-	while (g_execfunc[i].type)
+	while (g_execmap[i].type)
 	{
-		if (item->type == g_execfunc[i].type)
-			return ((*g_execfunc[i].f)(ast));
+		if (item->type == g_execmap[i].type)
+			return ((*g_execmap[i].f)(ast));
 		i++;
 	}
 	return (0);

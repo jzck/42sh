@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:35:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:41:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 int		exec_command(t_btree **ast)
 {
 	t_astnode	*node;
+	t_process	*process;
+	t_job		*job;
 
 	node = (*ast)->item;
-	ft_strappend(&data->jobc.process.command, ft_sstrcat(node->data.sstr));
-	DG("gonna exec_command '%s'", data->joc.process.command);
-	ft_cmd_process(node->data.sstr);
+	process = &data_singleton()->exec.process;
+	job = &data_singleton()->exec.job;
+	process->argv = ft_sstrdup(node->data.sstr);
+	DG("gonna launch_process");
+	process_setexec(process);
+	launch_process(process);
+	job_addprocess(process);
 	btree_delone(ast, &ast_free);
 	return (0);
 }

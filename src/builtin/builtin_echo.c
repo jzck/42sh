@@ -6,15 +6,16 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:41 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/28 14:22:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:58:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
-int		builtin_echo(char **av, t_data *data)
+int		builtin_echo(const char *path, char *const av[], char *const envp[])
 {
-	(void)data;
+	(void)envp;
+	(void)path;
 	av++;
 	while (*av)
 	{

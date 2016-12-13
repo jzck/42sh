@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:56:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:50:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,38 @@
 # define PIPE_WRITE		1
 
 # include "libft.h"
+# include "types.h"
+# include "job_control.h"
 
-typedef struct s_execfunc	t_execfunc;
-typedef long long			t_type;
+struct	s_process
+{
+	char	**argv;
+	char	*path;
+	t_execf	*execf;
+	pid_t	pid;
+	int		fdin;
+	int		fdout;
+	int		status;
+	t_flag	attributes;
+};
 
 struct	s_exec
 {
-	char	*aol_status;
-	int		aol_search;
+	char		*aol_status;
+	int			aol_search;
+	t_job		job;
+	t_process	process;
 };
 
-struct	s_execfunc
+struct	s_execmap
 {
 	t_type	type;
 	int		(*f)(t_btree **ast);
 };
 
-# include "minishell.h"
+#include "minishell.h"
 
-extern t_execfunc	g_execfunc[];
+extern t_execmap	g_execmap[];
 
 int		ft_exec(t_btree **ast);
 
@@ -50,15 +63,18 @@ int		exec_great(t_btree **ast);
 int		exec_dgreat(t_btree **ast);
 int		exec_command(t_btree **ast);
 
+int		launch_process(t_process *p);
+int		process_setexec(t_process *p);
+int		process_setgroup(t_process *p);
+int		process_redirect(t_process *p);
+
 void	fd_redirect(void);
 void	fd_reset(void);
 
-int		ft_cmd_process(char **argv);
-int		ft_cmd_exec(char *execpath, char **argv);
 char	*ft_findexec(char *path, char *file);
 
-void	ast_free(void *data, size_t content_size);
-
 void	set_exitstatus(int status);
+
+void	ast_free(void *data, size_t content_size);
 
 #endif

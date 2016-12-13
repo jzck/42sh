@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:56:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:51:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 # include "libft.h"
 
+# include "types.h"
 # include "line_editing.h"
 # include "lexer.h"
 # include "parser.h"
 # include "exec.h"
+# include "builtin.h"
 # include "job_control.h"
 
 # include <dirent.h>
@@ -77,13 +79,6 @@ void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
 
-int		ft_builtin(char **av);
-int		builtin_echo(char **av, t_data *data);
-int		builtin_cd(char **av, t_data *data);
-int		builtin_exit(char **av, t_data *data);
-int		builtin_setenv(char **av, t_data *data);
-int		builtin_unsetenv(char **av, t_data *data);
-int		builtin_env(char **av, t_data *data);
 
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);

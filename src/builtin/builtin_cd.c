@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:58:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:56:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
 #define CDERR_1 "cd: no such file or directory: %s\n"
 
-static char		*builtin_cd_special(char **av, char **env)
+static char		*builtin_cd_special(char *const av[], char *const env[])
 {
 	char	*target;
 
 	if (!*av)
 	{
-		if (!(target = ft_getenv(env, "HOME")))
+		if (!(target = ft_getenv((char**)env, "HOME")))
 			return (NULL);
 	}
 	else if (ft_strcmp(*av, "-") == 0)
-		target = ft_getenv(env, "OLDPWD");
+		target = ft_getenv((char**)env, "OLDPWD");
 	else
 		target = *av;
 	return (target);
 }
 
-static int		builtin_cd_opts(char **av, int *opts)
+static int		builtin_cd_opts(char *const av[], int *opts)
 {
 	int		i;
 	int		j;
@@ -60,7 +60,7 @@ static int		builtin_cd_opts(char **av, int *opts)
 	return (i);
 }
 
-int				builtin_cd(char **av, t_data *data)
+int				builtin_cd(const char *path, char *const av[], char *const envp[])
 {
 	int		i;
 	int		opts;
@@ -68,9 +68,9 @@ int				builtin_cd(char **av, t_data *data)
 
 	opts = 0;
 	i = builtin_cd_opts(av, &opts);
-	if (!(target = builtin_cd_special(av + i, data->env)))
+	if (!(target = builtin_cd_special(av + i, envp)))
 		return (0);
-	builtin_setenv((char*[3]){"OLDPWD", getcwd(NULL, 0)}, data);
+	builtin_setenv(path, (char*[3]){"OLDPWD", getcwd(NULL, 0)}, envp);
 	if (chdir(target))
 	{
 		ft_printf(CDERR_1, target);
@@ -78,6 +78,6 @@ int				builtin_cd(char **av, t_data *data)
 	}
 	else if (target != av[i])
 		ft_printf("%s\n", target);
-	builtin_setenv((char*[3]){"PWD", getcwd(NULL, 0)}, data);
+	builtin_setenv(path, (char*[3]){"PWD", getcwd(NULL, 0)}, envp);
 	return (0);
 }

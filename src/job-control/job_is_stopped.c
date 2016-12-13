@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   job_is_stopped.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:13:58 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 15:06:45 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 15:24:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "job_control.h"
 
-int		exec_dgreat(t_btree **ast)
+int		job_is_stopped(t_job *job)
 {
-	t_astnode	*node;
-	int			fd;
+	t_list		*lst;
+	t_process	*process;
 
-	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data_singleton()->exec.process.fdout = fd;
-	ft_exec(&(*ast)->left);
-	data_singleton()->exec.process.fdout = STDOUT;
-	btree_delone(ast, &ast_free);
-	return (0);
+	lst = job->lst;
+	while (lst)
+	{
+		process = lst->content;
+		if (!(process->attributes & (PROCESS_COMPLETED | PROCESS_STOPPED)))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
 }

@@ -6,20 +6,21 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 14:35:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:59:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		builtin_exit(char **av, t_data *data)
+int		builtin_exit(const char *path, char *const av[], char *const envp[])
 {
 	int		status;
 
+	(void)path;
 	if (av[1])
 		status = ft_atoi(av[1]);
 	else
-		status = ft_atoi(ft_getenv(data->env, "?"));
+		status = ft_atoi(ft_getenv((char**)envp, "?"));
 	exit(status);
 	return (0);
 }

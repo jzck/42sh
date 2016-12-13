@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:13:58 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 17:49:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_dgreat(t_btree **ast)
+int		process_redirect(t_process *p)
 {
-	t_astnode	*node;
-	int			fd;
-
-	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data_singleton()->exec.process.fdout = fd;
-	ft_exec(&(*ast)->left);
-	data_singleton()->exec.process.fdout = STDOUT;
-	btree_delone(ast, &ast_free);
+	if (p->fdin != STDIN)
+	{
+		dup2(p->fdin, STDIN);
+		close(p->fdin);
+	}
+	if (p->fdout != STDOUT)
+	{
+		dup2(p->fdout, STDOUT);
+		close(p->fdout);
+	}
 	return (0);
 }

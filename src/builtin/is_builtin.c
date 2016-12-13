@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:21:34 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:56:11 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 17:31:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,13 @@ t_stof g_builtin[] = {
 	{NULL, NULL},
 };
 
-int		ft_builtin(char **av)
+t_execf		*is_builtin(t_process *p)
 {
 	int		i;
-	int		ret;
-	t_data	*data;
 
 	i = -1;
-	data = data_singleton();
 	while (g_builtin[++i].name)
-		if (ft_strcmp(g_builtin[i].name, *av) == 0)
-		{
-			if (data->exec.fdout != STDOUT)
-			{
-				if (fork() == 0)
-				{
-					fd_redirect();
-					ret = (g_builtin[i].f)(av, data);
-					exit(ret);
-				}
-			}
-			else
-			{
-				ret = (g_builtin[i].f)(av, data);
-				set_exitstatus(ret);
-			}
-			return (1);
-		}
-	return (0);
+		if (ft_strcmp(g_builtin[i].name, p->argv[0]) == 0)
+			return (g_builtin[i].f);
+	return (NULL);
 }

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   put_job_in_background.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:13:58 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 15:03:29 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/13 15:04:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "job_control.h"
 
-int		exec_dgreat(t_btree **ast)
+int	 put_job_in_background(t_job *job, int cont)
 {
-	t_astnode	*node;
-	int			fd;
-
-	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data_singleton()->exec.process.fdout = fd;
-	ft_exec(&(*ast)->left);
-	data_singleton()->exec.process.fdout = STDOUT;
-	btree_delone(ast, &ast_free);
-	return (0);
+	/* Send the job a continue signal, if necessary.  */
+	if (cont)
+		if (kill (-j->pgid, SIGCONT) < 0)
+			perror ("kill (SIGCONT)");
 }
