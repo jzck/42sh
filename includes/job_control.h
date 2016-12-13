@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:51:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:57:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <termios.h>
 # include "libft.h"
 
+# define TYPE_BUILTIN		
+
 typedef struct s_job	t_job;
 typedef struct s_jobc	t_jobc;
 
@@ -24,15 +26,20 @@ struct	s_job
 {
 	int		id;
 	pid_t	pid;
+	int		fdin;
+	int		fdout;
 	char	*command;
+	t_type	type;
 };
 
 struct	s_jobc
 {
-	t_list			*list;
+	t_list			*first_job;
 	pid_t			shell_pgid;
 	int				current_id;
 	int				rank[2];
+	t_job			job;
+	t_process		process;
 	struct termios	shell_tmodes;
 };
 
