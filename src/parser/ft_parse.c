@@ -14,8 +14,9 @@
 
 t_parser	g_parser[] =
 {
-	{TK_SEMI | TK_AMP, &parse_separator},
+	{TK_SEMI, &parse_separator},
 	{TK_AND_IF | TK_OR_IF, &parse_separator},
+	{TK_AMP, &parse_separator},
 	{TK_PIPE, &parse_separator},
 	{TK_LESS, &parse_less},
 	{TK_GREAT, &parse_great},

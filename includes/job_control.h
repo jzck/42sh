@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:57:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/13 13:00:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,29 @@
 
 # define TYPE_BUILTIN		
 
-typedef struct s_job	t_job;
-typedef struct s_jobc	t_jobc;
+typedef struct s_job		t_job;
+typedef struct s_process	t_process;
+typedef struct s_jobc		t_jobc;
 
 struct	s_job
 {
 	int		id;
+	pid_t	pgid;
+	char	notified;
+	char	*command;
+	int		foreground;
+	t_list	*first_process;
+};
+
+struct	s_process
+{
+	char	**argv;
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
-	char	*command;
-	t_type	type;
+	char	completed;
+	char	stopped;
+	int		status;
 };
 
 struct	s_jobc
