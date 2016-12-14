@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 02:05:22 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 14:32:27 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:50:33 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@
 #  define RL_SELECT_LEFT_CODE 0x445b1b1b
 #  define RL_SELECT_PAGEUP_CODE 0x7e355b1b1b
 #  define RL_SELECT_PAGEDOWN_CODE 0x7e365b1b1b
-#  define RL_SELECT_HOME_CODE 0x48333b315b1b
-#  define RL_SELECT_END_CODE 0x46333b315b1b
+#  define RL_SELECT_HOME_CODE 0X48393b315b1b
+#  define RL_SELECT_END_CODE 0X46393b315b1b
 #  define RL_SELECT_WRIGHT_CODE 0x4330313b315b1b
 #  define RL_SELECT_WLEFT_CODE 0x4430313b315b1b
 #  define RL_RETARR_CODE 0x7f

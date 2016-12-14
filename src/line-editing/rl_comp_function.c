@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 10:49:03 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 11:01:45 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:49:39 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int			rl_comp_function(t_line *line, long int input)
 	line->used = line->size;
 	curs_reset(0);
 	return (0);
+	(void)input;
 }

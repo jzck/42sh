@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/12 14:38:54 by sbenning         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:51:14 by sbenning         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
  * Input-Key Mapping !!! LINUX Or MACOSX !!!
 */
 
-# define LINUX
-//# define MACOSX
+//# define LINUX
+# define MACOSX
 # include "ft_input.h"
 
 /*
