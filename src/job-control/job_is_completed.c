@@ -15,13 +15,13 @@
 int		job_is_completed(t_job *job)
 {
 	t_list		*lst;
-	t_process	*process;
+	t_process	*p;
 
-	lst = job->lst;
+	lst = job->first_process;
 	while (lst)
 	{
-		process = lst->content;
-		if (!(process->attributes & PROCESS_COMPLETED))
+		p = lst->content;
+		if (!(p->attributes & PROCESS_COMPLETED))
 			return (0);
 		lst = lst->next;
 	}

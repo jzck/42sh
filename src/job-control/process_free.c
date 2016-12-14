@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_cmp_pid.c                                      :+:      :+:    :+:   */
+/*   process_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/12 13:00:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 13:40:13 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/12 13:02:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-int		job_cmp_pid(t_job *job, pid_t *pid)
+void	process_free(void *content, size_t content_size)
 {
-	return (job->pid - *pid);
+	t_process	*p;
+
+	(void)content_size;
+	p = content;
+	ft_strdel(&p->path);
+	ft_sstrfree(p->argv);
+	free(p);
 }

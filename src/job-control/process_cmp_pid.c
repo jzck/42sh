@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_exitstatus.c                                   :+:      :+:    :+:   */
+/*   process_cmp_pid.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:54:19 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/12 13:00:21 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/12 13:40:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_exitstatus(int status)
+int		process_cmp_pid(t_process *p, pid_t *pid)
 {
-	char	*astatus;
-
-	astatus = ft_itoa(status);
-	builtin_setenv("shell", (char*[3]){"?", astatus}, data_singleton()->env);
-	ft_strdel(&astatus);
+	return (p->pid - *pid);
 }

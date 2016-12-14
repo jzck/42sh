@@ -15,13 +15,13 @@
 int		job_is_stopped(t_job *job)
 {
 	t_list		*lst;
-	t_process	*process;
+	t_process	*p;
 
-	lst = job->lst;
+	lst = job->first_process;
 	while (lst)
 	{
-		process = lst->content;
-		if (!(process->attributes & (PROCESS_COMPLETED | PROCESS_STOPPED)))
+		p = lst->content;
+		if (!(p->attributes & (PROCESS_COMPLETED | PROCESS_STOPPED)))
 			return (0);
 		lst = lst->next;
 	}

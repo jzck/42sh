@@ -30,12 +30,6 @@
 # include <signal.h>
 # include <fcntl.h>
 
-typedef long long		t_type;
-typedef struct s_line	t_line;
-typedef struct s_comp	t_comp;
-typedef struct s_exec	t_exec;
-typedef struct s_jobc	t_jobc;
-typedef enum e_mode		t_mode;
 
 enum	e_mode
 {
@@ -66,19 +60,14 @@ struct	s_data
 	t_jobc	jobc;
 };
 
-typedef struct s_data	t_data;
-typedef enum e_qstate	t_qstate;
 
 extern t_stof	g_builtins[];
 extern pid_t	g_pid;
-
-t_data		*data_singleton();
 
 void	shell_init(void);
 void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
-
 
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);

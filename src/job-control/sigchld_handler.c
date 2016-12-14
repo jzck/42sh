@@ -18,13 +18,5 @@ void	sigchld_handler(int signo)
 
 	(void)signo;
 	data = data_singleton();
-	if (data->mode == MODE_INPUT)
-	{
-		DG("got SIGCHLD in MODE_INPUT (asynchronos notification)");
-		check_chlds();
-		ft_putstr(SHELL_PROMPT);
-		ft_putstr(data->line.input);
-	}
-	else
-		DG("got SIGCHLD in MODE_EXEC, will check before next prompt");
+		DG("got asynchronous notification (SIGCHLD)");
 }

@@ -15,17 +15,25 @@
 int		exec_command(t_btree **ast)
 {
 	t_astnode	*node;
-	t_process	*process;
+	t_process	*p;
 	t_job		*job;
 
 	node = (*ast)->item;
-	process = &data_singleton()->exec.process;
+	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
-	process->argv = ft_sstrdup(node->data.sstr);
+	p->argv = ft_sstrdup(node->data.sstr);
 	DG("gonna launch_process");
-	process_setexec(process);
-	launch_process(process);
-	job_addprocess(process);
+	DG("job attr=%i", job->attributes);
+	process_setexec(p);
+	launch_process(p);
+	if (p->fdout == STDOUT)
+	{
+		if (JOB_IS_FG(job->attributes))
+			put_job_in_foreground(job, 0);
+		else
+			put_job_in_background(job, 0);
+	}
+	job_addprocess(p);
 	btree_delone(ast, &ast_free);
 	return (0);
 }

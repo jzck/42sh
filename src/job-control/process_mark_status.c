@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_free.c                                         :+:      :+:    :+:   */
+/*   process_mark_status.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,31 @@
 
 #include "job_control.h"
 
-void	job_free(void *content, size_t content_size)
+int		process_mark_status(pid_t pid, int status)
 {
-	t_job	*job;
+	t_process	*p;
+	t_jobc		*jobc;
 
-	(void)content_size;
-	job = content;
-	ft_lstdel(&job->first_process, &process_free);
-	free(job);
+	jobc = &data_singleton()->jobc;
+	if (pid > 0)
+	{
+		if ((p = job_getprocess(pid)))
+		{
+			p->status = status;
+			if (WIFSTOPPED(status))
+				p->attributes &= PROCESS_STOPPED;
+			else
+			{
+				p->attributes &= PROCESS_COMPLETED;
+				if (WIFSIGNALED(status))
+					ft_printf("%d: Terminated by signal %d.\n",
+							(int) pid, WTERMSIG (p->status));
+			}
+			return(0);
+		}
+		ft_dprintf(STDERR, "No child process %d.\n", pid);
+		return(-1);
+	}
+	else
+		return(-1);
 }

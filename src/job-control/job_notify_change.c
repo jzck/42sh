@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_print_change.c                                 :+:      :+:    :+:   */
+/*   job_notify_change.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	job_print_change(t_job *job, int status)
+void	job_notify_change(t_job *job, int status)
 {
 	char	rank;
 
@@ -21,12 +21,12 @@ void	job_print_change(t_job *job, int status)
 		rank = '+';
 	else if (job->id == data_singleton()->jobc.rank[1])
 		rank = '-';
-	ft_printf("{mag}[%i]  %c %i ", job->id, rank, job->pid);
+	ft_printf("{mag}[%i]  %c ", job->id, rank);
 	if (status == 0)
 		ft_printf("{gre}done{mag}");
 	else if (status == 9)
 		ft_printf("{red}killed{mag}");
 	else
 		ft_printf("exit %i", status);
-	ft_printf("\t%s{eoc}\n", job->command);
+	/* ft_printf("\t%s{eoc}\n", job->command); */
 }

@@ -17,14 +17,6 @@ int		ft_prompt(void)
 	t_data	*data;
 
 	data = data_singleton();
-	while (data->jobc.list)
-	{
-		/* usleep(500 * 1000); */
-		if (check_chlds())
-			continue ;
-		else
-			break ;
-	}
 	ft_putstr(SHELL_PROMPT);
 	return (0);
 }

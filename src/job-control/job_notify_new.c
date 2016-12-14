@@ -16,8 +16,8 @@ void	job_notify_new(t_job *job)
 {
 	t_list	*process;
 
-	process = job->first_process;
 	ft_printf("{mag}[%i]", job->id);
+	process = job->first_process;
 	while (process)
 	{
 		ft_printf(" %i", ((t_process*)process->content)->pid);

@@ -14,24 +14,29 @@
 # define JOB_CONTROL_H
 
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <termios.h>
 # include "libft.h"
 # include "types.h"
-# include "exec.h"
 
-# define PROCESS_COMPLETED	1 << 0
-# define PROCESS_STOPED		1 << 1
-# define PROCESS_BUILTIN	1 << 2
-# define PROCESS_BINARY		1 << 3
-# define PROCESS_SCRIPT		1 << 4
-# define PROCESS_UNKNOWN	1 << 5
+# define PROCESS_COMPLETED	(1 << 0)
+# define PROCESS_STOPPED	(1 << 1)
+# define PROCESS_BUILTIN	(1 << 2)
+# define PROCESS_BINARY		(1 << 3)
+# define PROCESS_SCRIPT		(1 << 4)
+# define PROCESS_UNKNOWN	(1 << 5)
+
+# define JOB_NOTIFIED		(1 << 0)
+# define JOB_BG				(1 << 1)
+# define JOB_IS_BG(j)		(j & JOB_BG)
+# define JOB_IS_FG(j)		!(j & JOB_BG)
+
 
 struct	s_job
 {
 	int				id;
 	pid_t			pgid;
-	char			notified;
-	int				foreground;
+	t_flag			attributes;
 	t_list			*first_process;
 	struct termios	tmodes;
 };
@@ -45,12 +50,20 @@ struct	s_jobc
 	struct termios	shell_tmodes;
 };
 
-int		job_addprocess(t_process *p);
-void	job_update_id(void);
-void	job_print_change(t_job *job, int status);
-void	job_update_rank(void);
+# include "exec.h"
 
-void	job_new(char **av, pid_t pid);
+t_process	*job_getprocess(pid_t pid);
+int			job_addprocess(t_process *p);
+void		job_update_id(void);
+void		job_print_change(t_job *job, int status);
+void		job_update_rank(void);
+void		job_notify_new(t_job *job);
+int			job_wait(t_job *job);
+
+int			put_job_in_foreground(t_job *job, int cont);
+int			put_job_in_background(t_job *job, int cont);
+
+void		job_new(char **av, pid_t pid);
 
 void	job_free(void *content, size_t content_size);
 int		job_cmp_pid(t_job *job, pid_t *pid);
@@ -61,5 +74,7 @@ int		check_chlds(void);
 void	sigchld_handler(int signo);
 void	sigint_handler(int signo);
 void	sigtstp_handler(int signo);
+
+int		process_cmp_pid(t_process *p, pid_t *pid);
 
 #endif

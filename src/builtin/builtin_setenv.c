@@ -12,34 +12,38 @@
 
 #include "minishell.h"
 
-int		builtin_setenv(char **av, t_data *data)
+int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 {
 	char	*str;
-	char	**env;
+	char	***env;
+	int		i;
 
-	env = data->env;
+	(void)envp;
+	(void)path;
+	i = 0;
+	env = &data_singleton()->env;
 	DG("doing setenv now");
 	if (ft_strcmp(av[0], "setenv") == 0)
 		av++;
 	if (!av[0])
 	{
-		ft_sstrprint(data->env, '\n');
+		ft_sstrprint(*env, '\n');
 		ft_putchar('\n');
 	}
 	else
 	{
 		str = ft_str3join(av[0], "=", av[1]);
-		while (*env)
+		while ((*env)[i])
 		{
-			if (ft_strcmp(*env, av[0]) == '=')
+			if (ft_strcmp((*env)[i], av[0]) == '=')
 			{
-				ft_strdel(env);
-				*env = str;
+				ft_strdel(*env);
+				(*env)[i] = str;
 				return (0);
 			}
-			env++;
+			i++;
 		}
-		data->env = ft_sstradd(data->env, str);
+		*env = ft_sstradd(*env, str);
 		ft_strdel(&str);
 	}
 	return (0);

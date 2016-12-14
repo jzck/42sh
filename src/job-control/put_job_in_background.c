@@ -16,6 +16,7 @@ int	 put_job_in_background(t_job *job, int cont)
 {
 	/* Send the job a continue signal, if necessary.  */
 	if (cont)
-		if (kill (-j->pgid, SIGCONT) < 0)
+		if (kill (-job->pgid, SIGCONT) < 0)
 			perror ("kill (SIGCONT)");
+	return (0);
 }

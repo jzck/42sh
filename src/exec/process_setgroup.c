@@ -11,16 +11,20 @@
 /* ************************************************************************** */
 
 #include "job_control.h"
+#include "exec.h"
 
 int		process_setgroup(t_process *p)
 {
 	t_job	*job;
+	int		pid;
 
-	job = data_singleton()->exec.job;
+	(void)p;
+	job = &data_singleton()->exec.job;
 	pid = getpid();
 	if (job->pgid == 0)
 		job->pgid = pid;
 	setpgid(pid, job->pgid);
-	if (job->foreground)
+	if (JOB_IS_FG(job->attributes))
 		tcsetpgrp(STDIN_FILENO, job->pgid);
+	return (0);
 }

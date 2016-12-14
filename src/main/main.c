@@ -41,6 +41,7 @@ int		main(void)
 		/* btree_apply_infix(ast, &ft_putast2); */
 		if (ft_exec(&ast))
 			return (1);
+		DG("end of loop");
 	}
 	return (0);
 }

@@ -20,7 +20,7 @@ void	job_update_id(void)
 
 	jobc = &data_singleton()->jobc;
 	id = &jobc->current_id;
-	start = jobc->list;
+	start = jobc->first_job;
 	while (ft_lst_find(start, id, job_cmp_id))
 	{
 		*id += 1;

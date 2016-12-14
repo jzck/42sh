@@ -20,7 +20,7 @@ int		launch_process(t_process *p)
 	exec = &data_singleton()->exec;
 	if (p->attributes & PROCESS_UNKNOWN)
 		ft_dprintf(2, "%s: command not found: %s\n", SHELL_NAME, p->argv[0]);
-	if (p->attributes & PROCESS_BUILTIN && p->fdout != STDOUT)
+	else if (p->attributes & PROCESS_BUILTIN && p->fdout != STDOUT)
 		set_exitstatus((*p->execf)(p->path, p->argv, data_singleton()->env));
 	else
 	{

@@ -22,7 +22,7 @@ void	shell_init(void)
 	if (isatty(STDIN_FILENO))
 	{
 		while (tcgetpgrp(STDIN_FILENO) != (*shell_pgid = getpgrp()))
-			kill(*shell_pgid, SIGTTIN);
+			kill(-*shell_pgid, SIGTTIN);
 		signal(SIGINT, sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGTSTP, sigtstp_handler);

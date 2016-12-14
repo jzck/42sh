@@ -15,21 +15,27 @@
 int		process_setexec(t_process *p)
 {
 	if ((p->execf = is_builtin(p)))
+	{
+		DG("process is a builtin");
 		p->attributes &= PROCESS_BUILTIN;
+	}
 	else if (ft_strchr(p->argv[0], '/'))
 	{
+		DG("process is a script");
 		p->execf = &execve;
 		p->attributes &= PROCESS_SCRIPT;
 		p->path = ft_strdup(p->argv[0]);
 	}
-	else if (!(p->path = ft_findexec(ft_getenv(
+	else if ((p->path = ft_findexec(ft_getenv(
 						data_singleton()->env, "PATH"), p->argv[0])))
 	{
+		DG("process is binary");
 		p->execf = &execve;
 		p->attributes &= PROCESS_BINARY;
 	}
 	else
 	{
+		DG("process is unknown type");
 		p->execf = NULL;
 		p->attributes &= PROCESS_UNKNOWN;
 	}

@@ -67,6 +67,7 @@ int		launch_process(t_process *p);
 int		process_setexec(t_process *p);
 int		process_setgroup(t_process *p);
 int		process_redirect(t_process *p);
+void	process_free(void *content, size_t content_size);
 
 void	fd_redirect(void);
 void	fd_reset(void);

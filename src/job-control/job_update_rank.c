@@ -19,7 +19,7 @@ void	job_update_rank()
 	t_list	*list;
 
 	jobc = &data_singleton()->jobc;
-	list = jobc->list;
+	list = jobc->first_job;
 	if (list)
 	{
 		job = list->content;

@@ -14,26 +14,26 @@
 
 int		check_chlds()
 {
-	int		status;
-	pid_t	pid;
-	t_job	*job;
-	t_list	**start;
-	t_list	*list;
+	/* int		status; */
+	/* pid_t	pid; */
+	/* t_job	*job; */
+	/* t_list	**start; */
+	/* t_list	*list; */
 
-	DG("gonna check childs");
-	start = &data_singleton()->jobc.list;
-	pid = waitpid(-1, &status, WNOHANG);
-	DG("waitpid = %i", pid);
-	list = *start ? ft_lst_find(*start, &pid, job_cmp_pid) : NULL;
-	if (list)
-	{
-		job = list->content;
-		if (job->id < data_singleton()->jobc.current_id)
-			data_singleton()->jobc.current_id = job->id;
-		job_print_change(job, status);
-		ft_lst_delif(start, list->content, ft_addrcmp, job_free);
-		job_update_rank();
-		return (1);
-	}
+	/* DG("gonna check childs"); */
+	/* start = &data_singleton()->jobc.list; */
+	/* pid = waitpid(-1, &status, WNOHANG); */
+	/* DG("waitpid = %i", pid); */
+	/* list = *start ? ft_lst_find(*start, &pid, job_cmp_pid) : NULL; */
+	/* if (list) */
+	/* { */
+	/* 	job = list->content; */
+	/* 	if (job->id < data_singleton()->jobc.current_id) */
+	/* 		data_singleton()->jobc.current_id = job->id; */
+	/* 	job_print_change(job, status); */
+	/* 	ft_lst_delif(start, list->content, ft_addrcmp, job_free); */
+	/* 	job_update_rank(); */
+	/* 	return (1); */
+	/* } */
 	return (0);
 }

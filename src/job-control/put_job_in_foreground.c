@@ -16,22 +16,24 @@ int		put_job_in_foreground(t_job *job, int cont)
 {
 	t_jobc	*jobc;
 
+	jobc = &data_singleton()->jobc;
 	/* Put the job into the foreground.  */
-	tcsetpgrp(shell_terminal, job->pgid);
+	tcsetpgrp(STDIN_FILENO, job->pgid);
 	/* Send the job a continue signal, if necessary.  */
 	if (cont)
 	{
-		tcsetattr (shell_terminal, TCSADRAIN, &job->tmodes);
+		tcsetattr (STDIN_FILENO, TCSADRAIN, &job->tmodes);
 		if (kill(- job->pgid, SIGCONT) < 0)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
-	wait_for_job(j);
+	job_wait(job);
 
 	/* Put the shell back in the foreground.  */
-	tcsetpgrp(shell_terminal, jobc->shell_pgid);
+	tcsetpgrp(STDIN_FILENO, jobc->shell_pgid);
 
 	/* Restore the shell’s terminal modes.  */
-	tcgetattr(shell_terminal, &job->tmodes);
-	tcsetattr(shell_terminal, TCSADRAIN, &jobc->shell_tmodes);
+	tcgetattr(STDIN_FILENO, &job->tmodes);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &jobc->shell_tmodes);
+	return (0);
 }
