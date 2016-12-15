@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:50:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:19:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int		process_setexec(t_process *p)
 	}
 	else
 	{
-		DG("process is unknown type");
+		DG("process is '%s' unknown type", p->argv[0]);
 		p->execf = NULL;
 		p->attributes &= PROCESS_UNKNOWN;
+		return (1);
 	}
 	return (0);
 }

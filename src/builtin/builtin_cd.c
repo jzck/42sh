@@ -6,11 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:56:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:50:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
+
 #define CDOPT_L 0x001
 #define CDOPT_P 0x002
 #define HAS_CDOPT_P(x) (x & CD_OPT_P)

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:21:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:58:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:49:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include "types.h"
 # include "libft.h"
 
-t_execf		*is_builtin(t_process *p);
-int			builtin_env(const char *path, char *const argv[], char *const envp[]);
-int			builtin_echo(const char *path, char *const argv[], char *const envp[]);
-int			builtin_cd(const char *path, char *const argv[], char *const envp[]);
-int			builtin_exit(const char *path, char *const argv[], char *const envp[]);
-int			builtin_setenv(const char *path, char *const argv[], char *const envp[]);
-int			builtin_unsetenv(const char *path, char *const argv[], char *const envp[]);
+t_execf	*is_builtin(t_process *p);
+int		builtin_env(const char *path, char *const argv[], char *const envp[]);
+int		builtin_echo(const char *path, char *const argv[], char *const envp[]);
+int		builtin_cd(const char *path, char *const argv[], char *const envp[]);
+int		builtin_exit(const char *path, char *const argv[], char *const envp[]);
+int		builtin_setenv(const char *path, char *const argv[], char *const envp[]);
+int		builtin_unsetenv(const char *path, char *const argv[], char *const envp[]);
+int		builtin_jobs(const char *path, char *const av[], char *const envp[]);
+
 #endif

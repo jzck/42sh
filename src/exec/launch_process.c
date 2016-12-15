@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:50:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:21:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ int		launch_process(t_process *p)
 			p->pid = pid;
 		else if (pid == -1)
 			perror("fork");
-		if (p->fdout == STDOUT)
-		{
-			waitpid(pid, &p->status, 0);
-			set_exitstatus(p->status);
-		}
 	}
 	return (0);
 }

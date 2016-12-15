@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 17:37:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 16:49:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:06:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void	sigchld_handler(int signo)
 
 	(void)signo;
 	data = data_singleton();
-		DG("got asynchronous notification (SIGCHLD)");
+	DG("got asynchronous notification (SIGCHLD)");
+	job_update_status();
 }

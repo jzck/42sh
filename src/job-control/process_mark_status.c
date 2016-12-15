@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 13:02:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:12:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int		process_mark_status(pid_t pid, int status)
 {
 	t_process	*p;
-	t_jobc		*jobc;
 
-	jobc = &data_singleton()->jobc;
+	DG("marking: pid=%i, status=%i", pid, status);
 	if (pid > 0)
 	{
 		if ((p = job_getprocess(pid)))
 		{
+			DG("found process pid=%i", pid);
 			p->status = status;
 			if (WIFSTOPPED(status))
 				p->attributes &= PROCESS_STOPPED;
@@ -30,13 +30,15 @@ int		process_mark_status(pid_t pid, int status)
 				p->attributes &= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("%d: Terminated by signal %d.\n",
-							(int) pid, WTERMSIG (p->status));
+							(int) pid, WTERMSIG(p->status));
 			}
 			return(0);
 		}
-		ft_dprintf(STDERR, "No child process %d.\n", pid);
+		ft_dprintf(2, "No child process %d.\n", pid);
 		return(-1);
 	}
 	else
+	{
 		return(-1);
+	}
 }

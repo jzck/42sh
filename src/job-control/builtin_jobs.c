@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_addprocess.c                                   :+:      :+:    :+:   */
+/*   builtin_jobs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 18:31:22 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/15 17:54:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		job_addprocess(t_process *p)
+int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 {
 	t_jobc	*jobc;
+	t_list	*jlist;
 	t_job	*job;
+	char	rank;
 
 	jobc = &data_singleton()->jobc;
-	job = &data_singleton()->exec.job;
-	if (p->fdin == STDIN)
+	jlist = jobc->first_job;
+	(void)path;
+	(void)envp;
+	(void)av;
+	while (jlist)
 	{
-		job->id = jobc->current_id;
-		job_update_id();
-		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
-		jobc->rank[1] = jobc->rank[0];
-		jobc->rank[0] = job->id;
+		job = jlist->content;
+		rank = ' ';
+		if (job->id == data_singleton()->jobc.rank[0])
+			rank = '+';
+		else if (job->id == data_singleton()->jobc.rank[1])
+			rank = '-';
+		ft_printf("{mag}[%i]  %c ", job->id, rank);
+		ft_printf("attributes=%x{eoc}\n", job->attributes);
+		jlist = jlist->next;
 	}
-	job = jobc->first_job->content;
-	ft_lstadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-	if (JOB_IS_BG(job->attributes) && p->fdout == STDOUT)
-		job_notify_new(job);
-	DG("adding process to first_job : %i", p->pid);
-	return(0);
+	return (0);
 }

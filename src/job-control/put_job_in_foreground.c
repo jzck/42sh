@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 15:06:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:58:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int		put_job_in_foreground(t_job *job, int cont)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
+	DG("gonna wait for job");
 	job_wait(job);
+	DG("gonna remove job");
+	job_remove(job);
 
 	/* Put the shell back in the foreground.  */
 	tcsetpgrp(STDIN_FILENO, jobc->shell_pgid);

@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 15:04:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 16:39:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:45:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
 void	job_notify_change(t_job *job, int status)
 {
@@ -24,6 +24,8 @@ void	job_notify_change(t_job *job, int status)
 	ft_printf("{mag}[%i]  %c ", job->id, rank);
 	if (status == 0)
 		ft_printf("{gre}done{mag}");
+	else if (status == 8)
+		ft_printf("{red}stopped{mag}");
 	else if (status == 9)
 		ft_printf("{red}killed{mag}");
 	else

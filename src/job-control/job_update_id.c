@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:33:08 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:27:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:15:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	job_update_id(void)
 	while (ft_lst_find(start, id, job_cmp_id))
 	{
 		*id += 1;
-		DG("id = %i", *id);
+		DG("ID_UPDATE:%i", *id);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 12:05:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:03:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,14 @@ int		main(void)
 			return (1);
 		if (!token)
 			continue ;
-		token_print(token);
+		/* token_print(token); */
 		if (ft_parse(&ast, &token))
 			return (1);
-		btree_print(STDERR, ast, &ft_putast);
-		/* ft_dprintf(STDERR, "\n--- INFIX BREAKDOWN ---\n"); */
+		btree_print(STDBUG, ast, &ft_putast);
+		/* ft_dprintf(STDBUG, "\n--- INFIX BREAKDOWN ---\n"); */
 		/* btree_apply_infix(ast, &ft_putast2); */
 		if (ft_exec(&ast))
 			return (1);
-		DG("end of loop");
 	}
 	return (0);
 }

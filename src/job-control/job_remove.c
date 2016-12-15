@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_notify_new.c                                   :+:      :+:    :+:   */
+/*   job_remove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 14:27:01 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:15:54 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/15 12:51:08 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/15 17:58:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	job_notify_new(t_job *job)
+void	job_remove(t_job *job)
 {
-	t_list		*plist;
-	t_process	*p;
+	t_jobc	*jobc;
 
-	ft_printf("{mag}[%i]", job->id);
-	plist = job->first_process;
-	while (plist)
+	jobc = &data_singleton()->jobc;
+	if (job->id < data_singleton()->jobc.current_id)
 	{
-		p = plist->content;
-		ft_printf(" %i", p->pid);
-		plist = plist->next;
+		data_singleton()->jobc.current_id = job->id;
+		DG("ID_UPDATE(downgrade):%i", job->id);
 	}
-	ft_printf("{eoc}\n");
+	else
+		DG("ID_UPDATE(no downgrade): %i/%i", job->id, data_singleton()->jobc.current_id);
+	ft_lst_delif(&jobc->first_job, job, ft_addrcmp, job_free);
 }

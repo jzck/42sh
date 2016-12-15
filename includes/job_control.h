@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:50:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:49:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,25 @@ struct	s_jobc
 t_process	*job_getprocess(pid_t pid);
 int			job_addprocess(t_process *p);
 void		job_update_id(void);
-void		job_print_change(t_job *job, int status);
 void		job_update_rank(void);
+
+void		do_job_notification(void);
 void		job_notify_new(t_job *job);
+void		job_notify_change(t_job *job, int status);
+
 int			job_wait(t_job *job);
+void		job_update_status(void);
+int			job_is_stopped(t_job *job);
+int			job_is_completed(t_job *job);
+void		job_remove(t_job *job);
+void		job_free(void *content, size_t content_size);
+int			process_mark_status(pid_t pid, int status);
 
 int			put_job_in_foreground(t_job *job, int cont);
 int			put_job_in_background(t_job *job, int cont);
 
 void		job_new(char **av, pid_t pid);
 
-void	job_free(void *content, size_t content_size);
 int		job_cmp_pid(t_job *job, pid_t *pid);
 int		job_cmp_id(t_job *job, int *id);
 
