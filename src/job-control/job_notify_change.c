@@ -30,5 +30,5 @@ void	job_notify_change(t_job *job, int status)
 		ft_printf("{red}killed{mag}");
 	else
 		ft_printf("exit %i", status);
-	/* ft_printf("\t%s{eoc}\n", job->command); */
+	ft_printf("\t 'process command goes here'{eoc}\n");
 }

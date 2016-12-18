@@ -57,7 +57,7 @@ int			job_addprocess(t_process *p);
 void		job_update_id(void);
 void		job_update_rank(void);
 
-void		do_job_notification(void);
+int			do_job_notification(void);
 void		job_notify_new(t_job *job);
 void		job_notify_change(t_job *job, int status);
 
@@ -65,7 +65,7 @@ int			job_wait(t_job *job);
 void		job_update_status(void);
 int			job_is_stopped(t_job *job);
 int			job_is_completed(t_job *job);
-void		job_remove(t_job *job);
+void		job_remove(int id);
 void		job_free(void *content, size_t content_size);
 int			process_mark_status(pid_t pid, int status);
 

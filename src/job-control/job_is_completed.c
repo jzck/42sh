@@ -22,7 +22,10 @@ int		job_is_completed(t_job *job)
 	{
 		p = lst->content;
 		if (!(p->attributes & PROCESS_COMPLETED))
+		{
+			DG("process %i is not completed", p->pid);
 			return (0);
+		}
 		lst = lst->next;
 	}
 	return (1);

@@ -26,6 +26,7 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 	(void)av;
 	while (jlist)
 	{
+		DG("jlist->content");
 		job = jlist->content;
 		rank = ' ';
 		if (job->id == data_singleton()->jobc.rank[0])

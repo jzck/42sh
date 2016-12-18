@@ -20,10 +20,14 @@ int		launch_process(t_process *p)
 	exec = &data_singleton()->exec;
 	if (p->attributes & PROCESS_UNKNOWN)
 		ft_dprintf(2, "%s: command not found: %s\n", SHELL_NAME, p->argv[0]);
-	else if (p->attributes & PROCESS_BUILTIN && p->fdout != STDOUT)
+	else if (p->attributes & PROCESS_BUILTIN && p->fdout == STDOUT)
+	{
+		DG("process is not to be forked, fdout=%i, attr=%x", p->fdout, p->attributes);
 		set_exitstatus((*p->execf)(p->path, p->argv, data_singleton()->env));
+	}
 	else
 	{
+		DG("process is to be forked, fdout=%i, attr=%x", p->fdout, p->attributes);
 		if (p->attributes & (PROCESS_BINARY | PROCESS_SCRIPT)
 				&& access(p->path, X_OK) == -1)
 		{

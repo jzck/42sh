@@ -24,10 +24,10 @@ int		process_mark_status(pid_t pid, int status)
 			DG("found process pid=%i", pid);
 			p->status = status;
 			if (WIFSTOPPED(status))
-				p->attributes &= PROCESS_STOPPED;
+				p->attributes |= PROCESS_STOPPED;
 			else
 			{
-				p->attributes &= PROCESS_COMPLETED;
+				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("%d: Terminated by signal %d.\n",
 							(int) pid, WTERMSIG(p->status));

@@ -39,5 +39,7 @@ int		exec_command(t_btree **ast)
 			put_job_in_background(job, 0);
 	}
 	btree_delone(ast, &ast_free);
+	p->path = NULL;
+	p->attributes = 0;
 	return (0);
 }

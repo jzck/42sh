@@ -18,7 +18,9 @@ void	process_free(void *content, size_t content_size)
 
 	(void)content_size;
 	p = content;
+	DG("check 1");
 	ft_strdel(&p->path);
+	DG("check 2");
 	ft_sstrfree(p->argv);
 	free(p);
 }

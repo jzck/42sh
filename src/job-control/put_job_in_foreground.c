@@ -27,10 +27,8 @@ int		put_job_in_foreground(t_job *job, int cont)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
-	DG("gonna wait for job");
 	job_wait(job);
-	DG("gonna remove job");
-	job_remove(job);
+	job_remove(job->id);
 
 	/* Put the shell back in the foreground.  */
 	tcsetpgrp(STDIN_FILENO, jobc->shell_pgid);

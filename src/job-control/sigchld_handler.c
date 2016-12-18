@@ -19,5 +19,7 @@ void	sigchld_handler(int signo)
 	(void)signo;
 	data = data_singleton();
 	DG("got asynchronous notification (SIGCHLD)");
+	/* if (do_job_notification()) */
+	/* 	ft_putstr(SHELL_PROMPT); */
 	job_update_status();
 }
