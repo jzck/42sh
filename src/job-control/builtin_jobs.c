@@ -24,18 +24,15 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	(void)av;
+	rank = '+';
 	while (jlist)
 	{
 		DG("jlist->content");
 		job = jlist->content;
-		rank = ' ';
-		if (job->id == data_singleton()->jobc.rank[0])
-			rank = '+';
-		else if (job->id == data_singleton()->jobc.rank[1])
-			rank = '-';
-		ft_printf("{mag}[%i]  %c ", job->id, rank);
+		ft_printf("{mag}jobs: [%i]  %c ", job->id, rank);
 		ft_printf("attributes=%x{eoc}\n", job->attributes);
 		jlist = jlist->next;
+		rank = (rank == '+') ? '-' : ' ';
 	}
 	return (0);
 }

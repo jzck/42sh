@@ -59,7 +59,7 @@ void		job_update_rank(void);
 
 int			do_job_notification(void);
 void		job_notify_new(t_job *job);
-void		job_notify_change(t_job *job, int status);
+void		job_notify_change(int id, int status);
 
 int			job_wait(t_job *job);
 void		job_update_status(void);

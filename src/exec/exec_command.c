@@ -25,6 +25,9 @@ int		exec_command(t_btree **ast)
 	if (process_setexec(p))
 	{
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->argv[0]);
+		p->attributes = 0;
+		p->path = NULL;
+		p->argv = NULL;
 		btree_delone(ast, &ast_free);
 		return (0);
 	}
@@ -39,7 +42,8 @@ int		exec_command(t_btree **ast)
 			put_job_in_background(job, 0);
 	}
 	btree_delone(ast, &ast_free);
-	p->path = NULL;
 	p->attributes = 0;
+	p->path = NULL;
+	p->argv = NULL;
 	return (0);
 }

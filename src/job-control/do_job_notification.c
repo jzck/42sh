@@ -30,13 +30,13 @@ int		do_job_notification(void)
 		if (job_is_completed(j))
 		{
 			ret = 1;
-			job_notify_change(j, 0);
-			job_remove(j->id);
+			job_notify_change(j->id, 0);
+			/* job_remove(j->id); */
 		}
 		else if (job_is_stopped(j) && !(j->attributes & JOB_NOTIFIED))
 		{
 			ret = 1;
-			job_notify_change(j, 8);
+			job_notify_change(j->id, 8);
 			j->attributes &= JOB_NOTIFIED;
 		}
 		jlist = jlist->next;
