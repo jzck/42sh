@@ -19,18 +19,10 @@
 # include "libft.h"
 # include "types.h"
 
-# define PROCESS_COMPLETED	(1 << 0)
-# define PROCESS_STOPPED	(1 << 1)
-# define PROCESS_BUILTIN	(1 << 2)
-# define PROCESS_BINARY		(1 << 3)
-# define PROCESS_SCRIPT		(1 << 4)
-# define PROCESS_UNKNOWN	(1 << 5)
-
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
 # define JOB_IS_BG(j)		(j & JOB_BG)
 # define JOB_IS_FG(j)		!(j & JOB_BG)
-
 
 struct	s_job
 {

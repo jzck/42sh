@@ -16,6 +16,18 @@
 # define PIPE_READ		0
 # define PIPE_WRITE		1
 
+# define PROCESS_COMPLETED	(1 << 0)
+# define PROCESS_STOPPED	(1 << 1)
+# define PROCESS_BUILTIN	(1 << 2)
+# define PROCESS_BINARY		(1 << 3)
+# define PROCESS_SCRIPT		(1 << 4)
+# define PROCESS_UNKNOWN	(1 << 5)
+# define PROCESS_PIPESTART	(1 << 6)
+# define PROCESS_PIPEEND	(1 << 7)
+
+# define IS_PIPESTART(p)	(p & (PROCESS_PIPESTART))
+# define IS_PIPEEND(p)		(p & (PROCESS_PIPEEND))
+
 # include "libft.h"
 # include "types.h"
 # include "job_control.h"

@@ -14,8 +14,6 @@
 
 int		process_setexec(t_process *p)
 {
-	DG("going to setexec:\nenv at %p\nav[0]=%s", data_singleton()->env, p->argv[0]);
-	DG("going to setexec:\nPATH=%s\nav[0]=%s", ft_getenv(data_singleton()->env, "PATH"), p->argv[0]);
 	if ((p->execf = is_builtin(p)))
 	{
 		DG("process is a builtin");
