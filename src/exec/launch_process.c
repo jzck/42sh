@@ -27,7 +27,7 @@ int		launch_process(t_process *p)
 	}
 	else
 	{
-		DG("process is to be forked, fdout=%i, attr=%x", p->fdout, p->attributes);
+		DG("process is to be forked, fdout=%i, attr=%b", p->fdout, p->attributes);
 		if (p->attributes & (PROCESS_BINARY | PROCESS_SCRIPT)
 				&& access(p->path, X_OK) == -1)
 		{

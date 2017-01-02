@@ -24,18 +24,17 @@ int		exec_pipe(t_btree **ast)
 	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
 	p->fdout = fds[PIPE_WRITE];
 	if (!IS_PIPEEND(p->attributes))
-	{
 		p->attributes |= PROCESS_PIPESTART;
-		p->attributes &= ~PROCESS_PIPEEND;
-	}
+	else
+		p->attributes &= ~PROCESS_PIPESTART;
+	p->attributes &= ~PROCESS_PIPEEND;
 
 	ft_exec(&(*ast)->left);
 	if (p->fdout != STDOUT)
 		close(p->fdout);
 	p->fdout = STDOUT;
 	p->fdin = fds[PIPE_READ];
-
-	p->attributes ~= ~PROCESS_PIPESTART;
+	p->attributes &= ~PROCESS_PIPESTART;
 	p->attributes |= PROCESS_PIPEEND;
 
 	ft_exec(&(*ast)->right);
@@ -43,6 +42,7 @@ int		exec_pipe(t_btree **ast)
 	/* close(fds[PIPE_READ]); */
 	p->fdin = STDIN;
 	p->fdout = STDOUT;
+	p->attributes |= PROCESS_PIPESTART;
 	p->attributes &= ~PROCESS_PIPEEND;
 	btree_delone(ast, &ast_free);
 	return (0);

@@ -23,7 +23,7 @@ int		put_job_in_foreground(t_job *job, int cont)
 	if (cont)
 	{
 		tcsetattr (STDIN_FILENO, TCSADRAIN, &job->tmodes);
-		if (kill(- job->pgid, SIGCONT) < 0)
+		if (kill(-job->pgid, SIGCONT) < 0)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */

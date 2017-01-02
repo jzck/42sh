@@ -38,7 +38,6 @@ struct	s_jobc
 	t_list			*first_job;
 	pid_t			shell_pgid;
 	int				current_id;
-	int				rank[2];
 	struct termios	shell_tmodes;
 };
 

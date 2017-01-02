@@ -24,7 +24,7 @@ int		job_addprocess(t_process *p)
 		job_update_id();
 		job->id = jobc->current_id;
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
-		DG("added new job [%i], rank=%i:%i", job->id, jobc->rank[0], jobc->rank[1]);
+		DG("added new job [%i]", job->id);
 	}
 	job = jobc->first_job->content;
 	ft_lstadd(&job->first_process, ft_lstnew(p, sizeof(*p)));

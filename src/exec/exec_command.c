@@ -34,7 +34,7 @@ int		exec_command(t_btree **ast)
 	DG("gonna launch_process now");
 	launch_process(p);
 	job_addprocess(p);
-	if (IS_PIPEEND(p->fdout == STDOUT))
+	if (IS_PIPEEND(p->attributes))
 	{
 		if (JOB_IS_FG(job->attributes))
 			put_job_in_foreground(job, 0);

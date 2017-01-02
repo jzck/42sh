@@ -17,7 +17,7 @@ int		process_mark_status(pid_t pid, int status)
 	t_process	*p;
 
 	DG("marking: pid=%i, status=%i", pid, status);
-	if (pid > 0)
+	if (pid > 1)
 	{
 		if ((p = job_getprocess(pid)))
 		{
@@ -37,8 +37,5 @@ int		process_mark_status(pid_t pid, int status)
 		ft_dprintf(2, "No child process %d.\n", pid);
 		return(-1);
 	}
-	else
-	{
-		return(-1);
-	}
+	return(-1);
 }
