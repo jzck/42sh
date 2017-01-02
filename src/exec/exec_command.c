@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 18:31:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/02 19:07:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int		exec_command(t_btree **ast)
 	node = (*ast)->item;
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
-	p->argv = ft_sstrdup(node->data.sstr);
+	p->av = ft_sstrdup(node->data.sstr);
 	if (process_setexec(p))
 	{
-		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->argv[0]);
+		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
 		btree_delone(ast, &ast_free);
 		return (0);
 	}

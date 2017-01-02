@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:24:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/02 18:10:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 struct	s_process
 {
-	char	**argv;
+	char	**av;
 	char	*path;
 	t_execf	*execf;
 	pid_t	pid;

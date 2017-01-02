@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 15:21:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/02 18:14:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int		launch_process(t_process *p)
 
 	exec = &data_singleton()->exec;
 	if (p->attributes & PROCESS_UNKNOWN)
-		ft_dprintf(2, "%s: command not found: %s\n", SHELL_NAME, p->argv[0]);
+		ft_dprintf(2, "%s: command not found: %s\n", SHELL_NAME, p->av[0]);
 	else if (p->attributes & PROCESS_BUILTIN && p->fdout != STDOUT)
-		set_exitstatus((*p->execf)(p->path, p->argv, data_singleton()->env));
+		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env));
 	else
 	{
 		if (p->attributes & (PROCESS_BINARY | PROCESS_SCRIPT)
 				&& access(p->path, X_OK) == -1)
 		{
-			ft_dprintf(2, "%s: permission denied: %s\n", SHELL_NAME, p->argv[0]);
+			ft_dprintf(2, "%s: permission denied: %s\n", SHELL_NAME, p->av[0]);
 			return (-1);
 		}
 		pid = fork();
@@ -35,7 +35,7 @@ int		launch_process(t_process *p)
 		{
 			process_setgroup(p);
 			process_redirect(p);
-			(*p->execf)(p->path, p->argv, data_singleton()->env);
+			(*p->execf)(p->path, p->av, data_singleton()->env);
 			exit(42);
 		}
 		else if (pid > 0)
