@@ -16,7 +16,7 @@ int		process_setexec(t_process *p)
 {
 	if ((p->execf = is_builtin(p)))
 	{
-		DG("process is a builtin");
+		DG("process is a builtin, attr=%b", p->attributes);
 		p->attributes |= PROCESS_BUILTIN;
 	}
 	else if (ft_strchr(p->av[0], '/'))

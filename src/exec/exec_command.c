@@ -25,25 +25,23 @@ int		exec_command(t_btree **ast)
 	if (process_setexec(p))
 	{
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
-		p->attributes = 0;
-		p->path = NULL;
-		p->argv = NULL;
-		btree_delone(ast, &ast_free);
-		return (0);
+		set_exitstatus(127);
 	}
-	DG("gonna launch_process now");
-	launch_process(p);
-	job_addprocess(p);
-	if (IS_PIPEEND(p->attributes))
+	else
 	{
-		if (JOB_IS_FG(job->attributes))
-			put_job_in_foreground(job, 0);
-		else
-			put_job_in_background(job, 0);
+		DG("gonna launch_process now");
+		launch_process(p);
+		DG("launch_process done");
+		job_addprocess(p);
+		DG("job_addprocess done");
+		if (IS_PIPEEND(p->attributes))
+		{
+			JOB_IS_FG(job->attributes) ?
+				put_job_in_foreground(job, 0):
+				put_job_in_background(job, 0);
+		}
 	}
+	process_reset();
 	btree_delone(ast, &ast_free);
-	p->attributes = 0;
-	p->path = NULL;
-	p->argv = NULL;
 	return (0);
 }

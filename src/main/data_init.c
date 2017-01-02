@@ -23,10 +23,7 @@ int		data_init(void)
 	data->line.input = NULL;
 	data->env = ft_sstrdup(environ);
 	data->line.history = NULL;
-	data->exec.process.fdin = STDIN;
-	data->exec.process.fdout = STDOUT;
-	data->exec.process.pid = 0;
-	data->exec.process.attributes = PROCESS_PIPESTART;
+	process_reset();
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;
 	data->exec.job.id = 0;
@@ -35,8 +32,6 @@ int		data_init(void)
 	data->exec.job.first_process = 0;
 	data->jobc.first_job = NULL;
 	data->jobc.current_id = 1;
-	data->jobc.rank[0] = 0;
-	data->jobc.rank[1] = 0;
 	if (!(data->line.history = ft_dlstnew(NULL, 0)))
 		return (-1);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)

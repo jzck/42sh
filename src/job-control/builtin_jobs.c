@@ -31,15 +31,11 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 	lg = 0;
 	if (ft_strcmp(av[1], "-l") == 0)
 		lg = 1;
+	rank = '+';
 	while (jlist)
 	{
 		firstp = 1;
 		job = jlist->content;
-		rank = ' ';
-		if (job->id == data_singleton()->jobc.rank[0])
-			rank = '+';
-		else if (job->id == data_singleton()->jobc.rank[1])
-			rank = '-';
 		ft_printf("{mag}[%i]  %c ", job->id, rank);
 		if (lg)
 			ft_printf("%i ", p->pid);
@@ -63,6 +59,7 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 			firstp = 0;
 		}
 		jlist = jlist->next;
+		rank = (rank == '+') ? '-' : ' ';
 		ft_printf("{eoc}\n");
 	}
 	return (0);

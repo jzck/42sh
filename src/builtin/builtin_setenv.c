@@ -35,10 +35,13 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 		str = ft_str3join(av[0], "=", av[1]);
 		while ((*env)[i])
 		{
+			/* DG("check 2: i=%i, (*env)[i]=%p",i, (*env)[i]); */
+			/* DG("content=%s", (*env)[i]); */
 			if (ft_strcmp((*env)[i], av[0]) == '=')
 			{
 				ft_strdel(&(*env)[i]);
 				(*env)[i] = str;
+				DG("done setenv");
 				return (0);
 			}
 			i++;
@@ -46,5 +49,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 		*env = ft_sstradd(*env, str);
 		ft_strdel(&str);
 	}
+	DG("done setenv");
 	return (0);
 }

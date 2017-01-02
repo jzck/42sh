@@ -19,8 +19,10 @@ int		job_addprocess(t_process *p)
 
 	jobc = &data_singleton()->jobc;
 	job = &data_singleton()->exec.job;
+	DG("check; attr=%b", p->attributes);
 	if (IS_PIPESTART(p->attributes))
 	{
+		DG("check");
 		job_update_id();
 		job->id = jobc->current_id;
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));

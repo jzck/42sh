@@ -25,8 +25,8 @@
 # define PROCESS_PIPESTART	(1 << 6)
 # define PROCESS_PIPEEND	(1 << 7)
 
-# define IS_PIPESTART(p)	(p & (PROCESS_PIPESTART))
-# define IS_PIPEEND(p)		(p & (PROCESS_PIPEEND))
+# define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
+# define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
 
 # include "libft.h"
 # include "types.h"
@@ -80,6 +80,7 @@ int		process_setexec(t_process *p);
 int		process_setgroup(t_process *p);
 int		process_redirect(t_process *p);
 void	process_free(void *content, size_t content_size);
+void	process_reset(void);
 
 void	fd_redirect(void);
 void	fd_reset(void);

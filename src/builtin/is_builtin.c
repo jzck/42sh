@@ -29,7 +29,7 @@ t_execf		*is_builtin(t_process *p)
 
 	i = -1;
 	while (g_builtin[++i].name)
-		if (ft_strcmp(g_builtin[i].name, p->argv[0]) == 0)
+		if (ft_strcmp(g_builtin[i].name, p->av[0]) == 0)
 			return (g_builtin[i].f);
 	return (NULL);
 }
