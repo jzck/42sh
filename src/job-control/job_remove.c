@@ -12,17 +12,18 @@
 
 #include "job_control.h"
 
-void	job_remove(t_job *job)
+void	job_remove(int id)
 {
 	t_jobc	*jobc;
 
 	jobc = &data_singleton()->jobc;
-	if (job->id < data_singleton()->jobc.current_id)
+	DG("job_remove");
+	if (id < data_singleton()->jobc.current_id)
 	{
-		data_singleton()->jobc.current_id = job->id;
-		DG("ID_UPDATE(downgrade):%i", job->id);
+		data_singleton()->jobc.current_id = id;
+		DG("ID_UPDATE(downgrade):%i", id);
 	}
 	else
-		DG("ID_UPDATE(no downgrade): %i/%i", job->id, data_singleton()->jobc.current_id);
-	ft_lst_delif(&jobc->first_job, job, ft_addrcmp, job_free);
+		DG("ID_UPDATE(no downgrade): %i/%i", id, data_singleton()->jobc.current_id);
+	ft_lst_delif(&jobc->first_job, &id, job_cmp_id, job_free);
 }

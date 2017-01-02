@@ -26,6 +26,7 @@ int		data_init(void)
 	data->exec.process.fdin = STDIN;
 	data->exec.process.fdout = STDOUT;
 	data->exec.process.pid = 0;
+	data->exec.process.attributes = PROCESS_PIPESTART;
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;
 	data->exec.job.id = 0;

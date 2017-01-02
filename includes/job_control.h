@@ -19,18 +19,10 @@
 # include "libft.h"
 # include "types.h"
 
-# define PROCESS_COMPLETED	(1 << 0)
-# define PROCESS_STOPPED	(1 << 1)
-# define PROCESS_BUILTIN	(1 << 2)
-# define PROCESS_BINARY		(1 << 3)
-# define PROCESS_SCRIPT		(1 << 4)
-# define PROCESS_UNKNOWN	(1 << 5)
-
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
 # define JOB_IS_BG(j)		(j & JOB_BG)
 # define JOB_IS_FG(j)		!(j & JOB_BG)
-
 
 struct	s_job
 {
@@ -46,7 +38,6 @@ struct	s_jobc
 	t_list			*first_job;
 	pid_t			shell_pgid;
 	int				current_id;
-	int				rank[2];
 	struct termios	shell_tmodes;
 };
 
@@ -57,15 +48,15 @@ int			job_addprocess(t_process *p);
 void		job_update_id(void);
 void		job_update_rank(void);
 
-void		do_job_notification(void);
+int			do_job_notification(void);
 void		job_notify_new(t_job *job);
-void		job_notify_change(t_job *job, int status);
+void		job_notify_change(int id, int status);
 
 int			job_wait(t_job *job);
 void		job_update_status(void);
 int			job_is_stopped(t_job *job);
 int			job_is_completed(t_job *job);
-void		job_remove(t_job *job);
+void		job_remove(int id);
 void		job_free(void *content, size_t content_size);
 int			process_mark_status(pid_t pid, int status);
 

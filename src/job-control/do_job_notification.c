@@ -12,12 +12,14 @@
 
 #include "job_control.h"
 
-void	do_job_notification(void)
+int		do_job_notification(void)
 {
 	t_job		*j;
 	t_list		*jlist;
 	t_jobc		*jobc;
+	int			ret;
 
+	ret = 0;
 	job_update_status();
 	jobc = &data_singleton()->jobc;
 	jlist = jobc->first_job;
@@ -27,14 +29,17 @@ void	do_job_notification(void)
 		DG("checking job [%i]", j->id);
 		if (job_is_completed(j))
 		{
-			job_notify_change(j, 0);
-			job_remove(j);
+			ret = 1;
+			job_notify_change(j->id, 0);
+			job_remove(j->id);
 		}
 		else if (job_is_stopped(j) && !(j->attributes & JOB_NOTIFIED))
 		{
-			job_notify_change(j, 8);
+			ret = 1;
+			job_notify_change(j->id, 8);
 			j->attributes &= JOB_NOTIFIED;
 		}
 		jlist = jlist->next;
 	}
+	return (ret);
 }

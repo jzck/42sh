@@ -47,6 +47,7 @@ int		ft_interactive_sh(t_data *data)
 
 	if ((input_init(data)))
 		return (-1);
+	DG("interactive_sh loop");
 	while (1)
 	{
 		ft_bzero(buf, 4);

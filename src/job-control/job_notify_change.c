@@ -12,16 +12,24 @@
 
 #include "job_control.h"
 
-void	job_notify_change(t_job *job, int status)
+void	job_notify_change(int id, int status)
 {
-	char	rank;
+	t_job		*job;
+	t_jobc		*jobc;
+	char		rank;
 
 	rank = ' ';
-	if (job->id == data_singleton()->jobc.rank[0])
+	jobc = &data_singleton()->jobc;
+	job = jobc->first_job->content;
+	if (id == job->id)
 		rank = '+';
-	else if (job->id == data_singleton()->jobc.rank[1])
-		rank = '-';
-	ft_printf("{mag}[%i]  %c ", job->id, rank);
+	else if (jobc->first_job->next)
+	{
+		job = jobc->first_job->next->content;
+		if (id == job->id)
+			rank = '-';
+	}
+	ft_printf("{mag}[%i]  %c ", id, rank);
 	if (status == 0)
 		ft_printf("{gre}done{mag}");
 	else if (status == 8)
@@ -30,5 +38,5 @@ void	job_notify_change(t_job *job, int status)
 		ft_printf("{red}killed{mag}");
 	else
 		ft_printf("exit %i", status);
-	/* ft_printf("\t%s{eoc}\n", job->command); */
+	ft_printf("\t 'process command goes here'{eoc}\n");
 }

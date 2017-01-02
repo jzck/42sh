@@ -17,6 +17,6 @@ void	set_exitstatus(int status)
 	char	*astatus;
 
 	astatus = ft_itoa(status);
-	builtin_setenv("shell", (char*[3]){"?", astatus}, data_singleton()->env);
+	builtin_setenv("setenv", (char*[3]){"?", astatus}, data_singleton()->env);
 	ft_strdel(&astatus);
 }

@@ -14,9 +14,7 @@
 
 int		ft_prompt(void)
 {
-	t_data	*data;
-
-	data = data_singleton();
+	DG("do_job_notification() before prompt");
 	do_job_notification();
 	DG("new prompt now");
 	ft_putstr(SHELL_PROMPT);

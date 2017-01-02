@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 19:07:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/02 19:10:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ int		exec_command(t_btree **ast)
 	if (process_setexec(p))
 	{
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
+		p->attributes = 0;
+		p->path = NULL;
+		p->argv = NULL;
 		btree_delone(ast, &ast_free);
 		return (0);
 	}
 	DG("gonna launch_process now");
 	launch_process(p);
 	job_addprocess(p);
-	if (p->fdout == STDOUT)
+	if (IS_PIPEEND(p->attributes))
 	{
 		if (JOB_IS_FG(job->attributes))
 			put_job_in_foreground(job, 0);
@@ -39,5 +42,8 @@ int		exec_command(t_btree **ast)
 			put_job_in_background(job, 0);
 	}
 	btree_delone(ast, &ast_free);
+	p->attributes = 0;
+	p->path = NULL;
+	p->argv = NULL;
 	return (0);
 }

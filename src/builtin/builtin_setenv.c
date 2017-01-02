@@ -37,7 +37,7 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 		{
 			if (ft_strcmp((*env)[i], av[0]) == '=')
 			{
-				ft_strdel(*env);
+				ft_strdel(&(*env)[i]);
 				(*env)[i] = str;
 				return (0);
 			}

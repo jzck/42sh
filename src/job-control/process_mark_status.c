@@ -17,17 +17,17 @@ int		process_mark_status(pid_t pid, int status)
 	t_process	*p;
 
 	DG("marking: pid=%i, status=%i", pid, status);
-	if (pid > 0)
+	if (pid > 1)
 	{
 		if ((p = job_getprocess(pid)))
 		{
 			DG("found process pid=%i", pid);
 			p->status = status;
 			if (WIFSTOPPED(status))
-				p->attributes &= PROCESS_STOPPED;
+				p->attributes |= PROCESS_STOPPED;
 			else
 			{
-				p->attributes &= PROCESS_COMPLETED;
+				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("%d: Terminated by signal %d.\n",
 							(int) pid, WTERMSIG(p->status));
@@ -37,8 +37,5 @@ int		process_mark_status(pid_t pid, int status)
 		ft_dprintf(2, "No child process %d.\n", pid);
 		return(-1);
 	}
-	else
-	{
-		return(-1);
-	}
+	return(-1);
 }

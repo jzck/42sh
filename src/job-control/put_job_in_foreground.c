@@ -23,14 +23,12 @@ int		put_job_in_foreground(t_job *job, int cont)
 	if (cont)
 	{
 		tcsetattr (STDIN_FILENO, TCSADRAIN, &job->tmodes);
-		if (kill(- job->pgid, SIGCONT) < 0)
+		if (kill(-job->pgid, SIGCONT) < 0)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
-	DG("gonna wait for job");
 	job_wait(job);
-	DG("gonna remove job");
-	job_remove(job);
+	job_remove(job->id);
 
 	/* Put the shell back in the foreground.  */
 	tcsetpgrp(STDIN_FILENO, jobc->shell_pgid);
