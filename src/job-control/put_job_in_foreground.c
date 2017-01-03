@@ -27,7 +27,8 @@ int		put_job_in_foreground(t_job *job, int cont)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
-	job_wait(job);
+	DG("gonna wait for job");
+	job_wait(job->id);
 	job_remove(job->id);
 
 	/* Put the shell back in the foreground.  */

@@ -38,7 +38,8 @@ int		ft_exec(t_btree **ast)
 	while (g_execmap[i].type)
 	{
 		if (item->type == g_execmap[i].type)
-			return ((*g_execmap[i].f)(ast));
+			/* return ((*g_execmap[i].f)(ast)); */
+			(*g_execmap[i].f)(ast);
 		i++;
 	}
 	return (0);

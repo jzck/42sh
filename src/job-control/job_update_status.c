@@ -18,7 +18,7 @@ void	job_update_status(void)
 	pid_t	pid;
 
 	DG("updating job status'");
-	pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
+	pid = waitpid (WAIT_ANY, &status, WUNTRACED | WNOHANG);
 	while (!process_mark_status(pid, status))
-		pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
+		pid = waitpid (WAIT_ANY, &status, WUNTRACED | WNOHANG);
 }

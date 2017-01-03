@@ -16,9 +16,9 @@ int		process_mark_status(pid_t pid, int status)
 {
 	t_process	*p;
 
-	DG("marking: pid=%i, status=%i", pid, status);
 	if (pid > 1)
 	{
+		DG("marking: pid=%i, status=%i", pid, status);
 		if ((p = job_getprocess(pid)))
 		{
 			DG("found process pid=%i", pid);

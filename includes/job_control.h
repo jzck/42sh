@@ -52,10 +52,10 @@ int			do_job_notification(void);
 void		job_notify_new(t_job *job);
 void		job_notify_change(int id, int status);
 
-int			job_wait(t_job *job);
+int			job_wait(int id);
 void		job_update_status(void);
-int			job_is_stopped(t_job *job);
-int			job_is_completed(t_job *job);
+int			job_is_stopped(int id);
+int			job_is_completed(int id);
 void		job_remove(int id);
 void		job_free(void *content, size_t content_size);
 int			process_mark_status(pid_t pid, int status);

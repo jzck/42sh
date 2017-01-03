@@ -14,16 +14,17 @@
 
 int		process_setexec(t_process *p)
 {
+	DG("process_setexec, attr=%b", p->attributes);
 	if ((p->execf = is_builtin(p)))
 	{
-		DG("process is a builtin, attr=%b", p->attributes);
+		DG("process is builtin");
 		p->attributes |= PROCESS_BUILTIN;
 	}
 	else if (ft_strchr(p->av[0], '/'))
 	{
 		DG("process is a script");
 		p->execf = &execve;
-		p->attributes &= PROCESS_SCRIPT;
+		p->attributes |= PROCESS_SCRIPT;
 		p->path = ft_strdup(p->av[0]);
 	}
 	else if ((p->path = ft_findexec(ft_getenv(

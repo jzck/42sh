@@ -12,11 +12,15 @@
 
 #include "job_control.h"
 
-int		job_is_stopped(t_job *job)
+int		job_is_stopped(int id)
 {
 	t_list		*lst;
+	t_job		*job;
+	t_jobc		*jobc;
 	t_process	*p;
 
+	jobc = &data_singleton()->jobc;
+	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
 	lst = job->first_process;
 	while (lst)
 	{

@@ -12,15 +12,21 @@
 
 #include "job_control.h"
 
-int		job_is_completed(t_job *job)
+int		job_is_completed(int id)
 {
 	t_list		*lst;
+	t_job		*job;
+	t_jobc		*jobc;
 	t_process	*p;
 
+	jobc = &data_singleton()->jobc;
+	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
 	lst = job->first_process;
+	DG("check");
 	while (lst)
 	{
 		p = lst->content;
+		DG("checking pid=%i", p->pid);
 		if (!(p->attributes & PROCESS_COMPLETED))
 		{
 			DG("process %i is not completed", p->pid);

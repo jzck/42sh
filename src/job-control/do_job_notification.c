@@ -27,13 +27,13 @@ int		do_job_notification(void)
 	{
 		j = jlist->content;
 		DG("checking job [%i]", j->id);
-		if (job_is_completed(j))
+		if (job_is_completed(j->id))
 		{
 			ret = 1;
 			job_notify_change(j->id, 0);
 			job_remove(j->id);
 		}
-		else if (job_is_stopped(j) && !(j->attributes & JOB_NOTIFIED))
+		else if (job_is_stopped(j->id) && !(j->attributes & JOB_NOTIFIED))
 		{
 			ret = 1;
 			job_notify_change(j->id, 8);

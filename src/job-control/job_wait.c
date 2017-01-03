@@ -12,17 +12,21 @@
 
 #include "job_control.h"
 
-int		job_wait(t_job *job)
+int		job_wait(int id)
 {
 	pid_t	pid;
 	int		status;
 
 	pid = waitpid(WAIT_ANY, &status, WUNTRACED);
-	while (!(process_mark_status(pid, status)
-			|| job_is_stopped(job)
-			|| job_is_completed(job)))
+	while (!process_mark_status(pid, status)
+			&& !job_is_stopped(id)
+			&& !job_is_completed(id))
 	{
+		DG("waitpid now");
 		pid = waitpid(WAIT_ANY, &status, WUNTRACED);
+		DG("waitpid done");
 	}
-	return(0);
+	/* DG("stopped: %i", job_is_stopped(job)); */
+	/* DG("completed: %i", job_is_completed(job)); */
+	return (0);
 }

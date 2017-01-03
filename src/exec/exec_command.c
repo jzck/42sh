@@ -21,25 +21,16 @@ int		exec_command(t_btree **ast)
 	node = (*ast)->item;
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
+	/* job = data_singleton()->jobc.first_job->content; */
 	p->av = ft_sstrdup(node->data.sstr);
-	if (process_setexec(p))
+	process_setexec(p);
+	if (!(launch_process(p)))
 	{
-		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
-		set_exitstatus(127);
-	}
-	else
-	{
-		DG("gonna launch_process now");
-		launch_process(p);
-		DG("launch_process done");
 		job_addprocess(p);
-		DG("job_addprocess done");
 		if (IS_PIPEEND(p->attributes))
-		{
 			JOB_IS_FG(job->attributes) ?
 				put_job_in_foreground(job, 0):
 				put_job_in_background(job, 0);
-		}
 	}
 	process_reset();
 	btree_delone(ast, &ast_free);

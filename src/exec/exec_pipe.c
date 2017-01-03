@@ -24,13 +24,7 @@ int		exec_pipe(t_btree **ast)
 	pipe(fds);
 	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
 	p->fdout = fds[PIPE_WRITE];
-	start = 0;
-	if (!IS_PIPESTART(p->attributes))
-	{
-		p->attributes |= PROCESS_PIPESTART;
-		start = 1;
-	}
-	p->attributes &= ~PROCESS_PIPESTART;
+	start = IS_PIPESTART(p->attributes);
 
 	p->attributes &= ~PROCESS_PIPEEND;
 	ft_exec(&(*ast)->left);

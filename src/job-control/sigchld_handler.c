@@ -21,5 +21,5 @@ void	sigchld_handler(int signo)
 	DG("got asynchronous notification (SIGCHLD)");
 	/* if (do_job_notification()) */
 	/* 	ft_putstr(SHELL_PROMPT); */
-	job_update_status();
+	/* job_update_status(); */
 }
