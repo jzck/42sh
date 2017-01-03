@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:48:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/03 18:04:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		process_setgroup(t_process *p)
 
 	(void)p;
 	job = &data_singleton()->exec.job;
-	pid = getpid();
+	pid = p->pid;
 	if (job->pgid == 0)
 		job->pgid = pid;
 	setpgid(pid, job->pgid);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 15:24:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/03 18:12:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		job_is_completed(int id)
 	jobc = &data_singleton()->jobc;
 	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
 	lst = job->first_process;
-	DG("check");
 	while (lst)
 	{
 		p = lst->content;

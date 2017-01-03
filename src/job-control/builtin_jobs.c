@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 19:11:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/03 18:13:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 		ft_printf("{mag}[%i]  %c ", job->id, rank);
 		if (lg)
 			ft_printf("%i ", p->pid);
-		ft_printf("attr=%x ", job->attributes);
+		ft_printf("attr=%#b ", job->attributes);
 		plist = job->first_process;
 		while (plist)
 		{

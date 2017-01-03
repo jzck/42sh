@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 18:16:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/03 18:16:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ int		job_addprocess(t_process *p)
 		DG("added new job [%i]", job->id);
 	}
 	job = jobc->first_job->content;
-	ft_lstadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
+	if (p->pid > 0)
+	{
+		ft_lstadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
+		DG("added process to first_job : %i", p->pid);
+	}
 	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
 		job_notify_new(job);
-	DG("added process to first_job : %i", p->pid);
 	return(0);
 }
