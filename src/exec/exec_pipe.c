@@ -29,8 +29,9 @@ int		exec_pipe(t_btree **ast)
 	p->attributes &= ~PROCESS_PIPEEND;
 	ft_exec(&(*ast)->left);
 	p->attributes &= ~PROCESS_PIPESTART;
-	if (p->fdout != STDOUT)
-		close(p->fdout);
+
+	DG("p->fdout=%i", p->fdout);
+	close(p->fdout);
 	p->fdout = STDOUT;
 	p->fdin = fds[PIPE_READ];
 
@@ -38,10 +39,9 @@ int		exec_pipe(t_btree **ast)
 	ft_exec(&(*ast)->right);
 	if (start)
 		p->attributes |= PROCESS_PIPESTART;
-	/* close(fds[PIPE_WRITE]); */
-	/* close(fds[PIPE_READ]); */
+
+	close(p->fdin);
 	p->fdin = STDIN;
-	p->fdout = STDOUT;
 	btree_delone(ast, &ast_free);
 	return (0);
 }

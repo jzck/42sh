@@ -31,7 +31,7 @@ int		job_addprocess(t_process *p)
 	job = jobc->first_job->content;
 	if (p->pid > 0)
 	{
-		ft_lstadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
+		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
 		DG("added process to first_job : %i", p->pid);
 	}
 	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))

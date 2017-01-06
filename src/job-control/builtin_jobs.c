@@ -37,8 +37,6 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 		firstp = 1;
 		job = jlist->content;
 		ft_printf("{mag}[%i]  %c ", job->id, rank);
-		if (lg)
-			ft_printf("%i ", p->pid);
 		ft_printf("attr=%#b ", job->attributes);
 		plist = job->first_process;
 		while (plist)
