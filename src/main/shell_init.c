@@ -26,8 +26,8 @@ void	shell_init(void)
 		signal(SIGINT, sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGTSTP, sigtstp_handler);
-		signal(SIGTTIN, SIG_IGN);
-		signal(SIGTTOU, SIG_IGN);
+		signal(SIGTTIN, sigttin_handler);
+		signal(SIGTTOU, sigttou_handler);
 		signal(SIGCHLD, sigchld_handler);
 		*shell_pgid = getpid();
 		if (setpgid(*shell_pgid, *shell_pgid))

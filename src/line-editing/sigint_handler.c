@@ -12,17 +12,15 @@
 
 #include "minishell.h"
 
-pid_t	g_pid;
-
 void	sigint_handler(int signo)
 {
+	t_job	*job;
+
 	(void)signo;
-	if (signo == SIGINT)
-	{
-		DG("got SIGINT");
-		if (g_pid)
-			kill(g_pid, SIGINT);
-		if (kill(g_pid, 0) == 0)
-			ft_putendl("");
-	}
+	job = &data_singleton()->exec.job;
+	DG("got SIGINT; job->pgid=%i", job->pgid);
+	if (job->pgid)
+		kill(job->pgid, SIGINT);
+	if (kill(job->pgid, 0) == 0)
+		ft_putchar('\n');
 }

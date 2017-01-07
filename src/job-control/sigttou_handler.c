@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_redirect.c                                 :+:      :+:    :+:   */
+/*   sigttou_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:49:09 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/10 15:14:53 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/10 18:20:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
-int		process_redirect(t_process *p)
+void	sigttou_handler(int signo)
 {
-	if (p->fdin != STDIN)
-	{
-		DG("dup2 %i->%i", p->fdin, STDIN);
-		dup2(p->fdin, STDIN);
-		close(p->fdin);
-	}
-	if (p->fdout != STDOUT)
-	{
-		DG("dup2 %i->%i", p->fdout, STDOUT);
-		dup2(p->fdout, STDOUT);
-		close(p->fdout);
-	}
-	return (0);
+	(void)signo;
+	DG("got SIGTTOU");
 }

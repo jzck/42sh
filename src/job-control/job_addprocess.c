@@ -19,10 +19,8 @@ int		job_addprocess(t_process *p)
 
 	jobc = &data_singleton()->jobc;
 	job = &data_singleton()->exec.job;
-	DG("check; attr=%b", p->attributes);
 	if (IS_PIPESTART(p->attributes))
 	{
-		DG("check");
 		job_update_id();
 		job->id = jobc->current_id;
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
@@ -32,7 +30,7 @@ int		job_addprocess(t_process *p)
 	if (p->pid > 0)
 	{
 		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-		DG("added process to first_job : %i", p->pid);
+		DG("added pid=%i to [%i]", p->pid, job->id);
 	}
 	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
 		job_notify_new(job);

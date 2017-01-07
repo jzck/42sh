@@ -73,6 +73,8 @@ int		check_chlds(void);
 void	sigchld_handler(int signo);
 void	sigint_handler(int signo);
 void	sigtstp_handler(int signo);
+void	sigttin_handler(int signo);
+void	sigttou_handler(int signo);
 
 int		process_cmp_pid(t_process *p, pid_t *pid);
 

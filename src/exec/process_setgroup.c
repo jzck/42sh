@@ -20,9 +20,10 @@ int		process_setgroup(t_process *p)
 
 	(void)p;
 	job = &data_singleton()->exec.job;
-	pid = p->pid;
+	pid = getpid();
 	if (job->pgid == 0)
 		job->pgid = pid;
+	DG("job->pgid=%i", job->pgid);
 	setpgid(pid, job->pgid);
 	if (JOB_IS_FG(job->attributes))
 		tcsetpgrp(STDIN_FILENO, job->pgid);

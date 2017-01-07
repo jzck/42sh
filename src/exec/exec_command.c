@@ -21,7 +21,6 @@ int		exec_command(t_btree **ast)
 	node = (*ast)->item;
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
-	/* job = data_singleton()->jobc.first_job->content; */
 	p->av = ft_sstrdup(node->data.sstr);
 	process_setexec(p);
 	if (!(launch_process(p)))
@@ -32,7 +31,9 @@ int		exec_command(t_btree **ast)
 				put_job_in_foreground(job, 0):
 				put_job_in_background(job, 0);
 	}
-	process_reset();
+	p->av = NULL;
+	p->pid = 0;
+	p->attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
 	btree_delone(ast, &ast_free);
 	return (0);
 }

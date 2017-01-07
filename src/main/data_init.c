@@ -23,7 +23,14 @@ int		data_init(void)
 	data->line.input = NULL;
 	data->env = ft_sstrdup(environ);
 	data->line.history = NULL;
-	process_reset();
+
+	data->exec.process.path = NULL;
+	data->exec.process.av = NULL;
+	data->exec.process.fdin = STDIN;
+	data->exec.process.fdout = STDOUT;
+	data->exec.process.pid = 0;
+	data->exec.process.attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
+
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;
 	data->exec.job.id = 0;
