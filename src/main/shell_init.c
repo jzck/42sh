@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 15:14:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 15:11:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	shell_init(void)
 	shell_pgid = &data_singleton()->jobc.shell_pgid;
 	data_init();
 	atexit(&shell_exit);
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN))
 	{
-		while (tcgetpgrp(STDIN_FILENO) != (*shell_pgid = getpgrp()))
+		while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 			kill(-*shell_pgid, SIGTTIN);
 		signal(SIGINT, sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
-		signal(SIGTSTP, sigtstp_handler);
+		signal(SIGTSTP, SIG_IGN);
 		signal(SIGTTIN, sigttin_handler);
 		signal(SIGTTOU, sigttou_handler);
 		signal(SIGCHLD, sigchld_handler);
@@ -35,7 +35,7 @@ void	shell_init(void)
 			ft_dprintf(2, "Couldnt put the shell in it's own process group");
 			exit (1);
 		}
-		tcsetpgrp(STDIN_FILENO, *shell_pgid);
-		tcgetattr(STDIN_FILENO, &data_singleton()->jobc.shell_tmodes);
+		tcsetpgrp(STDIN, *shell_pgid);
+		tcgetattr(STDIN, &data_singleton()->jobc.shell_tmodes);
 	}
 }

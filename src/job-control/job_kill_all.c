@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_is_completed.c                                 :+:      :+:    :+:   */
+/*   job_kill_all.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 14:04:16 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/08 15:36:56 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/08 15:44:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		job_is_completed(int id)
+void	job_kill_all(void)
 {
-	t_list		*lst;
-	t_job		*job;
 	t_jobc		*jobc;
-	t_process	*p;
+	t_list		*jlist;
+	t_job		*job;
 
 	jobc = &data_singleton()->jobc;
-	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
-	lst = job->first_process;
-	while (lst)
+	jlist = jobc->first_job;
+	while (jlist)
 	{
-		p = lst->content;
-		DG("checking pid=%i", p->pid);
-		if (!(p->attributes & PROCESS_COMPLETED))
-		{
-			DG("process %i is not completed", p->pid);
-			return (0);
-		}
-		lst = lst->next;
+		job = jlist->content;
+		kill(-job->pgid, SIGKILL);
+		jlist = jlist->next;
 	}
-	return (1);
 }

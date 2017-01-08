@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_addprocess.c                                   :+:      :+:    :+:   */
+/*   builtin_fg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 15:41:56 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/08 14:30:07 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/08 15:21:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		job_addprocess(t_process *p)
+int		builtin_fg(const char *path, char *const av[], char *const envp[])
 {
 	t_jobc	*jobc;
 	t_job	*job;
 
+	(void)path;
+	(void)envp;
+	(void)av;
 	jobc = &data_singleton()->jobc;
-	job = &data_singleton()->exec.job;
-	if (IS_PIPESTART(p->attributes))
-	{
-		job_update_id();
-		job->id = jobc->current_id;
-		job->pgid = p->pid;
-		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
-		DG("added new job [%i]", job->id);
-	}
 	job = jobc->first_job->content;
-	if (p->pid > 0)
+	if (job)
 	{
-		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-		DG("added pid=%i to [%i]", p->pid, job->id);
+		mark_job_as_running(job);
+		put_job_in_foreground(job, 1);
 	}
-	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
-		job_notify_new(job);
-	return(0);
+	return (0);
 }

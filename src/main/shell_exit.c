@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:37:04 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/12 17:51:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 15:55:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ extern char *BC;
 
 void	shell_exit(void)
 {
-	DG("cleanup. char * UP at %p", UP);
-	DG("cleanup. char * BC at %p", BC);
+	/* DG("cleanup. char * UP at %p", UP); */
+	/* DG("cleanup. char * BC at %p", BC); */
 	data_exit();
+	/* job_kill_all(); */
 	tcsetattr(0, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 }

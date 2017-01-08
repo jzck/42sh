@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:01:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 18:21:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 14:00:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int		do_job_notification(void)
 		else if (job_is_stopped(j->id) && !(j->attributes & JOB_NOTIFIED))
 		{
 			ret = 1;
-			job_notify_change(j->id, 8);
-			j->attributes &= JOB_NOTIFIED;
+			job_notify_change(j->id, -1);
+			j->attributes |= JOB_NOTIFIED;
 		}
 		jlist = jlist->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/03 18:01:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 14:55:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ int		process_mark_status(pid_t pid, int status)
 
 	if (pid > 1)
 	{
-		DG("marking: pid=%i, status=%i", pid, status);
 		if ((p = job_getprocess(pid)))
 		{
-			DG("found process pid=%i", pid);
 			p->status = status;
 			if (WIFSTOPPED(status))
+			{
+				DG("marking: pid=%i, status=%i (stopped)", pid, status);
 				p->attributes |= PROCESS_STOPPED;
+			}
 			else
 			{
+				DG("marking: pid=%i, status=%i (completed)", pid, status);
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",

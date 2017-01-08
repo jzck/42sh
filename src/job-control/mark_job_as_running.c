@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_is_completed.c                                 :+:      :+:    :+:   */
+/*   mark_job_as_running.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 14:04:16 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/08 14:53:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		job_is_completed(int id)
+void	mark_job_as_running (t_job *j)
 {
-	t_list		*lst;
-	t_job		*job;
-	t_jobc		*jobc;
+	t_list		*plist;
 	t_process	*p;
 
-	jobc = &data_singleton()->jobc;
-	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
-	lst = job->first_process;
-	while (lst)
+	plist = j->first_process;
+	while (plist)
 	{
-		p = lst->content;
-		DG("checking pid=%i", p->pid);
-		if (!(p->attributes & PROCESS_COMPLETED))
-		{
-			DG("process %i is not completed", p->pid);
-			return (0);
-		}
-		lst = lst->next;
+		p = plist->content;
+		p->attributes &= ~PROCESS_STOPPED;
+		plist = plist->next;
 	}
-	return (1);
+	j->attributes &= ~JOB_NOTIFIED;
 }

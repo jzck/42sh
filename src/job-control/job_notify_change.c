@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 15:04:03 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:45:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 13:52:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	job_notify_change(int id, int status)
 {
 	t_job		*job;
 	t_jobc		*jobc;
+	t_list		*plist;
+	t_process	*p;
 	char		rank;
 
 	rank = ' ';
@@ -30,13 +32,27 @@ void	job_notify_change(int id, int status)
 			rank = '-';
 	}
 	ft_printf("{mag}[%i]  %c ", id, rank);
-	if (status == 0)
-		ft_printf("{gre}done{mag}");
-	else if (status == 8)
+	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
+	if (status == -1)
 		ft_printf("{red}stopped{mag}");
-	else if (status == 9)
-		ft_printf("{red}killed{mag}");
 	else
-		ft_printf("exit %i", status);
-	ft_printf("\t 'process command goes here'{eoc}\n");
+	{
+		plist = job->first_process;
+		p = ft_lstlast(job->first_process)->content;
+		if (p->status == 0)
+			ft_printf("{gre}done{mag}");
+		else
+			ft_printf("{red}exit %i{mag}", p->status);
+	}
+	ft_printf("\t ");
+	plist = job->first_process;
+	while (plist)
+	{
+		p = plist->content;
+		ft_sstrprint(p->av, ' ');
+		if (plist->next)
+			ft_printf(" |");
+		plist = plist->next;
+	}
+	ft_printf("{eoc}\n");
 }

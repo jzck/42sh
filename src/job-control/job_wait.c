@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 11:49:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 17:32:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 16:00:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ int		job_wait(int id)
 		pid = waitpid(WAIT_ANY, &status, WUNTRACED);
 		DG("waitpid done");
 	}
-	DG("stopped: %i", job_is_stopped(id));
-	DG("completed: %i", job_is_completed(id));
 	return (0);
 }

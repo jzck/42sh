@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:48:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 14:30:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_stof g_builtin[] = {
 	{"env", &builtin_env},
 	{"exit", &builtin_exit},
 	{"jobs", &builtin_jobs},
+	{"fg", &builtin_fg},
 	{NULL, NULL},
 };
 

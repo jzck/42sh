@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 18:10:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/08 16:10:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int			job_is_stopped(int id);
 int			job_is_completed(int id);
 void		job_remove(int id);
 void		job_free(void *content, size_t content_size);
+void		job_kill_all(void);
+void		mark_job_as_running (t_job *j);
 int			process_mark_status(pid_t pid, int status);
 
 int			put_job_in_foreground(t_job *job, int cont);
