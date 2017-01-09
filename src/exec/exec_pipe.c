@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 11:03:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:56:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int		exec_pipe(t_btree **ast)
 	ft_exec(&(*ast)->left);
 	p->attributes &= ~PROCESS_PIPESTART;
 
-	DG("p->fdout=%i", p->fdout);
-	close(p->fdout);
+	close(fds[PIPE_WRITE]);
 	p->fdout = STDOUT;
 	p->fdin = fds[PIPE_READ];
 

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 16:29:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:53:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	i = 0;
 	env = &data_singleton()->env;
-	DG("doing setenv now");
 	if (ft_strcmp(av[0], "setenv") == 0)
 		av++;
 	if (!av[0])
@@ -41,7 +40,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 			{
 				ft_strdel(&(*env)[i]);
 				(*env)[i] = str;
-				DG("done setenv");
 				return (0);
 			}
 			i++;
@@ -49,6 +47,5 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 		*env = ft_sstradd(*env, str);
 		ft_strdel(&str);
 	}
-	DG("done setenv");
 	return (0);
 }

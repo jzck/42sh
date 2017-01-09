@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 15:23:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:58:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int		process_setgroup(t_process *p)
 	pid = getpid();
 	if (job->pgid == 0)
 		job->pgid = pid;
-	DG("job->pgid=%i", job->pgid);
 	if (setpgid(pid, job->pgid))
-		ft_dprintf(2, "{red}setpgid failed{eoc}\n");
+		DG("setpgid(%i, %i) failed", pid, job->pgid);
 	if (JOB_IS_FG(job->attributes))
 	{
 		signal(SIGTTOU, SIG_IGN);

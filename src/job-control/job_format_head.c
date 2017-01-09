@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigint_handler.c                                   :+:      :+:    :+:   */
+/*   job_format_head.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 15:14:47 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 15:59:05 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/09 13:10:38 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/09 13:53:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-void	sigint_handler(int signo)
+void	job_format_head(t_job *j, int rank[2])
 {
-	(void)signo;
-	DG("got SIGINT");
+	char		crank;
+
+	if (j->id == rank[0])
+		crank = '+';
+	else if (j->id == rank[1])
+		crank = '-';
+	else
+		crank = ' ';
+	ft_printf("{mag}[%i]  %c ", j->id, crank);
+	ft_printf("{eoc}");
 }

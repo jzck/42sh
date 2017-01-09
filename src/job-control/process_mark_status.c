@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 14:55:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 14:04:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ int		process_mark_status(pid_t pid, int status)
 			if (WIFSTOPPED(status))
 			{
 				DG("marking: pid=%i, status=%i (stopped)", pid, status);
-				p->attributes |= PROCESS_STOPPED;
+				p->attributes &= ~PROCESS_STATE_MASK;
+				p->attributes |= PROCESS_SUSPENDED;
 			}
 			else
 			{
 				DG("marking: pid=%i, status=%i (completed)", pid, status);
+				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",

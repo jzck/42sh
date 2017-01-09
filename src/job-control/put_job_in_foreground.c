@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 15:33:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 12:29:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int		put_job_in_foreground(t_job *job, int cont)
 	t_jobc	*jobc;
 
 	jobc = &data_singleton()->jobc;
-	/* Put the job into the foreground. */
-	signal(SIGTTOU, SIG_IGN);
-	if (tcsetpgrp(STDIN, job->pgid) == -1)
-		DG("couldn't put process in control. errno=%i, pgid=%i", errno, job->pgid);
-	else
-		DG("pgid %i is now in control.", job->pgid);
-	signal(SIGTTOU, sigttou_handler);
 	/* Send the job a continue signal, if necessary. */
 	if (cont)
 	{
+		/* Put the job into the foreground. */
+		signal(SIGTTOU, SIG_IGN);
+		if (tcsetpgrp(STDIN, job->pgid) == -1)
+			DG("couldn't put process in control. errno=%i, pgid=%i", errno, job->pgid);
+		else
+			DG("pgid %i is now in control.", job->pgid);
+		signal(SIGTTOU, sigttou_handler);
 		tcsetattr (STDIN, TCSANOW, &job->tmodes);
 		if (kill(-job->pgid, SIGCONT) < 0)
 			perror("kill (SIGCONT)");
@@ -35,6 +35,7 @@ int		put_job_in_foreground(t_job *job, int cont)
 	DG("gonna wait for job id=%i", job->id);
 	job_wait(job->id);
 	job_remove(job->id);
+	job->pgid = 0;
 
 	/* Put the shell back in the foreground. */
 	signal(SIGTTOU, SIG_IGN);

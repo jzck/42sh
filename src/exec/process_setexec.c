@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/02 19:11:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:49:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int		process_setexec(t_process *p)
 {
-	DG("process_setexec, attr=%b", p->attributes);
 	if ((p->execf = is_builtin(p)))
 	{
-		DG("process is builtin");
 		p->attributes |= PROCESS_BUILTIN;
 	}
 	else if (ft_strchr(p->av[0], '/'))
 	{
-		DG("process is a script");
 		p->execf = &execve;
 		p->attributes |= PROCESS_SCRIPT;
 		p->path = ft_strdup(p->av[0]);
@@ -30,13 +27,11 @@ int		process_setexec(t_process *p)
 	else if ((p->path = ft_findexec(ft_getenv(
 						data_singleton()->env, "PATH"), p->av[0])))
 	{
-		DG("process is binary");
 		p->execf = &execve;
 		p->attributes |= PROCESS_BINARY;
 	}
 	else
 	{
-		DG("process is '%s' unknown type", p->av[0]);
 		p->execf = NULL;
 		p->attributes |= PROCESS_UNKNOWN;
 		return (1);

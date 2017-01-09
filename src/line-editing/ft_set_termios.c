@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:14:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 14:26:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:44:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int		ft_set_termios(t_data *data, int input_mode)
 	struct termios	term;
 
 	(void)data;
+	/* term = data_singleton()->jobc.shell_tmodes; */
 	if (tcgetattr(0, &term) == -1)
+	{
+		DG("tcgetattr failed, errno=%i", errno);
 		return (-1);
+	}
 	if (input_mode)
 		term.c_lflag &= ~(ICANON) & ~(ISIG) & ~(ECHO);
 	else

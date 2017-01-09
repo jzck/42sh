@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigint_handler.c                                   :+:      :+:    :+:   */
+/*   job_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 15:14:47 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 15:59:05 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/09 12:47:17 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/09 14:05:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-void	sigint_handler(int signo)
+void	job_format(t_job *j, int rank[2], int opts)
 {
-	(void)signo;
-	DG("got SIGINT");
+	t_list		*plist;
+	int			firstp;
+
+	job_format_head(j, rank);
+	plist = j->first_process;
+	firstp = 1;
+	while (plist)
+	{
+		process_format(&plist, firstp, opts);
+		firstp = 0;
+	}
 }
