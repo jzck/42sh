@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:37:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 15:55:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:25:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	shell_exit(void)
 	/* DG("cleanup. char * UP at %p", UP); */
 	/* DG("cleanup. char * BC at %p", BC); */
 	data_exit();
-	/* job_kill_all(); */
+	job_kill_all();
 	tcsetattr(0, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 }

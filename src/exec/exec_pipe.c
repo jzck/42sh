@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 15:56:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:19:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		exec_pipe(t_btree **ast)
 	if (start)
 		p->attributes |= PROCESS_PIPESTART;
 
-	close(p->fdin);
+	close(fds[PIPE_READ]);
 	p->fdin = STDIN;
 	btree_delone(ast, &ast_free);
 	return (0);

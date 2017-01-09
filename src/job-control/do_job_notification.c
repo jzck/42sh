@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:01:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/08 14:00:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:24:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int		do_job_notification(void)
 	while (jlist)
 	{
 		j = jlist->content;
-		DG("checking job [%i]", j->id);
+		DG("checking [%i]", j->id);
 		if (job_is_completed(j->id))
 		{
 			ret = 1;
-			job_notify_change(j->id, 0);
+			job_notify_change(j->id);
 			job_remove(j->id);
 		}
 		else if (job_is_stopped(j->id) && !(j->attributes & JOB_NOTIFIED))
 		{
 			ret = 1;
-			job_notify_change(j->id, -1);
+			job_notify_change(j->id);
 			j->attributes |= JOB_NOTIFIED;
 		}
 		jlist = jlist->next;
