@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:00:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:38:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		launch_process(t_process *p)
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
 			signal(SIGTSTP, sigtstp_handler);
-			signal(SIGTTIN, SIG_DFL);
-			signal(SIGTTOU, SIG_DFL);
+			signal(SIGTTIN, sigttin_handler);
+			signal(SIGTTOU, sigttou_handler);
 			signal(SIGCHLD, SIG_DFL);
 			process_redirect(p);
 			(*p->execf)(p->path, p->av, data_singleton()->env);

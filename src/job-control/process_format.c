@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 14:19:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:58:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	process_format(t_list **plist, int firstp, int opts)
 		ft_putstr("running  ");
 	else if (state == PROCESS_SUSPENDED)
 		ft_putstr("suspended");
+	else if (state == PROCESS_CONTINUED)
+	{
+		ft_putstr("continued");
+		p->attributes &= ~PROCESS_STATE_MASK;
+		p->attributes &= ~PROCESS_RUNNING;
+	}
 	else if (state == PROCESS_COMPLETED)
 	{
 		if (p->status == 0)
@@ -51,9 +57,14 @@ void	process_format(t_list **plist, int firstp, int opts)
 			if (!(p->attributes & state) ||
 					(state == PROCESS_COMPLETED && p->status != 0))
 				break;
+			if (p->attributes & PROCESS_CONTINUED)
+			{
+				p->attributes &= ~PROCESS_STATE_MASK;
+				p->attributes &= ~PROCESS_RUNNING;
+			}
 			ft_sstrprint(p->av, ' ');
 			if ((*plist)->next)
-				ft_putstr(" |");
+				ft_putstr(" | ");
 			(*plist) = (*plist)->next;
 		}
 	}

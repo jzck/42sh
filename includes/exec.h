@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:22:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:58:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 # define PROCESS_COMPLETED	(1 << 6)
 # define PROCESS_SUSPENDED	(1 << 7)
 # define PROCESS_RUNNING	(1 << 8)
+# define PROCESS_CONTINUED	(1 << 9)
 
 # define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3)
-# define PROCESS_STATE_MASK	(1 << 6 | 1 << 7 | 1 << 8)
+# define PROCESS_STATE_MASK	(1 << 6 | 1 << 7 | 1 << 8 | 1 << 9)
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)

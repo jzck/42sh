@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 14:03:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:58:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mark_job_as_running (t_job *j)
 	{
 		p = plist->content;
 		p->attributes &= ~PROCESS_STATE_MASK;
-		p->attributes |= PROCESS_RUNNING;
+		p->attributes |= PROCESS_CONTINUED;
 		plist = plist->next;
 	}
 	j->attributes &= ~JOB_NOTIFIED;

@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_format.c                                 :+:      :+:    :+:   */
+/*   builtin_bg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 12:47:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:55:36 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/09 16:54:18 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/09 16:57:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "job_control.h"
 
-void	job_format(t_job *j, int rank[2], int opts)
+int		builtin_bg(const char *path, char *const av[], char *const envp[])
 {
-	t_list		*plist;
-	int			firstp;
+	t_jobc	*jobc;
+	t_job	*job;
+	int		rank[2];
 
-	job_format_head(j, rank);
-	plist = j->first_process;
-	firstp = 1;
-	while (plist)
+	(void)path;
+	(void)envp;
+	(void)av;
+	jobc = &data_singleton()->jobc;
+	job = jobc->first_job->content;
+	job_getrank(&rank);
+	if (job)
 	{
-		process_format(&plist, firstp, opts);
-		firstp = 0;
+		mark_job_as_running(job);
+		job_format(job, rank, JOBS_OPTS_L);
+		put_job_in_background(job, 1);
 	}
+	return (0);
 }
