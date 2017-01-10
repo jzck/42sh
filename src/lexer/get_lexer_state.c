@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_dquote.c                                     :+:      :+:    :+:   */
+/*   get_lexer_state.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:58:17 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/10 13:45:46 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/10 13:52:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_dquote(t_list **alst, char *str)
+t_lexstate		get_lexer_state(char *str)
 {
-	t_token		*token;
-
-	token = (*alst)->content;
-	token->type = TK_DQ_WORD;
-	str++;
-	if (*str == '\"')
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
-	if (*str == '\\')
-	{
-		token_append(token, *(str + 1));
-		return (lexer_dquote(alst, str + 1));
-	}
-	token_append(token, *str);
-	return (lexer_dquote(alst, str));
+	if (ft_is_delim(*str))
+		return (DELIM);
+	else if (*str == '&' || *str == ';' || *str == '|')
+		return (SEP);
+	else if (*str == '\\')
+		return (BACKSLASH);
+	else if (*str == '\'')
+		return (QUOTE);
+	else if (*str == '\"')
+		return (DQUOTE);
+	return (0);
 }

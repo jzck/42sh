@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:08:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:00:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		main(void)
 			return (1);
 		if (!token)
 			continue ;
-		/* token_print(token); */
+		token_print(token);
 		if (ft_parse(&ast, &token))
 			return (1);
 		btree_print(STDBUG, ast, &ft_putast);

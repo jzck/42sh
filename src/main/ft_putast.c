@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/06 20:09:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:02:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ char	*ft_putast(void *nodein)
 		char	str[5];
 		t_type	type;
 	};
-
-/* 	struct s_tmp[] = */
-/* 	{ */
-/* 		{TK_AMP, "  &  "}, */
-/* 		{TK_SEMI, "  &  "}, */
-/* 		{TK_AND_IF, "  &  "}, */
-/* 		{TK_OR_IF, "  &  "}, */
-/* 		{TK_PIPE, "  &  "}, */
-/* 		{TK_COMMAND, "  &  "}, */
-/* 		{TK_GREAT, "  &  "}, */
-/* 		{TK_AMP, "  &  "}, */
-/* 		{TK_AMP, "  &  "}, */
-/* 	} */
-
 	node = nodein;
 	if (node->type == TK_AMP)
 		return ("  &  ");
@@ -59,8 +45,5 @@ char	*ft_putast(void *nodein)
 	else if (node->type == TK_LESSAND)
 		return (" <&  ");
 	else
-	{
-		ft_printf("type=%02i\n", node->type);
 		return ("OTHER");
-	}
 }
