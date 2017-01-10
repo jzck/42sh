@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 13:45:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:52:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:18:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_lexstate		get_lexer_state(char *str)
 {
 	if (ft_is_delim(*str))
 		return (DELIM);
+	else if (*str == '$')
+		return (VAR);
 	else if (*str == '&' || *str == ';' || *str == '|')
 		return (SEP);
 	else if (*str == '\\')

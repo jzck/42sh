@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:59:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:04:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ enum	e_lexstate
 	QUOTE,
 	DQUOTE,
 	BACKSLASH,
+	VAR,
 };
 
 struct	s_token
@@ -71,6 +72,7 @@ int			token_append(t_token *token, char c);
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
 void		token_print(t_list *lst);
+void		token_expand_var(t_token *token);
 
 int			ft_is_delim(char c);
 
@@ -87,5 +89,6 @@ int			lexer_greatand(t_list **alst, char *str);
 int			lexer_quote(t_list **alst, char *str);
 int			lexer_dquote(t_list **alst, char *str);
 int			lexer_backslash(t_list **alst, char *str);
+int			lexer_var(t_list **alst, char *str);
 
 #endif

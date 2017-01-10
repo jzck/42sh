@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/01 16:36:58 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:44:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst)
 		return (1);
 	tok = (*lst)->content;
 	next_tok = (*lst)->next->content;
-	if (next_tok->type != TK_WORD)
+	if (!(next_tok->type & TK_WORD))
 		return (1);
 	node->data.redir.n = ft_atoi(tok->data);
 	node->data.redir.word.word = ft_strdup(next_tok->data);

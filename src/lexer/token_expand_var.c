@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_quote.c                                      :+:      :+:    :+:   */
+/*   token_expand_var.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 15:13:06 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/10 14:57:53 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/10 15:19:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_quote(t_list **alst, char *str)
+void	token_expand_var(t_token *token)
 {
-	t_token		*token;
+	char	*dollar;
+	char	*val;
 
-	token = (*alst)->content;
-	token->type = TK_Q_WORD;
-	str++;
-	if (*str == '\'')
-		return (ft_tokenize(alst, str + 1, WORD));
-	token_append(token, *str);
-	return (lexer_quote(alst, str));
+	dollar = ft_strchr(token->data, '$');
+	if (!dollar[1])
+		return ;
+	val = ft_getenv(data_singleton()->env, dollar + 1);
+	*dollar = 0;
+	if (val)
+		while (*val)
+			token_append(token, *val++);
 }

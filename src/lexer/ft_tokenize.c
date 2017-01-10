@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:51:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:15:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 	&lexer_quote,
 	&lexer_dquote,
 	&lexer_backslash,
+	&lexer_var,
 };
 
 int		ft_is_delim(char c)
@@ -37,6 +38,7 @@ int		ft_tokenize(t_list **alst, char *str, t_lexstate state)
 {
 	t_token	*token;
 
+	DG("state=%i, *str=%c", state, *str);
 	if (!*str)
 		return (0);
 	if (!*alst)

@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_quote.c                                      :+:      :+:    :+:   */
+/*   lexer_var.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 15:13:06 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/10 14:54:57 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/10 15:19:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_quote(t_list **alst, char *str)
+int		lexer_var(t_list **alst, char *str)
 {
 	t_token		*token;
+	t_lexstate	state;
 
 	token = (*alst)->content;
-	token->type = TK_Q_WORD;
+	token->type = TK_N_WORD;
 	str++;
-	if (*str == '\'')
-		return (ft_tokenize(alst, str + 1, WORD));
+	DG("check, *str=%c, data='%s'", *str, token->data);
+	if (!ft_strchr(token->data, '$'))
+		token_append(token, '$');
+	if (!*str)
+	{
+		token_expand_var(token);
+		return (0);
+	}
+	if ((state = get_lexer_state(str)))
+	{
+		token_expand_var(token);
+		return (ft_tokenize(alst, str, state));
+	}
 	token_append(token, *str);
-	return (lexer_quote(alst, str));
+	return (lexer_var(alst, str));
 }
