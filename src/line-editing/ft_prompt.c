@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:22:34 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 14:28:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 12:31:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		ft_prompt(void)
 {
-	DG("do_job_notification() before prompt");
 	do_job_notification();
-	DG("new prompt now");
 	ft_putstr(SHELL_PROMPT);
 	return (0);
 }

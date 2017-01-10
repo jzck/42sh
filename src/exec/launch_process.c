@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 10:30:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 12:28:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		launch_process(t_process *p)
 		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env));
 	else
 	{
-		DG("process is to be forked, %i->[]->%i, attr=%b", p->fdin, p->fdout, p->attributes);
+		/* DG("process is to be forked, %i->[]->%i, attr=%b", p->fdin, p->fdout, p->attributes); */
 		p->attributes &= ~PROCESS_STATE_MASK;
 		p->attributes |= PROCESS_RUNNING;
 		if (p->attributes & (PROCESS_BINARY | PROCESS_SCRIPT)
