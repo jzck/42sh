@@ -6,11 +6,12 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 01:45:09 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 11:43:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 16:41:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "job_control.h"
 
 void		rl_set_prompt(t_line *line)
 {

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:14:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 10:30:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 16:49:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	sigtstp_handler(int signo)
 {
+	t_jobc	*jobc;
+
 	(void)signo;
-	DG("got SIGTSTP");
+	jobc = &data_singleton()->jobc;
+	DG("got SIGTSTP in process %i", getpid());
+	kill(jobc->shell_pgid, SIGCONT);
 }

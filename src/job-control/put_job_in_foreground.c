@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:56:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:06:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		put_job_in_foreground(t_job *job, int cont)
 			perror("kill (SIGCONT)");
 	}
 	/* Wait for it to report.  */
-	/* DG("gonna wait for job id=%i", job->id); */
+	DG("gonna wait for job id=%i", job->id);
 	job_wait(job->id);
 	job_remove(job->id);
 

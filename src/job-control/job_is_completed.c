@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 12:30:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 16:41:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int		job_is_completed(int id)
 	while (lst)
 	{
 		p = lst->content;
-		/* DG("checking pid=%i", p->pid); */
+		DG("checking pid=%i", p->pid);
 		if (!(p->attributes & PROCESS_COMPLETED))
 		{
-			/* DG("process %i is not completed", p->pid); */
+			DG("process %i is not completed", p->pid);
 			return (0);
 		}
 		lst = lst->next;
