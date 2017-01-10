@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:58:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:30:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	process_format(t_list **plist, int firstp, int opts)
 		ft_printf("       ");
 	if (opts & JOBS_OPTS_L)
 		ft_printf("%i ", p->pid);
-
 	state = p->attributes & PROCESS_STATE_MASK;
 	if (state == PROCESS_RUNNING)
 		ft_putstr("running  ");
@@ -32,7 +31,7 @@ void	process_format(t_list **plist, int firstp, int opts)
 	{
 		ft_putstr("continued");
 		p->attributes &= ~PROCESS_STATE_MASK;
-		p->attributes &= ~PROCESS_RUNNING;
+		p->attributes |= PROCESS_RUNNING;
 	}
 	else if (state == PROCESS_COMPLETED)
 	{

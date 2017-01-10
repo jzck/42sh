@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 12:29:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:06:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int		put_job_in_foreground(t_job *job, int cont)
 	DG("gonna wait for job id=%i", job->id);
 	job_wait(job->id);
 	job_remove(job->id);
-	job->pgid = 0;
 
 	/* Put the shell back in the foreground. */
 	signal(SIGTTOU, SIG_IGN);

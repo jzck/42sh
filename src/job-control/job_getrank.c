@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:38:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 12:47:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 10:30:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	job_getrank(int (*rank)[2])
 {
-	t_job		*job;
-	t_jobc		*jobc;
-	t_list		*jlist;
+	t_job	*job;
+	t_jobc	*jobc;
+	t_list	*jlist;
+	int		i;
 
+	i = 0;
 	jobc = &data_singleton()->jobc;
 	jlist = jobc->first_job;
 	(*rank)[0] = 0;
 	(*rank)[1] = 0;
-	if (jlist)
+	while (jlist && i < 2)
 	{
 		job = jlist->content;
-		(*rank)[0] = job->id;
+		if (job_is_stopped(job->id))
+			(*rank)[i++] = job->id;
 		jlist = jlist->next;
-		if (jlist)
-		{
-			job = jlist->content;
-			(*rank)[1] = job->id;
-		}
 	}
 }

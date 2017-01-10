@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 12:20:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:03:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ int		exec_command(t_btree **ast)
 	{
 		job_addprocess(p);
 		if (IS_PIPEEND(p->attributes))
+		{
 			JOB_IS_FG(job->attributes) ?
 				put_job_in_foreground(job, 0):
 				put_job_in_background(job, 0);
+			job->pgid = 0;
+		}
 	}
 	p->av = NULL;
 	p->pid = 0;
