@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cleanup.c                                       :+:      :+:    :+:   */
+/*   job_update_id.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 14:42:42 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/09 21:50:38 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/12 13:33:08 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/10 13:22:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern char	**environ;
-extern char PC;
-extern char *UP;
-extern char *BC;
-
-void	ft_cleanup(void)
+void	job_update_id(void)
 {
-	struct termios	term;
+	int		*id;
+	t_jobc	*jobc;
+	t_list	*start;
 
-	DG("cleanup. char * UP at %p", UP);
-	DG("cleanup. char * BC at %p", BC);
-	if (tcgetattr(0, &term) == -1)
-		return ;
-	term.c_lflag |= ICANON | ISIG | ECHO;
-	if (tcsetattr(0, TCSANOW, &term) == -1)
-		return ;
+	jobc = &data_singleton()->jobc;
+	id = &jobc->current_id;
+	start = jobc->first_job;
+	while (ft_lst_find(start, id, job_cmp_id))
+		*id += 1;
 }

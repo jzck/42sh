@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_redirect.c                                      :+:      :+:    :+:   */
+/*   mark_job_as_running.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 15:24:08 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/10 10:52:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-void	fd_redirect(t_data *data)
+void	mark_job_as_running (t_job *j)
 {
-	if (data->exec.fdin != STDIN)
+	t_list		*plist;
+	t_process	*p;
+
+	plist = j->first_process;
+	while (plist)
 	{
-		dup2(data->exec.fdin, STDIN);
-		close(data->exec.fdin);
+		p = plist->content;
+		if (p->attributes & PROCESS_SUSPENDED)
+		{
+			p->attributes &= ~PROCESS_STATE_MASK;
+			p->attributes |= PROCESS_CONTINUED;
+		}
+		plist = plist->next;
 	}
-	if (data->exec.fdout != STDOUT)
-	{
-		dup2(data->exec.fdout, STDOUT);
-		close(data->exec.fdout);
-	}
+	j->attributes &= ~JOB_NOTIFIED;
 }

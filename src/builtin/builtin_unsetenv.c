@@ -12,21 +12,23 @@
 
 #include "minishell.h"
 
-int		builtin_unsetenv(char **av, t_data *data)
+int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 {
-	char	**env;
 	int		i;
 	int		j;
+	char	***env;
 
-	env = data->env;
+	(void)envp;
+	(void)path;
+	env = &data_singleton()->env;
 	i = 1;
 	while (av[i])
 	{
 		j = 0;
-		while (env[j])
+		while ((*env)[j])
 		{
-			if (ft_strcmp(env[j], av[i]) == '=')
-				ft_sstrdel(env, j);
+			if (ft_strcmp((*env)[j], av[i]) == '=')
+				ft_sstrdel(*env, j);
 			else
 				j++;
 		}

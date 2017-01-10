@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   job_notify_new.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 12:43:22 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 13:31:33 by jhalford         ###   ########.fr       */
+/*   Created: 2016/12/13 14:27:01 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/15 17:15:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "job_control.h"
 
-pid_t	g_pid;
-
-void	sig_handler(int signo)
+void	job_notify_new(t_job *job)
 {
-	(void)signo;
-	if (signo == SIGINT)
+	t_list		*plist;
+	t_process	*p;
+
+	ft_printf("{mag}[%i]", job->id);
+	plist = job->first_process;
+	while (plist)
 	{
-		if (g_pid)
-			kill(g_pid, SIGINT);
-		if (kill(g_pid, 0) == 0)
-			ft_putendl("");
+		p = plist->content;
+		ft_printf(" %i", p->pid);
+		plist = plist->next;
 	}
+	ft_printf("{eoc}\n");
 }

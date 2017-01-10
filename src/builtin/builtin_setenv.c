@@ -6,40 +6,45 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 16:29:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:53:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		builtin_setenv(char **av, t_data *data)
+int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 {
 	char	*str;
-	char	**env;
+	char	***env;
+	int		i;
 
-	env = data->env;
-	DG("doing setenv now");
+	(void)envp;
+	(void)path;
+	i = 0;
+	env = &data_singleton()->env;
 	if (ft_strcmp(av[0], "setenv") == 0)
 		av++;
 	if (!av[0])
 	{
-		ft_sstrprint(data->env, '\n');
+		ft_sstrprint(*env, '\n');
 		ft_putchar('\n');
 	}
 	else
 	{
 		str = ft_str3join(av[0], "=", av[1]);
-		while (*env)
+		while ((*env)[i])
 		{
-			if (ft_strcmp(*env, av[0]) == '=')
+			/* DG("check 2: i=%i, (*env)[i]=%p",i, (*env)[i]); */
+			/* DG("content=%s", (*env)[i]); */
+			if (ft_strcmp((*env)[i], av[0]) == '=')
 			{
-				ft_strdel(env);
-				*env = str;
+				ft_strdel(&(*env)[i]);
+				(*env)[i] = str;
 				return (0);
 			}
-			env++;
+			i++;
 		}
-		data->env = ft_sstradd(data->env, str);
+		*env = ft_sstradd(*env, str);
 		ft_strdel(&str);
 	}
 	return (0);

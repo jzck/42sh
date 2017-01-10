@@ -6,29 +6,41 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/06 20:26:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:19:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_pipe(t_btree **ast, t_data *data)
+int		exec_pipe(t_btree **ast)
 {
-	int		fds[2];
+	int			fds[2];
+	int			start;
+	t_data		*data;
+	t_process	*p;
 
+	data = data_singleton();
+	p = &data_singleton()->exec.process;
 	pipe(fds);
 	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
-	data->exec.fdout = fds[PIPE_WRITE];
-	ft_exec(&(*ast)->left, data);
-	if (data->exec.fdout != STDOUT)
-		close(data->exec.fdout);
-	data->exec.fdout = STDOUT;
-	data->exec.fdin = fds[PIPE_READ];
-	ft_exec(&(*ast)->right, data);
+	p->fdout = fds[PIPE_WRITE];
+	start = IS_PIPESTART(p->attributes);
+
+	p->attributes &= ~PROCESS_PIPEEND;
+	ft_exec(&(*ast)->left);
+	p->attributes &= ~PROCESS_PIPESTART;
+
 	close(fds[PIPE_WRITE]);
+	p->fdout = STDOUT;
+	p->fdin = fds[PIPE_READ];
+
+	p->attributes |= PROCESS_PIPEEND;
+	ft_exec(&(*ast)->right);
+	if (start)
+		p->attributes |= PROCESS_PIPESTART;
+
 	close(fds[PIPE_READ]);
-	data->exec.fdin = STDIN;
-	data->exec.fdout = STDOUT;
+	p->fdin = STDIN;
 	btree_delone(ast, &ast_free);
 	return (0);
 }

@@ -6,16 +6,17 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 18:12:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 13:16:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	data_exit(t_data *data)
+void	data_exit(void)
 {
-	ft_strdel(&data->line.input);
-	ft_dlstdel(&data->line.history, &ft_lst_bfree);
-	ft_lstdel(&data->line.qstack, &ft_lst_cfree);
+	t_data	*data;
+
+	data = data_singleton();
+	/* ft_strdel(&data->line.input); */
 	ft_sstrfree(data->env);
 }

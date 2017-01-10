@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 11:46:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 13:22:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,7 @@ struct s_line
 	int						select;
 	t_curs					curs;
 	t_list					*stack;
-	/*COMPATIBILITY*/
 	t_dlist					*history;
-	t_list					*qstack;
 };
 
 /*

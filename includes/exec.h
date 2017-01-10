@@ -6,48 +6,94 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/06 18:23:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 10:23:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "minishell.h"
 # define PIPE_READ		0
 # define PIPE_WRITE		1
 
-typedef struct s_execfunc	t_execfunc;
+# define PROCESS_BUILTIN	(1 << 0)
+# define PROCESS_BINARY		(1 << 1)
+# define PROCESS_SCRIPT		(1 << 2)
+# define PROCESS_UNKNOWN	(1 << 3)
+# define PROCESS_PIPESTART	(1 << 4)
+# define PROCESS_PIPEEND	(1 << 5)
+# define PROCESS_COMPLETED	(1 << 6)
+# define PROCESS_SUSPENDED	(1 << 7)
+# define PROCESS_RUNNING	(1 << 8)
+# define PROCESS_CONTINUED	(1 << 9)
 
-struct	s_execfunc
+# define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3)
+# define PROCESS_STATE_MASK	(1 << 6 | 1 << 7 | 1 << 8 | 1 << 9)
+
+# define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
+# define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
+
+# include "libft.h"
+# include "types.h"
+# include "job_control.h"
+
+struct	s_process
 {
-	t_type	type;
-	int		(*f)(t_btree **ast, t_data *data);
+	char	**av;
+	char	*path;
+	t_execf	*execf;
+	pid_t	pid;
+	int		fdin;
+	int		fdout;
+	int		status;
+	t_flag	attributes;
 };
 
-extern t_execfunc	g_execfunc[];
+struct	s_exec
+{
+	char		*aol_status;
+	int			aol_search;
+	t_job		job;
+	t_process	process;
+};
 
-int		ft_exec(t_btree **ast, t_data *data);
+struct	s_execmap
+{
+	t_type	type;
+	int		(*f)(t_btree **ast);
+};
 
-int		exec_semi(t_btree **ast, t_data *data);
-int		exec_or_if(t_btree **ast, t_data *data);
-int		exec_and_if(t_btree **ast, t_data *data);
-int		exec_pipe(t_btree **ast, t_data *data);
+#include "minishell.h"
 
-int		exec_less(t_btree **ast, t_data *data);
-int		exec_great(t_btree **ast, t_data *data);
-int		exec_dgreat(t_btree **ast, t_data *data);
-int		exec_command(t_btree **ast, t_data *data);
+extern t_execmap	g_execmap[];
 
-void	fd_redirect(t_data *data);
-void	fd_reset(t_data	*data);
+int		ft_exec(t_btree **ast);
 
-int		ft_cmd_process(char **argv, t_data *data);
-int		ft_cmd_exec(char *execpath, char **argv, t_data *data);
+int		exec_semi(t_btree **ast);
+int		exec_ampersand(t_btree **ast);
+int		exec_or_if(t_btree **ast);
+int		exec_and_if(t_btree **ast);
+int		exec_pipe(t_btree **ast);
+
+int		exec_less(t_btree **ast);
+int		exec_great(t_btree **ast);
+int		exec_dgreat(t_btree **ast);
+int		exec_command(t_btree **ast);
+
+int		launch_process(t_process *p);
+int		process_setexec(t_process *p);
+int		process_setgroup(t_process *p);
+int		process_redirect(t_process *p);
+void	process_free(void *content, size_t content_size);
+void	process_reset(void);
+
+void	fd_redirect(void);
+void	fd_reset(void);
+
 char	*ft_findexec(char *path, char *file);
 
-void	ast_free(void *data, size_t content_size);
+void	set_exitstatus(int status);
 
-void	set_exitstatus(t_data *data, int status);
+void	ast_free(void *data, size_t content_size);
 
 #endif
