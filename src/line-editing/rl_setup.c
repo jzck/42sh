@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:07:47 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 11:54:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:02:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		rl_setup(t_line *line)
 {
+	rl_set_termios(1);
 	ft_bzero(line, sizeof(t_line));
 	if (curs_setup(&line->curs) < 0)
 		return (-1);
@@ -24,6 +25,7 @@ int		rl_setup(t_line *line)
 
 int		rl_cleanup(t_line *line)
 {
+	rl_set_termios(0);
 	if (curs_cleanup(&line->curs) < 0)
 		return (-1);
 	if (rl_merge_line(line) < 0)

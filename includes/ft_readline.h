@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 13:22:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:01:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ struct s_input
 int							rl_setup(t_line *line);
 int							rl_cleanup(t_line *line);
 void						rl_teardown(t_line *line);
+int							rl_set_termios(int input_mode);
 
 /*
  * Dynamic allocated buffer manipulation
