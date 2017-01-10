@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/10 10:28:20 by sbenning         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:50:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 # include "libft.h"
 
-# include "line_editing.h"
 # include "lexer.h"
 # include "parser.h"
+# include "ft_readline.h"
 # include "exec.h"
 
 # include <dirent.h>
@@ -68,6 +68,7 @@ extern t_stof	g_builtins[];
 extern pid_t	g_pid;
 
 void	sig_handler(int signo);
+t_data		*data_singleton();
 int		data_init(t_data *data);
 void	data_exit(t_data *data);
 void	ft_cleanup(void);

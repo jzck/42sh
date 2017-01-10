@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/14 13:51:14 by sbenning         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:46:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@
  * QUOTING : Regroup ESC, QUOTE and DQUOTE
 */
 
-# define RL_FINISH 0x1
-# define RL_STACK 0x2
-# define RL_INSERT 0x4
-# define RL_SELECT 0x8
-# define RL_ESC 0x10
-# define RL_QUOTE 0x20
-# define RL_DQUOTE 0x40
-# define RL_QUOTING (RL_ESC|RL_QUOTE|RL_DQUOTE)
+# define RL_FINISH		(1 << 0)
+# define RL_STACK		(1 << 1)
+# define RL_INSERT		(1 << 2)
+# define RL_SELECT		(1 << 3)
+# define RL_ESC			(1 << 4)
+# define RL_QUOTE		(1 << 5)
+# define RL_DQUOTE		(1 << 6)
+# define RL_QUOTING		(RL_ESC | RL_QUOTE | RL_DQUOTE)
 
 typedef struct s_data		t_data;
 typedef struct s_line		t_line;

@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 10:49:03 by sbenning          #+#    #+#             */
-/*   Updated: 2016/12/14 13:49:39 by sbenning         ###   ########.fr       */
+/*   Updated: 2017/01/10 11:51:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			rl_comp_function(t_line *line, long int input)
 {
 	t_data	*data;
 
-	data = *data_singleton();
+	data = data_singleton();
 	if (ft_autocomp(data) < 0)
 		return (-1);
 	line->size = ft_strlen(line->input);

@@ -47,7 +47,7 @@ $(D_OBJ)/%.o: $(D_SRC)/minishell-exec/%.c includes/minishell.h
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
 
-$(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/line_editing.h
+$(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/ft_readline.h
 	@$(MKDIR) $(D_OBJ)
 	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
 	@echo "Compiling "$<"..."
