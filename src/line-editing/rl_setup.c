@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:07:47 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 17:06:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 18:02:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		rl_setup(t_line *line)
 {
-	rl_set_termios(1);
 	do_job_notification();
+	data_singleton()->mode = MODE_INPUT;
 	ft_bzero(line, sizeof(t_line));
 	if (curs_setup(&line->curs) < 0)
 		return (-1);
@@ -26,7 +26,7 @@ int		rl_setup(t_line *line)
 
 int		rl_cleanup(t_line *line)
 {
-	rl_set_termios(0);
+	data_singleton()->mode = MODE_EXEC;
 	if (curs_cleanup(&line->curs) < 0)
 		return (-1);
 	if (rl_merge_line(line) < 0)

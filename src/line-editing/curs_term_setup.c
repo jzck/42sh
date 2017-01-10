@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 16:50:26 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 11:54:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 18:04:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int							curs_term_setup(void)
 	if (tcgetattr(0, single) < 0)
 		return (-1);
 	term = *single;
-	term.c_lflag &= ~(ECHO | ICANON);
+	term.c_lflag &= ~(ECHO | ICANON | ISIG);
 	term.c_cc[VTIME] = 0;
 	term.c_cc[VMIN] = 1;
 	if (tcsetattr(0, TCSADRAIN, &term) < 0)
@@ -51,8 +51,11 @@ int							curs_term_setup(void)
 int							curs_term_cleanup(void)
 {
 	struct termios			*single;
+	struct termios			term;
 
 	single = curs_term();
+	term = *single;
+	term.c_lflag |= ECHO | ICANON | ISIG;
 	if (tcsetattr(0, TCSADRAIN, single) < 0)
 		return (-1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 17:05:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:10:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	shell_init(void)
 			kill(-*shell_pgid, SIGTTIN);
 		signal(SIGINT, sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
-		signal(SIGTSTP, SIG_IGN);
+		signal(SIGTSTP, sigtstp_handler);
 		signal(SIGTTIN, sigttin_handler);
 		signal(SIGTTOU, sigttou_handler);
 		signal(SIGCHLD, sigchld_handler);

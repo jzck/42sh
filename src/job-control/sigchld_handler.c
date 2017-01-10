@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 17:37:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 12:33:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:59:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	sigchld_handler(int signo)
 	/* DG("got SIGCHLD"); */
 	/* if (do_job_notification()) */
 	/* 	ft_putstr(SHELL_PROMPT); */
-	if (data_singleton()->mode != MODE_EXEC)
-		job_update_status();
+	/* if (data_singleton()->mode != MODE_EXEC) */
+	/* 	job_update_status(); */
 }
