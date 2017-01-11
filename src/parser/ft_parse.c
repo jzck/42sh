@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:20:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:52:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_parser	g_parser[] =
 	{TK_DGREAT, &parse_dgreat},
 	{TK_LESSAND, &parse_lessand},
 	{TK_GREATAND, &parse_greatand},
+	{TK_SUBSHELL, &parse_subshell},
 	{TK_WORD, &parse_word},
 	{0, 0},
 };

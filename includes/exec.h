@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 10:23:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:59:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@
 # define PROCESS_BUILTIN	(1 << 0)
 # define PROCESS_BINARY		(1 << 1)
 # define PROCESS_SCRIPT		(1 << 2)
-# define PROCESS_UNKNOWN	(1 << 3)
-# define PROCESS_PIPESTART	(1 << 4)
-# define PROCESS_PIPEEND	(1 << 5)
-# define PROCESS_COMPLETED	(1 << 6)
-# define PROCESS_SUSPENDED	(1 << 7)
-# define PROCESS_RUNNING	(1 << 8)
-# define PROCESS_CONTINUED	(1 << 9)
+# define PROCESS_SUBSHELL	(1 << 3)
+# define PROCESS_UNKNOWN	(1 << 4)
+# define PROCESS_PIPESTART	(1 << 5)
+# define PROCESS_PIPEEND	(1 << 6)
+# define PROCESS_COMPLETED	(1 << 7)
+# define PROCESS_SUSPENDED	(1 << 8)
+# define PROCESS_RUNNING	(1 << 9)
+# define PROCESS_CONTINUED	(1 << 10)
 
-# define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3)
-# define PROCESS_STATE_MASK	(1 << 6 | 1 << 7 | 1 << 8 | 1 << 9)
+# define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4)
+# define PROCESS_STATE_MASK	(1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
@@ -81,7 +82,7 @@ int		exec_dgreat(t_btree **ast);
 int		exec_command(t_btree **ast);
 
 int		launch_process(t_process *p);
-int		process_setexec(t_process *p);
+int		process_setexec(t_type type, t_process *p);
 int		process_setgroup(t_process *p);
 int		process_redirect(t_process *p);
 void	process_free(void *content, size_t content_size);

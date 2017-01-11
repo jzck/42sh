@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_lexer_state.c                                  :+:      :+:    :+:   */
+/*   ft_post_tokenize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/10 13:45:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 15:48:13 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/11 16:11:11 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/11 17:07:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_lexstate		get_lexer_state(char *str)
+int		ft_post_tokenize(t_list **alst, char *str)
 {
-	if (ft_is_delim(*str))
-		return (DELIM);
-	else if (*str == '$')
-		return (VAR);
-	else if (*str == '&' || *str == ';' || *str == '|')
-		return (SEP);
-	else if (*str == '\\')
-		return (BACKSLASH);
-	else if (*str == '\'')
-		return (QUOTE);
-	else if (*str == '\"')
-		return (DQUOTE);
-	else if (*str == '(' || *str == ')' || *str == '`')
-		return (SPECIAL);
+	if (reduce_parens(alst, str))
+		return (1);
+	if (reduce_bquotes(alst, str))
+		return (1);
 	return (0);
 }

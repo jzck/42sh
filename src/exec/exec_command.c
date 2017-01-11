@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:16:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:51:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		exec_command(t_btree **ast)
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
 	p->av = ft_sstrdup(node->data.sstr);
-	process_setexec(p);
+	process_setexec(node->type, p);
 	if (!(launch_process(p)))
 	{
 		job_addprocess(p);

@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_setgroup.c                                 :+:      :+:    :+:   */
+/*   shell_get_avdata.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 14:45:36 by jhalford         ###   ########.fr       */
+/*   Created: 2017/01/11 17:14:52 by jhalford          #+#    #+#             */
+/*   Updated: 2017/01/11 17:26:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
-#include "exec.h"
+#include "minishell.h"
 
-int		process_setgroup(t_process *p)
+char	*shell_get_avdata()
 {
-	t_job	*job;
-	int		pid;
+	t_data	*data;
+	char	**av;
+	int		i;
 
-	(void)p;
-	job = &data_singleton()->exec.job;
-	pid = getpid();
-	if (job->pgid == 0)
-		job->pgid = pid;
-	if (setpgid(pid, job->pgid))
-		DG("setpgid(%i, %i) failed", pid, job->pgid);
-	if (JOB_IS_FG(job->attributes))
+	data = data_singleton();
+	av = data->argv;
+	i = 1;
+	while (av[i][0] == '-')
 	{
-		signal(SIGTTOU, SIG_IGN);
-		tcsetpgrp(STDIN, job->pgid);
-		signal(SIGTTOU, SIG_DFL);
+		if (ft_strcmp(av[i], "--") == 0)
+		{
+			i++;
+			break ;
+		}
+		i++;
 	}
-	return (0);
+	return(av[i]);
 }

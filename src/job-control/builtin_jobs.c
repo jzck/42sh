@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 11:16:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 14:38:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	(void)av;
+	if (!SHELL_HAS_JOBC(data_singleton()->opts))
+	{
+		ft_dprintf(2, "{red}jobs: %s{eoc}\n", SHELL_MSG_NOJOBC);
+		return (-1);
+	}
 	jobc = &data_singleton()->jobc;
 	jlist = jobc->first_job;
 	job_getrank(&rank);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:49:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 15:45:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		lexer_delim(t_list **alst, char *str)
 	token = (*alst)->content;
 	while (ft_is_delim(*str))
 		str++;
-	if (*token->data)
+	if (token->type)
 		return (ft_tokenize(&(*alst)->next, str, DEFAULT));
 	else
 		return (ft_tokenize(alst, str, DEFAULT));

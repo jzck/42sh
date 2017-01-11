@@ -6,14 +6,14 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:50:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 14:29:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-#define CDOPT_L 0x001
-#define CDOPT_P 0x002
+#define CDOPT_L	(1 << 0)
+#define CDOPT_P	(1 << 2)
 #define HAS_CDOPT_P(x) (x & CD_OPT_P)
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
 #define CDERR_1 "cd: no such file or directory: %s\n"

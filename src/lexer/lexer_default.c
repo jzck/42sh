@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:50:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:10:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		lexer_default(t_list **alst, char *str)
 	t_lexstate	state;
 	t_token		*token;
 
-	state = DEFAULT;
 	if ((state = get_lexer_state(str)))
 		return (ft_tokenize(alst, str, state));
 	if (*str == '>')

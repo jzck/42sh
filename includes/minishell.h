@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 17:59:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:17:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,27 @@
 # include <fcntl.h>
 # include <errno.h>
 
-enum	e_mode
-{
-	MODE_INPUT,
-	MODE_EXEC,
-};
-
 struct	s_comp
 {
 	int		a;
 };
 
+# define SHELL_OPTS_JOBC	(1 << 0)
+# define SHELL_OPTS_LC		(1 << 1)
+# define SHELL_MODE_INPUT	(1 << 2)
+# define SHELL_MODE_EXEC	(1 << 3)
+
+# define SHELL_MODE_MASK	(SHELL_MODE_INPUT | SHELL_MODE_EXEC)
+# define SHELL_HAS_JOBC(b)	(b & SHELL_OPTS_JOBC)
+
+# define SHELL_MSG_NOJOBC	"no job-control"
+
 struct	s_data
 {
 	char	**env;
-	t_mode	mode;
+	int		argc;
+	char	**argv;
+	t_flag	opts;
 	t_line	line;
 	t_comp	comp;
 	t_exec	exec;
@@ -54,10 +60,14 @@ struct	s_data
 
 extern t_stof	g_builtins[];
 
-void	shell_init(void);
+void	shell_get_opts(int ac, char **av);
+char	*shell_get_avdata();
+void	shell_init(int ac, char **av);
 void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
+
+int		shell_single_command(char *command);
 
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);

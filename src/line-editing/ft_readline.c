@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:03:48 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 16:59:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:35:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ static int				rl_loop(t_line *line)
 	return ((ret < 0 ? -1 : 0));
 }
 
-int							ft_readline(t_line *line)
+int							ft_readline()
 {
+	t_line	*line;
+
+	line = &data_singleton()->line;
 	if (rl_setup(line) < 0)
 		return (-1);
 	if (rl_loop(line) < 0)

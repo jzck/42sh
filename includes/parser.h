@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 12:33:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:06:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ union	u_astdata
 {
 	t_redir	redir;
 	char	**sstr;
+	char	*str;
 };
 
 struct	s_astnode
@@ -64,5 +65,6 @@ int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst);
 int		parse_lessand(t_btree **ast, t_list **start, t_list **lst);
 int		parse_greatand(t_btree **ast, t_list **start, t_list **lst);
 int		parse_word(t_btree **ast, t_list **start, t_list **lst);
+int		parse_subshell(t_btree **ast, t_list **start, t_list **lst);
 
 #endif

@@ -6,18 +6,22 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:17:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 18:01:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		process_setexec(t_process *p)
+int		process_setexec(t_type type, t_process *p)
 {
-	if ((p->execf = is_builtin(p)))
+	if (type == TK_SUBSHELL)
 	{
-		p->attributes |= PROCESS_BUILTIN;
+		p->execf = &execve;
+		p->attributes |= PROCESS_SUBSHELL;
+		p->path = ft_strdup(p->av[0]);
 	}
+	else if ((p->execf = is_builtin(p)))
+		p->attributes |= PROCESS_BUILTIN;
 	else if (ft_strchr(p->av[0], '/'))
 	{
 		p->execf = &execve;

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:37:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:11:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 	&lexer_dquote,
 	&lexer_backslash,
 	&lexer_var,
+	&lexer_special,
 };
 
 int		ft_is_delim(char c)

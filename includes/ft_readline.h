@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/10 17:59:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:31:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,6 @@ int	rl_cut_function(t_line *line, long int input);				/* Cut selected area or cu
 int	rl_paste_function(t_line *line, long int input);			/* Paste copied/cuted area */
 int	rl_insert_function(t_line *line, long int input);			/* Toogle insert-mode/replacement-mode */
 
-int							ft_readline(t_line *line);
+int							ft_readline();
 
 #endif

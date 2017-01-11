@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:49:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 17:08:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,18 @@ typedef long long		t_type;
 # define TK_AND_IF		(1 << 8)
 # define TK_OR_IF		(1 << 9)
 # define TK_AMP			(1 << 10)
-# define TK_N_WORD		(1 << 11)
-# define TK_Q_WORD		(1 << 12)
-# define TK_DQ_WORD		(1 << 13)
-# define TK_COMMAND		(1 << 14)
+# define TK_PAREN_OPEN	(1 << 11)
+# define TK_PAREN_CLOSE	(1 << 12)
+# define TK_BQUOTE		(1 << 13)
+# define TK_N_WORD		(1 << 14)
+# define TK_Q_WORD		(1 << 15)
+# define TK_DQ_WORD		(1 << 16)
+# define TK_COMMAND		(1 << 17)
+# define TK_SUBSHELL	(1 << 18)
 
-# define TK_WORD		(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
-# define TK_REDIR		(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
+# define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
+# define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
+# define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)
 
 enum	e_lexstate
 {
@@ -51,6 +56,7 @@ enum	e_lexstate
 	DQUOTE,
 	BACKSLASH,
 	VAR,
+	SPECIAL,
 };
 
 struct	s_token
@@ -68,11 +74,15 @@ extern int	(*g_lexer[])(t_list **alst, char *str);
 
 t_token		*token_init();
 int			ft_tokenize(t_list **alst, char *str, t_lexstate state);
+int			ft_post_tokenize(t_list **alst, char *str);
 int			token_append(t_token *token, char c);
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
 void		token_print(t_list *lst);
 void		token_expand_var(t_token *token);
+
+int			reduce_parens(t_list **alst, char *str);
+int			reduce_bquotes(t_list **alst, char *str);
 
 int			ft_is_delim(char c);
 
@@ -90,5 +100,6 @@ int			lexer_quote(t_list **alst, char *str);
 int			lexer_dquote(t_list **alst, char *str);
 int			lexer_backslash(t_list **alst, char *str);
 int			lexer_var(t_list **alst, char *str);
+int			lexer_special(t_list **alst, char *str);
 
 #endif

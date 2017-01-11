@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:39:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/11 16:28:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	token_print(t_list *lst)
 
 	while (lst)
 	{
-		i = 0;
+		i = -1;
 		token = lst->content;
 		type = token->type;
 		while (type >> (i++ + 2))
