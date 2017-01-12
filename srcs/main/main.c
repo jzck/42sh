@@ -6,7 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
+<<<<<<< HEAD:src/main/main.c
 /*   Updated: 2017/01/12 14:02:30 by jhalford         ###   ########.fr       */
+=======
+/*   Updated: 2017/01/05 16:07:09 by wescande         ###   ########.fr       */
+>>>>>>> premier commit. working. . .:srcs/main/main.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +56,21 @@ int		main(int ac, char **av)
 	}
 	while (1)
 	{
+<<<<<<< HEAD:src/main/main.c
 		if (ft_readline())
+=======
+		if (ft_interactive_sh(&data))
+			return (1);
+		DG("{inv}{mag}got command '%s'", data.line.input);
+		token = NULL;
+		if (ft_tokenize(&token, data.line.input, DEFAULT))
+			return (1);
+		if (!token)
+			continue ;
+//		token_print(token);
+		glob_print(token, &data);
+		if (ft_parse(&ast, &token))
+>>>>>>> premier commit. working. . .:srcs/main/main.c
 			return (1);
 		if (shell_single_command(data_singleton()->line.input))
 			return (1);
