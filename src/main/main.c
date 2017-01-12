@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:48:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/12 14:02:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int		shell_single_command(char *command)
 		return (1);
 	DG("after post_tokenize");
 	token_print(token);
-	if (ft_parse(&ast, &token))
-		return (1);
-	btree_print(STDBUG, ast, &ft_putast);
-	/* ft_dprintf(STDBUG, "\n--- INFIX BREAKDOWN ---\n"); */
-	/* btree_apply_infix(ast, &ft_putast2); */
-	if (ft_exec(&ast))
-		return (1);
+	/* if (ft_parse(&ast, &token)) */
+	/* 	return (1); */
+	/* btree_print(STDBUG, ast, &ft_putast); */
+	/* /1* ft_dprintf(STDBUG, "\n--- INFIX BREAKDOWN ---\n"); *1/ */
+	/* /1* btree_apply_infix(ast, &ft_putast2); *1/ */
+	/* if (ft_exec(&ast)) */
+	/* 	return (1); */
 	return (0);
 }
 

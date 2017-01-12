@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 16:49:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/12 13:16:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,14 @@ void	process_format(t_list **plist, int firstp, int opts)
 	ft_putchar('\t');
 	if (opts & JOBS_OPTS_L)
 	{
-		ft_sstrprint(p->av, ' ');
+		if (p->attributes & PROCESS_SUBSHELL)
+		{
+			ft_putstr("( ");
+			ft_putstr(p->av[2]);
+			ft_putstr(" )");
+		}
+		else
+			ft_sstrprint(p->av, ' ');
 		if ((*plist)->next)
 			ft_putstr(" |");
 		(*plist) = (*plist)->next;
@@ -61,7 +68,14 @@ void	process_format(t_list **plist, int firstp, int opts)
 				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes &= ~PROCESS_RUNNING;
 			}
-			ft_sstrprint(p->av, ' ');
+			if (p->attributes & PROCESS_SUBSHELL)
+			{
+				ft_putstr("( ");
+				ft_putstr(p->av[2]);
+				ft_putstr(" )");
+			}
+			else
+				ft_sstrprint(p->av, ' ');
 			if ((*plist)->next)
 				ft_putstr(" | ");
 			(*plist) = (*plist)->next;

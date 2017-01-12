@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:13:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:06:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/12 13:50:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,14 @@ int		reduce_parens(t_list **alst, char *str)
 			if (num_p == 0)
 				break ;
 			end = end->next;
-			if (token->type & TK_NON_FREEABLE)
-				ft_lst_delif(alst, token, ft_addrcmp, ft_lst_cfree);
-			else
-				ft_lst_delif(alst, token, ft_addrcmp, token_free);
+			ft_lst_delif(alst, token, ft_addrcmp, token_free);
 		}
-		if (end)
-		{
-			token = start->content;
-			token->type = TK_SUBSHELL;
-			token->data = ft_strbetween(token->data + 1, ((t_token*)end->content)->data);
-			ft_lst_delif(alst, end->content, ft_addrcmp, ft_lst_cfree);
-			return (0);
-		}
+		if (!end)
+			return (-1);
+		token = start->content;
+		token->type = TK_SUBSHELL;
+		token->data = ft_strbetween(token->data + 1, ((t_token*)end->content)->data);
+		ft_lst_delif(alst, end->content, ft_addrcmp, token_free);
 		return (1);
 	}
 	return (0);

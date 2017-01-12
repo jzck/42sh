@@ -6,43 +6,44 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:56:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/12 15:10:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		reduce_bquotes(t_list **alst, char *str)
+int		reduce_bquotes(t_list **alst, char **str)
 {
 	t_list	*start;
-	t_list	*end;
+	t_list	**end;
 	t_token	*token;
 	int		tk;
+	char	*new;
+	char	*fit;
+	char	*bq_start;
+	char	*bq_end;
 
-	(void)str;
 	tk = TK_BQUOTE;
 	if ((start = ft_lst_find(*alst, &tk, token_cmp_type)))
 	{
-		end = start->next;
+		end = &start->next;
 		while (end)
 		{
-			token = end->content;
+			token = (*end)->content;
 			if (token->type == TK_BQUOTE)
 				break ;
-			end = end->next;
-			if (token->type & TK_NON_FREEABLE)
-				ft_lst_delif(alst, token, ft_addrcmp, ft_lst_cfree);
-			else
-				ft_lst_delif(alst, token, ft_addrcmp, token_free);
+			end = &(*end)->next;
 		}
-		if (end)
-		{
-			token = start->content;
-			token->type = TK_SUBSHELL;
-			token->data = ft_strbetween(token->data + 1, ((t_token*)end->content)->data);
-			ft_lst_delif(alst, end->content, ft_addrcmp, ft_lst_cfree);
-			return (0);
-		}
+		if (!*end)
+			return (-1);
+		bq_start = ((t_token*)start->content)->data;
+		bq_end = ((t_token*)(*end)->content)->data;
+		ft_lstdel(end, token_free);
+		fit = command_getoutput(ft_strbetween(bq_start + 1, bq_end));
+		new = ft_strreplace(str, bq_start, bq_end, fit);
+		ft_strdel(str);
+		*str = new;
+		ft_lstdel(alst, token_free);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:11:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:07:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/12 13:58:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int		ft_post_tokenize(t_list **alst, char *str)
 {
-	if (reduce_parens(alst, str))
-		return (1);
-	if (reduce_bquotes(alst, str))
-		return (1);
+	int		ret;
+
+	while ((ret = reduce_parens(alst, str)))
+		if (ret == -1)
+			return (-1);
+	while ((ret = reduce_bquotes(alst, &str)))
+		if (ret == -1)
+			return (-1);
+	DG("new command from bquotes: '%s'", str);
 	return (0);
 }
