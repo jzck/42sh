@@ -143,6 +143,7 @@ exec/ft_cmd.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/set_exitstatus.c\
+glob/expand_brace.c\
 glob/glob.c\
 glob/glob_print.c\
 glob/ld/ft_ld_back.c\

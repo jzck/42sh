@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/12 17:14:38 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/12 19:00:08 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_ld
 }				t_ld;
 
 char			**glob(const char *str, char **env);
+t_ld			*expand_brace(const char *pat);
 void			glob_print(t_list *token, t_data *data);
 
 /*
