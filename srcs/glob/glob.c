@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/12 18:37:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:48:26 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,22 @@ static int		match_bracket(const char **pat, char c)
 	return (neg);
 }
 
+static int		match_pattern(const char *pat, char *str);
+
 static int		match_star(const char *pat, char *str)
 {
 	char	*fix;
 
-	(void)pat;
+	if (!pat[1])
+		return (1);
 	fix = str + ft_strlen(str);
-	return (1);
+	while (fix > str)
+	{
+		if (match_pattern(pat + 1, fix))
+			return (1);
+		--fix;
+	}
+	return (0);
 }
 
 static int		match_pattern(const char *pat, char *str)
