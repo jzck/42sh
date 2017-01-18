@@ -44,6 +44,7 @@ int		reduce_bquotes(t_list **alst, char **str)
 		ft_strdel(str);
 		*str = new;
 		ft_lstdel(alst, token_free);
+		ft_tokenize(alst, new, DEFAULT);
 		return (1);
 	}
 	return (0);

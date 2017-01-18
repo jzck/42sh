@@ -31,21 +31,20 @@ int		shell_single_command(char *command)
 		return (1);
 	DG("after post_tokenize");
 	token_print(token);
-	/* if (ft_parse(&ast, &token)) */
-	/* 	return (1); */
+	if (ft_parse(&ast, &token))
+		return (1);
 	/* btree_print(STDBUG, ast, &ft_putast); */
 	/* /1* ft_dprintf(STDBUG, "\n--- INFIX BREAKDOWN ---\n"); *1/ */
 	/* /1* btree_apply_infix(ast, &ft_putast2); *1/ */
-	/* if (ft_exec(&ast)) */
-	/* 	return (1); */
+	if (ft_exec(&ast))
+		return (1);
 	return (0);
 }
 
 int		main(int ac, char **av)
 {
-	DG("{inv}{bol}{gre}start of shell");
+	DG("{inv}{bol}{gre}start of shell{eoc} job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
 	shell_init(ac, av);
-	DG("job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
 	if (data_singleton()->opts & SHELL_OPTS_LC)
 	{
 		shell_single_command(shell_get_avdata());

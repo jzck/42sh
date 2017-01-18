@@ -21,7 +21,6 @@ void	token_print(t_list *lst)
 	while (lst)
 	{
 		i = -1;
-		DG("lst at %p", lst);
 		token = lst->content;
 		type = token->type;
 		while (type >> (i++ + 2))

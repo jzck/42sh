@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define BUF_SIZE	10
+#define BUF_SIZE	1024
 
 char	*command_getoutput(char *command)
 {
@@ -19,11 +19,12 @@ char	*command_getoutput(char *command)
 	t_btree		*ast;
 	t_astnode	item;
 	char		*output;
-	char		*buf;
+	char		buf[BUF_SIZE + 1];
 	int			ret;
+	t_exec		*exec;
 
 	output = NULL;
-	buf = NULL;
+	exec = &data_singleton()->exec;
 	item.type = TK_SUBSHELL;
 	item.data.sstr = malloc(4 * sizeof(char *));
 	item.data.sstr[0] = ft_strdup(data_singleton()->argv[0]);
@@ -32,25 +33,15 @@ char	*command_getoutput(char *command)
 	item.data.sstr[3] = NULL;
 	ast = btree_create_node(&item, sizeof(item));
 	pipe(fds);
-	dup2(fds[PIPE_WRITE], 1);
-	close(fds[PIPE_WRITE]);
+	exec->process.fdout = fds[PIPE_WRITE];
 	ft_exec(&ast);
-	/* DG("gonna parse"); */
-	/* token_print(token); */
-	/* if (ft_parse(&ast, &token)) */
-	/* 	return (NULL); */
-	/* DG("gonna exec"); */
-	/* if (ft_exec(&ast)) */
-	/* 	return (NULL); */
-
-	DG("gonna read from pipe");
+	exec->process.fdout = STDOUT;
+	close(fds[PIPE_WRITE]);
 	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)))
 	{
 		buf[ret] = 0;
-		DG("read '%s' from pipe", buf);
 		ft_strappend(&output, buf);
 	}
-	DG("finished reading from pipe");
 	close(fds[PIPE_READ]);
 	return (output);
 }
