@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:52:57 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:43:13 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 18:15:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		ft_read_it(int input, size_t *pos, char **str)
 		++i;
 	while (i < 4)
 	{
-		if (t[i])
+		if (t[i] && ft_isprint(t[i]))
 		{
 			*str = ft_realloc_imput(*str, t[i], *pos);
 			++(*pos);

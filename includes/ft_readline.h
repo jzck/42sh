@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/19 16:47:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 17:35:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_list_history
 	struct s_list_history	*next;
 }				t_list_history;
 
+int				ft_is_next_char(char *str, char c);
 long long		ft_pow(int nbr, int power);
 char			*ft_strndup(char const *s, int n);
 char			*ft_strdupi(char const *s);

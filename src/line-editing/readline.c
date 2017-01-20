@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:43:16 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 12:07:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int		ft_readline(void)
 	static t_list_history	*head = NULL;
 
 	ft_prompt();
-	if (tcsetattr(0, TCSADRAIN, ft_stats_term_termcaps()) == -1)
+	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
 	data_singleton()->line.input = ft_lecture(head);
 	ft_putstr("\n");
 	ft_check_quotes(&data_singleton()->line.input, head);
 	if (data_singleton()->line.input)
 		ft_push_back_history(&head, ft_create_history_list(data_singleton()->line.input));
-	if (tcsetattr(0, TCSADRAIN, ft_save_stats_term()) == -1)
+	if (tcsetattr(0, TCSANOW, ft_save_stats_term()) == -1)
 		return (-1);
 	return (0);
 }

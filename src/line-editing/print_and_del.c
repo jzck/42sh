@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 18:08:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 17:49:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_print(char **str, int ret, size_t *i)
 	}
 	ft_putnc('\b', j - 1);
 	++(*i);
-}
-*/
+}*/
+
 void	ft_print(char **str, int ret, size_t *i)
 {
 	size_t len;
@@ -39,34 +39,48 @@ void	ft_print(char **str, int ret, size_t *i)
 	boolean2 = 0;
 	*str = ft_realloc_imput(*str, ret, *i);
 	tmp_len = ft_strlen(*str);
+	sleep(1);
 	ft_puttermcaps("cd");
-	write(1, *str + *i, 1);
-	if ((ft_nb_last_line(*str, *i + 1)
-	+ (len % ft_size_term()) == ft_size_term() - 1) && (*str)[*i + 1] == '\n')
+	sleep(1);
+	if (ft_is_next_char(*str, '\n') &&
+	ft_nb_last_line(*str, *i + 1) + (len % ft_size_term()) == ft_size_term() - 2)
 	{
-		ft_putchar(' ');
+		sleep(1);
+		write(1, *str + *i, 1);
+		sleep(1);
+		ft_putnc(' ', ft_size_term());
+		sleep(1);
+		write(1, *str + *i + 1, ft_strlen(*str + *i + 1));
+		sleep(1);
+		ft_puttermcaps("up");
 		boolean2 = 1;
 	}
-	if ((*str)[*i + 1] == '\n' && (*str)[*i + 2] && ft_strlen(*str) > *i + 2)
-		write(1, *str + *i + 1, ft_strlen(*str + *i + 2));
 	else
-		write(1, *str + *i + 1, ft_strlen(*str + *i + 1));
+		write(1, *str + *i, ft_strlen(*str + *i));
+	sleep(1);
 	++(*i);
 	while ((*str)[*i + len] && (*str)[*i + len] != '\n')
 		++len;
-	if ((*i && !(ft_nb_last_line(*str, *i)
-	+ (len % ft_size_term()))) || ft_nb_last_line(*str, *i)
-	+ (len % ft_size_term()) == ft_size_term() - 1)
-	{
-		--(tmp_len);
+		sleep(1);
+	if (len)
+		--len;
+//	if (ft_nb_last_line(*str, *i) + (len % ft_size_term()) == ft_size_term() - 1)
+//	{
+//		--(tmp_len);
+//		ft_move_to_beggin(*str, &tmp_len);
+//		boolean = 1;
+//	}
+//	else
 		ft_move_to_beggin(*str, &tmp_len);
-		boolean = 1;
-	}
-	else
-		ft_move_to_beggin(*str, &tmp_len);
-	if (boolean2)
-		ft_puttermcaps("up");
+//	ft_printf("\n\n\n%d\n\n\n\n", ft_nb_last_line(*str, *i) + (len % ft_size_term()) );
+		sleep(1);
+
+		if (boolean2)
+			ft_puttermcaps("up");
 	write(1, *str, *i);
+	if (boolean2)
+		ft_puttermcaps("do");
+	sleep(1);
 	if (boolean)
 		ft_putstr(" \b");
 }
