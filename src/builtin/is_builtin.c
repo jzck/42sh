@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:58:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:01:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_stof g_builtin[] = {
 	{"jobs", &builtin_jobs},
 	{"fg", &builtin_fg},
 	{"bg", &builtin_bg},
+	{"read", &builtin_read},
 	{NULL, NULL},
 };
 
