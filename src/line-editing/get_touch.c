@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:42:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/21 11:12:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,9 @@
 static int		ft_lecture_3(int ret, char **str, size_t *i)
 {
 	if (ret == 127 && (*i) > 0)
-	{
-		if ((*str)[*i - 1] != '\n')
-			ft_suppr_1(str, i);
-		else
-			ft_suppr_2(str, i);
-	}
+		ft_suppr(str, i);
 	else if (ret == TOUCHE_DELETE && (*str) && (*i) < ft_strlen((*str)))
-	{
-		if ((*str)[*i] != '\n')
-			ft_del_1(str, i);
-		else
-			ft_del_2(str, i);
-	}
+		ft_del(str, i);
 	else
 		return (0);
 	return (1);
@@ -69,11 +59,9 @@ char			*ft_lecture(t_list_history *head)
 			continue ;
 		else if (ret == FLECHE_BAS || ret == FLECHE_HAUT)
 		{
+			ft_history(&str, ret, &head, &i);
 			if (str)
-				ft_putstr(str + i);
-			ft_history(&str, ret, &head);
-			if (str)
-				i = ft_strlen(str);
+				i = ft_strlen_next(str, i);
 			else
 				i = 0;
 		}

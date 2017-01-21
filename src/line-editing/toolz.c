@@ -6,25 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 17:06:30 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/20 17:34:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 18:54:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int			ft_is_next_char(char *str, char c)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		++i;
-	}
-	return (0);
-}
 
 void		ft_putnc(char c, int n)
 {

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:43:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/21 17:29:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,73 @@
 
 static void	ft_up(size_t *pos, char *str)
 {
-	int	i;
-	int	j;
-	int	len;
-	int	tmp;
-	int	size_window;
+	int i;
+	int len;
 
-	size_window = ft_size_term();
 	i = 0;
-	len = 0;
-	j = 0;
-	if (!*pos)
-		return ;
-	while (len < size_window && *pos - i)
+	if (str[*pos - 1] == '\n')
 	{
-		if (i && str[*pos - i] == '\n')
-		{
-			ft_puttermcaps("up");
-			tmp = ft_nb_last_line(str, *pos - 1 - i) + 3;
-			if (ft_get_ind_prev(str, *pos - 1 - i))
-				tmp -= 2;
-			while (j < tmp - 1)
-			{
-				ft_puttermcaps("nd");
-				++j;
-			}
-			if (!ft_get_ind_prev(str, *pos - 1 - i))
-				ft_putchar('\b');
-			len += ft_size_term() - tmp;
-		}
-		else
-		{
-			ft_putchar('\b');
-			len++;
-		}
-		i++;
-	}
-	if (!(*pos - i))
-	{
-		(*pos) = 0;
-		return ;
-	}
-	if (j)
-	{
-		ft_puttermcaps("nd");
+		ft_puttermcaps("cd");
+		(*pos) -= 2;
+		ft_get_beggin(str, pos);
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
 		++(*pos);
 	}
-	*pos -= i;
+	else
+	{
+		len = ft_size_term();
+		if (str[*pos - i] == '\n')
+		{
+			--len;
+			ft_puttermcaps("le");
+			++i;
+		}
+		while (*pos - i && str[*pos - i] != '\n' && --len + 1)
+		{
+			ft_puttermcaps("le");
+			++i;
+		}
+		if (str[*pos - i] == '\n')
+		{
+			ft_puttermcaps("nd");
+			++(*pos);
+		}
+		(*pos) -= i;
+	}
 }
 
 static void	ft_down(size_t *pos, char *str)
 {
-	int		len;
-	int		size_window;
-	char	boolean;
+	int i;
+	int len;
 
-	len = 0;
-	boolean = 0;
-	size_window = ft_size_term();
-	while (str[*pos] && len < size_window)
+	i = 0;
+	if (str[*pos] == '\n')
 	{
-		if (str[*pos] == '\n' && !boolean)
+		if (*pos)
 		{
-			len += size_window - ft_nb_last_line(str, *pos - 1) - 2;
-			boolean = 1;
+			--(*pos);
+			ft_get_beggin_with_curs(str, pos);
 		}
-		else if (str[*pos] == '\n' && boolean)
-			return ;
-		else
-			++len;
-		ft_putchar(str[*pos]);
-		++(*pos);
+		ft_puttermcaps("cd");
+		ft_get_next_str(str, pos);
+		(*pos) += 2;
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		if (!(str[*pos]))
+			--(*pos);
+		ft_get_beggin_with_curs(str, pos);
+	}
+	else
+	{
+		len = ft_size_term();
+		while (str[i + *pos] && str[i + *pos] != '\n' && --len + 1)
+		{
+			ft_putchar(str[i + *pos]);
+			++i;
+		}
+		*pos += i;
 	}
 }
 

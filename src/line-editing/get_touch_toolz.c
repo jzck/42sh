@@ -6,17 +6,20 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:42:45 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/21 11:40:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_history_2(char **str, int ret, t_list_history **head)
+void		ft_history_2(char **str, int ret, t_list_history **head, size_t *pos)
 {
 	if (*str)
 	{
-		ft_curse_move(*str);
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
+		ft_puttermcaps("cd");
+		*pos = 0;
 		ft_strdel(str);
 	}
 	if (ret == FLECHE_BAS)
@@ -28,15 +31,15 @@ static void	ft_history_2(char **str, int ret, t_list_history **head)
 		else
 			*str = ft_strdup((*head)->str);
 		if (*str)
-			ft_putstr(*str);
+			ft_current_str(*str, *pos);
 	}
 }
 
-void		ft_history(char **str, int ret, t_list_history **head)
+void		ft_history(char **str, int ret, t_list_history **head, size_t *pos)
 {
 	if (!*head)
 		return ;
-	ft_history_2(str, ret, head);
+	ft_history_2(str, ret, head, pos);
 	if (ret == FLECHE_HAUT)
 	{
 		if ((*head)->prev)
@@ -46,7 +49,7 @@ void		ft_history(char **str, int ret, t_list_history **head)
 		else
 			*str = ft_strdup((*head)->str);
 		if (*str)
-			ft_putstr(*str);
+			ft_current_str(*str, *pos);
 	}
 }
 

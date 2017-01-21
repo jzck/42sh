@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/20 17:35:02 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/20 19:08:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,16 @@ typedef struct	s_list_history
 	struct s_list_history	*next;
 }				t_list_history;
 
-int				ft_is_next_char(char *str, char c);
+void			ft_get_beggin_with_curs(char *str, size_t *pos);
+void			ft_history(char **str, int ret, t_list_history **head, size_t *pos);
+void			ft_suppr(char **str, size_t *i);
+void			ft_del(char **str, size_t *i);
+void			ft_current_str(char *str, size_t pos);
+int				ft_strlen_next(char *str, size_t pos);
+void			ft_putall_current_str(char *str, size_t *pos);
+void			ft_get_next_str(char *str, size_t *pos);
+void			ft_get_beggin(char *str, size_t *pos);
+
 long long		ft_pow(int nbr, int power);
 char			*ft_strndup(char const *s, int n);
 char			*ft_strdupi(char const *s);
@@ -83,10 +92,6 @@ void			ft_init_line(void);
 void			ft_read_it(int input, size_t *pos, char **str);
 void			ft_check_quotes(char **s, t_list_history *head);
 int				ft_check_quotes_num(char *s);
-void			ft_del_2(char **str, size_t *i);
-void			ft_del_1(char **str, size_t *i);
-void			ft_suppr_2(char **str, size_t *i);
-void			ft_suppr_1(char **str, size_t *i);
 void			ft_print(char **str, int ret, size_t *i);
 void			ft_move_to_line(int ret, size_t *pos, char *str);
 void			ft_get_head(t_list_history **head);
@@ -96,7 +101,6 @@ void			ft_curse_move(char *str);
 void			ft_move_suppr(char *str, size_t pos);
 void			ft_move_dell(char *str, size_t pos);
 void			ft_move_to_word(int ret, size_t *pos, char *str);
-void			ft_history(char **str, int ret, t_list_history **head);
 void			ft_move_term(int ret, size_t *pos, char *str);
 void			ft_move_left(size_t pos, char *str);
 void			ft_home_end(char *str, int ret, size_t *pos);

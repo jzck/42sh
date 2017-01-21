@@ -6,12 +6,12 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/20 17:49:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/21 16:57:38 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 void	ft_print(char **str, int ret, size_t *i)
 {
 	int j;
@@ -25,128 +25,48 @@ void	ft_print(char **str, int ret, size_t *i)
 	}
 	ft_putnc('\b', j - 1);
 	++(*i);
-}*/
-
-void	ft_print(char **str, int ret, size_t *i)
-{
-	size_t len;
-	size_t tmp_len;
-	char	boolean;
-	char	boolean2;
-
-	len = 0;
-	boolean = 0;
-	boolean2 = 0;
-	*str = ft_realloc_imput(*str, ret, *i);
-	tmp_len = ft_strlen(*str);
-	sleep(1);
-	ft_puttermcaps("cd");
-	sleep(1);
-	if (ft_is_next_char(*str, '\n') &&
-	ft_nb_last_line(*str, *i + 1) + (len % ft_size_term()) == ft_size_term() - 2)
-	{
-		sleep(1);
-		write(1, *str + *i, 1);
-		sleep(1);
-		ft_putnc(' ', ft_size_term());
-		sleep(1);
-		write(1, *str + *i + 1, ft_strlen(*str + *i + 1));
-		sleep(1);
-		ft_puttermcaps("up");
-		boolean2 = 1;
-	}
-	else
-		write(1, *str + *i, ft_strlen(*str + *i));
-	sleep(1);
-	++(*i);
-	while ((*str)[*i + len] && (*str)[*i + len] != '\n')
-		++len;
-		sleep(1);
-	if (len)
-		--len;
-//	if (ft_nb_last_line(*str, *i) + (len % ft_size_term()) == ft_size_term() - 1)
-//	{
-//		--(tmp_len);
-//		ft_move_to_beggin(*str, &tmp_len);
-//		boolean = 1;
-//	}
-//	else
-		ft_move_to_beggin(*str, &tmp_len);
-//	ft_printf("\n\n\n%d\n\n\n\n", ft_nb_last_line(*str, *i) + (len % ft_size_term()) );
-		sleep(1);
-
-		if (boolean2)
-			ft_puttermcaps("up");
-	write(1, *str, *i);
-	if (boolean2)
-		ft_puttermcaps("do");
-	sleep(1);
-	if (boolean)
-		ft_putstr(" \b");
 }
 
-void	ft_suppr_1(char **str, size_t *i)
+void	ft_suppr(char **str, size_t *i)
 {
-	int j;
+	size_t	tmp;
 
-	j = 0;
-	write(1, "\b", 1);
-	while (*((*str) + *i + j) && *((*str) + *i + j) != '\n')
-	{
-		ft_putchar(*((*str) + *i + j));
-		++j;
-	}
 	--(*i);
-	write(1, " ", 1);
-	if (ft_nb_last_line(*str, *i) + j == ft_size_term() - 2)
+	tmp = *i;
+	*str = ft_remove_imput((*str), tmp);
+	ft_get_beggin_with_curs(*str, i);
+	ft_puttermcaps("cd");
+	ft_current_str(*str, *i);
+	ft_get_next_str(*str, i);
+/*	if (ft_nb_last_line(*str, *i) == ft_size_term() - 2)
 	{
 		ft_puttermcaps("nd");
-		ft_putnc('\b', j);
+		ft_putnc('\b', *i - tmp);
 	}
 	else
-		ft_putnc('\b', j + 1);
-	*str = ft_remove_imput((*str), (*i));
+		ft_putnc('\b', *i - tmp + 1);*/
+	ft_putnc('\b', *i - tmp);
+	(*i) = tmp;
 }
 
-void	ft_suppr_2(char **str, size_t *i)
+void	ft_del(char **str, size_t *i)
 {
-	int		j;
+	size_t	tmp;
 
-	j = 0;
-	ft_puttermcaps("up");
-	ft_move_left(*i - 1, *str);
-	ft_puttermcaps("cd");
-	ft_putstr(*str + *i);
-	ft_move_suppr(*str, *i);
+	tmp = *i;
+	*str = ft_remove_imput((*str), tmp);
 	--(*i);
-	*str = ft_remove_imput((*str), (*i));
-}
-
-void	ft_del_1(char **str, size_t *i)
-{
-	int j;
-
-	j = 0;
-	while (*((*str) + *i + j + 1) && *((*str) + *i + j + 1) != '\n')
-	{
-		ft_putchar(*((*str) + *i + j + 1));
-		++j;
-	}
-	write(1, " ", 1);
-	if (ft_nb_last_line(*str, *i) + j == ft_size_term() - 2)
-		ft_putnc('\b', j);
-	else
-		ft_putnc('\b', j + 1);
-	(*str) = ft_remove_imput((*str), (*i));
-}
-
-void	ft_del_2(char **str, size_t *i)
-{
-	int		j;
-
-	j = 1;
+	ft_get_beggin_with_curs(*str, i);
 	ft_puttermcaps("cd");
-	ft_putstr(*str + *i + 1);
-	ft_move_dell(*str, *i);
-	*str = ft_remove_imput((*str), (*i));
+	ft_current_str(*str, *i);
+	ft_get_next_str(*str, i);
+/*	if (ft_nb_last_line(*str, *i) == ft_size_term() - 2)
+	{
+		ft_puttermcaps("nd");
+		ft_putnc('\b', *i - tmp);
+	}
+	else
+		ft_putnc('\b', *i - tmp + 1);*/
+	ft_putnc('\b', *i - tmp);
+	(*i) = tmp;
 }

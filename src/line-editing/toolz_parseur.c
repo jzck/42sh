@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:43:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/21 18:16:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,40 +52,76 @@ char	*ft_remove_imput(char *str, size_t pos)
 	return (new_str2);
 }
 
-static int	ft_found_prev_word_pos(char *str, size_t *pos)
-{
-	size_t	tmp;
-
-	tmp = *pos;
-	while ((tmp) && (str[tmp] == ' ' || str[tmp] == '\n'))
-		--tmp;
-	while ((tmp) && str[tmp] != ' ' && str[tmp] != '\n')
-		--tmp;
-	return (tmp);
-}
-
 void	ft_found_prev_word(char *str, size_t *pos)
 {
-	size_t	tmp;
+	int i;
 
-	tmp = *pos;
-	ft_move_to_beggin(str, pos);
-	*pos = tmp;
-	tmp = ft_found_prev_word_pos(str, pos);
-	write(1, str, tmp);
-	*pos = tmp;
+	i = 0;
+	if (!*pos)
+		return ;
+	if (str[*pos - 1] == '\n')
+	{
+		ft_puttermcaps("cd");
+		ft_get_beggin(str, pos);
+		--(*pos);
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		++(*pos);
+	}
+	else
+	{
+		if (!(str[*pos - i] == '\n' || str[*pos - i] == ' '))
+		{
+			ft_puttermcaps("le");
+			--(*pos);
+		}
+		while (str[*pos - i] == '\n' || str[*pos - i] == ' ')
+		{
+			ft_puttermcaps("le");
+			++i;
+		}
+		while (*pos - i && str[*pos - i] != '\n' && str[*pos - i] != ' ')
+		{
+			ft_puttermcaps("le");
+			++i;
+		}
+		if (str[*pos - i] == '\n' || str[*pos - i] == ' ')
+		{
+			ft_puttermcaps("nd");
+			++(*pos);
+		}
+		(*pos) -= i;
+	}
 }
 
 void	ft_found_next_word(char *str, size_t *pos)
 {
-	while (str[(*pos)] == ' ' || str[(*pos)] == '\n')
+	int i;
+
+	i = 0;
+	if (str[*pos] == '\n')
 	{
-		ft_putchar(str[(*pos)]);
-		++(*pos);
+		sleep(1);
+		if (*pos)
+		{
+			--(*pos);
+			ft_get_beggin_with_curs(str, pos);
+		}
+		ft_puttermcaps("cd");
+		ft_get_next_str(str, pos);
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		(*pos) -= 2;
+		ft_get_beggin_with_curs(str, pos);
+		(*pos) += 2;
 	}
-	while (str[(*pos)] && str[(*pos)] != ' ' && str[(*pos)] != '\n')
+	else
 	{
-		ft_putchar(str[(*pos)]);
-		++(*pos);
+		while (str[i + *pos] && str[i + *pos] != '\n' && str[i + *pos] != ' ')
+		{
+			ft_putchar(str[i + *pos]);
+			++i;
+		}
+		*pos += i;
 	}
 }
