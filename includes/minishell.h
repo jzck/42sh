@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:17:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/22 00:37:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "libft.h"
 
+# include "readscript.h"
 # include "types.h"
 # include "lexer.h"
 # include "parser.h"
@@ -46,6 +47,7 @@ struct	s_comp
 
 # define SHELL_MSG_NOJOBC	"no job-control"
 
+
 struct	s_data
 {
 	char	**env;
@@ -56,6 +58,7 @@ struct	s_data
 	t_comp	comp;
 	t_exec	exec;
 	t_jobc	jobc;
+	t_script	 script;
 };
 
 extern t_stof	g_builtins[];

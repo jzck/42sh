@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/12 15:10:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/20 01:14:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ int		reduce_bquotes(t_list **alst, char **str)
 	}
 	return (0);
 }
-
