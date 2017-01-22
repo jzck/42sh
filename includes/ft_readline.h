@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/20 19:08:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/22 11:13:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define FLECHE_GAUCHE 4479771
 # define FLECHE_DROITE 4414235
 # define TOUCHE_DELETE 2117294875
+# define TOUCHE_CTRL_C 3
+# define TOUCHE_CTRL_D 4
 # define TOUCHE_HOME 4741915
 # define TOUCHE_END 4610843
 # define TOUCHE_TAB 9
