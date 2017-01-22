@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/22 11:15:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/22 15:03:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static int		ft_lecture_3(int ret, char **str, size_t *i)
 
 static int		ft_lecture_2(int ret, char **str, size_t *i)
 {
-	if (ret == TOUCHE_OPT_LEFT || ret == TOUCHE_OPT_RIGHT)
+	if (ret == TOUCHE_F5)
+		ft_printall(*str, i);
+	else if (ret == TOUCHE_OPT_LEFT || ret == TOUCHE_OPT_RIGHT)
 		ft_move_to_word(ret, i, *str);
 	else if (ret == TOUCHE_OPT_X || ret == TOUCHE_OPT_C
 	|| ret == TOUCHE_OPT_V)

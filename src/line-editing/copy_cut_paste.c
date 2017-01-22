@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:42:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/22 14:10:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,66 @@
 
 static void	ft_v(char *tmp, size_t *pos, char **str)
 {
-	int	i;
-	int	j;
-	int	len;
+	size_t	tmp_pos;
+	int		i;
 
 	i = 0;
-	j = 0;
-	len = *pos;
+	tmp_pos = *pos;
 	if (!tmp)
 		return ;
 	while (tmp[i])
 	{
-		*str = ft_realloc_imput(*str, tmp[i], *pos);
-		++(*pos);
+		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
 		++i;
 	}
-	ft_putstr((*str) + *pos - i);
-	if (ft_nb_last_line(*str, *pos) == ft_size_term() - 1)
+	if (*pos)
 	{
-		ft_putchar(' ');
-		ft_putchar('\b');
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
 	}
-	*pos = ft_strlen(*str);
-	ft_move_to_beggin(*str, pos);
-	*pos = len;
-	write(1, *str, *pos);
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_putnc('\b', *pos - tmp_pos);
+	(*pos) = tmp_pos;
+}
+
+static char	*ft_strdupi_space(char const *s)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (s[i] && s[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (str)
+	{
+		str[i--] = '\0';
+		while (i >= 0)
+		{
+			str[i] = s[i];
+			i--;
+		}
+	}
+	return (str);
 }
 
 static void	ft_x(char **tmp, size_t *pos, char **str)
 {
 	int	i;
 
-	i = ft_strlen(*str) - 1;
 	if (*tmp)
 		ft_strdel(tmp);
-	*tmp = ft_strdup(&(*str)[(*pos)]);
-	while (i >= 0 && i >= (int)*pos)
+	*tmp = ft_strdupi_space(&(*str)[(*pos)]);
+	i = ft_strlen(*tmp);
+	while (i >= 0)
 	{
-		*str = ft_remove_imput(*str, i);
+		*str = ft_remove_imput(*str, *pos + i);
 		--i;
 	}
-	ft_move_to_beggin(*str, pos);
 	ft_puttermcaps("cd");
-	ft_putstr(*str);
-	*pos = ft_strlen(*str);
 }
+
 
 void		ft_cxv(int ret, size_t *pos, char **str)
 {
@@ -72,7 +87,7 @@ void		ft_cxv(int ret, size_t *pos, char **str)
 	{
 		if (tmp)
 			ft_strdel(&tmp);
-		tmp = ft_strdup(&(*str)[(*pos)]);
+		tmp = ft_strdupi_space(&(*str)[(*pos)]);
 	}
 	else if (ret == TOUCHE_OPT_V)
 		ft_v(tmp, pos, str);

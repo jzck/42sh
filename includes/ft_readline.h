@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/22 11:13:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/22 14:34:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 # define TOUCHE_OPT_V 10127586
 # define TOUCHE_OPT_C 42947
 # define TOUCHE_OPT_X 8948194
+# define TOUCHE_F5 892427035
+# define TOUCHE_F6 925981467
 
 typedef struct	s_line
 {
@@ -60,6 +62,7 @@ typedef struct	s_list_history
 	struct s_list_history	*next;
 }				t_list_history;
 
+void			ft_printall(char *str, size_t *pos);
 void			ft_get_beggin_with_curs(char *str, size_t *pos);
 void			ft_history(char **str, int ret, t_list_history **head, size_t *pos);
 void			ft_suppr(char **str, size_t *i);

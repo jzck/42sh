@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/21 18:16:56 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/22 11:58:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,30 @@ void	ft_found_prev_word(char *str, size_t *pos)
 	i = 0;
 	if (!*pos)
 		return ;
+	if (!(str[*pos] == '\n' || str[*pos] == ' '))
+	{
+		ft_puttermcaps("le");
+		--(*pos);
+	}
+	while ((int)*pos - i  - 1 > 0 && str[*pos - i - 1] == ' ')
+	{
+		ft_puttermcaps("le");
+		++i;
+	}
+	(*pos) = (i && str[*pos - i] == '\n') ? *pos - i + 1 : *pos - i;
+	i = 0;
 	if (str[*pos - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
+		(*pos) -= 2;
 		ft_get_beggin(str, pos);
-		--(*pos);
 		ft_current_str(str, *pos);
 		ft_get_next_str(str, pos);
 		++(*pos);
 	}
 	else
 	{
-		if (!(str[*pos - i] == '\n' || str[*pos - i] == ' '))
+		if (!(str[*pos] == '\n' || str[*pos] == ' '))
 		{
 			ft_puttermcaps("le");
 			--(*pos);
@@ -99,9 +111,13 @@ void	ft_found_next_word(char *str, size_t *pos)
 	int i;
 
 	i = 0;
+	while (str[i + *pos] && str[i + *pos] == ' ')
+	{
+		ft_putchar(str[i + *pos]);
+		++i;
+	}
 	if (str[*pos] == '\n')
 	{
-		sleep(1);
 		if (*pos)
 		{
 			--(*pos);
@@ -109,11 +125,11 @@ void	ft_found_next_word(char *str, size_t *pos)
 		}
 		ft_puttermcaps("cd");
 		ft_get_next_str(str, pos);
+		(*pos) += 2;
 		ft_current_str(str, *pos);
 		ft_get_next_str(str, pos);
-		(*pos) -= 2;
+		--(*pos);
 		ft_get_beggin_with_curs(str, pos);
-		(*pos) += 2;
 	}
 	else
 	{
