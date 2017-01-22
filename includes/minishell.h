@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 00:37:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 22:50:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ struct	s_comp
 # define SHELL_OPTS_LC		(1 << 1)
 # define SHELL_MODE_INPUT	(1 << 2)
 # define SHELL_MODE_EXEC	(1 << 3)
+# define SHELL_MODE_SCRIPT	(1 << 4)
 
-# define SHELL_MODE_MASK	(SHELL_MODE_INPUT | SHELL_MODE_EXEC)
+# define SHELL_MODE_MASK	(SHELL_MODE_INPUT | SHELL_MODE_EXEC | SHELL_MODE_SCRIPT)
 # define SHELL_HAS_JOBC(b)	(b & SHELL_OPTS_JOBC)
 
 # define SHELL_MSG_NOJOBC	"no job-control"

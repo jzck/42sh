@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 22:50:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 21:24:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 22:19:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ typedef struct s_script	 t_script;
 */
 	
 int			ft_read_script(char *file);
+
+int			rs_shebang_check(char *file, t_script *script);
 
 #endif

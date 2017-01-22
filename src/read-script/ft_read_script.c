@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 22:49:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 21:39:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 22:19:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int			ft_read_script(char *file)
 	if (rs_setup(script) < 0)
 		return (-1);
 	if (rs_loop(file, script) < 0)
+		return (-1);
+	if (rs_shebang_check(file, script) < 0)
 		return (-1);
 	script->buffer = NULL;
 	DG("{inv}{bol}{gre}read of script{eoc} script detected");
