@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 00:37:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 21:18:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int		main(int ac, char **av)
 		shell_single_command(shell_get_avdata());
 		return (0);
 	}
+	if (ft_read_script(av[1]))
+		return (0);	
 	while (1)
 	{	
-//		if (ft_read_script())
-//			return (1);
-//		else if (ft_readline())
-//			return (1);
-//		if (shell_single_command(data_singleton()->line.input))
-//			return (1);
+		if (ft_readline())
+			return (1);
+		if (shell_single_command(data_singleton()->line.input))
+			return (1);
 	}
 	return (0);
 }
