@@ -6,13 +6,14 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/20 15:01:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:42:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_stof g_builtin[] = {
+t_stof g_builtin[] =
+{
 	{"echo", &builtin_echo},
 	{"cd", &builtin_cd},
 	{"setenv", &builtin_setenv},

@@ -6,12 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/20 19:32:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:04:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef BUILTIN_READ_H
+# define BUILTIN_READ_H
 
 # include "types.h"
 # include "libft.h"
@@ -30,15 +30,18 @@
 # define READ_OPT_LT	(1 << 9)
 # define READ_OPT_LU	(1 << 10)
 
-typedef	struct s_read	t_read;
+typedef	struct s_read		t_read;
+typedef	struct s_readopt	t_readopt;
 
 struct	s_read
 {
+	t_flag	opts;
 	char	delim;
 	int		nchars;
 	char	*prompt;
 	int		timeout;
 	int		fd;
+	char	**names;
 };
 
 struct s_readopt
@@ -51,5 +54,11 @@ struct s_readopt
 extern t_readopt	g_readtab[];
 
 int		builtin_read(const char *path, char *const av[], char *const envp[]);
+
+int		bt_read_getdelim(t_read *data, char *arg);
+int		bt_read_getnchars(t_read *data, char *arg);
+int		bt_read_getprompt(t_read *data, char *arg);
+int		bt_read_gettimeout(t_read *data, char *arg);
+int		bt_read_getfd(t_read *data, char *arg);
 
 #endif

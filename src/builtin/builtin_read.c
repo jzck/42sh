@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/20 19:32:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:21:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,31 @@
 
 t_readopt	g_readtab[] =
 {
-	{'a', READ_OPT_LA, NULL},
-	{'d', READ_OPT_LD, NULL},
-	{'e', READ_OPT_LE, NULL},
-	{'i', READ_OPT_LI, NULL},
-	{'n', READ_OPT_LN, NULL},
-	{'N', READ_OPT_UN, NULL},
-	{'p', READ_OPT_LP, NULL},
+	/* {'a', READ_OPT_LA, NULL}, */
+	{'d', READ_OPT_LD, bt_read_getdelim},
+	/* {'e', READ_OPT_LE, NULL}, */
+	/* {'i', READ_OPT_LI, NULL}, */
+	{'n', READ_OPT_LN, bt_read_getnchars},
+	/* {'N', READ_OPT_UN, bt_read_getnchars}, */
+	{'p', READ_OPT_LP, bt_read_getprompt},
 	{'r', READ_OPT_LR, NULL},
 	{'s', READ_OPT_LS, NULL},
-	{'t', READ_OPT_LT, NULL},
-	{'u', READ_OPT_LU, NULL},
+	{'t', READ_OPT_LT, bt_read_gettimeout},
+	{'u', READ_OPT_LU, bt_read_getfd},
 	{0, 0, 0},
 };
 
-void	bt_read_init(t_read *data)
+void		bt_read_init(t_read *data)
 {
-	data.delim = '\n';
-	data.nchars = -1;
-	data.prompt = NULL;
-	data.timeout = -1;
-	data.fd = 0;
+	data->opts = 0;
+	data->delim = '\n';
+	data->nchars = -1;
+	data->prompt = NULL;
+	data->timeout = -1;
+	data->fd = 0;
 }
 
-t_readopt	bt_read_getopt(char letter)
+t_readopt	*bt_read_getopt(char letter)
 {
 	int		i;
 
@@ -45,48 +46,56 @@ t_readopt	bt_read_getopt(char letter)
 	while (g_readtab[i].letter)
 	{
 		if (g_readtab[i].letter == letter)
-			return (g_readtab[i]);
+			return (&g_readtab[i]);
+		i++;
 	}
 	return (NULL);
 }
 
-int		bt_read_parse(t_read *data, char **av)
+int			bt_read_parse(t_read *data, char **av)
 {
 	int			i;
 	int			j;
 	int			k;
-	t_readopt	opt;
+	t_readopt	*opt;
 
+	i = 1;
+	k = 0;
 	while (av[i])
 	{
 		j = 0;
+		DG("check 1");
 		if (av[i][j++] == '-')
 		{
-			if (av[i][j] == '-')
+			if (av[i][j] == '-' && av[i][j + 1] == 0)
 			{
+				DG("check 2");
 				i++;
 				break ;
 			}
+			DG("check 3");
 			while (av[i][j])
 			{
 				if (!(opt = bt_read_getopt(av[i][j])))
 				{
-					ft_dprintf(2, "%s: bad option: %c", SHELL_NAME, av[i][j]);
+					ft_dprintf(2, "{red}%s: bad option: %c{eoc}\n", SHELL_NAME, av[i][j]);
 					return (2);
 				}
-				data->opts |= opt.flag;
-				if (data->get)
+				data->opts |= opt->flag;
+				if (opt->get)
 				{
-					(*data->get)(data, av[i + 1]);
+					(*opt->get)(data, av[++i]);
 					break ;
 				}
 				j++;
 			}
+			DG("check 4");
 		}
+		else
+			break ;
 		i++;
 	}
-	if (av[i])
-		bt_read_getnames(())
+	data->names = av + i;
 	return (0);
 }
 
@@ -94,10 +103,46 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 {
 	t_read	data;
 	int		i;
+	char	buf[5];
+	char	*input;
+	int		esc;
 
 	(void)path;
 	(void)envp;
+	input = NULL;
 	bt_read_init(&data);
-	if ((i = bt_read_parse(&data, (char **)av)))
-		return (i);
+	if ((bt_read_parse(&data, (char **)av)))
+		return (2);
+	DG("read_opts: %b", data.opts);
+	DG("\ndelim=%c\nnchars=%i\nprompt=%s\ntimeout=%i\nfd=%i",
+		data.delim, data.nchars, data.prompt, data.timeout, data.fd);
+	ft_sstrprint(data.names, ',');
+	i = 0;
+	esc = 0;
+	if (data.prompt)
+		ft_printf(data.prompt);
+	while (42)
+	{
+		if (read(0, buf, 1) < 0)
+			return (1);
+		buf[1] = 0;
+		if (!esc && *buf == data.delim)
+		{
+			DG("CHECK 1");
+			break ;
+		}
+		if (*buf == '\n' && !(data.opts & READ_OPT_LR))
+			ft_putstr("> ");
+		esc = esc ? 0 : !(data.opts & READ_OPT_LR) && (*buf == '\\');
+		ft_strappend(&input, buf);
+		i++;
+		DG("%i:%i", data.opts & READ_OPT_LN, i >= data.nchars);
+		if ((data.opts & READ_OPT_LN) && i >= data.nchars)
+		{
+			DG("CHECK 2");
+			break ;
+		}
+	}
+	DG("input=%s", input);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:29:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/22 17:40:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		lexer_number(t_list **alst, char *str)
 	t_lexstate	state;
 
 	token = (*alst)->content;
-	DG("*str=%c", *str);
 	if ((state = get_lexer_state(str)))
 		return (ft_tokenize(alst, str, state));
 	if (*str == '>')
