@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 21:42:27 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 22:53:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 23:11:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			rs_shebang_check(char *file, t_script *script)
 	else if (ft_strncmp(interpreter, "minishell", ft_strlen("minishell")) == 0)
 	{
 		data_singleton()->opts &= ~SHELL_MODE_MASK;
-		data_singleton()->opts |= SHELL_MODE_EXEC;
+		data_singleton()->opts |= SHELL_MODE_SCRIPT;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 22:52:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 23:09:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		shell_single_command(char *command)
 	/* /1* btree_apply_infix(ast, &ft_putast2); *1/ */
 	if (ft_exec(&ast))
 		return (1);
+
 	return (0);
 }
 
@@ -51,7 +52,10 @@ int		main(int ac, char **av)
 	}
 	if (ft_read_script(av[1]))
 	{
-		shell_single_command(data_singleton()->line.input);
+		if (data_singleton()->opts & SHELL_MODE_SCRIPT)
+			shell_script();
+		else
+			shell_single_command(data_singleton()->line.input);
 		return (0);
 	}
 	while (1)
