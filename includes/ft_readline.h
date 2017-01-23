@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/22 14:34:41 by gwojda           ###   ########.fr       */
+/*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
+/*   Updated: 2017/01/23 15:14:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct	s_list_history
 	struct s_list_history	*next;
 }				t_list_history;
 
+int				ft_found_next_char(char *str, size_t i);
+void			ft_check_end_of_line(char *str, size_t pos);
 void			ft_printall(char *str, size_t *pos);
 void			ft_get_beggin_with_curs(char *str, size_t *pos);
 void			ft_history(char **str, int ret, t_list_history **head, size_t *pos);
@@ -114,6 +116,5 @@ char			**ft_split_whitespaces(char const *s);
 void			ft_cxv(int ret, size_t *pos, char **str);
 char			*ft_lecture(t_list_history *head);
 void			ft_prompt(void);
-
 
 #endif

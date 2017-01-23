@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/22 11:58:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/23 13:40:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_found_prev_word(char *str, size_t *pos)
 	i = 0;
 	if (!*pos)
 		return ;
-	if (!(str[*pos] == '\n' || str[*pos] == ' '))
+	if (str[*pos - 1] != '\n' && !(str[*pos] == '\n' || str[*pos] == ' '))
 	{
 		ft_puttermcaps("le");
 		--(*pos);

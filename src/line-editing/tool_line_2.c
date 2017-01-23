@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/22 17:20:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/23 11:31:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	ft_printall(char *str, size_t *pos)
 	size_t	pos_tmp;
 	int			ret;
 
+	ret = 0;
 	if (read(0, &ret, sizeof(int)) == -1 || ret != 126 || !str)
 		return ;
 	ft_clear_window();
 	ft_prompt();
-	sleep(1);
 	pos_tmp = *pos;
-
 	ft_putstr("\033[31m");
 	ft_puttermcaps("cd");
 	ft_puttermcaps("sc");
@@ -62,6 +61,19 @@ void	ft_printall(char *str, size_t *pos)
 		--(*pos);
 	ft_putnc('\b', *pos - pos_tmp + 1);
 	*pos = pos_tmp;
+}
+
+void	ft_check_end_of_line(char *str, size_t pos)
+{
+	if (!str)
+		return ;
+	//ft_printf("\n\n\nnd = %d\n\n", ft_nb_last_line(str, pos));
+	if (ft_nb_last_line(str, pos) == 0)
+	{
+		//ft_printf("\n\n\nhere\n\n");
+		ft_putchar(' ');
+		ft_puttermcaps("le");
+	}
 }
 
 void	ft_get_beggin_with_curs(char *str, size_t *pos)

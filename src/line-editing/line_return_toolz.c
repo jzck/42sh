@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 14:32:12 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:42:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/23 10:57:17 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,40 +104,4 @@ void		ft_move_suppr(char *str, size_t pos)
 			--pos;
 		}
 	}
-}
-
-void		ft_curse_move(char *str)
-{
-	int		i;
-	int		count;
-	int		prompt_size;
-
-	prompt_size = data_singleton()->line.prompt_size;
-	count = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-		{
-			count += ft_nb_line(str, i - 1);
-			count++;
-		}
-		++i;
-	}
-	while (i && str[i] != '\n')
-	{
-		ft_putchar('\b');
-		--i;
-	}
-	if (count)
-	{
-		while (count)
-		{
-			ft_puttermcaps("up");
-			--count;
-		}
-		while (--prompt_size + 2)
-			ft_puttermcaps("nd");
-	}
-	ft_puttermcaps("cd");
 }
