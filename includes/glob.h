@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/12 19:00:08 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/24 19:27:53 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct	s_ld
 char			**glob(const char *str, char **env);
 t_ld			*expand_brace(const char *pat);
 void			glob_print(t_list *token, t_data *data);
+int				match_pattern(const char *pat, char *str, char *full_word, t_ld **match);
+void			dir_research(const char *pat, char *path, t_ld **match);
+bool			is_directory(const char *path);
 
 /*
 ** LIST D:
@@ -40,6 +43,13 @@ void			ft_ld_reverse(t_ld **lst);
 t_ld			*ft_ld_back(t_ld *ld);
 t_ld			*ft_ld_swap(t_ld *l_cur);
 char			**ft_ld_to_tab(t_ld *ld);
+t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
 
+/*
+** str:
+*/
+
+char			*ft_strjoinf(char *str, char *str2, int mode);
+void			ft_tabdel(char ***mytab);
 
 #endif
