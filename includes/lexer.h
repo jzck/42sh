@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 16:21:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/24 20:13:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ enum	e_lexstate
 	BACKSLASH,
 	VAR,
 	SPECIAL,
+	COMMENT,
 };
 
 struct	s_token
@@ -94,6 +95,7 @@ int			ft_is_delim(char c);
 
 t_lexstate	get_lexer_state(char *str);
 int			lexer_default(t_list **alst, char *str);
+int			lexer_comment(t_list **alst, char *str);
 int			lexer_newline(t_list **alst, char *str);
 int			lexer_delim(t_list **alst, char *str);
 int			lexer_sep(t_list **alst, char *str);

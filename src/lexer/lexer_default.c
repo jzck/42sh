@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 01:01:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/24 19:22:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		lexer_default(t_list **alst, char *str)
 		return (ft_tokenize(alst, str, GREAT));
 	else if (*str == '<')
 		return (ft_tokenize(alst, str, LESS));
+	else if (*str == '#')
+		return (ft_tokenize(alst, str, COMMENT));
 	else if (ft_isdigit(*str))
 		state = NUMBER;
 	else
