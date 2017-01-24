@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 19:27:53 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/24 21:22:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ typedef struct	s_ld
 char			**glob(const char *str, char **env);
 t_ld			*expand_brace(const char *pat);
 void			glob_print(t_list *token, t_data *data);
-int				match_pattern(const char *pat, char *str, char *full_word, t_ld **match);
+int				match_pattern(const char *pat, char *str,
+								char *full_word, t_ld **match);
 void			dir_research(const char *pat, char *path, t_ld **match);
+void			dir_research_recursive(const char *pat, char *p, t_ld **match);
 bool			is_directory(const char *path);
 
 /*

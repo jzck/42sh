@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 20:42:30 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/24 20:58:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int		match_star(const char *pat, char *str,
 {
 	char	*fix;
 
+	if (pat[1] == '*')
+		dir_research_recursive(pat, full_word, match);
 	if (!pat[1])
 		return (1);
 	fix = str + ft_strlen(str);
