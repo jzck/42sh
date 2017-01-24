@@ -6,3 +6,5 @@ debug
 *.dSYM
 .script.sh.swp
 *.swp
+*.swo
+*.o
