@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:11 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/23 11:23:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 11:19:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_nb_last_line(char *str, size_t pos)
 	int	len;
 
 	len = 1;
-	if (str[pos] == '\n')
+	if (pos && str[pos] == '\n')
 		--pos;
 	len += data_singleton()->line.prompt_size;
 	len += ft_get_size_prev(str, pos);

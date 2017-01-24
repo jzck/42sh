@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 18:20:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/21 17:04:13 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 11:36:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_get_beggin(char *str, size_t *pos)
 {
 	while ((*pos) && str[(*pos)] != '\n')
 		--(*pos);
-	if (str[(*pos)] == '\n')
+	if (*pos && str[(*pos)] == '\n')
 		++(*pos);
 }
 
@@ -24,7 +24,7 @@ void	ft_get_next_str(char *str, size_t *pos)
 {
 	while (str[(*pos)] && str[(*pos)] != '\n')
 		++(*pos);
-	if (str[(*pos)] == '\n')
+	if (*pos && str[(*pos)] == '\n')
 		--(*pos);
 }
 

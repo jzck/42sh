@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/23 13:40:41 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:14:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ void	ft_found_next_word(char *str, size_t *pos)
 		(*pos) += 2;
 		ft_current_str(str, *pos);
 		ft_get_next_str(str, pos);
-		--(*pos);
+		if (!str[*pos])
+			--(*pos);
 		ft_get_beggin_with_curs(str, pos);
 	}
 	else

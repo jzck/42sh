@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/23 15:13:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:40:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,19 @@ void	ft_suppr(char **str, size_t *i)
 	--(*i);
 	tmp = *i;
 	if (boolean)
+	{
 		ft_get_beggin_with_curs(*str, i);
+		*str = ft_remove_imput((*str), tmp);
+	}
 	else
+	{
+		*str = ft_remove_imput((*str), tmp);
 		ft_get_beggin(*str, i);
-	*str = ft_remove_imput((*str), tmp);
+	}
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *i);
 	ft_get_next_str(*str, i);
-	if (str[*i] && ft_found_next_char(*str, *i))
+	if (*i && (*str)[*i] && ft_found_next_char(*str, *i))
 		++(*i);
 	ft_putnc('\b', *i - tmp);
 	(*i) = tmp;
@@ -71,12 +76,14 @@ void	ft_del(char **str, size_t *i)
 	tmp = *i;
 	*str = ft_remove_imput((*str), tmp);
 	if (*i)
+	{
 		--(*i);
-	ft_get_beggin_with_curs(*str, i);
+		ft_get_beggin_with_curs(*str, i);
+	}
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *i);
 	ft_get_next_str(*str, i);
-	if (str[*i])
+	if ((*str)[*i])
 		++(*i);
 	ft_putnc('\b', *i - tmp);
 	(*i) = tmp;

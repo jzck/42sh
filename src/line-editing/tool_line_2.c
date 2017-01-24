@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/23 11:31:36 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 11:37:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ void	ft_printall(char *str, size_t *pos)
 	ft_puttermcaps("rc");
 	ft_puttermcaps("cd");
 	ft_putstr("\033[37m");
-	--(*pos);
+	if (*pos)
+		--(*pos);
 	ft_get_beggin(str, pos);
 	ft_current_str(str, *pos);
 	ft_get_next_str(str, pos);
-	if (!str[*pos])
+	if (*pos && !str[*pos])
 		--(*pos);
-	ft_putnc('\b', *pos - pos_tmp + 1);
+	if (*pos)
+		ft_putnc('\b', *pos - pos_tmp + 1);
 	*pos = pos_tmp;
 }
 
@@ -83,7 +85,7 @@ void	ft_get_beggin_with_curs(char *str, size_t *pos)
 		--(*pos);
 		ft_puttermcaps("le");
 	}
-	if (!*pos)
+	if (!*pos && str[(*pos)] != '\n')
 		ft_puttermcaps("le");
 	if (str[(*pos)] == '\n')
 		++(*pos);

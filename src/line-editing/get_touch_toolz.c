@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/21 11:40:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 10:21:48 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		ft_history_2(char **str, int ret, t_list_history **head, size_t *pos)
 {
 	if (*str)
 	{
-		--(*pos);
+		if (*pos)
+			--(*pos);
 		ft_get_beggin_with_curs(*str, pos);
 		ft_puttermcaps("cd");
 		*pos = 0;
