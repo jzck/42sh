@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 15:14:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 16:42:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ typedef struct	s_line
 	int						prompt_size;
 	int						list_size;
 	t_list_history			*list_end;
+	t_list_history			*list_beg;
 }				t_line;
 
+void			ft_check_heredoc(char **str);
 void			ft_history_builtin(void);
 int				ft_nbr_len(int nbr);
 int				ft_found_next_char(char *str, size_t i);

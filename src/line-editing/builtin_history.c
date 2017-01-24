@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:54:53 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 15:26:28 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 16:44:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ft_history_builtin(void)
 		ft_putnc(' ', ft_nbr_len(data_singleton()->line.list_size) - ft_nbr_len(len));
 		ft_printf("%zu  %s\n", len, head->str);
 		++len;
-		head = head->nextm;
+		head = head->next;
 	}
 }
