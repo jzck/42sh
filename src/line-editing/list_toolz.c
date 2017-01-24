@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/19 16:42:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 15:19:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_list_history	*ft_create_history_list(char *str)
 
 void			ft_push_back_history(t_list_history **head, t_list_history *new)
 {
+	++(data_singleton()->line.list_size);
 	if (!*head)
 	{
 		*head = new;
@@ -38,6 +39,7 @@ void			ft_push_back_history(t_list_history **head, t_list_history *new)
 		(*head)->next = ft_create_history_list(NULL);
 		(*head)->next->prev = (*head);
 		(*head) = (*head)->next;
+		(data_singleton())->line.list_end = new;
 		return ;
 	}
 	while ((*head)->next)

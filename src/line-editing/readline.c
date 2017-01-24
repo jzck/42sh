@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/22 14:57:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/24 15:29:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_init_line(void)
 {
 	data_singleton()->line.input = NULL;
 	data_singleton()->line.prompt_size = 0;
+	data_singleton()->line.list_size = 0;
+	data_singleton()->line.list_end = NULL;
 }
 
 struct termios	*ft_save_stats_term(void)

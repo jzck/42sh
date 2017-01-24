@@ -1,52 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolz2.c                                           :+:      :+:    :+:   */
+/*   builtin_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 15:00:16 by gwojda           ###   ########.fr       */
+/*   Created: 2017/01/24 14:54:53 by gwojda            #+#    #+#             */
+/*   Updated: 2017/01/24 15:26:28 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_nbr_len(int nbr)
+void	ft_history_builtin(void)
 {
-	if (nbr % 10 != nbr)
-		return (ft_nbr_len(nbr / 10) + 1);
-	else
-		return (1);
-}
+	size_t	len;
+	t_list_history	*head;
 
-void	ft_puttermcaps(char *str)
-{
-	char	*res;
-	char	*env;
-
-	env = getenv("TERM");
-	if ((res = tgetstr(str, &env)) == NULL)
+	head = data_singleton()->line.list_end;
+	len = 1;
+	if (!head)
 		return ;
-	tputs(res, 0, ft_put);
-}
-
-int		ft_size_term(void)
-{
-	return (tgetnum("co"));
-}
-
-long long	ft_pow(int nbr, int power)
-{
-	int			i;
-	long long	ret;
-
-	i = 0;
-	ret = 1;
-	while (i < power)
+	if (head && !head->str)
+		head = head->next;
+	while (head && head->str)
 	{
-		ret *= nbr;
-		i++;
+		ft_putnc(' ', ft_nbr_len(data_singleton()->line.list_size) - ft_nbr_len(len));
+		ft_printf("%zu  %s\n", len, head->str);
+		++len;
+		head = head->nextm;
 	}
-	return (ret);
 }
