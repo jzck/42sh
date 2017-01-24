@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 23:18:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/24 01:25:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		(*g_lexer[])(t_list **alst, char *str) =
 {
 	&lexer_default,
+	&lexer_newline,
 	&lexer_delim,
 	&lexer_sep,
 	&lexer_word,
@@ -32,7 +33,7 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 
 int		ft_is_delim(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
+	return (c == ' ' || c == '\t');
 }
 
 int		ft_tokenize(t_list **alst, char *str, t_lexstate state)

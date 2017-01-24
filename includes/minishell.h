@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 23:21:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 23:31:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # include "libft.h"
 
-# include "readscript.h"
 # include "types.h"
 # include "lexer.h"
 # include "parser.h"
@@ -48,6 +47,14 @@ struct	s_comp
 
 # define SHELL_MSG_NOJOBC	"no job-control"
 
+struct	s_script
+{
+	char	*buffer;
+	int		q_size;
+	t_list	*queue;
+};
+
+typedef struct s_script	t_script;
 
 struct	s_data
 {
@@ -73,6 +80,7 @@ void	data_exit(void);
 
 int		shell_single_command(char *command);
 
+int		read_script(char *file);
 int		shell_script(void);
 
 void	ft_expand_dollar(char **av, char **env);

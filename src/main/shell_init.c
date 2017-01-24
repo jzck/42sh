@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 21:58:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 22:35:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	shell_init(int ac, char **av)
 		tcsetpgrp(STDIN, *shell_pgid);
 		tcgetattr(STDIN, &data_singleton()->jobc.shell_tmodes);
 	}
+	read_script(av[1]);
 	shell_get_opts(ac, av);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 23:30:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/24 00:45:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ typedef long long		t_type;
 # define TK_DQ_WORD		(1 << 16)
 # define TK_COMMAND		(1 << 17)
 # define TK_SUBSHELL	(1 << 18)
+# define TK_NEWLINE		(1 << 19)
+# define TK_LOOP		(1 << 20)
+# define TK_B_LOOP		(1 << 21)
+# define TK_E_LOOP		(1 << 22)
 
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
@@ -44,6 +48,7 @@ typedef long long		t_type;
 enum	e_lexstate
 {
 	DEFAULT,
+	NEWLINE,
 	DELIM,
 	SEP,
 	WORD,
@@ -89,6 +94,7 @@ int			ft_is_delim(char c);
 
 t_lexstate	get_lexer_state(char *str);
 int			lexer_default(t_list **alst, char *str);
+int			lexer_newline(t_list **alst, char *str);
 int			lexer_delim(t_list **alst, char *str);
 int			lexer_sep(t_list **alst, char *str);
 int			lexer_word(t_list **alst, char *str);

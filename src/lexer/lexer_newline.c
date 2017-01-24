@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_sep.c                                        :+:      :+:    :+:   */
+/*   lexer_newline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 16:29:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 01:25:42 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/23 23:19:46 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/24 01:25:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_sep(t_list **alst, char *str)
+int		lexer_newline(t_list **alst, char *str)
 {
 	t_token		*token;
 
@@ -20,7 +20,7 @@ int		lexer_sep(t_list **alst, char *str)
 	{
 		token = (*alst)->content;
 		if (*token->data)
-			return (lexer_sep(&(*alst)->next, str));
+			return (lexer_newline(&(*alst)->next, str));
 	}
 	else
 	{
@@ -28,13 +28,6 @@ int		lexer_sep(t_list **alst, char *str)
 		*alst = ft_lstnew(token, sizeof(*token));
 	}
 	token = (*alst)->content;
-	if (str[0] == '&')
-		token->type = str[1] == '&' ? TK_AND_IF : TK_AMP;
-	if (str[0] == '|')
-		token->type = str[1] == '|' ? TK_OR_IF : TK_PIPE;
-	token->type = (*str == ';') ? TK_SEMI : token->type;
-	return (ft_tokenize(&(*alst)->next,
-				str + 1 +
-				(token->type & (TK_AND_IF | TK_OR_IF) ? 1 : 0),
-				DEFAULT));
+	token->type = TK_NEWLINE;
+	return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
 }
