@@ -4,3 +4,4 @@ minishell
 out
 debug
 *.dSYM
+.script.sh.swp
