@@ -6,13 +6,14 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 10:21:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:49:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_history_2(char **str, int ret, t_list_history **head, size_t *pos)
+void		ft_history_2(char **str, int ret, t_list_history **head
+			, size_t *pos)
 {
 	if (*str)
 	{

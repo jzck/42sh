@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 11:22:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:26:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,91 +18,90 @@ int				ft_put(int nb)
 	return (1);
 }
 
-void			ft_home_end(char *str, int ret, size_t *pos)
+void			ft_end(char *str, size_t *pos)
 {
-	if (ret == TOUCHE_END && str)
+	if (*pos)
 	{
-		if (*pos)
-		{
-			--(*pos);
-			ft_get_beggin_with_curs(str, pos);
-		}
-		ft_puttermcaps("cd");
-		while (str[*pos])
-			++(*pos);
-		ft_get_beggin(str, pos);
-		ft_current_str(str, *pos);
-		ft_get_next_str(str, pos);
+		--(*pos);
+		ft_get_beggin_with_curs(str, pos);
 	}
-	else if (ret == TOUCHE_HOME)
+	ft_puttermcaps("cd");
+	while (str[*pos])
+		++(*pos);
+	ft_get_beggin(str, pos);
+	ft_current_str(str, *pos);
+	ft_get_next_str(str, pos);
+}
+
+void			ft_home(char *str, size_t *pos)
+{
+	if (*pos)
+	{
+		--(*pos);
+		ft_get_beggin_with_curs(str, pos);
+		if (str[*pos + 1] == '\n')
+			ft_puttermcaps("nd");
+	}
+	ft_puttermcaps("cd");
+	*pos = 0;
+	ft_current_str(str, *pos);
+	ft_get_next_str(str, pos);
+	ft_check_end_of_line(str, *pos);
+	if (!str[*pos])
+		--(*pos);
+	ft_get_beggin_with_curs(str, pos);
+}
+
+void			ft_move_right(size_t *pos, char *str)
+{
+	size_t	tmp;
+
+	if (ft_strlen(str) <= *pos)
+		return ;
+	if (str[*pos] == '\n')
 	{
 		if (*pos)
 		{
-			--(*pos);
-			ft_get_beggin_with_curs(str, pos);
-			if (str[*pos + 1] == '\n')
-				ft_puttermcaps("nd");
+			tmp = *pos - 1;
+			ft_get_beggin_with_curs(str, &tmp);
 		}
 		ft_puttermcaps("cd");
-		*pos = 0;
+		++(*pos);
 		ft_current_str(str, *pos);
 		ft_get_next_str(str, pos);
-		ft_check_end_of_line(str, *pos);
 		if (!str[*pos])
 			--(*pos);
 		ft_get_beggin_with_curs(str, pos);
 	}
+	else
+	{
+		ft_putchar(str[*pos]);
+		++(*pos);
+	}
 }
 
-void			ft_move_term(int ret, size_t *pos, char *str)
+void			ft_move_left(size_t *pos, char *str)
 {
-	size_t	tmp;
-
-	if (ret == FLECHE_DROITE && str && ft_strlen(str) > *pos)
+	if (!*pos)
+		return ;
+	if (str[*pos - 1] == '\n')
 	{
-		if (str[*pos] == '\n')
+		if (*pos - 1 == 0)
 		{
-			if (*pos)
-			{
-				tmp = *pos - 1;
-				ft_get_beggin_with_curs(str, &tmp);
-			}
-			//si premiere ligne ne contient que \n, puis fleche droite -> decalage//
 			ft_puttermcaps("cd");
-			++(*pos);
-			ft_current_str(str, *pos);
-			ft_get_next_str(str, pos);
-			if (!str[*pos])
-				--(*pos);
-			ft_get_beggin_with_curs(str, pos);
-		}
-		else
-		{
-			ft_putchar(str[*pos]);
-			++(*pos);
-		}
-	}
-	else if (ret == FLECHE_GAUCHE && *pos > 0)
-	{
-		if (str[*pos - 1] == '\n')
-		{
-			if (*pos - 1 == 0)
-			{
-				ft_puttermcaps("cd");
-				--(*pos);
-				return ;
-			}
-			ft_puttermcaps("cd");
-			(*pos) -= 2;
-			ft_get_beggin(str, pos);
-			ft_current_str(str, *pos);
-			ft_get_next_str(str, pos);
-			++(*pos);
-		}
-		else
-		{
-			ft_puttermcaps("le");
 			--(*pos);
+			return ;
 		}
+		ft_puttermcaps("cd");
+		(*pos) -= 2;
+		ft_get_beggin(str, pos);
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		++(*pos);
+	}
+	else
+	{
+		ft_puttermcaps("le");
+		--(*pos);
 	}
 }

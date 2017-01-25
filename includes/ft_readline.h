@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 14:37:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 20:04:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ typedef struct	s_line
 	t_list_history			*list_beg;
 }				t_line;
 
+void			ft_realloc_str_history_3(char **str, size_t pos, char *s);
+void			ft_move_right(size_t *pos, char *str);
+void			ft_move_left(size_t *pos, char *str);
+int				ft_put(int nb);
+void			ft_end(char *str, size_t *pos);
+void			ft_home(char *str, size_t *pos);
 void			ft_realloc_str_history_2(char **str, size_t pos, char *s);
 void			ft_realloc_str_history(char **str, size_t pos
 				, int nb_his, int len);
@@ -123,7 +129,6 @@ void			ft_move_suppr(char *str, size_t pos);
 void			ft_move_dell(char *str, size_t pos);
 void			ft_move_to_word(int ret, size_t *pos, char *str);
 void			ft_move_term(int ret, size_t *pos, char *str);
-void			ft_move_left(size_t pos, char *str);
 void			ft_home_end(char *str, int ret, size_t *pos);
 int				ft_put(int nb);
 char			**ft_split_whitespaces(char const *s);

@@ -6,11 +6,30 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:52:57 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/20 18:15:12 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 19:07:39 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_read_it_3(char **str, char t[5], size_t *pos, int *j)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4 && t[i] == '\0')
+		++i;
+	while (i < 4)
+	{
+		if (t[i] && ft_isprint(t[i]))
+		{
+			*str = ft_realloc_imput(*str, t[i], *pos);
+			++(*pos);
+			++(*j);
+		}
+		++i;
+	}
+}
 
 static void	ft_read_it_2(int input, char t[5])
 {
@@ -31,31 +50,17 @@ static void	ft_read_it_2(int input, char t[5])
 
 void		ft_read_it(int input, size_t *pos, char **str)
 {
-	int		i;
 	int		j;
 	char	t[5];
 
 	j = 0;
-	i = 0;
-	if (input == TOUCHE_DELETE || input < 0 || input == 892427035 || input == 126 ||
-	input == 993090331 || input == 925981467 || input == 21298 ||
-	input == 892427035 || input == 8270395 || input == 942758683 ||
-	input == 993090331 || input == 18489 || input == 17977)
-
+	if (input == TOUCHE_DELETE || input < 0 || input == 892427035 ||
+	input == 126 ||	input == 993090331 || input == 925981467 ||
+	input == 21298 || input == 892427035 || input == 8270395 ||
+	input == 942758683 || input == 993090331 || input == 18489 || input == 17977)
 		return ;
 	ft_read_it_2(input, t);
-	while (i < 4 && t[i] == '\0')
-		++i;
-	while (i < 4)
-	{
-		if (t[i] && ft_isprint(t[i]))
-		{
-			*str = ft_realloc_imput(*str, t[i], *pos);
-			++(*pos);
-			++j;
-		}
-		++i;
-	}
+	ft_read_it_3(str, t, pos, &j);
 	ft_putstr((*str) + (*pos) - j);
 	ft_putnc('\b', ft_strlen((*str)) - ((*pos)));
 }

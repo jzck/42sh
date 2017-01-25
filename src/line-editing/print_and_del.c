@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 14:40:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:37:45 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ void	ft_print(char **str, int ret, size_t *i)
 	++(*i);
 }
 
+void	ft_suppr_2(char **str, size_t *i, size_t tmp)
+{
+	ft_puttermcaps("cd");
+	ft_current_str(*str, *i);
+	ft_get_next_str(*str, i);
+	if (*i && (*str)[*i] && ft_found_next_char(*str, *i))
+		++(*i);
+	ft_putnc('\b', *i - tmp);
+	(*i) = tmp;
+	if (ft_strlen(*str) == 0)
+		*str = NULL;
+}
+
 void	ft_suppr(char **str, size_t *i)
 {
 	size_t	tmp;
@@ -58,15 +71,7 @@ void	ft_suppr(char **str, size_t *i)
 		*str = ft_remove_imput((*str), tmp);
 		ft_get_beggin(*str, i);
 	}
-	ft_puttermcaps("cd");
-	ft_current_str(*str, *i);
-	ft_get_next_str(*str, i);
-	if (*i && (*str)[*i] && ft_found_next_char(*str, *i))
-		++(*i);
-	ft_putnc('\b', *i - tmp);
-	(*i) = tmp;
-	if (ft_strlen(*str) == 0)
-		*str = NULL;
+	ft_suppr_2(str, i, tmp);
 }
 
 void	ft_del(char **str, size_t *i)

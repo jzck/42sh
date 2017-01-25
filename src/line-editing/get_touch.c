@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 14:39:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:26:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static int		ft_lecture_3(int ret, char **str, size_t *i)
 		ft_suppr(str, i);
 	else if (ret == TOUCHE_DELETE && (*str) && (*i) < ft_strlen((*str)))
 		ft_del(str, i);
+	else if (ret == TOUCHE_HOME)
+		ft_home(*str, i);
+	else if (ret == TOUCHE_END)
+		ft_end(*str, i);
 	else
 		return (0);
 	return (1);
@@ -32,8 +36,10 @@ static int		ft_lecture_2(int ret, char **str, size_t *i)
 	else if (ret == TOUCHE_OPT_X || ret == TOUCHE_OPT_C
 	|| ret == TOUCHE_OPT_V)
 		ft_cxv(ret, i, str);
-	else if (ret == FLECHE_DROITE || ret == FLECHE_GAUCHE)
-		ft_move_term(ret, i, *str);
+	else if (ret == FLECHE_DROITE)
+		ft_move_right(i, *str);
+	else if (ret == FLECHE_GAUCHE)
+		ft_move_left(i, *str);
 	else if (ret == TOUCHE_OPT_UP || ret == TOUCHE_OPT_DOWN)
 		ft_move_to_line(ret, i, *str);
 	else if (ft_isprint(ret))
@@ -67,8 +73,10 @@ char			*ft_lecture(t_list_history *head)
 		read(0, &ret, sizeof(int));
 		if (ret == TOUCHE_F6 && read(0, &ret, sizeof(int)) > 0)
 			continue ;
-//		if (ret == TOUCHE_TAB)
-//			ret = ft_completion(&str, &i);
+/*
+**		if (ret == TOUCHE_TAB)
+**			ret = ft_completion(&str, &i);
+*/
 		if (ret == TOUCHE_CTRL_C || ret == TOUCHE_CTRL_D)
 			exit(1);
 		if (ft_lecture_2(ret, &str, &i))
@@ -81,8 +89,6 @@ char			*ft_lecture(t_list_history *head)
 			else
 				i = 0;
 		}
-		else if (ret == TOUCHE_HOME || ret == TOUCHE_END)
-			ft_home_end(str, ret, &i);
 		else if (ft_lecture_3(ret, &str, &i))
 			continue ;
 		else if (ret == 10)

@@ -6,13 +6,15 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/20 11:30:17 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:31:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* ft_printf de la lib bug avec unicode */
+/*
+**ft_printf de la lib bug avec unicode
+*/
 
 static void	ft_get_date(void)
 {

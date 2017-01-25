@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:52:34 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 17:07:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:03:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_next_word(char *str)
+char		*ft_get_next_word(char *str)
 {
 	int j;
 	int k;
@@ -26,32 +26,13 @@ char	*ft_get_next_word(char *str)
 	return (ft_strndup(str + j, k));
 }
 
-void	ft_check_heredoc(char **str)
+static void	ft_check_heredoc_2(char **str, char *end)
 {
-	int		i;
 	char	boolean;
-	char	*end;
 	char	*tmp;
 	char	*tmp2;
 
-	i = 0;
-	end = NULL;
 	boolean = 0;
-	if (!*str)
-		return ;
-	while ((*str)[i])
-	{
-		if ((*str)[i] == '<' && !ft_strncmp(*str + i, "<<", 2))
-		{
-			if ((*str)[i + 1] == '<' && (*str)[i + 2])
-				end = ft_get_next_word(*str + i + 2);
-			else
-				return ;
-		}
-		++i;
-	}
-	if (!end)
-		return ;
 	while (!boolean)
 	{
 		ft_putstr("heredoc> ");
@@ -68,4 +49,29 @@ void	ft_check_heredoc(char **str)
 		free(tmp2);
 		ft_putchar('\n');
 	}
+}
+
+void		ft_check_heredoc(char **str)
+{
+	int		i;
+	char	*end;
+
+	i = 0;
+	end = NULL;
+	if (!*str)
+		return ;
+	while ((*str)[i])
+	{
+		if ((*str)[i] == '<' && !ft_strncmp(*str + i, "<<", 2))
+		{
+			if ((*str)[i + 1] == '<' && (*str)[i + 2])
+				end = ft_get_next_word(*str + i + 2);
+			else
+				return ;
+		}
+		++i;
+	}
+	if (!end)
+		return ;
+	ft_check_heredoc_2(str, end);
 }

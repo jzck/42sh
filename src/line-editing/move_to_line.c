@@ -6,16 +6,41 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/21 17:29:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:40:09 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ft_up_2(size_t *pos, char *str)
+{
+	int len;
+	int i;
+
+	i = 0;
+	len = ft_size_term();
+	if (str[*pos - i] == '\n')
+	{
+		--len;
+		ft_puttermcaps("le");
+		++i;
+	}
+	while (*pos - i && str[*pos - i] != '\n' && --len + 1)
+	{
+		ft_puttermcaps("le");
+		++i;
+	}
+	if (str[*pos - i] == '\n')
+	{
+		ft_puttermcaps("nd");
+		++(*pos);
+	}
+	(*pos) -= i;
+}
+
 static void	ft_up(size_t *pos, char *str)
 {
 	int i;
-	int len;
 
 	i = 0;
 	if (str[*pos - 1] == '\n')
@@ -28,26 +53,24 @@ static void	ft_up(size_t *pos, char *str)
 		++(*pos);
 	}
 	else
+		ft_up_2(pos, str);
+}
+
+static void	ft_down_2(size_t *pos, char *str)
+{
+	if (*pos)
 	{
-		len = ft_size_term();
-		if (str[*pos - i] == '\n')
-		{
-			--len;
-			ft_puttermcaps("le");
-			++i;
-		}
-		while (*pos - i && str[*pos - i] != '\n' && --len + 1)
-		{
-			ft_puttermcaps("le");
-			++i;
-		}
-		if (str[*pos - i] == '\n')
-		{
-			ft_puttermcaps("nd");
-			++(*pos);
-		}
-		(*pos) -= i;
+		--(*pos);
+		ft_get_beggin_with_curs(str, pos);
 	}
+	ft_puttermcaps("cd");
+	ft_get_next_str(str, pos);
+	(*pos) += 2;
+	ft_current_str(str, *pos);
+	ft_get_next_str(str, pos);
+	if (!(str[*pos]))
+		--(*pos);
+	ft_get_beggin_with_curs(str, pos);
 }
 
 static void	ft_down(size_t *pos, char *str)
@@ -57,21 +80,7 @@ static void	ft_down(size_t *pos, char *str)
 
 	i = 0;
 	if (str[*pos] == '\n')
-	{
-		if (*pos)
-		{
-			--(*pos);
-			ft_get_beggin_with_curs(str, pos);
-		}
-		ft_puttermcaps("cd");
-		ft_get_next_str(str, pos);
-		(*pos) += 2;
-		ft_current_str(str, *pos);
-		ft_get_next_str(str, pos);
-		if (!(str[*pos]))
-			--(*pos);
-		ft_get_beggin_with_curs(str, pos);
-	}
+		ft_down_2(pos, str);
 	else
 	{
 		len = ft_size_term();

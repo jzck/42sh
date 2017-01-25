@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:54:53 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 16:44:13 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:48:52 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_history_builtin(void)
 {
-	size_t	len;
+	size_t			len;
 	t_list_history	*head;
 
 	head = data_singleton()->line.list_end;
@@ -25,7 +25,8 @@ void	ft_history_builtin(void)
 		head = head->next;
 	while (head && head->str)
 	{
-		ft_putnc(' ', ft_nbr_len(data_singleton()->line.list_size) - ft_nbr_len(len));
+		ft_putnc(' ', ft_nbr_len(data_singleton()->line.list_size)
+		- ft_nbr_len(len));
 		ft_printf("%zu  %s\n", len, head->str);
 		++len;
 		head = head->next;

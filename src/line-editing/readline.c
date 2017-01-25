@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 14:37:16 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 17:06:53 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,22 @@ struct termios	*ft_stats_term_termcaps(void)
 	return (term);
 }
 
+void	ft_reset_stats_term(int signal)
+{
+	char	*name_term;
+
+	if (signal == SIGWINCH)
+	{
+		if ((name_term = getenv("TERM")) == NULL)
+			return ;
+		if (tgetent(NULL, name_term) == -1)
+			return ;
+	}
+}
+
 int		ft_readline(void)
 {
+	signal(SIGWINCH, ft_reset_stats_term);
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
 	if (data_singleton()->line.input)

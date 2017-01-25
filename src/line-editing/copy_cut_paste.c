@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 14:28:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 17:58:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	ft_x(char **tmp, size_t *pos, char **str)
 	}
 	ft_puttermcaps("cd");
 }
-
 
 void		ft_cxv(int ret, size_t *pos, char **str)
 {

@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:52:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 14:10:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:49:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strdupi_w(char const *s)
+char		*ft_strdupi_w(char const *s)
 {
 	int		i;
 	char	*str;
