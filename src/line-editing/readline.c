@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 17:23:11 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:37:16 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_init_line(void)
 	data_singleton()->line.list_size = 0;
 	data_singleton()->line.list_end = NULL;
 	data_singleton()->line.list_beg = NULL;
+	data_singleton()->line.opt = 0;
 }
 
 struct termios	*ft_save_stats_term(void)
@@ -53,11 +54,15 @@ int		ft_readline(void)
 {
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
+	if (data_singleton()->line.input)
+		data_singleton()->line.input = NULL;
 	ft_prompt();
 	data_singleton()->line.input = ft_lecture(data_singleton()->line.list_beg);
 	ft_putstr("\n");
 	ft_check_quotes(&data_singleton()->line.input, data_singleton()->line.list_beg);
 	ft_check_heredoc(&data_singleton()->line.input);
+	ft_history_builtin();
+	ft_history_parsing();
 	if (data_singleton()->line.input)
 		ft_push_back_history(&data_singleton()->line.list_beg, ft_create_history_list(data_singleton()->line.input));
 	if (tcsetattr(0, TCSANOW, ft_save_stats_term()) == -1)

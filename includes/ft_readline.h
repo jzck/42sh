@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 16:42:30 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:37:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
 
+# define HIST 1
+
 typedef struct	s_list_history
 {
 	char					*str;
@@ -61,10 +63,16 @@ typedef struct	s_line
 	char					*input;
 	int						prompt_size;
 	int						list_size;
+	char					opt;
 	t_list_history			*list_end;
 	t_list_history			*list_beg;
 }				t_line;
 
+void			ft_realloc_str_history_2(char **str, size_t pos, char *s);
+void			ft_realloc_str_history(char **str, size_t pos
+				, int nb_his, int len);
+char			*ft_strdupi_w(char const *s);
+void			ft_history_parsing();
 void			ft_check_heredoc(char **str);
 void			ft_history_builtin(void);
 int				ft_nbr_len(int nbr);

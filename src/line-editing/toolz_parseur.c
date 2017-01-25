@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 14:14:31 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 11:51:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ char	*ft_realloc_imput(char *str, int a, size_t pos)
 
 char	*ft_remove_imput(char *str, size_t pos)
 {
-	int		i;
 	char	*new_str;
 	char	*new_str2;
 
-	i = 0;
 	if (!str)
 		return (str);
 	new_str = ft_strndup(str, pos);

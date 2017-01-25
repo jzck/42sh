@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/23 13:32:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:39:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,16 @@ char			*ft_lecture(t_list_history *head)
 	size_t		i;
 
 	str = NULL;
+	if (data_singleton()->line.opt & HIST)
+		str = data_singleton()->line.input;
 	i = 0;
+	if (str)
+	{
+		ft_current_str(str, i);
+		ft_get_next_str(str, &i);
+		if (str[i])
+			++i;
+	}
 	while (42)
 	{
 		ft_check_end_of_line(str, i);
