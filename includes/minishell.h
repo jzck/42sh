@@ -6,11 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/01/11 17:17:16 by jhalford         ###   ########.fr       */
-=======
-/*   Updated: 2017/01/05 14:24:14 by wescande         ###   ########.fr       */
->>>>>>> premier commit. working. . .
+/*   Updated: 2017/01/26 19:39:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +21,9 @@
 # include "parser.h"
 # include "ft_readline.h"
 # include "exec.h"
-<<<<<<< HEAD
 # include "builtin.h"
 # include "job_control.h"
-=======
 # include "glob.h"
->>>>>>> premier commit. working. . .
 
 # include <dirent.h>
 # include <sys/stat.h>
