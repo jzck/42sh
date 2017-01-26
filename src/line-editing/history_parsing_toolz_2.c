@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 20:04:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 20:06:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/26 11:33:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_strget_history(char *str)
+char		*ft_strget_history(char *str)
 {
 	t_list_history	*list;
 	size_t			i;

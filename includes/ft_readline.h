@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 20:04:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/26 13:36:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define TOUCHE_DELETE 2117294875
 # define TOUCHE_CTRL_C 3
 # define TOUCHE_CTRL_D 4
+# define TOUCHE_CTRL_R 18
 # define TOUCHE_HOME 4741915
 # define TOUCHE_END 4610843
 # define TOUCHE_TAB 9
@@ -50,6 +51,8 @@
 # define TOUCHE_F6 925981467
 
 # define HIST 1
+
+# define ERROR_CNTL_R 1
 
 typedef struct	s_list_history
 {
@@ -68,6 +71,9 @@ typedef struct	s_line
 	t_list_history			*list_beg;
 }				t_line;
 
+void			ft_check_backslash(char **str);
+char			*ft_strget_history(char *str);
+void			ft_surch_in_history(char **str, size_t *pos);
 void			ft_realloc_str_history_3(char **str, size_t pos, char *s);
 void			ft_move_right(size_t *pos, char *str);
 void			ft_move_left(size_t *pos, char *str);

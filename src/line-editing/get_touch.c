@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:26:30 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/26 11:36:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ char			*ft_lecture(t_list_history *head)
 		read(0, &ret, sizeof(int));
 		if (ret == TOUCHE_F6 && read(0, &ret, sizeof(int)) > 0)
 			continue ;
+		if (ret == TOUCHE_CTRL_R)
+		{
+			ft_surch_in_history(&str, &i);
+			continue ;
+		}
 /*
 **		if (ret == TOUCHE_TAB)
 **			ret = ft_completion(&str, &i);
