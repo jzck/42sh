@@ -117,7 +117,7 @@ LIBFT_INC	=	$(LIBFT_DIR)includes/
 
 LIBS		=	-ltermcap
 
-SRC_DIR		=	srcs/
+SRC_DIR		=	src/
 INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 

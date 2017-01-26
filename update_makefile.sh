@@ -5,7 +5,7 @@ then
 	echo "regenerate Makefile"
 	sed "`grep -n 'SRC_BASE	=' $CUR_MAKEFILE | sed 's/:.*//'`, \$d" $CUR_MAKEFILE > NEWMAKEFILE
 	grep 'SRC_BASE	=' $CUR_MAKEFILE >> NEWMAKEFILE
-	expr "$(find ./srcs | grep "\.c" | sed -e 's/srcs\///' -e 's/\.\///' -e 's/$/\\/')" : "\(.*\).$" >> NEWMAKEFILE
+	expr "$(find ./src | grep "\.c" | sed -e 's/src\///' -e 's/\.\///' -e 's/$/\\/')" : "\(.*\).$" >> NEWMAKEFILE
 	echo "" >> NEWMAKEFILE
 	grep 'SRCS		=' $CUR_MAKEFILE >> NEWMAKEFILE
 	sed "1, `grep -n 'SRCS		=' $CUR_MAKEFILE | sed 's/:.*//'`d" $CUR_MAKEFILE >> NEWMAKEFILE
