@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/25 16:14:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:23:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ extern t_readopt	g_readtab[];
 
 int				builtin_read(const char *path, char *const av[], char *const envp[]);
 
-struct termios	*bt_read_term(int init);
+struct termios	bt_read_term(int init);
 int				bt_read_terminit(t_read *data);
 int				bt_read_termexit(void);
 

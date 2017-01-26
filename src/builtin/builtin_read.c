@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/25 16:19:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/26 18:39:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 	char	buf[2];
 	char	*input;
 	int		esc;
+	int		ret;
 
 	(void)path;
 	(void)envp;
@@ -120,9 +121,10 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 		ft_printf(data.prompt);
 	while (42)
 	{
-		if (read(data.fd, buf, 1) < 0)
+		if ((ret = read(data.fd, buf, 1) <= 0))
 			return (1);
-		buf[1] = 0;
+		DG("got *buf=%c, ret=%i", *buf, ret);
+		buf[ret] = 0;
 		if (!esc && *buf == data.delim)
 			break ;
 		esc = esc ? 0 : !(data.opts & READ_OPT_LR) && (*buf == '\\');
