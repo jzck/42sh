@@ -6,11 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-<<<<<<< HEAD:src/main/main.c
-/*   Updated: 2017/01/12 14:02:30 by jhalford         ###   ########.fr       */
-=======
-/*   Updated: 2017/01/05 16:07:09 by wescande         ###   ########.fr       */
->>>>>>> premier commit. working. . .:srcs/main/main.c
+/*   Updated: 2017/01/26 16:54:26 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +26,11 @@ int		shell_single_command(char *command)
 		return (1);
 	if (!token)
 		return (0);
-	token_print(token);
 	if (ft_post_tokenize(&token, command))
 		return (1);
 	DG("after post_tokenize");
 	token_print(token);
+	glob_print(token, data_singleton());
 	if (ft_parse(&ast, &token))
 		return (1);
 	/* btree_print(STDBUG, ast, &ft_putast); */
@@ -56,21 +52,7 @@ int		main(int ac, char **av)
 	}
 	while (1)
 	{
-<<<<<<< HEAD:src/main/main.c
 		if (ft_readline())
-=======
-		if (ft_interactive_sh(&data))
-			return (1);
-		DG("{inv}{mag}got command '%s'", data.line.input);
-		token = NULL;
-		if (ft_tokenize(&token, data.line.input, DEFAULT))
-			return (1);
-		if (!token)
-			continue ;
-//		token_print(token);
-		glob_print(token, &data);
-		if (ft_parse(&ast, &token))
->>>>>>> premier commit. working. . .:srcs/main/main.c
 			return (1);
 		if (shell_single_command(data_singleton()->line.input))
 			return (1);

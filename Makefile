@@ -122,14 +122,15 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
-builtin/builtin.c\
 builtin/builtin_cd.c\
 builtin/builtin_echo.c\
 builtin/builtin_env.c\
 builtin/builtin_exit.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unsetenv.c\
+builtin/is_builtin.c\
 exec/ast_free.c\
+exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\
 exec/exec_dgreat.c\
@@ -138,10 +139,13 @@ exec/exec_less.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_semi.c\
-exec/fd_redirect.c\
-exec/ft_cmd.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
+exec/launch_process.c\
+exec/process_redirect.c\
+exec/process_reset.c\
+exec/process_setexec.c\
+exec/process_setgroup.c\
 exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\
@@ -162,7 +166,42 @@ glob/lib_perso/ft_ld_to_tab.c\
 glob/lib_perso/ft_strjoinf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/match_pattern.c\
+job-control/builtin_bg.c\
+job-control/builtin_fg.c\
+job-control/builtin_jobs.c\
+job-control/do_job_notification.c\
+job-control/job_addprocess.c\
+job-control/job_cmp_id.c\
+job-control/job_format.c\
+job-control/job_format_head.c\
+job-control/job_free.c\
+job-control/job_getprocess.c\
+job-control/job_getrank.c\
+job-control/job_is_completed.c\
+job-control/job_is_stopped.c\
+job-control/job_kill_all.c\
+job-control/job_notify_change.c\
+job-control/job_notify_new.c\
+job-control/job_remove.c\
+job-control/job_update_id.c\
+job-control/job_update_status.c\
+job-control/job_wait.c\
+job-control/mark_job_as_running.c\
+job-control/process_cmp_pid.c\
+job-control/process_format.c\
+job-control/process_free.c\
+job-control/process_mark_status.c\
+job-control/put_job_in_background.c\
+job-control/put_job_in_foreground.c\
+job-control/sigchld_handler.c\
+job-control/sigint_handler.c\
+job-control/sigtstp_handler.c\
+job-control/sigttin_handler.c\
+job-control/sigttou_handler.c\
+lexer/command_getoutput.c\
+lexer/ft_post_tokenize.c\
 lexer/ft_tokenize.c\
+lexer/get_lexer_state.c\
 lexer/lexer_backslash.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
@@ -174,9 +213,14 @@ lexer/lexer_lessand.c\
 lexer/lexer_number.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
+lexer/lexer_special.c\
+lexer/lexer_var.c\
 lexer/lexer_word.c\
+lexer/reduce_bquotes.c\
+lexer/reduce_parens.c\
 lexer/token_append.c\
 lexer/token_cmp_type.c\
+lexer/token_expand_var.c\
 lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\
@@ -188,7 +232,6 @@ line-editing/curs_setup.c\
 line-editing/curs_single.c\
 line-editing/curs_term_setup.c\
 line-editing/curs_write.c\
-line-editing/ft_interactive_sh.c\
 line-editing/ft_readline.c\
 line-editing/rl_bitset.c\
 line-editing/rl_clear_function.c\
@@ -212,11 +255,16 @@ line-editing/rl_word_move_function.c\
 line-editing/rl_word_utility.c\
 main/data_exit.c\
 main/data_init.c\
+main/data_singleton.c\
 main/ft_cleanup.c\
 main/ft_putast.c\
 main/ft_putast2.c\
 main/lib_expansion.c\
 main/main.c\
+main/shell_exit.c\
+main/shell_get_avdata.c\
+main/shell_get_opts.c\
+main/shell_init.c\
 main/sig_handler.c\
 parser/ft_parse.c\
 parser/parse_dgreat.c\
@@ -226,6 +274,7 @@ parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
 parser/parse_separator.c\
+parser/parse_subshell.c\
 parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
