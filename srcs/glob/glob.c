@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 20:42:45 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:04:09 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** glob return expansion of a string.
-** pattern searched are ~, *, ?, [a-z], [!a-z], [^a-z], {ab}.
+** pattern searched are ~, *, ?, [a-z], [!a-z], [^a-z], {ab, ac}, **
 ** input parameters are :
 **			-char	*pat  -> pattern string to be looking for match
 **			-char	**env -> env var. could be NULL
