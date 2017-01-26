@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 23:06:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/24 20:14:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 22:54:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		shell_script()
 	DG("after post_tokenize");
 	token_print(head);
 	list_tmp = NULL;
+	return (0);
 	while (head)
 	{
 		if (ft_parse(&ast, &head))

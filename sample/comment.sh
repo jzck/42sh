@@ -1,2 +1,2 @@
-ls #ls
-pwd
+ls | cat 
+pwd ; cd

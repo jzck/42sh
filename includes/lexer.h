@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 20:13:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 00:57:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ typedef long long		t_type;
 # define TK_COMMAND		(1 << 17)
 # define TK_SUBSHELL	(1 << 18)
 # define TK_NEWLINE		(1 << 19)
-# define TK_LOOP		(1 << 20)
-# define TK_B_LOOP		(1 << 21)
-# define TK_E_LOOP		(1 << 22)
+# define TK_WHILE		(1 << 20)
+# define TK_DO			(1 << 21)
+# define TK_DONE		(1 << 22)
+# define TK_LIST		(1 << 23)
 
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
@@ -62,6 +63,9 @@ enum	e_lexstate
 	BACKSLASH,
 	VAR,
 	SPECIAL,
+	WHILE,
+	DO_GROUP,
+	LIST,
 	COMMENT,
 };
 
@@ -92,10 +96,11 @@ int			reduce_bquotes(t_list **alst, char **str);
 char		*command_getoutput(char *command);
 
 int			ft_is_delim(char c);
+int			ft_is_delim_list(char c);
 
 t_lexstate	get_lexer_state(char *str);
+t_lexstate	get_reserved_words(char *str);
 int			lexer_default(t_list **alst, char *str);
-int			lexer_comment(t_list **alst, char *str);
 int			lexer_newline(t_list **alst, char *str);
 int			lexer_delim(t_list **alst, char *str);
 int			lexer_sep(t_list **alst, char *str);
@@ -110,5 +115,9 @@ int			lexer_dquote(t_list **alst, char *str);
 int			lexer_backslash(t_list **alst, char *str);
 int			lexer_var(t_list **alst, char *str);
 int			lexer_special(t_list **alst, char *str);
+int			lexer_while(t_list **alst, char *str);
+int			lexer_do_group(t_list **alst, char *str);
+int			lexer_list(t_list **alst, char *str);
+int			lexer_comment(t_list **alst, char *str);
 
 #endif

@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_newline.c                                    :+:      :+:    :+:   */
+/*   get_reserved_words.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 23:19:46 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 00:41:18 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/26 00:51:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_newline(t_list **alst, char *str)
+t_lexstate		get_reserved_words(char *str)
 {
-	t_token		*token;
-
-	if (*alst)
-	{
-		token = (*alst)->content;
-		if (*token->data)
-			return (lexer_newline(&(*alst)->next, str));
-	}
-	else
-	{
-		token = token_init();
-		*alst = ft_lstnew(token, sizeof(*token));
-	}
-	token = (*alst)->content;
-	token->type = TK_NEWLINE;
-	return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+	if (ft_strncmp(str, "while", 5) == 0)
+		return (WHILE);
+	else if (ft_strncmp(str, "done", 4) == 0 
+		|| ft_strncmp(str, "do" , 2) == 0)
+		return (DO_GROUP);
+	return (0);
 }

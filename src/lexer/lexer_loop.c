@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_newline.c                                    :+:      :+:    :+:   */
+/*   lexer_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 23:19:46 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 00:41:18 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/25 21:58:12 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/26 00:58:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_newline(t_list **alst, char *str)
+int		lexer_while(t_list **alst, char *str)
 {
 	t_token		*token;
 
-	if (*alst)
-	{
-		token = (*alst)->content;
-		if (*token->data)
-			return (lexer_newline(&(*alst)->next, str));
-	}
-	else
-	{
-		token = token_init();
-		*alst = ft_lstnew(token, sizeof(*token));
-	}
 	token = (*alst)->content;
-	token->type = TK_NEWLINE;
-	return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+	if (ft_strncmp(str, "while", 5) == 0)
+		token->type = TK_WHILE;
+	else if (ft_isalnum(*str))
+	{
+		token_append(token, *str);
+		return (ft_tokenize(alst, str + 1, WORD));
+	}
+	return (ft_tokenize(&(*alst)->next, str + 6, LIST));
 }
