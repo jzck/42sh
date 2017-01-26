@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/26 16:04:09 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:18:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ char			**glob(const char *pat, char **env)
 	mul_pat = expand_brace(pat);
 	while (mul_pat->next)
 	{
-		if (env && (path = ft_strsplit(ft_getenv(env, "PATH"), ':')))
+		if (!(((char *)mul_pat->content)[0] == '/'
+			|| (((char *)mul_pat->content)[0] == '.'
+			&& ((char *)mul_pat->content)[1] == '/'))
+			&& env && (path = ft_strsplit(ft_getenv(env, "PATH"), ':')))
 		{
 			path_research(mul_pat->content, path, &match);
 			ft_tabdel(&path);

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:09:40 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/12 15:48:03 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:14:32 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	glob_print(t_list *lst, t_data *data)
 			;
 		glob_ret = glob(token->data, data->env);
 		DG("%02i '%s'", i, token->data);
-		ft_tabprint_fd(glob_ret, 2);
+		ft_tabprint_fd(glob_ret, 3);
 		lst = lst->next;
 	}
 }
