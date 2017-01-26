@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 20:04:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 20:57:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ struct	s_comp
 struct	s_script
 {
 	char	*buffer;
-	int		q_size;
-	t_list	*queue;
+	int		size;
 };
 
 typedef struct s_script	t_script;

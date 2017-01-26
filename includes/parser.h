@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 20:08:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 20:57:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef long long		t_type;
 struct	s_parser
 {
 	t_type	type;
-	int		(*f)(t_btree **ast, t_list **start, t_list **token);
+	int		(*f)(t_list **list_ast, t_btree **ast,
+			t_list **start, t_list **token);
 };
 
 union	u_word
@@ -56,16 +57,28 @@ struct	s_astnode
 
 extern t_parser		g_parser[];
 
-int		ft_parse(t_btree **ast, t_list **token);
-int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
-int		parse_less(t_btree **ast, t_list **start, t_list **lst);
-int		parse_great(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dless(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst);
-int		parse_lessand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_greatand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_word(t_btree **ast, t_list **start, t_list **lst);
-int		parse_subshell(t_btree **ast, t_list **start, t_list **lst);
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
+int		ft_parse(t_list	**list_ast, t_btree **ast, t_list **token);
+int		parse_newline(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_separator(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_less(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_great(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_dless(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_dgreat(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_lessand(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_greatand(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_word(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_subshell(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_newline(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
 
 #endif

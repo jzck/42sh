@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_loop.c                                       :+:      :+:    :+:   */
+/*   parse_newline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 21:58:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 00:58:57 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/26 22:39:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
-int		lexer_while(t_list **alst, char *str)
+int		parse_newline(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst)
 {
-	t_token		*token;
+	t_list		*temp;
 
-	token = (*alst)->content;
-	if (ft_strncmp(str, "while", 5) == 0)
-		token->type = TK_WHILE;
-	else if (ft_isalnum(*str))
-	{
-		token_append(token, *str);
-		return (ft_tokenize(alst, str + 1, WORD));
-	}
-	return (ft_tokenize(&(*alst)->next, str + 6, LIST));
+	ft_putstr("newline");
+	temp = (*lst)->next;
+	(*lst)->next = NULL;
+	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
+	*lst = NULL;
+	ft_parse(list_ast, ast, start);
+	*ast = NULL;
+	ft_parse(list_ast, ast, &temp);
+	return (0);
 }

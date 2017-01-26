@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/25 23:01:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 18:16:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int		lexer_default(t_list **alst, char *str)
 	else
 		state = WORD;
 	token = (*alst)->content;
-	token_append(token, *str);
 	token->type = TK_N_WORD;
-	return (ft_tokenize(alst, str + 1, state));
+	return (ft_tokenize(alst, str, state));
 }

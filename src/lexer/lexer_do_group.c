@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:48:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 00:59:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 18:49:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int		lexer_do_group(t_list **alst, char *str)
 {
 	t_token		*token;
 	t_lexstate	state;
-	int			type;
+	int 		type;
 
 	type = (str[0] == 'd' && str[1] == 'o' && str[2] != 'n' ?
 		2 : 4);
 	if (*alst)
 	{
-		if (ft_is_delim_list(*(str + type)) || *(str + type) == ' ')
+		if (ft_is_delim_list(*(str + type)) || *(str + type) == ' ')			
 			return (lexer_do_group(&(*alst)->next, str));
 		return (ft_tokenize(alst, str + 1, LIST));
 	}
@@ -34,5 +34,5 @@ int		lexer_do_group(t_list **alst, char *str)
 	token = (*alst)->content;
 	token->type = (type == 2 ? TK_DO : TK_DONE);
 	state = (token->type == TK_DO) ? LIST : DEFAULT;	
-	return (ft_tokenize(&(*alst)->next, str + 1, state));
+	return (ft_tokenize(&(*alst)->next, str + type, state));
 }

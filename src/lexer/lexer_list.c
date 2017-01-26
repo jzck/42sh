@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:55:33 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 00:58:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/26 19:24:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		lexer_list(t_list **alst, char *str)
 	{
 		if (ft_is_delim_list(*str))
 		{
+			str++;
 			while (ft_is_delim(*str) || *str == '\n')
 				str++;
 			if (ft_strncmp(str, "done", 4) == 0
