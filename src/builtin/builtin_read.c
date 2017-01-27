@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 20:32:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:10:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		bt_read_init(t_read *data)
 	data->delim = '\n';
 	data->nchars = -1;
 	data->prompt = NULL;
-	data->timeout = -1;
 	data->fd = 0;
 }
 
@@ -121,9 +120,9 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 		ft_printf(data.prompt);
 	while (42)
 	{
-		if ((ret = read(data.fd, buf, 1) <= 0))
+		if ((ret = read(data.fd, buf, 1)) <= 0)
 			return (1);
-		DG("got *buf=%c, ret=%i", *buf, ret);
+		/* DG("got *buf=%c, ret=%i", *buf, ret); */
 		buf[ret] = 0;
 		if (!esc && *buf == data.delim)
 			break ;

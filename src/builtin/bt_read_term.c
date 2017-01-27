@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:02:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 20:27:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:07:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		bt_read_terminit(t_read *data)
 	}
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		return (-1);
-	DG("c_cc[VTIME]=%i", term.c_cc[VTIME]);
+	/* DG("c_cc[VTIME]=%i", term.c_cc[VTIME]); */
 	return (0);
 }
 
