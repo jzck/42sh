@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 21:22:58 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:13:15 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,23 @@ typedef struct	s_ld
 	struct s_ld		*prev;
 }				t_ld;
 
-char			**glob(const char *str, char **env);
-t_ld			*expand_brace(const char *pat);
+typedef struct	s_glob
+{
+	const char	*pat;
+	const char	*esc;
+	t_ld		*match;
+	t_ld		*m_pat;
+}				t_glob;
+
+char			**glob(const char *str, const char *esc, char **env);
+void			expand_brace(t_glob *tglob);
 void			glob_print(t_list *token, t_data *data);
-int				match_pattern(const char *pat, char *str,
-								char *full_word, t_ld **match);
-void			dir_research(const char *pat, char *path, t_ld **match);
-void			dir_research_recursive(const char *pat, char *p, t_ld **match);
-bool			is_directory(const char *path);
+int				match_pattern(t_glob *tglob, char *str, char *full_word);
+void			dir_research(t_glob *tglob, char *path);
+void			dir_research_recursive(t_glob *tglob, char *p);
+int				is_directory(const char *path);
+
+int				is_char_esc(const char *esc, const char *ini_str, const char *str_pos);
 
 /*
 ** LIST D:

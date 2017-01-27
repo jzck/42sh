@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/12 13:18:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:35:37 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	token_free(void *data, size_t size)
 	(void)size;
 	token = data;
 	if (!(token->type & TK_NON_FREEABLE))
+	{
 		ft_strdel(&token->data);
+		ft_strdel(&token->esc);
+	}
 	free(token);
 }

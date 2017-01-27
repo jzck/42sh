@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 15:45:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:35:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_token		*token_init(void)
 
 	token = (t_token *)malloc(sizeof(t_token));
 	token->type = 0;
-	token->size = 10;
-	token->data = ft_strnew(token->size);
+	token->size = 8;
+	token->data = ft_strnew(token->size + 1);
+	token->esc = ft_strnew(token->size / 8);
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 14:54:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:36:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:55:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		lexer_var(t_list **alst, char *str)
 	token->type = TK_N_WORD;
 	str++;
 	if (!ft_strchr(token->data, '$'))
-		token_append(token, '$');
+		token_append(token, '$', 0);
 	if (!*str)
 	{
 		token_expand_var(token);
@@ -32,6 +32,6 @@ int		lexer_var(t_list **alst, char *str)
 		token_expand_var(token);
 		return (ft_tokenize(alst, str, state));
 	}
-	token_append(token, *str);
+	token_append(token, *str, 0);
 	return (lexer_var(alst, str));
 }

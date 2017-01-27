@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:29:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:52:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		lexer_number(t_list **alst, char *str)
 		return (ft_tokenize(alst, str, LESS));
 	else if (ft_isdigit(*str))
 	{
-		token_append(token, *str);
+		token_append(token, *str, 0);
 		return (lexer_number(alst, str + 1));
 	}
 	return (ft_tokenize(alst, str, DEFAULT));

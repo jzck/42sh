@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/12 14:57:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:52:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ struct	s_token
 {
 	t_type		type;
 	char		*data;
+	char		*esc;
 	int			size;
 };
 
@@ -75,7 +76,7 @@ extern int	(*g_lexer[])(t_list **alst, char *str);
 t_token		*token_init();
 int			ft_tokenize(t_list **alst, char *str, t_lexstate state);
 int			ft_post_tokenize(t_list **alst, char *str);
-int			token_append(t_token *token, char c);
+int			token_append(t_token *token, char c, short int esc);
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
 void		token_print(t_list *lst);

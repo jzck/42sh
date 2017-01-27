@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_backslash.c                                  :+:      :+:    :+:   */
+/*   is_char_esc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 15:52:46 by wescande         ###   ########.fr       */
+/*   Created: 2017/01/27 18:19:55 by wescande          #+#    #+#             */
+/*   Updated: 2017/01/27 18:23:22 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-int		lexer_backslash(t_list **alst, char *str)
+int		is_char_esc(const char *esc, const char *ini_str, const char *str_pos)
 {
-	t_token		*token;
+	int		pos;
 
-	token = (*alst)->content;
-	token->type = TK_WORD;
-	token_append(token, str[1], 1);
-	return (ft_tokenize(alst, str + 2, WORD));
+	pos = str_pos - ini_str;
+	if ((esc[pos / 8] >> pos % 8) & 1)
+		return (1);
+	return (0);
 }
