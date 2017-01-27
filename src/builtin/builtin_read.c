@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 17:10:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:40:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,115 +28,83 @@ t_readopt	g_readtab[] =
 	{0, 0, 0},
 };
 
-void		bt_read_init(t_read *data)
-{
-	data->opts = 0;
-	data->delim = '\n';
-	data->nchars = -1;
-	data->prompt = NULL;
-	data->fd = 0;
-}
-
-t_readopt	*bt_read_getopt(char letter)
+int		bt_read_loop(t_read *data)
 {
 	int		i;
+	int		esc;
+	int		ret;
+	char	buf[2];
 
 	i = 0;
-	while (g_readtab[i].letter)
+	esc = 0;
+	if (data->prompt)
+		ft_printf(data->prompt);
+	while (42)
 	{
-		if (g_readtab[i].letter == letter)
-			return (&g_readtab[i]);
+		if ((ret = read(data->fd, buf, 1)) <= 0)
+			return (1);
+		/* DG("got *buf=%c, ret=%i", *buf, ret); */
+		buf[ret] = 0;
+		if (!esc && *buf == data->delim)
+			break ;
+		esc = esc ? 0 : !(data->opts & READ_OPT_LR) && (*buf == '\\');
+		ft_strappend(&data->input, buf);
+		if (!(data->opts & READ_OPT_LS))
+			ft_putchar(*buf);
 		i++;
+		if (*buf == '\n' && !(data->opts & READ_OPT_LR))
+			ft_putstr("> ");
+		if ((data->opts & READ_OPT_LN) && i >= data->nchars)
+			break ;
 	}
-	return (NULL);
+	ft_putchar('\n');
+	DG("input=%s", data->input);
+	return (0);
 }
 
-int			bt_read_parse(t_read *data, char **av)
+int		bt_read_assign(t_read *data)
 {
-	int			i;
-	int			j;
-	int			k;
-	t_readopt	*opt;
+	char	*input;
+	char	**names;
+	char	*IFS;
+	char	*start;
 
-	i = 1;
-	k = 0;
-	while (av[i])
+	input = data->input;
+	names = data->names ? data->names : (char*[]){"REPLY", NULL};
+	IFS = ft_getenv(data_singleton()->env, "IFS");
+	start = input;
+	while (*start && *names)
 	{
-		j = 0;
-		if (av[i][j++] == '-')
+		if (!(names[1]) || !IFS)
 		{
-			if (av[i][j] == '-' && av[i][j + 1] == 0)
-			{
-				i++;
-				break ;
-			}
-			while (av[i][j])
-			{
-				if (!(opt = bt_read_getopt(av[i][j])))
-				{
-					ft_dprintf(2, "{red}%s: bad option: %c{eoc}\n", SHELL_NAME, av[i][j]);
-					return (2);
-				}
-				data->opts |= opt->flag;
-				if (opt->get)
-				{
-					(*opt->get)(data, av[++i]);
-					break ;
-				}
-				j++;
-			}
-		}
-		else
+			builtin_setenv("setenv", (char*[]){"setenv", *names, start}, NULL);
 			break ;
-		i++;
+		}
+		while (*input && !ft_strchr(IFS, *input))
+			input++;
+		while (input && ft_strchr(IFS, *input))
+			*(input++) = 0;
+		builtin_setenv("setenv", (char*[]){"setenv", *names, start}, NULL);
+		start = input;
+		names++;
 	}
-	data->names = av + i;
 	return (0);
 }
 
 int		builtin_read(const char *path, char *const av[], char *const envp[])
 {
 	t_read	data;
-	int		i;
-	char	buf[2];
-	char	*input;
-	int		esc;
 	int		ret;
 
 	(void)path;
 	(void)envp;
-	input = NULL;
-	bt_read_init(&data);
-	if ((bt_read_parse(&data, (char **)av)))
-		return (2);
-	DG("read_opts: %b", data.opts);
-	DG("\ndelim=%c\nnchars=%i\nprompt=%s\ntimeout=%i\nfd=%i",
-		data.delim, data.nchars, data.prompt, data.timeout, data.fd);
-	ft_sstrprint(data.names, ',');
-	bt_read_terminit(&data);
-	i = 0;
-	esc = 0;
-	if (data.prompt)
-		ft_printf(data.prompt);
-	while (42)
-	{
-		if ((ret = read(data.fd, buf, 1)) <= 0)
-			return (1);
-		/* DG("got *buf=%c, ret=%i", *buf, ret); */
-		buf[ret] = 0;
-		if (!esc && *buf == data.delim)
-			break ;
-		esc = esc ? 0 : !(data.opts & READ_OPT_LR) && (*buf == '\\');
-		ft_strappend(&input, buf);
-		ft_putchar(*buf);
-		i++;
-		if (*buf == '\n' && !(data.opts & READ_OPT_LR))
-			ft_putstr("> ");
-		if ((data.opts & READ_OPT_LN) && i >= data.nchars)
-			break ;
-	}
-	ft_putchar('\n');
-	DG("input=%s", input);
-	bt_read_termexit();
-	return (0);
+	ret = 0;
+	if (bt_read_init(&data, (char **)av))
+		ret = 2;
+	else if (bt_read_loop(&data))
+		ret = 1;
+	else if (bt_read_assign(&data))
+		ret = 1;
+	bt_read_exit(&data);
+	return (ret);
 }

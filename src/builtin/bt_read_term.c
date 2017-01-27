@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:02:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 17:07:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:00:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int		bt_read_terminit(t_read *data)
 	return (0);
 }
 
-int		bt_read_termexit(void)
+int		bt_read_exit(t_read *data)
 {
 	struct termios	term;
 
+	ft_strdel(&data->input);
 	term = bt_read_term(0);
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		return (-1);

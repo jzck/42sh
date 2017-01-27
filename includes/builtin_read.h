@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 20:25:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:56:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct	s_read
 	int		timeout;
 	int		fd;
 	char	**names;
+	char	*input;
 };
 
 struct s_readopt
@@ -55,9 +56,11 @@ extern t_readopt	g_readtab[];
 
 int				builtin_read(const char *path, char *const av[], char *const envp[]);
 
+int				bt_read_init(t_read *data, char **av);
+
 struct termios	bt_read_term(int init);
 int				bt_read_terminit(t_read *data);
-int				bt_read_termexit(void);
+int				bt_read_exit(t_read *data);
 
 int				bt_read_getdelim(t_read *data, char *arg);
 int				bt_read_getnchars(t_read *data, char *arg);
