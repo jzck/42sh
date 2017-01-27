@@ -6,21 +6,24 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:54:53 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 15:48:52 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/26 14:58:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_history_builtin(void)
+int		builtin_history(const char *path, char *const av[], char *const envp[])
 {
 	size_t			len;
 	t_list_history	*head;
 
+	(void)path;
+	(void)av;
+	(void)envp;
 	head = data_singleton()->line.list_end;
 	len = 1;
 	if (!head)
-		return ;
+		return (0);
 	if (head && !head->str)
 		head = head->next;
 	while (head && head->str)
@@ -31,4 +34,5 @@ void	ft_history_builtin(void)
 		++len;
 		head = head->next;
 	}
+	return (0);
 }

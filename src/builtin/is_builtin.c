@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:58:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/26 14:58:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_stof g_builtin[] = {
 	{"jobs", &builtin_jobs},
 	{"fg", &builtin_fg},
 	{"bg", &builtin_bg},
+	{"history", &builtin_history},
 	{NULL, NULL},
 };
 

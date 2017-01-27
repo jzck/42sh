@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/26 13:36:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/26 14:58:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_line
 	t_list_history			*list_beg;
 }				t_line;
 
+int		builtin_history(const char *path, char *const av[], char *const envp[]);
 void			ft_check_backslash(char **str);
 char			*ft_strget_history(char *str);
 void			ft_surch_in_history(char **str, size_t *pos);
