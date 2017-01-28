@@ -14,7 +14,7 @@
 
 void	job_format_head(t_job *j, int rank[2])
 {
-	char		crank;
+	char	crank;
 
 	if (j->id == rank[0])
 		crank = '+';

@@ -63,6 +63,7 @@ int			job_is_stopped(int id);
 int			job_is_completed(int id);
 
 void		job_new(char **av, pid_t pid);
+void		job_run(t_job *job, int foreground);
 int			job_wait(int id);
 void		job_remove(int id);
 void		job_free(void *content, size_t content_size);

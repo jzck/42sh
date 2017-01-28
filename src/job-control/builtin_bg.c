@@ -15,14 +15,12 @@
 int		builtin_bg(const char *path, char *const av[], char *const envp[])
 {
 	t_jobc	*jobc;
-	t_job	*job;
 	t_list	*jlist;
 	int		rank[2];
 	int		id;
 
 	(void)path;
 	(void)envp;
-	(void)av;
 	if (!SHELL_HAS_JOBC(data_singleton()->opts))
 	{
 		ft_dprintf(2, "{red}bg: %s{eoc}\n", SHELL_MSG_NOJOBC);
@@ -31,13 +29,9 @@ int		builtin_bg(const char *path, char *const av[], char *const envp[])
 	jobc = &data_singleton()->jobc;
 	job_getrank(&rank);
 	id = av[1] ? ft_atoi(av[1]) : rank[0];
-	jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id);
-	if (jlist)
+	if ((jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
 	{
-		job = jlist->content;
-		mark_job_as_running(job);
-		job_format(job, rank, JOBS_OPTS_L);
-		put_job_in_background(job, 1);
+		job_run(jlist->content, 0);
 		return (0);
 	}
 	else if (av[1])
