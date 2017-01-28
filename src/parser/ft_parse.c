@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 22:42:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 23:27:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		ft_parse(t_list **list_ast, t_btree **ast, t_list **start)
 		*ast = btree_create_node(&item, sizeof(item));
 		((t_astnode *)(*ast)->item)->data.sstr = NULL;
 	}
-//	if (!*list_ast)
-//		ft_lsteadd(list_ast, ft_lstnew(ast, sizeof(*ast)));
+	if (!*list_ast)
+		*list_ast = ft_lstnew(ast, sizeof(t_btree *));
 	while (g_parser[i].type)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))

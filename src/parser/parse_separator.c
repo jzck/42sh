@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:21:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 22:42:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 23:01:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		parse_separator(t_list **list_ast, t_btree **ast,
 	t_token		*token;
 	t_astnode	*node;
 
+	DG("parsing separator");
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = token->type;
