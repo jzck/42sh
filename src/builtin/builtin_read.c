@@ -32,7 +32,6 @@ int		bt_read_loop(t_read *data)
 {
 	int		i;
 	int		esc;
-	int		ret;
 	char	buf[2];
 
 	i = 0;
@@ -41,24 +40,21 @@ int		bt_read_loop(t_read *data)
 		ft_printf(data->prompt);
 	while (42)
 	{
-		if ((ret = read(data->fd, buf, 1)) <= 0)
+		if (read(data->fd, buf, 1) <= 0)
 			return (1);
-		/* DG("got *buf=%c, ret=%i", *buf, ret); */
-		buf[ret] = 0;
+		buf[1] = 0;
 		if (!esc && *buf == data->delim)
 			break ;
 		esc = esc ? 0 : !(data->opts & READ_OPT_LR) && (*buf == '\\');
 		ft_strappend(&data->input, buf);
 		if (!(data->opts & READ_OPT_LS))
 			ft_putchar(*buf);
-		i++;
 		if (*buf == '\n' && !(data->opts & READ_OPT_LR))
 			ft_putstr("> ");
-		if ((data->opts & READ_OPT_LN) && i >= data->nchars)
+		if ((data->opts & READ_OPT_LN) && ++i >= data->nchars)
 			break ;
 	}
 	ft_putchar('\n');
-	DG("input=%s", data->input);
 	return (0);
 }
 

@@ -40,7 +40,6 @@ int		bt_read_terminit(t_read *data)
 	}
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		return (-1);
-	/* DG("c_cc[VTIME]=%i", term.c_cc[VTIME]); */
 	return (0);
 }
 
