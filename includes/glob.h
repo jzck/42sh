@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/27 19:13:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/28 00:14:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define GLOB_H
 
 # include "minishell.h"
+
+# define CH(x) ((char **)(x)->content)
+# define UCH(x) ((unsigned char **)(x)->content)
 
 typedef struct	s_ld
 {
@@ -24,21 +27,30 @@ typedef struct	s_ld
 
 typedef struct	s_glob
 {
-	const char	*pat;
-	const char	*esc;
-	t_ld		*match;
-	t_ld		*m_pat;
+	const char			*pat;
+	const unsigned char	*esc;
+	t_ld				*match;
+	t_ld				*m_pat;
 }				t_glob;
 
-char			**glob(const char *str, const char *esc, char **env);
+typedef struct	s_expand
+{
+	t_ld			**wk;
+	char			*str;
+	unsigned char	*esc;
+	char			**split;
+	char			*s1;
+}					t_expand;
+
+char			**glob(const char *str, const unsigned char *esc, char **env);
 void			expand_brace(t_glob *tglob);
 void			glob_print(t_list *token, t_data *data);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
-void			dir_research(t_glob *tglob, char *path);
-void			dir_research_recursive(t_glob *tglob, char *p);
+void			dir_research(t_glob *tglob, char *p, const char *pat);
+void			dir_research_recursive(t_glob *tglob, char *p, const char *pat);
 int				is_directory(const char *path);
 
-int				is_char_esc(const char *esc, const char *ini_str, const char *str_pos);
+int				is_char_esc(const unsigned char *esc, const char *ini_str, const char *str_pos);
 
 /*
 ** LIST D:

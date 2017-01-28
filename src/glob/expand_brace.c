@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/27 20:12:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/28 01:13:26 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@
 **			-char	*pat  -> pattern string to be looking for expand
 */
 
-static char		**generate_tab(const char *pat, const char *esc, int dup)
+static char					**gen_tab(const char *pat,
+		const unsigned char *esc, int dup)
 {
 	char	**my_tab;
 
-	if (!(my_tab = (char **)malloc(sizeof(char*) * 3)))
+	if (!(my_tab = (char **)malloc(sizeof(char *) * 3)))
 		return (NULL);
 	if (dup)
 	{
 		my_tab[0] = ft_strdup(pat);
-		my_tab[1] = ft_strdup(esc);
+		my_tab[1] = ft_strdup((const char *)esc);
 	}
 	else
 	{
@@ -40,66 +41,104 @@ static char		**generate_tab(const char *pat, const char *esc, int dup)
 	return (my_tab);
 }
 
-static char		*calc_expand_esc(const char *esc,
-		int nb_start, int nb_middle, int nb_end)
+static unsigned char		*calc_expand_esc(const unsigned char *esc,
+		int nb_start, int nb_middle, int *nb_end)
 {
-	char	*new_esc;
-	int		index;
+	unsigned char	*new_esc;
+	int				index;
+	int				pos;
 
-	new_esc = ft_memalloc(sizeof(char) * (nb_start + nb_middle + nb_end) / 8);
+	if (!(new_esc = ft_memalloc(sizeof(char) *
+					((nb_start + nb_middle + nb_end[1]) / 8) + 1)))
+		return (NULL);
 	index = -1;
 	while (++index < nb_start)
-		new_esc[index / 8] |= (esc[index / 8] >> index % 8) & 1 << index % 8;
-	//copy the nb_start first bit of esc.
-	//append nb_middle bit at status 0
-	//append nb_end last bit from end of esc.
+		new_esc[index / 8] |=
+			((esc[index / 8] >> (7 - index % 8)) & 1) << (7 - index % 8);
+	pos = -1;
+	while (++pos < nb_middle)
+	{
+		new_esc[index / 8] |= 1 << (7 - index % 8);
+		++index;
+	}
+	pos = nb_end[0];
+	while (++pos <= nb_end[0] + nb_end[1])
+	{
+		new_esc[index / 8] |=
+			((esc[pos / 8] >> (7 - pos % 8)) & 1) << (7 - index % 8);
+		++index;
+	}
 	return (new_esc);
 }
 
-static int		search_brace(t_ld **wk, char *str, char *esc, int index)
+static void					iter_on_each(t_expand *me)
+{
+	int				i;
+	char			**my_new;
+	char			*first;
+	unsigned char	*second;
+	t_ld			*wk_tmp;
+
+	i = -1;
+	wk_tmp = *me->wk;
+	while (me->split[++i])
+	{
+		first = ft_strjoinf(ft_strjoin(me->s1, me->split[i]), me->str + 1, 1);
+		second = calc_expand_esc(me->esc,
+				ft_strlen(me->s1),
+				ft_strlen(me->split[i]),
+				(int[2]){me->str - CH(*me->wk)[0], ft_strlen(me->str + 1)});
+		my_new = gen_tab(first, second, 0);
+		ft_ld_pushfront(&wk_tmp, my_new);
+	}
+	me->wk = &wk_tmp;
+}
+
+static int					search_brace(t_expand *me)
 {
 	char	*start;
-	char	*s1;
-	char	**split;
 
 	start = NULL;
-	while (*str)
+	while (*me->str)
 	{
-		start = *str == '{' ? str : start;
-		if (*str == '}' && start)
+		start = *me->str == '{' && !is_char_esc(me->esc,
+				CH(*me->wk)[0], me->str) ? me->str : start;
+		if (*me->str == '}' && start
+				&& !is_char_esc(me->esc, CH(*me->wk)[0], me->str))
 		{
-			s1 = ft_strsub(start, 1, str - start - 1);
-			split = ft_strsplit(s1, ',');
-			ft_strdel(&s1);
-			s1 = ft_strsub((*wk)->content, 0, start - (char *)(*wk)->content);
-			while (split[++index])
-				ft_ld_pushfront(wk, generate_tab(ft_strjoinf(ft_strjoin(s1,
-				split[index]), str + 1, 1), calc_expand_esc(esc,
-				ft_strlen(s1), ft_strlen(split[index]), ft_strlen(str +1)), 0));
-			ft_strdel(&s1);
-			ft_tabdel(&split);
+			me->s1 = ft_strsub(start, 1, me->str - start - 1);
+			me->split = ft_strsplit(me->s1, ',');
+			ft_strdel(&me->s1);
+			me->s1 = ft_strsub(CH(*me->wk)[0], 0, start - CH(*me->wk)[0]);
+			iter_on_each(me);
+			ft_strdel(&me->s1);
+			ft_tabdel(&me->split);
 			return (1);
 		}
-		++str;
+		++me->str;
 	}
 	return (0);
 }
 
-void			expand_brace(t_glob *gl)
+void						expand_brace(t_glob *gl)
 {
-	t_ld	*tmp;
-	int		do_it;
+	t_ld		*tmp;
+	int			do_it;
+	t_expand	me;
 
-	ft_ld_pushfront(&gl->m_pat, generate_tab("", "", 1));
-	ft_ld_pushfront(&gl->m_pat, generate_tab(gl->pat, gl->esc, 1));
+	ft_ld_pushfront(&gl->m_pat, gen_tab("", (const unsigned char *)"", 1));
+	ft_ld_pushfront(&gl->m_pat, gen_tab(gl->pat, gl->esc, 1));
+	me = (t_expand){NULL, NULL, NULL, NULL, NULL};
 	do_it = 1;
 	while (do_it)
 	{
 		do_it = 0;
 		while (gl->m_pat->next)
 		{
-			if ((tmp = gl->m_pat) && search_brace(&gl->m_pat,
-	((char **)gl->m_pat->content)[0],((char **)gl->m_pat->content)[1], -1))
+			me.wk = &gl->m_pat;
+			me.esc = UCH(gl->m_pat)[1];
+			me.str = CH(gl->m_pat)[0];
+			if ((tmp = gl->m_pat) && search_brace(&me))
 			{
 				ft_ld_del(&tmp, &ft_tabdel);
 				do_it = 1;

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 20:58:47 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/27 23:45:39 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,34 @@ static int		match_bracket_char(char **cmp, const char *pat, char c, int neg)
 		*cmp += 2;
 	}
 	else if (!neg && **cmp == c)
-	{
 		return (1);
-	}
 	else if (neg && **cmp == c)
-	{
 		return (0);
-	}
 	return (-1);
 }
 
-static int		match_bracket(const char **pat, char c)
+static int		match_bracket(t_glob *gl, char c)
 {
 	char	*cmp;
 	int		neg;
 	int		ret;
 
-	cmp = (char *)*pat + 1;
-	while (**pat != ']')
+	cmp = (char *)gl->pat + 1;
+	while (*gl->pat != ']'
+			|| is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat))
 	{
-		if (!**pat)
+		if (!*gl->pat)
 			return (0);
-		++*pat;
+		++gl->pat;
 	}
 	neg = 0;
-	if ((*cmp == '^' || *cmp == '!') && ++neg)
+	if ((*cmp == '^' || *cmp == '!')
+		&& !is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], cmp)
+		&& ++neg)
 		++cmp;
-	while (cmp < *pat)
+	while (cmp < gl->pat)
 	{
-		ret = match_bracket_char(&cmp, *pat, c, neg);
+		ret = match_bracket_char(&cmp, gl->pat, c, neg);
 		if (ret != -1)
 			return (ret);
 		++cmp;
@@ -67,19 +66,19 @@ static int		match_bracket(const char **pat, char c)
 	return (neg);
 }
 
-static int		match_star(const char *pat, char *str,
-							char *full_word, t_ld **match)
+static int		match_star(t_glob *gl, char *str, char *full_word)
 {
 	char	*fix;
 
-	if (pat[1] == '*')
-		dir_research_recursive(pat, full_word, match);
-	if (!pat[1])
+	if (gl->pat[1] == '*' &&
+		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
+		dir_research_recursive(gl, full_word, gl->pat + 1);
+	if (!*++gl->pat)
 		return (1);
 	fix = str + ft_strlen(str);
 	while (fix > str)
 	{
-		if (match_pattern(pat + 1, fix, full_word, match))
+		if (match_pattern(gl, fix, full_word))
 			return (1);
 		--fix;
 	}
@@ -94,32 +93,31 @@ const char		*manage_pat(const char *pat, char *str)
 	return (pat);
 }
 
-int				match_pattern(const char *pat, char *str,
-							char *full_word, t_ld **match)
+int				match_pattern(t_glob *gl, char *str, char *full_word)
 {
-	pat = manage_pat(pat, str);
-	while (*pat)
+	gl->pat = manage_pat(gl->pat, str);
+	while (*gl->pat)
 	{
-		if (*pat == '?')
+		if (is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat))
+		{
+			if (*str != *gl->pat)
+				return (0);
+		}
+		else if (*gl->pat == '?')
 			str++;
-		else if (*pat == '[')
+		else if (*gl->pat == '[')
 		{
-			if (!match_bracket(&pat, *str))
+			if (!match_bracket(gl, *str))
 				return (0);
 		}
-		else if (*pat == '*')
-			return (match_star(pat, str, full_word, match));
-		else if (*pat == '\\')
-		{
-			if (!*++pat || *str != *pat)
-				return (0);
-		}
-		else if (*pat == '/' && !*str && is_directory(full_word))
-			dir_research((pat + 1), full_word, match);
-		else if (*pat != *str)
+		else if (*gl->pat == '*')
+			return (match_star(gl, str, full_word));
+		else if (*gl->pat == '/' && !*str && is_directory(full_word))
+			dir_research(gl, full_word, gl->pat + 1);
+		else if (*gl->pat != *str)
 			return (0);
 		++str;
-		++pat;
+		++gl->pat;
 	}
 	return (*str ? 0 : 1);
 }

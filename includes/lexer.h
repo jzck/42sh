@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 15:52:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/27 21:47:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ enum	e_lexstate
 
 struct	s_token
 {
-	t_type		type;
-	char		*data;
-	char		*esc;
-	int			size;
+	t_type			type;
+	char			*data;
+	unsigned char	*esc;
+	int				size;
 };
 
 typedef struct s_data	t_data;

@@ -59,6 +59,7 @@ glob/dir_glob.c\
 glob/expand_brace.c\
 glob/glob.c\
 glob/glob_print.c\
+glob/is_char_esc.c\
 glob/lib_perso/ft_ld_back.c\
 glob/lib_perso/ft_ld_clear.c\
 glob/lib_perso/ft_ld_del.c\
@@ -188,7 +189,8 @@ parser/parse_word.c
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
 
-all :			$(NAME)
+all :
+	@make -j $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(FLAGS) $(D_FLAGS) \
