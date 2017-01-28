@@ -25,13 +25,11 @@ int		job_addprocess(t_process *p)
 		job->id = jobc->current_id;
 		job->pgid = p->pid;
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
-		/* DG("added new job [%i]", job->id); */
 	}
 	job = jobc->first_job->content;
 	if (p->pid > 0)
 	{
 		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-		/* DG("added pid=%i to [%i]", p->pid, job->id); */
 	}
 	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
 		job_notify_new(job);

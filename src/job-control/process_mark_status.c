@@ -23,13 +23,11 @@ int		process_mark_status(pid_t pid, int status)
 			p->status = status;
 			if (WIFSTOPPED(status))
 			{
-				DG("marking: pid=%i, status=%i (stopped sig %i)", pid, status, WTERMSIG(status));
 				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes |= PROCESS_SUSPENDED;
 			}
 			else
 			{
-				DG("marking: pid=%i, status=%i (completed sig %i)", pid, status, WTERMSIG(status));
 				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
@@ -39,7 +37,6 @@ int		process_mark_status(pid_t pid, int status)
 			return(0);
 		}
 		ft_dprintf(2, "No child process %d.\n", pid);
-		return(-1);
 	}
 	return(-1);
 }
