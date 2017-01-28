@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-t_stof g_builtin[] = {
+t_stof g_builtin[] =
+{
 	{"echo", &builtin_echo},
 	{"cd", &builtin_cd},
 	{"setenv", &builtin_setenv},
@@ -23,6 +24,7 @@ t_stof g_builtin[] = {
 	{"fg", &builtin_fg},
 	{"bg", &builtin_bg},
 	{"history", &builtin_history},
+	{"read", &builtin_read},
 	{NULL, NULL},
 };
 

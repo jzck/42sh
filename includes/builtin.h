@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:21:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 16:57:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:42:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "types.h"
 # include "libft.h"
+# include "builtin_read.h"
 
 t_execf	*is_builtin(t_process *p);
 int		builtin_env(const char *path, char *const argv[], char *const envp[]);

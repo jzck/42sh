@@ -33,7 +33,7 @@ int		shell_single_command(char *command)
 	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
-	/* btree_print(STDBUG, ast, &ft_putast); */
+	btree_print(STDBUG, ast, &ft_putast);
 	/* /1* ft_dprintf(STDBUG, "\n--- INFIX BREAKDOWN ---\n"); *1/ */
 	/* /1* btree_apply_infix(ast, &ft_putast2); *1/ */
 	if (ft_exec(&ast))
