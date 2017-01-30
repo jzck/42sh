@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 15:04:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/30 13:09:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		shell_single_command(char *command)
 		return (1);
 	if (!token)
 		return (0);
-	token_print(token);
 	if (ft_post_tokenize(&token, command))
 		return (1);
 	DG("after post_tokenize");
 	token_print(token);
+	glob_print(token, data_singleton());
 	if (ft_parse(&ast, &token))
 		return (1);
 	btree_print(STDBUG, ast, &ft_putast);

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_print.c                                      :+:      :+:    :+:   */
+/*   lib_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:57:05 by wescande         ###   ########.fr       */
+/*   Created: 2016/12/03 13:37:41 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 13:37:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	token_print(t_list *lst)
+void	ft_expand_dollar(char **av, char **env)
 {
-	t_token		*token;
-	int			i;
-	t_type		type;
-	int			index;
+	char	*dollar;
 
-	while (lst)
+	while (*av)
 	{
-		i = -1;
-		token = lst->content;
-		type = token->type;
-		while (type >> (i++ + 2))
-			;
-		DG("%02i '%s'", i, token->data);
-		index = -1;
-		lst = lst->next;
+		if ((dollar = ft_strchr(*av, '$')))
+		{
+			*dollar = '\0';
+			*av = ft_strjoin(*av, ft_getenv(env, dollar + 1));
+		}
+		av++;
 	}
 }

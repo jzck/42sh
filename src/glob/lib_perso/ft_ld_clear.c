@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   ft_ld_clear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:54:05 by wescande         ###   ########.fr       */
+/*   Created: 2016/12/06 19:56:49 by wescande          #+#    #+#             */
+/*   Updated: 2017/01/05 14:17:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-void	token_free(void *data, size_t size)
+void	ft_ld_clear(t_ld **ld, void (*del)())
 {
-	t_token		*token;
-
-	(void)size;
-	token = data;
-	if (!(token->type & TK_NON_FREEABLE))
+	if (!ld || !*ld)
+		return ;
+	*ld = ft_ld_front(*ld);
+	while (*ld)
 	{
-		ft_strdel(&token->data);
-		ft_memdel((void **)&token->esc);
+		ft_ld_del(ld, del);
 	}
-	free(token);
 }

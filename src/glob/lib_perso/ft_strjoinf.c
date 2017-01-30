@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:54:05 by wescande         ###   ########.fr       */
+/*   Created: 2016/11/05 13:33:24 by wescande          #+#    #+#             */
+/*   Updated: 2017/01/24 16:53:13 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-void	token_free(void *data, size_t size)
+char	*ft_strjoinf(char *s1, char *s2, int state)
 {
-	t_token		*token;
+	char	*ans;
 
-	(void)size;
-	token = data;
-	if (!(token->type & TK_NON_FREEABLE))
-	{
-		ft_strdel(&token->data);
-		ft_memdel((void **)&token->esc);
-	}
-	free(token);
+	ans = ft_strjoin((const char *)s1, (const char *)s2);
+	if (state == 1 || state == 3)
+		ft_strdel(&s1);
+	if (state == 2 || state == 3)
+		ft_strdel(&s2);
+	return (ans);
 }

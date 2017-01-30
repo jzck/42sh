@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:18:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 18:32:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:09:01 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 #define TOKEN_INCR	10
 
-int		token_append(t_token *token, char c)
+int		token_append(t_token *token, char c, short int esc)
 {
-	if ((int)ft_strlen(token->data) >= token->size)
+	int		len;
+
+	len = ft_strlen(token->data);
+	if (len >= token->size)
 	{
-		token->data = (char *)ft_realloc(token->data, token->size + TOKEN_INCR);
-		token->size += TOKEN_INCR - 1;
+		token->size += 8;
+		token->data = (char *)ft_realloc(token->data, token->size + 1);
+		token->esc = (unsigned char *)ft_realloc((char *)token->esc,
+												token->size / 8 + 1);
+		token->esc[token->size / 8 - 1] = 0; 
 	}
-	ft_strcat(token->data, (char[]){c, 0});
+	ft_strcat(token->data, (char[2]){c, '\0'});
+	if (esc)
+		token->esc[len / 8] |= 1 << (7 - len % 8);
 	return (0);
 }

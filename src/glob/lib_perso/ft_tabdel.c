@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   glob.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:54:05 by wescande         ###   ########.fr       */
+/*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
+/*   Updated: 2017/01/24 16:52:50 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-void	token_free(void *data, size_t size)
+void		ft_tabdel(char ***mytab)
 {
-	t_token		*token;
+	char	**erase;
+	int		i;
 
-	(void)size;
-	token = data;
-	if (!(token->type & TK_NON_FREEABLE))
+	if (!mytab || !*mytab)
+		return ;
+	erase = *mytab;
+	i = 0;
+	while (erase[i])
 	{
-		ft_strdel(&token->data);
-		ft_memdel((void **)&token->esc);
+		ft_strdel(&erase[i]);
+		++i;
 	}
-	free(token);
+	free(*mytab);
+	*mytab = NULL;
 }

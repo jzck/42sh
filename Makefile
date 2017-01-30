@@ -1,90 +1,237 @@
-NAME	=	minishell
-CC		=	gcc
-TAGFILE	=	.tags
+#* ************************************************************************** *#
+#*                                                                            *#
+#*                                                        :::      ::::::::   *#
+#*   Makefile                                           :+:      :+:    :+:   *#
+#*                                                    +:+ +:+         +:+     *#
+#*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        *#
+#*                                                +#+#+#+#+#+   +#+           *#
+#*   Created: 2016/08/29 21:32:58 by wescande          #+#    #+#             *#
+#*   Updated: 2016/09/27 20:14:55 by wescande         ###   ########.fr       *#
+#*                                                                            *#
+#* ************************************************************************** *#
 
-D_SRC	=	src
-F_SRC   :=  $(shell find $(D_SRC) -type f -regex ".*\.c$$")
+NAME		=	42sh
 
-D_OBJ	=	obj
-F_OBJ	=	$(notdir $(F_SRC:.c=.o))
-DF_OBJ	:=	$(addprefix $(D_OBJ)/, $(F_OBJ))
+CC			=	gcc
+FLAGS		=	-Wall -Wextra -Werror
+D_FLAGS		=	-g
 
-D_INC	=	includes libft/includes
-F_INC   :=  $(shell find $(D_INC) -type f -regex ".*\.h$$")
-O_INC	=	$(addprefix -I, $(D_INC))
+LEN_NAME	=	`printf "%s" $(NAME) |wc -c`
+DELTA		=	$$(echo "$$(tput cols)-24-$(LEN_NAME)"|bc)
 
-D_SER	=	libft/
-O_SER	=	$(addprefix -L, $(D_SER))
+LIBFT_DIR	=	libft/
+LIBFT_LIB	=	$(LIBFT_DIR)libft.a
+LIBFT_INC	=	$(LIBFT_DIR)includes/
 
-D_LIB	=	ft ncurses
-O_LIB	=	$(addprefix -l, $(D_LIB))
+LIBS		=	-ltermcap
 
-W_FLAGS	=	-Wall -Wextra -Werror
-D_FLAGS	=	-g
+SRC_DIR		=	src/
+INC_DIR		=	includes/
+OBJ_DIR		=	objs/
 
-MKDIR	=	mkdir -p
-RM		=	/bin/rm -rf
+SRC_BASE	=	\
+builtin/builtin_cd.c\
+builtin/builtin_echo.c\
+builtin/builtin_env.c\
+builtin/builtin_exit.c\
+builtin/builtin_setenv.c\
+builtin/builtin_unsetenv.c\
+builtin/is_builtin.c\
+exec/ast_free.c\
+exec/exec_ampersand.c\
+exec/exec_and_if.c\
+exec/exec_command.c\
+exec/exec_dgreat.c\
+exec/exec_great.c\
+exec/exec_less.c\
+exec/exec_or_if.c\
+exec/exec_pipe.c\
+exec/exec_semi.c\
+exec/ft_exec.c\
+exec/ft_findexec.c\
+exec/launch_process.c\
+exec/process_redirect.c\
+exec/process_reset.c\
+exec/process_setexec.c\
+exec/process_setgroup.c\
+exec/set_exitstatus.c\
+glob/dir_glob.c\
+glob/expand_brace.c\
+glob/glob.c\
+glob/glob_print.c\
+glob/is_char_esc.c\
+glob/lib_perso/ft_ld_back.c\
+glob/lib_perso/ft_ld_clear.c\
+glob/lib_perso/ft_ld_del.c\
+glob/lib_perso/ft_ld_front.c\
+glob/lib_perso/ft_ld_new.c\
+glob/lib_perso/ft_ld_order.c\
+glob/lib_perso/ft_ld_pushback.c\
+glob/lib_perso/ft_ld_pushfront.c\
+glob/lib_perso/ft_ld_reverse.c\
+glob/lib_perso/ft_ld_size.c\
+glob/lib_perso/ft_ld_swap.c\
+glob/lib_perso/ft_ld_to_tab.c\
+glob/lib_perso/ft_strjoinf.c\
+glob/lib_perso/ft_tabdel.c\
+glob/match_pattern.c\
+job-control/builtin_bg.c\
+job-control/builtin_fg.c\
+job-control/builtin_jobs.c\
+job-control/do_job_notification.c\
+job-control/job_addprocess.c\
+job-control/job_cmp_id.c\
+job-control/job_format.c\
+job-control/job_format_head.c\
+job-control/job_free.c\
+job-control/job_getprocess.c\
+job-control/job_getrank.c\
+job-control/job_is_completed.c\
+job-control/job_is_stopped.c\
+job-control/job_kill_all.c\
+job-control/job_notify_change.c\
+job-control/job_notify_new.c\
+job-control/job_remove.c\
+job-control/job_update_id.c\
+job-control/job_update_status.c\
+job-control/job_wait.c\
+job-control/mark_job_as_running.c\
+job-control/process_cmp_pid.c\
+job-control/process_format.c\
+job-control/process_free.c\
+job-control/process_mark_status.c\
+job-control/put_job_in_background.c\
+job-control/put_job_in_foreground.c\
+job-control/sigchld_handler.c\
+job-control/sigint_handler.c\
+job-control/sigtstp_handler.c\
+job-control/sigttin_handler.c\
+job-control/sigttou_handler.c\
+lexer/command_getoutput.c\
+lexer/ft_post_tokenize.c\
+lexer/ft_tokenize.c\
+lexer/get_lexer_state.c\
+lexer/lexer_backslash.c\
+lexer/lexer_default.c\
+lexer/lexer_delim.c\
+lexer/lexer_dquote.c\
+lexer/lexer_great.c\
+lexer/lexer_greatand.c\
+lexer/lexer_less.c\
+lexer/lexer_lessand.c\
+lexer/lexer_number.c\
+lexer/lexer_quote.c\
+lexer/lexer_sep.c\
+lexer/lexer_special.c\
+lexer/lexer_var.c\
+lexer/lexer_word.c\
+lexer/reduce_bquotes.c\
+lexer/reduce_parens.c\
+lexer/token_append.c\
+lexer/token_cmp_type.c\
+lexer/token_expand_var.c\
+lexer/token_free.c\
+lexer/token_init.c\
+lexer/token_print.c\
+line-editing/curs_ask.c\
+line-editing/curs_clear.c\
+line-editing/curs_goto.c\
+line-editing/curs_move.c\
+line-editing/curs_setup.c\
+line-editing/curs_single.c\
+line-editing/curs_term_setup.c\
+line-editing/curs_write.c\
+line-editing/ft_readline.c\
+line-editing/rl_bitset.c\
+line-editing/rl_clear_function.c\
+line-editing/rl_clipboard_function.c\
+line-editing/rl_clipboard_utility.c\
+line-editing/rl_comp_function.c\
+line-editing/rl_default_function.c\
+line-editing/rl_display.c\
+line-editing/rl_dynamic_buffer.c\
+line-editing/rl_long_move_function.c\
+line-editing/rl_merge_line.c\
+line-editing/rl_page_move_function.c\
+line-editing/rl_prompt.c\
+line-editing/rl_quoting_function.c\
+line-editing/rl_remove_function.c\
+line-editing/rl_setup.c\
+line-editing/rl_short_move_function.c\
+line-editing/rl_stack_line.c\
+line-editing/rl_state_function.c\
+line-editing/rl_word_move_function.c\
+line-editing/rl_word_utility.c\
+main/data_exit.c\
+main/data_init.c\
+main/data_singleton.c\
+main/ft_cleanup.c\
+main/ft_putast.c\
+main/ft_putast2.c\
+main/lib_expansion.c\
+main/main.c\
+main/shell_exit.c\
+main/shell_get_avdata.c\
+main/shell_get_opts.c\
+main/shell_init.c\
+main/sig_handler.c\
+parser/ft_parse.c\
+parser/parse_dgreat.c\
+parser/parse_dless.c\
+parser/parse_great.c\
+parser/parse_greatand.c\
+parser/parse_less.c\
+parser/parse_lessand.c\
+parser/parse_separator.c\
+parser/parse_subshell.c\
+parser/parse_word.c
 
-.PHONY: all clean fclean re
+SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
+OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
 
-all: $(NAME)
+all :
+	@make -j $(NAME)
 
-$(NAME): libft/libft.a $(DF_OBJ)
-	$(CC) $(O_INC) $(O_SER) $(O_LIB) $(W_FLAGS) $(DF_OBJ) -o $@ $(D_FLAGS)
+$(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
+	@$(CC) $(FLAGS) $(D_FLAGS) \
+		-I $(INC_DIR) \
+		-I $(LIBFT_INC) \
+		$(LIBS) \
+		$(LIBFT_LIB) $(OBJS) \
+		-o $(NAME)
+	@echo "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K"
 
-$(D_OBJ)/%.o: $(D_SRC)/main/%.c includes/minishell.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+$(LIBFT_LIB):
+	@make -j -C $(LIBFT_DIR)
 
-$(D_OBJ)/%.o: $(D_SRC)/builtin/%.c includes/minishell.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+$(OBJ_DIR) :
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $(OBJS))
 
-$(D_OBJ)/%.o: $(D_SRC)/minishell-exec/%.c includes/minishell.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+$(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
+	@$(CC) $(FLAGS) -MMD -c $< -o $@\
+		-I $(INC_DIR)\
+		-I $(LIBFT_INC)
+	@printf "\r\033[38;5;11m⌛ MAKE %s     plz wait :  %*s\033[0m\033[K" $(NAME) $(DELTA) "$@"
 
-$(D_OBJ)/%.o: $(D_SRC)/line-editing/%.c includes/ft_readline.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+clean:			cleanlib
+	@rm -rf $(OBJ_DIR)
+	@echo "\r\033[38;5;202m✖ clean $(NAME).\033[0m\033[K"
 
-$(D_OBJ)/%.o: $(D_SRC)/lexer/%.c includes/lexer.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+cleanlib:
+	@make -C $(LIBFT_DIR) clean
 
-$(D_OBJ)/%.o: $(D_SRC)/parser/%.c includes/parser.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+fclean:			clean fcleanlib
+	@rm -f $(NAME)
+	@echo "\r\033[38;5;196m❌ fclean $(NAME).\033[0m\033[K"
 
-$(D_OBJ)/%.o: $(D_SRC)/exec/%.c includes/exec.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+fcleanlib:		cleanlib
+	@make -C $(LIBFT_DIR) fclean
 
-$(D_OBJ)/%.o: $(D_SRC)/job-control/%.c includes/job_control.h
-	@$(MKDIR) $(D_OBJ)
-	@$(CC) $(O_INC) $(W_FLAGS) -c $< -o $@ $(D_FLAGS)
-	@echo "Compiling "$<"..."
+re:				fclean all
 
-libft/libft.a: libft/src/*/*.c
-	@echo "libft/libft.a"
-	@$(MAKE) -C libft 2>/dev/null
+relib:			fcleanlib $(LIBFT_LIB)
 
-libft:
-	@echo "libft"
-	@$(MAKE) -C libft 2>/dev/null
+.PHONY :		fclean clean re relib cleanlib fcleanlib
 
-clean:
-	$(RM) $(D_OBJ)
-
-fclean: clean
-	$(RM) $(NAME)
-	@$(MAKE) fclean -C libft/ 2>/dev/null
-
-re: fclean all
+-include $(OBJS:.o=.d)

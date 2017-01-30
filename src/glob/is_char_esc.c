@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   is_char_esc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:54:05 by wescande         ###   ########.fr       */
+/*   Created: 2017/01/27 18:19:55 by wescande          #+#    #+#             */
+/*   Updated: 2017/01/27 23:45:51 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-void	token_free(void *data, size_t size)
+int		is_char_esc(const unsigned char *esc,
+		const char *ini_str, const char *str_pos)
 {
-	t_token		*token;
+	int		pos;
 
-	(void)size;
-	token = data;
-	if (!(token->type & TK_NON_FREEABLE))
-	{
-		ft_strdel(&token->data);
-		ft_memdel((void **)&token->esc);
-	}
-	free(token);
+	pos = str_pos - ini_str;
+	if ((esc[pos / 8] >> (7 - pos % 8)) & 1)
+		return (1);
+	return (0);
 }

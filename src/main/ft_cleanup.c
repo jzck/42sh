@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_print.c                                      :+:      :+:    :+:   */
+/*   ft_cleanup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:57:05 by wescande         ###   ########.fr       */
+/*   Created: 2016/12/01 14:42:42 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/09 21:50:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	token_print(t_list *lst)
+extern char	**environ;
+extern char PC;
+extern char *UP;
+extern char *BC;
+
+void	ft_cleanup(void)
 {
-	t_token		*token;
-	int			i;
-	t_type		type;
-	int			index;
+	struct termios	term;
 
-	while (lst)
-	{
-		i = -1;
-		token = lst->content;
-		type = token->type;
-		while (type >> (i++ + 2))
-			;
-		DG("%02i '%s'", i, token->data);
-		index = -1;
-		lst = lst->next;
-	}
+	DG("cleanup. char * UP at %p", UP);
+	DG("cleanup. char * BC at %p", BC);
+	if (tcgetattr(0, &term) == -1)
+		return ;
+	term.c_lflag |= ICANON | ISIG | ECHO;
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return ;
 }

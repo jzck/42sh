@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 14:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:37:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:56:40 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	token_expand_var(t_token *token)
 	*dollar = 0;
 	if (val)
 		while (*val)
-			token_append(token, *val++);
+			token_append(token, *val++, 1);
 }

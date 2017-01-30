@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 16:30:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:07:52 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ int		lexer_backslash(t_list **alst, char *str)
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
-	token_append(token, str[1]);
+	token_append(token, str[1], 1);
 	return (ft_tokenize(alst, str + 2, WORD));
 }

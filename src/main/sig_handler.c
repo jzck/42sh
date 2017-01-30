@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_print.c                                      :+:      :+:    :+:   */
+/*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 21:57:05 by wescande         ###   ########.fr       */
+/*   Created: 2016/12/01 12:43:22 by jhalford          #+#    #+#             */
+/*   Updated: 2016/12/03 13:31:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	token_print(t_list *lst)
+pid_t	g_pid;
+
+void	sig_handler(int signo)
 {
-	t_token		*token;
-	int			i;
-	t_type		type;
-	int			index;
-
-	while (lst)
+	(void)signo;
+	if (signo == SIGINT)
 	{
-		i = -1;
-		token = lst->content;
-		type = token->type;
-		while (type >> (i++ + 2))
-			;
-		DG("%02i '%s'", i, token->data);
-		index = -1;
-		lst = lst->next;
+		if (g_pid)
+			kill(g_pid, SIGINT);
+		if (kill(g_pid, 0) == 0)
+			ft_putendl("");
 	}
 }
