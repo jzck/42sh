@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 20:57:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 17:14:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,12 @@ int		parse_subshell(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst);
 int		parse_newline(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst);
-
+int		parse_while(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_do(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_done(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
+int		parse_list(t_list **list_ast, t_btree **ast,
+		t_list **start, t_list **lst);
 #endif

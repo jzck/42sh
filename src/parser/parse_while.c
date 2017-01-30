@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_newline.c                                    :+:      :+:    :+:   */
+/*   parse_while.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 17:14:05 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/30 16:03:28 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/30 17:22:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_newline(t_list **list_ast, t_btree **ast,
+int		parse_while(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst)
 {
-	t_list		*temp;
-	
-	DG("parsing newline");
-	temp = (*lst)->next;
-	(*lst)->next = NULL;
+	t_astnode	*node;
+	t_token		*token;
+
+	token = (*lst)->content;
+	node = (*ast)->item;
+	node->type = TK_WHILE;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(list_ast, ast, start);
-	*ast = NULL;
-	ft_parse(&(*list_ast)->next, ast, &temp);
-	return (0);
+	ft_parse(list_ast, &(*ast)->left, start);
+	ft_parse(list_ast, &(*ast)->right, start);
+ 	return (0);
 }

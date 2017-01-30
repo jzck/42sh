@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 23:06:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 23:38:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 17:15:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		shell_script()
 		btree_print(STDBUG, *ast2, &ft_putast);
 		tmp2 = tmp2->next;
 	}
+	return (0);
 	while (list_ast)
 	{
 		if (ft_exec((t_btree **)list_ast->content))

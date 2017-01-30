@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 13:52:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 16:45:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int		parse_word(t_list **list_ast, t_btree **ast,
 	t_astnode	*node;
 	t_token		*token;
 
-	(void)start;
-	(void)list_ast;
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = TK_COMMAND;

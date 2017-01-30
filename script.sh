@@ -1,11 +1,15 @@
+#!/bin/bash
+
 echo "debut script"
 
-do
-
-while [ 1 ] 
+VALUE=3
+while [ $VALUE -gt 1 ] 
 do 
 	sleep 1
+	((VALUE--))
 	echo "a"
-done
+done > file1 | cat ; ls 
+
+ls -l > file2 | cat
 
 echo "fin script"
