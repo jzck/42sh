@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 18:57:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 22:32:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		exec_dgreat(t_btree **ast);
 int		exec_command(t_btree **ast);
 
 int		exec_while(t_btree **ast);		
+int		exec_list(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
@@ -101,5 +102,7 @@ char	*ft_findexec(char *path, char *file);
 void	set_exitstatus(int status);
 
 void	ast_free(void *data, size_t content_size);
+
+int		loop_exec(t_list *list_ast);
 
 #endif

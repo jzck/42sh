@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_ampersand.c                                   :+:      :+:    :+:   */
+/*   exec_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 16:01:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 21:11:38 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/30 20:19:29 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/30 20:57:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_ampersand(t_btree **ast)
+int		exec_list(t_btree **ast)
 {
 	t_process	*p;
 
-	if (SHELL_HAS_JOBC(data_singleton()->opts))
-		data_singleton()->exec.job.attributes |= JOB_BG;
-	ft_exec(&(*ast)->left);
-	if (SHELL_HAS_JOBC(data_singleton()->opts))
-		data_singleton()->exec.job.attributes &= ~JOB_BG;
-	ft_exec(&(*ast)->right);
-
-	p = &data_singleton()->exec.process;	
+	p = &data_singleton()->exec.process;
 	if (!(p->script & SCRIPT_LOOP))
 		btree_delone(ast, &ast_free);
 	return (0);

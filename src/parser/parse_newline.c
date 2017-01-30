@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 17:14:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 20:02:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		parse_newline(t_list **list_ast, t_btree **ast,
 {
 	t_list		*temp;
 	
-	DG("parsing newline");
 	temp = (*lst)->next;
 	(*lst)->next = NULL;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);

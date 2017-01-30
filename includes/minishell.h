@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 19:23:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 23:10:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		shell_single_command(char *command);
 
 int		read_script(char *file);
 int		shell_script(void);
-t_list	*shell_get_ast(char *command);
+t_list	**shell_get_ast(char *command);
 
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);

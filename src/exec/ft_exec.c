@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 17:33:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 23:15:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_execmap	g_execmap[] =
 	{TK_GREAT, &exec_great},
 	{TK_DGREAT, &exec_dgreat},
 	{TK_WHILE, &exec_while},
+	{TK_LIST, &exec_list},
 	{TK_COMMAND | TK_SUBSHELL, &exec_command},
 	{0, 0},
 };
@@ -39,8 +40,10 @@ int		ft_exec(t_btree **ast)
 	while (g_execmap[i].type)
 	{
 		if (item->type & g_execmap[i].type)
+		{
 			/* return ((*g_execmap[i].f)(ast)); */
 			(*g_execmap[i].f)(ast);
+		}
 		i++;
 	}
 	return (0);

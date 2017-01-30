@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:34:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 18:48:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 23:38:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		parse_list(t_list **list_ast, t_btree **ast,
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = TK_LIST;
-	node->data.str = ft_strdup(token->data); 
+	node->data.str = ft_strdup(token->data);
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	return (0);
 }

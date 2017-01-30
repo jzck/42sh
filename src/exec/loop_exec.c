@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_exitstatus.c                                   :+:      :+:    :+:   */
+/*   loop_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 21:05:42 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/30 21:02:10 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/30 23:17:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-void	set_exitstatus(int status)
+int		loop_exec(t_list *list_ast)
 {
-	char	*astatus;
 
-	astatus = ft_itoa(status);
-	builtin_setenv("setenv", (char*[3]){"?", astatus}, data_singleton()->env);
-	ft_strdel(&astatus);
+//	DG("begin exec loop");
+//	ft_print_all_ast(*list_ast);
+	while (list_ast)
+	{
+		if (ft_exec((t_btree **)list_ast->content))
+			return (1);
+		list_ast = list_ast->next;
+	}
+	return (0);
 }
