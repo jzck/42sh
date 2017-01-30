@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/30 12:12:23 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:14:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ typedef struct	s_expand
 	char			*s1;
 }				t_expand;
 
-char			**glob(const char *str, const unsigned char *esc, char **env);
-void			expand_brace(t_glob *tglob);
-void			glob_print(t_list *token, t_data *data);
-int				match_pattern(t_glob *tglob, char *str, char *full_word);
-void			dir_research(t_glob *tglob, char *p, const char *pat);
-void			dir_research_recursive(t_glob *tglob, char *p, const char *pat);
+/*
+** interface of glob.
+** It fill all token->expand_data with correspind expansion
+*/
+void			glob_expand_token(t_list *token, t_data *data);
+
 /*
 ** return TRUE if path file is a directory.
 */
+
 int				is_directory(const char *path);
 /*
 ** return TRUE if char at str_pos in ini_str is escape.
@@ -58,6 +59,21 @@ int				is_directory(const char *path);
 int				is_char_esc(const unsigned char *esc,
 							const char *ini_str, const char *str_pos);
 
+/*
+** Internal function.
+**
+**
+**
+**
+**
+**
+**
+*/
+char			**glob(const char *str, const unsigned char *esc, char **env);
+void			expand_brace(t_glob *tglob);
+int				match_pattern(t_glob *tglob, char *str, char *full_word);
+void			dir_research(t_glob *tglob, char *p, const char *pat);
+void			dir_research_recursive(t_glob *tglob, char *p, const char *pat);
 /*
 ** LIST D:
 */
