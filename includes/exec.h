@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/24 20:01:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 18:57:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
 
+# define SCRIPT_LOOP		(1 << 0)
+
 # include "libft.h"
 # include "types.h"
 # include "job_control.h"
@@ -48,6 +50,7 @@ struct	s_process
 	int		fdout;
 	int		status;
 	t_flag	attributes;
+	t_flag	script;
 };
 
 struct	s_exec
@@ -80,6 +83,8 @@ int		exec_less(t_btree **ast);
 int		exec_great(t_btree **ast);
 int		exec_dgreat(t_btree **ast);
 int		exec_command(t_btree **ast);
+
+int		exec_while(t_btree **ast);		
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);

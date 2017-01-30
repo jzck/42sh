@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.c                                       :+:      :+:    :+:   */
+/*   ft_print_all_ast.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:34:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 18:48:24 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/30 19:23:49 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/30 19:26:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-int		parse_list(t_list **list_ast, t_btree **ast,
-		t_list **start, t_list **lst)
+void		ft_print_all_ast(t_list *lst_ast)
 {
-	t_astnode	*node;
-	t_token		*token;
+	t_list	*tmp;
+	t_btree	**ast;
 
-	(void)list_ast;
-	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_LIST;
-	node->data.str = ft_strdup(token->data); 
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	return (0);
+	tmp = lst_ast;
+	while (tmp)
+	{
+		ast = tmp->content;
+		btree_print(STDBUG, *ast, &ft_putast);
+		tmp = tmp->next;
+	}
 }
