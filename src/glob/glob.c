@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 14:16:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 19:40:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@
 **				to just expanse in local directory and not in path dir
 */
 
-static void		path_research(t_glob *gl, char **path)
-{
-	int				i;
-
-	i = -1;
-	while (path[++i])
-		dir_research(gl, path[i], gl->pat);
-}
-
 static char		**treat_glob(t_ld **match)
 {
 	char	**gl;
@@ -43,33 +34,10 @@ static char		**treat_glob(t_ld **match)
 	return (gl);
 }
 
-static void		add_simple_pat(t_glob *gl)
-{
-	char	*str;
-	int		start;
-
-	str = (char *)gl->pat;
-	start = 0;
-	while (*str)
-	{
-		if (!is_char_esc(gl->esc, gl->pat, str))
-		{
-			if (*str == '[')
-				start = 1;
-			else if (*str == ']' && start == 1)
-				return ;
-			else if (*str == '*' || *str == '?')
-				return ;
-		}
-		++str;
-	}
-	ft_ld_pushfront(&gl->match, ft_strdup(gl->pat));
-}
-
-char			**glob(const char *pat, const unsigned char *esc, char **env)
+char			**glob(const char *pat, const unsigned char *esc)
 {
 	t_glob	gl;
-	char	**path;
+	int		ret;
 
 	gl = (t_glob){pat, esc, NULL, NULL};
 	expand_brace(&gl);
@@ -77,18 +45,12 @@ char			**glob(const char *pat, const unsigned char *esc, char **env)
 	{
 		gl.pat = ((char **)gl.m_pat->content)[0];
 		gl.esc = ((unsigned char **)gl.m_pat->content)[1];
-		add_simple_pat(&gl);
-		if (!(gl.pat[0] == '/' || (gl.pat[0] == '.' && gl.pat[1] == '/'))
-				&& env && (path = ft_strsplit(ft_getenv(env, "PATH"), ':')))
-		{
-			path_research(&gl, path);
-			ft_tabdel(&path);
-		}
-		gl.pat = ((char **)gl.m_pat->content)[0];
 		if (gl.pat[0] != '/')
-			dir_research(&gl, ".", gl.pat);
+			ret = dir_research(&gl, ".", gl.pat);
 		else
-			dir_research(&gl, "/", gl.pat + 1);
+			ret = dir_research(&gl, "/", gl.pat + 1);
+		if (!ret)
+			ft_ld_pushfront(&gl.match, ft_strdup(gl.pat));
 		gl.m_pat = gl.m_pat->next;
 	}
 	ft_ld_clear(&gl.m_pat, &ft_tabdel);
