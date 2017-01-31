@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:55:33 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 22:14:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 23:58:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int		lexer_list(t_list **alst, char *str)
 			else if (ft_strncmp(str, "do", 2) == 0 && (ft_is_delim_list(*(str + 2))
 				|| *(str + 2) == ' '))
 				return (ft_tokenize(alst, str, DO));
+			else if (ft_strncmp(str, "then", 4) == 0 && (ft_is_delim_list(*(str + 4))
+				|| *(str + 4) == ' '))
+				return (ft_tokenize(alst, str, THEN));
+			else if (ft_strncmp(str, "fi", 2) == 0 && (ft_is_delim_list(*(str + 2))
+				|| *(str + 2) == ' '))
+				return (ft_tokenize(alst, str, FI));
 		}
 		token_append(token, *str++);
 	}

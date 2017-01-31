@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_do_group.c                                   :+:      :+:    :+:   */
+/*   lexer_do.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 00:48:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 22:14:26 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/31 23:29:09 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/31 23:32:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int		lexer_do(t_list **alst, char *str)
 	token = (*alst)->content;
 	token->type = TK_DO;
 	state = LIST;
-//	data_singleton()->scope |= (token->type == TK_DO) ? IN_LIST : OUT_LIST;
 	return (ft_tokenize(&(*alst)->next, str + 2, state));
 }

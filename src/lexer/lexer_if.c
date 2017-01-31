@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_del.c                                         :+:      :+:    :+:   */
+/*   lexer_if.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/31 22:39:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 23:20:40 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/31 23:25:47 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/31 23:28:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "lexer.h"
 
-int		loop_del(t_list *list_ast)
+int		lexer_if(t_list **alst, char *str)
 {
-	t_list	*temp;
+	t_token		*token;
 
-	while (list_ast)
+	token = (*alst)->content;
+	if (ft_strncmp(str, "if", 2) == 0)
+		token->type = TK_IF;
+	else if (ft_isalnum(*str))
 	{
-		btree_del((t_btree **)list_ast->content, &ast_free);
-		temp = list_ast;
-		list_ast = list_ast->next;
-		ft_lstdelone(&temp, NULL);
+		token_append(token, *str);
+		return (ft_tokenize(alst, str + 1, WORD));
 	}
-	return (0);
+	return (ft_tokenize(&(*alst)->next, str + 3, LIST));
 }

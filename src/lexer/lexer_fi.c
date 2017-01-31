@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_del.c                                         :+:      :+:    :+:   */
+/*   lexer_fi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/31 22:39:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 23:20:40 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/31 23:35:08 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/31 23:59:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "lexer.h"
 
-int		loop_del(t_list *list_ast)
+int		lexer_fi(t_list **alst, char *str)
 {
-	t_list	*temp;
+	t_token		*token;
+	t_lexstate	state;
 
-	while (list_ast)
+	if (*alst)
+		return (lexer_fi(&(*alst)->next, str));
+	else
 	{
-		btree_del((t_btree **)list_ast->content, &ast_free);
-		temp = list_ast;
-		list_ast = list_ast->next;
-		ft_lstdelone(&temp, NULL);
+		token = token_init();
+		*alst = ft_lstnew(token, sizeof(*token));
 	}
-	return (0);
+	token = (*alst)->content;
+	token->type = TK_FI;
+	state = DEFAULT;
+	return (ft_tokenize(&(*alst)->next, str + 2, state));
 }

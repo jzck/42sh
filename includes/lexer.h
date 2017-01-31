@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 22:14:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 23:52:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ typedef long long		t_type;
 # define TK_WHILE		(1 << 20)
 # define TK_DO			(1 << 21)
 # define TK_DONE		(1 << 22)
-# define TK_LIST		(1 << 23)
+# define TK_IF			(1 << 23)
+# define TK_THEN		(1 << 24)
+# define TK_FI			(1 << 25)
+# define TK_LIST		(1 << 26)
 
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
@@ -73,6 +76,9 @@ enum	e_lexstate
 	WHILE,
 	DO,
 	DONE,
+	IF,
+	THEN,
+	FI,
 	LIST,
 	COMMENT,
 };
@@ -126,6 +132,9 @@ int			lexer_special(t_list **alst, char *str);
 int			lexer_while(t_list **alst, char *str);
 int			lexer_do(t_list **alst, char *str);
 int			lexer_done(t_list **alst, char *str);
+int			lexer_if(t_list **alst, char *str);
+int			lexer_then(t_list **alst, char *str);
+int			lexer_fi(t_list **alst, char *str);
 int			lexer_list(t_list **alst, char *str);
 int			lexer_comment(t_list **alst, char *str);
 
