@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 19:40:49 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/31 23:15:27 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char		**treat_glob(t_ld **match)
 
 	gl = NULL;
 	ft_ld_reverse(match);
-	*match = ft_ld_order(*match, &ft_strcmp, &ft_strdel);
 	gl = ft_ld_to_tab(*match);
 	ft_ld_clear(match, &ft_strdel);
 	return (gl);
@@ -50,7 +49,8 @@ char			**glob(const char *pat, const unsigned char *esc)
 		else
 			ret = dir_research(&gl, "/", gl.pat + 1);
 		if (!ret)
-			ft_ld_pushfront(&gl.match, ft_strdup(gl.pat));
+			ft_ld_pushfront(&gl.match,
+					ft_strdup(((char **)gl.m_pat->content)[0]));
 		gl.m_pat = gl.m_pat->next;
 	}
 	ft_ld_clear(&gl.m_pat, &ft_tabdel);

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 17:54:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/31 23:20:22 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_expand
 	char			*str;
 	unsigned char	*esc;
 	char			**split;
+	unsigned char	**m_esc;
 	char			*s1;
 }				t_expand;
 
@@ -61,10 +62,19 @@ int				is_char_esc(const unsigned char *esc,
 /*
 ** Internal function.
 */
+unsigned char	*ft_sub_esc(const unsigned char *esc, int start, int len);
+unsigned char	*calc_expand_esc(const unsigned char *esc,
+								int nb_start, int nb_middle, int *nb_end);
+void			modify_esc_split(unsigned char *esc_dest,
+								unsigned char *esc_src, int start, int len);
 void			expand_brace(t_glob *tglob);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
 int				dir_research(t_glob *tglob, char *p, const char *pat);
 int				dir_research_recursive(t_glob *tglob, char *p, const char *pat);
+char			**ft_strsplit_spe(const char *str,
+								const unsigned char *esc, char c);
+unsigned char	**ft_strsplit_esc(const char *str,
+								const unsigned char *esc, char c);
 /*
 ** LIST D:
 */
@@ -87,5 +97,6 @@ t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
 
 char			*ft_strjoinf(char *str, char *str2, int mode);
 void			ft_tabdel(char ***mytab);
+int				ft_tablen(char **mytab);
 
 #endif

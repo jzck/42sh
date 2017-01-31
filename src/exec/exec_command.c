@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 19:12:23 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/31 20:19:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static char		**return_array_expand(t_ld *ld)
 	while (ld)
 	{
 		content = ld->content;
-	DG("EXPANSION DE :");
-	DG("%s", content[0]);
 		expand = glob(content[0], (unsigned char *)content[1]);
-	DG();
 		index = -1;
 		while (expand[++index])
 			my_tab = ft_sstradd(my_tab, expand[index]);
@@ -35,22 +32,6 @@ static char		**return_array_expand(t_ld *ld)
 	}
 	return (my_tab);
 }
-
-static void		ft_tabprint_fd(char **mytab, int fd)
-{
-	int		i;
-
-	DG("Affichage des parametres envoyes apres le glob");
-	if (!mytab || !*mytab)
-		return ;
-	i = 0;
-	while (mytab[i])
-	{
-		ft_putendl_fd(mytab[i], fd);
-		++i;
-	}
-}
-
 
 int				exec_command(t_btree **ast)
 {
@@ -62,7 +43,6 @@ int				exec_command(t_btree **ast)
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
 	p->av = return_array_expand(node->data.token);
-	ft_tabprint_fd(p->av, 4);
 	process_setexec(node->type, p);
 	if (!(launch_process(p)))
 	{
