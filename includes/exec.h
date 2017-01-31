@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 19:34:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 22:38:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	set_exitstatus(int status);
 void	ast_free(void *data, size_t content_size);
 
 int		loop_exec(t_list *list_ast);
+int		loop_del(t_list *list_ast);
 
 #endif
