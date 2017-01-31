@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/28 01:13:26 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:19:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char					**gen_tab(const char *pat,
 		my_tab[1] = (char *)esc;
 	}
 	my_tab[2] = NULL;
+
 	return (my_tab);
 }
 
@@ -125,6 +126,7 @@ void						expand_brace(t_glob *gl)
 	t_ld		*tmp;
 	int			do_it;
 	t_expand	me;
+
 
 	ft_ld_pushfront(&gl->m_pat, gen_tab("", (const unsigned char *)"", 1));
 	ft_ld_pushfront(&gl->m_pat, gen_tab(gl->pat, gl->esc, 1));

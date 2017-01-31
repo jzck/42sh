@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 17:05:20 by wescande         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:35:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ struct	s_token
 {
 	t_type			type;
 	char			*data;
-	char			**expand_data;
 	unsigned char	*esc;
 	int				size;
 };

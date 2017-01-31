@@ -13,11 +13,11 @@
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
 D_FLAGS		=	-g
 
 LEN_NAME	=	`printf "%s" $(NAME) |wc -c`
-DELTA		=	$$(echo "$$(tput cols)-24-$(LEN_NAME)"|bc)
+DELTA		=	$$(echo "$$(tput cols)-37-$(LEN_NAME)"|bc)
 
 LIBFT_DIR	=	libft/
 LIBFT_LIB	=	$(LIBFT_DIR)libft.a
@@ -62,7 +62,6 @@ exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\
 glob/glob.c\
-glob/glob_expand_token.c\
 glob/is_char_esc.c\
 glob/lib_perso/ft_ld_back.c\
 glob/lib_perso/ft_ld_clear.c\
@@ -189,6 +188,8 @@ parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
+NB			=	$(words $(SRC_BASE))
+INDEX		=	0
 
 all :
 	@make -j $(NAME)
@@ -210,10 +211,15 @@ $(OBJ_DIR) :
 	@mkdir -p $(dir $(OBJS))
 
 $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
+	@$(eval DONE=$(shell echo $$(($(INDEX)*20/$(NB)))))
+	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
+	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
+	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
+	@printf "\r\033[38;5;11m⌛ MAKE %s : %2d%% \033[48;5;%dm%*s\033[0m%*s\033[48;5;255m \033[0m \033[38;5;11m %*s\033[0m\033[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
 	@$(CC) $(FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)
-	@printf "\r\033[38;5;11m⌛ MAKE %s     plz wait :  %*s\033[0m\033[K" $(NAME) $(DELTA) "$@"
+	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))
 
 clean:			cleanlib
 	@rm -rf $(OBJ_DIR)
