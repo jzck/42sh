@@ -6,16 +6,19 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:10:38 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/09 13:53:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 14:53:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	job_format_head(t_job *j, int rank[2])
+void	job_format_head(t_job *j)
 {
 	char	crank;
+	int		rank[2];
 
+	job_getrank(&rank);
+	DG("rank[0]=%i,rank[1]=%i", rank[0], rank[1]);
 	if (j->id == rank[0])
 		crank = '+';
 	else if (j->id == rank[1])

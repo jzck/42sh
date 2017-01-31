@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 10:52:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:08:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	mark_job_as_running (t_job *j)
+void	mark_job_as_running(t_job *j)
 {
 	t_list		*plist;
 	t_process	*p;

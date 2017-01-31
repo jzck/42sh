@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:31:24 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:02:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		ft_prompt(void)
 {
 	int ret;
 
+	do_job_notification();
 	ft_get_date();
 	ft_putstr("\033[22;36m");
 	ret = ft_currend_dir();

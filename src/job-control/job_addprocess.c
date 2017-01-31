@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 14:40:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:07:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int		job_addprocess(t_process *p)
 	}
 	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
 		job_notify_new(job);
-	return(0);
+	return (0);
 }

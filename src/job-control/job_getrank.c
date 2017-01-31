@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:38:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 10:30:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:04:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	job_getrank(int (*rank)[2])
 	jlist = jobc->first_job;
 	(*rank)[0] = 0;
 	(*rank)[1] = 0;
+	DG("check 1");
 	while (jlist && i < 2)
 	{
 		job = jlist->content;
+		DG("check 2: id=%i", job->id);
 		if (job_is_stopped(job->id))
 			(*rank)[i++] = job->id;
 		jlist = jlist->next;

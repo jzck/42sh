@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 15:04:03 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 11:16:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 14:46:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	job_notify_change(int id)
 {
 	t_job		*job;
 	t_jobc		*jobc;
-	int			rank[2];
 
 	jobc = &data_singleton()->jobc;
 	job = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
-	job_getrank(&rank);
-	job_format(job, rank, JOBS_OPTS_L);
+	job_format(job, JOBS_OPTS_L);
 }

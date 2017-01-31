@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 13:47:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:10:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		put_job_in_foreground(t_job *job, int cont)
 	{
 		signal(SIGTTOU, SIG_IGN);
 		if (tcsetpgrp(STDIN, job->pgid) == -1)
-			DG("couldn't put process in control. errno=%i, pgid=%i", errno, job->pgid);
+			return (1);
 		signal(SIGTTOU, sigttou_handler);
-		tcsetattr (STDIN, TCSANOW, &job->tmodes);
+		tcsetattr(STDIN, TCSANOW, &job->tmodes);
 		if (kill(-job->pgid, SIGCONT) < 0)
 			perror("kill (SIGCONT)");
 	}
