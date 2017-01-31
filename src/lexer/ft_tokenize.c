@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 12:50:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 21:08:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 	&lexer_var,
 	&lexer_special,
 	&lexer_while,
-	&lexer_do_group,
+	&lexer_do,
+	&lexer_done,
 	&lexer_list,
 	&lexer_comment,
 };

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 18:52:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 19:31:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ struct	s_astnode
 extern t_parser		g_parser[];
 
 int		ft_parse(t_list	**list_ast, t_btree **ast, t_list **token);
+
 int		parse_newline(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst);
 int		parse_separator(t_list **list_ast, t_btree **ast,
@@ -88,4 +89,5 @@ int		parse_done(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst);
 int		parse_list(t_list **list_ast, t_btree **ast,
 		t_list **start, t_list **lst);
+
 #endif

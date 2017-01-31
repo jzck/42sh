@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_do_group.c                                   :+:      :+:    :+:   */
+/*   lexer_done.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 00:48:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/26 18:49:32 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/31 20:49:09 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/31 21:57:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_do_group(t_list **alst, char *str)
+int		lexer_done(t_list **alst, char *str)
 {
 	t_token		*token;
 	t_lexstate	state;
-	int 		type;
+	t_nest		*nest;
 
-	type = (str[0] == 'd' && str[1] == 'o' && str[2] != 'n' ?
-		2 : 4);
+	nest = &data_singleton()->nest;
 	if (*alst)
 	{
-		if (ft_is_delim_list(*(str + type)) || *(str + type) == ' ')			
-			return (lexer_do_group(&(*alst)->next, str));
-		return (ft_tokenize(alst, str + 1, LIST));
+		nest->do_group--;
+		if (nest->do_group == 0)
+			return (lexer_done(&(*alst)->next, str));	
+		return (ft_tokenize(alst, str, LIST));
 	}
 	else
 	{
@@ -32,7 +32,8 @@ int		lexer_do_group(t_list **alst, char *str)
 		*alst = ft_lstnew(token, sizeof(*token));
 	}
 	token = (*alst)->content;
-	token->type = (type == 2 ? TK_DO : TK_DONE);
-	state = (token->type == TK_DO) ? LIST : DEFAULT;	
-	return (ft_tokenize(&(*alst)->next, str + type, state));
+	token->type = TK_DONE;
+	state = DEFAULT;
+//	data_singleton()->scope |= (token->type == TK_DO) ? IN_LIST : OUT_LIST;
+	return (ft_tokenize(&(*alst)->next, str + 4, state));
 }

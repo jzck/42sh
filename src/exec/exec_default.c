@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_done.c                                       :+:      :+:    :+:   */
+/*   exec_default.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:36:28 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 19:36:49 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/31 19:29:59 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/31 19:57:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "exec.h"
 
-int		parse_done(t_list **list_ast, t_btree **ast,
-		t_list **start, t_list **lst)
+int		exec_default(t_btree **ast)
 {
-	t_astnode	*node;
-	t_token		*token;
+	t_process	*p;
 
-	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_DONE;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(list_ast, ast, start);
+	p = &data_singleton()->exec.process;
+	if (!(p->script & SCRIPT_LOOP))
+		btree_delone(ast, &ast_free);
 	return (0);
-}
+}	

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 22:32:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 19:34:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ struct	s_execmap
 extern t_execmap	g_execmap[];
 
 int		ft_exec(t_btree **ast);
+
+int		exec_default(t_btree **ast);
 
 int		exec_semi(t_btree **ast);
 int		exec_ampersand(t_btree **ast);

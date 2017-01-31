@@ -6,12 +6,19 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 23:41:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 21:55:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+struct	s_nest
+{
+	long long	do_group;
+};
+
+typedef struct s_nest	t_nest;
 
 # include "minishell.h"
 
@@ -64,7 +71,8 @@ enum	e_lexstate
 	VAR,
 	SPECIAL,
 	WHILE,
-	DO_GROUP,
+	DO,
+	DONE,
 	LIST,
 	COMMENT,
 };
@@ -116,7 +124,8 @@ int			lexer_backslash(t_list **alst, char *str);
 int			lexer_var(t_list **alst, char *str);
 int			lexer_special(t_list **alst, char *str);
 int			lexer_while(t_list **alst, char *str);
-int			lexer_do_group(t_list **alst, char *str);
+int			lexer_do(t_list **alst, char *str);
+int			lexer_done(t_list **alst, char *str);
 int			lexer_list(t_list **alst, char *str);
 int			lexer_comment(t_list **alst, char *str);
 
