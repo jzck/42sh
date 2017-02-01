@@ -15,5 +15,5 @@
 void	sigint_handler(int signo)
 {
 	(void)signo;
-	DG("got SIGINT in process %i", getpid());
+	DG("pid:%i got SIGINT", getpid());
 }

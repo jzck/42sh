@@ -16,6 +16,6 @@ int		put_job_in_background(t_job *j, int cont)
 {
 	if (cont)
 		if (kill(-j->pgid, SIGCONT) < 0)
-			DG("kill (SIGCONT) malfunction");
+			DG("kill(SIGCONT) failed");
 	return (0);
 }

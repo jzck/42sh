@@ -2,7 +2,7 @@
 
 void	process_setsig(void)
 {
-	signal(SIGINT, SIG_DFL);
+	/* signal(SIGINT, SIG_DFL); */
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGTTIN, SIG_DFL);

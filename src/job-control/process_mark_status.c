@@ -32,7 +32,7 @@ int		process_mark_status(pid_t pid, int status)
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",
-							(int)pid, WTERMSIG(p->status));
+							(int)pid, WTERMSIG(status));
 			}
 			return (0);
 		}
