@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/26 11:36:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 16:50:57 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		ft_lecture_3(int ret, char **str, size_t *i)
 		ft_suppr(str, i);
 	else if (ret == TOUCHE_DELETE && (*str) && (*i) < ft_strlen((*str)))
 		ft_del(str, i);
-	else if (ret == TOUCHE_HOME)
+	else if (ret == TOUCHE_HOME && *str)
 		ft_home(*str, i);
-	else if (ret == TOUCHE_END)
+	else if (ret == TOUCHE_END && *str)
 		ft_end(*str, i);
 	else
 		return (0);
@@ -68,7 +68,6 @@ char			*ft_lecture(t_list_history *head)
 	}
 	while (42)
 	{
-		ft_check_end_of_line(str, i);
 		ret = 0;
 		read(0, &ret, sizeof(int));
 		if (ret == TOUCHE_F6 && read(0, &ret, sizeof(int)) > 0)
@@ -82,12 +81,28 @@ char			*ft_lecture(t_list_history *head)
 **		if (ret == TOUCHE_TAB)
 **			ret = ft_completion(&str, &i);
 */
-		if (ret == TOUCHE_CTRL_C || ret == TOUCHE_CTRL_D)
-			exit(1);
+		if (ret == TOUCHE_CTRL_D)
+		{
+			if (!str || str[0] == '\0')
+				exit(0);
+			else if (i < ft_strlen(str))
+				ft_del(&str, &i);
+			else
+				ft_puttermcaps("bl");
+		}
+		if (ret == TOUCHE_CTRL_C)
+		{
+			ft_putchar('\n');
+			ft_prompt();
+			ft_strdel(&str);
+			i = 0;
+		}
 		if (ft_lecture_2(ret, &str, &i))
 			continue ;
 		else if (ret == FLECHE_BAS || ret == FLECHE_HAUT)
 		{
+			if (!head)
+				continue ;
 			ft_history(&str, ret, &head, &i);
 			if (str)
 				i = ft_strlen_next(str, i);

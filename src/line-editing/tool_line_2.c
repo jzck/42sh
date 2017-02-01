@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 11:37:27 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 15:24:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	ft_check_end_of_line(char *str, size_t pos)
 {
 	if (!str)
 		return ;
-	//ft_printf("\n\n\nnd = %d\n\n", ft_nb_last_line(str, pos));
 	if (ft_nb_last_line(str, pos) == 0)
 	{
-		//ft_printf("\n\n\nhere\n\n");
 		ft_putchar(' ');
 		ft_puttermcaps("le");
 	}

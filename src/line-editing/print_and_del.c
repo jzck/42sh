@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:37:45 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 15:25:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_print(char **str, int ret, size_t *i)
 		ft_putchar(*((*str) + *i + j));
 		++j;
 	}
+	ft_check_end_of_line(*str, *i + j);
 	ft_putnc('\b', j - 1);
 	++(*i);
 }

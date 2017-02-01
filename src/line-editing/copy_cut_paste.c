@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 17:58:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 15:16:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ static void	ft_v(char *tmp, size_t *pos, char **str)
 		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
 		++i;
 	}
-	sleep(1);
 	if (*pos)
 	{
 		--(*pos);
 		ft_get_beggin_with_curs(*str, pos);
 	}
-	sleep(1);
 	ft_current_str(*str, *pos);
-	sleep(1);
 	ft_get_next_str(*str, pos);
-	sleep(1);
-	ft_putnc('\b', *pos - tmp_pos + 1);
+	ft_putnc('\b', *pos - tmp_pos);
 	(*pos) = tmp_pos;
 }
 
@@ -94,7 +90,6 @@ void		ft_cxv(int ret, size_t *pos, char **str)
 		if (tmp)
 			ft_strdel(&tmp);
 		tmp = ft_strdupi_space((*str) + (*pos));
-		ft_printf("\n\ntmp = \"%s\"\n\n", tmp);
 	}
 	else if (ret == TOUCHE_OPT_V)
 		ft_v(tmp, pos, str);
