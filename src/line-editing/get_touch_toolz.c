@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 15:49:11 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 16:45:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void		ft_history_2(char **str, int ret, t_list_history **head
 
 void		ft_history(char **str, int ret, t_list_history **head, size_t *pos)
 {
-	if (!*head)
-		return ;
 	ft_history_2(str, ret, head, pos);
 	if (ret == FLECHE_HAUT)
 	{

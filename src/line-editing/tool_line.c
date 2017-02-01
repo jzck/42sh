@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 18:20:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 11:36:56 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/01 15:27:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_current_str(char *str, size_t pos)
 	while (str[pos + len] && str[pos + len] != '\n')
 		++len;
 	write(1, str + pos, len);
+	ft_check_end_of_line(str, pos + len);
 }
 
 int		ft_strlen_next(char *str, size_t pos)
