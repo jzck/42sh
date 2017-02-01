@@ -45,7 +45,7 @@ struct	s_jobc
 
 # include "exec.h"
 
-t_process	*job_getprocess(pid_t pid);
+t_list		*job_getprocess(pid_t pid);
 int			job_addprocess(t_process *p);
 void		job_update_id(void);
 void		job_update_rank(void);

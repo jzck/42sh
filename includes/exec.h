@@ -33,6 +33,7 @@
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
+# define IS_PIPESINGLE(a)	(a & (PROCESS_PIPESTART | PROCESS_PIPEEND))
 
 # include "libft.h"
 # include "types.h"
@@ -95,7 +96,7 @@ void	fd_reset(void);
 
 char	*ft_findexec(char *path, char *file);
 
-void	set_exitstatus(int status);
+void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
 

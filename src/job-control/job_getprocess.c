@@ -12,7 +12,7 @@
 
 #include "job_control.h"
 
-t_process	*job_getprocess(pid_t pid)
+t_list	*job_getprocess(pid_t pid)
 {
 	t_jobc		*jobc;
 	t_job		*j;
@@ -25,7 +25,7 @@ t_process	*job_getprocess(pid_t pid)
 	{
 		j = jlist->content;
 		if ((lst = ft_lst_find(j->first_process, &pid, &process_cmp_pid)))
-			return (lst->content);
+			return (lst);
 		jlist = jlist->next;
 	}
 	return (NULL);

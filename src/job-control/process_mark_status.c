@@ -14,12 +14,14 @@
 
 int		process_mark_status(pid_t pid, int status)
 {
+	t_list		*plist;
 	t_process	*p;
 
 	if (pid > 1)
 	{
-		if ((p = job_getprocess(pid)))
+		if ((plist = job_getprocess(pid)))
 		{
+			p = plist->content;
 			p->status = status;
 			if (WIFSTOPPED(status))
 			{
