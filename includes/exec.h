@@ -46,6 +46,7 @@ struct	s_process
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
+	int		toclose;
 	int		status;
 	t_flag	attributes;
 };
@@ -83,8 +84,9 @@ int		exec_command(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
-int		process_setgroup(t_process *p);
+int		process_setgroup(t_process *p, pid_t pid);
 int		process_redirect(t_process *p);
+void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(void);
 

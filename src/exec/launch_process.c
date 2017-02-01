@@ -39,19 +39,17 @@ int		launch_process(t_process *p)
 		pid = fork();
 		if (pid == 0)
 		{
-			process_setgroup(p);
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			signal(SIGTSTP, SIG_DFL);
-			signal(SIGTTIN, sigttin_handler);
-			signal(SIGTTOU, sigttou_handler);
-			signal(SIGCHLD, SIG_DFL);
+			process_setgroup(p, 0);
+			process_setsig();
 			process_redirect(p);
 			(*p->execf)(p->path, p->av, data_singleton()->env);
 			exit(42);
 		}
 		else if (pid > 0)
+		{
 			p->pid = pid;
+			process_setgroup(p, pid);
+		}
 		else if (pid == -1)
 			perror("fork");
 	}

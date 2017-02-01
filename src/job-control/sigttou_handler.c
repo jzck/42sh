@@ -15,5 +15,5 @@
 void	sigttou_handler(int signo)
 {
 	(void)signo;
-	DG("got SIGTTOU");
+	DG("got SIGTTOU, pid=%i, pgid=%i", getpid(), getpgid(getpid()));
 }
