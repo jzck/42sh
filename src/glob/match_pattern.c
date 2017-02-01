@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/27 23:45:39 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/01 19:46:43 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 
 	if (gl->pat[1] == '*' &&
 		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
-		dir_research_recursive(gl, full_word, gl->pat + 1);
+		dir_research(gl, full_word, gl->pat + 1, 1);
 	if (!*++gl->pat)
 		return (1);
 	fix = str + ft_strlen(str);
@@ -113,7 +113,7 @@ int				match_pattern(t_glob *gl, char *str, char *full_word)
 		else if (*gl->pat == '*')
 			return (match_star(gl, str, full_word));
 		else if (*gl->pat == '/' && !*str && is_directory(full_word))
-			dir_research(gl, full_word, gl->pat + 1);
+			dir_research(gl, full_word, gl->pat + 1, 0);
 		else if (*gl->pat != *str)
 			return (0);
 		++str;

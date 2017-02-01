@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 23:15:27 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/01 19:46:22 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ char			**glob(const char *pat, const unsigned char *esc)
 		gl.pat = ((char **)gl.m_pat->content)[0];
 		gl.esc = ((unsigned char **)gl.m_pat->content)[1];
 		if (gl.pat[0] != '/')
-			ret = dir_research(&gl, ".", gl.pat);
+			ret = dir_research(&gl, ".", gl.pat, 0);
 		else
-			ret = dir_research(&gl, "/", gl.pat + 1);
+			ret = dir_research(&gl, "/", gl.pat + 1, 0);
 		if (!ret)
 			ft_ld_pushfront(&gl.match,
 					ft_strdup(((char **)gl.m_pat->content)[0]));

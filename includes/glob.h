@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 23:20:22 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/01 19:50:07 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void			modify_esc_split(unsigned char *esc_dest,
 								unsigned char *esc_src, int start, int len);
 void			expand_brace(t_glob *tglob);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
-int				dir_research(t_glob *tglob, char *p, const char *pat);
-int				dir_research_recursive(t_glob *tglob, char *p, const char *pat);
+int				dir_research(t_glob *tglob, char *p, const char *pat, int rec);
 char			**ft_strsplit_spe(const char *str,
 								const unsigned char *esc, char c);
 unsigned char	**ft_strsplit_esc(const char *str,
