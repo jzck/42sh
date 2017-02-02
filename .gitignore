@@ -3,4 +3,5 @@ minishell
 42sh
 out
 debug
+.42sh_history
 *.dSYM

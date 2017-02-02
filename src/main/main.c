@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 14:55:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/02 15:22:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		main(int ac, char **av)
 	{
 		if (ft_readline())
 			return (1);
-		if (shell_single_command(ft_strdup(data_singleton()->line.input)))
+		if (shell_single_command(ft_strdup(data_singleton()->line.input)) < 0)
 			return (1);
 	}
 	return (0);
