@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:32:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/26 13:50:00 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:11:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_check_backslash(char **str)
 	char	*tmp1;
 	char	*tmp2;
 
-	if (!*str)
+	if (!*str || !**str)
 		return ;
 	if ((*str)[ft_strlen(*str) - 1] == '\\')
 	{

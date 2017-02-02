@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 15:25:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:12:29 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_suppr_2(char **str, size_t *i, size_t tmp)
 	ft_putnc('\b', *i - tmp);
 	(*i) = tmp;
 	if (ft_strlen(*str) == 0)
-		*str = NULL;
+		ft_strdel(str);
 }
 
 void	ft_suppr(char **str, size_t *i)

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 16:50:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 10:38:58 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,8 @@ char			*ft_lecture(t_list_history *head)
 		else if (ft_lecture_3(ret, &str, &i))
 			continue ;
 		else if (ret == 10)
-			break ;
+			return (str);
 		else if (ft_isascii(ret) == 0)
 			ft_read_it(ret, &i, &str);
 	}
-	if (str)
-		ft_putstr(str + i);
-	return (str);
 }
