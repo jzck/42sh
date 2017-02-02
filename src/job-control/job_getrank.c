@@ -24,11 +24,9 @@ void	job_getrank(int (*rank)[2])
 	jlist = jobc->first_job;
 	(*rank)[0] = 0;
 	(*rank)[1] = 0;
-	DG("check 1");
 	while (jlist && i < 2)
 	{
 		job = jlist->content;
-		DG("check 2: id=%i", job->id);
 		if (job_is_stopped(job->id))
 			(*rank)[i++] = job->id;
 		jlist = jlist->next;

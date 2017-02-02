@@ -28,7 +28,6 @@ int		shell_single_command(char *command)
 		return (0);
 	if (ft_post_tokenize(&token, command))
 		return (1);
-	DG("after post_tokenize");
 	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);

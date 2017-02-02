@@ -23,12 +23,8 @@ int		process_setgroup(t_process *p, pid_t pid)
 	j = &data_singleton()->exec.job;
 	if (!j->pgid)
 		j->pgid = pid ? pid : getpid();
-	DG("pid:%i gonna setpgid(%i, %i)", getpid(), pid, j->pgid);
 	setpgid(pid, j->pgid);
 	if (pid == 0 && JOB_IS_FG(j->attributes))
-	{
-		DG("pid:%i gonna setpgrp(%i)", getpid(), j->pgid);
 		tcsetpgrp(STDIN, j->pgid);
-	}
 	return (0);
 }
