@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 18:35:34 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/02 14:55:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ extern int	(*g_lexer[])(t_list **alst, char *str);
 
 t_token		*token_init();
 int			ft_tokenize(t_list **alst, char *str, t_lexstate state);
-int			ft_post_tokenize(t_list **alst, char *str);
+int			ft_post_tokenize(t_list **alst, char **str);
 int			token_append(t_token *token, char c, short int esc);
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
