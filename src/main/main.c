@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 15:22:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/02 15:45:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,18 @@ int		shell_single_command(char *command)
 
 	token = NULL;
 	ast = NULL;
-	if (!command)
-		return (0);
+
 	DG("{inv}{mag}got command '%s'", command);
-	if (ft_tokenize(&token, command, DEFAULT))
+	if (ft_lexer(&token, &command) || !token)
 		return (1);
-	if (ft_post_tokenize(&token, &command))
-		return (1);
-	if (!token)
-		return (0);
-	ft_strdel(&command);
+
 	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
+
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
-	DG("after exec!");
 	return (0);
 }
 

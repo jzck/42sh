@@ -116,6 +116,7 @@ job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
+lexer/ft_lexer.c\
 lexer/ft_post_tokenize.c\
 lexer/ft_tokenize.c\
 lexer/get_lexer_state.c\

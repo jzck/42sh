@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_free.c                                     :+:      :+:    :+:   */
+/*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 15:45:25 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/02 15:42:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "lexer.h"
 
-void	process_free(void *content, size_t content_size)
+int		ft_lexer(t_list **alst, char **command)
 {
-	t_process	*p;
+	int		ret;
 
-	(void)content_size;
-	p = content;
-	ft_strdel(&p->path);
-	ft_sstrfree(p->av);
-	free(p);
+	ret = 0;
+	if (!*command)
+		ret = 1;
+	else if (ft_tokenize(alst, *command, DEFAULT))
+		ret = 1;
+	else if (ft_post_tokenize(alst, command))
+		ret = 1;
+	ft_strdel(command);
+	return (ret);
 }
