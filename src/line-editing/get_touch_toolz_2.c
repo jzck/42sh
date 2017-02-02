@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 15:29:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:34:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int				ft_put(int nb)
 
 void			ft_end(char *str, size_t *pos)
 {
+	if (!str)
+		return ;
 	if (*pos)
 	{
 		--(*pos);
@@ -35,6 +37,8 @@ void			ft_end(char *str, size_t *pos)
 
 void			ft_home(char *str, size_t *pos)
 {
+	if (!str)
+		return ;
 	if (*pos)
 	{
 		--(*pos);

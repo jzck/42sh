@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 10:38:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:34:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		ft_lecture_3(int ret, char **str, size_t *i)
 		ft_suppr(str, i);
 	else if (ret == TOUCHE_DELETE && (*str) && (*i) < ft_strlen((*str)))
 		ft_del(str, i);
-	else if (ret == TOUCHE_HOME && *str)
+	else if (ret == TOUCHE_HOME)
 		ft_home(*str, i);
-	else if (ret == TOUCHE_END && *str)
+	else if (ret == TOUCHE_END)
 		ft_end(*str, i);
 	else
 		return (0);
