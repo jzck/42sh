@@ -57,6 +57,7 @@ exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
+exec/process_setsig.c\
 exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\

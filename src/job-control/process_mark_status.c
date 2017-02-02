@@ -14,12 +14,14 @@
 
 int		process_mark_status(pid_t pid, int status)
 {
+	t_list		*plist;
 	t_process	*p;
 
 	if (pid > 1)
 	{
-		if ((p = job_getprocess(pid)))
+		if ((plist = job_getprocess(pid)))
 		{
+			p = plist->content;
 			p->status = status;
 			if (WIFSTOPPED(status))
 			{
@@ -32,7 +34,7 @@ int		process_mark_status(pid_t pid, int status)
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",
-							(int)pid, WTERMSIG(p->status));
+							(int)pid, WTERMSIG(status));
 			}
 			return (0);
 		}

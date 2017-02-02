@@ -16,5 +16,8 @@ void	job_run(t_job *job, int foreground)
 {
 	mark_job_as_running(job);
 	job_format(job, JOBS_OPTS_L);
-	foreground ? put_job_in_foreground(job, 1) : put_job_in_background(job, 1);
+	if (foreground)
+		put_job_in_foreground(job, 1);
+	else
+		put_job_in_background(job, 1);
 }

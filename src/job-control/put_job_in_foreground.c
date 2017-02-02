@@ -12,27 +12,26 @@
 
 #include "job_control.h"
 
-int		put_job_in_foreground(t_job *job, int cont)
+int		put_job_in_foreground(t_job *j, int cont)
 {
 	t_jobc	*jobc;
 
 	jobc = &data_singleton()->jobc;
+	tcsetpgrp(STDIN, j->pgid);
+	tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
+
 	if (cont)
 	{
-		signal(SIGTTOU, SIG_IGN);
-		if (tcsetpgrp(STDIN, job->pgid) == -1)
-			return (1);
-		signal(SIGTTOU, sigttou_handler);
-		tcsetattr(STDIN, TCSANOW, &job->tmodes);
-		if (kill(-job->pgid, SIGCONT) < 0)
-			perror("kill (SIGCONT)");
+		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
+		if (kill(-j->pgid, SIGCONT) < 0)
+			DG("kill(SIGCONT) failed");
 	}
-	job_wait(job->id);
-	job_remove(job->id);
-	signal(SIGTTOU, SIG_IGN);
+	job_wait(j->id);
+	job_remove(j->id);
+
 	tcsetpgrp(STDIN, jobc->shell_pgid);
-	signal(SIGTTOU, sigttou_handler);
-	tcgetattr(STDIN, &job->tmodes);
+
+	tcgetattr(STDIN, &j->tmodes);
 	tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
 	return (0);
 }

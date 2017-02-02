@@ -21,11 +21,10 @@ int		launch_process(t_process *p)
 	if (p->attributes & PROCESS_UNKNOWN)
 	{
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
-		set_exitstatus(127);
-		return (1);
+		set_exitstatus(127, 1);
 	}
-	else if (p->attributes & PROCESS_BUILTIN && p->fdout == STDOUT)
-		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env));
+	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p->attributes))
+		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
 	else
 	{
 		p->attributes &= ~PROCESS_STATE_MASK;
@@ -34,26 +33,26 @@ int		launch_process(t_process *p)
 				&& access(p->path, X_OK) == -1)
 		{
 			ft_dprintf(2, "{red}%s: permission denied: %s{eoc}\n", SHELL_NAME, p->av[0]);
-			return (-1);
+			set_exitstatus(126, 1);
+			return (1);
 		}
 		pid = fork();
 		if (pid == 0)
 		{
-			process_setgroup(p);
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			signal(SIGTSTP, SIG_DFL);
-			signal(SIGTTIN, sigttin_handler);
-			signal(SIGTTOU, sigttou_handler);
-			signal(SIGCHLD, SIG_DFL);
+			process_setgroup(p, 0);
+			process_setsig();
 			process_redirect(p);
 			(*p->execf)(p->path, p->av, data_singleton()->env);
-			exit(42);
+			exit(43);
 		}
 		else if (pid > 0)
+		{
 			p->pid = pid;
+			process_setgroup(p, pid);
+			return (0);
+		}
 		else if (pid == -1)
-			perror("fork");
+			ft_dprintf(2, "{red}internal fork error{eoc}\n");
 	}
-	return (0);
+	return (1);
 }

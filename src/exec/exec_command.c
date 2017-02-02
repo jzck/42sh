@@ -57,7 +57,7 @@ int				exec_command(t_btree **ast)
 	}
 	p->av = NULL;
 	p->pid = 0;
-	p->attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
+	p->attributes &= ~(PROCESS_STATE_MASK | PROCESS_TYPE_MASK);
 	btree_delone(ast, &ast_free);
 	return (0);
 }

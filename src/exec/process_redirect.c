@@ -14,15 +14,15 @@
 
 int		process_redirect(t_process *p)
 {
+	if (p->toclose != STDIN)
+		close(p->toclose);
 	if (p->fdin != STDIN)
 	{
-		/* DG("redirect STDIN to %i", p->fdin); */
 		dup2(p->fdin, STDIN);
 		close(p->fdin);
 	}
 	if (p->fdout != STDOUT)
 	{
-		/* DG("redirect STDOUT to %i", p->fdout); */
 		dup2(p->fdout, STDOUT);
 		close(p->fdout);
 	}

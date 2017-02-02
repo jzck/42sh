@@ -17,8 +17,9 @@ int		job_wait(int id)
 	pid_t	pid;
 	int		status;
 
-	if (job_is_stopped(id) || job_is_completed(id))
+	if (job_is_stopped(id))
 		return (0);
+	job_update_status();
 	pid = waitpid(WAIT_ANY, &status, WUNTRACED);
 	while (!process_mark_status(pid, status)
 			&& !job_is_completed(id)

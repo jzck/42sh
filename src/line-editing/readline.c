@@ -66,6 +66,7 @@ void	ft_reset_stats_term(int signal)
 int		ft_readline(void)
 {
 	signal(SIGWINCH, ft_reset_stats_term);
+	ft_save_stats_term();
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
 	if (data_singleton()->line.input)

@@ -18,7 +18,6 @@ void	job_format_head(t_job *j)
 	int		rank[2];
 
 	job_getrank(&rank);
-	DG("rank[0]=%i,rank[1]=%i", rank[0], rank[1]);
 	if (j->id == rank[0])
 		crank = '+';
 	else if (j->id == rank[1])
