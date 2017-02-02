@@ -6,11 +6,23 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 15:00:16 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 13:31:57 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_add_in_history_file(char *str)
+{
+	int		fd;
+
+	fd = open(".42sh_history", O_CREAT | O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
+	if (fd == -1)
+		return ;
+	write(fd, str, ft_strlen(str));
+	write(fd, "\n", 1);
+	close(fd);
+}
 
 int		ft_nbr_len(int nbr)
 {
@@ -33,7 +45,10 @@ void	ft_puttermcaps(char *str)
 
 int		ft_size_term(void)
 {
-	return (tgetnum("co"));
+	struct winsize w;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	return (w.ws_col);
 }
 
 long long	ft_pow(int nbr, int power)

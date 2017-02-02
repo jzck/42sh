@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 10:41:26 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 13:34:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ void	ft_init_line(void)
 	data_singleton()->line.list_end = NULL;
 	data_singleton()->line.list_beg = NULL;
 	data_singleton()->line.opt = 0;
+}
+
+void	ft_init_history(void)
+{
+	int		fd;
+	char	*str;
+
+	fd = open(".42sh_history", O_RDONLY);
+	if (fd == -1)
+		return ;
+	while (get_next_line(fd, &str) > 0)
+	{
+		ft_push_back_history(&data_singleton()->line.list_beg,
+		ft_create_history_list(str));
+		free(str);
+	}
+	free(str);
+	close(fd);
 }
 
 struct termios	*ft_save_stats_term(void)
@@ -41,6 +59,7 @@ struct termios	*ft_stats_term_termcaps(void)
 	if (!term)
 	{
 		ft_init_line();
+		ft_init_history();
 		term = (struct termios *)malloc(sizeof(struct termios));
 		tcgetattr(0, term);
 		(*term).c_lflag &= ~(ECHO | ICANON | ISIG);
@@ -50,22 +69,8 @@ struct termios	*ft_stats_term_termcaps(void)
 	return (term);
 }
 
-void	ft_reset_stats_term(int signal)
-{
-	char	*name_term;
-
-	if (signal == SIGWINCH)
-	{
-		if ((name_term = getenv("TERM")) == NULL)
-			return ;
-		if (tgetent(NULL, name_term) == -1)
-			return ;
-	}
-}
-
 int		ft_readline(void)
 {
-	signal(SIGWINCH, ft_reset_stats_term);
 	ft_save_stats_term();
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
@@ -80,8 +85,11 @@ int		ft_readline(void)
 	ft_check_backslash(&data_singleton()->line.input);
 	ft_history_parsing();
 	if (data_singleton()->line.input)
+	{
 		ft_push_back_history(&data_singleton()->line.list_beg,
 		ft_create_history_list(data_singleton()->line.input));
+		ft_add_in_history_file(data_singleton()->line.input);
+	}
 	if (tcsetattr(0, TCSANOW, ft_save_stats_term()) == -1)
 		return (-1);
 	return (0);

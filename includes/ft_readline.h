@@ -6,13 +6,14 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 15:10:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 13:23:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_READLINE_H
 # define FT_READLINE_H
 
+# include <sys/ioctl.h>
 # include <termios.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -71,6 +72,7 @@ typedef struct	s_line
 	t_list_history			*list_beg;
 }				t_line;
 
+void			ft_add_in_history_file(char *str);
 int				builtin_history(const char *path, char *const av[], char *const envp[]);
 void			ft_check_backslash(char **str);
 char			*ft_strget_history(char *str);
