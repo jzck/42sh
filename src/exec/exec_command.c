@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 23:25:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/02 17:25:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		exec_command(t_btree **ast)
 	p->pid = 0;
 	p->attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
 	
-	if (!(p->script & SCRIPT_LOOP))
-		btree_delone(ast, &ast_free);
+//	btree_delone(ast, &ast_free);
 	return (0);
 }
