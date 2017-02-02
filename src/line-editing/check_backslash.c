@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:32:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 11:11:11 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 16:01:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_check_backslash(char **str)
 		tmp1 = *str;
 		tmp2 = ft_strjoin(tmp1, "\n");
 		free(tmp1);
-		tmp1 = ft_lecture(data_singleton()->line.list_beg);
+		tmp1 = ft_read_stdin();
 		*str = ft_strjoin(tmp2, tmp1);
 		free(tmp1);
 		free(tmp2);

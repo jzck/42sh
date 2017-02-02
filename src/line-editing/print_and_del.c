@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 11:12:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:10:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@ int		ft_found_next_char(char *str, size_t i)
 	return (0);
 }
 
-void	ft_print(char **str, int ret, size_t *i)
+void	ft_print(int ret)
 {
-	int j;
+	int		j;
+	char	**str;
+	size_t	*i;
 
 	j = 0;
+	str = &data_singleton()->line.input;
+	i = &data_singleton()->line.pos;
 	*str = ft_realloc_imput(*str, ret, *i);
 	while (*((*str) + *i + j) && *((*str) + *i + j) != '\n')
 	{
@@ -52,12 +56,18 @@ void	ft_suppr_2(char **str, size_t *i, size_t tmp)
 		ft_strdel(str);
 }
 
-void	ft_suppr(char **str, size_t *i)
+void	ft_suppr(void)
 {
 	size_t	tmp;
 	char	boolean;
+	char	**str;
+	size_t	*i;
 
+	str = &data_singleton()->line.input;
+	i = &data_singleton()->line.pos;
 	boolean = 0;
+	if (*i <= 0)
+		return ;
 	if ((*str)[*i - 1] != '\n')
 		boolean = 1;
 	--(*i);
@@ -75,12 +85,18 @@ void	ft_suppr(char **str, size_t *i)
 	ft_suppr_2(str, i, tmp);
 }
 
-void	ft_del(char **str, size_t *i)
+void	ft_del(void)
 {
 	size_t	tmp;
+	char	**str;
+	size_t	*i;
 
+	str = &data_singleton()->line.input;
+	i = &data_singleton()->line.pos;
 	tmp = *i;
 	*str = ft_remove_imput((*str), tmp);
+	if (!((*str) && (*i) < ft_strlen((*str))))
+		return ;
 	if (*i)
 	{
 		--(*i);

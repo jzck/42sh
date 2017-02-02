@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:52:34 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:03:11 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 16:09:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_check_heredoc_2(char **str, char *end)
 		*str = ft_strjoin(*str, "\n");
 		free(tmp);
 		tmp = *str;
-		tmp2 = ft_lecture(data_singleton()->line.list_beg);
+		tmp2 = ft_read_stdin();
 		if (!ft_strcmp(end, tmp2))
 			boolean = 1;
 		*str = ft_strjoin(tmp, tmp2);

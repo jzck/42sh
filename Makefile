@@ -144,12 +144,14 @@ lexer/token_init.c\
 lexer/token_print.c\
 line-editing/builtin_history.c\
 line-editing/check_backslash.c\
+line-editing/control_c_and_d.c\
 line-editing/copy_cut_paste.c\
 line-editing/ft_split_whitespaces.c\
 line-editing/get_touch.c\
 line-editing/get_touch_toolz.c\
 line-editing/get_touch_toolz_2.c\
 line-editing/heredoc.c\
+line-editing/history.c\
 line-editing/history_parsing.c\
 line-editing/history_parsing_toolz.c\
 line-editing/history_parsing_toolz_2.c\

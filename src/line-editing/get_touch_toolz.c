@@ -6,61 +6,108 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 11:41:52 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:22:35 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_history_2(char **str, int ret, t_list_history **head
-			, size_t *pos)
+void	ft_found_prev_word(void)
 {
-	if (*str)
+	int i;
+	char	*str;
+	size_t	*pos;
+
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	i = 0;
+	if (!*pos)
+		return ;
+	if (str[*pos - 1] != '\n' && !(str[*pos] == '\n' || str[*pos] == ' '))
+	{
+		ft_puttermcaps("le");
+		--(*pos);
+	}
+	while ((int)*pos - i  - 1 > 0 && str[*pos - i - 1] == ' ')
+	{
+		ft_puttermcaps("le");
+		++i;
+	}
+	(*pos) = (i && str[*pos - i] == '\n') ? *pos - i + 1 : *pos - i;
+	i = 0;
+	if (*pos >= 1 && str[*pos - 1] == '\n')
+	{
+		ft_puttermcaps("cd");
+		if (*pos >= 2)
+			(*pos) -= 2;
+		ft_get_beggin(str, pos);
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		++(*pos);
+	}
+	else
+	{
+		if (*pos && !(str[*pos] == '\n' || str[*pos] == ' '))
+		{
+			ft_puttermcaps("le");
+			--(*pos);
+		}
+		while (*pos - i && (str[*pos - i] == '\n' || str[*pos - i] == ' '))
+		{
+			ft_puttermcaps("le");
+			++i;
+		}
+		while (*pos - i && str[*pos - i] != '\n' && str[*pos - i] != ' ')
+		{
+			ft_puttermcaps("le");
+			++i;
+		}
+		if (str[*pos - i] == '\n' || str[*pos - i] == ' ')
+		{
+			ft_puttermcaps("nd");
+			++(*pos);
+		}
+		(*pos) -= i;
+	}
+}
+
+void	ft_found_next_word(void)
+{
+	int i;
+	char	*str;
+	size_t	*pos;
+
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	i = 0;
+	while (str[i + *pos] && str[i + *pos] == ' ')
+	{
+		ft_putchar(str[i + *pos]);
+		++i;
+	}
+	if (str[*pos] == '\n')
 	{
 		if (*pos)
 		{
 			--(*pos);
-			ft_get_beggin_with_curs(*str, pos);
+			ft_get_beggin_with_curs(str, pos);
 		}
 		ft_puttermcaps("cd");
-		*pos = 0;
-		ft_strdel(str);
+		ft_get_next_str(str, pos);
+		(*pos) += (*pos) ? 2 : 1;
+		ft_current_str(str, *pos);
+		ft_get_next_str(str, pos);
+		if (!str[*pos])
+			--(*pos);
+		ft_get_beggin_with_curs(str, pos);
 	}
-	if (ret == FLECHE_BAS)
+	else
 	{
-		if ((*head)->next)
-			(*head) = (*head)->next;
-		if (!(*head)->str)
-			*str = NULL;
-		else
-			*str = ft_strdup((*head)->str);
-		if (*str)
-			ft_current_str(*str, *pos);
+		while (str[i + *pos] && str[i + *pos] != '\n' && str[i + *pos] != ' ')
+		{
+			ft_putchar(str[i + *pos]);
+			++i;
+		}
+		*pos += i;
 	}
-}
-
-void		ft_history(char **str, int ret, t_list_history **head, size_t *pos)
-{
-	ft_history_2(str, ret, head, pos);
-	if (ret == FLECHE_HAUT)
-	{
-		if ((*head)->prev)
-			(*head) = (*head)->prev;
-		if (!(*head)->str)
-			*str = NULL;
-		else
-			*str = ft_strdup((*head)->str);
-		if (*str)
-			ft_current_str(*str, *pos);
-	}
-}
-
-void		ft_move_to_word(int ret, size_t *pos, char *str)
-{
-	if (!str)
-		return ;
-	if (ret == TOUCHE_OPT_LEFT)
-		ft_found_prev_word(str, pos);
-	else if (ret == TOUCHE_OPT_RIGHT)
-		ft_found_next_word(str, pos);
 }

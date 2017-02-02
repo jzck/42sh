@@ -6,36 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 15:16:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 16:10:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_v(char *tmp, size_t *pos, char **str)
-{
-	size_t	tmp_pos;
-	int		i;
-
-	i = 0;
-	tmp_pos = *pos;
-	if (!tmp)
-		return ;
-	while (tmp[i])
-	{
-		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
-		++i;
-	}
-	if (*pos)
-	{
-		--(*pos);
-		ft_get_beggin_with_curs(*str, pos);
-	}
-	ft_current_str(*str, *pos);
-	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - tmp_pos);
-	(*pos) = tmp_pos;
-}
 
 static char	*ft_strdupi_space(char const *s)
 {
@@ -61,10 +36,49 @@ static char	*ft_strdupi_space(char const *s)
 	return (str);
 }
 
-static void	ft_x(char **tmp, size_t *pos, char **str)
+void	ft_v(void)
 {
-	int	i;
+	size_t	tmp_pos;
+	int		i;
+	char	*tmp;
+	char	**str;
+	size_t	*pos;
 
+	tmp = data_singleton()->line.copy_tmp;
+	str = &data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	i = 0;
+	tmp_pos = *pos;
+	if (!*str || !tmp)
+		return ;
+	while (tmp[i])
+	{
+		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
+		++i;
+	}
+	if (*pos)
+	{
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
+	}
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_putnc('\b', *pos - tmp_pos);
+	(*pos) = tmp_pos;
+}
+
+void	ft_x(void)
+{
+	int		i;
+	char	**tmp;
+	char	**str;
+	size_t	*pos;
+
+	tmp = &data_singleton()->line.copy_tmp;
+	str = &data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	if (!*str)
+		return ;
 	if (*tmp)
 		ft_strdel(tmp);
 	*tmp = ft_strdupi_space(&(*str)[(*pos)]);
@@ -77,20 +91,16 @@ static void	ft_x(char **tmp, size_t *pos, char **str)
 	ft_puttermcaps("cd");
 }
 
-void		ft_cxv(int ret, size_t *pos, char **str)
+void		ft_c(void)
 {
-	static char	*tmp = NULL;
+	char	*tmp;
+	char	**str;
+	size_t	*pos;
 
-	if (!*str)
-		return ;
-	if (ret == TOUCHE_OPT_X)
-		ft_x(&tmp, pos, str);
-	else if (ret == TOUCHE_OPT_C)
-	{
-		if (tmp)
-			ft_strdel(&tmp);
-		tmp = ft_strdupi_space((*str) + (*pos));
-	}
-	else if (ret == TOUCHE_OPT_V)
-		ft_v(tmp, pos, str);
+	tmp = data_singleton()->line.copy_tmp;
+	str = &data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	if (tmp)
+		ft_strdel(&tmp);
+	tmp = ft_strdupi_space((*str) + (*pos));
 }

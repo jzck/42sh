@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 14:38:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/02 18:03:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	ft_init_line(void)
 {
 	data_singleton()->line.input = NULL;
+	data_singleton()->line.copy_tmp = NULL;
+	data_singleton()->line.pos = 0;
 	data_singleton()->line.prompt_size = 0;
 	data_singleton()->line.list_size = 0;
 	data_singleton()->line.list_end = NULL;
@@ -76,11 +78,12 @@ int		ft_readline(void)
 		return (-1);
 	if (data_singleton()->line.input)
 		ft_strdel(&data_singleton()->line.input);
+	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
+	data_singleton()->line.pos = 0;
 	ft_prompt();
-	data_singleton()->line.input = ft_lecture(data_singleton()->line.list_beg);
+	data_singleton()->line.input = ft_read_stdin();
 	ft_putchar('\n');
-	ft_check_quotes(&data_singleton()->line.input,
-	data_singleton()->line.list_beg);
+	ft_check_quotes(&data_singleton()->line.input);
 	ft_check_heredoc(&data_singleton()->line.input);
 	ft_check_backslash(&data_singleton()->line.input);
 	ft_history_parsing();

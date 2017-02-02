@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:40:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:07:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ static void	ft_up_2(size_t *pos, char *str)
 	(*pos) -= i;
 }
 
-static void	ft_up(size_t *pos, char *str)
+void	ft_up(void)
 {
 	int i;
+	char	*str;
+	size_t	*pos;
 
 	i = 0;
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	if (!str)
+		return ;
 	if (str[*pos - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
@@ -73,12 +79,18 @@ static void	ft_down_2(size_t *pos, char *str)
 	ft_get_beggin_with_curs(str, pos);
 }
 
-static void	ft_down(size_t *pos, char *str)
+void	ft_down(void)
 {
 	int i;
 	int len;
+	char	*str;
+	size_t	*pos;
 
 	i = 0;
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
+	if (!str)
+		return ;
 	if (str[*pos] == '\n')
 		ft_down_2(pos, str);
 	else
@@ -91,14 +103,4 @@ static void	ft_down(size_t *pos, char *str)
 		}
 		*pos += i;
 	}
-}
-
-void		ft_move_to_line(int ret, size_t *pos, char *str)
-{
-	if (!str)
-		return ;
-	if (ret == TOUCHE_OPT_UP)
-		ft_up(pos, str);
-	else if (ret == TOUCHE_OPT_DOWN)
-		ft_down(pos, str);
 }

@@ -6,114 +6,64 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 11:34:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 18:27:07 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		ft_lecture_3(int ret, char **str, size_t *i)
+t_key	g_key[] =
 {
-	if (ret == 127 && (*i) > 0)
-		ft_suppr(str, i);
-	else if (ret == TOUCHE_DELETE && (*str) && (*i) < ft_strlen((*str)))
-		ft_del(str, i);
-	else if (ret == TOUCHE_HOME)
-		ft_home(*str, i);
-	else if (ret == TOUCHE_END)
-		ft_end(*str, i);
-	else
-		return (0);
-	return (1);
-}
+	{FLECHE_HAUT		, &ft_history_up		},
+	{FLECHE_BAS			, &ft_history_down		},
+	{FLECHE_GAUCHE		, &ft_move_left			},
+	{FLECHE_DROITE		, &ft_move_right		},
+	{TOUCHE_DELETE		, &ft_del				},
+	{TOUCHE_CTRL_C		, &ft_control_c			},
+	{TOUCHE_CTRL_D		, &ft_control_d			},
+	{TOUCHE_CTRL_R		, &ft_history_parsing	},
+	{TOUCHE_SUPPR		, &ft_suppr				},
+	{TOUCHE_HOME		, &ft_home				},
+	{TOUCHE_END			, &ft_end				},
+	{TOUCHE_OPT_UP		, &ft_up				},
+	{TOUCHE_OPT_DOWN	, &ft_down				},
+	{TOUCHE_OPT_LEFT	, &ft_found_prev_word	},
+	{TOUCHE_OPT_RIGHT	, &ft_found_next_word	},
+	{TOUCHE_OPT_C		, &ft_c					},
+	{TOUCHE_OPT_V		, &ft_v					},
+	{TOUCHE_OPT_X		, &ft_x					},
+	{TOUCHE_F5			, &ft_printall			},
+	{TOUCHE_F6			, &ft_buff_f6			},
+	{0					, 0						},
+};
 
-static int		ft_lecture_2(int ret, char **str, size_t *i)
+char			*ft_read_stdin(void)
 {
-	if (ret == TOUCHE_F5)
-		ft_printall(*str, i);
-	else if (ret == TOUCHE_OPT_LEFT || ret == TOUCHE_OPT_RIGHT)
-		ft_move_to_word(ret, i, *str);
-	else if (ret == TOUCHE_OPT_X || ret == TOUCHE_OPT_C
-	|| ret == TOUCHE_OPT_V)
-		ft_cxv(ret, i, str);
-	else if (ret == FLECHE_DROITE)
-		ft_move_right(i, *str);
-	else if (ret == FLECHE_GAUCHE)
-		ft_move_left(i, *str);
-	else if (ret == TOUCHE_OPT_UP || ret == TOUCHE_OPT_DOWN)
-		ft_move_to_line(ret, i, *str);
-	else if (ft_isprint(ret))
-		ft_print(str, ret, i);
-	else
-		return (0);
-	return (1);
-}
+	int	ret;
+	int	j;
 
-char			*ft_lecture(t_list_history *head)
-{
-	char		*str;
-	int			ret;
-	size_t		i;
-
-	str = NULL;
-	if (data_singleton()->line.opt & HIST)
-		str = data_singleton()->line.input;
-	i = 0;
-	if (str)
+	if (data_singleton()->line.input)
 	{
-		ft_current_str(str, i);
-		ft_get_next_str(str, &i);
-		if (str[i])
-			++i;
+		ft_current_str(data_singleton()->line.input, data_singleton()->line.pos);
+		ft_get_next_str(data_singleton()->line.input, &data_singleton()->line.pos);
+		if (data_singleton()->line.input[data_singleton()->line.pos])
+			++(data_singleton()->line.pos);
 	}
 	while (42)
 	{
 		ret = 0;
+		j = 0;
 		read(0, &ret, sizeof(int));
-		if (ret == TOUCHE_F6 && read(0, &ret, sizeof(int)) > 0)
-			continue ;
-		if (ret == TOUCHE_CTRL_R)
-		{
-			ft_surch_in_history(&str, &i);
-			continue ;
-		}
-/*
-**		if (ret == TOUCHE_TAB)
-**			ret = ft_completion(&str, &i);
-*/
-		if (ret == TOUCHE_CTRL_D)
-		{
-			if (!str || str[0] == '\0')
-				exit(0);
-			else if (i < ft_strlen(str))
-				ft_del(&str, &i);
-			else
-				ft_puttermcaps("bl");
-		}
-		if (ret == TOUCHE_CTRL_C)
-		{
-			ft_putchar('\n');
-			ft_prompt();
-			ft_strdel(&str);
-			i = 0;
-		}
-		if (ft_lecture_2(ret, &str, &i))
-			continue ;
-		else if (ret == FLECHE_BAS || ret == FLECHE_HAUT)
-		{
-			if (!head)
-				continue ;
-			ft_history(&str, ret, &head, &i);
-			if (str)
-				i = ft_strlen_next(str, i);
-			else
-				i = 0;
-		}
-		else if (ft_lecture_3(ret, &str, &i))
-			continue ;
+		while (g_key[j].value && g_key[j].value != ret)
+			++j;
+		if (g_key[j].value)
+			g_key[j].f();
+		else if (ft_isprint(ret))
+			ft_print(ret);
 		else if (ret == 10)
-			return (str);
+			return (data_singleton()->line.input);
 		else if (ft_isascii(ret) == 0)
-			ft_read_it(ret, &i, &str);
+			ft_read_it(ret, &data_singleton()->line.pos,
+			&data_singleton()->line.input);
 	}
 }

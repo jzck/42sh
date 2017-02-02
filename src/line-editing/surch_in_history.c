@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/26 14:01:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:16:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ void	ft_surch_and_realloc(char **str, char **str_srch, int ret, size_t *srch_pos
 	*str = ft_strget_history(*str_srch);
 }
 
-void	ft_surch_in_history(char **str, size_t *pos)
+void	ft_surch_in_history(void)
 {
 	char	*str_srch;
 	int		ret;
 	size_t	srch_pos;
+	char	**str;
+	size_t	*pos;
 
+	str = &data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	srch_pos = 0;
 	str_srch = NULL;
 	if (*str)

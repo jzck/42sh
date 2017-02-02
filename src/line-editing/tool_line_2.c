@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/01 15:24:50 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 14:16:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ static void	ft_clear_window()
 		execve("/usr/bin/clear", tab_str, data_singleton()->env);
 }
 
-void	ft_printall(char *str, size_t *pos)
+void	ft_printall(void)
 {
 	size_t	pos_tmp;
 	int			ret;
+	char	*str;
+	size_t	*pos;
 
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	ret = 0;
 	if (read(0, &ret, sizeof(int)) == -1 || ret != 126 || !str)
 		return ;

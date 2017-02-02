@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 11:34:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 17:54:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ int				ft_put(int nb)
 	return (1);
 }
 
-void			ft_end(char *str, size_t *pos)
+void			ft_end(void)
 {
+	char	*str;
+	size_t	*pos;
+
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	if (!str)
 		return ;
 	if (*pos)
@@ -35,8 +40,13 @@ void			ft_end(char *str, size_t *pos)
 	ft_get_next_str(str, pos);
 }
 
-void			ft_home(char *str, size_t *pos)
+void			ft_home(void)
 {
+	char	*str;
+	size_t	*pos;
+
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	if (!str)
 		return ;
 	if (*pos)
@@ -56,10 +66,14 @@ void			ft_home(char *str, size_t *pos)
 	ft_get_beggin_with_curs(str, pos);
 }
 
-void			ft_move_right(size_t *pos, char *str)
+void			ft_move_right(void)
 {
 	size_t	tmp;
+	char	*str;
+	size_t	*pos;
 
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	if (ft_strlen(str) <= *pos)
 		return ;
 	if (str[*pos] == '\n')
@@ -84,8 +98,13 @@ void			ft_move_right(size_t *pos, char *str)
 	}
 }
 
-void			ft_move_left(size_t *pos, char *str)
+void			ft_move_left(void)
 {
+	char	*str;
+	size_t	*pos;
+
+	str = data_singleton()->line.input;
+	pos = &data_singleton()->line.pos;
 	if (!*pos)
 		return ;
 	if (str[*pos - 1] == '\n')
@@ -96,7 +115,6 @@ void			ft_move_left(size_t *pos, char *str)
 			--(*pos);
 			return ;
 		}
-		printf("here\n\n");
 		ft_puttermcaps("cd");
 		(*pos) -= 2;
 		ft_get_beggin(str, pos);

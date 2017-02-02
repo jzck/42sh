@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/24 15:19:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 16:08:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,4 @@ void			ft_push_back_history(t_list_history **head, t_list_history *new)
 	(*head)->prev->next = new;
 	new->next = (*head);
 	(*head)->prev = new;
-}
-
-void			ft_get_head(t_list_history **head)
-{
-	if (head && *head)
-	{
-		while ((*head)->next && (*head)->next->str)
-			(*head) = (*head)->next;
-	}
 }

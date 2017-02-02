@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 12:20:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 16:50:14 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/02 17:53:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ int		ft_check_quotes_num(char *s)
 	return (0);
 }
 
-void	ft_check_quotes(char **s, t_list_history *head)
+void	ft_check_quotes(char **s)
 {
-	int		ret;
-	char	*tmp;
-	char	*tmp2;
-	int		prompt_size_mem;
+	int				ret;
+	char			*tmp;
+	char			*tmp2;
+	int				prompt_size_mem;
+	t_list_history	*head;
 
+	head = data_singleton()->line.list_beg;
 	if (!*s)
 		return ;
 	while ((ret = (ft_check_quotes_num(*s))))
@@ -71,12 +73,15 @@ void	ft_check_quotes(char **s, t_list_history *head)
 		ft_strdel(&tmp);
 		tmp = *s;
 		prompt_size_mem = data_singleton()->line.prompt_size;
-		tmp2 = ft_lecture(head);
+		data_singleton()->line.input = NULL;
+		data_singleton()->line.pos = 0;
+		tmp2 = ft_read_stdin();
 		data_singleton()->line.prompt_size = prompt_size_mem;
 		ft_putchar('\n');
 		if (!tmp2)
 			continue ;
 		*s = ft_strjoin(tmp, tmp2);
+		data_singleton()->line.input = *s;
 		ft_strdel(&tmp);
 		ft_strdel(&tmp2);
 	}
