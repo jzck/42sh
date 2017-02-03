@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:31:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:46:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int		process_redirect(t_process *p)
 {
+	t_list	*redirs;
+
+	redirs = p->redirs;
+	while (redirs)
+	{
+		process_do_redirection(redirs->content);
+		redirs = redirs->next;
+	}
 	if (p->toclose != STDIN)
 		close(p->toclose);
 	if (p->fdin != STDIN)

@@ -44,15 +44,14 @@ exec/ast_free.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\
-exec/exec_dgreat.c\
-exec/exec_great.c\
-exec/exec_less.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
+exec/exec_redir.c\
 exec/exec_semi.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
+exec/process_do_redirection.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
@@ -189,6 +188,7 @@ parser/parse_great.c\
 parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
+parser/parse_redir.c\
 parser/parse_separator.c\
 parser/parse_subshell.c\
 parser/parse_word.c
