@@ -6,14 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:31:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 19:53:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 16:43:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_dless(t_list **list_ast, t_btree **ast,
-		t_list **start, t_list **lst)
+int		parse_dless(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*tok;
@@ -30,6 +29,6 @@ int		parse_dless(t_list **list_ast, t_btree **ast,
 	node->data.redir.word.word = ft_strdup(next_tok->data);
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_lst_delif(start, (*lst)->next->content, &ft_addrcmp, &token_free);
-	ft_parse(list_ast, &(*ast)->left, start);
+	ft_parse(&(*ast)->left, start);
 	return (0);
 }

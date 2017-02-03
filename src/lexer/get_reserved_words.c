@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/03 15:31:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 19:39:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,37 @@
 
 int		get_reserved_words(t_list **alst)
 {
-//	t_token		token;
+	t_token		*token;
+	t_list		*temp;
+	int			i;
 
-	(void)alst;
-/*
-	while (*alst)
+	temp = *alst;
+	i = 0;
+	while (temp)
 	{
-		token = (*alst)->content;
-		if (token->type = TK_WORD);
+		token = temp->content;
+		if (i == 0)
+			if (token->type == TK_N_WORD)
+				if (ft_strncmp(token->data, "while", 5) == 0)
+					token->type = TK_WHILE;
+		if ((token->type & (TK_NEWLINE | TK_AMP | TK_SEMI)))
 		{
-			if (ft_strncmp(str, "while", 5) == 0  && ft_isalpha(*(str + 5)) == 0)
-				lexer_while(
-			else if (ft_strncmp(str, "done", 4) == 0 && ft_isalpha(*(str + 4)) == 0)
-				return (DONE);
-			else if	(ft_strncmp(str, "do" , 2) == 0 && ft_isalpha(*(str + 2)) == 0)
-				return (DO);
-//	else if (ft_strncmp(str, "if", 2) == 0 && ft_isalpha(*(str + 2)) == 0)
-//		return (IF);
-//	else if (ft_strncmp(str, "then", 4) == 0 && ft_isalpha(*(str + 4)) == 0)
-//		return (THEN);
-//	else if (ft_strncmp(str, "fi", 2) == 0 && ft_isalpha(*(str + 2)) == 0)
-//		return (FI);
+			if ((temp = temp->next))
+				token = temp->content;
+			else
+				break;
+			if (token->type == TK_N_WORD)
+			{	
+				if (ft_strncmp(token->data, "while", 5) == 0)
+					token->type = TK_WHILE;
+				else if (ft_strncmp(token->data, "done", 4) == 0)
+					token->type = TK_DONE;
+				else if	(ft_strncmp(token->data, "do" , 2) == 0)
+					token->type = TK_DO;
+			}
 		}
-		(*alst) = (*alst)->next;
+		temp = temp->next;
+		i++;
 	}
-*/	return (0);
+	return (0);
 }

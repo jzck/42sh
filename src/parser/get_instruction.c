@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_loop.c                                       :+:      :+:    :+:   */
+/*   get_instruction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 21:58:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/03 15:14:06 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/03 16:56:55 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/03 17:16:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
-int		lexer_while(t_list **alst, char *str)
+int		get_instruction(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_token		*token;
 
-	token = (*alst)->content;
-	if (ft_strncmp(str, "while", 5) == 0)
-		token->type = TK_WHILE;
-	else if (ft_isalnum(*str))
-	{
-		token_append(token, *str, 0);
-		return (ft_tokenize(alst, str + 1, WORD));
-	}
-	return (ft_tokenize(&(*alst)->next, str + 6, LIST));
+	token = (*lst)->content;
+	if (token->type == TK_NEWLINE)
+		return (parse_newline(ast, start, lst));
+	else if (token->type == TK_WHILE)
+		return (parse_while(ast, start, lst));
+	return (0);
 }

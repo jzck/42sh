@@ -1,11 +1,20 @@
-echo "begin loop"
 while [ 1 ]
 do
-	echo "begin inner loop"
-	while [ 1 ]
+	while pwd
 	do
-		echo "end scd loop" 
+		while pwd
+		do
+			while pwd
+			do
+				echo "hello"
+			done
+		done
 	done
-	echo "end inner loop"
-done	
-echo "end loop"
+	while pwd
+	do
+		while pwd
+		do
+			echo "bonjour"
+		done
+	done
+done

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:31:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 19:37:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_parser	g_parser[] =
 {
-	{TK_NEWLINE, &parse_newline},
+	{TK_NEWLINE | TK_WHILE, &get_instruction},
 	{TK_SEMI, &parse_separator},
 	{TK_AND_IF | TK_OR_IF, &parse_separator},
 	{TK_AMP, &parse_separator},
@@ -27,14 +27,11 @@ t_parser	g_parser[] =
 	{TK_GREATAND, &parse_greatand},
 	{TK_SUBSHELL, &parse_subshell},
 	{TK_WHILE, &parse_while},
-	{TK_DO, &parse_do},
-	{TK_DONE, &parse_done},
-	{TK_LIST, &parse_list},
 	{TK_WORD, &parse_word},
 	{0, 0},
 };
 
-int		ft_parse(t_list **list_ast, t_btree **ast, t_list **start)
+int		ft_parse(t_btree **ast, t_list **start)
 {
 	t_list		*lst;
 	t_astnode	item;
@@ -48,14 +45,12 @@ int		ft_parse(t_list **list_ast, t_btree **ast, t_list **start)
 		*ast = btree_create_node(&item, sizeof(item));
 		((t_astnode *)(*ast)->item)->data.token = NULL;
 	}
-	if (!*list_ast)
-		*list_ast = ft_lstnew(ast, sizeof(t_btree *));
 	while (g_parser[i].type)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
 		{
 			if (g_parser[i].f)
-				(*g_parser[i].f)(list_ast, ast, start, &lst);
+				(*g_parser[i].f)(ast, start, &lst);
 			return (0);
 		}
 		i++;

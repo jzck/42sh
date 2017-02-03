@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 22:49:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 20:32:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 19:55:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static int	rs_loop(char *file, t_script *script)
 	line = NULL;
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (0);
-	while (get_next_line(fd, &line) > 0)
+	while ((get_next_line(fd, &line)) > 0)
 	{
 		ft_strappend(&script->buffer, line);
 		ft_strappend(&script->buffer, "\n");
 		ft_strdel(&line);
 		script->size += ft_strlen(script->buffer);
 	}
+	script->buffer[ft_strlen(script->buffer) - 1] = 0;
 	close(fd);
 	if (script->size > 0)
 	{

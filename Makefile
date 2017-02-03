@@ -130,8 +130,6 @@ lexer/lexer_backslash.c\
 lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
-lexer/lexer_do.c\
-lexer/lexer_done.c\
 lexer/lexer_dquote.c\
 lexer/lexer_fi.c\
 lexer/lexer_great.c\
@@ -139,7 +137,6 @@ lexer/lexer_greatand.c\
 lexer/lexer_if.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
-lexer/lexer_list.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
 lexer/lexer_quote.c\
@@ -147,7 +144,6 @@ lexer/lexer_sep.c\
 lexer/lexer_special.c\
 lexer/lexer_then.c\
 lexer/lexer_var.c\
-lexer/lexer_while.c\
 lexer/lexer_word.c\
 lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\
@@ -168,13 +164,13 @@ main/lib_expansion.c\
 main/main.c\
 main/read_script.c\
 main/shell_exit.c\
-main/shell_get_ast.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
 main/shell_script.c\
 main/sig_handler.c\
 parser/ft_parse.c\
+parser/get_instruction.c \
 parser/parse_dgreat.c\
 parser/parse_dless.c\
 parser/parse_do.c\

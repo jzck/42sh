@@ -6,14 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 19:35:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 17:16:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_newline(t_list **list_ast, t_btree **ast,
-		t_list **start, t_list **lst)
+int		parse_newline(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_list		*temp;
 	t_astnode	*node;
@@ -25,8 +24,7 @@ int		parse_newline(t_list **list_ast, t_btree **ast,
 	temp = (*lst)->next;
 	(*lst)->next = NULL;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(list_ast, ast, start);
-	*ast = NULL;
-	ft_parse(&(*list_ast)->next, ast, &temp);
+	ft_parse(ast, start);
+	*start = temp;
 	return (0);
 }

@@ -6,14 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:36:28 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/02 16:44:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 16:47:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_done(t_list **list_ast, t_btree **ast,
-		t_list **start, t_list **lst)
+int		parse_done(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -22,6 +21,6 @@ int		parse_done(t_list **list_ast, t_btree **ast,
 	node = (*ast)->item;
 	node->type = TK_DONE;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(list_ast, ast, start);
+	ft_parse(ast, start);
 	return (0);
 }
