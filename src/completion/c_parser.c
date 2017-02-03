@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/01/31 18:34:54 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:40:14 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Add the matching element to the list
 */
 
-static void	c_add_to_lst(t_comp *c, t_clst *node)
+static void			c_add_to_lst(t_comp *c, t_clst *node)
 {
 	DG("PARSER: Adding node [%s]", node->name);
 	if (c->lst == NULL)
@@ -42,9 +42,9 @@ static void	c_add_to_lst(t_comp *c, t_clst *node)
 ** created and the function above is called to add it.
 */
 
-static int	c_storing(t_comp *c, char *value, unsigned char type)
+static int			c_storing(t_comp *c, char *value, unsigned char type)
 {
-	t_clst		*tmp;
+	t_clst			*tmp;
 
 	if (ft_strncmp(".", value, 1) == 0 || ft_strncmp("..", value, 2) == 0)
 		return (0);
@@ -68,10 +68,10 @@ static int	c_storing(t_comp *c, char *value, unsigned char type)
 
 int					c_parser(t_comp *c, char *path, char *name)
 {
-	DG("PARSER: Search for [%s] in [%s]", name, path);
 	DIR				*rep;
 	struct dirent	*dirc;
 
+	DG("PARSER: Search for [%s] in [%s]", name, path);
 	if (!(rep = opendir(path)))
 		return (-1);
 	while ((dirc = readdir(rep)))

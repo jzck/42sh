@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 12:23:05 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:37:11 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ typedef struct				s_comp
 	t_clst					*lst;
 }							t_comp;
 
+/*
+** Main autocompletion engine
+*/
+
 int							completion(long int key);
 void						c_init(t_data *s, long int input);
 int							c_matching(t_data *s, t_comp *c);
@@ -82,15 +86,27 @@ int							c_seek_files(t_data *s, t_comp *c);
 int							c_parser(t_comp *c, char *path, char *name);
 int							c_sizing(t_comp *c);
 
-int							c_single(t_comp *c);
+/*
+** Output functions.
+*/
+
+int							c_updater(t_comp *c);
+int							c_gtfo(t_comp *c, long int keypress);
+
+/*
+** Terminal related function (moving and printing the list)
+*/
 
 void						c_term_mv_down(t_comp *c);
 void						c_term_mv_back(t_comp *c);
 void						c_printer(t_comp *c);
 
+/*
+** Support functions
+*/
+
 int							c_clear(t_data *s);
 char						*path_solver(t_comp *c, char *cmd, char *cwd);
-
-int							 test(t_comp *c);
+int							test(t_comp *c);
 
 #endif

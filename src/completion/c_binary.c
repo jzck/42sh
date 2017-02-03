@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/01/11 14:08:08 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:30:59 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int				c_seek_binary(t_data *s, t_comp *c)
 		c_parser(c, paths[i++], c->rcmd);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	paths ? ft_sstrfree(paths) : (0);
+	DG("SB: End");
 	return (0);
 }

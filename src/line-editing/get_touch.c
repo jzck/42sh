@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 12:23:44 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:05:41 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ char			*ft_read_stdin(void)
 		ret = 0;
 		j = 0;
 		read(0, &ret, sizeof(int));
+if (data_singleton()->comp || ret == TOUCHE_TAB)
+	completion(ret);
 		while (g_key[j].value && g_key[j].value != ret)
 			++j;
-		if (data_singleton()->comp || ret == 9)
-			completion(ret);
 		if (g_key[j].value)
 			g_key[j].f();
 		else if (ft_isprint(ret))

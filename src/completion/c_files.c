@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/01/11 14:06:50 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:30:50 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ static char		*c_slicer(t_comp *c)
 
 int				c_seek_files(t_data *s, t_comp *c)
 {
-	DG("Seek Files");
-	(void)s;
 	char	*path;
 
+	DG("SF: Start");
+	(void)s;
 	path = c_slicer(c);
 	c->cpath = path_solver(c, path, NULL);
 	DG("Solved as [%s]", c->cpath);
 	path ? ft_memdel((void *)&path) : (0);
 	c_parser(c, c->cpath, c->match);
+	DG("SF: End");
 	return (0);
 }

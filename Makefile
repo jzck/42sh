@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/03 12:26:23 by alao             ###   ########.fr        #
+#    Updated: 2017/02/03 13:53:09 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
+completion/c_output.c\
 completion/c_binary.c\
 completion/c_clear.c\
 completion/c_files.c\
@@ -37,7 +38,6 @@ completion/c_matching.c\
 completion/c_parser.c\
 completion/c_pathsolver.c\
 completion/c_printer.c\
-completion/c_single.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 12:28:49 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 13:38:53 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ static char				*c_trimmer(char *cmd, int st, int nd)
 void					c_init(t_data *s, long int input)
 {
 	struct winsize		win;
+	int					len_trail;
 
 	if (!(s->comp = (t_comp *)malloc((sizeof(t_comp)))))
 		return ;
 	s->comp->rcmd = c_trimmer(s->line.input, s->line.pos, s->line.pos);
+	len_trail = ft_strlen(s->line.input) - s->line.pos;
 	if (ft_strlen(s->line.input) > s->line.pos)
-		s->comp->trail = ft_strsub(s->line.input, s->line.pos, ft_strlen(s->line.input) - s->line.pos);
+		s->comp->trail = ft_strsub(s->line.input, s->line.pos, len_trail);
 	else
 		s->comp->trail = NULL;
 	s->comp->ircmd = s->line.pos;
