@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:46:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:41:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:55:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	process_do_redirection(t_redir *redir)
 	{
 		fdin = redir->n;
 		fdout = open(redir->word.word, O_WRONLY | O_CREAT
-				(redir->type & TK_GREAT) ? O_TRUNC : O_APPEND,
+				| (redir->type & TK_GREAT) ? O_TRUNC : O_APPEND,
 				0644);
 	}
 	else if (redir->type & TK_LESS)
@@ -46,6 +46,11 @@ void	process_do_redirection(t_redir *redir)
 			fdin = redir->type & TK_LESSAND ? redir->word.fd : redir->n;
 			fdout = redir->type & TK_LESSAND ? redir->n : redir->word.fd;
 		}
+	}
+	else
+	{
+		ft_dprintf(2, "{red}%s: redirection error.", SHELL_NAME);
+		return ;
 	}
 	fd_is_valid(fdout) ? dup2(fdout, fdin) : close(fdin);
 	close(fdout);
