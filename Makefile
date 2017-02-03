@@ -158,7 +158,6 @@ line-editing/check_backslash.c\
 line-editing/completion.c\
 line-editing/control_c_and_d.c\
 line-editing/copy_cut_paste.c\
-line-editing/ft_split_whitespaces.c\
 line-editing/get_touch.c\
 line-editing/get_touch_toolz.c\
 line-editing/get_touch_toolz_2.c\
