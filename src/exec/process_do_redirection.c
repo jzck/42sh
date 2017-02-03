@@ -6,27 +6,28 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:46:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:10:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:41:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int fd_is_valid(int fd)
+{
+	return (fcntl(fd, F_GETFD) != -1 || errno != EBADF);
+}
 
 void	process_do_redirection(t_redir *redir)
 {
 	int		fdin;
 	int		fdout;
 
-	if (redir->type & TK_GREAT)
+	if (redir->type & (TK_GREAT | TK_DGREAT))
 	{
 		fdin = redir->n;
-		fdout = open(redir->word.word, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		DG("opened [%s] in fd[%i]", redir->word.word, fdout);
-	}
-	else if (redir->type & TK_DGREAT)
-	{
-		fdin = redir->n;
-		fdout = open(redir->word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		fdout = open(redir->word.word, O_WRONLY | O_CREAT
+				(redir->type & TK_GREAT) ? O_TRUNC : O_APPEND,
+				0644);
 	}
 	else if (redir->type & TK_LESS)
 	{
@@ -37,7 +38,6 @@ void	process_do_redirection(t_redir *redir)
 	{
 		if (redir->close)
 		{
-			DG("gonna close(%i)", redir->n);
 			close(redir->n);
 			return ;
 		}
@@ -47,12 +47,6 @@ void	process_do_redirection(t_redir *redir)
 			fdout = redir->type & TK_LESSAND ? redir->n : redir->word.fd;
 		}
 	}
-	else
-	{
-		DG("redir->type not well set !");
-		return ;
-	}
-	DG("gonna dup2(%i,%i)", fdout, fdin);
-	dup2(fdout, fdin);
+	fd_is_valid(fdout) ? dup2(fdout, fdin) : close(fdin);
 	close(fdout);
 }
