@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 15:33:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:47:16 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 ** Once that done, it will clear all the memory related and return zero.
 */
 
-int			c_updater(t_comp *c)
+int			c_updater(t_comp *c, char *select)
 {
 	char		*tmp;
 	char		*rt;
 	int			new_pos;
 
 	DG("\tUpdater");
-	DG("RCMD [%s] match [%s] Candidat [%s]", c->rcmd, c->match, c->lst->name);
+	DG("RCMD [%s] match [%s] Candidat [%s]", c->rcmd, c->match, select);
 	tmp = NULL;
 	rt = NULL;
-	new_pos = c->ircmd + (ft_strlen(c->lst->name) - ft_strlen(c->match)) + 1;
+	new_pos = c->ircmd + (ft_strlen(select) - ft_strlen(c->match)) + 1;
 	tmp = ft_strsub(c->rcmd, 0, ft_strlen(c->rcmd) - ft_strlen(c->match));
-	rt = ft_strjoin(tmp, c->lst->name);
+	rt = ft_strjoin(tmp, select);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	if (c->trail)
 		data_singleton()->line.input = ft_strjoin(rt, c->trail);
@@ -52,7 +52,16 @@ int			c_updater(t_comp *c)
 
 int			c_gtfo(t_comp *c, long int keypress)
 {
+	t_clst		*ptr;
+
 	DG("It's time to GTFO. Keypress [%d]", keypress);
-	(void)c;
-	return (0);
+	if (keypress != 10)
+	{
+		c_clear(data_singleton());
+		return (0);
+	}
+	ptr = c->lst;
+	while (!ptr->cursor)
+		ptr = ptr->next;
+	return (c_updater(c, ptr->name));
 }

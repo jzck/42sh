@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 15:39:26 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:47:19 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int		c_dispatcher(t_data *s)
 		c_clear(s);
 	}
 	else if (s->comp && s->comp->lst == s->comp->lst->next)
-		return (c_updater(s->comp));
+		return (c_updater(s->comp, s->comp->lst->name));
 	else if (s->comp && s->comp->lst != s->comp->lst->next)
 	{
 		c_term_mv_down(s->comp);

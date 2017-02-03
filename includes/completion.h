@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:37:11 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 15:47:35 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int							c_sizing(t_comp *c);
 ** Output functions.
 */
 
-int							c_updater(t_comp *c);
+int							c_updater(t_comp *c, char *select);
 int							c_gtfo(t_comp *c, long int keypress);
 
 /*
