@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 14:46:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 12:16:52 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "builtin.h"
 # include "job_control.h"
 # include "glob.h"
+# include "completion.h"
 
 # include <dirent.h>
 # include <sys/stat.h>
@@ -31,11 +32,6 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <errno.h>
-
-struct	s_comp
-{
-	int		a;
-};
 
 # define SHELL_OPTS_JOBC	(1 << 0)
 # define SHELL_OPTS_LC		(1 << 1)
@@ -54,7 +50,7 @@ struct	s_data
 	char	**argv;
 	t_flag	opts;
 	t_line	line;
-	t_comp	comp;
+	t_comp	*comp;
 	t_exec	exec;
 	t_jobc	jobc;
 };
