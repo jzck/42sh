@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 15:47:19 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 17:33:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,20 @@ int				test(t_comp *c)
 	t_clst		*tmp;
 	int			i;
 
-	DG("\tAutocompletion dump");
 	i = 1;
 	if (!(c->lst))
 	{
-		DG("Empty list");
 		return (0);
 	}
-	if (c->lst && c->lst->cursor)
-		DG("Node [x] ID [%d] [%s]", c->lst->id, c->lst->name);
-	else
-		DG("Node [ ] ID [%d] [%s]", c->lst->id, c->lst->name);
 	if (c->lst->prev != c->lst)
 	{
 		tmp = c->lst->next;
 		while (tmp != c->lst)
 		{
-			if (tmp->cursor)
-				DG("Node [x] ID [%d] [%s]", tmp->id, tmp->name);
-			else
-				DG("Node [ ] ID [%d] [%s]", tmp->id, tmp->name);
 			i++;
 			tmp = tmp->next;
 		}
 	}
-	DG("List configuration as:");
-	DG("Max value: Length (X) %d Number (Y) %d", c->c_sx, c->c_sy);
-	DG("Translated to [%d] Lines and [%d] Column", c->c_line, c->c_pline);
 	return (0);
 }
 
@@ -79,7 +66,6 @@ static int		c_dispatcher(t_data *s)
 {
 	if (s->comp && s->comp->lst == NULL)
 	{
-		DG("Empty list, flushing autocompletion");
 		c_clear(s);
 	}
 	else if (s->comp && s->comp->lst == s->comp->lst->next)
@@ -117,7 +103,6 @@ int				completion(long int keypress)
 	t_data		*s;
 
 	s = data_singleton();
-	DG("\n\n\t\tAutocompletion input key [%d]\n", (int)keypress);
 	if (s->comp == NULL)
 	{
 		if (s->line.pos == 0)

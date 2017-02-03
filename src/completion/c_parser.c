@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:40:14 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 17:35:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 static void			c_add_to_lst(t_comp *c, t_clst *node)
 {
-	DG("PARSER: Adding node [%s]", node->name);
 	if (c->lst == NULL)
 	{
 		c->lst = node;
@@ -71,7 +70,7 @@ int					c_parser(t_comp *c, char *path, char *name)
 	DIR				*rep;
 	struct dirent	*dirc;
 
-	DG("PARSER: Search for [%s] in [%s]", name, path);
+	(void)name;
 	if (!(rep = opendir(path)))
 		return (-1);
 	while ((dirc = readdir(rep)))
