@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 14:03:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:03:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ extern t_parser		g_parser[];
 
 int		ft_parse(t_btree **ast, t_list **token);
 int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
+int		parse_redir(t_btree **ast, t_list **start, t_list **lst);
 int		parse_less(t_btree **ast, t_list **start, t_list **lst);
 int		parse_great(t_btree **ast, t_list **start, t_list **lst);
 int		parse_dless(t_btree **ast, t_list **start, t_list **lst);

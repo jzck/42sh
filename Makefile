@@ -187,6 +187,7 @@ parser/parse_great.c\
 parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
+parser/parse_redir.c\
 parser/parse_separator.c\
 parser/parse_subshell.c\
 parser/parse_word.c
