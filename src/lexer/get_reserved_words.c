@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/03 14:27:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:31:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int		get_reserved_words(t_list **alst)
 {
-	t_token		token;
+//	t_token		token;
 
+	(void)alst;
+/*
 	while (*alst)
 	{
 		token = (*alst)->content;
@@ -36,5 +38,5 @@ int		get_reserved_words(t_list **alst)
 		}
 		(*alst) = (*alst)->next;
 	}
-	return (0);
+*/	return (0);
 }

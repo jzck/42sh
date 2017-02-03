@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 18:19:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 23:14:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:29:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list		**shell_get_ast(char *command)
 		return (NULL);
 	if (!token)
 		return (NULL);
-	if (ft_post_tokenize(&token, command))
+	if (ft_post_tokenize(&token, &command))
 		return (NULL);
 	DG("after post_tokenize");
 	token_print(token);

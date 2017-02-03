@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 23:20:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:09:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		exec_command(t_btree **ast);
 
 int		exec_while(t_btree **ast);		
 int		exec_list(t_btree **ast);
+int		exec_default(t_btree **ast);
+
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);

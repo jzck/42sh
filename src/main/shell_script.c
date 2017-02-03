@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 23:06:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/02 17:50:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:37:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ int		shell_script()
 	token = NULL;
 	ast = NULL;
 	list_ast = NULL;
-	if (ft_tokenize(&token, data_singleton()->script.buffer , DEFAULT))
-		return (1);
-	if (!token)
-		return (0);
-	if (ft_post_tokenize(&token, data_singleton()->script.buffer))
+	if (ft_lexer(&token, &data_singleton()->script.buffer) || !token)
 		return (1);
 	DG("after post_tokenize");
 	token_print(token);

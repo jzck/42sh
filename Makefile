@@ -14,7 +14,7 @@ NAME		=	42sh
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
-D_FLAGS		=	-g
+D_FLAGS		=	-g 
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
 
@@ -44,15 +44,20 @@ exec/ast_free.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\
+exec/exec_default.c\
 exec/exec_dgreat.c\
 exec/exec_great.c\
 exec/exec_less.c\
+exec/exec_list.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_semi.c\
+exec/exec_while.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
+exec/loop_del.c\
+exec/loop_exec.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
@@ -120,19 +125,29 @@ lexer/ft_lexer.c\
 lexer/ft_post_tokenize.c\
 lexer/ft_tokenize.c\
 lexer/get_lexer_state.c\
+lexer/get_reserved_words.c\
 lexer/lexer_backslash.c\
+lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
+lexer/lexer_do.c\
+lexer/lexer_done.c\
 lexer/lexer_dquote.c\
+lexer/lexer_fi.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
+lexer/lexer_if.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
+lexer/lexer_list.c\
+lexer/lexer_newline.c\
 lexer/lexer_number.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_special.c\
+lexer/lexer_then.c\
 lexer/lexer_var.c\
+lexer/lexer_while.c\
 lexer/lexer_word.c\
 lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\
@@ -142,55 +157,37 @@ lexer/token_expand_var.c\
 lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\
-line-editing/builtin_history.c\
-line-editing/check_backslash.c\
-line-editing/control_c_and_d.c\
-line-editing/copy_cut_paste.c\
-line-editing/ft_split_whitespaces.c\
-line-editing/get_touch.c\
-line-editing/get_touch_toolz.c\
-line-editing/get_touch_toolz_2.c\
-line-editing/heredoc.c\
-line-editing/history.c\
-line-editing/history_parsing.c\
-line-editing/history_parsing_toolz.c\
-line-editing/history_parsing_toolz_2.c\
-line-editing/list_toolz.c\
-line-editing/move_to_line.c\
-line-editing/print_and_del.c\
-line-editing/prompt.c\
-line-editing/quotes_gest.c\
-line-editing/reader.c\
-line-editing/readline.c\
-line-editing/surch_in_history.c\
-line-editing/tool_line.c\
-line-editing/tool_line_2.c\
-line-editing/toolz.c\
-line-editing/toolz2.c\
-line-editing/toolz_parseur.c\
-line-editing/toolz_termcaps.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
 main/ft_cleanup.c\
+main/ft_print_all_ast.c\
 main/ft_putast.c\
 main/ft_putast2.c\
 main/lib_expansion.c\
 main/main.c\
+main/read_script.c\
 main/shell_exit.c\
+main/shell_get_ast.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
+main/shell_script.c\
 main/sig_handler.c\
 parser/ft_parse.c\
 parser/parse_dgreat.c\
 parser/parse_dless.c\
+parser/parse_do.c\
+parser/parse_done.c\
 parser/parse_great.c\
 parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
+parser/parse_list.c\
+parser/parse_newline.c\
 parser/parse_separator.c\
 parser/parse_subshell.c\
+parser/parse_while.c\
 parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))

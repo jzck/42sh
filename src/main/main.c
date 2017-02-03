@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:31:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:40:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		shell_single_command(char *command)
 	if (ft_lexer(&token, &command) || !token)
 		return (1);
 	token_print(token);
-	if (ft_parse(&ast, &token))
-		return (1);
+//	if (ft_parse(&ast, &token))
+//		return (1);
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
@@ -49,8 +49,6 @@ int		main(int ac, char **av)
 	}
 	while (1)
 	{	
-		if (ft_readline())
-			return (1);
 		if (shell_single_command(ft_strdup(data_singleton()->line.input)) < 0)
 			return (1);
 	}
