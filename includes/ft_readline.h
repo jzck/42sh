@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 15:13:01 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 16:27:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,7 @@ int				ft_readline(void);
 int				ft_completion(int ret);
 
 void			ft_check_heredoc(char **str);
+
+char	*ft_strdupi_w(char const *s);
 
 #endif
