@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 16:23:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 18:36:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int		ft_readline(void)
 	ft_putchar('\n');
 	ft_check_heredoc(&data_singleton()->line.input);
 	ft_history_parsing();
-	if (data_singleton()->line.input)
+	if (data_singleton()->line.input && (!data_singleton()->line.list_beg ||
+	ft_strcmp(data_singleton()->line.list_beg->prev->str, data_singleton()->line.input)))
 	{
 		ft_push_back_history(&data_singleton()->line.list_beg,
 		ft_create_history_list(data_singleton()->line.input));

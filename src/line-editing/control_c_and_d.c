@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 16:43:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 18:27:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	ft_control_d(void)
 	str = &data_singleton()->line.input;
 	pos = &data_singleton()->line.pos;
 	if (!(*str) || (*str)[0] == '\0')
+	{
+		ft_putstr("exit\n");
 		builtin_exit(NULL, (char*[]){"exit", NULL}, NULL);
+	}
 	else if (*pos < ft_strlen(*str))
 		ft_del();
 	else

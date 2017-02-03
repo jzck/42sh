@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:09:39 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/25 14:41:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 17:03:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void		ft_realloc_str_history(char **str, size_t pos, int nb_his, int len)
 	if (!*str)
 		return ;
 	new_str = ft_strndup(*str, pos);
-	ft_printf("\n\npos = %d\n\n", len);
 	new_str3 = ft_nget_histo(nb_his);
 	if (new_str3)
 	{
