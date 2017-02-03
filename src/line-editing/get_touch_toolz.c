@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:42:54 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 15:22:35 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 12:08:45 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ void	ft_found_prev_word(void)
 
 void	ft_found_next_word(void)
 {
-	int i;
+	int		i;
 	char	*str;
 	size_t	*pos;
 
 	str = data_singleton()->line.input;
 	pos = &data_singleton()->line.pos;
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i + *pos] && str[i + *pos] == ' ')
 	{
 		ft_putchar(str[i + *pos]);

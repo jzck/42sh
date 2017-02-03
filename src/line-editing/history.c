@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:22:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 18:04:16 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 11:55:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_history_down(void)
 	str = &data_singleton()->line.input;
 	pos = &data_singleton()->line.pos;
 	head = data_singleton()->line.list_cur;
-	if (!head || !*str)
+	if (!head)
 		return ;
 	if (*str)
 	{
