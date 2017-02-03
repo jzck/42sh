@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 15:45:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:45:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int				exec_command(t_btree **ast)
 	p->av = NULL;
 	p->pid = 0;
 	p->attributes &= ~(PROCESS_STATE_MASK | PROCESS_TYPE_MASK);
+	p->redirs = NULL;
 	btree_delone(ast, &ast_free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 19:03:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:01:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define PARSER_H
 
 # include "minishell.h"
-
-typedef struct s_parser		t_parser;
-typedef struct	s_ld		t_ld;
-typedef struct s_astnode	t_astnode;
-typedef struct s_redir		t_redir;
-typedef union u_astdata		t_astdata;
-typedef union u_word		t_word;
-typedef long long		t_type;
 
 struct	s_parser
 {
@@ -37,9 +29,10 @@ union	u_word
 
 struct	s_redir
 {
+	t_flag	type;
 	int		n;
-	int		close;
 	t_word	word;
+	int		close;
 };
 
 union	u_astdata

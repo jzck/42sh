@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dgreat.c                                      :+:      :+:    :+:   */
+/*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:15:13 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:13:58 by jhalford         ###   ########.fr       */
+/*   Created: 2016/11/14 17:27:51 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/03 13:58:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_dgreat(t_btree **ast)
+int		exec_redir(t_btree **ast)
 {
 	t_astnode	*node;
-	int			fd;
+	t_process	*p;
 
+	p = &data_singleton()->exec.process;
 	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	data_singleton()->exec.process.fdout = fd;
+	node->data.redir.type = node->type;
+	ft_lsteadd(&p->redirs, ft_lstnew(&node->data.redir,sizeof(node->data.redir)));
 	ft_exec(&(*ast)->left);
-	data_singleton()->exec.process.fdout = STDOUT;
 	btree_delone(ast, &ast_free);
 	return (0);
 }
