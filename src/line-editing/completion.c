@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 14:15:55 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 15:03:17 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:17:05 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int		ft_completion(int ret)
 {
 	size_t	tmp;
 
+
 	if ((ret != TOUCHE_TAB && ret != 10)
 	|| (ret == 10 && !(data_singleton()->comp)))
 		return (0);
-	data_singleton()->line.pos = tmp;
+	tmp = data_singleton()->line.pos;
 	if (ret == 10)
 		ft_puttermcaps("cd");
 	if (data_singleton()->comp || ret == TOUCHE_TAB)

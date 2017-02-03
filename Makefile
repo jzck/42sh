@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/03 15:01:26 by alao             ###   ########.fr        #
+#    Updated: 2017/02/03 15:18:41 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,7 +171,6 @@ line-editing/list_toolz.c\
 line-editing/move_to_line.c\
 line-editing/print_and_del.c\
 line-editing/prompt.c\
-line-editing/quotes_gest.c\
 line-editing/reader.c\
 line-editing/readline.c\
 line-editing/surch_in_history.c\
