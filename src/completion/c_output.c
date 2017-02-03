@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:52:01 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 15:33:53 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			c_updater(t_comp *c)
 	DG("Resulting RCMD [%s] with pos [%d] from [%d]", rt, new_pos, c->ircmd);
 	rt ? ft_memdel((void *)&rt) : (0);
 	c_clear(data_singleton());
-	return (0);
+	return (1);
 }
 
 /*

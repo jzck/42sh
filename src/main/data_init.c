@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 13:44:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 15:25:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		data_init(void)
 
 	data = data_singleton();
 	data->env = ft_sstrdup(environ);
+	data->comp = NULL;
 	data->opts = SHELL_OPTS_JOBC;
 
 	data->exec.process.path = NULL;

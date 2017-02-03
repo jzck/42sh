@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:32:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 14:09:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:27:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	ft_check_line(void)
 	i = 0;
 	status = 0;
 	str = data_singleton()->line.input;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		if (IS_BSLASH & status)

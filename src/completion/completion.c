@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 14:53:57 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 15:39:26 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,5 @@ int				completion(long int keypress)
 			return (c_gtfo(s->comp, keypress));
 	}
 	test(s->comp);
-	c_dispatcher(s);
-	return (0);
+	return (c_dispatcher(s));
 }
