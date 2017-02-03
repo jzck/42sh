@@ -13,23 +13,18 @@
 #include "job_control.h"
 #include "exec.h"
 
-int		process_setgroup(t_process *p)
+int		process_setgroup(t_process *p, pid_t pid)
 {
-	t_job	*job;
-	int		pid;
+	t_job	*j;
 
 	(void)p;
-	job = &data_singleton()->exec.job;
-	pid = getpid();
-	if (job->pgid == 0)
-		job->pgid = pid;
-	if (setpgid(pid, job->pgid))
-		DG("setpgid(%i, %i) failed", pid, job->pgid);
-	if (JOB_IS_FG(job->attributes))
-	{
-		signal(SIGTTOU, SIG_IGN);
-		tcsetpgrp(STDIN, job->pgid);
-		signal(SIGTTOU, SIG_DFL);
-	}
+	if (!SHELL_HAS_JOBC(data_singleton()->opts))
+		return (0);
+	j = &data_singleton()->exec.job;
+	if (!j->pgid)
+		j->pgid = pid ? pid : getpid();
+	setpgid(pid, j->pgid);
+	if (pid == 0 && JOB_IS_FG(j->attributes))
+		tcsetpgrp(STDIN, j->pgid);
 	return (0);
 }

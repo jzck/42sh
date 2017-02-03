@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 17:40:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:36:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int		reduce_bquotes(t_list **alst, char **str)
 	char	*bq_end;
 
 	tk = TK_BQUOTE;
+	DG("check 0");
 	if ((start = ft_lst_find(*alst, &tk, token_cmp_type)))
 	{
+		DG("check 1");
 		end = &start->next;
-		while (end)
+		while (end && *end)
 		{
 			token = (*end)->content;
 			if (token->type == TK_BQUOTE)
@@ -35,7 +37,10 @@ int		reduce_bquotes(t_list **alst, char **str)
 			end = &(*end)->next;
 		}
 		if (!*end)
+		{
+			DG("check 42");
 			return (-1);
+		}
 		bq_start = ((t_token*)start->content)->data;
 		bq_end = ((t_token*)(*end)->content)->data;
 		ft_lstdel(end, token_free);

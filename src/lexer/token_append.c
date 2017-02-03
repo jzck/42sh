@@ -6,19 +6,29 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:18:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/26 18:07:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:36:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		token_append(t_token *token, char c)
+#define TOKEN_INCR	10
+
+int		token_append(t_token *token, char c, short int esc)
 {
-	if ((int)ft_strlen(token->data) >= token->size)
+	int		len;
+
+	len = ft_strlen(token->data);
+	if (len >= token->size)
 	{
-		token->data = (char *)ft_realloc(token->data, token->size + 10);
-		token->size += 10;
+		token->size += 8;
+		token->data = (char *)ft_realloc(token->data, token->size + 1);
+		token->esc = (unsigned char *)ft_realloc((char *)token->esc,
+												token->size / 8 + 1);
+		token->esc[token->size / 8 - 1] = 0; 
 	}
 	ft_strcat(token->data, (char[2]){c, '\0'});
+	if (esc)
+		token->esc[len / 8] |= 1 << (7 - len % 8);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 19:31:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:42:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 typedef struct s_parser		t_parser;
+typedef struct	s_ld		t_ld;
 typedef struct s_astnode	t_astnode;
 typedef struct s_redir		t_redir;
 typedef union u_astdata		t_astdata;
@@ -45,6 +46,7 @@ struct	s_redir
 union	u_astdata
 {
 	t_redir	redir;
+	t_ld	*token;
 	char	**sstr;
 	char	*str;
 };

@@ -12,11 +12,27 @@
 
 #include "minishell.h"
 
-void	set_exitstatus(int status)
+void	set_exitstatus(int status, int override)
 {
 	char	*astatus;
+	int		exitval;
 
-	astatus = ft_itoa(status);
-	builtin_setenv("setenv", (char*[3]){"?", astatus}, data_singleton()->env);
+	if (override)
+		exitval = status;
+	else
+	{
+		if (WIFEXITED(status))
+			exitval = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			exitval = 128 + WTERMSIG(status);
+		else
+		{
+			DG("fail: process was not exited nor signaled.");
+			return ;
+		}
+	}
+	astatus = ft_itoa(exitval);
+	builtin_setenv("setenv", (char*[]){"setenv", "?", astatus, 0},
+			data_singleton()->env);
 	ft_strdel(&astatus);
 }

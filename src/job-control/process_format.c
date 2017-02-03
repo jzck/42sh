@@ -6,22 +6,16 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/12 13:16:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:10:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-void	process_format(t_list **plist, int firstp, int opts)
+static void	process_format_state(t_process *p)
 {
-	t_process	*p;
 	int			state;
 
-	p = (*plist)->content;
-	if (!firstp)
-		ft_printf("       ");
-	if (opts & JOBS_OPTS_L)
-		ft_printf("%i ", p->pid);
 	state = p->attributes & PROCESS_STATE_MASK;
 	if (state == PROCESS_RUNNING)
 		ft_putstr("running  ");
@@ -41,8 +35,41 @@ void	process_format(t_list **plist, int firstp, int opts)
 			ft_printf("exit %i  ", p->status);
 	}
 	ft_putchar('\t');
-	if (opts & JOBS_OPTS_L)
+}
+
+static void	process_format_com_long(t_list **plist)
+{
+	t_process	*p;
+
+	p = (*plist)->content;
+	if (p->attributes & PROCESS_SUBSHELL)
 	{
+		ft_putstr("( ");
+		ft_putstr(p->av[2]);
+		ft_putstr(" )");
+	}
+	else
+		ft_sstrprint(p->av, ' ');
+	if ((*plist)->next)
+		ft_putstr(" |");
+	(*plist) = (*plist)->next;
+}
+
+static void	process_format_com_short(t_list **plist, t_flag state)
+{
+	t_process	*p;
+
+	while (*plist)
+	{
+		p = (*plist)->content;
+		if (!(p->attributes & state) ||
+				(state == PROCESS_COMPLETED && p->status != 0))
+			break ;
+		if (p->attributes & PROCESS_CONTINUED)
+		{
+			p->attributes &= ~PROCESS_STATE_MASK;
+			p->attributes &= ~PROCESS_RUNNING;
+		}
 		if (p->attributes & PROCESS_SUBSHELL)
 		{
 			ft_putstr("( ");
@@ -52,34 +79,26 @@ void	process_format(t_list **plist, int firstp, int opts)
 		else
 			ft_sstrprint(p->av, ' ');
 		if ((*plist)->next)
-			ft_putstr(" |");
+			ft_putstr(" | ");
 		(*plist) = (*plist)->next;
 	}
+}
+
+void		process_format(t_list **plist, int firstp, int opts)
+{
+	t_process	*p;
+	t_flag		state;
+
+	p = (*plist)->content;
+	state = p->attributes & PROCESS_STATE_MASK;
+	if (!firstp)
+		ft_printf("       ");
+	if (opts & JOBS_OPTS_L)
+		ft_printf("%i ", p->pid);
+	process_format_state(p);
+	if (opts & JOBS_OPTS_L)
+		process_format_com_long(plist);
 	else
-	{
-		while (*plist)
-		{
-			p = (*plist)->content;
-			if (!(p->attributes & state) ||
-					(state == PROCESS_COMPLETED && p->status != 0))
-				break;
-			if (p->attributes & PROCESS_CONTINUED)
-			{
-				p->attributes &= ~PROCESS_STATE_MASK;
-				p->attributes &= ~PROCESS_RUNNING;
-			}
-			if (p->attributes & PROCESS_SUBSHELL)
-			{
-				ft_putstr("( ");
-				ft_putstr(p->av[2]);
-				ft_putstr(" )");
-			}
-			else
-				ft_sstrprint(p->av, ' ');
-			if ((*plist)->next)
-				ft_putstr(" | ");
-			(*plist) = (*plist)->next;
-		}
-	}
+		process_format_com_short(plist, state);
 	ft_putchar('\n');
 }

@@ -33,6 +33,7 @@
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
+# define IS_PIPESINGLE(a)	(a & (PROCESS_PIPESTART | PROCESS_PIPEEND))
 
 # define SCRIPT_LOOP		(1 << 0)
 
@@ -48,6 +49,7 @@ struct	s_process
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
+	int		toclose;
 	int		status;
 	t_flag	attributes;
 	t_flag	script;
@@ -91,8 +93,9 @@ int		exec_list(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
-int		process_setgroup(t_process *p);
+int		process_setgroup(t_process *p, pid_t pid);
 int		process_redirect(t_process *p);
+void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(void);
 
@@ -101,7 +104,7 @@ void	fd_reset(void);
 
 char	*ft_findexec(char *path, char *file);
 
-void	set_exitstatus(int status);
+void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
 

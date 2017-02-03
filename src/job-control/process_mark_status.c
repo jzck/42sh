@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/12 15:14:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/31 15:10:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,31 @@
 
 int		process_mark_status(pid_t pid, int status)
 {
+	t_list		*plist;
 	t_process	*p;
 
 	if (pid > 1)
 	{
-		if ((p = job_getprocess(pid)))
+		if ((plist = job_getprocess(pid)))
 		{
+			p = plist->content;
 			p->status = status;
 			if (WIFSTOPPED(status))
 			{
-				DG("marking: pid=%i, status=%i (stopped sig %i)", pid, status, WTERMSIG(status));
 				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes |= PROCESS_SUSPENDED;
 			}
 			else
 			{
-				DG("marking: pid=%i, status=%i (completed sig %i)", pid, status, WTERMSIG(status));
 				p->attributes &= ~PROCESS_STATE_MASK;
 				p->attributes |= PROCESS_COMPLETED;
 				if (WIFSIGNALED(status))
 					ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",
-							(int) pid, WTERMSIG(p->status));
+							(int)pid, WTERMSIG(status));
 			}
-			return(0);
+			return (0);
 		}
 		ft_dprintf(2, "No child process %d.\n", pid);
-		return(-1);
 	}
-	return(-1);
+	return (-1);
 }

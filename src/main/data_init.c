@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 21:50:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:34:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		data_init(void)
 	t_data	*data;
 
 	data = data_singleton();
-	data->line.input = NULL;
 	data->env = ft_sstrdup(environ);
 	data->opts = SHELL_OPTS_JOBC;
 

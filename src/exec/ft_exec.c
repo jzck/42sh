@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 20:00:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:40:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_exec(t_btree **ast)
 	while (g_execmap[i].type)
 	{
 		if (item->type & g_execmap[i].type)
+
 		{
 			/* return ((*g_execmap[i].f)(ast)); */
 			(*g_execmap[i].f)(ast);

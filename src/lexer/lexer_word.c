@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 17:50:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:37:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int		lexer_word(t_list **alst, char *str)
 		return (ft_tokenize(&(*alst)->next, str, GREAT));
 	else if (*str == '<')
 		return (ft_tokenize(&(*alst)->next, str, LESS));
-	token_append(token, *str);
+	token_append(token, *str, 0);
 	return (ft_tokenize(alst, str + 1, WORD));
 }

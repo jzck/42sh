@@ -25,11 +25,13 @@ int		exec_pipe(t_btree **ast)
 	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
 	p->fdout = fds[PIPE_WRITE];
 	start = IS_PIPESTART(p->attributes);
+	p->toclose = fds[PIPE_READ];
 
 	p->attributes &= ~PROCESS_PIPEEND;
 	ft_exec(&(*ast)->left);
 	p->attributes &= ~PROCESS_PIPESTART;
 
+	p->toclose = STDIN;
 	close(fds[PIPE_WRITE]);
 	p->fdout = STDOUT;
 	p->fdin = fds[PIPE_READ];

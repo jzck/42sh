@@ -3,212 +3,145 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 18:02:25 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/21 23:42:07 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
+/*   Updated: 2017/02/03 14:43:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_READLINE_H
 # define FT_READLINE_H
 
-# include "libft.h"
-# include "ft_curs.h"
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <term.h>
+# include <sys/types.h>
+# include <sys/xattr.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <pwd.h>
+# include <grp.h>
+# include <uuid/uuid.h>
+# include <time.h>
+# include <dirent.h>
+# include <locale.h>
 
-/*
- * Input-Key Mapping !!! LINUX Or MACOSX !!!
-*/
+# define FLECHE_HAUT 4283163
+# define FLECHE_BAS 4348699
+# define FLECHE_GAUCHE 4479771
+# define FLECHE_DROITE 4414235
+# define TOUCHE_DELETE 2117294875
+# define TOUCHE_CTRL_C 3
+# define TOUCHE_CTRL_D 4
+# define TOUCHE_CTRL_R 18
+# define TOUCHE_SUPPR 127
+# define TOUCHE_HOME 4741915
+# define TOUCHE_END 4610843
+# define TOUCHE_TAB 9
+# define TOUCHE_OPT_RIGHT 1130044187
+# define TOUCHE_OPT_LEFT 1146821403
+# define TOUCHE_OPT_UP 1096489755
+# define TOUCHE_OPT_DOWN 1113266971
+# define TOUCHE_OPT_V 10127586
+# define TOUCHE_OPT_C 42947
+# define TOUCHE_OPT_X 8948194
+# define TOUCHE_F5 892427035
+# define TOUCHE_F6 925981467
 
-//# define LINUX
-# define MACOSX
-# include "ft_input.h"
+# define HIST 1
 
-/*
- * Default offset for dynamic allocation
-*/
+# define ERROR_CNTL_R 1
 
-# define RL_OFFSET 1024
-
-/*
- * Readline possible prompt
-*/
-
-# define RL_PROMPT_DEFAULT "$> "
-# define RL_PROMPT_ESC "> "
-# define RL_PROMPT_QUOTE "quote> "
-# define RL_PROMPT_DQUOTE "double quote> "
-
-/*
- * Bitset manipulation : X is the bitset and Y is the bit to manipulate
- * IS : Is Y set in X
- * NOT : Is Y not set in X
- * SET : Set Y in X
- * UNSET : Unset Y from X
-*/
-
-# define RL_IS(X, Y) (X & Y)
-# define RL_NOT(X, Y) (!RL_IS(X, Y))
-# define RL_SET(X, Y) (X |= Y)
-# define RL_UNSET(X, Y) (X &= ~Y)
-
-/*
- * Possible bit for t_line.bitset
- *
- * FINISH : bit to terminate and flush the readline
- * STACK : bit to stack the current line and begin another one
- * INSERT : bit to toogle insert-mode/replace-mode
- * SELECT : bit to toogle extend-video-area-mode/clear-video-area-mode
- * ESC : bit to escape quoting and new line
- * QUOTE : bit to toogle quote-terminated-mode/quote-not-terminated-mode
- * DQUOTE : bit to toogle dquote-terminated-mode/dquote-not-terminated-mode
- * QUOTING : Regroup ESC, QUOTE and DQUOTE
-*/
-
-# define RL_FINISH		(1 << 0)
-# define RL_STACK		(1 << 1)
-# define RL_INSERT		(1 << 2)
-# define RL_SELECT		(1 << 3)
-# define RL_ESC			(1 << 4)
-# define RL_QUOTE		(1 << 5)
-# define RL_DQUOTE		(1 << 6)
-# define RL_QUOTING		(RL_ESC | RL_QUOTE | RL_DQUOTE)
-
-typedef struct s_data		t_data;
-typedef struct s_line		t_line;
-typedef struct s_input		t_input;
-typedef int					(*t_input_function)(t_line *, long int);
-
-/*
- *	Interactive line data:
- *
- *	bitset : global/local state and settings for readline
- *	prompt : current prompt
- *	input : destination buffer
- *	pos : cursor position in the destination buffer
- *	size : allocated size of the destination buffer
- *	used : actual used size in the destination buffer
- *	select : start position of the video (aka selected) area in the destination buffer
- *	clipboard : duplication of the copied/cuted part of the destination buffer
- *	stack : list of stacked line. (lines are stacked when a quoted (or escaped) new line appear)
-*/
-
-struct s_line
+typedef struct	s_list_history
 {
-	int						bitset;
-	char					*prompt;
+	char					*str;
+	struct s_list_history	*prev;
+	struct s_list_history	*next;
+}				t_list_history;
+
+typedef struct	s_line
+{
 	char					*input;
-	char					*clipboard;
-	int						pos;
-	int						size;
-	int						used;
-	int						select;
-	t_curs					curs;
-	t_list					*stack;
-	t_dlist					*history;
-};
+	char					*copy_tmp;
+	size_t					pos;
+	int						prompt_size;
+	int						list_size;
+	char					opt;
+	t_list_history			*list_end;
+	t_list_history			*list_cur;
+	t_list_history			*list_beg;
+}				t_line;
 
-/*
- * Input data:
- * code : input identifier
- * function : input handler
-*/
-
-struct s_input
+typedef struct	s_key
 {
-	long int				code;
-	t_input_function		function;
-};
+	int		value;
+	void	(*f)(void);
+}				t_key;
 
-# include "minishell.h"
+extern t_key	g_keys[];
 
-/*
- * Readline setup/cleanup/teardown
-*/
 
-int							rl_setup(t_line *line);
-int							rl_cleanup(t_line *line);
-void						rl_teardown(t_line *line);
-int							rl_set_termios(int input_mode);
+void			ft_putnc(char c, int n);
+int				ft_nbr_len(int nbr);
+void			ft_puttermcaps(char *str);
+void			ft_get_beggin_with_curs(char *str, size_t *pos);
+void			ft_check_end_of_line(char *str, size_t pos);
+int				ft_size_term(void);
+void			ft_add_in_history_file(char *str);
+void			ft_get_beggin(char *str, size_t *pos);
+void			ft_get_next_str(char *str, size_t *pos);
+void			ft_putall_current_str(char *str, size_t *pos);
+void			ft_current_str(char *str, size_t pos);
+int				ft_strlen_next(char *str, size_t pos);
+void			ft_push_back_history(t_list_history **head, t_list_history *new);
+void			ft_prompt(void);
+char			*ft_remove_imput(char *str, size_t pos);
+char			*ft_realloc_imput(char *str, int a, size_t pos);
+char			*ft_strdupi(char const *s);
+char			*ft_strndup(char const *s, int n);
+t_list_history	*ft_create_history_list(char *str);
+char			*ft_strdupi_w(char const *s);
+void			ft_realloc_str_history(char **str, size_t pos, int nb_his, int len);
+void			ft_realloc_str_history_2(char **str, size_t pos, char *s);
+long long		ft_pow(int nbr, int power);
+void			ft_realloc_str_history_3(char **str, size_t pos, char *s);
+void			ft_check_backslash(char **str);
+char			*ft_strget_history(char *str);
+int				ft_nb_last_line(char *str, size_t pos);
+int				ft_put(int nb);
 
-/*
- * Dynamic allocated buffer manipulation
-*/
+char			*ft_read_stdin(void);
+void			ft_end(void);
+void			ft_home(void);
+void			ft_move_right(void);
+void			ft_move_left(void);
+void			ft_up(void);
+void			ft_down(void);
+void			ft_buff_f6(void);
+void			ft_control_d(void);
+void			ft_control_c(void);
+void			ft_del(void);
+void			ft_suppr(void);
+void			ft_print(int ret);
+void			ft_surch_in_history(void);
+void			ft_printall(void);
+void			ft_history_down(void);
+void			ft_history_up(void);
+void			ft_found_next_word(void);
+void			ft_found_prev_word(void);
+void			ft_c(void);
+void			ft_x(void);
+void			ft_v(void);
+void			ft_history_parsing(void);
+void			ft_read_it(int input, size_t *pos, char **str);
+int				ft_readline(void);
 
-int							input_maj(t_line *line, char *str, int size);
-int							input_move(t_line *line, char *str, int size);
-void						input_remove(t_line *line, int size);
+void			ft_check_heredoc(char **str);
+void			ft_check_quotes(char **s);
 
-/*
- * Readline internal function
-*/
-
-void						rl_set_prompt(t_line *line);
-void						rl_put_prompt(t_line *line);
-int							rl_previous_word(t_line *line);
-int							rl_next_word(t_line *line);
-int							rl_clipboard_new(t_line *line);
-int							rl_clipboard_new_cut(t_line *line);
-void						rl_toogle_bitset(t_line *line, int set);
-int							rl_finish(t_line *line);
-int							rl_stack_line(t_line *line);
-int							rl_merge_line(t_line *line);
-
-/*
- * Realine display functions:
- * 
- * reset_display : Redraw the interactive buffer and replace the cursor
- * 				   based on t_line.input, t_line.pos and t_line.select .
- * reset_display_ante : Redraw before the cursor position.
- * reset_display_post : Redraw after the cursor position.
-*/
-
-void						rl_reset_display(t_line *line);
-void						rl_reset_display_ante(t_line *line);
-void						rl_reset_display_post(t_line *line);
-
-/*
- * input handler functions
- *
- * An handler use curs_<utilities-function> to manipulate the cursor position
- * and recalc t_line.pos based on the cursor movement.
- *
- * An handler can also modify the content of the destination buffer.
- * If it do so, it must reset all display that appear
- * after the first index of that modification.
- * If t_line.pos is that index, rl_reset_display_post can simply do the work.
-*/
-
-int	rl_default_function(t_line *line, long int input);	/* Not handled input */
-int	rl_esc_function(t_line *line, long int input);		/* Backslash */
-int	rl_quote_function(t_line *line, long int input);	/* Simple quote */
-int	rl_dquote_function(t_line *line, long int input);	/* Double quote */
-int	rl_nl_function(t_line *line, long int input);		/* New line */
-int	rl_comp_function(t_line *line, long int input);		/* Tabulation */
-int	rl_left_function(t_line *line, long int input);		/* Left move */
-int	rl_right_function(t_line *line, long int input);	/* Right move */
-int	rl_wleft_function(t_line *line, long int input);	/* Word left move */
-int	rl_wright_function(t_line *line, long int input);	/* Word right move */
-int	rl_home_function(t_line *line, long int input);		/* Home move */
-int	rl_end_function(t_line *line, long int input);		/* End move */
-int	rl_pageup_function(t_line *line, long int input);	/* Pageup move */
-int	rl_pagedown_function(t_line *line, long int input);	/* Pagedown move*/
-int	rl_select_left_function(t_line *line, long int input);	/* Left extend video area */
-int	rl_select_right_function(t_line *line, long int input);	/* Right extend video area */
-int	rl_select_wleft_function(t_line *line, long int input);	/* Word left extend video area */
-int	rl_select_wright_function(t_line *line, long int input);	/* Word right extend video area */
-int	rl_select_home_function(t_line *line, long int input);		/* Home extend video area */
-int	rl_select_end_function(t_line *line, long int input);		/* End extend video area */
-int	rl_select_pageup_function(t_line *line, long int input);	/* Pageup extend video area */
-int	rl_select_pagedown_function(t_line *line, long int input);	/* Pagedown extend video area */
-int	rl_retarr_function(t_line *line, long int input);			/* Remove before the cursor */
-int	rl_suppr_function(t_line *line, long int input);			/* Remove after the cursor */
-int	rl_clear_function(t_line *line, long int input);			/* Clear screen */
-int	rl_copy_function(t_line *line, long int input);				/* Copy selected area or current cursor line */
-int	rl_cut_function(t_line *line, long int input);				/* Cut selected area or current cursor line */
-int	rl_paste_function(t_line *line, long int input);			/* Paste copied/cuted area */
-int	rl_insert_function(t_line *line, long int input);			/* Toogle insert-mode/replacement-mode */
-
-int							ft_readline();
 
 #endif
