@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 13:05:41 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 14:54:17 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char			*ft_read_stdin(void)
 		if (data_singleton()->line.input[data_singleton()->line.pos])
 			++(data_singleton()->line.pos);
 	}
+if (data_singleton()->comp)
+	c_clear(data_singleton());
 	while (42)
 	{
 		ret = 0;

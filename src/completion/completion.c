@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 14:11:42 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 14:53:57 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,14 @@ static int		c_dispatcher(t_data *s)
 }
 
 /*
-** Autocompletion feature.
+**                          Autocompletion feature.
+**
 **  If the structure of the completion (later called comp) doesn't exist, the
 **  function will check for a few things. If the current position is zero, it
 **  will return immediately. Same thing apply if the current position of the
 **  cursor is not a space. If those condition are not met the comp struct is
 **  created using c_init().
+**
 **  If the comp struct already exist at the call of the function, it will check
 **  which key has been pressed. If the tab key has been used, that mean an other
 **  item should be selected. This is done using c_next_item(). If the keypress

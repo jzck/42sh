@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 18:28:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:34:31 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_line
 {
 	char					*input;
 	char					*copy_tmp;
+	char					*input_tmp;
 	size_t					pos;
 	int						prompt_size;
 	int						list_size;
