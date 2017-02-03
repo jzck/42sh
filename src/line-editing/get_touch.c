@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 18:27:07 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:46:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char			*ft_read_stdin(void)
 		ret = 0;
 		j = 0;
 		read(0, &ret, sizeof(int));
+		if (ft_completion(ret))
+			continue ;
 		while (g_key[j].value && g_key[j].value != ret)
 			++j;
 		if (g_key[j].value)

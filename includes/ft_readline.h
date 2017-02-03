@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 18:28:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 15:04:38 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,27 @@
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
 
+# define PROMPT_QUOTES "quote> "
+# define PROMPT_DQUOTES "dquote> "
+# define PROMPT_BQUOTES "bquote> "
+# define PROMPT_ACCOLADE "cursh> "
+# define PROMPT_BRACKET "subsh> "
+# define PROMPT_BSLASH "> "
+
+# define SIZE_PROMPT_QUOTES 7
+# define SIZE_PROMPT_DQUOTES 8
+# define SIZE_PROMPT_BQUOTES 8
+# define SIZE_PROMPT_ACCOLADE 7
+# define SIZE_PROMPT_BRACKET 7
+# define SIZE_PROMPT_BSLASH 2
+
+# define IS_QUOTES 1 << 0
+# define IS_BQUOTES 1 << 1
+# define IS_DQUOTES 1 << 2
+# define IS_ACCOLADE 1 << 3
+# define IS_BRACKET 1 << 4
+# define IS_BSLASH 1 << 5
+
 # define HIST 1
 
 # define ERROR_CNTL_R 1
@@ -82,8 +103,15 @@ typedef struct	s_key
 	void	(*f)(void);
 }				t_key;
 
-extern t_key	g_keys[];
+typedef struct	s_prompt_type
+{
+	char	key;
+	int		value;
+	char	*new_prompt;
+}				t_prompt_type;
 
+extern t_key			g_keys[];
+extern t_prompt_type	g_prompt_tab[];
 
 void			ft_putnc(char c, int n);
 int				ft_nbr_len(int nbr);
@@ -109,10 +137,10 @@ void			ft_realloc_str_history(char **str, size_t pos, int nb_his, int len);
 void			ft_realloc_str_history_2(char **str, size_t pos, char *s);
 long long		ft_pow(int nbr, int power);
 void			ft_realloc_str_history_3(char **str, size_t pos, char *s);
-void			ft_check_backslash(char **str);
 char			*ft_strget_history(char *str);
 int				ft_nb_last_line(char *str, size_t pos);
 int				ft_put(int nb);
+void			ft_check_line(void);
 
 char			*ft_read_stdin(void);
 void			ft_end(void);
@@ -139,9 +167,8 @@ void			ft_v(void);
 void			ft_history_parsing(void);
 void			ft_read_it(int input, size_t *pos, char **str);
 int				ft_readline(void);
+int				ft_completion(int ret);
 
 void			ft_check_heredoc(char **str);
-void			ft_check_quotes(char **s);
-
 
 #endif

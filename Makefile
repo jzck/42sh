@@ -143,6 +143,7 @@ lexer/token_init.c\
 lexer/token_print.c\
 line-editing/builtin_history.c\
 line-editing/check_backslash.c\
+line-editing/completion.c\
 line-editing/control_c_and_d.c\
 line-editing/copy_cut_paste.c\
 line-editing/ft_split_whitespaces.c\

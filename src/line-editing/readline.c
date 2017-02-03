@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 18:03:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 12:33:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ int		ft_readline(void)
 	data_singleton()->line.pos = 0;
 	ft_prompt();
 	data_singleton()->line.input = ft_read_stdin();
+	ft_check_line();
 	ft_putchar('\n');
-	ft_check_quotes(&data_singleton()->line.input);
 	ft_check_heredoc(&data_singleton()->line.input);
-	ft_check_backslash(&data_singleton()->line.input);
 	ft_history_parsing();
 	if (data_singleton()->line.input)
 	{
