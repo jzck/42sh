@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:40:41 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 17:33:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void			c_term_mv_back(t_comp *c)
 	int		lcmd;
 
 	i = 0;
-	DG("Terminal back up");
 	while (i != (c->c_line))
 	{
 		ft_putstr(tgetstr("up", NULL));
@@ -50,7 +49,6 @@ void			c_term_mv_down(t_comp *c)
 	int		i;
 
 	i = 0;
-	DG("Terminal down");
 	while (i < c->c_line)
 	{
 		ft_putstr(tgetstr("do", NULL));

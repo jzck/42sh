@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 16:12:00 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/03 17:32:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int			c_updater(t_comp *c, char *select)
 	char		*rt;
 	int			new_pos;
 
-	DG("\tUpdater");
-	DG("RCMD [%s] match [%s] Candidat [%s]", c->rcmd, c->match, select);
 	tmp = NULL;
 	rt = NULL;
 	new_pos = c->ircmd + (ft_strlen(select) - ft_strlen(c->match)) + 1;
@@ -39,7 +37,6 @@ int			c_updater(t_comp *c, char *select)
 	else
 		data_singleton()->line.input = ft_strdup(rt);
 	data_singleton()->line.pos = new_pos;
-	DG("Resulting RCMD [%s] with pos [%d] from [%d]", rt, new_pos, c->ircmd);
 	rt ? ft_memdel((void *)&rt) : (0);
 	c_clear(data_singleton());
 	return (1);
@@ -54,7 +51,6 @@ int			c_gtfo(t_comp *c, long int keypress)
 {
 	t_clst		*ptr;
 
-	DG("It's time to GTFO. Keypress [%d]", keypress);
 	if (keypress != 10)
 	{
 		c_clear(data_singleton());

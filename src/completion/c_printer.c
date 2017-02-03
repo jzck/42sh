@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/01/19 15:49:34 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 17:35:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 static void	c_printer_node(t_clst *lst)
 {
-	DG("File [%s] type [%d]", lst->name, (int)lst->type);
 	lst->cursor ? ft_putstr(tgetstr("us", NULL)) : (0);
 	lst->cursor ? (ft_putstr_fd("\033[31m", 2)) : (0);
 	lst->type == 4 ? ft_putstr_fd("\e[1;31m", 2) : (0);

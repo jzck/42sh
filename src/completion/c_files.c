@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:30:50 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/03 17:32:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char		*c_slicer(t_comp *c)
 	rt = ft_strsub(tmp, 0, i);
 	if (i <= (int)ft_strlen(tmp) - i + 1)
 		c->match = ft_strsub(tmp, i, ft_strlen(tmp) - i);
-	DG("From [%s] to path [%s] and match [%s]", tmp, rt, c->match);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (rt);
 }
@@ -52,13 +51,10 @@ int				c_seek_files(t_data *s, t_comp *c)
 {
 	char	*path;
 
-	DG("SF: Start");
 	(void)s;
 	path = c_slicer(c);
 	c->cpath = path_solver(c, path, NULL);
-	DG("Solved as [%s]", c->cpath);
 	path ? ft_memdel((void *)&path) : (0);
 	c_parser(c, c->cpath, c->match);
-	DG("SF: End");
 	return (0);
 }
