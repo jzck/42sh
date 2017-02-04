@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 15:36:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 16:35:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void		ft_up(void)
 	i = 0;
 	str = data_singleton()->line.input;
 	pos = &data_singleton()->line.pos;
-	if (!str)
+	if (!str || !*pos)
 		return ;
 	if (str[*pos - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
-		(*pos) -= 2;
+		if (*pos >= 2)
+			(*pos) -= 2;
 		ft_get_beggin(str, pos);
 		ft_current_str(str, *pos);
 		ft_get_next_str(str, pos);

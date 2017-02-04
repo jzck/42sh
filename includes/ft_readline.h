@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 14:50:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 18:16:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,17 @@ typedef struct	s_prompt_type
 	char	*new_prompt;
 }				t_prompt_type;
 
+typedef struct	s_brackets
+{
+	int		pos;
+	char	tabl[100];
+}				t_brackets;
+
 extern t_key			g_keys[];
 extern t_prompt_type	g_prompt_tab[];
+extern t_brackets		g_brackets;
 
+void			ft_reset_tab(char *tabl);
 void			ft_putnc(char c, int n);
 int				ft_nbr_len(int nbr);
 void			ft_puttermcaps(char *str);
