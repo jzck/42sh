@@ -6,11 +6,27 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:03:28 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/03 19:48:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:51:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static int		delete_all_newline(t_list **start, t_list **lst)
+{
+	t_token		*token;
+
+	while ((*lst))
+	{
+		token = (*lst)->content;
+		if (token->type & TK_NEWLINE)
+			ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
+		else
+			break;
+		(*lst) = (*lst)->next;
+	}
+	return (0);
+}
 
 int		parse_while(t_btree **ast, t_list **start, t_list **lst)
 {
@@ -31,9 +47,8 @@ int		parse_while(t_btree **ast, t_list **start, t_list **lst)
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_parse(&(*ast)->left, start);
 
-	(*lst) = temp;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	temp = temp->next;
+	delete_all_newline(start, &temp);
+
 	(*lst) = temp;
 	*start = temp;
 	nest = 1;
@@ -46,7 +61,6 @@ int		parse_while(t_btree **ast, t_list **start, t_list **lst)
 			nest--;
 		if (nest == 0)
 			break;
-		DG("nest : '%d'", nest);
 	}
 	temp = (*lst)->next;
 	(*lst)->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:11:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 19:54:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:33:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		ft_post_tokenize(t_list **alst, char **str)
 	int		ret;
 	t_flag	tk;
 
+//	token_print(*alst);
 	get_reserved_words(alst);
 	while ((ret = reduce_parens(alst, *str)))
 		if (ret == -1)

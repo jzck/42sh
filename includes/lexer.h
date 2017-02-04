@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 19:47:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:05:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef long long		t_type;
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 # define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)
+# define SHELL_SEP			(TK_NEWLINE | TK_AMP | TK_SEMI | TK_DO)
 
 enum	e_lexstate
 {
