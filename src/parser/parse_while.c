@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:03:28 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/05 00:14:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 00:40:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int		delete_all_newline(t_list **lst)
 	{
 		token = (*lst)->content;
 		start = *lst;
+		(*lst) = (*lst)->next;
 		if (token->type & TK_NEWLINE)
-			ft_lst_delif(&start, (*lst)->content, &ft_addrcmp, &token_free);
+			ft_lstdelone(&start, &token_free);
 		else
 			break;
-		(*lst) = (*lst)->next;
 	}
 	return (0);
 }
@@ -77,6 +77,8 @@ int		parse_while(t_btree **ast, t_list **start, t_list **lst)
 	(*lst)->next = NULL;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_parse(&(temp3)->left, start);
+
+	return (0);
 
 	delete_all_newline(&temp);
 	ft_parse(&(temp3)->right, &temp);		

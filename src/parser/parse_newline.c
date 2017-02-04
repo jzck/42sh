@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/04 20:22:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 00:40:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int		parse_newline(t_btree **ast, t_list **start, t_list **lst)
 {
-	t_list		*temp;
 	t_astnode	*node;
 	t_token		*token;
 
+	(void)start;
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = TK_NEWLINE;
-	temp = (*lst)->next;
-	(*lst)->next = NULL;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(ast, start);
-	*start = temp;
+	ft_parse(&(*ast)->right, &(*lst)->next);
+	ft_lstdelone(lst, &token_free);
+	ft_parse(&(*ast)->left, start);
 	return (0);
 }
