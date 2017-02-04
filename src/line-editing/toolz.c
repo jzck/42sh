@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 17:06:30 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 16:22:47 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 16:19:49 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char		*ft_strndup(char const *s, int n)
 	return (str);
 }
 
-char	*ft_strdupi(char const *s)
+char		*ft_strdupi(char const *s)
 {
 	int		i;
 	char	*str;

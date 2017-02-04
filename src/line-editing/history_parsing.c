@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 17:57:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:35:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	ft_history_parsing_4(char *str, int *i)
 {
 	int tmp;
+
 	if (!ft_strncmp("!!", str + *i, 2))
 	{
 		ft_realloc_str_history(&(data_singleton()->line.input), *i, 0, 2);
@@ -35,6 +36,7 @@ static int	ft_history_parsing_4(char *str, int *i)
 static int	ft_history_parsing_3(char *str, int *i)
 {
 	int tmp;
+
 	if (ft_history_parsing_4(str, i))
 		return (1);
 	else if (str[*i + 1] == '-' && ft_isdigit(str[*i + 2]))

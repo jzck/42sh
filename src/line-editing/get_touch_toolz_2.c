@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 17:54:27 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:34:10 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void			ft_end(void)
 	char	*str;
 	size_t	*pos;
 
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
+	str = STR;
+	pos = &POS;
 	if (!str)
 		return ;
 	if (*pos)
@@ -45,8 +45,8 @@ void			ft_home(void)
 	char	*str;
 	size_t	*pos;
 
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
+	str = STR;
+	pos = &POS;
 	if (!str)
 		return ;
 	if (*pos)
@@ -69,45 +69,40 @@ void			ft_home(void)
 void			ft_move_right(void)
 {
 	size_t	tmp;
-	char	*str;
 	size_t	*pos;
 
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
-	if (ft_strlen(str) <= *pos)
+	pos = &POS;
+	if (ft_strlen(STR) <= *pos)
 		return ;
-	if (str[*pos] == '\n')
+	if (STR[*pos] == '\n')
 	{
 		if (*pos)
 		{
 			tmp = *pos - 1;
-			ft_get_beggin_with_curs(str, &tmp);
+			ft_get_beggin_with_curs(STR, &tmp);
 		}
 		ft_puttermcaps("cd");
 		++(*pos);
-		ft_current_str(str, *pos);
-		ft_get_next_str(str, pos);
-		if (!str[*pos])
-			--(*pos);
-		ft_get_beggin_with_curs(str, pos);
+		ft_current_str(STR, *pos);
+		ft_get_next_str(STR, pos);
+		(*pos) = (!STR[*pos]) ? *pos - 1 : *pos;
+		ft_get_beggin_with_curs(STR, pos);
 	}
 	else
 	{
-		ft_putchar(str[*pos]);
+		ft_putchar(STR[*pos]);
 		++(*pos);
 	}
 }
 
 void			ft_move_left(void)
 {
-	char	*str;
 	size_t	*pos;
 
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
+	pos = &POS;
 	if (!*pos)
 		return ;
-	if (str[*pos - 1] == '\n')
+	if (STR[*pos - 1] == '\n')
 	{
 		if (*pos - 1 == 0)
 		{
@@ -117,9 +112,9 @@ void			ft_move_left(void)
 		}
 		ft_puttermcaps("cd");
 		(*pos) -= 2;
-		ft_get_beggin(str, pos);
-		ft_current_str(str, *pos);
-		ft_get_next_str(str, pos);
+		ft_get_beggin(STR, pos);
+		ft_current_str(STR, *pos);
+		ft_get_next_str(STR, pos);
 		++(*pos);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:32:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 15:27:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 14:51:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 t_prompt_type	g_prompt_tab[] =
 {
-	{IS_QUOTES		,SIZE_PROMPT_QUOTES		,PROMPT_QUOTES},
-	{IS_BQUOTES		,SIZE_PROMPT_BQUOTES	,PROMPT_BQUOTES},
-	{IS_DQUOTES		,SIZE_PROMPT_DQUOTES	,PROMPT_DQUOTES},
-	{IS_ACCOLADE	,SIZE_PROMPT_ACCOLADE	,PROMPT_ACCOLADE},
-	{IS_BRACKET		,SIZE_PROMPT_BRACKET	,PROMPT_BRACKET},
-	{IS_BSLASH		,SIZE_PROMPT_BSLASH		,PROMPT_BSLASH},
-	{0				,0						,0},
+	{IS_QUOTES, SIZE_PROMPT_QUOTES, PROMPT_QUOTES},
+	{IS_BQUOTES, SIZE_PROMPT_BQUOTES, PROMPT_BQUOTES},
+	{IS_DQUOTES, SIZE_PROMPT_DQUOTES, PROMPT_DQUOTES},
+	{IS_ACCOLADE, SIZE_PROMPT_ACCOLADE, PROMPT_ACCOLADE},
+	{IS_BRACKET, SIZE_PROMPT_BRACKET, PROMPT_BRACKET},
+	{IS_BSLASH, SIZE_PROMPT_BSLASH, PROMPT_BSLASH},
+	{0, 0, 0},
 };
 
 void	ft_read_more(short c)
@@ -50,9 +50,10 @@ void	ft_read_more(short c)
 void	ft_check_this_char(char c, short *status)
 {
 	int		i;
-	char	stats[] = {'\'', '`', '\"', '{', '(', '\\', '\0'};
+	char	*stats;
 
 	i = 0;
+	stats = "\'`\"{(\\";
 	while (stats[i] && stats[i] != c)
 		++i;
 	if (!stats[i])

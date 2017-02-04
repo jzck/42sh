@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 16:10:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 14:55:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*ft_strdupi_space(char const *s)
 	return (str);
 }
 
-void	ft_v(void)
+void		ft_v(void)
 {
 	size_t	tmp_pos;
 	int		i;
@@ -45,17 +45,14 @@ void	ft_v(void)
 	size_t	*pos;
 
 	tmp = data_singleton()->line.copy_tmp;
-	str = &data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
-	i = 0;
+	str = &STR;
+	pos = &POS;
+	i = -1;
 	tmp_pos = *pos;
 	if (!*str || !tmp)
 		return ;
-	while (tmp[i])
-	{
+	while (tmp[++i])
 		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
-		++i;
-	}
 	if (*pos)
 	{
 		--(*pos);
@@ -67,7 +64,7 @@ void	ft_v(void)
 	(*pos) = tmp_pos;
 }
 
-void	ft_x(void)
+void		ft_x(void)
 {
 	int		i;
 	char	**tmp;
@@ -75,8 +72,8 @@ void	ft_x(void)
 	size_t	*pos;
 
 	tmp = &data_singleton()->line.copy_tmp;
-	str = &data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
+	str = &STR;
+	pos = &POS;
 	if (!*str)
 		return ;
 	if (*tmp)
@@ -98,8 +95,8 @@ void		ft_c(void)
 	size_t	*pos;
 
 	tmp = data_singleton()->line.copy_tmp;
-	str = &data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
+	str = &STR;
+	pos = &POS;
 	if (tmp)
 		ft_strdel(&tmp);
 	tmp = ft_strdupi_space((*str) + (*pos));

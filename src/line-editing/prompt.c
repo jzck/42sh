@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 15:52:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/04 14:56:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void		ft_prompt(void)
 	int ret;
 
 	do_job_notification();
-	// yo gwojda enlève pas ca, je fait des notif de
-	// job control juste avant que tu mette ton prompt.
-
 	ft_get_date();
 	ft_putstr("\033[22;36m");
 	ret = ft_currend_dir();

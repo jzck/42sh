@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 16:36:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 14:50:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@
 # define IS_BRACKET (1 << 4)
 # define IS_BSLASH (1 << 5)
 
+# define STR data_singleton()->line.input
+# define POS data_singleton()->line.pos
+
 # define HIST 1
 
 # define ERROR_CNTL_R 1
@@ -88,7 +91,6 @@ typedef struct	s_line
 {
 	char					*input;
 	char					*copy_tmp;
-	char					*input_tmp;
 	size_t					pos;
 	int						prompt_size;
 	int						list_size;

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 15:07:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:36:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	ft_up_2(size_t *pos, char *str)
 	(*pos) -= i;
 }
 
-void	ft_up(void)
+void		ft_up(void)
 {
-	int i;
+	int		i;
 	char	*str;
 	size_t	*pos;
 
@@ -79,10 +79,10 @@ static void	ft_down_2(size_t *pos, char *str)
 	ft_get_beggin_with_curs(str, pos);
 }
 
-void	ft_down(void)
+void		ft_down(void)
 {
-	int i;
-	int len;
+	int		i;
+	int		len;
 	char	*str;
 	size_t	*pos;
 

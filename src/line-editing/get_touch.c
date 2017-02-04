@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 18:00:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:39:49 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_key	g_key[] =
 	{TOUCHE_DELETE		, &ft_del				},
 	{TOUCHE_CTRL_C		, &ft_control_c			},
 	{TOUCHE_CTRL_D		, &ft_control_d			},
-	{TOUCHE_CTRL_R		, &ft_history_parsing	},
+	{TOUCHE_CTRL_R		, &ft_surch_in_history	},
 	{TOUCHE_SUPPR		, &ft_suppr				},
 	{TOUCHE_HOME		, &ft_home				},
 	{TOUCHE_END			, &ft_end				},
@@ -37,18 +37,23 @@ t_key	g_key[] =
 	{0					, 0						},
 };
 
-char			*ft_read_stdin(void)
+static void	ft_is_str(void)
+{
+	if (STR)
+	{
+		ft_current_str(STR, POS);
+		ft_get_next_str(STR, &POS);
+		if (STR[POS])
+			++(POS);
+	}
+}
+
+char		*ft_read_stdin(void)
 {
 	int	ret;
 	int	j;
 
-	if (data_singleton()->line.input)
-	{
-		ft_current_str(data_singleton()->line.input, data_singleton()->line.pos);
-		ft_get_next_str(data_singleton()->line.input, &data_singleton()->line.pos);
-		if (data_singleton()->line.input[data_singleton()->line.pos])
-			++(data_singleton()->line.pos);
-	}
+	ft_is_str();
 	if (data_singleton()->comp)
 		c_clear(data_singleton());
 	while (42)
@@ -65,9 +70,8 @@ char			*ft_read_stdin(void)
 		else if (ft_isprint(ret))
 			ft_print(ret);
 		else if (ret == 10)
-			return (data_singleton()->line.input);
+			return (STR);
 		else if (ft_isascii(ret) == 0)
-			ft_read_it(ret, &data_singleton()->line.pos,
-			&data_singleton()->line.input);
+			ft_read_it(ret, &POS, &STR);
 	}
 }

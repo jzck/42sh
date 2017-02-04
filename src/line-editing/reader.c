@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:52:57 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 18:24:47 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 15:37:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void		ft_read_it(int input, size_t *pos, char **str)
 	j = 0;
 	pos_tmp = *pos;
 	if (input == TOUCHE_DELETE || input < 0 || input == 892427035 ||
-	input == 126 ||	input == 993090331 || input == 925981467 ||
-	input == 21298 || input == 892427035 || input == 8270395 ||
-	input == 942758683 || input == 993090331 || input == 18489 || input == 17977)
+	input == 126 || input == 993090331 || input == 925981467 ||
+	input == 21298 || input == 892427035 || input == 8270395 || input ==
+	942758683 || input == 993090331 || input == 18489 || input == 17977)
 		return ;
 	ft_read_it_2(input, t);
 	ft_read_it_3(str, t, pos, &j);
 	*pos = pos_tmp;
 	ft_current_str((*str), *pos);
 	ft_get_next_str((*str), pos);
-	ft_putnc('\b', *pos - (pos_tmp + j) + 1);
+	ft_putnc('\b', *pos - (pos_tmp + j));
 	*pos = (pos_tmp + j);
 }

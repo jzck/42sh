@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 18:36:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 16:19:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_line(void)
+void			ft_init_line(void)
 {
 	data_singleton()->line.input = NULL;
 	data_singleton()->line.copy_tmp = NULL;
@@ -24,7 +24,7 @@ void	ft_init_line(void)
 	data_singleton()->line.opt = 0;
 }
 
-void	ft_init_history(void)
+void			ft_init_history(void)
 {
 	int		fd;
 	char	*str;
@@ -71,27 +71,27 @@ struct termios	*ft_stats_term_termcaps(void)
 	return (term);
 }
 
-int		ft_readline(void)
+int				ft_readline(void)
 {
 	ft_save_stats_term();
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
 		return (-1);
-	if (data_singleton()->line.input)
-		ft_strdel(&data_singleton()->line.input);
+	if (STR)
+		ft_strdel(&STR);
 	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
-	data_singleton()->line.pos = 0;
+	POS = 0;
 	ft_prompt();
-	data_singleton()->line.input = ft_read_stdin();
+	STR = ft_read_stdin();
 	ft_check_line();
 	ft_putchar('\n');
-	ft_check_heredoc(&data_singleton()->line.input);
+	ft_check_heredoc(&STR);
 	ft_history_parsing();
-	if (data_singleton()->line.input && (!data_singleton()->line.list_beg ||
-	ft_strcmp(data_singleton()->line.list_beg->prev->str, data_singleton()->line.input)))
+	if (STR && (!data_singleton()->line.list_beg ||
+	ft_strcmp(data_singleton()->line.list_beg->prev->str, STR)))
 	{
 		ft_push_back_history(&data_singleton()->line.list_beg,
-		ft_create_history_list(data_singleton()->line.input));
-		ft_add_in_history_file(data_singleton()->line.input);
+		ft_create_history_list(STR));
+		ft_add_in_history_file(STR);
 	}
 	if (tcsetattr(0, TCSANOW, ft_save_stats_term()) == -1)
 		return (-1);

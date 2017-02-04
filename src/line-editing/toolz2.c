@@ -6,17 +6,18 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 16:04:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/04 16:20:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_add_in_history_file(char *str)
+void		ft_add_in_history_file(char *str)
 {
 	int		fd;
 
-	fd = open(".42sh_history", O_CREAT | O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
+	fd = open(".42sh_history",
+	O_CREAT | O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
 	if (fd == -1)
 		return ;
 	write(fd, str, ft_strlen(str));
@@ -24,7 +25,7 @@ void	ft_add_in_history_file(char *str)
 	close(fd);
 }
 
-int		ft_nbr_len(int nbr)
+int			ft_nbr_len(int nbr)
 {
 	if (nbr % 10 != nbr)
 		return (ft_nbr_len(nbr / 10) + 1);
@@ -32,7 +33,7 @@ int		ft_nbr_len(int nbr)
 		return (1);
 }
 
-void	ft_puttermcaps(char *str)
+void		ft_puttermcaps(char *str)
 {
 	char	*res;
 	char	*env;
@@ -43,7 +44,7 @@ void	ft_puttermcaps(char *str)
 	tputs(res, 0, ft_put);
 }
 
-int		ft_size_term(void)
+int			ft_size_term(void)
 {
 	struct winsize w;
 
