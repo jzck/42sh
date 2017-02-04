@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_newline.c                                    :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/26 19:26:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/04 20:22:57 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/04 16:52:51 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/04 20:43:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst)
+int		parse(t_btree **ast, t_list **token)
 {
-	t_list		*temp;
-	t_astnode	*node;
-	t_token		*token;
+	t_list	*start;
 
-	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_NEWLINE;
-	temp = (*lst)->next;
-	(*lst)->next = NULL;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(ast, start);
-	*start = temp;
+	start = *token;
+	if (get_instruction(token))
+		return (1);
+	if (ft_parse(ast, &start))
+		return (1);
 	return (0);
 }

@@ -169,8 +169,10 @@ main/shell_get_opts.c\
 main/shell_init.c\
 main/shell_script.c\
 main/sig_handler.c\
+parser/parse.c\
 parser/ft_parse.c\
 parser/get_instruction.c \
+parser/get_instruction2.c \
 parser/parse_dgreat.c\
 parser/parse_dless.c\
 parser/parse_do.c\

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 19:37:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 00:14:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_parser	g_parser[] =
 {
-	{TK_NEWLINE | TK_WHILE, &get_instruction},
+	{TK_WHILE, &parse_while},
 	{TK_SEMI, &parse_separator},
 	{TK_AND_IF | TK_OR_IF, &parse_separator},
 	{TK_AMP, &parse_separator},
@@ -26,7 +26,6 @@ t_parser	g_parser[] =
 	{TK_LESSAND, &parse_lessand},
 	{TK_GREATAND, &parse_greatand},
 	{TK_SUBSHELL, &parse_subshell},
-	{TK_WHILE, &parse_while},
 	{TK_WORD, &parse_word},
 	{0, 0},
 };

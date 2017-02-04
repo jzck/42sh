@@ -1,9 +1,7 @@
-while [ 1 ]
-do while pwd 
-	do 
-		while ls
-		do
-			echo hello
-		done
-	done
-done
+while ls | cat ; pwd
+do
+	while ls | cat
+	do
+		echo monde ; cat 
+	done 
+done > file1 

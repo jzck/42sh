@@ -1,3 +1,1 @@
-ls ; echo ; pwd | cat > file2 
-ls | cat
-pwd ; echo hello
+ls ; pwd > file1 ; ls | cat
