@@ -1,8 +1,12 @@
-while ls | cat ;
+while
+
+	ls | cat
 do
-	echo hello
-	while ls 
+	while [ 1 ]
 	do
-		echo ; cat
-	done
-done > file1 
+		while [ 1 ]
+		do
+			echo
+		done	
+	done	
+done > file1 > file2
