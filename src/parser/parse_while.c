@@ -82,45 +82,21 @@ static int		parse_head(t_btree **ast,
 	node->type = token->type;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	*lst = (*lst)->next;
+	delete_newline(start, lst);
 	return (0);
 }
 
-/*static int		parse_condition(t_btree **ast, t_list **start, t_list **lst)
-{
-	t_token		*token;
-	int			nest;
-
-	delete_newline(start, lst);	
-	nest = 0;
-	while ((*lst))
-	{
-		token = (*lst)->content;
-		if (token->type & TK_DO)
-			nest++;
-		else if (token->type & TK_DONE)
-			nest--;
-		if (nest == 1 && (token->type & TK_DO))
-			break;
-		*lst = (*lst)->next;
-	}			
-	(*lst)->next = NULL;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	DG("new token");
-	token_print(*start);
-	ft_parse(&(*ast)->left, start);
-	return (0);
-}*/
-
-static int		parse_execution(t_btree **ast, t_list **start, t_list **lst)
+static int		parse_loop(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_token		*token;
 	t_list		*temp;
+	t_list		*new_start;
 	int			nest;
 
-	(void)ast;
 	nest = 0;
 	while ((*lst)->next)
 		*lst = (*lst)->next;
+	new_start = *start;
 	ft_lst_reverse(start);
 	temp = *lst;
 	while ((*lst))
@@ -134,12 +110,13 @@ static int		parse_execution(t_btree **ast, t_list **start, t_list **lst)
 			break;
 		*lst = (*lst)->next;
 	}
-
 	ft_lst_reverse(&temp);
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);	
-	*lst = (*lst)->next;
-	delete_newline(start, lst);	
-	ft_parse(&(*ast)->right, lst);
+	temp = (*lst)->next;
+	(*lst)->next = NULL;
+	ft_lst_delif(&new_start, (*lst)->content, &ft_addrcmp, &token_free);	
+	delete_newline(start, &temp);	
+	ft_parse(&(*ast)->right, &temp);
+	ft_parse(&(*ast)->left, &new_start);
 	return (0);
 }
 
@@ -149,14 +126,6 @@ int			parse_while(t_btree **ast, t_list **start, t_list **lst)
 
 	parse_after_loop(ast, start, lst);
 	parse_head(ast, &new_ast, start, lst);
-	parse_execution(&new_ast, start, lst);
+	parse_loop(&new_ast, start, lst);
 	return (0);
-
-/*	
-	temp = temp->next;
-	ft_parse(&(temp3)->right, &temp);		
-
-	return (0);
-	delete_all_newline(&temp);
-*/
 }

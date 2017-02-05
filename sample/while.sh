@@ -1,12 +1,11 @@
-while
-
-	ls | cat
+while ls 
 do
-	while [ 1 ]
+	while ls
 	do
-		while [ 1 ]
-		do
-			echo
-		done	
-	done	
-done > file1 > file2
+		pwd	
+	done 
+	while ls
+	do
+		cd
+	done 
+done

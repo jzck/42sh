@@ -182,7 +182,6 @@ parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
 parser/parse_list.c\
-parser/parse_newline.c\
 parser/parse_separator.c\
 parser/parse_subshell.c\
 parser/parse_while.c\
