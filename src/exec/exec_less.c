@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 20:56:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 22:12:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		exec_less(t_btree **ast)
 {
 	t_astnode	*node;
-	t_process	*p;
 	int			fd;
 
 	node = (*ast)->item;
@@ -27,8 +26,6 @@ int		exec_less(t_btree **ast)
 	data_singleton()->exec.process.fdin = STDIN;
 	/* data->exec.process.command = NULL; */
 
-	p = &data_singleton()->exec.process;
-	if (!(p->script & SCRIPT_LOOP))
-		btree_delone(ast, &ast_free);
+//	btree_delone(ast, &ast_free);
 	return (0);
 }

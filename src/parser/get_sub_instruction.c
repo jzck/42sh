@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.c                                       :+:      :+:    :+:   */
+/*   get_instruction2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:34:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/03 16:51:39 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/05 22:05:26 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/05 23:15:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_list(t_btree **ast, t_list **start, t_list **lst)
+int			get_sub_instruction(t_btree **ast, t_list **start, t_list **lst)
 {
-	t_astnode	*node;
 	t_token		*token;
 
 	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_LIST;
-	node->data.str = ft_strdup(token->data);
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
+	if (token->type == TK_NEWLINE)
+		return (parse_separator(ast, start, lst));
+	else if (token->type == TK_WHILE)
+		return (parse_while(ast, start, lst));
+	else if (token->type == TK_IF)
+		return (parse_if(ast, start, lst));
+	else if (token->type == TK_SEMI)
+		return (parse_separator(ast, start, lst));
 	return (0);
 }

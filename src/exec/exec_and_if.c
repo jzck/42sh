@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 20:52:28 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 20:53:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 22:10:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		exec_and_if(t_btree **ast)
 {
 	t_data		*data;
-	t_process	*p;
 
 	data = data_singleton();
 	if (data->exec.aol_status == NULL
@@ -34,8 +33,6 @@ int		exec_and_if(t_btree **ast)
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;
 
-	p = &data_singleton()->exec.process;
-	if (!(p->script & SCRIPT_LOOP))
-		btree_delone(ast, &ast_free);
+//	btree_delone(ast, &ast_free);
 	return (0);
 }

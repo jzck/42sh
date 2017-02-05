@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:31:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 00:04:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_execmap	g_execmap[] =
 {
-	{TK_NEWLINE, &exec_default},
+	{TK_NEWLINE, &exec_semi},
 	{TK_AND_IF, &exec_and_if},
 	{TK_OR_IF, &exec_or_if},
 	{TK_SEMI, &exec_semi},
@@ -24,7 +24,7 @@ t_execmap	g_execmap[] =
 	{TK_GREAT, &exec_great},
 	{TK_DGREAT, &exec_dgreat},
 	{TK_WHILE, &exec_while},
-	{TK_LIST, &exec_list},
+	{TK_IF, &exec_if},
 	{TK_COMMAND | TK_SUBSHELL, &exec_command},
 	{0, 0},
 };

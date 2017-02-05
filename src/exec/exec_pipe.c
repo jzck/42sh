@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 21:01:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 22:14:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int		exec_pipe(t_btree **ast)
 
 	close(fds[PIPE_READ]);
 	p->fdin = STDIN;
-	
-	if (!(p->script & SCRIPT_LOOP))
-		btree_delone(ast, &ast_free);
+
+	btree_delone(ast, &ast_free);
 	return (0);
 }

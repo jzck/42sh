@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/04 17:15:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 23:15:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ int		get_reserved_words(t_list **alst)
 					token->type = TK_DONE;
 				else if	(ft_strncmp(token->data, "do" , 2) == 0)
 					token->type = TK_DO;
+				else if (ft_strncmp(token->data, "if", 2) == 0)
+					token->type = TK_IF;
+				else if (ft_strncmp(token->data, "then", 4) == 0)
+					token->type = TK_THEN;
+				else if(ft_strncmp(token->data, "fi", 4) == 0)
+					token->type = TK_FI;
 			}
 		}
 		previous_token = token;

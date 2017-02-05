@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 21:09:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 22:11:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		exec_great(t_btree **ast)
 {
 	t_astnode	*node;
-	t_process	*p;
 	int			fd;
 
 	node = (*ast)->item;
@@ -24,8 +23,6 @@ int		exec_great(t_btree **ast)
 	ft_exec(&(*ast)->left);
 	data_singleton()->exec.process.fdout = STDOUT;
 	
-	p = &data_singleton()->exec.process;
-	if (!(p->script & SCRIPT_LOOP))
-		btree_delone(ast, &ast_free);
+//	btree_delone(ast, &ast_free);
 	return (0);
 }

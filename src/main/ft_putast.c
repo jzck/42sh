@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/05 00:32:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/05 23:50:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ char	*ft_putast(void *nodein)
 		return (" COM ");
 	else if (node->type == TK_WHILE)
 		return (" WHILE ");
-	else if (node->type == TK_DO)
-		return ("DO");
-	else if (node->type == TK_DONE)
-		return ("DONE");
+	else if (node->type == TK_IF)
+		return ("IF");
 	else if (node->type == TK_NEWLINE)
 		return ("NEW");
-	else if (node->type == TK_LIST)
-		return (" LIST ");
 	else if (node->type == TK_GREAT)
 		return ("  >  ");
 	else if (node->type == TK_LESS)

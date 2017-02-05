@@ -48,7 +48,6 @@ exec/exec_default.c\
 exec/exec_dgreat.c\
 exec/exec_great.c\
 exec/exec_less.c\
-exec/exec_list.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_semi.c\
@@ -171,8 +170,8 @@ main/shell_script.c\
 main/sig_handler.c\
 parser/parse.c\
 parser/ft_parse.c\
-parser/get_instruction.c \
-parser/get_instruction2.c \
+parser/get_instruction.c\
+parser/get_sub_instruction.c\
 parser/parse_dgreat.c\
 parser/parse_dless.c\
 parser/parse_do.c\
@@ -181,10 +180,10 @@ parser/parse_great.c\
 parser/parse_greatand.c\
 parser/parse_less.c\
 parser/parse_lessand.c\
-parser/parse_list.c\
 parser/parse_separator.c\
 parser/parse_subshell.c\
 parser/parse_while.c\
+parser/parse_if.c\
 parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
