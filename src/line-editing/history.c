@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:22:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 15:20:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:00:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 static void	ft_clear_before_history(char **str)
 {
-	size_t			*pos;
-
-	pos = &POS;
 	if (*str)
 	{
-		if (*pos)
+		if (POS)
 		{
-			--(*pos);
-			ft_get_beggin_with_curs(*str, pos);
+			--POS;
+			ft_get_beggin_with_curs(*str, &POS);
 		}
 		ft_puttermcaps("cd");
-		*pos = 0;
+		POS = 0;
 		ft_strdel(str);
 	}
 }
@@ -33,53 +30,45 @@ static void	ft_clear_before_history(char **str)
 void		ft_history_down(void)
 {
 	t_list_history	*head;
-	char			**str;
-	size_t			*pos;
 
-	str = &STR;
-	pos = &POS;
 	head = data_singleton()->line.list_cur;
 	if (!head)
 		return ;
-	ft_clear_before_history(str);
+	ft_clear_before_history(&STR);
 	if (head->next)
 		head = head->next;
 	if (!head->str)
-		*str = NULL;
+		STR = NULL;
 	else
-		*str = ft_strdup(head->str);
-	if (*str)
-		ft_current_str(*str, *pos);
-	if (*str)
-		*pos = ft_strlen_next(*str, *pos);
+		STR = ft_strdup(head->str);
+	if (STR)
+		ft_current_str(STR, POS);
+	if (STR)
+		POS = ft_strlen_next(STR, POS);
 	else
-		*pos = 0;
+		POS = 0;
 	data_singleton()->line.list_cur = head;
 }
 
 void		ft_history_up(void)
 {
 	t_list_history	*head;
-	char			**str;
-	size_t			*pos;
 
-	str = &STR;
-	pos = &POS;
 	head = data_singleton()->line.list_cur;
 	if (!head)
 		return ;
-	ft_clear_before_history(str);
+	ft_clear_before_history(&STR);
 	if (head->prev)
 		head = head->prev;
 	if (!head->str)
-		*str = NULL;
+		STR = NULL;
 	else
-		*str = ft_strdup(head->str);
-	if (*str)
-		ft_current_str(*str, *pos);
-	if (*str)
-		*pos = ft_strlen_next(*str, *pos);
+		STR = ft_strdup(head->str);
+	if (STR)
+		ft_current_str(STR, POS);
+	if (STR)
+		POS = ft_strlen_next(STR, POS);
 	else
-		*pos = 0;
+		POS = 0;
 	data_singleton()->line.list_cur = head;
 }

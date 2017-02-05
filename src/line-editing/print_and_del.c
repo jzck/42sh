@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 15:10:50 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:08:58 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,17 @@ int		ft_found_next_char(char *str, size_t i)
 void	ft_print(int ret)
 {
 	int		j;
-	char	**str;
-	size_t	*i;
 
 	j = 0;
-	str = &data_singleton()->line.input;
-	i = &data_singleton()->line.pos;
-	*str = ft_realloc_imput(*str, ret, *i);
-	while (*((*str) + *i + j) && *((*str) + *i + j) != '\n')
+	STR = ft_realloc_imput(STR, ret, POS);
+	while (*(STR + POS + j) && *(STR + POS + j) != '\n')
 	{
-		ft_putchar(*((*str) + *i + j));
+		ft_putchar(*(STR + POS + j));
 		++j;
 	}
-	ft_check_end_of_line(*str, *i + j);
+	ft_check_end_of_line(STR, POS + j);
 	ft_putnc('\b', j - 1);
-	++(*i);
+	++POS;
 }
 
 void	ft_suppr_2(char **str, size_t *i, size_t tmp)
@@ -60,53 +56,45 @@ void	ft_suppr(void)
 {
 	size_t	tmp;
 	char	boolean;
-	char	**str;
-	size_t	*i;
 
-	str = &data_singleton()->line.input;
-	i = &data_singleton()->line.pos;
 	boolean = 0;
-	if (*i <= 0)
+	if (POS <= 0)
 		return ;
-	if ((*str)[*i - 1] != '\n')
+	if (STR[POS - 1] != '\n')
 		boolean = 1;
-	--(*i);
-	tmp = *i;
+	--POS;
+	tmp = POS;
 	if (boolean)
 	{
-		ft_get_beggin_with_curs(*str, i);
-		*str = ft_remove_imput((*str), tmp);
+		ft_get_beggin_with_curs(STR, &POS);
+		STR = ft_remove_imput(STR, tmp);
 	}
 	else
 	{
-		*str = ft_remove_imput((*str), tmp);
-		ft_get_beggin(*str, i);
+		STR = ft_remove_imput(STR, tmp);
+		ft_get_beggin(STR, &POS);
 	}
-	ft_suppr_2(str, i, tmp);
+	ft_suppr_2(&STR, &POS, tmp);
 }
 
 void	ft_del(void)
 {
 	size_t	tmp;
-	char	**str;
-	size_t	*i;
 
-	str = &data_singleton()->line.input;
-	i = &data_singleton()->line.pos;
-	tmp = *i;
-	*str = ft_remove_imput((*str), tmp);
-	if (!((*str) && (*i) < ft_strlen((*str))))
+	tmp = POS;
+	STR = ft_remove_imput(STR, tmp);
+	if (!(STR && POS < ft_strlen(STR + 1)))
 		return ;
-	if (*i)
+	if (POS)
 	{
-		--(*i);
-		ft_get_beggin_with_curs(*str, i);
+		--POS;
+		ft_get_beggin_with_curs(STR, &POS);
 	}
 	ft_puttermcaps("cd");
-	ft_current_str(*str, *i);
-	ft_get_next_str(*str, i);
-	if ((*str)[*i])
-		++(*i);
-	ft_putnc('\b', *i - tmp);
-	(*i) = tmp;
+	ft_current_str(STR, POS);
+	ft_get_next_str(STR, &POS);
+	if (STR[POS] && STR[POS] != '\n')
+		++POS;
+	ft_putnc('\b', POS - tmp);
+	POS = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 16:35:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:01:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,22 @@ static void	ft_up_2(size_t *pos, char *str)
 void		ft_up(void)
 {
 	int		i;
-	char	*str;
-	size_t	*pos;
 
 	i = 0;
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
-	if (!str || !*pos)
+	if (!STR || !POS)
 		return ;
-	if (str[*pos - 1] == '\n')
+	if (STR[POS - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
-		if (*pos >= 2)
-			(*pos) -= 2;
-		ft_get_beggin(str, pos);
-		ft_current_str(str, *pos);
-		ft_get_next_str(str, pos);
-		++(*pos);
+		if (POS >= 2)
+			POS -= 2;
+		ft_get_beggin(STR, &POS);
+		ft_current_str(STR, POS);
+		ft_get_next_str(STR, &POS);
+		++POS;
 	}
 	else
-		ft_up_2(pos, str);
+		ft_up_2(&POS, STR);
 }
 
 static void	ft_down_2(size_t *pos, char *str)
@@ -84,24 +80,20 @@ void		ft_down(void)
 {
 	int		i;
 	int		len;
-	char	*str;
-	size_t	*pos;
 
 	i = 0;
-	str = data_singleton()->line.input;
-	pos = &data_singleton()->line.pos;
-	if (!str)
+	if (!STR)
 		return ;
-	if (str[*pos] == '\n')
-		ft_down_2(pos, str);
+	if (STR[POS] == '\n')
+		ft_down_2(&POS, STR);
 	else
 	{
 		len = ft_size_term();
-		while (str[i + *pos] && str[i + *pos] != '\n' && --len + 1)
+		while (STR[i + POS] && STR[i + POS] != '\n' && --len + 1)
 		{
-			ft_putchar(str[i + *pos]);
+			ft_putchar(STR[i + POS]);
 			++i;
 		}
-		*pos += i;
+		POS += i;
 	}
 }

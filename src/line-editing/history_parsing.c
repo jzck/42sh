@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 15:35:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 16:58:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,22 @@ static void	ft_history_parsing_2(void)
 
 void		ft_history_parsing(void)
 {
-	char	*str;
 	int		i;
 	char	boolean;
 
 	i = 0;
 	boolean = 0;
-	str = data_singleton()->line.input;
-	if (!str)
+	if (!STR)
 		return ;
-	while (str && str[i])
+	while (STR && STR[i])
 	{
-		if (str[i] == '!')
+		if (STR[i] == '!')
 		{
 			boolean = 1;
-			if (!ft_history_parsing_3(str, &i))
+			if (!ft_history_parsing_3(STR, &i))
 				boolean = 0;
 		}
-		str = data_singleton()->line.input;
+		STR = data_singleton()->line.input;
 		++i;
 	}
 	if (boolean)

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 16:27:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:06:07 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,25 @@ void		ft_change_affichage(void)
 void		ft_printall(void)
 {
 	size_t	pos_tmp;
-	char	*str;
-	size_t	*pos;
 	int		ret;
 
-	str = STR;
-	pos = &POS;
 	ret = 0;
-	if (read(0, &ret, sizeof(int)) == -1 || ret != 126 || !str)
+	if (read(0, &ret, sizeof(int)) == -1 || ret != 126 || !STR)
 		return ;
 	ft_clear_window();
 	ft_prompt();
-	pos_tmp = *pos;
+	pos_tmp = POS;
 	ft_change_affichage();
-	if (*pos)
-		--(*pos);
-	ft_get_beggin(str, pos);
-	ft_current_str(str, *pos);
-	ft_get_next_str(str, pos);
-	if (*pos && !str[*pos])
-		--(*pos);
-	if (*pos)
-		ft_putnc('\b', *pos - pos_tmp + 1);
-	*pos = pos_tmp;
+	if (POS)
+		--POS;
+	ft_get_beggin(STR, &POS);
+	ft_current_str(STR, POS);
+	ft_get_next_str(STR, &POS);
+	if (POS && !STR[POS])
+		--POS;
+	if (POS)
+		ft_putnc('\b', POS - pos_tmp + 1);
+	POS = pos_tmp;
 }
 
 void		ft_get_beggin_with_curs(char *str, size_t *pos)

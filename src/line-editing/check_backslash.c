@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:32:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 18:26:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 12:40:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,32 +101,28 @@ static int	ft_brackets(char c)
 void		ft_check_line(void)
 {
 	int		i;
-	char	*str;
 	short	status;
 
-	i = 0;
+	i = -1;
 	status = 0;
-	str = STR;
 	ft_reset_tab((char *)g_brackets.tabl);
 	g_brackets.pos = 0;
-	if (!str)
+	if (!STR)
 		return ;
-	while (str[i])
+	while (STR[++i])
 	{
 		if (IS_BSLASH & status)
 			status = status ^ IS_BSLASH;
 		else
 		{
-			ft_check_this_char_quotes(str[i], &status);
-			if (!status && ft_brackets(str[i]))
+			ft_check_this_char_quotes(STR[i], &status);
+			if (!status && ft_brackets(STR[i]))
 				return ;
 		}
-		++i;
 	}
 	if (g_brackets.pos && g_brackets.tabl[0] == '(')
 		status = status | IS_BRACKET;
 	else if (g_brackets.pos && g_brackets.tabl[0] == '{')
 		status = status | IS_ACCOLADE;
-	if (status)
-		ft_read_more(status);
+	(status) ? ft_read_more(status) : 0;
 }
