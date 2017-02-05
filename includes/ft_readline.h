@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 18:16:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:44:07 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@
 # define IS_QUOTES (1 << 0)
 # define IS_BQUOTES (1 << 1)
 # define IS_DQUOTES (1 << 2)
-# define IS_ACCOLADE (1 << 3)
-# define IS_BRACKET (1 << 4)
-# define IS_BSLASH (1 << 5)
+# define IS_BSLASH (1 << 3)
+# define IS_ACCOLADE (1 << 4)
+# define IS_BRACKET (1 << 5)
 
 # define STR data_singleton()->line.input
 # define POS data_singleton()->line.pos

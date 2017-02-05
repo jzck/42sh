@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 14:56:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:42:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static void	ft_get_date(void)
 
 	t = time(NULL);
 	tm = *localtime(&t);
-	ft_putstr("\033[22;32m");
+	ft_putstr("\x1b[38;5;242m");
+//	ft_putstr("\033[22;32m");
 	printf("%.2d:%.2d:%.2d ", tm.tm_hour, tm.tm_min, tm.tm_sec);
 	fflush(NULL);
 	if (tm.tm_hour >= 8 && tm.tm_hour < 20)
-		printf("\033[22;33m%C ", L'☀');
+		printf("\x1b[38;5;184m%C ", L'☀');
 	else
-		printf("\033[22;33m%C ", L'★');
+		printf("\x1b[38;5;184m%C ", L'★');
 	fflush(NULL);
 }
 
@@ -56,11 +57,11 @@ void		ft_prompt(void)
 
 	do_job_notification();
 	ft_get_date();
-	ft_putstr("\033[22;36m");
+	ft_putstr("\x1b[38;5;254m");
 	ret = ft_currend_dir();
-	ft_putstr("\033[22;33m");
-	printf(" %C", L'›');
+	ft_putstr("\x1b[38;5;184m");
+	printf(" %C ", L'›');
 	fflush(NULL);
 	ft_putstr("\033[22;37m");
-	data_singleton()->line.prompt_size = ret + 12;
+	data_singleton()->line.prompt_size = ret + 13;
 }
