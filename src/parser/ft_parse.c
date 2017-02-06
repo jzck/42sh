@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 13:43:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:38:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int		ft_parse(t_btree **ast, t_list **start)
 	while (g_parser[i].type)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
-		{
-			if (g_parser[i].f)
-				return ((*g_parser[i].f)(ast, start, &lst));
-		}
+			return ((*g_parser[i].f)(ast, start, &lst));
 		i++;
 	}
 	return (0);
