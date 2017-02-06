@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 23:20:38 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:19:46 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** pattern searched are {ab, cd}.
 ** return is t_ld which first param is ab and second is cd
 ** input parameters are :
-**			-char	*pat  -> pattern string to be looking for expand
+**			-t_glob		*gl  -> struct of expanding
 */
 
 static char					**gen_tab(const char *pat,
@@ -49,9 +49,9 @@ static void					iter_on_each(t_expand *me)
 	unsigned char	*second;
 	t_ld			*wk_tmp;
 
-	i = -1;
+	i = ft_tablen(me->split);
 	wk_tmp = *me->wk;
-	while (me->split[++i])
+	while (i--)
 	{
 		first = ft_strjoinf(ft_strjoin(me->s1, me->split[i]), me->str + 1, 1);
 		second = calc_expand_esc(me->esc,
@@ -66,7 +66,7 @@ static void					iter_on_each(t_expand *me)
 	me->wk = &wk_tmp;
 }
 
-static void					init_expand(t_expand *me, char *start)
+static int					init_expand(t_expand *me, char *start)
 {
 	unsigned char	*esc;
 
@@ -81,28 +81,32 @@ static void					init_expand(t_expand *me, char *start)
 	ft_strdel(&me->s1);
 	ft_tabdel(&me->split);
 	ft_tabdel((char ***)&me->m_esc);
+	return (1);
 }
 
 static int					search_brace(t_expand *me)
 {
 	char			*start;
+	int				comma;
 	int				nb;
 
 	start = NULL;
 	nb = 0;
+	comma = 0;
 	while (*me->str)
 	{
-		start = *me->str == '{'
-			&& !is_char_esc(me->esc, CH(*me->wk)[0], me->str)
-			&& nb == 0 ? me->str : start;
-		nb += *me->str == '{'
-			&& !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
-		nb -= *me->str == '}'
-			&& !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
+		start = *me->str == '{' && !is_char_esc(me->esc, CH(*me->wk)[0],
+				me->str) && nb == 0 ? me->str : start;
+		nb += *me->str == '{' && !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
+		nb -= *me->str == '}' && !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
+		comma += *me->str == ',' && nb == 1;
 		if (!nb && start)
 		{
-			init_expand(me, start);
-			return (1);
+			if (comma)
+				return (init_expand(me, start));
+			set_char_esc(me->esc, CH(*me->wk)[0], start);
+			set_char_esc(me->esc, CH(*me->wk)[0], me->str);
+			return (2);
 		}
 		++me->str;
 	}
@@ -127,11 +131,9 @@ void						expand_brace(t_glob *gl)
 			me.wk = &gl->m_pat;
 			me.esc = UCH(gl->m_pat)[1];
 			me.str = CH(gl->m_pat)[0];
-			if ((tmp = gl->m_pat) && search_brace(&me))
-			{
+			if ((tmp = gl->m_pat) && 
+					(do_it = search_brace(&me) == 1))
 				ft_ld_del(&tmp, &ft_tabdel);
-				do_it = 1;
-			}
 			gl->m_pat = gl->m_pat->next;
 		}
 		gl->m_pat = ft_ld_front(gl->m_pat);

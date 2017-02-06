@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:19:55 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/27 23:45:51 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:11:14 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,43 @@ int		is_char_esc(const unsigned char *esc,
 {
 	int		pos;
 
+	if (!esc || !ini_str || !str_pos)
+		return (0);
 	pos = str_pos - ini_str;
 	if ((esc[pos / 8] >> (7 - pos % 8)) & 1)
 		return (1);
 	return (0);
+}
+
+void	set_char_esc_mode(unsigned char *esc,
+		const char *ini_str, const char *str_pos, int mode)
+{
+	int		pos;
+
+	if (!esc || !ini_str || !str_pos || mode < 0 || mode > 1)
+		return ;
+	pos = str_pos - ini_str;
+	esc[pos / 8] |= mode << (7 - pos % 8);
+}
+
+void	set_char_esc(unsigned char *esc,
+		const char *ini_str, const char *str_pos)
+{
+	int		pos;
+
+	if (!esc || !ini_str || !str_pos)
+		return ;
+	pos = str_pos - ini_str;
+	esc[pos / 8] |= 1 << (7 - pos % 8);
+}
+
+void	set_char_no_esc(unsigned char *esc,
+		const char *ini_str, const char *str_pos)
+{
+	int		pos;
+
+	if (!esc || !ini_str || !str_pos)
+		return ;
+	pos = str_pos - ini_str;
+	esc[pos / 8] |= 0 << (7 - pos % 8);
 }

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/01 19:50:07 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:12:39 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,18 @@ char			**glob(const char *str, const unsigned char *esc);
 */
 
 int				is_directory(const char *path);
+
 /*
 ** return TRUE if char at str_pos in ini_str is escape.
+** five the possibility to set if the char is esc or not.
 */
 int				is_char_esc(const unsigned char *esc,
+							const char *ini_str, const char *str_pos);
+void			set_char_esc_mode(unsigned char *esc,
+							const char *ini_str, const char *str_pos, int mode);
+void			set_char_esc(unsigned char *esc,
+							const char *ini_str, const char *str_pos);
+void			set_char_no_esc(unsigned char *esc,
 							const char *ini_str, const char *str_pos);
 
 /*
