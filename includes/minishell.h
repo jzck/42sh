@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 18:33:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 21:23:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct	s_comp
 struct	s_script
 {
 	char	*buffer;
+	int		fd;
 	int		size;
 	int		lc;
 };
@@ -84,7 +85,7 @@ int		shell_single_command(char *command);
 
 int		read_script(char *file);
 int		shell_script(void);
-t_list	**shell_get_ast(char *command);
+int		get_script_content(t_script *script);
 
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);
