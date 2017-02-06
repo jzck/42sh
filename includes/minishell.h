@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:42:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 18:33:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct	s_script
 {
 	char	*buffer;
 	int		size;
+	int		lc;
 };
 
 typedef struct s_script	t_script;

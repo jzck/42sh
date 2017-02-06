@@ -1,7 +1,13 @@
-if ls 
+while ls
+do
+if ls
 then
 	echo hello
-elif ls
-then
-	echo world
+else
+	while ls
+	do
+		echo hello world
+		pwd
+	done
 fi
+done

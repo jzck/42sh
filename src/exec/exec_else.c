@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_semi.c                                        :+:      :+:    :+:   */
+/*   exec_else.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 20:52:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 18:34:38 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/06 18:55:07 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/06 19:13:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
-int		exec_semi(t_btree **ast)
+int		exec_else(t_btree **ast)
 {
-	ft_exec(&(*ast)->left);
 	ft_exec(&(*ast)->right);
-
-//	btree_delone(ast, &ast_free);
+	//btree_delone(ast, &ast_free);
 	return (0);
 }

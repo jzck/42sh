@@ -83,7 +83,6 @@ int		parse_head(t_btree **ast,
 	del = (*lst);
 	*lst = (*lst)->next;
 	//check that//
-	del->next = NULL;
 	ft_lst_delif(start, del->content, &ft_addrcmp, &token_free);
 	delete_newline(start, lst);
 	return (0);

@@ -52,11 +52,12 @@ exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_semi.c\
 exec/exec_while.c\
+exec/exec_if.c\
+exec/exec_else.c\
+exec/exec_elif.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
-exec/loop_del.c\
-exec/loop_exec.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
@@ -183,6 +184,7 @@ parser/parse_subshell.c\
 parser/parse_while.c\
 parser/parse_if.c\
 parser/parse_elif.c\
+parser/parse_else.c\
 parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))

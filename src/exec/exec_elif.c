@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_semi.c                                        :+:      :+:    :+:   */
+/*   exec_elif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 20:52:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 18:34:38 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/06 18:08:53 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/06 19:26:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_semi(t_btree **ast)
+int			exec_elif(t_btree **ast)
 {
-	ft_exec(&(*ast)->left);
-	ft_exec(&(*ast)->right);
+	int		test;
 
-//	btree_delone(ast, &ast_free);
+	(void)ast;
+	test = 1;
+	if (test && data_singleton()->script.lc == 0)
+	{
+		ft_exec(&(*ast)->right);
+		data_singleton()->script.lc = 1;
+	}
+	//	btree_delone(ast, &ast_free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 14:50:54 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/06 17:54:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 19:22:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		parse_after_elif(t_btree **ast, t_list **lst)
 	while ((temp = temp->next))
 	{
 		token = temp->content;
-		if (nest == 0 && (token->type & TK_ELIF))
+		if (nest == 0 && (token->type & (TK_ELIF | TK_ELSE)))
 			break;
 		else if (token->type & TK_IF)
 			nest++;
@@ -52,7 +52,7 @@ static int		parse_loop(t_btree **ast, t_list **start, t_list **lst)
 		token = (*lst)->content;
 		if (token->type & TK_THEN)
 			nest++;
-		else if (token->type & TK_ELIF)
+		else if (token->type & (TK_ELIF | TK_ELSE))
 			nest--;
 		if (nest == 1 && (token->type & TK_THEN))
 			break;

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 23:15:23 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/06 17:46:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 19:20:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	parse_head_condition(t_btree **ast,
 int			parse_if(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_btree		*new_ast;
-	
+
 	parse_after_condition(ast, start, lst);
 	parse_head_condition(ast, &new_ast, start, lst);
 	return (0);

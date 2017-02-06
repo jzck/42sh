@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_semi.c                                        :+:      :+:    :+:   */
+/*   exec_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 20:52:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 18:34:38 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/06 18:55:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_semi(t_btree **ast)
+int			exec_if(t_btree **ast)
 {
-	ft_exec(&(*ast)->left);
 	ft_exec(&(*ast)->right);
-
+	data_singleton()->script.lc = 0;
 //	btree_delone(ast, &ast_free);
 	return (0);
 }
