@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:01:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:54:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 int		process_redirect(t_process *p);
-void	process_do_redirection(t_redir *redir);
+int		process_do_redirection(t_redir *redir);
 void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(void);

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:45 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 11:58:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:31:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int		parse_less(t_btree **ast, t_list **start, t_list **lst)
 		return (1);
 	tok = (*lst)->content;
 	next_tok = (*lst)->next->content;
-	if (next_tok->type != TK_WORD)
+	if (!(next_tok->type & TK_WORD))
 		return (1);
-	node->data.redir.n = ft_atoi(tok->data);
+	node->data.redir.n = *tok->data == '>' ? 0 : ft_atoi(tok->data);
 	node->data.redir.word.word = ft_strdup(next_tok->data);
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_lst_delif(start, (*lst)->next->content, &ft_addrcmp, &token_free);

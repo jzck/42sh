@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 14:38:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:46:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int		shell_single_command(char *command)
 int		main(int ac, char **av)
 {
 	setlocale(LC_ALL, "");
-	DG("{inv}{bol}{gre}start of shell{eoc} job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
 	shell_init(ac, av);
+	DG("{inv}{bol}{gre}start of shell{eoc} job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
 	if (data_singleton()->opts & SHELL_OPTS_LC)
 	{
 		shell_single_command(ft_strdup(shell_get_avdata()));
