@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/01 19:49:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:02:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		dir_list_content(t_glob *gl, char **str, const char *pat,
 	char		*path_tmp;
 
 	ret = 0;
-	if (ft_strcmp(str[1], ".") && ft_strcmp(str[1], ".."))
+	if (str[1][0] != '.')
 	{
 		if (*str[0] == '/' && !*(str[0] + 1))
 			path_tmp = ft_strjoin(str[0], str[1]);
