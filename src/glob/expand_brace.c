@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/06 15:19:46 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:51:32 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void						expand_brace(t_glob *gl)
 			me.wk = &gl->m_pat;
 			me.esc = UCH(gl->m_pat)[1];
 			me.str = CH(gl->m_pat)[0];
-			if ((tmp = gl->m_pat) && 
-					(do_it = search_brace(&me) == 1))
+			if ((tmp = gl->m_pat) &&
+					(do_it = search_brace(&me)) == 1)
 				ft_ld_del(&tmp, &ft_tabdel);
 			gl->m_pat = gl->m_pat->next;
 		}
