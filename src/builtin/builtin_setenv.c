@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 19:00:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:05:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 		str = ft_str3join(av[0], "=", av[1]);
 		while ((*env)[i])
 		{
-			/* DG("check 2: i=%i, (*env)[i]=%p",i, (*env)[i]); */
-			/* DG("content=%s", (*env)[i]); */
 			if (ft_strcmp((*env)[i], av[0]) == '=')
 			{
 				ft_strdel(&(*env)[i]);
