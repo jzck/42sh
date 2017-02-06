@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 19:02:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 20:35:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PARSER_H
 
 # include "minishell.h"
+
+#define INSTRUCTION			(TK_WHILE | TK_IF | TK_ELIF | TK_NEWLINE | TK_SEMI\
+							| TK_ELSE | TK_UNTIL)
 
 typedef struct s_parser		t_parser;
 typedef struct	s_ld		t_ld;

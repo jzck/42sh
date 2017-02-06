@@ -13,4 +13,4 @@ do
 		((TWO--))
 	done
 	((ONE--))
-done
+done > file1

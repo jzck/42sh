@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 19:16:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 20:37:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*ft_putast(void *nodein)
 		return ("ELIF");
 	else if (node->type == TK_ELSE)
 		return ("ELSE");
+	else if (node->type == TK_UNTIL)
+		return ("UNTIL");
 	else if (node->type == TK_NEWLINE)
 		return ("NEW");
 	else if (node->type == TK_GREAT)

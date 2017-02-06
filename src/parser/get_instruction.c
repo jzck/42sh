@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:56:55 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/06 19:18:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 20:30:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			get_instruction(t_list **lst)
 		token = (*lst)->content;
 		if (token->type & TK_NEWLINE)
 			return (get_simple_instruction(&start, lst));
-		else if (token->type & TK_WHILE)
+		else if (token->type & (TK_WHILE | TK_UNTIL))
 			return (get_loop_instruction(&start, lst));
 		else if (token->type & TK_IF)
 			return (get_condition_instruction(&start, lst));

@@ -55,6 +55,7 @@ exec/exec_while.c\
 exec/exec_if.c\
 exec/exec_else.c\
 exec/exec_elif.c\
+exec/exec_until.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
