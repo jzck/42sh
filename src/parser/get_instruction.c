@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:56:55 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/05 23:45:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 17:17:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,16 @@ static int	get_condition_instruction(t_list **start, t_list **lst)
 	int		nest;
 
 	nest = 0;
-	while (((*lst) = (*lst)->next))
+	while (*lst)
 	{
 		token = (*lst)->content;
-		if (token->type & TK_THEN)
+		if (token->type & TK_IF)
 			nest++;
 		else if (token->type & TK_FI)
 			nest--;
 		if (nest == 0 && token->type & TK_FI)
 			break;
+		*lst = (*lst)->next;
 	}
 	while (((*lst) = (*lst)->next))
 	{

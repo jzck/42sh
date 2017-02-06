@@ -130,10 +130,8 @@ lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dquote.c\
-lexer/lexer_fi.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
-lexer/lexer_if.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
 lexer/lexer_newline.c\
@@ -184,6 +182,7 @@ parser/parse_separator.c\
 parser/parse_subshell.c\
 parser/parse_while.c\
 parser/parse_if.c\
+parser/parse_elif.c\
 parser/parse_word.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))

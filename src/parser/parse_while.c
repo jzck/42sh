@@ -58,7 +58,7 @@ static int		parse_after_loop(t_btree **ast, t_list **start, t_list **lst)
 	return (0);
 }
 
-static int		parse_head(t_btree **ast, 
+int		parse_head(t_btree **ast, 
 					t_btree **new_ast, t_list **start, t_list **lst)
 {
 	t_btree		*father;
@@ -77,12 +77,13 @@ static int		parse_head(t_btree **ast,
 		father->left = *new_ast;
 	else
 		*new_ast = *ast;
-
 	token = (*lst)->content;
 	node = (*new_ast)->item;
 	node->type = token->type;
 	del = (*lst);
 	*lst = (*lst)->next;
+	//check that//
+	del->next = NULL;
 	ft_lst_delif(start, del->content, &ft_addrcmp, &token_free);
 	delete_newline(start, lst);
 	return (0);

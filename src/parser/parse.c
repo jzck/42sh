@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 16:52:51 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/05 23:46:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 17:42:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		parse(t_btree **ast, t_list **token)
 {
 	t_list	*start;
 
+	(void)ast;
 	start = *token;
 	if (get_instruction(token))
 		return (1);

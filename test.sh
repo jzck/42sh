@@ -1,7 +1,9 @@
-if ls 
+if [ 0 -gt 1 ]
 then
 	echo hello
-elif ls
+if ls
 then
 	echo world
+
+	echo yolo
 fi

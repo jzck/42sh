@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/05 23:15:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 15:10:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		get_reserved_words(t_list **alst)
 	while (temp)
 	{
 		token = temp->content;
-		if (!previous_token || (previous_token->type & SHELL_SEP))
+		if (!previous_token || (previous_token->type & RW_SEP))
 		{
 			if (token->type == TK_N_WORD)
 			{		
@@ -39,6 +39,10 @@ int		get_reserved_words(t_list **alst)
 					token->type = TK_THEN;
 				else if(ft_strncmp(token->data, "fi", 4) == 0)
 					token->type = TK_FI;
+				else if (ft_strncmp(token->data, "elif", 4) == 0)
+					token->type = TK_ELIF;
+				else if (ft_strncmp(token->data, "else", 4) == 0)
+					token->type = TK_ELSE;
 			}
 		}
 		previous_token = token;

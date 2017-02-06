@@ -6,31 +6,31 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 23:15:23 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/05 23:57:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/06 17:46:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	parse_after_condition(t_btree **ast, t_list **start, t_list **lst)
+static int		parse_after_condition(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_list	*temp;
 	t_list	*del;
 	t_token	*token;
 	int		nest;
 
-
 	temp = (*lst);
 	nest = 0;	
-	while ((temp = temp->next))
+	while (temp)
 	{
 		token = temp->content;
-		if (token->type & TK_THEN)
+		if (token->type & TK_IF)
 			nest++;
 		else if (token->type & TK_FI)
 			nest--;
 		if (nest == 0 && (token->type & TK_FI))
-			break;
+			break;		
+		temp = temp->next;
 	}
 	del = temp;
 	temp = temp->next;
@@ -41,12 +41,11 @@ static int	parse_after_condition(t_btree **ast, t_list **start, t_list **lst)
 	return (0);
 }
 
-static int	parse_head(t_btree **ast,
-				t_btree **new_ast, t_list **start, t_list **lst)
+static int	parse_head_condition(t_btree **ast, 
+			t_btree **new_ast, t_list **start, t_list **lst)
 {
 	t_btree 	*father;
 	t_token		*token;
-	t_list		*del;
 	t_astnode	*node;
 	t_astnode	item;
 
@@ -64,53 +63,17 @@ static int	parse_head(t_btree **ast,
 	token = (*lst)->content;
 	node = (*new_ast)->item;
 	node->type = token->type;
-	del = (*lst);
-	*lst = (*lst)->next;
-	ft_lst_delif(start, del->content, &ft_addrcmp, &token_free);
-	delete_newline(start, lst);
+	token->type = TK_ELIF;
+	ft_parse(&(*new_ast)->right, start);
 	return (0);
 }
 
-static int	parse_loop(t_btree **ast, t_list **start, t_list **lst)
-{
-	t_token		*token;
-	t_list		*temp;
-	t_list		*new_start;
-	int			nest;
-
-	nest = 0;
-	while ((*lst)->next)
-		*lst = (*lst)->next;
-	new_start = *start;
-	ft_lst_reverse(start);
-	temp = *lst;
-	while ((*lst))
-	{
-		token = (*lst)->content;
-		if (token->type & TK_THEN)
-			nest++;
-		else if (token->type & TK_FI)
-			nest--;
-		if (nest == 1 && (token->type & TK_THEN))
-			break;
-		*lst = (*lst)->next;
-	}
-	ft_lst_reverse(&temp);
-	temp = (*lst)->next;
-	(*lst)->next = NULL;
-	ft_lst_delif(&new_start, (*lst)->content, &ft_addrcmp, &token_free);
-	delete_newline(start, &temp);
-	ft_parse(&(*ast)->right, &temp);
-	ft_parse(&(*ast)->left, &new_start);
-	return (0);
-}
 
 int			parse_if(t_btree **ast, t_list **start, t_list **lst)
 {
 	t_btree		*new_ast;
-
+	
 	parse_after_condition(ast, start, lst);
-	parse_head(ast, &new_ast, start, lst);
-	parse_loop(&new_ast, start, lst);
+	parse_head_condition(ast, &new_ast, start, lst);
 	return (0);
 }
