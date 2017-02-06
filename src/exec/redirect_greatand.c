@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer.c                                         :+:      :+:    :+:   */
+/*   redirect_greatand.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 21:49:55 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/06 22:12:31 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/06 22:54:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
 
-int		ft_lexer(t_list **alst, char **command)
+#include "exec.h"
+
+int		redirect_greatand(t_redir *redir, int *fdold, int *fdnew)
 {
-	int		ret;
-
-	if (!*command)
+	if (redir->word.fd > 9)
+		bad_fd(redir->word.fd);
+	if (redir->close)
+	{
+		close(redir->n);
 		return (1);
-	ret = 0;
-	if (ft_tokenize(alst, *command, DEFAULT))
-		ret = 1;
-	else if (ft_post_tokenize(alst, command))
-		ret = 1;
-	ft_strdel(command);
-	return (ret);
+	}
+	else
+	{
+		*fdnew = redir->n;
+		*fdold = redir->word.fd;
+	}
+	if (fd_is_valid(fdold))
+	{
+		dup2(fdold, fdnew);
+		close(fdold);
+	}
+	else
+		bad_fd(fdold);
+	return (0);
 }

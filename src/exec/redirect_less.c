@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer.c                                         :+:      :+:    :+:   */
+/*   redirect_less.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 21:49:55 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/06 22:38:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "exec.h"
 
-int		ft_lexer(t_list **alst, char **command)
+int		redirect_less(t_redir *redir, int *fdold, int *fdnew)
 {
-	int		ret;
-
-	if (!*command)
-		return (1);
-	ret = 0;
-	if (ft_tokenize(alst, *command, DEFAULT))
-		ret = 1;
-	else if (ft_post_tokenize(alst, command))
-		ret = 1;
-	ft_strdel(command);
-	return (ret);
+	*fdnew = redir->n;
+	if ((*fdold = open(redir->word.word, O_RDONLY)) < 0)
+	{
+		ft_dprintf(2, "{red}%s: no such file or directory: %s{eoc}\n",
+				SHELL_NAME, redir->word.word);
+		exit (1);
+	}
+	return (0);
+	dup2(fdold, fdnew);
 }

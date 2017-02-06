@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/06 15:47:04 by wescande         ###   ########.fr        #
+#    Updated: 2017/02/06 21:49:51 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,18 +29,6 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
-completion/c_output.c\
-completion/c_binary.c\
-completion/c_clear.c\
-completion/c_files.c\
-completion/c_init.c\
-completion/c_matching.c\
-completion/c_parser.c\
-completion/c_pathsolver.c\
-completion/c_printer.c\
-completion/c_sizing.c\
-completion/c_terminal.c\
-completion/completion.c\
 builtin/bt_read_get.c\
 builtin/bt_read_parse.c\
 builtin/bt_read_term.c\
@@ -52,7 +40,20 @@ builtin/builtin_read.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
+completion/c_binary.c\
+completion/c_clear.c\
+completion/c_files.c\
+completion/c_init.c\
+completion/c_matching.c\
+completion/c_output.c\
+completion/c_parser.c\
+completion/c_pathsolver.c\
+completion/c_printer.c\
+completion/c_sizing.c\
+completion/c_terminal.c\
+completion/completion.c\
 exec/ast_free.c\
+exec/bad_fd.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\
@@ -69,6 +70,11 @@ exec/process_reset.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
+exec/redirect_dgreat.c\
+exec/redirect_great.c\
+exec/redirect_greatand.c\
+exec/redirect_less.c\
+exec/redirect_lessand.c\
 exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\

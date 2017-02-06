@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:46:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 16:51:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 22:54:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,44 @@ int		process_do_redirection(t_redir *redir)
 	int		fdold;
 	int		fdnew;
 
-	if (redir->type & (TK_GREAT | TK_DGREAT))
-	{
-		fdold = redir->n;
-		if ((fdnew = open(redir->word.word, O_WRONLY | O_CREAT
-				| ((redir->type & TK_GREAT) ? O_TRUNC : O_APPEND),
-				0644)) < 0)
-		{
-			DG("open errno=%i", errno);
-			exit(1);
-		}
-	}
+	if (redir->n > 9)
+		bad_fd(redir->n);
+	if (redir->type & TK_GREAT)
+		redirect_great(redir, &fdold, &fdnew);
+	else if (redir->type & TK_GREAT)
+		redirect_dgreat(redir, &fdold, &fdnew);
 	else if (redir->type & TK_LESS)
+		redirect_less(redir, &fdold, &fdnew);
+	else if (redir->type & TK_GREATAND)
 	{
-		fdold = redir->n;
-		if ((fdnew = open(redir->word.word, O_RDONLY)) < 0)
-		{
-			ft_dprintf(2, "{red}%s: no such file or directory: %s{eoc}\n",
-					SHELL_NAME, redir->word.word);
-			exit (1);
-		}
-	}
-	else if (redir->type & (TK_LESSAND | TK_GREATAND))
-	{
-		if (redir->close)
-		{
-			close(redir->n);
+		if (redirect_greatand(redir, &fdold, &fdnew))
 			return (0);
+	}
+	else if (redir->type & TK_LESSAND)
+	{
+		if (redirect_lessand(redir, &fdold, &fdnew))
+			return (0);
+	}
+	else
+		exit(42);
+	DG("gonna redirect dup2(%i,%i)", fdold, fdnew);
+	if (fd_is_valid(fdnew))
+	{
+		if (fd_is_valid(fdold))
+		{
+			dup2(fdold, fdnew);
+			close(fdold);
 		}
 		else
-		{
-			fdold = redir->type & TK_LESSAND ? redir->word.fd : redir->n;
-			fdnew = redir->type & TK_LESSAND ? redir->n : redir->word.fd;
-		}
+			bad_fd(fdold);
 	}
 	else
 	{
-		ft_dprintf(2, "{red}%s: redirection error.{eoc}\n", SHELL_NAME);
-		return (-1);
+		DG("[%i] is not a valid fd", fdnew);
+		if (fdnew <= 2)
+			close(fdnew);
+		else
+			bad_fd(fdnew);
 	}
-	fd_is_valid(fdold) ? dup2(fdnew, fdold) : close(fdnew);
-	close(fdnew);
 	return (0);
 }

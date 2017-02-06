@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer.c                                         :+:      :+:    :+:   */
+/*   redirect_dgreat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 21:49:55 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/06 22:07:37 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/06 22:27:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "exec.h"
 
-int		ft_lexer(t_list **alst, char **command)
+int		redirect_dgreat(t_redir *redir, int *fdold, int *fdnew)
 {
-	int		ret;
-
-	if (!*command)
-		return (1);
-	ret = 0;
-	if (ft_tokenize(alst, *command, DEFAULT))
-		ret = 1;
-	else if (ft_post_tokenize(alst, command))
-		ret = 1;
-	ft_strdel(command);
-	return (ret);
+	*fdold = redir->n;
+	if ((*fdnew = open(redir->word.word,
+					O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0)
+	{
+		DG("open errno=%i", errno);
+		exit(1);
+	}
+	return (0);
 }

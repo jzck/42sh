@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 15:54:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 22:34:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,19 @@ int		exec_command(t_btree **ast);
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
-int		process_redirect(t_process *p);
-int		process_do_redirection(t_redir *redir);
 void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(void);
 
-void	fd_redirect(void);
-void	fd_reset(void);
+int		process_redirect(t_process *p);
+int		process_do_redirection(t_redir *redir);
+void	bad_fd(int fd);
+int		redirect_great(t_redir *redir, int *fdold, int *fdnew);
+int		redirect_less(t_redir *redir, int *fdold, int *fdnew);
+int		redirect_dgreat(t_redir *redir, int *fdold, int *fdnew);
+int		redirect_dless(t_redir *redir, int *fdold, int *fdnew);
+int		redirect_greatand(t_redir *redir, int *fdold, int *fdnew);
+int		redirect_lessand(t_redir *redir, int *fdold, int *fdnew);
 
 char	*ft_findexec(char *path, char *file);
 
