@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 17:30:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/06 15:31:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static char		**token_to_argv(t_astnode *node)
 		while (ld)
 		{
 			content = ld->content;
-			expand = glob(content[0], (unsigned char *)content[1]);
-			index = -1;
-			while (expand[++index])
-				my_tab = ft_sstradd(my_tab, expand[index]);
-			ft_tabdel(&expand);
+			if ((expand = glob(content[0], (unsigned char *)content[1])))
+			{
+				index = -1;
+				while (expand[++index])
+					my_tab = ft_sstradd(my_tab, expand[index]);
+				ft_tabdel(&expand);
+			}
 			ld = ld->next;
 		}
 		return (my_tab);
