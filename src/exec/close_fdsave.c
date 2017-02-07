@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bad_fd.c                                           :+:      :+:    :+:   */
+/*   close_fdsave.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:32:43 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 16:02:12 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/07 17:45:23 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/07 17:54:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-int		bad_fd(int fd)
+void	close_fdsave(void)
 {
-	ft_dprintf(2, "{red}%s: %i: Bad file descriptor{eoc}\n",
-			SHELL_NAME, fd);
-	return (1);
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	close(exec->fd0save);
+	close(exec->fd1save);
+	close(exec->fd2save);
 }
