@@ -138,6 +138,7 @@ lexer/ft_post_tokenize.c\
 lexer/ft_tokenize.c\
 lexer/get_lexer_state.c\
 lexer/lexer_backslash.c\
+lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dquote.c\
@@ -145,6 +146,7 @@ lexer/lexer_great.c\
 lexer/lexer_greatand.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
+lexer/lexer_newline.c\
 lexer/lexer_number.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\

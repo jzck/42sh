@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:29:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 12:56:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef long long		t_type;
 # define TK_DQ_WORD		(1 << 16)
 # define TK_COMMAND		(1 << 17)
 # define TK_SUBSHELL	(1 << 18)
+# define TK_NEWLINE		(1 << 19)
 
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
@@ -94,6 +95,7 @@ int			ft_is_delim(char c);
 
 t_lexstate	get_lexer_state(char *str);
 int			lexer_default(t_list **alst, char *str);
+int			lexer_newline(t_list **alst, char *str);
 int			lexer_delim(t_list **alst, char *str);
 int			lexer_sep(t_list **alst, char *str);
 int			lexer_word(t_list **alst, char *str);
@@ -107,5 +109,6 @@ int			lexer_dquote(t_list **alst, char *str);
 int			lexer_backslash(t_list **alst, char *str);
 int			lexer_var(t_list **alst, char *str);
 int			lexer_special(t_list **alst, char *str);
+int			lexer_comment(t_list **alst, char *str);
 
 #endif

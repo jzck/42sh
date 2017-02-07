@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_delim.c                                      :+:      :+:    :+:   */
+/*   lexer_comment.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:48:11 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/07 12:15:59 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/07 12:56:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_delim(t_list **alst, char *str)
+int		lexer_comment(t_list **alst, char *str)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
-	while (ft_is_delim(*str))
-		str++;
-	if (token->type)
-		return (ft_tokenize(&(*alst)->next, str, DEFAULT));
-	else
-	{
-		if (!*str)
-			ft_lst_delif(alst, (*alst)->content, &ft_addrcmp, &token_free);
-		return (ft_tokenize(alst, str, DEFAULT));
-	}
+	if (*str == '\n')
+		return (ft_tokenize(&(*alst)->next, str, NEWLINE));
+	return (lexer_comment(alst, str + 1));
 }
