@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:14:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 17:33:15 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char		**token_to_argv(t_astnode *node)
 		while (ld)
 		{
 			content = ld->content;
-			if ((expand = glob(content[0], (unsigned char *)content[1])))
+			if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2])))
 			{
 				index = -1;
 				while (expand[++index])

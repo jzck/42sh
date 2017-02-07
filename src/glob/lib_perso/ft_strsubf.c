@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_backslash.c                                  :+:      :+:    :+:   */
+/*   ft_strsubf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 11:39:15 by wescande         ###   ########.fr       */
+/*   Created: 2016/11/15 17:20:08 by wescande          #+#    #+#             */
+/*   Updated: 2017/02/07 13:01:55 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "glob.h"
 
-int		lexer_backslash(t_list **alst, char *str)
+char	*ft_strsubf(char *s, unsigned int start, size_t len, short int mode)
 {
-	t_token		*token;
+	char	*sptr;
 
-	token = (*alst)->content;
-	token->type = TK_WORD;
-	token_append(token, str[1], 1, 1);
-	return (ft_tokenize(alst, str + 2, WORD));
+	if (!s)
+		return (NULL);
+	sptr = ft_strsub(s, start, len);
+	if (mode == 1)
+		ft_strdel(&s);
+	return (sptr);
 }

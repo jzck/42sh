@@ -6,20 +6,20 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:18:56 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 23:19:45 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 15:49:15 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 
 unsigned char				*calc_expand_esc(const unsigned char *esc,
-							int nb_start, int nb_middle, int *nb_end)
+							int nb_start, int *nb_middle, int *nb_end)
 {
 	unsigned char	*new_esc;
 	int				index;
 	int				pos;
 
-	if (!(new_esc = (unsigned char *)ft_strnew(((nb_start + nb_middle
+	if (!(new_esc = (unsigned char *)ft_strnew(((nb_start + nb_middle[0]
 							+ nb_end[1]) / 8) + 1)))
 		return (NULL);
 	index = -1;
@@ -27,9 +27,9 @@ unsigned char				*calc_expand_esc(const unsigned char *esc,
 		new_esc[index / 8] |=
 			((esc[index / 8] >> (7 - index % 8)) & 1) << (7 - index % 8);
 	pos = -1;
-	while (++pos < nb_middle)
+	while (++pos < nb_middle[0])
 	{
-		new_esc[index / 8] |= 0 << (7 - index % 8);
+		new_esc[index / 8] |= nb_middle[1] << (7 - index % 8);
 		++index;
 	}
 	pos = nb_end[0];

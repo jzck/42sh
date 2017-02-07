@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 18:36:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 13:42:00 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_token		*token_init(void)
 	token->type = 0;
 	token->size = 8;
 	token->data = ft_strnew(token->size + 1);
-	token->esc = (unsigned char *)ft_strnew(token->size / 8 + 1);
+	token->esc = (unsigned char *)ft_strnew((token->size >> 3) + 1);
+	token->esc2 = (unsigned char *)ft_strnew((token->size >> 3) + 1);
 	return (token);
 }

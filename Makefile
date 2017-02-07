@@ -79,6 +79,7 @@ exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
+glob/expand_var.c\
 glob/ft_strsplit_esc.c\
 glob/ft_strsplit_spe.c\
 glob/glob.c\
@@ -96,6 +97,7 @@ glob/lib_perso/ft_ld_size.c\
 glob/lib_perso/ft_ld_swap.c\
 glob/lib_perso/ft_ld_to_tab.c\
 glob/lib_perso/ft_strjoinf.c\
+glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/lib_perso/ft_tablen.c\
 glob/match_pattern.c\
