@@ -155,7 +155,6 @@ lexer/lexer_number.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_special.c\
-lexer/lexer_var.c\
 lexer/lexer_word.c\
 lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\

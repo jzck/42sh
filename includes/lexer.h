@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 18:06:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 18:06:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int			lexer_greatand(t_list **alst, char *str);
 int			lexer_quote(t_list **alst, char *str);
 int			lexer_dquote(t_list **alst, char *str);
 int			lexer_backslash(t_list **alst, char *str);
-int			lexer_var(t_list **alst, char *str);
 int			lexer_special(t_list **alst, char *str);
 int			lexer_comment(t_list **alst, char *str);
 
