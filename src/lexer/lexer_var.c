@@ -6,12 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 14:54:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 14:02:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 11:36:41 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
+/*
 int		lexer_var(t_list **alst, char *str)
 {
 	t_token		*token;
@@ -34,4 +35,4 @@ int		lexer_var(t_list **alst, char *str)
 	}
 	token_append(token, *str, 0);
 	return (lexer_var(alst, str));
-}
+}*/

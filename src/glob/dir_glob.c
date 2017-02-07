@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/06 16:02:48 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 13:06:07 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				is_directory(const char *path)
 	return (S_ISDIR(path_stat.st_mode));
 }
 
-static int		dir_list_content(t_glob *gl, char **str, const char *pat,
+static int		dir_list_content(t_glob *gl, char **str, char *pat,
 								int recursive)
 {
 	int			ret;
@@ -45,7 +45,7 @@ static int		dir_list_content(t_glob *gl, char **str, const char *pat,
 }
 
 int				dir_research(t_glob *gl, char *p,
-		const char *pat, int recursive)
+		char *pat, int recursive)
 {
 	DIR				*dir;
 	struct dirent	*in;

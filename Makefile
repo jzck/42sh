@@ -29,18 +29,6 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
-completion/c_output.c\
-completion/c_binary.c\
-completion/c_clear.c\
-completion/c_files.c\
-completion/c_init.c\
-completion/c_matching.c\
-completion/c_parser.c\
-completion/c_pathsolver.c\
-completion/c_printer.c\
-completion/c_sizing.c\
-completion/c_terminal.c\
-completion/completion.c\
 builtin/bt_read_get.c\
 builtin/bt_read_parse.c\
 builtin/bt_read_term.c\
@@ -52,6 +40,18 @@ builtin/builtin_read.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
+completion/c_binary.c\
+completion/c_clear.c\
+completion/c_files.c\
+completion/c_init.c\
+completion/c_matching.c\
+completion/c_output.c\
+completion/c_parser.c\
+completion/c_pathsolver.c\
+completion/c_printer.c\
+completion/c_sizing.c\
+completion/c_terminal.c\
+completion/completion.c\
 exec/ast_free.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
@@ -73,6 +73,7 @@ exec/set_exitstatus.c\
 glob/dir_glob.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
+glob/expand_var.c\
 glob/ft_strsplit_esc.c\
 glob/ft_strsplit_spe.c\
 glob/glob.c\
@@ -90,6 +91,7 @@ glob/lib_perso/ft_ld_size.c\
 glob/lib_perso/ft_ld_swap.c\
 glob/lib_perso/ft_ld_to_tab.c\
 glob/lib_perso/ft_strjoinf.c\
+glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/lib_perso/ft_tablen.c\
 glob/match_pattern.c\

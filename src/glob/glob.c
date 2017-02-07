@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/01 19:46:22 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 16:13:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,18 @@ static char		**treat_glob(t_ld **match)
 	return (gl);
 }
 
-char			**glob(const char *pat, const unsigned char *esc)
+char			**glob(char *pat, unsigned char *esc,
+										unsigned char *esc2)
 {
 	t_glob	gl;
 	int		ret;
+	int		len;
 
-	gl = (t_glob){pat, esc, NULL, NULL};
+	len = ft_strlen(pat);
+	gl = (t_glob){ft_strdup(pat), dup_char_esc(esc, len),
+		dup_char_esc(esc2, len), NULL, NULL};
+	expand_var(&gl);
+	ft_memdel((void **)&gl.esc2);
 	expand_brace(&gl);
 	while (gl.m_pat->next)
 	{
