@@ -67,9 +67,16 @@ struct	s_execmap
 	int		(*f)(t_btree **ast);
 };
 
+struct	s_redirmap
+{
+	t_flag	type;
+	int		(*f)(t_redir *redir);
+};
+
 #include "minishell.h"
 
 extern t_execmap	g_execmap[];
+extern t_redirmap	g_redirmap[];
 
 int		ft_exec(t_btree **ast);
 
@@ -88,15 +95,15 @@ void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(void);
 
-int		process_redirect(t_process *p);
-int		process_do_redirection(t_redir *redir);
+int		fd_is_valid(int fd);
 void	bad_fd(int fd);
-int		redirect_great(t_redir *redir, int *fdold, int *fdnew);
-int		redirect_less(t_redir *redir, int *fdold, int *fdnew);
-int		redirect_dgreat(t_redir *redir, int *fdold, int *fdnew);
-int		redirect_dless(t_redir *redir, int *fdold, int *fdnew);
-int		redirect_greatand(t_redir *redir, int *fdold, int *fdnew);
-int		redirect_lessand(t_redir *redir, int *fdold, int *fdnew);
+int		process_redirect(t_process *p);
+int		redirect_great(t_redir *redir);
+int		redirect_less(t_redir *redir);
+int		redirect_dgreat(t_redir *redir);
+int		redirect_dless(t_redir *redir);
+int		redirect_greatand(t_redir *redir);
+int		redirect_lessand(t_redir *redir);
 
 char	*ft_findexec(char *path, char *file);
 

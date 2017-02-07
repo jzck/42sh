@@ -12,8 +12,11 @@
 
 #include "exec.h"
 
-int		redirect_lessand(t_redir *redir, int *fdold, int *fdnew)
+int		redirect_lessand(t_redir *redir)
 {
+	int		fdold;
+	int		fdnew;
+
 	if (redir->word.fd > 9)
 		bad_fd(redir->word.fd);
 	if (redir->close)
@@ -23,10 +26,10 @@ int		redirect_lessand(t_redir *redir, int *fdold, int *fdnew)
 	}
 	else
 	{
-		*fdnew = redir->word.fd;
-		*fdold = redir->n;
+		fdold = redir->word.fd;
+		fdnew = redir->n;
 	}
-	if (fd_is_valid(fdnew))
+	if (fd_is_valid(fdold))
 	{
 		dup2(fdold, fdnew);
 		close(fdold);

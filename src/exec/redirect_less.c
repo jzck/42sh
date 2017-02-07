@@ -12,15 +12,18 @@
 
 #include "exec.h"
 
-int		redirect_less(t_redir *redir, int *fdold, int *fdnew)
+int		redirect_less(t_redir *redir)
 {
-	*fdnew = redir->n;
-	if ((*fdold = open(redir->word.word, O_RDONLY)) < 0)
+	int		fdold;
+	int		fdnew;
+
+	fdnew = redir->n;
+	if ((fdold = open(redir->word.word, O_RDONLY)) < 0)
 	{
 		ft_dprintf(2, "{red}%s: no such file or directory: %s{eoc}\n",
 				SHELL_NAME, redir->word.word);
 		exit (1);
 	}
-	return (0);
 	dup2(fdold, fdnew);
+	return (0);
 }

@@ -32,6 +32,7 @@ typedef union u_word		t_word;
 
 typedef struct s_job		t_job;
 typedef struct s_execmap	t_execmap;
+typedef struct s_redirmap	t_redirmap;
 typedef struct s_process	t_process;
 typedef int		(t_execf)(const char *path, char *const argv[], char *const envp[]);
 

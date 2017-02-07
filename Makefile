@@ -61,10 +61,10 @@ exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_redir.c\
 exec/exec_semi.c\
+exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
-exec/process_do_redirection.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\

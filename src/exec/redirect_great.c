@@ -12,15 +12,18 @@
 
 #include "exec.h"
 
-int		redirect_great(t_redir* redir, int *fdold, int *fdnew)
+int		redirect_great(t_redir* redir)
 {
-	*fdnew = redir->n;
-	if ((*fdold = open(redir->word.word,
+	int		fdold;
+	int		fdnew;
+
+	fdnew = redir->n;
+	if ((fdold = open(redir->word.word,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 	{
 		DG("open errno=%i", errno);
 		exit(1);
 	}
-	return (0);
 	dup2(fdold, fdnew);
+	return (0);
 }
