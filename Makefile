@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/07 16:11:13 by jhalford         ###   ########.fr        #
+#    Updated: 2017/02/07 20:11:22 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -230,7 +230,7 @@ $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		$(LIBS) \
 		$(LIBFT_LIB) $(OBJS) \
 		-o $(NAME)
-	@echo "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K"
+	@printf "\r\e[48;5;15;38;5;25m✅ MAKE $(NAME)\e[0m\e[K\n"
 
 $(LIBFT_LIB):
 	@make -j -C $(LIBFT_DIR)
@@ -244,7 +244,7 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
 	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
-	@printf "\r\033[38;5;11m⌛ MAKE %10.10s : %2d%% \033[48;5;%dm%*s\033[0m%*s\033[48;5;255m \033[0m \033[38;5;11m %*s\033[0m\033[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
+	@printf "\r\e[38;5;11m⌛ MAKE %10.10s : %2d%% \e[48;5;%dm%*s\e[0m%*s\e[48;5;255m \e[0m \e[38;5;11m %*s\e[0m\e[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
 	@$(CC) $(FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)
@@ -252,14 +252,14 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 
 clean:			cleanlib
 	@rm -rf $(OBJ_DIR)
-	@echo "\r\033[38;5;202m✖ clean $(NAME).\033[0m\033[K"
+	@echo "\r\e[38;5;202m✖ clean $(NAME).\e[0m\e[K\n"
 
 cleanlib:
 	@make -C $(LIBFT_DIR) clean
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
-	@echo "\r\033[38;5;196m❌ fclean $(NAME).\033[0m\033[K"
+	@printf "\r\e[38;5;196m❌ fclean $(NAME).\e[0m\e[K\n"
 
 fcleanlib:		cleanlib
 	@make -C $(LIBFT_DIR) fclean
