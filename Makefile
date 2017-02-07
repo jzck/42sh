@@ -252,7 +252,7 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 
 clean:			cleanlib
 	@rm -rf $(OBJ_DIR)
-	@echo "\r\e[38;5;202m✖ clean $(NAME).\e[0m\e[K\n"
+	@printf "\r\e[38;5;202m✖ clean $(NAME).\e[0m\e[K\n"
 
 cleanlib:
 	@make -C $(LIBFT_DIR) clean
