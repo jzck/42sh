@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/06 21:49:51 by jhalford         ###   ########.fr        #
+#    Updated: 2017/02/07 16:11:13 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -54,6 +54,7 @@ completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
 exec/bad_fd.c\
+exec/close_fdsave.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\
@@ -67,6 +68,7 @@ exec/ft_findexec.c\
 exec/launch_process.c\
 exec/process_redirect.c\
 exec/process_reset.c\
+exec/process_resetfds.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
