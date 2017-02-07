@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 16:04:57 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 19:40:59 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct	s_ld
 
 typedef struct	s_glob
 {
+	short int			found;
+	short int			cur_dir;
 	char				*pat;
 	unsigned char		*esc;
 	unsigned char		*esc2;

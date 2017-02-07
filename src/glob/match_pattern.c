@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 13:06:58 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 19:45:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,20 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 	return (0);
 }
 
-char			*manage_pat(char *pat, char *str)
+static char		*manage_pat(t_glob *gl, char *pat, char *str)
 {
 	if (pat[0] == '.' && pat[1] == '/'
 			&& ((str[0] == '.' && str[1] != '/') || str[0] != '.'))
+	{
+		gl->cur_dir = 0;
 		return (pat + 2);
+	}
 	return (pat);
 }
 
 int				match_pattern(t_glob *gl, char *str, char *full_word)
 {
-	gl->pat = manage_pat(gl->pat, str);
+	gl->pat = manage_pat(gl, gl->pat, str);
 	while (*gl->pat)
 	{
 		if (is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat))
