@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 16:13:36 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 18:59:50 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char			**glob(char *pat, unsigned char *esc,
 	int		len;
 
 	len = ft_strlen(pat);
-	gl = (t_glob){ft_strdup(pat), dup_char_esc(esc, len),
-		dup_char_esc(esc2, len), NULL, NULL};
+	gl = (t_glob){ft_strdup(pat), dup_char_esc(esc, (len >> 3) + 1),
+		dup_char_esc(esc2, (len >> 3) +1), NULL, NULL};
 	expand_var(&gl);
 	ft_memdel((void **)&gl.esc2);
 	expand_brace(&gl);
