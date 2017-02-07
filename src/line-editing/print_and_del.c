@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 17:08:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/07 15:27:48 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_del(void)
 
 	tmp = POS;
 	STR = ft_remove_imput(STR, tmp);
-	if (!(STR && POS < ft_strlen(STR + 1)))
+	if (!(STR && POS < ft_strlen(STR) + 1))
 		return ;
 	if (POS)
 	{
