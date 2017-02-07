@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 16:22:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 12:29:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef long long		t_type;
 enum	e_lexstate
 {
 	DEFAULT,
+	NEWLINE,
 	DELIM,
 	SEP,
 	WORD,
@@ -57,6 +58,7 @@ enum	e_lexstate
 	BACKSLASH,
 	VAR,
 	SPECIAL,
+	COMMENT,
 };
 
 struct	s_token

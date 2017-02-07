@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:39:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 12:29:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		(*g_lexer[])(t_list **alst, char *str) =
 {
 	&lexer_default,
+	&lexer_newline,
 	&lexer_delim,
 	&lexer_sep,
 	&lexer_word,
@@ -28,6 +29,7 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 	&lexer_backslash,
 	&lexer_var,
 	&lexer_special,
+	&lexer_comment,
 };
 
 int		ft_is_delim(char c)
