@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:11:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 17:54:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int		launch_process(t_process *p)
 		set_exitstatus(127, 1);
 	}
 	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p->attributes))
+	{
+		if (process_redirect(p))
+			return (1);
 		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
+	}
 	else
 	{
 		p->attributes &= ~PROCESS_STATE_MASK;
@@ -39,9 +43,11 @@ int		launch_process(t_process *p)
 		pid = fork();
 		if (pid == 0)
 		{
+			close_fdsave();
 			process_setgroup(p, 0);
 			process_setsig();
-			process_redirect(p);
+			if (process_redirect(p))
+				exit (1);
 			(*p->execf)(p->path, p->av, data_singleton()->env);
 			exit(43);
 		}
@@ -52,7 +58,7 @@ int		launch_process(t_process *p)
 			return (0);
 		}
 		else if (pid == -1)
-			ft_dprintf(2, "{red}internal fork error{eoc}\n");
+			ft_dprintf(2, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
 	}
 	return (1);
 }

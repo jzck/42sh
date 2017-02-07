@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:33:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/07 18:06:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ int				exec_command(t_btree **ast)
 			job->pgid = 0;
 		}
 	}
-	p->av = NULL;
-	p->pid = 0;
-	p->attributes &= ~(PROCESS_STATE_MASK | PROCESS_TYPE_MASK);
-	p->redirs = NULL;
+	process_reset(p);
 	btree_delone(ast, &ast_free);
 	return (0);
 }

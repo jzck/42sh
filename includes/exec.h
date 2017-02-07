@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:09:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/07 17:49:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ struct	s_exec
 	int			aol_search;
 	t_job		job;
 	t_process	process;
+	int			fd0save;
+	int			fd1save;
+	int			fd2save;
 };
 
 struct	s_execmap
@@ -93,10 +96,12 @@ int		process_setexec(t_type type, t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
-void	process_reset(void);
+void	process_reset(t_process *p);
+void	process_resetfds(void);
+void	close_fdsave(void);
 
 int		fd_is_valid(int fd);
-void	bad_fd(int fd);
+int		bad_fd(int fd);
 int		process_redirect(t_process *p);
 int		redirect_great(t_redir *redir);
 int		redirect_less(t_redir *redir);

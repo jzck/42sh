@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:25:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/07 17:23:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int		data_init(void)
 	data->exec.process.pid = 0;
 	data->exec.process.attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
 	data->exec.process.redirs = NULL;
+	data->exec.fd0save = dup(0);
+	data->exec.fd1save = dup(1);
+	data->exec.fd2save = dup(2);
 
 	data->exec.aol_status = NULL;
 	data->exec.aol_search = 0;

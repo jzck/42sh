@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bad_fd.c                                           :+:      :+:    :+:   */
+/*   process_resetfds.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:32:43 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 16:02:12 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/07 17:39:14 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/07 17:50:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		bad_fd(int fd)
+void	process_resetfds(void)
 {
-	ft_dprintf(2, "{red}%s: %i: Bad file descriptor{eoc}\n",
-			SHELL_NAME, fd);
-	return (1);
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	dup2(exec->fd0save, 0);
+	dup2(exec->fd1save, 1);
+	dup2(exec->fd2save, 2);
 }
