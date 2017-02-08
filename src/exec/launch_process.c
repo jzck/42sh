@@ -43,7 +43,6 @@ int		launch_process(t_process *p)
 		pid = fork();
 		if (pid == 0)
 		{
-			close_fdsave();
 			process_setgroup(p, 0);
 			process_setsig();
 			if (process_redirect(p))

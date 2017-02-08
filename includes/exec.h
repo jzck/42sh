@@ -98,7 +98,6 @@ void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
 void	process_reset(t_process *p);
 void	process_resetfds(void);
-void	close_fdsave(void);
 
 int		fd_is_valid(int fd);
 int		bad_fd(int fd);

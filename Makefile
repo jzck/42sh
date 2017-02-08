@@ -54,7 +54,6 @@ completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
 exec/bad_fd.c\
-exec/close_fdsave.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_command.c\

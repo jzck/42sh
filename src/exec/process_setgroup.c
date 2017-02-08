@@ -16,11 +16,13 @@
 int		process_setgroup(t_process *p, pid_t pid)
 {
 	t_job	*j;
+	t_data	*data;
 
 	(void)p;
-	if (!SHELL_HAS_JOBC(data_singleton()->opts))
+	data = data_singleton();
+	if (!SH_HAS_JOBC(data->opts))
 		return (0);
-	j = &data_singleton()->exec.job;
+	j = &data->exec.job;
 	if (!j->pgid)
 		j->pgid = pid ? pid : getpid();
 	setpgid(pid, j->pgid);

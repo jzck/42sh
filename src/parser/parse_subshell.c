@@ -19,7 +19,6 @@ int		parse_subshell(t_btree **ast, t_list **start, t_list **lst)
 
 	(void)start;
 	token = (*lst)->content;
-	DG("parsing subshell");
 	if ((*lst)->next && ((t_token*)(*lst)->next->content)->type & TK_WORD)
 	{
 		ft_dprintf(2, "{red}%s: parse error near ')'{eoc}\n", SHELL_NAME);

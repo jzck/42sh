@@ -15,7 +15,7 @@
 static void	shell_parse_long_opt(char *str)
 {
 	if (ft_strcmp("no-jobcontrol", str) == 0)
-		data_singleton()->opts &= ~SHELL_OPTS_JOBC;
+		data_singleton()->opts &= ~SH_OPTS_JOBC;
 }
 
 static void	shell_parse_short_opt(char *str)
@@ -27,8 +27,8 @@ static void	shell_parse_short_opt(char *str)
 	{
 		if (*str == 'c')
 		{
-			data_singleton()->opts |= SHELL_OPTS_LC;
-			data_singleton()->opts &= ~SHELL_OPTS_JOBC;
+			data_singleton()->opts |= SH_OPTS_LC;
+			data_singleton()->opts &= ~SH_OPTS_JOBC;
 		}
 		i++;
 	}
@@ -39,6 +39,8 @@ void		shell_get_opts(int ac, char **av)
 	int		i;
 
 	i = 1;
+	if (isatty(STDIN))
+		data_singleton()->opts |= SH_INTERACTIVE;
 	while (i < ac && av[i][0] == '-')
 	{
 		if (ft_strcmp(av[i], "--") == 0)
