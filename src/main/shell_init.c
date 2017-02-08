@@ -15,14 +15,18 @@
 void	shell_init(int ac, char **av)
 {
 	int		*shell_pgid;
+	t_data	*data;
 
 	data_init();
-	data_singleton()->argc = ac;
-	data_singleton()->argv = ft_sstrdup(av);
+	data = data_singleton();
+	data->argc = ac;
+	data->argv = ft_sstrdup(av);
 	atexit(&shell_exit);
-	if (isatty(STDIN))
+	shell_get_opts(ac, av);
+	if (SH_IS_INTERACTIVE(data->opts))
 	{
-		shell_pgid = &data_singleton()->jobc.shell_pgid;
+		DG("interactive shell settings");
+		shell_pgid = &data->jobc.shell_pgid;
 		while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 			kill(-*shell_pgid, SIGTTIN);
 		signal(SIGINT, sigint_handler);
@@ -38,7 +42,6 @@ void	shell_init(int ac, char **av)
 			exit (1);
 		}
 		tcsetpgrp(STDIN, *shell_pgid);
-		tcgetattr(STDIN, &data_singleton()->jobc.shell_tmodes);
+		tcgetattr(STDIN, &data->jobc.shell_tmodes);
 	}
-	shell_get_opts(ac, av);
 }

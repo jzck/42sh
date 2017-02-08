@@ -33,15 +33,17 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# define SHELL_OPTS_JOBC	(1 << 0)
-# define SHELL_OPTS_LC		(1 << 1)
-# define SHELL_MODE_INPUT	(1 << 2)
-# define SHELL_MODE_EXEC	(1 << 3)
+# define SH_INTERACTIVE			(1 << 0)
+# define SH_OPTS_JOBC			(1 << 1)
+# define SH_OPTS_LC				(1 << 2)
+# define SH_MODE_INPUT			(1 << 3)
+# define SH_MODE_EXEC			(1 << 4)
 
-# define SHELL_MODE_MASK	(SHELL_MODE_INPUT | SHELL_MODE_EXEC)
-# define SHELL_HAS_JOBC(b)	(b & SHELL_OPTS_JOBC)
+# define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
+# define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
+# define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
 
-# define SHELL_MSG_NOJOBC	"no job-control"
+# define SH_MSG_NOJOBC	"no job-control"
 
 struct	s_data
 {

@@ -36,10 +36,14 @@ int		shell_single_command(char *command)
 
 int		main(int ac, char **av)
 {
+	t_data	*data;
+
+	data = data_singleton();
 	setlocale(LC_ALL, "");
+	DG("{inv}{bol}{gre}start of shell{eoc} pid=%i pgrp=%i job_control is %s", getpid(), getpgrp(), SH_HAS_JOBC(data->opts) ? "ON" : "OFF");
 	shell_init(ac, av);
-	DG("{inv}{bol}{gre}start of shell{eoc} job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
-	if (data_singleton()->opts & SHELL_OPTS_LC)
+	DG("{inv}{bol}{gre}start of shell{eoc} pid=%i pgrp=%i job_control is %s", getpid(), getpgrp(), SH_HAS_JOBC(data->opts) ? "ON" : "OFF");
+	if (data_singleton()->opts & SH_OPTS_LC)
 	{
 		shell_single_command(ft_strdup(shell_get_avdata()));
 		return (0);
