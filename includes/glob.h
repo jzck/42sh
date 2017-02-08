@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 19:40:59 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/08 13:54:57 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,5 @@ char			*ft_strsubf(char *s, unsigned int start,
 void			ft_tabdel(char ***mytab);
 int				ft_tablen(char **mytab);
 
+void			*ft_memrealloc(void *ptr, size_t old_s, size_t new_s);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:18:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 15:32:08 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/08 13:55:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int		token_append(t_token *token, char c, short int esc, short int esc2)
 	{
 		token->size += 8;
 		token->data = (char *)ft_realloc(token->data, token->size + 1);
-		token->esc = (unsigned char *)ft_realloc((char *)token->esc,
+		token->esc = (unsigned char *)ft_memrealloc((char *)token->esc,
+												(token->size >> 3),
 												(token->size >> 3) + 1);
 		token->esc[token->size >> 3] = 0; 
-		token->esc2 = (unsigned char *)ft_realloc((char *)token->esc2,
+		token->esc2 = (unsigned char *)ft_memrealloc((char *)token->esc2,
+												(token->size >> 3),
 												(token->size >> 3) + 1);
 		token->esc2[token->size >> 3] = 0; 
 	}

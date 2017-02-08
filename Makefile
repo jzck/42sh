@@ -98,6 +98,7 @@ glob/lib_perso/ft_ld_reverse.c\
 glob/lib_perso/ft_ld_size.c\
 glob/lib_perso/ft_ld_swap.c\
 glob/lib_perso/ft_ld_to_tab.c\
+glob/lib_perso/ft_memrealloc.c\
 glob/lib_perso/ft_strjoinf.c\
 glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
