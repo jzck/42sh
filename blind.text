@@ -1,3 +1,19 @@
 do en condition, aller a la fin
 verifier les delimiters
 impleter erreur syntax : EOF, unexpected do, unexpected done, pareil if
+
+pipe_sequence
+
+';;' sep
+'; ;' sep-newline_list-sep
+'		; ' newline-sep
+'ls | cat ; ls | cat' line break and_or separator and_or
+
+';;' sep-sep
+';&' sep-sep
+'&&' and_or "no_command"
+'||' and_or "no_command"
+
+
+while compound_list do compound_list done
+	linebreak term  
