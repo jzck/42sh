@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 15:58:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 18:04:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,14 @@ typedef unsigned long long int 		t_sym;
 
 
 int		ft_parse(t_btree **ast, t_list **token);
-int		produce_prim_sym(t_sym *new_sym, t_list **lst);
+int		produce_sym(t_sym *new_sym, t_list **lst);
+int		eval_sym(t_sym stack, t_sym new_sym);
+int		aggregate_sym(t_sym stack, t_sym *new_sym);
+int		superflous_sym(t_sym stack, t_sym new_sym);
 
-int		ft_read_stack(t_sym stack[], int size);
+int		push_stack(t_sym *stack, t_sym *new_sym);
+
+int		ft_read_stack(t_sym *stack); 
 char	*read_state(t_sym current);
 
 enum	e_parstate

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 16:02:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 17:33:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ char			*read_state(t_sym current)
 	return (NULL);
 }
 
-int			ft_read_stack(t_sym	stack[], int size)
+int			ft_read_stack(t_sym *stack)	
 {
-	while (stack[size])
-		ft_putstr(read_state(stack[size--]));
+	while (*stack)
+	{
+		ft_putstr(read_state(*stack--));
+		ft_putchar(10);
+	}
 	return (0);
 }

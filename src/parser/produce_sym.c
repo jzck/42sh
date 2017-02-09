@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   produce_prim_sym.c                                 :+:      :+:    :+:   */
+/*   produce_sym.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 14:55:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 16:05:27 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/09 17:58:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		produce_prim_sym(t_sym *new_sym, t_list **lst)
+int		produce_sym(t_sym *new_sym, t_list **lst)
 {
 	t_token		*token;
 
@@ -33,6 +33,5 @@ int		produce_prim_sym(t_sym *new_sym, t_list **lst)
 		*new_sym = SYM_LESSAND;
 	else if (token->type == TK_LESS)
 		*new_sym = SYM_LESS;
-	ft_lst_delif(lst, (*lst)->content, &ft_addrcmp, &token_free);
 	return (0);
 }
