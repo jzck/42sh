@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 17:33:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 19:41:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ char			*read_state(t_sym current)
 		return ("LESSAND");
 	if (current == SYM_LESS)
 		return ("LESS");
+	if (current == SIMPLE_COMMAND)
+		return ("SIMPLE_COMMAND");
+	if (current == PROGRAM)
+		return ("PROGRAM");
+	if (current != 0)
+		return ("NON-DEFINED");
 	return (NULL);
 }
 

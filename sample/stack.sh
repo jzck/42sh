@@ -1,1 +1,1 @@
-ls > file1
+ls ;

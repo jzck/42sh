@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:47:33 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 17:56:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 19:25:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			superflous_sym(t_sym stack, t_sym new_sym)
 {
-	if (stack == new_sym);
+	if (stack == new_sym)
 		return (1);
 	return (0);
 }

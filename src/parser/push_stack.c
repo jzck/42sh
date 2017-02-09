@@ -6,14 +6,14 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:48:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 17:55:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 20:00:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		push_stack(t_sym *stack, t_sym *new_sym)
+int		push_stack(t_sym *stack, t_sym new_sym)
 {
-	*stack = *new_sym;
+	*stack = new_sym;
 	return (0);
 }

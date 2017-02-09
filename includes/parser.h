@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 18:04:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 20:28:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,27 @@ typedef unsigned long long int 		t_sym;
 #define SYM_GREAT			(1UL << 49)
 #define SYM_LESSAND			(1UL << 50)
 #define SYM_LESS			(1UL << 51)
-
+#define SYM_SEMI			(1UL << 52)
 
 int		ft_parse(t_btree **ast, t_list **token);
-int		produce_sym(t_sym *new_sym, t_list **lst);
+int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
 int		eval_sym(t_sym stack, t_sym new_sym);
-int		aggregate_sym(t_sym stack, t_sym *new_sym);
+int		aggregate_sym(t_sym **stack, t_sym *new_sym);
 int		superflous_sym(t_sym stack, t_sym new_sym);
 
-int		push_stack(t_sym *stack, t_sym *new_sym);
+int		push_stack(t_sym *stack, t_sym new_sym);
+int		pop_stack(t_sym **stack, int k);
+
+int		error_syntax(t_list **token);
 
 int		ft_read_stack(t_sym *stack); 
 char	*read_state(t_sym current);
 
-enum	e_parstate
-{
-	UNDEFINED,
-	ERROR,
-	SUCCESS,
-};
+#define UNDEFINED	(1 << 0)
+#define ERROR		(1 << 1)
+#define SUCCESS		(1 << 2)
 
-typedef enum e_parstate t_parstate;
+typedef int  t_parstate;
 
 /*
  * Build AST

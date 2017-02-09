@@ -6,16 +6,17 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 17:58:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 20:28:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		produce_sym(t_sym *new_sym, t_list **lst)
+int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 {
 	t_token		*token;
 
+	(void)stack;
 	token = (*lst)->content;
 	if (token->type == TK_N_WORD)
 		*new_sym = CMD_NAME;
@@ -33,5 +34,7 @@ int		produce_sym(t_sym *new_sym, t_list **lst)
 		*new_sym = SYM_LESSAND;
 	else if (token->type == TK_LESS)
 		*new_sym = SYM_LESS;
+	else if (token->type == TK_SEMI)
+		*new_sym = SYM_SEMI;
 	return (0);
 }
