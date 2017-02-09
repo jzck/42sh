@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 20:35:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 15:26:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,27 @@ typedef struct s_nest	t_nest;
 
 typedef long long		t_type;
 
-# define TK_LESS		(1 << 0)
-# define TK_GREAT		(1 << 1)
+/*
+ * Token need :
+ * DLESSDASH
+ * CLOBBER
+ * LESSGREAT
+ * IO_NUMBER
+ * NAME
+ * DSEMI
+ * ASSIGNEMENT_WORD
+ * Lbrace
+ * Rbrace
+ * Bang
+ * Case
+ * Esac
+ * for
+ * in
+ *
+*/
+
+# define TK_LESS		(1 << 0)	//transparent
+# define TK_GREAT		(1 << 1)	//transparent
 # define TK_DLESS		(1 << 2)
 # define TK_DGREAT		(1 << 3)
 # define TK_LESSAND		(1 << 4)
@@ -83,7 +102,6 @@ enum	e_lexstate
 	IF,
 	THEN,
 	FI,
-	LIST,
 	COMMENT,
 };
 

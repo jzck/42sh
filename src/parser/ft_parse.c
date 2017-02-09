@@ -3,56 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 20:37:26 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/09 16:02:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_parser	g_parser[] =
+int			ft_parse(t_btree **ast, t_list **token)
 {
-	{INSTRUCTION, &get_sub_instruction},
-	{TK_AND_IF | TK_OR_IF, &parse_separator},
-	{TK_AMP, &parse_separator},
-	{TK_PIPE, &parse_separator},
-	{TK_LESS, &parse_less},
-	{TK_GREAT, &parse_great},
-	{TK_DLESS, &parse_dless},
-	{TK_DGREAT, &parse_dgreat},
-	{TK_LESSAND, &parse_lessand},
-	{TK_GREATAND, &parse_greatand},
-	{TK_SUBSHELL, &parse_subshell},
-	{TK_WORD, &parse_word},
-	{0, 0},
-};
+	t_sym			*new_sym;
+	t_parstate		state;
 
-int		ft_parse(t_btree **ast, t_list **start)
-{
-	t_list		*lst;
-	t_astnode	item;
-	int			i;
-
-	i = 0;
-	if (!*start)
-		return (0);
-	if (!*ast)
+	(void)ast;
+	state = UNDEFINED;
+	new_sym = ft_memalloc(sizeof(t_sym)); 
+	while (*token)
 	{
-		*ast = btree_create_node(&item, sizeof(item));
-		((t_astnode *)(*ast)->item)->data.token = NULL;
-		((t_astnode *)(*ast)->item)->type = 0;
-	}
-	while (g_parser[i].type)
-	{
-		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
+		produce_prim_sym(new_sym, token);
+		DG("new sym : %s", read_state(*new_sym));
+/*		if (eval_sym(head_stack, new_sym))
+			state = ERROR;
+		else
 		{
-			if (g_parser[i].f)
-				(*g_parser[i].f)(ast, start, &lst);
-			return (0);
+			aggregate_sym(head_stack, new_sym, struct_sym);
+			if (struct_sym)
+				pop(struct_sym.sym);
+			else if (!same_sym(new_sym, head_stack))
+				push(new_sym);
 		}
-		i++;
-	}
+		build_tree(token, ast);
+		if (head_stack == PROGRAM)
+			state = PROGRAM;
+		if (state == ERROR)
+			return (error_syntax(token));
+		if (state == PROGRAM)
+			return (0);
+*/	}
 	return (0);
 }

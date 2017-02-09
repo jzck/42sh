@@ -170,6 +170,7 @@ main/shell_script.c\
 main/sig_handler.c\
 parser/parse.c\
 parser/ft_parse.c\
+parser/produce_prim_sym.c\
 parser/get_instruction.c\
 parser/get_sub_instruction.c\
 parser/parse_dgreat.c\
@@ -186,7 +187,8 @@ parser/parse_while.c\
 parser/parse_if.c\
 parser/parse_elif.c\
 parser/parse_else.c\
-parser/parse_word.c
+parser/parse_word.c\
+parser/read_stack.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

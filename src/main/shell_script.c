@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 23:06:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/06 22:05:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 15:26:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ int		shell_script()
 			return (1);
 		DG("after post_tokenize");
 		token_print(token);
-
-		while (token)
-		{
-			if (parse(&ast, &token))
-				return (1);
-			btree_print(STDBUG, ast, &ft_putast);
-			if (ft_exec(&ast))
-				return (1);
-			ast = NULL;	
-		}
+		if (ft_parse(&ast, &token))
+			return (1);
+//		btree_print(STDBUG, ast, &ft_putast);
+//		if (ft_exec(&ast))
+//			return (1);
+//		ast = NULL;
 		script->size = 0;
 		get_script_content(script);	
 	}
