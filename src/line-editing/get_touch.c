@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 16:57:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/09 17:25:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char		*ft_read_stdin(void)
 			ft_print(ret);
 		else if (ret == 10)
 			return (STR);
-		else if (ft_isascii(ret) == 0)
-			ft_read_it(ret, &POS, &STR);
+		/* else if (ft_isascii(ret) == 0) */
+		/* 	ft_read_it(ret, &POS, &STR); */
 	}
 }

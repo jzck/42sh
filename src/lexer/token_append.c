@@ -6,16 +6,18 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:18:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/08 13:55:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/09 19:37:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		token_append(t_token *token, char c, short int esc, short int esc2)
+int		token_append(t_token *token, t_lexer *lexer, short int esc, short int esc2)
 {
 	int		len;
+	char	c;
 
+	c = lexer->str[lexer->pos];
 	len = ft_strlen(token->data);
 	if (len >= token->size)
 	{

@@ -6,18 +6,21 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 11:39:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/09 19:53:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_backslash(t_list **alst, char *str)
+int		lexer_backslash(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
-	token_append(token, str[1], 1, 1);
-	return (ft_tokenize(alst, str + 2, WORD));
+	lexer->pos++;
+	token_append(token, lexer, 1, 1);
+	lexer->pos++;
+	lexer->state = WORD;
+	return (lexer_lex(alst, lexer));
 }

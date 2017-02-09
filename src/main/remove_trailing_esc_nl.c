@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_delim.c                                      :+:      :+:    :+:   */
+/*   remove_trailing_esc_nl.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 20:02:45 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/09 16:52:34 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 17:00:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-int		lexer_delim(t_list **alst, t_lexer *lexer)
+int		remove_trailing_esc_nl(char *str)
 {
-	t_token		*token;
+	char	*last;
 
-	token = (*alst)->content;
-	while (ft_is_delim(lexer->str[lexer->pos]))
-		lexer->pos++;
-	if (token->type)
-		return (lexer_lex(&(*alst)->next, lexer));
-	else
+	last = str + ft_strlen(str) - 1;
+	if (*last == '\\')
 	{
-		if (!lexer->str[lexer->pos])
-			ft_lst_delif(alst, (*alst)->content, &ft_addrcmp, &token_free);
-		return (lexer_lex(alst, lexer));
+		*last = 0;
+		return (1);
 	}
+	return (0);
 }

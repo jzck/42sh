@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/04 16:19:36 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/09 17:03:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void			ft_init_history(void)
 	close(fd);
 }
 
-struct termios	*ft_save_stats_term(void)
+struct termios	*ft_save_stats_term(int save)
 {
 	static struct termios	*term_save = NULL;
 
-	if (!term_save)
+	if (save)
 	{
 		term_save = (struct termios *)malloc(sizeof(struct termios));
 		tcgetattr(0, term_save);
@@ -71,29 +71,32 @@ struct termios	*ft_stats_term_termcaps(void)
 	return (term);
 }
 
-int				ft_readline(void)
+char	*readline(char *prompt)
 {
-	ft_save_stats_term();
+	char	*input;
+
+	ft_save_stats_term(1);
 	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
-		return (-1);
+		return (NULL);
 	if (STR)
 		ft_strdel(&STR);
 	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
 	POS = 0;
-	ft_prompt();
-	STR = ft_read_stdin();
-	ft_check_line();
+	prompt ? ft_putstr(prompt) : ft_prompt();
+	input = ft_read_stdin();
 	ft_putchar('\n');
-	ft_check_heredoc(&STR);
-	ft_history_parsing();
-	if (STR && (!data_singleton()->line.list_beg ||
-	ft_strcmp(data_singleton()->line.list_beg->prev->str, STR)))
-	{
-		ft_push_back_history(&data_singleton()->line.list_beg,
-		ft_create_history_list(STR));
-		ft_add_in_history_file(STR);
-	}
-	if (tcsetattr(0, TCSANOW, ft_save_stats_term()) == -1)
-		return (-1);
-	return (0);
+	/* ft_check_line(); */
+	/* ft_check_heredoc(&STR); */
+	if (tcsetattr(0, TCSANOW, ft_save_stats_term(0)) == -1)
+		return (NULL);
+	return (input);
+
+	/* ft_history_parsing(); */
+	/* if (STR && (!data_singleton()->line.list_beg || */
+	/* ft_strcmp(data_singleton()->line.list_beg->prev->str, STR))) */
+	/* { */
+	/* 	ft_push_back_history(&data_singleton()->line.list_beg, */
+	/* 	ft_create_history_list(STR)); */
+	/* 	ft_add_in_history_file(STR); */
+	/* } */
 }

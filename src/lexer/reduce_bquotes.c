@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:40:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:45:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		reduce_bquotes(t_list **alst, char **str)
 	char	*fit;
 	char	*bq_start;
 	char	*bq_end;
+	t_lexer	lexer;
 
 	tk = TK_BQUOTE;
 	if ((start = ft_lst_find(*alst, &tk, token_cmp_type)))
@@ -44,7 +45,11 @@ int		reduce_bquotes(t_list **alst, char **str)
 		ft_strdel(str);
 		*str = new;
 		ft_lstdel(alst, token_free);
-		ft_tokenize(alst, new, DEFAULT);
+
+		lexer.pos = 0;
+		lexer.str = *str;
+		lexer.state = DEFAULT;
+		lexer_lex(alst, &lexer);
 		return (1);
 	}
 	return (0);

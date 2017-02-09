@@ -6,25 +6,32 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:18:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/10 00:36:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		shell_single_command(char *command)
+int		interactive_shell()
 {
 	t_list	*token;
+	t_list	*ltoken;
+	t_lexer	lexer;
 	t_btree	*ast;
 
+	lexer.pos = 0;
+	lexer.state = DEFAULT;
+	lexer.str = NULL;
 	token = NULL;
-	ast = NULL;
-
-	DG("{inv}{mag}got command '%s'", command);
-	if (ft_lexer(&token, &command) || !token)
-		return (1);
-
-	token_print(token);
+	lexer.stack = NULL;
+	do {
+		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
+			pop(&lexer.stack);
+		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
+		ltoken = ft_lstlast(token);
+		lexer_lex((token ? &ltoken : &token), &lexer);
+		token_print(token);
+	} while (lexer.stack->content);
 	if (ft_parse(&ast, &token))
 		return (1);
 
@@ -40,20 +47,12 @@ int		main(int ac, char **av)
 
 	data = data_singleton();
 	setlocale(LC_ALL, "");
-	DG("{inv}{bol}{gre}start of shell{eoc} pid=%i pgrp=%i job_control is %s", getpid(), getpgrp(), SH_HAS_JOBC(data->opts) ? "ON" : "OFF");
 	shell_init(ac, av);
 	DG("{inv}{bol}{gre}start of shell{eoc} pid=%i pgrp=%i job_control is %s", getpid(), getpgrp(), SH_HAS_JOBC(data->opts) ? "ON" : "OFF");
-	if (data_singleton()->opts & SH_OPTS_LC)
+	if (SH_IS_INTERACTIVE(data->opts))
 	{
-		shell_single_command(ft_strdup(shell_get_avdata()));
-		return (0);
-	}
-	while (1)
-	{
-		if (ft_readline())
-			return (1);
-		if (shell_single_command(ft_strdup(data_singleton()->line.input)) < 0)
-			return (1);
+		while (1)
+			interactive_shell();
 	}
 	return (0);
 }

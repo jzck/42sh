@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:35:38 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:36:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/09 22:09:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_special(t_list **alst, char *str)
+int		lexer_subshell(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 	t_list	**lst;
@@ -27,12 +27,11 @@ int		lexer_special(t_list **alst, char *str)
 	token = token_init();
 	*lst = ft_lstnew(token, sizeof(*token));
 	token = (*lst)->content;
-	if (*str == '(')
+	if (lexer->str[lexer->pos] == '(')
 		token->type = TK_PAREN_OPEN;
-	else if (*str == ')')
+	else if (lexer->str[lexer->pos] == ')')
 		token->type = TK_PAREN_CLOSE;
-	else if (*str == '`')
-		token->type = TK_BQUOTE;
-	token->data = str;
-	return (ft_tokenize(&(*lst)->next, str + 1, DEFAULT));
+	token->data = lexer->str;
+	lexer->pos++;
+	return (lexer_lex(&(*lst)->next, lexer));
 }

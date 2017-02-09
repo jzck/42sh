@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_delim.c                                      :+:      :+:    :+:   */
+/*   get_state_redir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 20:02:45 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/09 20:37:28 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 20:39:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_delim(t_list **alst, t_lexer *lexer)
+t_lexstate		get_state_redir(t_lexer *lexer)
 {
-	t_token		*token;
+	char	c;
 
-	token = (*alst)->content;
-	while (ft_is_delim(lexer->str[lexer->pos]))
-		lexer->pos++;
-	if (token->type)
-		return (lexer_lex(&(*alst)->next, lexer));
-	else
-	{
-		if (!lexer->str[lexer->pos])
-			ft_lst_delif(alst, (*alst)->content, &ft_addrcmp, &token_free);
-		return (lexer_lex(alst, lexer));
-	}
+	c = lexer->str[lexer->pos];
+	if (c == '>')
+		return (GREAT);
+	else if (c == '<')
+		return (LESS);
+	return (0);
 }

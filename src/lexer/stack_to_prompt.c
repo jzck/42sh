@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer.c                                         :+:      :+:    :+:   */
+/*   stack_to_prompt.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 21:49:55 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/09 21:25:26 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 22:49:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		ft_lexer(t_list **alst, char **command)
+char	*stack_to_prompt(t_list	*stack)
 {
-	int		ret;
+	t_flag		top;
 
-	if (!*command)
-		return (1);
-	ret = 0;
-	if (ft_tokenize(alst, *command, DEFAULT))
-		ret = 1;
-	else if (ft_post_tokenize(alst, command))
-		ret = 1;
-	ft_strdel(command);
-	return (ret);
+	if (!stack)
+		return (NULL);
+	top = *(int*)stack->content;
+	if (top == BACKSLASH)
+		return ("> ");
+	else if (top == QUOTE)
+		return ("quote >");
+	else if (top == DQUOTE)
+		return ("dquote >");
+	else if (top == BQUOTE)
+		return ("bquote >");
+	else if (top == SUBSHELL)
+		return ("subsh >");
+	else
+		return (" > ");
 }

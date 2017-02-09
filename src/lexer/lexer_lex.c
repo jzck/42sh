@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokenize.c                                      :+:      :+:    :+:   */
+/*   lexer_lex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:33:34 by wescande         ###   ########.fr       */
+/*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 22:58:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		(*g_lexer[])(t_list **alst, char *str) =
+int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 {
 	&lexer_default,
 	&lexer_newline,
@@ -26,8 +26,9 @@ int		(*g_lexer[])(t_list **alst, char *str) =
 	&lexer_lessand,
 	&lexer_quote,
 	&lexer_dquote,
+	&lexer_bquote,
 	&lexer_backslash,
-	&lexer_special,
+	&lexer_subshell,
 	&lexer_comment,
 };
 
@@ -36,16 +37,16 @@ int		ft_is_delim(char c)
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
-int		ft_tokenize(t_list **alst, char *str, t_lexstate state)
+int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
-	if (!*str)
+	if (!lexer->str[lexer->pos])
 		return (0);
 	if (!*alst)
 	{
 		token = token_init();
 		*alst = ft_lstnew(token, sizeof(*token));
 	}
-	return ((*g_lexer[state])(alst, str));
+	return ((*g_lexer[lexer->state])(alst, lexer));
 }

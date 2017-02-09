@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 16:58:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/09 16:25:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_history_parsing_4(char *str, int *i)
 	{
 		tmp = ft_nbr_len(ft_atoi(str + *i + 1));
 		ft_realloc_str_history(&(data_singleton()->line.input), *i,
-		ft_atoi(str + (*i) + 1), ft_nbr_len(ft_atoi(str + *i + 1)) + 1);
+				ft_atoi(str + (*i) + 1), ft_nbr_len(ft_atoi(str + *i + 1)) + 1);
 		(*i) += tmp;
 		return (1);
 	}
@@ -43,16 +43,16 @@ static int	ft_history_parsing_3(char *str, int *i)
 	{
 		tmp = ft_nbr_len(ft_atoi(str + *i + 2));
 		ft_realloc_str_history(&(data_singleton()->line.input), *i,
-		data_singleton()->line.list_size - ft_atoi(str + *i + 2),
-		ft_nbr_len(ft_atoi(str + *i + 2)) + 2);
+				data_singleton()->line.list_size - ft_atoi(str + *i + 2),
+				ft_nbr_len(ft_atoi(str + *i + 2)) + 2);
 		i += tmp;
 	}
 	else if (str[*i + 1] == '?')
 		ft_realloc_str_history_3(&(data_singleton()->line.input), *i,
-		ft_strdupi_w(str + *i + 2));
+				ft_strdupi_w(str + *i + 2));
 	else if (str[*i + 1] != ' ')
 		ft_realloc_str_history_2(&(data_singleton()->line.input), *i,
-		ft_strdupi_w(str + *i + 1));
+				ft_strdupi_w(str + *i + 1));
 	else
 		return (0);
 	return (1);

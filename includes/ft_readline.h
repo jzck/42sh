@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 17:44:07 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/09 17:24:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
 
-# define PROMPT_QUOTES "quote> "
-# define PROMPT_DQUOTES "dquote> "
-# define PROMPT_BQUOTES "bquote> "
-# define PROMPT_ACCOLADE "cursh> "
-# define PROMPT_BRACKET "subsh> "
-# define PROMPT_BSLASH "> "
+/* # define PROMPT_QUOTES "quote> " */
+/* # define PROMPT_DQUOTES "dquote> " */
+/* # define PROMPT_BQUOTES "bquote> " */
+/* # define PROMPT_ACCOLADE "cursh> " */
+/* # define PROMPT_BRACKET "subsh> " */
+/* # define PROMPT_BSLASH "> " */
 
-# define SIZE_PROMPT_QUOTES 7
-# define SIZE_PROMPT_DQUOTES 8
-# define SIZE_PROMPT_BQUOTES 8
-# define SIZE_PROMPT_ACCOLADE 7
-# define SIZE_PROMPT_BRACKET 7
-# define SIZE_PROMPT_BSLASH 2
+/* # define SIZE_PROMPT_QUOTES 7 */
+/* # define SIZE_PROMPT_DQUOTES 8 */
+/* # define SIZE_PROMPT_BQUOTES 8 */
+/* # define SIZE_PROMPT_ACCOLADE 7 */
+/* # define SIZE_PROMPT_BRACKET 7 */
+/* # define SIZE_PROMPT_BSLASH 2 */
 
 # define IS_QUOTES (1 << 0)
 # define IS_BQUOTES (1 << 1)
@@ -177,7 +177,7 @@ void			ft_x(void);
 void			ft_v(void);
 void			ft_history_parsing(void);
 void			ft_read_it(int input, size_t *pos, char **str);
-int				ft_readline(void);
+char			*readline(char *);
 int				ft_completion(int ret);
 
 void			ft_check_heredoc(char **str);

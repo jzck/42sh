@@ -6,33 +6,39 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:36:42 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:37:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_less(t_list **alst, char *str)
+int		lexer_less(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
-	token_append(token, str[0], 0, 0);
-	if (*(str + 1) == '&')
+	token_append(token, lexer, 0, 0);
+	if (lexer->str[lexer->pos + 1] == '&')
 	{
 		token->type = TK_LESSAND;
-		token_append(token, str[1], 0, 0);
-		return (lexer_lessand(alst, str + 2));
+		lexer->pos++;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		return (lexer_lessand(alst, lexer));
 	}
-	else if (*(str + 1) == '<')
+	if (lexer->str[lexer->pos + 1] == '<')
 	{
 		token->type = TK_DLESS;
-		token_append(token, str[1], 0, 0);
-		return (ft_tokenize(&(*alst)->next, str + 2, DEFAULT));
+		lexer->pos++;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else
 	{
 		token->type = TK_LESS;
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 }

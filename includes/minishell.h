@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 12:16:52 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/10 00:26:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define SHELL_NAME		"minishell"
 
 # include "libft.h"
-
 # include "types.h"
 # include "lexer.h"
 # include "parser.h"
@@ -66,10 +65,10 @@ void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
 
-int		shell_single_command(char *command);
-
 void	ft_expand_dollar(char **av, char **env);
 char	*ft_findexec(char *path, char *file);
+
+int		remove_trailing_esc_nl(char *str);
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_lexer_state.c                                  :+:      :+:    :+:   */
+/*   get_state_global.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/10 13:45:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:34:14 by wescande         ###   ########.fr       */
+/*   Created: 2017/02/09 20:39:06 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 22:12:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_lexstate		get_lexer_state(char *str)
+t_lexstate		get_state_global(t_lexer *lexer)
 {
-	if (ft_is_delim(*str))
+	char	c;
+
+	c = lexer->str[lexer->pos];
+	if (ft_is_delim(c))
 		return (DELIM);
-	else if (*str == '#')
+	else if (c == '#')
 		return (COMMENT);
-	else if (*str == '&' || *str == ';' || *str == '|')
+	else if (c == '&' || c == ';' || c == '|')
 		return (SEP);
-	else if (*str == '\\')
+	else if (c == '\\')
 		return (BACKSLASH);
-	else if (*str == '\'')
+	else if (c == '\'')
 		return (QUOTE);
-	else if (*str == '\"')
+	else if (c == '\"')
 		return (DQUOTE);
-	else if (*str == '(' || *str == ')' || *str == '`')
-		return (SPECIAL);
+	else if (c == '`')
+		return (BQUOTE);
+	else if (c == '(' || c == ')')
+		return (SUBSHELL);
 	return (0);
 }
