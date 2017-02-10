@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:29:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 23:59:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:15:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int		lexer_then(t_list **alst, char *str)
 	}
 	token = (*alst)->content;
 	token->type = TK_THEN;
-	state = LIST;
+	state = TK_WORD;
 	return (ft_tokenize(&(*alst)->next, str + 4, state));
 }		

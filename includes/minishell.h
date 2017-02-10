@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 23:47:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 22:31:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ struct	s_data
 	t_exec	exec;
 	t_jobc	jobc;
 	t_script	 script;
-	t_nest	nest;	
 };
 
 extern t_stof	g_builtins[];

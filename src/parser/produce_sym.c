@@ -6,35 +6,33 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 20:28:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:42:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+t_prodmatch		g_prodmatch[] =
+{
+	{TK_N_WORD, EMPTY, CMD_NAME},
+	{TK_GREAT, ALL, TK_GREAT},
+	{TK_N_WORD, ALL, CMD_NAME},
+	{0, 0, 0},
+};
+
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 {
 	t_token		*token;
+	int			i;
 
-	(void)stack;
 	token = (*lst)->content;
-	if (token->type == TK_N_WORD)
-		*new_sym = CMD_NAME;
-	else if (token->type == TK_NEWLINE)
-		*new_sym = NEWLINE_LIST;
-	else if (token->type == TK_DLESS)
-		*new_sym = SYM_DLESS;
-	else if (token->type == TK_DGREAT)
-		*new_sym = SYM_DGREAT;
-	else if (token->type == TK_GREATAND)
-		*new_sym = SYM_GREATAND;
-	else if (token->type == TK_GREAT)
-	   *new_sym = SYM_GREAT;
-	else if (token->type == TK_LESSAND)
-		*new_sym = SYM_LESSAND;
-	else if (token->type == TK_LESS)
-		*new_sym = SYM_LESS;
-	else if (token->type == TK_SEMI)
-		*new_sym = SYM_SEMI;
+	i = 0;
+	while (g_prodmatch[i].new_sym)
+	{
+		if (token->type == g_prodmatch[i].token
+			&& stack & g_prodmatch[i].stack)
+			*new_sym = g_prodmatch[i].new_sym;
+		i++;
+	}
 	return (0);
 }

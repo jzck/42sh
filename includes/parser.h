@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 20:28:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:39:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,98 @@
  *
 */
 
+enum	e_sym
+{
+	EMPTY = 1,
+	TK_LESS,
+	TK_GREAT,
+	TK_DLESS,
+	TK_DGREAT,
+	TK_LESSAND,
+	TK_GREATAND,
+	TK_SEMI,
+	TK_PIPE,
+	TK_AND_IF,
+	TK_OR_IF,
+	TK_AMP,
+	TK_PAREN_OPEN,
+	TK_PAREN_CLOSE,
+	TK_BQUOTE,
+	TK_SUBSHELL,
+	TK_NEWLINE,
+	TK_WHILE,
+	TK_DO,
+	TK_DONE,
+	TK_IF,
+	TK_THEN,
+	TK_FI,
+	TK_ELIF,
+	TK_ELSE,
+	TK_UNTIL,
+	TK_N_WORD,
+	TK_Q_WORD,
+	TK_DQ_WORD,
+	PROGRAM = 100,
+	COMPLETE_COMMANDS,
+	LIST,
+	AND_OR,
+	PIPELINE,
+	PIPE_SEQUENCE,
+	COMMAND,
+	COMPOUND_COMMAND,
+	SUBSHELL,
+	COMPOUND_LIST,
+	TERM,
+	FOR_CLAUSE,
+	NAME,
+	IN,
+	WORDLIST,
+	CASE_CLAUSE,
+	CASE_LIST_NS,
+	CASE_ITEM_NS,
+	PATTERN,
+	IF_CLAUSE,
+	ELSE_PART,
+	WHILE_CLAUSE,
+	UNTIL_CLAUSE,
+	FUNCTION_DEFINITION,
+	FUNCTION_BODY,
+	FNAME,
+	BRACE_GROUP,
+	DO_GROUP,
+	SIMPLE_COMMAND,
+	CMD_NAME,
+	CMD_WORD,
+	CMD_PREFIX,
+	CMD_SUFFIX,
+	REDIRECT_LIST,
+	IO_REDIRECT,
+	IO_FILE,
+	FILENAME,
+	IO_HERE,
+	HERE_END,
+	NEWLINE_LIST,
+	LINEBREAK,
+	SEPARATOR_OP,
+	SEPARATOR,
+	SEQUENTIAL_SEP,
+	ALL = TK_LESS | TK_GREAT | TK_DLESS | TK_DGREAT | TK_LESSAND | TK_GREATAND\
+	| TK_SEMI | TK_PIPE | TK_AND_IF	| TK_OR_IF | TK_AMP | TK_PAREN_OPEN\
+  	| TK_PAREN_CLOSE | TK_BQUOTE | TK_SUBSHELL | TK_NEWLINE | TK_WHILE | TK_DO\
+	| TK_DONE | TK_IF | TK_THEN | TK_FI | TK_ELIF | TK_ELSE | TK_UNTIL | TK_N_WORD\
+   	| TK_Q_WORD | TK_DQ_WORD | PROGRAM | COMPLETE_COMMANDS | LIST\
+	| AND_OR | PIPELINE | PIPE_SEQUENCE | COMMAND | COMPOUND_COMMAND | SUBSHELL\
+	| COMPOUND_LIST | TERM | FOR_CLAUSE | NAME | IN | WORDLIST | CASE_CLAUSE\
+	| CASE_LIST_NS | CASE_ITEM_NS | PATTERN | IF_CLAUSE | ELSE_PART\
+	| WHILE_CLAUSE | UNTIL_CLAUSE | FUNCTION_DEFINITION | FUNCTION_BODY | FNAME\
+	| BRACE_GROUP | DO_GROUP | SIMPLE_COMMAND | CMD_NAME | CMD_WORD | CMD_PREFIX\
+	| CMD_SUFFIX | REDIRECT_LIST | IO_REDIRECT | IO_FILE | FILENAME | IO_HERE\
+	| HERE_END | NEWLINE_LIST | LINEBREAK | SEPARATOR_OP | SEPARATOR | SEQUENTIAL_SEP
+};
+
+typedef unsigned long long int		t_sym;
+
+/*
 typedef unsigned long long int 		t_sym;
 
 #define	PROGRAM 			(1UL << 0)
@@ -69,13 +161,34 @@ typedef unsigned long long int 		t_sym;
 #define SEPARATOR			(1UL << 44)
 #define SEQUENTIAL_SEP		(1UL << 45)
 
-#define SYM_DLESS			(1UL << 46)
-#define SYM_DGREAT			(1UL << 47)
-#define SYM_GREATAND		(1UL << 48)
-#define SYM_GREAT			(1UL << 49)
-#define SYM_LESSAND			(1UL << 50)
-#define SYM_LESS			(1UL << 51)
-#define SYM_SEMI			(1UL << 52)
+#define SYM_LESS			(1UL << 49)
+#define SYM_GREAT			(1UL << 50)
+
+#define ALL_SYM 			!0
+//#define ALL_SYM 			-1UL
+*/
+
+struct	s_prodmatch
+{
+	t_type	token;
+	t_sym	stack;
+	t_sym	new_sym;
+};
+
+typedef struct s_prodmatch t_prodmatch;
+
+extern t_prodmatch g_prodmatch[];
+
+
+struct	s_stackmatch
+{
+	t_sym under;
+	t_sym top;
+};
+
+typedef struct s_stackmatch	t_stackmatch;
+
+extern t_stackmatch g_stackmatch[];
 
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);

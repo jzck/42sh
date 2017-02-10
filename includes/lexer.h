@@ -6,19 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 20:20:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:24:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-struct	s_nest
-{
-	long long	do_group;
-};
-
-typedef struct s_nest	t_nest;
 
 # include "minishell.h"
 
@@ -42,6 +35,8 @@ typedef long long		t_type;
  * in
  *
 */
+
+/*
 
 # define TK_LESS		(1 << 0)	//transparent
 # define TK_GREAT		(1 << 1)	//transparent
@@ -73,6 +68,9 @@ typedef long long		t_type;
 # define TK_ELSE		(1 << 27)
 # define TK_UNTIL		(1 << 28)
 
+*/
+
+# define TK_COMMAND			(1 << 10)
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 # define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)

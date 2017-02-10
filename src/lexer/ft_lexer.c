@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:30:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 15:36:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:24:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		ft_lexer(t_list **alst, char **command)
 		ret = 1;
 	else if (ft_tokenize(alst, *command, DEFAULT))
 		ret = 1;
-	else if (ft_post_tokenize(alst, command))
-		ret = 1;
+//	else if (ft_post_tokenize(alst, command))
+//		ret = 1;
 	ft_strdel(command);
 	return (ret);
 }

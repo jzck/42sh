@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 20:32:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/10 01:40:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@ int			ft_parse(t_btree **ast, t_list **token)
 	state = UNDEFINED;
 	new_sym = ft_memalloc(sizeof(t_sym));
 	stack = ft_memalloc(sizeof(t_sym) * 1000);
-	push_stack(stack, 0);
+	push_stack(stack, EMPTY);
 	while (*token)
 	{
 		produce_sym(*stack, new_sym, token);	
+		DG("new sym %s", read_state(*new_sym));
 		if (eval_sym(*stack, *new_sym))
 			state = ERROR;
 		else
 		{
-			aggregate_sym(&stack, new_sym);
+//			aggregate_sym(&stack, new_sym);
 			//superflous sym
 			push_stack(++stack, *new_sym);
 		}
 		if (*stack == PROGRAM)
-			state = PROGRAM;
+			state = SUCCESS;
 		if (state == ERROR)
 			return (error_syntax(token));		
-		if (state == PROGRAM)
+		if (state == SUCCESS)
 			ft_putstr("success");
 //		build_tree(token, ast);
 		ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
