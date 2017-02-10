@@ -45,5 +45,9 @@ int		data_init(void)
 
 	data->jobc.first_job = NULL;
 	data->jobc.current_id = 1;
+	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
+		return (-1);
+	if (tgetent(NULL, term_name) != 1)
+		return (-1);
 	return (0);
 }
