@@ -29,7 +29,7 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 			push(&lexer->stack, lexer->state);
 			return (lexer_lex(alst, lexer));
 		}
-		top_state = *(int*)pop(&lexer->stack);
+		top_state = *(int*)pop(&lexer->stack)->content;
 		lexer->state = top_state == DQUOTE_BQUOTE ? DQUOTE : DEFAULT;
 		return (lexer_lex(alst, lexer));
 	}
