@@ -15,23 +15,25 @@
 int		lexer_bquote(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
+	int			top_state;
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
+	token_append(token, lexer, 0, 0);
 	if (lexer->str[lexer->pos] == '`')
 	{
 		lexer->pos++;
-		if (!(lexer->stack && *(int*)lexer->stack->content == BQUOTE))
+		if (!(lexer->stack && (*(int*)lexer->stack->content == BQUOTE
+							|| *(int*)lexer->stack->content == DQUOTE_BQUOTE)))
 		{
-			push(&lexer->stack, BQUOTE);
+			push(&lexer->stack, lexer->state);
 			return (lexer_lex(alst, lexer));
 		}
-		lexer->state = WORD;
-		pop(&lexer->stack);
+		top_state = *(int*)pop(&lexer->stack);
+		lexer->state = top_state == DQUOTE_BQUOTE ? DQUOTE : DEFAULT;
 		return (lexer_lex(alst, lexer));
 	}
-	token_append(token, lexer, 0, 0);
 	lexer->pos++;
-	return (lexer_quote(alst, lexer));
+	return (lexer_lex(alst, lexer));
 }
 

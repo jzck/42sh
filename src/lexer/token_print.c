@@ -26,7 +26,7 @@ void	token_print(t_list *lst)
 		type = token->type;
 		while (type >> (i++ + 2))
 			;
-		DG("%02i '%s'", i, token->data);
+		DG("%02i:[%s]", i, token->data);
 		index = -1;
 		lst = lst->next;
 	}

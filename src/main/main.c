@@ -29,9 +29,9 @@ int		interactive_shell()
 		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
 			pop(&lexer.stack);
 		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
-		DG("[{mag}%s{eoc}]", lexer.str);
 		ltoken = ft_lstlast(token);
 		lexer_lex((token ? &ltoken : &token), &lexer);
+		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
 	} while (lexer.stack);
 	DG("after lexing");

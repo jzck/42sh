@@ -58,6 +58,7 @@ enum	e_lexstate
 	QUOTE,
 	DQUOTE,
 	BQUOTE,
+	DQUOTE_BQUOTE,
 	BACKSLASH,
 	PAREN,
 	COMMENT,

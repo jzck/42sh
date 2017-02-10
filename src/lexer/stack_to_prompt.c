@@ -27,6 +27,8 @@ char	*stack_to_prompt(t_list	*stack)
 		return ("dquote> ");
 	else if (top == BQUOTE)
 		return ("bquote> ");
+	else if (top == DQUOTE_BQUOTE)
+		return ("dquote bquote> ");
 	else if (top == PAREN)
 		return ("subsh> ");
 	else

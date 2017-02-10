@@ -26,13 +26,13 @@ int		token_append(t_token *token, t_lexer *lexer, short int esc, short int esc2)
 		token->esc = (unsigned char *)ft_memrealloc((char *)token->esc,
 												(token->size >> 3),
 												(token->size >> 3) + 1);
-		token->esc[token->size >> 3] = 0; 
+		token->esc[token->size >> 3] = 0;
 		token->esc2 = (unsigned char *)ft_memrealloc((char *)token->esc2,
 												(token->size >> 3),
 												(token->size >> 3) + 1);
-		token->esc2[token->size >> 3] = 0; 
+		token->esc2[token->size >> 3] = 0;
 	}
-	ft_strcat(token->data, (char[2]){c, '\0'});
+	ft_strcat(token->data, (char[]){c, 0});
 	token->esc[len >> 3] |= esc << (7 - len % 8);
 	token->esc2[len >> 3] |= esc2 << (7 - len % 8);
 	return (0);
