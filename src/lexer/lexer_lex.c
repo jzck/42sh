@@ -28,7 +28,7 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_dquote,
 	&lexer_bquote,
 	&lexer_backslash,
-	&lexer_subshell,
+	&lexer_paren,
 	&lexer_comment,
 };
 

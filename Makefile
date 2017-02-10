@@ -137,7 +137,6 @@ job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
-lexer/ft_post_tokenize.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/lexer_backslash.c\
@@ -153,9 +152,9 @@ lexer/lexer_lessand.c\
 lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
+lexer/lexer_paren.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
-lexer/lexer_subshell.c\
 lexer/lexer_word.c\
 lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\

@@ -31,14 +31,15 @@
 # define TK_PAREN_OPEN	(1 << 11)
 # define TK_PAREN_CLOSE	(1 << 12)
 # define TK_BQUOTE		(1 << 13)
-# define TK_N_WORD		(1 << 14)
-# define TK_Q_WORD		(1 << 15)
-# define TK_DQ_WORD		(1 << 16)
+# define TK_WORD		(1 << 14)
+/* # define TK_N_WORD		(1 << 14) */
+/* # define TK_Q_WORD		(1 << 15) */
+/* # define TK_DQ_WORD		(1 << 16) */
 # define TK_COMMAND		(1 << 17)
 # define TK_SUBSHELL	(1 << 18)
 # define TK_NEWLINE		(1 << 19)
 
-# define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
+/* # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD) */
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 # define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)
 
@@ -58,7 +59,7 @@ enum	e_lexstate
 	DQUOTE,
 	BQUOTE,
 	BACKSLASH,
-	SUBSHELL,
+	PAREN,
 	COMMENT,
 };
 
@@ -116,7 +117,7 @@ int			lexer_quote(t_list **alst, t_lexer *lexer);
 int			lexer_dquote(t_list **alst, t_lexer *lexer);
 int			lexer_bquote(t_list **alst, t_lexer *lexer);
 int			lexer_backslash(t_list **alst, t_lexer *lexer);
-int			lexer_subshell(t_list **alst, t_lexer *lexer);
+int			lexer_paren(t_list **alst, t_lexer *lexer);
 int			lexer_comment(t_list **alst, t_lexer *lexer);
 
 #endif

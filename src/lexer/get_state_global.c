@@ -32,6 +32,6 @@ t_lexstate		get_state_global(t_lexer *lexer)
 	else if (c == '`')
 		return (BQUOTE);
 	else if (c == '(' || c == ')')
-		return (SUBSHELL);
+		return (PAREN);
 	return (0);
 }

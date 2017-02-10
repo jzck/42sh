@@ -71,7 +71,7 @@ char		*ft_read_stdin(void)
 			ft_print(ret);
 		else if (ret == 10)
 			return (STR);
-		/* else if (ft_isascii(ret) == 0) */
-		/* 	ft_read_it(ret, &POS, &STR); */
+		else if (ft_isascii(ret) == 0)
+			ft_read_it(ret, &POS, &STR);
 	}
 }

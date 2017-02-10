@@ -22,13 +22,13 @@ char	*stack_to_prompt(t_list	*stack)
 	if (top == BACKSLASH)
 		return ("> ");
 	else if (top == QUOTE)
-		return ("quote >");
+		return ("quote> ");
 	else if (top == DQUOTE)
-		return ("dquote >");
+		return ("dquote> ");
 	else if (top == BQUOTE)
-		return ("bquote >");
-	else if (top == SUBSHELL)
-		return ("subsh >");
+		return ("bquote> ");
+	else if (top == PAREN)
+		return ("subsh> ");
 	else
-		return (" > ");
+		return ("error> ");
 }

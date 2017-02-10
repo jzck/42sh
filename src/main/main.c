@@ -24,17 +24,20 @@ int		interactive_shell()
 	lexer.str = NULL;
 	token = NULL;
 	lexer.stack = NULL;
+	ast = NULL;
 	do {
 		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
 			pop(&lexer.stack);
 		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
+		DG("[{mag}%s{eoc}]", lexer.str);
 		ltoken = ft_lstlast(token);
 		lexer_lex((token ? &ltoken : &token), &lexer);
 		token_print(token);
-	} while (lexer.stack->content);
+	} while (lexer.stack);
+	DG("after lexing");
+	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
-
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);

@@ -14,27 +14,16 @@
 
 int		lexer_default(t_list **alst, t_lexer *lexer)
 {
-	t_lexstate	state;
 	t_token		*token;
 	char		c;
 
 	c = lexer->str[lexer->pos];
-	if ((state = get_state_global(lexer)))
-	{
-		lexer->state = state;
+	if ((lexer->state = get_state_global(lexer)))
 		return (lexer_lex(alst, lexer));
-	}
-	if ((state = get_state_redir(lexer)))
-	{
-		lexer->state = state;
+	if ((lexer->state = get_state_redir(lexer)))
 		return (lexer_lex(alst, lexer));
-	}
-	else if (ft_isdigit(c))
-		lexer->state = NUMBER;
-	else
-		lexer->state = WORD;
+	lexer->state = ft_isdigit(c) ? NUMBER : WORD;
 	token = (*alst)->content;
-	token_append(token, lexer, 0, 0);
-	token->type = TK_N_WORD;
+	token->type = TK_WORD;
 	return (lexer_lex(alst, lexer));
 }

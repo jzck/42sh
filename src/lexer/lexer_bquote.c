@@ -17,19 +17,21 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	token = (*alst)->content;
-	token->type = TK_Q_WORD;
-	lexer->pos++;
-	push(&lexer->stack, BQUOTE);
+	token->type = TK_WORD;
 	if (lexer->str[lexer->pos] == '`')
 	{
-		lexer->state = WORD;
 		lexer->pos++;
+		if (!(lexer->stack && *(int*)lexer->stack->content == BQUOTE))
+		{
+			push(&lexer->stack, BQUOTE);
+			return (lexer_lex(alst, lexer));
+		}
+		lexer->state = WORD;
 		pop(&lexer->stack);
 		return (lexer_lex(alst, lexer));
 	}
-	else if (lexer->str[lexer->pos] == 0)
-		return (0);
 	token_append(token, lexer, 0, 0);
+	lexer->pos++;
 	return (lexer_quote(alst, lexer));
 }
 

@@ -18,9 +18,12 @@ int		lexer_word(t_list **alst, t_lexer *lexer)
 	t_lexstate	state;
 
 	token = (*alst)->content;
-	token->type = TK_N_WORD;
+	token->type = TK_WORD;
 	if ((state = get_state_global(lexer)))
+	{
+		lexer->state = state;
 		return (lexer_lex(alst, lexer));
+	}
 	if ((state = get_state_redir(lexer)))
 	{
 		lexer->state = state;
