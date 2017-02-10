@@ -1,0 +1,87 @@
+#LINEBREAK#
+
+											linebreak - linebreak : NOTHING
+linebreak - sequential_sep : 0
+											linebreak - separator_op : AGGREGATION, k = 1, new = separator
+linebreak - separator : 0
+linebreak - newline_list : 0
+linebreak - here_end : 0
+linebreak - io_here : 0
+linebreak - filename : 0	
+linebreak - io_file : 0
+linebreak - io_redirect : 0
+linebreak - redirect_list : 0
+linebreak - cmd_suffix : 0 
+linebreak - cmd_prefix : 0
+linebreak - cmd_word : 0
+linebreak - cmd_name : 0
+linebreak - simple_commound : 0
+linebreak - do_group : 0
+linebreak - brace_group : 0
+linebreak - fname : 0 
+linebreak - function_body : 0
+linebreak - function_definition : 0
+linebreak - until_clause : 0
+linebreak - while_clause : 0
+linebreak - else_part : 0
+linebreak - if_clause : 0
+linebreak - pattern : 0
+linebreak - case_item : 0
+linebreak - case_item_ns : 0
+linebreak - case_list : 0
+linebreak - case_list_ns : 0
+linebreak - case_clause : 0
+linebreak - wordlist : 0
+											linebreak - in : VALID
+											linebreak - name : VALID	
+linebreak - term : 0
+											linebreak - compound_list : VALID
+linebreak - subshell : 0
+linebreak - compound_command : 0
+linebreak - command : 0
+linebreak - pipe_sequence : 0
+linebreak - pipeline : 0
+linebreak - and_or : 0
+linebreak - list : 0
+linebreak - complete_command : 0
+											linebreak - complete_commands : VALID
+linebreak - program : 0
+linebreak - In : 0
+#linebreak - Lbrace : 0
+#linebreak - Rbrace : 0
+#linebreak - Bang : 0
+linebreak - case : 0 
+linebreak - esac : 0
+linebreak - while : 0
+linebreak - until : 0
+linebreak - for : 0
+linebreak - if : 0
+linebreak - then : 0
+linebreak - else : 0
+linebreak - elif : 0
+linebreak - fi : 0
+linebreak - do : 0
+linebreak - done : 0
+linebreak - CLOBBER : 0
+linebreak - DLESS : 0
+linebreak - DGREAT : 0
+linebreak - LESSAND : 0
+linebreak - GREATAND : 0
+linebreak - LESSGREAT : 0
+linebreak - DLESSDAH : 0
+i											linebreak - AND_IF : VALID
+											linebreak - OR_IF : VALID
+linebreak - DSEMI : 0 
+											linebreak - WORD : VALID
+linebreak - ASSIGNEMENT_WORD : 0
+linebreak - NAME : 0
+linebreak - NEWLINE : 0
+linebreak - IO_NUMER : 0
+											linebreak - SEMI : AGGREGATION, k = 1 new = sequential_sep
+linebreak - AMP : 0
+											linebreak - EMPTY : VALID
+linebreak - GREAT : 0
+linebreak - LESS : 0
+linebreak - PAREN_OPEN : 0
+linebreak - PIPE : 0
+											linebreak - PAREN_CLOSE : VALID

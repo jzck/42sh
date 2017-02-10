@@ -1,0 +1,21 @@
+sequential_sep - wordlist : VALID
+sequential_sep - in : VALID
+sequential_sep - name : VALID
+
+separator - term : VALID
+separator - compound_list : NOTHING				!!!!!
+
+separator_op - complete_commands : NOTHING !!!!
+
+linebreak - linebreak : NOTHING
+linebreak - separator_op : ASSIGNATION, k = 1,	new = separator
+linebreak - in : VALID
+linebreak - name : VALID
+linebreak - compound_list : VALID
+linebreak - complete_commands : VALID
+linebreak - AND_IF : VALID
+linebreak - OR_IF : VALID
+linebreak - WORD : VALID
+linebreak - SEMI : AGGREGATION k - 1, new = sequential_sep
+linebreak - EMPTY : VALID
+linebreak - PAREN_CLOSE : VALID
