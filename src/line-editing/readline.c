@@ -42,7 +42,7 @@ void			ft_init_history(void)
 	close(fd);
 }
 
-struct termios	*ft_save_stats_term(int save)
+struct termios	*ft_save_termios(int save)
 {
 	static struct termios	*term_save = NULL;
 
@@ -54,40 +54,40 @@ struct termios	*ft_save_stats_term(int save)
 	return (term_save);
 }
 
-struct termios	*ft_stats_term_termcaps(void)
+void	ft_init_termios(void)
 {
-	static struct termios	*term = NULL;
+	struct termios	term;
 
-	if (!term)
-	{
-		ft_init_line();
-		ft_init_history();
-		term = (struct termios *)malloc(sizeof(struct termios));
-		tcgetattr(0, term);
-		(*term).c_lflag &= ~(ECHO | ICANON | ISIG);
-		(*term).c_cc[VMIN] = 1;
-		(*term).c_cc[VTIME] = 0;
-	}
-	return (term);
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ECHO | ICANON | ISIG);
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	tcsetattr(0, TCSANOW, &term);
+}
+
+void	readline_init(char *prompt)
+{
+	ft_save_termios(1);
+	ft_init_line();
+	ft_init_history();
+	ft_init_termios();
+	if (STR)
+		ft_strdel(&STR);
+	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
+	POS = 0;
+	prompt ? ft_putstr(prompt) : ft_prompt();
 }
 
 char	*readline(char *prompt)
 {
 	char	*input;
 
-	ft_save_stats_term(1);
-	if (tcsetattr(0, TCSANOW, ft_stats_term_termcaps()) == -1)
-		return (NULL);
-	if (STR)
-		ft_strdel(&STR);
-	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
-	POS = 0;
-	prompt ? ft_putstr(prompt) : ft_prompt();
+	readline_init(prompt);
 	input = ft_read_stdin();
 	ft_putchar('\n');
 	/* ft_check_line(); */
 	/* ft_check_heredoc(&STR); */
-	if (tcsetattr(0, TCSANOW, ft_save_stats_term(0)) == -1)
+	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
 		return (NULL);
 	return (input);
 
