@@ -3,12 +3,12 @@ sequential_sep - in : VALID
 sequential_sep - name : VALID
 
 separator - term : VALID
-separator - compound_list : NOTHING				!!!!!
+separator - compound_list : VALID - NOTHING							!!!!!
 
-separator_op - complete_commands : NOTHING !!!!
+separator_op - complete_commands : VALID - NOTHING 					!!!!
 
-linebreak - linebreak : NOTHING
-linebreak - separator_op : ASSIGNATION, k = 1,	new = separator
+linebreak - linebreak : VALID - NOTHING
+linebreak - separator_op : VALID - ASSIGNATION, k = 1,	new = separator
 linebreak - in : VALID
 linebreak - name : VALID
 linebreak - compound_list : VALID
@@ -16,6 +16,46 @@ linebreak - complete_commands : VALID
 linebreak - AND_IF : VALID
 linebreak - OR_IF : VALID
 linebreak - WORD : VALID
-linebreak - SEMI : AGGREGATION k - 1, new = sequential_sep
-linebreak - EMPTY : VALID
+linebreak - SEMI : VALID - AGGREGATION k = 1, new = sequential_sep
 linebreak - PAREN_CLOSE : VALID
+
+newline_list - newline_list : VALID - NOTHING
+newline_list - separator : VALID - NOTHING 								!!!
+newline_list - linebreak : VALID - NOTHING
+newline_list - term : VALID - AGGREGATION k = 0, new = separator
+
+here_end - DLESS : VALID - AGGREGATION k = 1, new = io_here
+here_end - DLESSDAH : VALID - AGGREGATION k = 1, new = io_here
+
+io_here - linebreak : VALID - AGGREGATION k = 1, new = program
+io_here - redirect_list : VALID - NOTHING
+io_here - cmd_suffix : VALID - NOTHING
+io_here - cmd_prefix : VALID - NOTHING
+io_here - cmd_word : VALID - AGGREGATION k = 0, new = cmd_suffix
+io_here - cmd_name : VALID - AGGREGATION k = 0, new = cd_suffix
+io_here - IO_NUMBER : VALID - AGGREGATION k = 1, new = io_redirect
+io_here - compound_command : VALID - AGGREGATION k = 0, new = io_redirect
+
+filename - LESS : VALID - AGGREGATION k = 1, new = io_file
+filename - LESSAND : VALID - AGGREGATION k = 1, new = io_file
+filename - GREAT : VALID - AGGREGATION k = 1, new = io_file
+filename - GREATAND : VALID - AGGREGATION k = 1, new = io_file
+filename - DGREAT : VALID - AGGREGATION k = 1, new = io_file
+filename - LESSGREAT : VALID - AGGREGATION k = 1, new = io_file
+filename - CLOBBER : VALID - AGGREGATION k = 1, new = io_file
+
+io_file - redirect_list : VALID - NOTHING
+io_file - cmd_suffix : VALID - NOTHING
+io_file - cmd_prefix : VALID - NOTHING
+io_file - cmd_name : VALID - NOTHING
+io_file - cmd_word : VALID - NOTHING
+io_file - linebreak : VALID - AGGREGATION k = 1, new = program
+io_file - IO_NUMBER : VALID - AGGREGATION k = 1, new = io_redirect
+io_file - compound_command : VALID - AGGREGATION k = 0, new = io_redirect
+
+io_redirect - redirect_list : VALID - NOTHING
+io_redirect - compound_command : VALID - AGGREGATION k = 0, new = redirect_list 
+
+// si transparence continuer remontee,
+// si dernier membre aurait pu aussi constitue membre actuel, ne rien fiare, ainsi que transparence
+//push un dernier caracter linebreak

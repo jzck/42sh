@@ -1,0 +1,87 @@
+#IO_HERE
+
+io_here - io_here : 0
+io_here - sequential_sep : 0
+io_here - separator_op :  0
+										io_here - linebreak : VALID - AGGREGATION k = 1, new = program
+io_here - newline_list : 0
+io_here - here_end : 0
+io_here - separator : 0
+io_here - filename : 0
+io_here - io_file : 0
+io_here - io_redirect : 0
+										io_here - redirect_list : VALID - NOTHING
+										io_here - cmd_suffix : VALID - NOTHING
+										io_here - cmd_prefix : VALID - NOTHING
+										io_here - cmd_word : VALID - AGGREGATION k = 0, new = cmd_suffix
+										io_here - cmd_name : VALID - AGGREGATION k = 0, new = cmd_suffix
+io_here - simple_command : 0
+io_here - do_group : 0
+io_here - brace_group : 0
+io_here - fname : 0 
+io_here - function_body : 0
+io_here - function_definition : 0
+io_here - until_clause : 0
+io_here - while_clause : 0
+io_here - else_part : 0
+io_here - if_clause : 0
+io_here - pattern : 0
+io_here - case_item : 0
+io_here - case_item_ns : 0
+io_here - case_list : 0
+io_here - case_list_ns : 0
+io_here - case_clause : 0
+io_here - wordlist : 0
+io_here - in : 0
+io_here - name : 0
+io_here - term : 0 
+io_here - compound_list : 0
+io_here - subshell : 0
+io_here - compound_command : 0
+io_here - command : 0
+io_here - pipe_sequence : 0
+io_here - pipeline : 0
+io_here - and_or : 0
+io_here - list : 0
+io_here - complete_command : 0
+io_here - complete_commands : 0
+io_here - program : 0
+io_here - In : 0
+#io_here - Lbrace : 0
+#io_here - Rbrace : 0
+#io_here - Bang : 0
+io_here - case : 0 
+io_here - esac : 0
+io_here - while : 0
+io_here - until : 0
+io_here - for : 0
+io_here - if : 0
+io_here - then : 0
+io_here - else : 0
+io_here - elif : 0
+io_here - fi : 0
+io_here - do : 0
+io_here - done : 0
+io_here - CLOBBER : 0
+io_here - DLESS : 0
+io_here - DGREAT : 0
+io_here - LESSAND : 0
+io_here - GREATAND : 0
+io_here - LESSGREAT : 0
+io_here - DLESSDAH : 0
+io_here - AND_IF : 0
+io_here - OR_IF : 0
+io_here - DSEMI : 0 
+io_here - WORD : 0
+io_here - ASSIGNEMENT_WORD : 0
+io_here - NAME : 0
+io_here - NEWLINE : 0
+										io_here - IO_NUMBER : VALID - AGREGATION k = 1, new = io_redirect
+io_here - SEMI : 0
+io_here - AMP : 0
+io_here - EMPTY : 0
+io_here - GREAT : 0
+io_here - LESS : 0
+io_here - PAREN_OPEN : 0
+io_here - PIPE : 0
+io_here - PAREN_CLOSE : 0

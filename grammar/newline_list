@@ -1,10 +1,10 @@
 #NEWLINE_LIST
 
-newline_list - newline_list : 0
+													newline_list - newline_list : VALID - NOTHING
 newline_list - sequential_sep : 0
 newline_list - separator_op : 0
-newline_list - separator : 0
-newline_list - newline_list : 0
+													newline_list - separator : VALID - NOTHNG !!!
+													newline_list - linebreak : VALID - NOTHING
 newline_list - here_end : 0
 newline_list - io_here : 0
 newline_list - filename : 0	
@@ -34,7 +34,7 @@ newline_list - case_clause : 0
 newline_list - wordlist : 0
 newline_list - in : 0 
 newline_list - name : 0  
-newline_list - term : 0
+													newline_list - term : AGGREGATION k - 0, new = separator
 newline_list - compound_list : 0
 newline_list - subshell : 0
 newline_list - compound_command : 0
@@ -79,9 +79,9 @@ newline_list - NEWLINE : 0
 newline_list - IO_NUMER : 0
 newline_list - SEMI : 0
 newline_list - AMP : 0
-											newline_list - EMPTY : VALID
+											newline_list - EMPTY : AGGREGATION k = 1, new = linebreak;
 newline_list - GREAT : 0
 newline_list - LESS : 0
 newline_list - PAREN_OPEN : 0
 newline_list - PIPE : 0
-											newline_list - PAREN_CLOSE : VALID
+newline_list - PAREN_CLOSE : 0
