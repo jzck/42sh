@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/12 19:02:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 20:35:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ enum	e_sym
 	SEQUENTIAL_SEP,
 	LOOP,
 	FUNC,
+	PIPE_SEMI_SEQUENCE,
 	ALL = TK_LESS | TK_GREAT | TK_DLESS | TK_DGREAT | TK_LESSAND | TK_GREATAND\
 	| TK_SEMI | TK_PIPE | TK_AND_IF	| TK_OR_IF | TK_AMP | TK_PAREN_OPEN\
   	| TK_PAREN_CLOSE | TK_BQUOTE | TK_SUBSHELL | TK_NEWLINE | TK_WHILE | TK_DO\
