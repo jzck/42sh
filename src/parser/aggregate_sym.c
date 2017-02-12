@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/12 18:47:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 19:18:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_aggrematch		g_aggrematch[] =
 	{LINEBREAK, TK_SEMI, SEPARATOR_OP, ALL, tant que TK_SEMI},
 //do one
 	{LINEBREAK, TK_PAREN_CLOSE, TK_ESAC, CASE_ITEM_NS, tant que pattern ou '('},
-	
+	{LINEBREAK, TK_PAREN_CLOSE, FUNC, ALL, FNAME},
+
 	{NEWLINE_LIST, NEWLINE_LIST, NEWLINE_LIST, ALL, tant que newline},
 	{NEWLINE_LIST, NAME, SEPARATOR_SEP, ALL, 0},
 	{NEWlINE_LIST, IN, SEPARATOR_SEP, ALL, 0},
@@ -83,6 +84,28 @@ t_aggrematch		g_aggrematch[] =
 	{CMD_NAME, SEPARATOR_OP, SIMPLE_COMMAND, TK_NEWLINE ou TK_SEMI ou TK_AMP, 0},
 	{CMD_NAME, NEWLINE_LIST, SIMPLE_COMMAND, TK_NEWLINE ou TK_SEMI ou TK_AMP, 0},
 
+	{SIMPLE_COMMAND, ALL, COMMAND, ALL, 0},
+
+	{DO_GROUP, NAME, FOR_CLAUSE, ALL, FOR},
+	{DO_GROUP, SEQUENTIAL_SEP, FOR_CLAUSE, ALL, FOR},
+	{DO_GROUP, COMPOUND_LIST, LOOP, ALL, COMPOUND_LIST},
+
+	{LOOP, WHILE, WHILE_CLAUSE, ALL, WHILE},
+	{LOOP, UNTIL, UNTIL_CLAUSE, ALL, UNTIL},
+
+	{BRACE_GROUP, ALL, COMMAND, ALL, 0},
+
+	{FUNCTION_BODY, FUNC, FUNCTION_DEFINITION, ALL, 0},
+
+	{FUNCTION_DEFINITION, ALL, COMMAND, ALL, 0},
+
+	{UNTIL_CLAUSE, ALL, COMMAND, ALL, 0},
+
+	{WHILE_CLAUSE, ALL, COMMAND, ALL, 0},
+
+	{ELSE_PART, COMPOUND_LIST, ELSE_PART, ALL, ELIF},
+
+	{IF_CLAUSE, ALL, COMMAND, ALL, 0}
 	{0, 0, 0},
 }
 

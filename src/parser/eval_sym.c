@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/12 18:46:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 19:18:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,52 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_NAME, TK_BANG},
 	{CMD_NAME, SEPARATOR_OP},
 	{CMD_NAME, NEWLINE_LIST},
+
+	{SIMPLE_COMMNAND, LINEBREAK},
+	{SIMPLE_COMMAND, TK_BANG},
+	{SIMPLE_COMMAND, SEPARATOR_OP},
+	{SIMPLE_COMMAND, NEWLINE_LIST},
+
+	{DO_GROUP, COMPOUND_LIST},
+	{DO_GROUP, NAME},
+	{DO_GROUP, SEQUENTIAL_SEP},
+
+	{LOOP, WHILE},
+	{LOOP, UNTIL},
+
+	{BRACE_GROUP, LINEBREAK},
+	{BRACE_GROUP, TK_BANG},
+	{BRACE_GROUP, SEPARATOR_OP},
+	{BRACE_GROUP, NEWLINE_LIST},
+
+	{FNAME, LINEBREAK},
+	{FNAME, TK_BANG},
+	{FNAME, SEPARATOR_OP},
+	{FNAME, NEWLINE_LIST},
+
+	{FUNCTION_BODY, FUNC},
+
+	{FUNCTION_DEFINITION, LINEBREAK},
+	{FUNCTION_DEFINITION, TK_BANG},
+	{FUNCTION_DEFINITION, SEPARATOR_OP},
+	{FUNCTION_DEFINITION, NEWLINE_LIST},
+
+	{UNTIL_CLAUSE, LINEBREAK},
+	{UNTIL_CLAUSE, TK_BANG},
+	{UNTIL_CLAUSE, SEPARATOR_OP},
+	{UNTIL_CLAUSE, NEWLINE_LIST},
+
+	{WHILE_CLAUSE, LINEBREAK},
+	{WHILE_CLAUSE, TK_BANG},
+	{WHILE_CLAUSE, SEPARATOR_OP},
+	{WHILE_CLAUSE, NEWLINE_LIST},
+
+	{ELSE_PART, COMPOUND_LIST},
+	
+	{IF_CLAUSE, LINEBREAK},
+	{IF_CLAUSE, TK_BANG},
+	{IF_CLAUSE, SEPARATOR_OP},
+	{IF_CLAUSE, NEWLINE_LIST},
 	{0, 0},
 };
 
