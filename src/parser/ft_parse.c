@@ -22,7 +22,7 @@ int			ft_parse(t_btree **ast, t_list **token)
 	state = UNDEFINED;
 	new_sym = ft_memalloc(sizeof(t_sym));
 	stack = ft_memalloc(sizeof(t_sym) * 1000);
-	push_stack(stack, EMPTY);
+	push_stack(stack, LINEBREAK);
 	while (*token)
 	{
 		produce_sym(*stack, new_sym, token);	

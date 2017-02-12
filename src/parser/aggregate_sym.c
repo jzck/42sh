@@ -12,7 +12,20 @@
 
 #include "parser.h"
 
-//descente recursive pour multi aggregation
+t_aggrematch		g_aggrematch[] =
+{
+	{CMD_SUFFIX, TK_WORD, CMD_SUFFIX},
+	{TK_PIPE, TK_WORD, PATTERN},
+	{WORDLIST, TK_WORD, WORDLIST},
+
+	{CMD_PREFIX, TK_ASSIGNEMENT_WORD, CMD_PREFIX},
+
+	{ELSE_PART, TK_FI, IF_CLAUSE},
+	{COMPOUND_LIST, TK_FI, IF_CLAUSE},	
+
+	{TK_COMPOUND_LIST, TK_DONE, DO_GROUP},
+	{TK_COMPOUND_LIST, TK_RBRACE, BRACE_GROUP},
+	{0, 0, 0},
 
 int			aggregate_sym(t_sym **stack, t_sym *new_sym)
 {

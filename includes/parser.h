@@ -22,7 +22,7 @@
 
 enum	e_sym
 {
-	EMPTY = 1,
+	LINEBREAK = 1,
 	TK_LESS,
 	TK_GREAT,
 	TK_DLESS,
@@ -51,6 +51,16 @@ enum	e_sym
 	TK_N_WORD,
 	TK_Q_WORD,
 	TK_DQ_WORD,
+	TK_ASSIGNEMENT_WORD = 50,
+	TK_BANG,	
+	TK_NAME,
+	TK_FOR,
+	TK_IO_NUMBER,
+	TK_DLESSDASH,
+	TK_LESSGREAT,
+	TK_CASE,
+	TK_LBRACE,
+	TK_IN,
 	PROGRAM = 100,
 	COMPLETE_COMMANDS,
 	LIST,
@@ -91,7 +101,6 @@ enum	e_sym
 	IO_HERE,
 	HERE_END,
 	NEWLINE_LIST,
-	LINEBREAK,
 	SEPARATOR_OP,
 	SEPARATOR,
 	SEQUENTIAL_SEP,
@@ -106,7 +115,7 @@ enum	e_sym
 	| WHILE_CLAUSE | UNTIL_CLAUSE | FUNCTION_DEFINITION | FUNCTION_BODY | FNAME\
 	| BRACE_GROUP | DO_GROUP | SIMPLE_COMMAND | CMD_NAME | CMD_WORD | CMD_PREFIX\
 	| CMD_SUFFIX | REDIRECT_LIST | IO_REDIRECT | IO_FILE | FILENAME | IO_HERE\
-	| HERE_END | NEWLINE_LIST | LINEBREAK | SEPARATOR_OP | SEPARATOR | SEQUENTIAL_SEP
+	| HERE_END | NEWLINE_LIST | SEPARATOR_OP | SEPARATOR | SEQUENTIAL_SEP
 };
 
 typedef unsigned long long int		t_sym;
@@ -168,6 +177,17 @@ typedef unsigned long long int 		t_sym;
 //#define ALL_SYM 			-1UL
 */
 
+struct	s_aggrematch
+{
+	t_sym 	under;
+	t_sym 	top;
+	t_sym 	new_sym;
+};
+
+typedef struct s_aggrematch t_aggrematch;
+
+extern t_aggrematch g_aggrematch[];
+
 struct	s_prodmatch
 {
 	t_type	token;
@@ -178,7 +198,6 @@ struct	s_prodmatch
 typedef struct s_prodmatch t_prodmatch;
 
 extern t_prodmatch g_prodmatch[];
-
 
 struct	s_stackmatch
 {
