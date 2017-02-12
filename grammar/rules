@@ -55,6 +55,12 @@ io_file - compound_command : VALID - AGGREGATION k = 0, new = io_redirect
 
 io_redirect - redirect_list : VALID - NOTHING
 io_redirect - compound_command : VALID - AGGREGATION k = 0, new = redirect_list 
+io_redirect - cmd_suffix : VALID - NOTHING
+io_redirect - cmd_prefix : VALID - NOTHING
+io_redirect - cmd_word : VALID - NOTHING
+io_redirect - cmd_name : VALID - NOTHING
+
+
 
 // si transparence continuer remontee,
 // si dernier membre aurait pu aussi constitue membre actuel, ne rien fiare, ainsi que transparence

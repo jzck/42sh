@@ -36,8 +36,8 @@ char			*read_state(t_sym current)
 		return ("SIMPLE_COMMAND");
 	if (current == PROGRAM)
 		return ("PROGRAM");
-*/	if (current == EMPTY)
-		return ("EMPTY");
+*/	if (current == LINEBREAK)
+		return ("LINEBREAK");
 	if (current != 0)
 		return ("NON-DEFINED");
 	if (current == 0)
