@@ -145,6 +145,7 @@ lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dquote.c\
+lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
 lexer/lexer_less.c\

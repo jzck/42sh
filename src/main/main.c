@@ -34,8 +34,6 @@ int		interactive_shell()
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
 	} while (lexer.stack);
-	DG("after lexing");
-	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
 	btree_print(STDBUG, ast, &ft_putast);

@@ -31,6 +31,7 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_backslash,
 	&lexer_paren,
 	&lexer_comment,
+	&lexer_end,
 };
 
 int		ft_is_delim(char c)
@@ -42,8 +43,8 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
-	if (!lexer->str[lexer->pos])
-		return (0);
+	if (lexer->str[lexer->pos] == 0)
+		return (lexer_end(alst, lexer));
 	if (!*alst)
 	{
 		token = token_init();

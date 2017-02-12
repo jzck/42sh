@@ -33,7 +33,19 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 		lexer->state = top_state == DQUOTE_BQUOTE ? DQUOTE : DEFAULT;
 		return (lexer_lex(alst, lexer));
 	}
+	if (lexer->str[lexer->pos] == '\\')
+	{
+		lexer->pos++;
+		if (lexer->str[lexer->pos] == 0)
+		{
+			push(&lexer->stack, BACKSLASH);
+			return (0);
+		}
+		else
+			token_append(token, lexer, 1, 1);
+		lexer->pos++;
+		return (lexer_lex(alst,lexer));
+	}
 	lexer->pos++;
 	return (lexer_lex(alst, lexer));
 }
-

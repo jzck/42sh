@@ -21,7 +21,6 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	if (lexer->str[lexer->pos] == '"')
 	{
 		lexer->pos++;
-		/* if (!(lexer->stack && *(int*)lexer->stack->content != BQUOTE)) */
 		if (!(lexer->stack && *(int*)lexer->stack->content == DQUOTE))
 		{
 			push(&lexer->stack, DQUOTE);
@@ -33,16 +32,16 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	}
 	if (lexer->str[lexer->pos] == '\\')
 	{
-		if (lexer->str[lexer->pos + 1] == '"')
-			token_append(token, lexer, 1, 0);
-		else if (lexer->str[lexer->pos + 1] == 0)
+		lexer->pos++;
+		if (lexer->str[lexer->pos] == 0)
 		{
 			push(&lexer->stack, BACKSLASH);
 			return (0);
 		}
+		else
+			token_append(token, lexer, 1, 1);
 		lexer->pos++;
-		token_append(token, lexer, 1, 1);
-		return (lexer_dquote(alst,lexer));
+		return (lexer_lex(alst,lexer));
 	}
 	else if (lexer->str[lexer->pos] == '`')
 	{
