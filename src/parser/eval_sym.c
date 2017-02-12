@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/10 16:57:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 18:46:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 t_stackmatch	g_stackmatch[] =
 {
-	{CMD_SUFFIX, TK_WORD},
-	{TK_PIPE, TK_WORD},
-	{CASE, TK_WORD},
-	{WORDLIST, TK_WORD},
+	{TK_WORD, CMD_SUFFIX},
+	{TK_WORD, TK_PIPE},
+	{TK_WORD, CASE},
+	{TK_WORD, WORDLIST},
 
-	{CMD_PREFIX, TK_ASSIGNEMENT_WORD},
+	{TK_ASSIGNEMENT_WORD, CMD_PREFIX},
 	
-	{REDIRECT_LIST, TK_IO_NUMBER},
-	{CMD_SUFFIX, TK_IO_NUMBER},
-	{CMD_PREFIX, TK_IO_NUMBER},
-	{CMD_NAME, TK_IO_NUMBER},
-	{CMD_WORD, TK_IO_NUMBER},
-	{LINEBREAK, TK_IO_NUMBER},
-	{TK_BANG, TK_IO_NUMBER},
-	{SEPARATOR_OP, TK_IO_NUMBER},
-	{NEWLINE_LIST, TK_IO_NUMBER},
+	{TK_IO_NUMBER, REDIRECT_LIST},
+	{TK_IO_NUMBER, CMD_SUFFIX},
+	{TK_IO_NUMBER, CMD_PREFIX},
+	{TK_IO_NUMBER, CMD_NAME},
+	{TK_IO_NUMBER, CMD_WORD},
+	{TK_IO_NUMBER, LINEBREAK},
+	{TK_IO_NUMBER, TK_BANG},
+	{TK_IO_NUMBER, SEPARATOR_OP},
+	{TK_IO_NUMBER, NEWWLINE_LIST},
 
 	{TK_AND_IF, AND_OR},
 
@@ -224,6 +224,65 @@ t_stackmatch	g_stackmatch[] =
 	{NEWLINE_LIST, COMPOUND_LIST},
 	{NEWLINE_LIST, COMPLETE_COMMANDS}, 
 
+	{HERE_END, DLESS},
+	{HERE_END, DLESSDASH},
+
+	{IO_HERE, TK_IO_NUMBER},
+	{IO_HERE, REDIRECT_LIST},
+	{IO_HERE, CMD_SUFFIX},
+	{IO_HERE, CMD_PREFIX},
+	{IO_HERE, CMD_WORD},
+	{IO_HERE, CMD_NAME},
+	{IO_HERE, LINEBREAK},
+	{IO_HERE, TK_BANG},
+	{IO_HERE, SEPARATOR_OP},
+	{IO_HERE, NEWLINE_LIST},
+
+	{FILENAME, TK_LESS},
+	{FILENAME, TK_LESSAND},
+	{FILENAME, TK_GREAT},
+	{FILENAME, TK_GREATAND},
+	{FILENAME, TK_DGREAT},
+	{FILENAME, TK_LESSGREAT},
+	{FILENAME, TK_CLOBBER},
+
+	{IO_FILE, TK_IO_NUMBER},
+	{IO_FILE, REDIRECT_LIST},
+	{IO_FILE, CMD_SUFFIX},
+	{IO_FILE, CMD_PREFIX},
+	{IO_FILE, CMD_WORD},
+	{IO_FILE, CMD_NAME},
+	{IO_FILE, LINEBREAK},
+	{IO_FILE, TK_BANG},
+	{IO_FILE, SEPARATOR_OP},
+	{IO_FILE, NEWLINE_LIST},
+
+	{IO_REDIRECT, REDIRECT_LIST},
+	{IO_REDIRECT, CMD_SUFFIX},
+	{IO_REDIRECT, CMD_PREFIX},
+	{IO_REDIRECT, CMD_WORD},
+	{IO_REDIRECT, CMD_NAME},
+	{IO_REDIRECT, LINEBREAK},
+	{IO_REDIRECT, TK_BANG},
+	{IO_REDIRECT, SEPARATOR_OP},
+	{IO_REDIRECT, NEWLINE_LIST},
+
+	{REDIRECT_LIST, COMPOUND_COMMAND}
+
+	{CMD_SUFFIX, CMD_WORD},
+	{CMD_SUFFIX, CMD_NAME},
+
+	{CMD_PREFIX, LINEBREAK},
+	{CMD_PREFIX, TK_BANG},
+	{CMD_PREFIX, SEPARATOR_OP},
+	{CMD_PREFIX, NEWLINE_LIST},
+
+	{CMD_WORD, CMD_PREFIX},
+	
+	{CMD_NAME, LINEBREAK},
+	{CMD_NAME, TK_BANG},
+	{CMD_NAME, SEPARATOR_OP},
+	{CMD_NAME, NEWLINE_LIST},
 	{0, 0},
 };
 
@@ -235,8 +294,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
-		if (stack == g_stackmatch[i].under
-			&& new_sym == g_stackmatch[i].top)
+		if (new_sym == g_stackmatch[i].top && stack == g.stackmatch[i].under)
 			return (0);
 		i++;
 	}

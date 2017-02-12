@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/10 15:58:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 17:41:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,8 @@ extern t_prodmatch g_prodmatch[];
 
 struct	s_stackmatch
 {
-	t_sym under;
 	t_sym top;
+	t_sym under;
 };
 
 typedef struct s_stackmatch	t_stackmatch;
