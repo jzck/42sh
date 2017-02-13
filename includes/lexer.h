@@ -84,12 +84,16 @@ int			ft_post_tokenize(t_list **alst, char **str);
 t_token		*token_init();
 int			token_append(t_token *token, t_lexer *lexer,
 				short int esc, short int esc2);
+int			token_append_char(t_token *token, char c,
+				short int esc, short int esc2);
+int			token_append_str(t_token *token, char *str,
+				short int esc, short int esc2);
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
 void		token_print(t_list *lst);
 
 int			reduce_parens(t_list **alst, char *str);
-int			expand_bquotes(t_list **alst);
+int			bquotes_expand(t_list **alst);
 char		*command_getoutput(char *command);
 
 int			ft_is_delim(char c);

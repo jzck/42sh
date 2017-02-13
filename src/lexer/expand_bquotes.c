@@ -12,75 +12,80 @@
 
 #include "lexer.h"
 
-int		expand_bquotes(t_list **alst)
+int		bquotes_insert_words(t_list *cur_word, char *word, char *after_bq)
 {
+	char	*ifs;
 	t_list	*new_word;
 	t_list	*after_word;
-	t_list	*cur_word;
-	t_list	*lst;
 	t_token	*token;
-	t_token	*token_buf;
-	char	*word;
-	char	*ifs;
+
+	after_word = cur_word->next;
+	ifs = ft_getenv(data_singleton()->env, "IFS");
+	if (ifs)
+		word = ft_strtok(word, ifs);
+	token = cur_word->content;
+	token_append_str(token, word, 0, 0);
+	if (ifs)
+		while ((word = ft_strtok(NULL, ifs)))
+		{
+			token = token_init();
+			token->type = TK_WORD;
+			token_append_str(token, word, 0, 0);
+			new_word = ft_lstnew(token, sizeof(*token));
+			cur_word->next = new_word;
+			new_word->next = after_word;
+			cur_word = new_word;
+		}
+	token = cur_word->content;
+	ft_strappend(&token->data, after_bq);
+	return (0);
+}
+
+int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
+{
 	char	*output;
 	char	*last_char;
+	char	*after_bq;
+
+	*bq_start = 0;
+	*bq_end = 0;
+	output = command_getoutput(bq_start + 1);
+	after_bq = ft_strdup(bq_end + 1);
+	last_char = output + ft_strlen(output) - 1;
+	while (*last_char == '\n')
+		*last_char++ = 0;
+	bquotes_insert_words(cur_word, output, after_bq);
+	ft_strdel(&output);
+	ft_strdel(&after_bq);
+	return (0);
+}
+
+int		bquotes_expand(t_list **alst)
+{
+	t_list	*cur_word;
+	t_list	*lst;
 	char	*bq_start;
 	char	*bq_end;
-	char	*after_bq;
-	char	**str;
-	t_lexer	lexer;
 	t_flag	tk;
 
 	tk = TK_WORD;
 	cur_word = *alst;
-	while (cur_word && (lst = ft_lst_find(cur_word, &tk, token_cmp_type)))
+	while ((lst = ft_lst_find(cur_word, &tk, token_cmp_type)))
 	{
 		cur_word = lst;
-		after_word = cur_word->next;
-		token = cur_word->content;
-		str = &token->data;
-		if (!(bq_start = ft_strchr(*str, '`')))
+		if (!(bq_start = ft_strchr(((t_token*)cur_word->content)->data, '`')))
 		{
 			cur_word = cur_word->next;
-			continue ;
+			return (0);
 		}
 		if (!(bq_end = ft_strchr(bq_start + 1, '`')))
 		{
 			ft_dprintf(2, "{red}%s: parse error near '`'{eoc}\n", SHELL_NAME);
 			return (-1);
 		}
-		*bq_end = 0;
-		after_bq = ft_strdup(bq_end + 1);
-		word = command_getoutput(bq_start + 1);
-		output = word;
-		last_char = word + ft_strlen(word) - 1;
-		while (*last_char == '\n')
-			*last_char++ = 0;
-		ifs = ft_getenv(data_singleton()->env, "IFS");
-		if (ifs)
-			word = ft_strtok(word, ifs);
-		*bq_start = 0;
-		ft_strappend(str, word);
-		while (ifs && (lexer.str = ft_strtok(NULL, ifs)))
-		{
-			lexer.pos = 0;
-			token_buf = token_init();
-			token_buf->type = TK_WORD;
-			while (lexer.str[lexer.pos])
-			{
-				token_append(token_buf, &lexer, 0, 0);
-				lexer.pos++;
-			}
-			new_word = ft_lstnew(token_buf, sizeof(*token_buf));
-			cur_word->next = new_word;
-			new_word->next = after_word;
-			cur_word = new_word;
-		}
-		token = cur_word->content;
-		ft_strappend(&token->data, after_bq);
-		ft_strdel(&after_bq);
-		ft_strdel(&output);
-		cur_word = after_word;
+		if (bquotes_substitute(cur_word, bq_start, bq_end))
+			return (-1);
+		cur_word = lst;
 	}
 	return (0);
 }

@@ -31,7 +31,7 @@ int		non_interactive_shell(char *command)
 		do {
 			lexer_lex(&token, &lexer);
 		} while (lexer.str[lexer.pos] == '\n');
-		if (expand_bquotes(&token))
+		if (bquotes_expand(&token))
 			return (1);
 		token_print(token);
 		if (ft_parse(&ast, &token))
@@ -63,13 +63,13 @@ int		interactive_shell()
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
 	} while (lexer.stack);
-	if (expand_bquotes(&token))
+	if (!token)
+		return (0);
+	if (bquotes_expand(&token))
 		return (1);
-	DG("check main 0");
 	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
-	DG("check main 1");
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);

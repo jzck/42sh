@@ -85,18 +85,7 @@ char	*readline(char *prompt)
 	readline_init(prompt);
 	input = ft_read_stdin();
 	ft_putchar('\n');
-	/* ft_check_line(); */
-	/* ft_check_heredoc(&STR); */
 	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
 		return (NULL);
 	return (input);
-
-	/* ft_history_parsing(); */
-	/* if (STR && (!data_singleton()->line.list_beg || */
-	/* ft_strcmp(data_singleton()->line.list_beg->prev->str, STR))) */
-	/* { */
-	/* 	ft_push_back_history(&data_singleton()->line.list_beg, */
-	/* 	ft_create_history_list(STR)); */
-	/* 	ft_add_in_history_file(STR); */
-	/* } */
 }

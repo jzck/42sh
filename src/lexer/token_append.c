@@ -12,12 +12,12 @@
 
 #include "lexer.h"
 
-int		token_append(t_token *token, t_lexer *lexer, short int esc, short int esc2)
+
+int		token_append_char(t_token *token, char c,
+		short int esc, short int esc2)
 {
 	int		len;
-	char	c;
 
-	c = lexer->str[lexer->pos];
 	len = ft_strlen(token->data);
 	if (len >= token->size)
 	{
@@ -36,4 +36,19 @@ int		token_append(t_token *token, t_lexer *lexer, short int esc, short int esc2)
 	token->esc[len >> 3] |= esc << (7 - len % 8);
 	token->esc2[len >> 3] |= esc2 << (7 - len % 8);
 	return (0);
+}
+
+int		token_append_str(t_token *token, char *str,
+		short int esc, short int esc2)
+{
+	while (*str)
+		if (token_append_char(token, *str++, esc, esc2))
+			return (1);
+	return (0);
+}
+
+int		token_append(t_token *token, t_lexer *lexer,
+		short int esc, short int esc2)
+{
+	return (token_append_char(token, lexer->str[lexer->pos], esc, esc2));
 }
