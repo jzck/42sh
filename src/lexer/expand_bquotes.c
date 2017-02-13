@@ -19,13 +19,16 @@ int		expand_bquotes(t_list **alst)
 	t_list	*cur_word;
 	t_list	*lst;
 	t_token	*token;
-	t_token	token_buf;
+	t_token	*token_buf;
 	char	*word;
+	char	*ifs;
 	char	*output;
+	char	*last_char;
 	char	*bq_start;
 	char	*bq_end;
 	char	*after_bq;
 	char	**str;
+	t_lexer	lexer;
 	t_flag	tk;
 
 	tk = TK_WORD;
@@ -36,7 +39,6 @@ int		expand_bquotes(t_list **alst)
 		after_word = cur_word->next;
 		token = cur_word->content;
 		str = &token->data;
-		DG("found word=[%s]", *str);
 		if (!(bq_start = ft_strchr(*str, '`')))
 		{
 			cur_word = cur_word->next;
@@ -49,31 +51,37 @@ int		expand_bquotes(t_list **alst)
 		}
 		*bq_end = 0;
 		after_bq = ft_strdup(bq_end + 1);
-		output = command_getoutput(bq_start + 1);
-		word = ft_strtok(output, " \n\t");
-		DG("strtok=[%s]", word);
-		DG("first_tok was [%s]", *str);
+		word = command_getoutput(bq_start + 1);
+		output = word;
+		last_char = word + ft_strlen(word) - 1;
+		while (*last_char == '\n')
+			*last_char++ = 0;
+		ifs = ft_getenv(data_singleton()->env, "IFS");
+		if (ifs)
+			word = ft_strtok(word, ifs);
 		*bq_start = 0;
 		ft_strappend(str, word);
-		DG("first_tok=[%s]", *str);
-		while ((word = ft_strtok(NULL, " \n\t")))
+		while (ifs && (lexer.str = ft_strtok(NULL, ifs)))
 		{
-			DG("strtok=[%s]", word);
-			token_buf.data = ft_strdup(word);
-			token_buf.type = TK_WORD;
-			new_word = ft_lstnew(&token_buf, sizeof(token_buf));
+			lexer.pos = 0;
+			token_buf = token_init();
+			token_buf->type = TK_WORD;
+			while (lexer.str[lexer.pos])
+			{
+				token_append(token_buf, &lexer, 0, 0);
+				lexer.pos++;
+			}
+			new_word = ft_lstnew(token_buf, sizeof(*token_buf));
 			cur_word->next = new_word;
 			new_word->next = after_word;
 			cur_word = new_word;
 		}
-		token = new_word->content;
+		token = cur_word->content;
 		ft_strappend(&token->data, after_bq);
 		ft_strdel(&after_bq);
 		ft_strdel(&output);
 		cur_word = after_word;
 	}
-	token_print(*alst);
-	DG("check end");
 	return (0);
 }
 

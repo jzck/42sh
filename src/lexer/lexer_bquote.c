@@ -19,7 +19,10 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
-	token_append(token, lexer, 0, 0);
+	if (lexer->state == DQUOTE_BQUOTE)
+		token_append(token, lexer, 1, 1);
+	else
+		token_append(token, lexer, 0, 0);
 	if (lexer->str[lexer->pos] == '`')
 	{
 		lexer->pos++;

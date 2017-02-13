@@ -67,9 +67,9 @@ int		interactive_shell()
 		return (1);
 	DG("check main 0");
 	token_print(token);
-	DG("check main 1");
 	if (ft_parse(&ast, &token))
 		return (1);
+	DG("check main 1");
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);

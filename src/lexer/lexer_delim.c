@@ -17,7 +17,6 @@ int		lexer_delim(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	token = (*alst)->content;
-	DG("DELIM");
 	while (ft_is_delim(lexer->str[lexer->pos]))
 		lexer->pos++;
 	lexer->state = DEFAULT;
