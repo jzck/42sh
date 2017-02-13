@@ -1,0 +1,13 @@
+valeur all, all_separator, paren_case,
+integrer decoupe temporaire
+soigner les regles avec les separateurs
+ajouter linebreak sur token needed
+
+pour jack, jerter les separateurs a la formation
+rajouter les noms de tous les tokens pour la sortie d erreur
+
+->passer a une stack infinie
+->construire if, while, else if
+->tester les combinaisons deja existantes
+->integrer erreurs
+->erreur speciale : EOF

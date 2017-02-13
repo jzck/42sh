@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/12 20:35:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 22:33:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ enum	e_sym
 	TK_DLESSDASH,
 	TK_LESSGREAT,
 	TK_CASE,
-	TK_LBRACE,
 	TK_IN,
-	TK_CASE,
 	TK_ESAC,
+	TK_CLOBBER,
+	TK_LBRACE,
+	TK_RBRACE,
+	TK_DSEMI,
 	PROGRAM = 100,
+	COMPLETE_COMMAND,
 	COMPLETE_COMMANDS,
 	LIST,
 	AND_OR,
@@ -79,7 +82,9 @@ enum	e_sym
 	IN,
 	WORDLIST,
 	CASE_CLAUSE,
+	CASE_LIST,
 	CASE_LIST_NS,
+	CASE_ITEM,
 	CASE_ITEM_NS,
 	PATTERN,
 	IF_CLAUSE,
@@ -109,21 +114,15 @@ enum	e_sym
 	LOOP,
 	FUNC,
 	PIPE_SEMI_SEQUENCE,
-	ALL = TK_LESS | TK_GREAT | TK_DLESS | TK_DGREAT | TK_LESSAND | TK_GREATAND\
-	| TK_SEMI | TK_PIPE | TK_AND_IF	| TK_OR_IF | TK_AMP | TK_PAREN_OPEN\
-  	| TK_PAREN_CLOSE | TK_BQUOTE | TK_SUBSHELL | TK_NEWLINE | TK_WHILE | TK_DO\
-	| TK_DONE | TK_IF | TK_THEN | TK_FI | TK_ELIF | TK_ELSE | TK_UNTIL | TK_N_WORD\
-   	| TK_Q_WORD | TK_DQ_WORD | PROGRAM | COMPLETE_COMMANDS | LIST\
-	| AND_OR | PIPELINE | PIPE_SEQUENCE | COMMAND | COMPOUND_COMMAND | SUBSHELL\
-	| COMPOUND_LIST | TERM | FOR_CLAUSE | NAME | IN | WORDLIST | CASE_CLAUSE\
-	| CASE_LIST_NS | CASE_ITEM_NS | PATTERN | IF_CLAUSE | ELSE_PART\
-	| WHILE_CLAUSE | UNTIL_CLAUSE | FUNCTION_DEFINITION | FUNCTION_BODY | FNAME\
-	| BRACE_GROUP | DO_GROUP | SIMPLE_COMMAND | CMD_NAME | CMD_WORD | CMD_PREFIX\
-	| CMD_SUFFIX | REDIRECT_LIST | IO_REDIRECT | IO_FILE | FILENAME | IO_HERE\
-	| HERE_END | NEWLINE_LIST | SEPARATOR_OP | SEPARATOR | SEQUENTIAL_SEP
+	ALL = 200,
+	PATTERN_CASE,
+	ALL_SEPERATOR,
 };
 
-typedef unsigned long long int		t_sym;
+# define PATTERN_CASE (PATTERN | TK_PAREN_OPEN)
+# define ALL_SEPARATOR (TK_NEWLINE | TK_SEMI | TK_AMP)
+
+typedef int		t_sym;
 
 /*
 typedef unsigned long long int 		t_sym;
@@ -181,12 +180,15 @@ typedef unsigned long long int 		t_sym;
 #define ALL_SYM 			!0
 //#define ALL_SYM 			-1UL
 */
+typedef int  t_parstate;
 
 struct	s_aggrematch
 {
-	t_sym 	under;
 	t_sym 	top;
+	t_sym 	under;
 	t_sym 	new_sym;
+	t_type	next_token;
+	t_sym	erase_sym;
 };
 
 typedef struct s_aggrematch t_aggrematch;
@@ -217,11 +219,11 @@ extern t_stackmatch g_stackmatch[];
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
 int		eval_sym(t_sym stack, t_sym new_sym);
-int		aggregate_sym(t_sym **stack, t_sym *new_sym);
-int		superflous_sym(t_sym stack, t_sym new_sym);
+int		aggregate_sym(t_sym **stack, t_sym *new_sym,
+		t_parstate *state, t_list *next_token);
 
 int		push_stack(t_sym *stack, t_sym new_sym);
-int		pop_stack(t_sym **stack, int k);
+int		pop_stack(t_sym **stack, t_sym erase_sym);
 
 int		error_syntax(t_list **token);
 
@@ -231,8 +233,6 @@ char	*read_state(t_sym current);
 #define UNDEFINED	(1 << 0)
 #define ERROR		(1 << 1)
 #define SUCCESS		(1 << 2)
-
-typedef int  t_parstate;
 
 /*
  * Build AST

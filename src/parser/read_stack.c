@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/10 01:41:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 22:40:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,42 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == PIPE_SEMI_SEQUENCE)
+		return ("PIPE_SEMI_SEQUENCE");
+	if (current == TK_PIPE)
+		return ("TK_PIPE");
+	if (current == PROGRAM)
+		return ("PROGRAM");
+	if (current == COMMAND)
+		return ("COMMAND");
+	if (current == PIPE_SEQUENCE)
+		return ("PIPE_SEQUENCE");
+	if (current == PIPELINE)
+		return ("PIPELINE");
+	if (current == AND_OR)
+		return ("AND_OR");
+	if (current == LIST)
+		return ("LIST");
+	if (current == COMPLETE_COMMAND)
+		return ("COMPLETE_COMMAND");
+	if (current == COMPLETE_COMMANDS)
+		return ("COMPLETE_COMMANDS");
+	if (current == TK_N_WORD)
+		return ("TK_WORD");
 	if (current == CMD_NAME)
 		return ("CMD_NAME");
+	if (current == HERE_END)
+		return ("HERE_END");
+	if (current == FILENAME)
+		return ("FILENAME");
+	if (current == CMD_SUFFIX)
+		return ("CMD_SUFFIX");
+	if (current == SIMPLE_COMMAND)
+		return ("SIMPLE_COMMAND");
+	if (current == TK_SEMI)
+		return ("TK_SEMI");
+	if (current == ALL)
+		return ("ALL");
 /*	if (current == NEWLINE_LIST)
 		return ("NEWLINE_LIST");
 	if (current == SYM_DLESS)

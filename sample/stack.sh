@@ -1,1 +1,1 @@
-ls
+ls | cat | cat | cat 
