@@ -34,7 +34,7 @@ char	*command_getoutput(char *command)
 	ast = btree_create_node(&item, sizeof(item));
 	pipe(fds);
 	exec->process.fdout = fds[PIPE_WRITE];
-	ft_exec(&ast);
+	exec_command(&ast);
 	exec->process.fdout = STDOUT;
 	close(fds[PIPE_WRITE]);
 	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)))

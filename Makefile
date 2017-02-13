@@ -137,6 +137,7 @@ job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
+lexer/expand_bquotes.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/lexer_backslash.c\
@@ -157,12 +158,10 @@ lexer/lexer_paren.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_word.c\
-lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\
 lexer/stack_to_prompt.c\
 lexer/token_append.c\
 lexer/token_cmp_type.c\
-lexer/token_expand_var.c\
 lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\

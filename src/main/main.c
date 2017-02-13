@@ -12,6 +12,35 @@
 
 #include "minishell.h"
 
+int		non_interactive_shell(char *command)
+{
+	t_list	*token;
+	t_lexer	lexer;
+	t_btree	*ast;
+
+	lexer.pos = 0;
+	lexer.state = DEFAULT;
+	lexer.str = command;
+	lexer.stack = NULL;
+	token = NULL;
+	ast = NULL;
+	while (lexer.str[lexer.pos])
+	{
+		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
+			pop(&lexer.stack);
+		do {
+			lexer_lex(&token, &lexer);
+		} while (lexer.str[lexer.pos] == '\n');
+		if (expand_bquotes(&token))
+			return (1);
+		token_print(token);
+		if (ft_parse(&ast, &token))
+			return (1);
+		if (ft_exec(&ast))
+			return (1);
+	}
+	return (0);
+}
 int		interactive_shell()
 {
 	t_list	*token;
@@ -34,6 +63,11 @@ int		interactive_shell()
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
 	} while (lexer.stack);
+	if (expand_bquotes(&token))
+		return (1);
+	DG("check main 0");
+	token_print(token);
+	DG("check main 1");
 	if (ft_parse(&ast, &token))
 		return (1);
 	btree_print(STDBUG, ast, &ft_putast);
@@ -55,5 +89,7 @@ int		main(int ac, char **av)
 		while (1)
 			interactive_shell();
 	}
+	else
+		non_interactive_shell(shell_get_avdata());
 	return (0);
 }

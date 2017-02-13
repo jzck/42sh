@@ -30,14 +30,12 @@
 # define TK_AMP			(1 << 10)
 # define TK_PAREN_OPEN	(1 << 11)
 # define TK_PAREN_CLOSE	(1 << 12)
-# define TK_BQUOTE		(1 << 13)
-# define TK_WORD		(1 << 14)
-# define TK_COMMAND		(1 << 17)
-# define TK_SUBSHELL	(1 << 18)
-# define TK_NEWLINE		(1 << 19)
+# define TK_WORD		(1 << 13)
+# define TK_COMMAND		(1 << 14)
+# define TK_SUBSHELL	(1 << 15)
+# define TK_NEWLINE		(1 << 16)
 
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
-# define TK_NON_FREEABLE	(TK_BQUOTE)
 
 enum	e_lexstate
 {
@@ -89,10 +87,9 @@ int			token_append(t_token *token, t_lexer *lexer,
 void		token_free(void *data, size_t size);
 int			token_cmp_type(t_token *token, t_type *ref);
 void		token_print(t_list *lst);
-void		token_expand_var(t_token *token);
 
 int			reduce_parens(t_list **alst, char *str);
-int			reduce_bquotes(t_list **alst, char **str);
+int			expand_bquotes(t_list **alst);
 char		*command_getoutput(char *command);
 
 int			ft_is_delim(char c);

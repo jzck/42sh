@@ -16,6 +16,7 @@ void	shell_exit(void)
 {
 	DG("shell_exit()");
 	data_exit();
-	job_kill_all();
+	if (SH_HAS_JOBC(data_singleton()->opts))
+		job_kill_all();
 	tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 }
