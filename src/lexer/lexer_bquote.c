@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_dquote.c                                     :+:      :+:    :+:   */
+/*   lexer_bquote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/10 00:33:34 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/09 22:03:48 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 22:07:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_dquote(t_list **alst, t_lexer *lexer)
+int		lexer_bquote(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
+	int			top_state;
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
-	if (lexer->str[lexer->pos] == '"')
+	if (lexer->state == DQUOTE_BQUOTE)
+		token_append(token, lexer, 1, 1);
+	else
+		token_append(token, lexer, 0, 0);
+	if (lexer->str[lexer->pos] == '`')
 	{
 		lexer->pos++;
-		if (!(lexer->stack && *(int*)lexer->stack->content == DQUOTE))
+		if (!(lexer->stack && (*(int*)lexer->stack->content == BQUOTE
+							|| *(int*)lexer->stack->content == DQUOTE_BQUOTE)))
 		{
-			push(&lexer->stack, DQUOTE);
+			push(&lexer->stack, lexer->state);
 			return (lexer_lex(alst, lexer));
 		}
-		lexer->state = WORD;
-		pop(&lexer->stack);
+		top_state = *(int*)pop(&lexer->stack)->content;
+		lexer->state = top_state == DQUOTE_BQUOTE ? DQUOTE : DEFAULT;
 		return (lexer_lex(alst, lexer));
 	}
 	if (lexer->str[lexer->pos] == '\\')
@@ -43,12 +49,6 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 		lexer->pos++;
 		return (lexer_lex(alst,lexer));
 	}
-	else if (lexer->str[lexer->pos] == '`')
-	{
-		lexer->state = DQUOTE_BQUOTE;
-		return (lexer_bquote(alst, lexer));
-	}
-	token_append(token, lexer, 1, 0);
 	lexer->pos++;
 	return (lexer_lex(alst, lexer));
 }

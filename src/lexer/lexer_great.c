@@ -6,33 +6,39 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:35 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:36:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/09 19:57:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_great(t_list **alst, char *str)
+int		lexer_great(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
-	token_append(token, str[0], 0, 0);
-	if (*(str + 1) == '&')
+	token_append(token, lexer, 0, 0);
+	if (lexer->str[lexer->pos + 1] == '&')
 	{
 		token->type = TK_GREATAND;
-		token_append(token, str[1], 0, 0);
-		return (lexer_greatand(alst, str + 2));
+		lexer->pos++;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		return (lexer_greatand(alst, lexer));
 	}
-	else if (*(str + 1) == '>')
+	if (lexer->str[lexer->pos + 1] == '>')
 	{
 		token->type = TK_DGREAT;
-		token_append(token, str[1], 0, 0);
-		return (ft_tokenize(&(*alst)->next, str + 2, DEFAULT));
+		lexer->pos++;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else
 	{
 		token->type = TK_GREAT;
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 }

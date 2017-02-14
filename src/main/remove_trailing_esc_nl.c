@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_exit.c                                       :+:      :+:    :+:   */
+/*   remove_trailing_esc_nl.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/12 17:37:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 16:51:45 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/09 16:52:34 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 17:00:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	shell_exit(void)
+int		remove_trailing_esc_nl(char *str)
 {
-	DG("shell_exit()");
-	data_exit();
-	if (SH_HAS_JOBC(data_singleton()->opts))
-		job_kill_all();
-	tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
+	char	*last;
+
+	last = str + ft_strlen(str) - 1;
+	if (*last == '\\')
+	{
+		*last = 0;
+		return (1);
+	}
+	return (0);
 }

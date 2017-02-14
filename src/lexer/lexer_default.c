@@ -6,29 +6,24 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 11:39:07 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:40:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_default(t_list **alst, char *str)
+int		lexer_default(t_list **alst, t_lexer *lexer)
 {
-	t_lexstate	state;
 	t_token		*token;
+	char		c;
 
-	if ((state = get_lexer_state(str)))
-		return (ft_tokenize(alst, str, state));
-	if (*str == '>')
-		return (ft_tokenize(alst, str, GREAT));
-	else if (*str == '<')
-		return (ft_tokenize(alst, str, LESS));
-	else if (ft_isdigit(*str))
-		state = NUMBER;
-	else
-		state = WORD;
+	c = lexer->str[lexer->pos];
+	if ((lexer->state = get_state_global(lexer)))
+		return (lexer_lex(alst, lexer));
+	if ((lexer->state = get_state_redir(lexer)))
+		return (lexer_lex(alst, lexer));
+	lexer->state = ft_isdigit(c) ? NUMBER : WORD;
 	token = (*alst)->content;
-	token_append(token, *str, 0, 0);
-	token->type = TK_N_WORD;
-	return (ft_tokenize(alst, str + 1, state));
+	token->type = TK_WORD;
+	return (lexer_lex(alst, lexer));
 }

@@ -13,10 +13,10 @@
 #include "builtin.h"
 
 #define CDOPT_L	(1 << 0)
-#define CDOPT_P	(1 << 2)
+#define CDOPT_P	(1 << 1)
 #define HAS_CDOPT_P(x) (x & CD_OPT_P)
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
-#define CDERR_1 "cd: no such file or directory: %s\n"
+#define CDERR_1 "{red}cd: no such file or directory: %s{eoc}\n"
 
 static char		*builtin_cd_special(char *const av[], char *const env[])
 {

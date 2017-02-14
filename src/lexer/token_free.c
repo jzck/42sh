@@ -18,11 +18,8 @@ void	token_free(void *data, size_t size)
 
 	(void)size;
 	token = data;
-	if (!(token->type & TK_NON_FREEABLE))
-	{
-		ft_strdel(&token->data);
-		ft_memdel((void **)&token->esc);
-		ft_memdel((void **)&token->esc2);
-	}
+	ft_strdel(&token->data);
+	ft_memdel((void **)&token->esc);
+	ft_memdel((void **)&token->esc2);
 	free(token);
 }

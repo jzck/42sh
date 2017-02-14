@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:03:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/09 19:52:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ typedef struct s_comp		t_comp;
 typedef struct s_exec		t_exec;
 typedef struct s_jobc		t_jobc;
 typedef enum e_mode			t_mode;
+
+typedef struct s_lexer		t_lexer;
+typedef enum e_lexstate		t_lexstate;
+typedef struct s_token		t_token;
 
 typedef struct s_parser		t_parser;
 typedef struct s_ld			t_ld;

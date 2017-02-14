@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_expand_var.c                                 :+:      :+:    :+:   */
+/*   stack_to_prompt.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/10 14:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 13:16:04 by wescande         ###   ########.fr       */
+/*   Created: 2017/02/09 21:25:26 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/09 22:49:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-/*
-void	token_expand_var(t_token *token)
-{
-	char	*dollar;
-	char	*val;
 
-	dollar = ft_strchr(token->data, '$');
-	if (!dollar[1])
-		return ;
-	val = ft_getenv(data_singleton()->env, dollar + 1);
-	*dollar = 0;
-	if (val)
-		while (*val)
-			token_append(token, *val++, 1, 1);
+char	*stack_to_prompt(t_list	*stack)
+{
+	t_flag		top;
+
+	if (!stack)
+		return (NULL);
+	top = *(int*)stack->content;
+	if (top == BACKSLASH)
+		return ("> ");
+	else if (top == QUOTE)
+		return ("quote> ");
+	else if (top == DQUOTE)
+		return ("dquote> ");
+	else if (top == BQUOTE)
+		return ("bquote> ");
+	else if (top == DQUOTE_BQUOTE)
+		return ("dquote bquote> ");
+	else if (top == PAREN)
+		return ("subsh> ");
+	else
+		return ("error> ");
 }
-*/

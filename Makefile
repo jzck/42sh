@@ -137,38 +137,39 @@ job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
-lexer/ft_lexer.c\
-lexer/ft_post_tokenize.c\
-lexer/ft_tokenize.c\
-lexer/get_lexer_state.c\
+lexer/expand_bquotes.c\
+lexer/get_state_global.c\
+lexer/get_state_redir.c\
 lexer/lexer_backslash.c\
+lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dquote.c\
+lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
+lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
+lexer/lexer_paren.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
-lexer/lexer_special.c\
 lexer/lexer_word.c\
-lexer/reduce_bquotes.c\
 lexer/reduce_parens.c\
+lexer/stack_to_prompt.c\
 lexer/token_append.c\
 lexer/token_cmp_type.c\
-lexer/token_expand_var.c\
 lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\
 line-editing/builtin_history.c\
-line-editing/check_backslash.c\
 line-editing/completion.c\
 line-editing/control_c_and_d.c\
 line-editing/copy_cut_paste.c\
+line-editing/ft_prompt.c\
 line-editing/get_touch.c\
 line-editing/get_touch_toolz.c\
 line-editing/get_touch_toolz_2.c\
@@ -180,7 +181,6 @@ line-editing/history_parsing_toolz_2.c\
 line-editing/list_toolz.c\
 line-editing/move_to_line.c\
 line-editing/print_and_del.c\
-line-editing/prompt.c\
 line-editing/reader.c\
 line-editing/readline.c\
 line-editing/surch_in_history.c\
@@ -198,6 +198,7 @@ main/ft_putast.c\
 main/ft_putast2.c\
 main/lib_expansion.c\
 main/main.c\
+main/remove_trailing_esc_nl.c\
 main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
@@ -245,7 +246,7 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
 	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
 	@printf "\r\e[38;5;11m⌛ MAKE %10.10s : %2d%% \e[48;5;%dm%*s\e[0m%*s\e[48;5;255m \e[0m \e[38;5;11m %*s\e[0m\e[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
-	@$(CC) $(FLAGS) -MMD -c $< -o $@\
+	@$(CC) $(FLAGS) $(D_FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)
 	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:04:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:14:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/09 20:50:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	shell_parse_short_opt(char *str)
 		{
 			data_singleton()->opts |= SH_OPTS_LC;
 			data_singleton()->opts &= ~SH_OPTS_JOBC;
+			data_singleton()->opts &= ~SH_INTERACTIVE;
 		}
 		i++;
 	}
