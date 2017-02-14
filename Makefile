@@ -72,6 +72,7 @@ exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
 exec/redirect_dgreat.c\
+exec/redirect_dless.c\
 exec/redirect_great.c\
 exec/redirect_greatand.c\
 exec/redirect_less.c\

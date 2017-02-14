@@ -30,6 +30,9 @@ int		lexer_dless(t_list **alst, t_lexer *lexer)
 		pop(&lexer->heredoc_stack);
 		while (lexer->str[++lexer->pos])
 			;
+		ft_strappend(&lexer->str, (char[]){'\n', 0});
+		lexer->pos++;
+		return (0);
 	}
 	else
 		while (lexer->str[lexer->pos])
