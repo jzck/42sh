@@ -20,10 +20,11 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_sep,
 	&lexer_word,
 	&lexer_number,
-	&lexer_great,
 	&lexer_less,
-	&lexer_greatand,
+	&lexer_great,
 	&lexer_lessand,
+	&lexer_greatand,
+	&lexer_dless,
 	&lexer_quote,
 	&lexer_dquote,
 	&lexer_bquote,
@@ -43,6 +44,7 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
+	DG("check 01, state=[%i]", lexer->state);
 	if (lexer->str[lexer->pos] == 0)
 		return (lexer_end(alst, lexer));
 	if (!*alst)

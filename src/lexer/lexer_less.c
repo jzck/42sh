@@ -28,11 +28,13 @@ int		lexer_less(t_list **alst, t_lexer *lexer)
 	}
 	if (lexer->str[lexer->pos + 1] == '<')
 	{
+		token_free(token, 0);
+		(*alst)->content = token_init();
 		token->type = TK_DLESS;
-		lexer->pos++;
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
+		lexer->pos += 2;
+		push(&lexer->stack, DLESS);
 		lexer->state = DEFAULT;
+		ft_lsteadd(&lexer->heredoc_stack, ft_lstnew(alst, sizeof(alst)));
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else

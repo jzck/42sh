@@ -45,10 +45,11 @@ enum	e_lexstate
 	SEP,
 	WORD,
 	NUMBER,
-	GREAT,
 	LESS,
-	GREATAND,
+	GREAT,
 	LESSAND,
+	GREATAND,
+	DLESS,
 	QUOTE,
 	DQUOTE,
 	BQUOTE,
@@ -74,6 +75,7 @@ struct	s_lexer
 	int			pos;
 	t_lexstate	state;
 	t_list		*stack;
+	t_list		*heredoc_stack;
 };
 
 
@@ -101,6 +103,8 @@ char		*stack_to_prompt(t_list	*stack);
 
 t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
+int			get_lexer_stack(t_lexer lexer);
+void		lexer_init(t_lexer *lexer);
 int			lexer_lex(t_list **alst, t_lexer *lexer);
 int			lexer_default(t_list **alst, t_lexer *lexer);
 int			lexer_newline(t_list **alst, t_lexer *lexer);
@@ -110,8 +114,9 @@ int			lexer_word(t_list **alst, t_lexer *lexer);
 int			lexer_number(t_list **alst, t_lexer *lexer);
 int			lexer_less(t_list **alst, t_lexer *lexer);
 int			lexer_great(t_list **alst, t_lexer *lexer);
-int			lexer_lessand(t_list **alst, t_lexer *lexer);
 int			lexer_greatand(t_list **alst, t_lexer *lexer);
+int			lexer_lessand(t_list **alst, t_lexer *lexer);
+int			lexer_dless(t_list **alst, t_lexer *lexer);
 int			lexer_quote(t_list **alst, t_lexer *lexer);
 int			lexer_dquote(t_list **alst, t_lexer *lexer);
 int			lexer_bquote(t_list **alst, t_lexer *lexer);

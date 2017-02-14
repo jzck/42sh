@@ -30,14 +30,13 @@ int		process_redirect(t_process *p)
 	int		i;
 
 	redirs = p->redirs;
+	DG("process redirect");
 	while (redirs)
 	{
 		redir = redirs->content;
+		DG("process redirect 2, type=[%i]", redir->type);
 		if (redir->n > 9)
-		{
-			bad_fd(redir->n);
-			exit(1);
-		}
+			return (bad_fd(redir->n));
 		i = 0;
 		while (g_redirmap[i].type)
 		{

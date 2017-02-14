@@ -138,6 +138,7 @@ job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
 lexer/expand_bquotes.c\
+lexer/get_lexer_stack.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/lexer_backslash.c\
@@ -149,6 +150,7 @@ lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
+lexer/lexer_init.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
 lexer/lexer_lex.c\
@@ -165,6 +167,7 @@ lexer/token_cmp_type.c\
 lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\
+lexer_dless.c\
 line-editing/builtin_history.c\
 line-editing/completion.c\
 line-editing/control_c_and_d.c\
