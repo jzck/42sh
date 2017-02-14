@@ -28,9 +28,11 @@ int		lexer_dless(t_list **alst, t_lexer *lexer)
 	{
 		pop(&lexer->stack);
 		pop(&lexer->heredoc_stack);
-		return (0);
+		while (lexer->str[++lexer->pos])
+			;
 	}
-	while (lexer->str[lexer->pos])
-		token_append_char(heredoc_tok, lexer->str[lexer->pos++], 0, 0);
+	else
+		while (lexer->str[lexer->pos])
+			token_append_char(heredoc_tok, lexer->str[lexer->pos++], 0, 0);
 	return (lexer_end(alst, lexer));
 }

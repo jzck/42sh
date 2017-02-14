@@ -44,7 +44,6 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
-	DG("check 01, state=[%i]", lexer->state);
 	if (lexer->str[lexer->pos] == 0)
 		return (lexer_end(alst, lexer));
 	if (!*alst)

@@ -17,7 +17,6 @@ int		job_wait(int id)
 	pid_t	pid;
 	int		status;
 
-	DG("gonna wait [%i]", id);
 	if (job_is_stopped(id))
 		return (0);
 	job_update_status();

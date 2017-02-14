@@ -54,25 +54,20 @@ int		interactive_shell()
 	ast = NULL;
 	do {
 		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
-		DG("check 0");
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
-		DG("check 1");
 		ltoken = ft_lstlast(token);
 		if (lexer_lex((token ? &ltoken : &token), &lexer))
 			return (1);
-		DG("check 2");
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
-		DG("check 3");
 		token_print(token);
 	} while (get_lexer_stack(lexer));
 	if (bquotes_expand(&token))
 		return (1);
 	if (!token)
 		return (0);
-	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
 	btree_print(STDBUG, ast, &ft_putast);

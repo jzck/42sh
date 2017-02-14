@@ -4,7 +4,6 @@ int		lexer_end(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
-	DG("check");
 	if ((*alst && (lexer->state == QUOTE
 			|| lexer->state == DQUOTE
 			|| lexer->state == BQUOTE))
