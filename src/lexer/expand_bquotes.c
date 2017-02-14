@@ -49,12 +49,15 @@ int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
 
 	*bq_start = 0;
 	*bq_end = 0;
-	output = command_getoutput(bq_start + 1);
+	if ((output = command_getoutput(bq_start + 1)))
+	{
+		last_char = output + ft_strlen(output) - 1;
+		while (*last_char == '\n')
+			*last_char++ = 0;
+	}
+	DG("output = [%s]", output);
 	after_bq = ft_strdup(bq_end + 1);
-	last_char = output + ft_strlen(output) - 1;
-	while (*last_char == '\n')
-		*last_char++ = 0;
-	bquotes_insert_words(cur_word, output, after_bq);
+	bquotes_insert_words(cur_word, output ? output : "", after_bq);
 	ft_strdel(&output);
 	ft_strdel(&after_bq);
 	return (0);
@@ -85,6 +88,8 @@ int		bquotes_expand(t_list **alst)
 		}
 		if (bquotes_substitute(cur_word, bq_start, bq_end))
 			return (-1);
+		if (!(*((t_token*)cur_word->content)->data))
+			ft_lst_delif(alst, cur_word->content, ft_addrcmp, token_free);
 		cur_word = lst;
 	}
 	return (0);

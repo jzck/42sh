@@ -31,6 +31,8 @@ int		non_interactive_shell(char *command)
 		do {
 			lexer_lex(&token, &lexer);
 		} while (lexer.str[lexer.pos] == '\n');
+		if (!token)
+			return (0);
 		if (bquotes_expand(&token))
 			return (1);
 		token_print(token);
@@ -55,18 +57,18 @@ int		interactive_shell()
 	lexer.stack = NULL;
 	ast = NULL;
 	do {
+		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
 		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
 			pop(&lexer.stack);
-		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
 		ltoken = ft_lstlast(token);
 		lexer_lex((token ? &ltoken : &token), &lexer);
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
 	} while (lexer.stack);
-	if (!token)
-		return (0);
 	if (bquotes_expand(&token))
 		return (1);
+	if (!token)
+		return (0);
 	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);

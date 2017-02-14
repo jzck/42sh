@@ -34,10 +34,7 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	{
 		lexer->pos++;
 		if (lexer->str[lexer->pos] == 0)
-		{
-			push(&lexer->stack, BACKSLASH);
 			return (0);
-		}
 		else
 			token_append(token, lexer, 1, 1);
 		lexer->pos++;

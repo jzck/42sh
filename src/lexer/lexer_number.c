@@ -19,7 +19,10 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	if ((state = get_state_global(lexer)))
+	{
+		lexer->state = state;
 		return (lexer_lex(alst, lexer));
+	}
 	else if ((state = get_state_redir(lexer)))
 	{
 		lexer->state = state;
