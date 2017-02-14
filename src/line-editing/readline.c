@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/09 17:03:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/14 15:17:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,15 @@ void	ft_init_termios(void)
 
 void	readline_init(char *prompt)
 {
+	static int	beg = 0;
+
+	if (!beg)
+	{
+		ft_init_line();
+		ft_init_history();
+		beg = 1;
+	}
 	ft_save_termios(1);
-	ft_init_line();
-	ft_init_history();
 	ft_init_termios();
 	if (STR)
 		ft_strdel(&STR);
@@ -85,6 +91,8 @@ char	*readline(char *prompt)
 	readline_init(prompt);
 	input = ft_read_stdin();
 	ft_putchar('\n');
+	if (!prompt)
+		input = ft_history_parsing();
 	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
 		return (NULL);
 	return (input);

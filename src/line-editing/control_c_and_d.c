@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 16:49:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/14 14:08:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_control_d(void)
 void	ft_control_c(void)
 {
 	ft_putchar('\n');
+	set_exitstatus(1, 1);
 	ft_prompt();
 	ft_strdel(&STR);
 	POS = 0;

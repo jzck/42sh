@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/09 17:24:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/14 15:14:57 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,16 @@ void			ft_found_prev_word(void);
 void			ft_c(void);
 void			ft_x(void);
 void			ft_v(void);
-void			ft_history_parsing(void);
 void			ft_read_it(int input, size_t *pos, char **str);
 char			*readline(char *);
 int				ft_completion(int ret);
 
 void			ft_check_heredoc(char **str);
 
-char	*ft_strdupi_w(char const *s);
+char			*ft_strdupi_w(char const *s);
+
+void			ft_add_str_in_history(char *str);
+void			ft_init_history(void);
+char			*ft_history_parsing(void);
 
 #endif
