@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/13 22:33:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 19:07:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,12 @@ enum	e_sym
 	FUNC,
 	PIPE_SEMI_SEQUENCE,
 	ALL = 200,
-	PATTERN_CASE,
-	ALL_SEPERATOR,
 };
 
-# define PATTERN_CASE (PATTERN | TK_PAREN_OPEN)
-# define ALL_SEPARATOR (TK_NEWLINE | TK_SEMI | TK_AMP)
-
 typedef int		t_sym;
+
+# define REDIR	(TK_IO_NUMBER | TK_LESS | TK_LESSAND | TK_GREATAND | TK_DGREAT\
+				| TK_LESSGREAT | TK_CLOBBER | TK_DLESS | TK_DLESSDASH | TK_WORD)
 
 /*
 typedef unsigned long long int 		t_sym;
@@ -180,6 +178,11 @@ typedef unsigned long long int 		t_sym;
 #define ALL_SYM 			!0
 //#define ALL_SYM 			-1UL
 */
+
+# define MATCH_STACK(x, y)		(x == y || x == ALL)
+# define MATCH_NXT_TOKEN(x, y) 	(x == y || y == ALL || x == 0 || x &~ REDIR)
+							
+
 typedef int  t_parstate;
 
 struct	s_aggrematch

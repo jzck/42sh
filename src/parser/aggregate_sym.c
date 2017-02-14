@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 22:59:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 19:08:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ t_aggrematch		g_aggrematch[] =
 	{REDIRECT_LIST, COMPOUND_COMMAND, COMPOUND_COMMAND, ALL, COMPOUND_COMMAND},
 	{CMD_SUFFIX, CMD_WORD, SIMPLE_COMMAND, ALL, CMD_PREFIX},
 	{CMD_SUFFIX, CMD_NAME, SIMPLE_COMMAND, ALL, CMD_NAME},
-	{CMD_PREFIX, LINEBREAK, SIMPLE_COMMAND, ALL_SEPARATOR, 0},
-	{CMD_PREFIX, TK_BANG, SIMPLE_COMMAND, ALL_SEPARATOR, 0},
-	{CMD_PREFIX, SEPARATOR_OP, SIMPLE_COMMAND, ALL_SEPARATOR, 0},
-	{CMD_PREFIX, NEWLINE_LIST, SIMPLE_COMMAND, ALL_SEPARATOR, 0},
+	{CMD_PREFIX, LINEBREAK, SIMPLE_COMMAND, TK_WORD, 0},
+	{CMD_PREFIX, TK_BANG, SIMPLE_COMMAND, TK_WORD, 0},
+	{CMD_PREFIX, SEPARATOR_OP, SIMPLE_COMMAND, TK_WORD, 0},
+	{CMD_PREFIX, NEWLINE_LIST, SIMPLE_COMMAND, TK_WORD, 0},
 	{CMD_WORD, CMD_PREFIX, SIMPLE_COMMAND, ALL_SEPARATOR, CMD_PREFIX},
 //to check	
-	{CMD_NAME, LINEBREAK, SIMPLE_COMMAND, ALL, 0},
-	{CMD_NAME, TK_BANG, SIMPLE_COMMAND, ALL, 0},
-	{CMD_NAME, SEPARATOR_OP, SIMPLE_COMMAND, ALL, 0},
-	{CMD_NAME, NEWLINE_LIST, SIMPLE_COMMAND, ALL, 0},
-	{CMD_NAME, PIPE_SEMI_SEQUENCE, SIMPLE_COMMAND, ALL, 0},
+	{CMD_NAME, LINEBREAK, SIMPLE_COMMAND, SUFFIX_NAME, 0},
+	{CMD_NAME, TK_BANG, SIMPLE_COMMAND, SUFFIX_NAME, 0},
+	{CMD_NAME, SEPARATOR_OP, SIMPLE_COMMAND, SUFFIX_NAME, 0},
+	{CMD_NAME, NEWLINE_LIST, SIMPLE_COMMAND, SUFFIX_NAME, 0},
+	{CMD_NAME, PIPE_SEMI_SEQUENCE, SIMPLE_COMMAND, SUFFIX_NAME, 0},
 
 	{SIMPLE_COMMAND, ALL, COMMAND, ALL, 0},
 	{DO_GROUP, NAME, FOR_CLAUSE, ALL, TK_FOR},
@@ -140,12 +140,9 @@ int			aggregate_sym(t_sym **stack, t_sym *new_sym,
 	read_state(**stack), read_state(*new_sym), read_state(next));
 	while (g_aggrematch[i].top)
 	{
-		if (*new_sym == g_aggrematch[i].top && (**stack == g_aggrematch[i].under
-			|| g_aggrematch[i].under == ALL 
-			|| g_aggrematch[i].under == ALL_SEPARATOR)
-			&& (next == g_aggrematch[i].next_token || next == 0 
-			|| g_aggrematch[i].next_token == ALL 
-			|| (g_aggrematch[i].next_token == ALL_SEPARATOR && next == TK_SEMI)))
+		if (*new_sym == g_aggrematch[i].top
+			&& MATCH_STACK(**stack, g_aggrematch[i].under)
+			&& MATCH_NXT_TOKEN(next, g_aggrematch[i].next_token))
 		{
 			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;

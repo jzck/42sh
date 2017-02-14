@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 22:59:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 18:26:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, CMD_WORD, CMD_SUFFIX},
 	{TK_N_WORD, CMD_NAME, CMD_SUFFIX},
 	{TK_N_WORD, LINEBREAK, CMD_NAME},
-	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
-//to delete	
-	{TK_N_WORD, TK_SEMI, CMD_NAME},
 
+	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
 	{TK_N_WORD, TK_BANG, CMD_NAME},
 	{TK_N_WORD, PIPE_SEMI_SEQUENCE, CMD_NAME},
 	{TK_N_WORD, SEPARATOR_OP, CMD_NAME},
@@ -49,13 +47,10 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
 	{TK_SEMI, TERM, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
-	{TK_SEMI, COMPLETE_COMMAND, SEPARATOR_OP},
-	{TK_SEMI, COMPLETE_COMMANDS, SEPARATOR_OP},
+	{TK_SEMI, COMPOUND_LIST, SEPARATOR_OP},
 	{TK_AMP, TERM, SEPARATOR_OP},
-	{TK_AMP, LIST, SEPARATOR_OP},	
-	{TK_AMP, COMPLETE_COMMAND, SEPARATOR_OP},
-	{TK_AMP, COMPLETE_COMMANDS, SEPARATOR_OP},
-
+	{TK_AMP, LIST, SEPARATOR_OP},
+	{TK_AMP, COMPOUND_LIST, SEPARATOR_OP},
 
 	{0, 0, 0},
 };
