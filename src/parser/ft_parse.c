@@ -18,7 +18,6 @@ int			ft_parse(t_btree **ast, t_list **token)
 	t_sym			*stack;
 	t_parstate		state;
 //to delete
-	t_token			*content;
 
 	(void)ast;
 	state = UNDEFINED;
@@ -27,14 +26,13 @@ int			ft_parse(t_btree **ast, t_list **token)
 	push_stack(stack, LINEBREAK);
 	while (*token)
 	{
-		content = (*token)->content;
 		produce_sym(*stack, new_sym, token);	
 		DG("new sym %s", read_state(*new_sym));
 		if (eval_sym(*stack, *new_sym))
 			state = ERROR;
 		else
 		{
-			aggregate_sym(&stack, new_sym, &state, (*token)->next);
+			aggregate_sym(&stack, new_sym, &state);
 			push_stack(++stack, *new_sym);
 		}
 		ft_putstr("\n");
@@ -46,10 +44,7 @@ int			ft_parse(t_btree **ast, t_list **token)
 		if (state == SUCCESS)
 			ft_putstr("success");
 //		build_tree(token, ast);
-		if (*stack == TK_PIPE)
-			content->type = LINEBREAK;	
-		else
-			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
+		ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
 	return (0);
 }

@@ -14,6 +14,18 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == CMD_SUPERIOR)
+		return ("CMD_SUPERIOR");
+	if (current == TK_IO_NUMBER)
+		return ("IO_NUMBER");
+	if (current == CMD_SUFFIX)	
+		return ("CMD_SUFFIX");
+	if (current == CMD_PREFIX)
+		return ("CMD_PREFIX");
+	if (current == IO_REDIRECT)
+		return ("IO_REDIRECT");
+	if (current == IO_FILE)
+		return ("IO_FILE");
 	if (current == PIPE_SEMI_SEQUENCE)
 		return ("PIPE_SEMI_SEQUENCE");
 	if (current == TK_PIPE)
