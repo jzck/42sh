@@ -114,13 +114,12 @@ enum	e_sym
 	LOOP,
 	FUNC,
 	PIPE_SEMI_SEQUENCE,
+	PATTERN_CASE,
+	CMD_SUPERIOR,
 	ALL = 200,
 };
 
 typedef int		t_sym;
-
-# define REDIR	(TK_IO_NUMBER | TK_LESS | TK_LESSAND | TK_GREATAND | TK_DGREAT\
-				| TK_LESSGREAT | TK_CLOBBER | TK_DLESS | TK_DLESSDASH | TK_WORD)
 
 /*
 typedef unsigned long long int 		t_sym;
@@ -179,9 +178,7 @@ typedef unsigned long long int 		t_sym;
 //#define ALL_SYM 			-1UL
 */
 
-# define MATCH_STACK(x, y)		(x == y || x == ALL)
-# define MATCH_NXT_TOKEN(x, y) 	(x == y || y == ALL || x == 0 || x &~ REDIR)
-							
+# define MATCH_STACK(x, y)		(x == y || y == ALL)
 
 typedef int  t_parstate;
 
@@ -190,8 +187,7 @@ struct	s_aggrematch
 	t_sym 	top;
 	t_sym 	under;
 	t_sym 	new_sym;
-	t_type	next_token;
-	t_sym	erase_sym;
+	int	erase_sym;
 };
 
 typedef struct s_aggrematch t_aggrematch;
@@ -222,8 +218,7 @@ extern t_stackmatch g_stackmatch[];
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
 int		eval_sym(t_sym stack, t_sym new_sym);
-int		aggregate_sym(t_sym **stack, t_sym *new_sym,
-		t_parstate *state, t_list *next_token);
+int		aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state);
 
 int		push_stack(t_sym *stack, t_sym new_sym);
 int		pop_stack(t_sym **stack, t_sym erase_sym);
@@ -231,7 +226,7 @@ int		pop_stack(t_sym **stack, t_sym erase_sym);
 int		error_syntax(t_list **token);
 
 int		ft_read_stack(t_sym *stack); 
-char	*read_state(t_sym current);
+char		*read_state(t_sym current);
 
 #define UNDEFINED	(1 << 0)
 #define ERROR		(1 << 1)

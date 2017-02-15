@@ -175,7 +175,6 @@ parser/eval_sym.c\
 parser/aggregate_sym.c\
 parser/pop_stack.c\
 parser/push_stack.c\
-parser/superflous_sym.c\
 parser/error_syntax.c\
 parser/get_instruction.c\
 parser/get_sub_instruction.c\
