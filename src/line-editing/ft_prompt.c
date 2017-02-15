@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 14:13:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/15 11:52:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ static int	ft_git_status(void)
 		if (ft_strrchr(line, '/'))
 		{
 			line = ft_strdup(ft_strrchr(line, '/') + 1);
+			ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
+			free(tmp);
+		}
+		else
+		{
+			line = ft_strdup(line + 3);
 			ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
 			free(tmp);
 		}

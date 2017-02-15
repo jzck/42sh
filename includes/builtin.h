@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:21:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 19:07:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/15 11:45:15 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "builtin_read.h"
 
 t_execf	*is_builtin(t_process *p);
+int		builtin_export(const char *path, char *const av[], char *const envp[]);
+int		builtin_unset(const char *path, char *const av[], char *const envp[]);
 int		builtin_env(const char *path, char *const argv[], char *const envp[]);
 int		builtin_echo(const char *path, char *const argv[], char *const envp[]);
 int		builtin_cd(const char *path, char *const argv[], char *const envp[]);

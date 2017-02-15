@@ -1,62 +1,19 @@
 [7m[33m         shell_init.c [1m[34m28 [0minteractive shell settings[0m
-[7m[33m               main.c [1m[34m90 [0m[7m[1m[32mstart of shell[0m pid=44206 pgrp=44206 job_control is ON[0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mhistory[0m] stack=[0] state=[4][0m
+[7m[33m               main.c [1m[34m88 [0m[7m[1m[32mstart of shell[0m JOBC is ON[0m
+[7m[33m               main.c [1m[34m64 [0m[[35menv -o[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[env][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[-o][0m
+[7m[33m               main.c [1m[34m64 [0m[[35menv -u[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[env][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[-u][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhistor[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[histor][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhistory[0m] stack=[0] state=[4][0m
 [7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mhistory[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35maaaaaaa[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[aaaaaaa][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[aaaaaaa][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mssssss[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ssssss][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ssssss][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mddddddddd[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ddddddddd][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ddddddddd][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mffffffffffffff[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ffffffffffffff][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ffffffffffffff][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mffffffffffffff[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ffffffffffffff][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ffffffffffffff][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mhistory[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mhistory[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mls[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m           job_wait.c [1m[34m20 [0mgonna wait [1][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mls -la[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[-la][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[-la][0m
-[7m[33m           job_wait.c [1m[34m20 [0mgonna wait [1][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mls -la[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[-la][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[-la][0m
-[7m[33m           job_wait.c [1m[34m20 [0mgonna wait [1][0m
-[7m[33m          lexer_end.c [1m[34m7  [0mcheck[0m
-[7m[33m               main.c [1m[34m65 [0m[[35mhistory[0m] stack=[0] state=[4][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
-[7m[33m        token_print.c [1m[34m29 [0m13:[history][0m
+[7m[33m               main.c [1m[34m64 [0m[[35menv -u LESS[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[env][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[-u][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[LESS][0m
+[7m[33m               main.c [1m[34m64 [0m[[35menv [0m] stack=[0] state=[0][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[env][0m
 [7m[33m         shell_exit.c [1m[34m17 [0mshell_exit()[0m
