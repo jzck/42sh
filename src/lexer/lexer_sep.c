@@ -18,6 +18,7 @@ int		lexer_sep(t_list **alst, t_lexer *lexer)
 	char	c;
 	char	cn;
 
+	lexer->state = DEFAULT;
 	if (*alst)
 	{
 		token = (*alst)->content;

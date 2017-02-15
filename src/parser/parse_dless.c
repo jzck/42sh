@@ -26,7 +26,8 @@ int		parse_dless(t_btree **ast, t_list **start, t_list **lst)
 	next_tok = (*lst)->next->content;
 	if (next_tok->type != TK_WORD)
 		return (1);
-	node->data.redir.word.word = ft_strdup(next_tok->data);
+	node->data.redir.word.word = ft_strdup(tok->data);
+	node->data.redir.n = 0;
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
 	ft_lst_delif(start, (*lst)->next->content, &ft_addrcmp, &token_free);
 	ft_parse(&(*ast)->left, start);

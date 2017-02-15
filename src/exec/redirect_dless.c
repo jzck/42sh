@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_wait.c                                         :+:      :+:    :+:   */
+/*   redirect_dless.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 11:49:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 13:44:17 by jhalford         ###   ########.fr       */
+/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/07 16:05:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "exec.h"
 
-int		job_wait(int id)
+int		redirect_dless(t_redir *redir)
 {
-	pid_t	pid;
-	int		status;
+	int		fds[2];
+	char	*str;
 
-	if (job_is_stopped(id))
-		return (0);
-	job_update_status();
-	pid = waitpid(WAIT_ANY, &status, WUNTRACED);
-	while (!process_mark_status(pid, status)
-			&& !job_is_completed(id)
-			&& !job_is_stopped(id))
-	{
-		pid = waitpid(WAIT_ANY, &status, WUNTRACED);
-	}
+	pipe(fds);
+	str = redir->word.word;
+	write(fds[PIPE_WRITE], str, ft_strlen(str));
+	close(fds[PIPE_WRITE]);
+	dup2(fds[PIPE_READ], 0);
+	close(fds[PIPE_READ]);
 	return (0);
 }

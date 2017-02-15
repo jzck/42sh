@@ -16,7 +16,7 @@ t_redirmap	g_redirmap[] =
 {
 	{TK_LESS, redirect_less},
 	{TK_GREAT, redirect_great},
-	/* {TK_DLESS, redirect_dless}, */
+	{TK_DLESS, redirect_dless},
 	{TK_DGREAT, redirect_dgreat},
 	{TK_LESSAND, redirect_lessand},
 	{TK_GREATAND, redirect_greatand},
@@ -34,10 +34,7 @@ int		process_redirect(t_process *p)
 	{
 		redir = redirs->content;
 		if (redir->n > 9)
-		{
-			bad_fd(redir->n);
-			exit(1);
-		}
+			return (bad_fd(redir->n));
 		i = 0;
 		while (g_redirmap[i].type)
 		{

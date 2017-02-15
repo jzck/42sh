@@ -73,6 +73,7 @@ exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
 exec/redirect_dgreat.c\
+exec/redirect_dless.c\
 exec/redirect_great.c\
 exec/redirect_greatand.c\
 exec/redirect_less.c\
@@ -104,6 +105,13 @@ glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/lib_perso/ft_tablen.c\
 glob/match_pattern.c\
+history/add_str_in_history.c\
+history/history.c\
+history/history_parsing.c\
+history/history_parsing_toolz.c\
+history/history_parsing_toolz_2.c\
+history/list_toolz.c\
+history/surch_in_history.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
@@ -139,6 +147,7 @@ job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/command_getoutput.c\
 lexer/expand_bquotes.c\
+lexer/get_lexer_stack.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/lexer_backslash.c\
@@ -146,10 +155,12 @@ lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
+lexer/lexer_dless.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
+lexer/lexer_init.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
 lexer/lexer_lex.c\
@@ -172,13 +183,6 @@ line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\
 line-editing/heredoc.c\
-line-editing/history/add_str_in_history.c\
-line-editing/history/history.c\
-line-editing/history/history_parsing.c\
-line-editing/history/history_parsing_toolz.c\
-line-editing/history/history_parsing_toolz_2.c\
-line-editing/history/list_toolz.c\
-line-editing/history/surch_in_history.c\
 line-editing/home_end.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\

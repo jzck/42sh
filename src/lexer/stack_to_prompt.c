@@ -31,6 +31,8 @@ char	*stack_to_prompt(t_list	*stack)
 		return ("dquote bquote> ");
 	else if (top == PAREN)
 		return ("subsh> ");
+	else if (top == DLESS)
+		return ("heredoc> ");
 	else
 		return ("error> ");
 }

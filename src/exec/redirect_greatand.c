@@ -17,6 +17,7 @@ int		redirect_greatand(t_redir *redir)
 	int		fdold;
 	int		fdnew;
 
+	DG("redir greatand");
 	if (redir->close)
 	{
 		close(redir->n);

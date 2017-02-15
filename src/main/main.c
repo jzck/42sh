@@ -18,10 +18,8 @@ int		non_interactive_shell(char *command)
 	t_lexer	lexer;
 	t_btree	*ast;
 
-	lexer.pos = 0;
-	lexer.state = DEFAULT;
+	lexer_init(&lexer);
 	lexer.str = command;
-	lexer.stack = NULL;
 	token = NULL;
 	ast = NULL;
 	while (lexer.str[lexer.pos])
@@ -43,6 +41,7 @@ int		non_interactive_shell(char *command)
 	}
 	return (0);
 }
+
 int		interactive_shell()
 {
 	t_list	*token;
@@ -50,27 +49,26 @@ int		interactive_shell()
 	t_lexer	lexer;
 	t_btree	*ast;
 
-	lexer.pos = 0;
-	lexer.state = DEFAULT;
-	lexer.str = NULL;
+	lexer_init(&lexer);
 	token = NULL;
-	lexer.stack = NULL;
 	ast = NULL;
 	do {
 		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
-		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
+		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
+		else if (get_lexer_stack(lexer) == DLESS)
+			lexer.state = DLESS;
 		ltoken = ft_lstlast(token);
-		lexer_lex((token ? &ltoken : &token), &lexer);
+		if (lexer_lex((token ? &ltoken : &token), &lexer))
+			return (1);
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
-	} while (lexer.stack);
+	} while (get_lexer_stack(lexer));
 	if (bquotes_expand(&token))
 		return (1);
 	if (!token)
 		return (0);
 	ft_add_str_in_history(lexer.str);
-	token_print(token);
 	if (ft_parse(&ast, &token))
 		return (1);
 	btree_print(STDBUG, ast, &ft_putast);
@@ -87,7 +85,7 @@ int		main(int ac, char **av)
 	data = data_singleton();
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
-	DG("{inv}{bol}{gre}start of shell{eoc} pid=%i pgrp=%i job_control is %s", getpid(), getpgrp(), SH_HAS_JOBC(data->opts) ? "ON" : "OFF");
+	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
 	if (SH_IS_INTERACTIVE(data->opts))
 	{
 		while (1)
