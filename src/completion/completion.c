@@ -6,37 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:33:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/15 19:30:18 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
-
-/*
-** DEBUG FUNCTION
-*/
-
-int				test(t_comp *c)
-{
-	t_clst		*tmp;
-	int			i;
-
-	i = 1;
-	if (!(c->lst))
-	{
-		return (0);
-	}
-	if (c->lst->prev != c->lst)
-	{
-		tmp = c->lst->next;
-		while (tmp != c->lst)
-		{
-			i++;
-			tmp = tmp->next;
-		}
-	}
-	return (0);
-}
 
 /*
 ** Function to select the next item in the list if it has already been Created
@@ -64,6 +38,11 @@ static void		c_next_item(t_comp *c)
 
 static int		c_dispatcher(t_data *s)
 {
+	if (s->comp && s->comp->lst == NULL && s->comp->isfolder)
+	{
+		c_clear(s);
+		return(1);
+	}
 	if (s->comp && s->comp->lst == NULL)
 	{
 		c_clear(s);
@@ -119,6 +98,5 @@ int				completion(long int keypress)
 		else
 			return (c_gtfo(s->comp, keypress));
 	}
-	test(s->comp);
 	return (c_dispatcher(s));
 }

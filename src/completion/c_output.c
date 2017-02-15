@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:32:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/15 21:00:22 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			c_gtfo(t_comp *c, long int keypress)
 
 	if (keypress != 10)
 	{
+//		c_rematch(c, keypress);
 		c_clear(data_singleton());
 		return (1);
 	}

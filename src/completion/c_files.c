@@ -6,12 +6,38 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:32:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/15 19:33:11 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
+/*
+** If the parsing for local file fail. The function is called to check if the
+** match is actually a folder. If so, the command is updated with a trailing
+** slash (/).
+*/
+
+static int		c_exclusion_folder(t_comp *c)
+{
+	DIR			*rep;
+	char		*tmp;
+
+	tmp = ft_strjoin(c->cpath, c->match);
+	if ((rep = opendir(tmp)) && (!closedir(rep)))
+	{
+		tmp ? ft_memdel((void *)&tmp) : (0);
+		tmp = ft_strjoin(c->rcmd, "/");
+		if (c->trail)
+			data_singleton()->line.input = ft_strjoin(tmp, c->trail);
+		else
+			data_singleton()->line.input = ft_strdup(tmp);
+		data_singleton()->line.pos = data_singleton()->line.pos + 1;
+		c->isfolder = 1;
+	}
+	tmp ? ft_memdel((void *)&tmp) : (0);
+	return (0);
+}
 /*
 ** Clear the binary from c->rcmd ans save the result in c->match. Return the
 ** path part of it if exist or NULL.
@@ -56,5 +82,7 @@ int				c_seek_files(t_data *s, t_comp *c)
 	c->cpath = path_solver(c, path, NULL);
 	path ? ft_memdel((void *)&path) : (0);
 	c_parser(c, c->cpath, c->match);
+	if (c->lst == NULL)
+		c_exclusion_folder(c);
 	return (0);
 }

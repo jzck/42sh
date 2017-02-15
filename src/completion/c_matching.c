@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 13:31:36 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/15 19:06:32 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@
 
 int			c_matching(t_data *s, t_comp *c)
 {
-	if (!(ft_strchr(c->rcmd, ' ')))
+	if (c->rcmd[0] == '.' || c->rcmd[0] == '/')
+	{
+		c->rcmd[0] == '.' ? c->cpath = path_solver(c, "./", NULL) : 0;
+		c->rcmd[0] == '/' ? c->cpath = path_solver(c, "/", NULL) : 0;
+		c_parser(c, c->cpath, c->match);
+	}
+	else if (!(ft_strchr(c->rcmd, ' ')))
 		c_seek_binary(s, c);
 	else
 		c_seek_files(s, c);

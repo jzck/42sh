@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/07 20:11:22 by jhalford         ###   ########.fr        #
+#    Updated: 2017/02/15 20:00:50 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ completion/c_output.c\
 completion/c_parser.c\
 completion/c_pathsolver.c\
 completion/c_printer.c\
+completion/c_rematch.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
@@ -229,7 +230,7 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make -j $(NAME)
+	@make $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(FLAGS) $(D_FLAGS) \
@@ -241,7 +242,7 @@ $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@printf "\r\e[48;5;15;38;5;25m✅ MAKE $(NAME)\e[0m\e[K\n"
 
 $(LIBFT_LIB):
-	@make -j -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR) :
 	@mkdir -p $(OBJ_DIR)

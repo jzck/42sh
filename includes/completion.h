@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 15:47:35 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/15 20:00:32 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct				s_clst
 **  c_pline : Number of item per line when printing.
 **   c_line : Number of line required to move to terminal up.
 **    win_x : Size of the window in length.
+**      key : The keypressed lastly.
+** isfolder : If the match is a folder. boolean.
 **      lst : List of the item corresponding to the completion.
 */
 
@@ -71,6 +73,7 @@ typedef struct				s_comp
 	int						c_line;
 	int						win_x;
 	int						key;
+	int						isfolder;
 	t_clst					*lst;
 }							t_comp;
 
@@ -92,6 +95,7 @@ int							c_sizing(t_comp *c);
 
 int							c_updater(t_comp *c, char *select);
 int							c_gtfo(t_comp *c, long int keypress);
+int							c_rematch(t_comp *c, long int keypress);
 
 /*
 ** Terminal related function (moving and printing the list)

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:32:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/15 19:05:04 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void					c_init(t_data *s, long int input)
 	s->comp->home = ft_strdup(ft_getenv(s->env, "HOME"));
 	s->comp->pwd = ft_strdup(ft_getenv(s->env, "PWD"));
 	s->comp->key = input;
+	s->comp->isfolder = 0;
 	s->comp->prompt = s->line.prompt_size;
 	c_matching(s, s->comp);
 }

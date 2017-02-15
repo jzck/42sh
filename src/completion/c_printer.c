@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:35:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/15 19:28:43 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,29 @@
 **                 - (10) Symlink: Cyan "\e[96m"
 */
 
-static void	c_printer_node(t_clst *lst)
+static void	c_printer_node(t_clst *lst, int c_sx)
 {
-	lst->cursor ? ft_putstr(tgetstr("us", NULL)) : (0);
-	lst->cursor ? (ft_putstr_fd("\033[31m", 2)) : (0);
-	lst->type == 4 ? ft_putstr_fd("\e[1;31m", 2) : (0);
-	lst->type == 10 ? ft_putstr_fd("\e[1;96m", 2) : (0);
+	int		i;
+
+	i = lst->len;
+	if (lst->cursor)
+		ft_putstr_fd("\e[7m", 2);
+	else
+	{
+		lst->type == 4 ? ft_putstr_fd("\e[1;31m", 2) : (0);
+		lst->type == 10 ? ft_putstr_fd("\e[1;96m", 2) : (0);
+	}
 	ft_putstr_fd(lst->name, 2);
-	ft_putstr_fd("\033[00m", 2);
 	if (lst->type == 4)
 		ft_putstr_fd("/", 2);
 	else if (lst->type == 10)
 		ft_putstr_fd("@", 2);
 	else
 		ft_putstr_fd(" ", 2);
-	lst->cursor ? ft_putstr(tgetstr("ue", NULL)) : (0);
+	while (i++ < (c_sx))
+		ft_putstr(" ");
+	ft_putstr_fd("\e[00m", 2);
+	ft_putstr(" ");
 }
 
 /*
@@ -47,7 +55,7 @@ static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 	t_clst	*ptr;
 
 	ptr = lst->next;
-	c_printer_node(lst);
+	c_printer_node(lst, c->c_sx);
 	while (loop)
 	{
 		i = 1;
@@ -60,9 +68,7 @@ static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 		if (ptr != c->lst)
 		{
 			i = lst->len;
-			while (i++ < (c->c_sx + 1))
-				ft_putstr(" ");
-			c_printer_node(ptr);
+			c_printer_node(ptr, c->c_sx);
 			lst = ptr;
 			ptr = ptr->next;
 		}
