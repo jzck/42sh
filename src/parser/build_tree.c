@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_do.c                                         :+:      :+:    :+:   */
+/*   build_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:28:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 19:08:49 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/15 20:51:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_do(t_btree **ast, t_list **start, t_list **lst)
+t_treematch			g_treematch[] =
 {
-	t_astnode	*node;
-	t_token		*token;
+	{TK_N_WORD, &add_cmd},
+	{TK_PIPE, &add_sep},
+	{0, NULL},
+};
 
+int		build_tree(t_btree **ast, t_list **lst)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
 	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_DO;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(ast, start);
+	while (g_treematch[i].type)
+	{
+		DG("func TK : '%s' TK : '%s'",
+		read_state(g_treematch[i].type) ,read_state(token->type));
+		if (g_treematch[i].type == token->type)
+		   return (g_treematch[i].add(ast, lst));	
+		i++;
+	}
 	return (0);
 }

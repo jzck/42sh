@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 19:12:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 22:51:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/15 19:52:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			pop_stack(t_sym **stack, t_sym erase_sym)
 {
 	t_sym	*temp;
 
-	DG("pop until :%s", read_state(erase_sym));
+//	DG("pop until :%s", read_state(erase_sym));
 	temp = *stack; 
 	while (*temp != erase_sym)
 		*temp-- = 0;

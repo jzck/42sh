@@ -176,6 +176,10 @@ parser/aggregate_sym.c\
 parser/pop_stack.c\
 parser/push_stack.c\
 parser/error_syntax.c\
+parser/build_tree.c\
+parser/tree_wrapper.c\
+parser/add_sep.c\
+parser/add_cmd.c\
 parser/get_instruction.c\
 parser/get_sub_instruction.c\
 parser/parse_dgreat.c\
