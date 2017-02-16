@@ -170,6 +170,7 @@ main/shell_script.c\
 main/sig_handler.c\
 parser/parse.c\
 parser/ft_parse.c\
+parser/old_parse.c\
 parser/produce_sym.c\
 parser/eval_sym.c\
 parser/aggregate_sym.c\

@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TK_DLESS)
+		return ("TK_DLESS");
 	if (current == CMD_SUPERIOR)
 		return ("CMD_SUPERIOR");
 	if (current == TK_IO_NUMBER)

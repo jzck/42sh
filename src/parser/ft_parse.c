@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-int			ft_parse(t_btree **ast, t_list **token)
+int			ft_parse2(t_btree **ast, t_list **token)
 {
 	t_sym			*new_sym;
 	t_sym			*stack;

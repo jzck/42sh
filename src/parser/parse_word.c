@@ -18,6 +18,7 @@ int		parse_word(t_btree **ast, t_list **start, t_list **lst)
 	t_token		*token;
 	char		**my_tab;
 
+	DG("parse word begin");
 	my_tab = NULL;
 	token = (*lst)->content;
 	node = (*ast)->item;
@@ -27,5 +28,6 @@ int		parse_word(t_btree **ast, t_list **start, t_list **lst)
 	ft_ld_pushback(&node->data.token, my_tab);
 	ft_parse(ast, &(*lst)->next);
 	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
+	DG("parse word end");
 	return (0);
 }

@@ -14,7 +14,6 @@
 
 t_parser	g_parser[] =
 {
-	{INSTRUCTION, &get_sub_instruction},
 	{TK_AND_IF | TK_OR_IF, &parse_separator},
 	{TK_AMP, &parse_separator},
 	{TK_PIPE, &parse_separator},
@@ -25,7 +24,7 @@ t_parser	g_parser[] =
 	{TK_LESSAND, &parse_lessand},
 	{TK_GREATAND, &parse_greatand},
 	{TK_SUBSHELL, &parse_subshell},
-	{TK_WORD, &parse_word},
+	{TK_N_WORD, &parse_word},
 	{0, 0},
 };
 
@@ -35,6 +34,7 @@ int		ft_parse(t_btree **ast, t_list **start)
 	t_astnode	item;
 	int			i;
 
+	DG("old parser");
 	i = 0;
 	if (!*start)
 		return (0);
@@ -48,6 +48,7 @@ int		ft_parse(t_btree **ast, t_list **start)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
 		{
+			DG("match : %s", read_state(g_parser[i].type));
 			if (g_parser[i].f)
 				(*g_parser[i].f)(ast, start, &lst);
 			return (0);

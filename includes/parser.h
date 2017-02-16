@@ -158,15 +158,7 @@ typedef struct s_stackmatch	t_stackmatch;
 
 extern t_stackmatch g_stackmatch[];
 
-struct	s_treematch	g_treemacth[];
-{
-	t_type	token;
-	void	(*add)(t_btree **ast, t_type )
-};		
-
-typedef struct s_treematch	t_treematch;
-
-extern t_treematch g_treematch[];
+int		ft_parse2(t_btree **ast, t_list **token);
 
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
@@ -193,7 +185,7 @@ char		*read_state(t_sym current);
 struct	s_treematch
 {
 	t_type	type;
-	int		(*add)(t_btree **ast, t_list **lst);
+	int	(*add)(t_btree **ast, t_list **lst);
 };
 
 typedef struct s_treematch	t_treematch;
@@ -207,8 +199,6 @@ int		add_cmd(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
-
-
 
 /*
  * Build AST
