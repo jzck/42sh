@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 17:43:57 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 22:03:41 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int					c_clear_lst(t_comp *c)
 	}
 	c_lst->name ? ft_memdel((void *)&c_lst->name) : (0);
 	c_lst ? ft_memdel((void *)&c_lst) : (0);
+	c->lst = NULL;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 18:04:15 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 22:03:42 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int				c_rematch(t_comp *c, long int keypress)
 		c_term_clear(c);
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
-		c->lst = NULL;
 		c_matching(data_singleton(), c);
 		if (c->lst == NULL)
 		{

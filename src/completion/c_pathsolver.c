@@ -6,54 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 18:21:54 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 12:18:45 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 22:17:53 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
-
-void	ft_sstrdelete(char **s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		ft_memdel((void *)&s[i++]);
-	}
-	ft_memdel((void *)&s);
-}
-
-int	ft_sstrlen(char **s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_sstrtostr(char **s, char *sep)
-{
-	char	*tmp;
-	char	*tmp2;
-	int		i;
-
-	tmp = NULL;
-	tmp2 = NULL;
-	tmp = ft_strjoin(s[0], sep);
-	i = 1;
-	while (s[i])
-	{
-		tmp2 = ft_strjoin(tmp, s[i]);
-		ft_memdel((void *)&tmp);
-		tmp = ft_strjoin(tmp2, sep);
-		ft_memdel((void *)&tmp2);
-		i++;
-	}
-	return (tmp);
-}
 
 /*
 ** Solve the tilde pattern in the path
@@ -136,8 +93,8 @@ static char		*dots(char *cmd, char *cwd, int i)
 		scmd = ft_strsplit(cmd, '/');
 		scwd = ft_strsplit(cwd, '/');
 		tmp = dots_purge(scwd, scmd, 0);
-		scmd ? ft_sstrdelete(scmd) : (0);
-		scwd ? ft_sstrdelete(scwd) : (0);
+		scmd ? ft_sstrfree(scmd) : (0);
+		scwd ? ft_sstrfree(scwd) : (0);
 	}
 	if (!cwd)
 		tmp = ft_strdup("/");

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 15:18:14 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 21:03:18 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** Retrieve the path from the env and create a char ** from the PATH pattern.
 ** The function will cycle through it to find the matching element using the
-** c_parser() function
+** c_parser() function.
 */
 
 int				c_seek_binary(t_data *s, t_comp *c)

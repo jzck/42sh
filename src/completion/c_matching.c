@@ -6,17 +6,23 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 17:57:51 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 21:57:47 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
 /*
-** Start the parsing for the autocompletion. If a space is found in the command
-** it will call c_seek_files() function. If not, it assume it will be a binary
-** so the function c_seek_binary() is called instead.
-** Once that done, the printing function should occur.
+** Start the parsing for the autocompletion.
+** Check the first char of the c->rcmd for a . or /. to see if it's a local
+** path to search even if there's no space in the command.
+** If a space is found in the command. The function will assume it's a binary
+** completion that is needed. Else the c_seek_files() is called to search for
+** local path along with the binary part separated.
+** If any of the other part successfully created a list, the c_sizing is called
+** and 1 is returned. The last condition also check is the structure still
+** exist. It's only when the c_rematch() called it that it can be the case.
+** Else 0 is returned.
 */
 
 int			c_matching(t_data *s, t_comp *c)

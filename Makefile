@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/15 20:00:50 by alao             ###   ########.fr        #
+#    Updated: 2017/02/16 22:19:03 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ completion/c_clear.c\
 completion/c_files.c\
 completion/c_init.c\
 completion/c_matching.c\
+completion/c_misc.c\
 completion/c_output.c\
 completion/c_parser.c\
 completion/c_pathsolver.c\

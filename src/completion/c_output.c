@@ -6,11 +6,17 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 18:02:47 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 22:00:38 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
+
+/*
+** Update of the struct data.
+** The broken out command is recomposed as one unique including the choice and
+** put back in the main structure. The new cursor position is also updated.
+*/
 
 static int		c_updater_rcmd(t_comp *c)
 {
@@ -22,12 +28,15 @@ static int		c_updater_rcmd(t_comp *c)
 	tmp2 = ft_strjoin(tmp, c->rcmd);
 	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
 	c->rcmd = ft_strjoin(tmp2, c->trail);
-	tmp ? ft_memdel((void *)&tmp) : (0);
-	tmp2 ? ft_memdel((void *)&tmp2) : (0);
-	data_singleton()->line.input ? ft_memdel((void *)&data_singleton()->line.input) : (0);
-	data_singleton()->line.input = ft_strdup(c->rcmd);
+	if (data_singleton()->line.input)
+	{
+		ft_memdel((void *)&data_singleton()->line.input);
+		data_singleton()->line.input = ft_strdup(c->rcmd);
+	}
 	new_pos = ft_strlen(c->start) + ft_strlen(c->between) + ft_strlen(c->rcmd);
 	data_singleton()->line.pos = new_pos;
+	tmp ? ft_memdel((void *)&tmp) : (0);
+	tmp2 ? ft_memdel((void *)&tmp2) : (0);
 	return (1);
 }
 
@@ -58,7 +67,6 @@ int				c_updater(t_comp *c, char *select)
 	c_updater_rcmd(c);
 	rt ? ft_memdel((void *)&rt) : (0);
 	c_clear(data_singleton());
-//	DG("Module complete commands [%s] with pos [%d]", data_singleton()->line.input, data_singleton()->line.pos);
 	return (1);
 }
 

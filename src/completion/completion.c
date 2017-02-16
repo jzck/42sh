@@ -6,14 +6,14 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 17:59:23 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 22:01:18 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
 /*
-** Function to select the next item in the list if it has already been Created
+** Function to select the next item in the list if it has already been created
 ** and if the keypressed is tab.
 */
 
