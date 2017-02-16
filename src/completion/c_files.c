@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 12:04:10 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 16:31:34 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 static int		c_exclusion_folder(t_comp *c)
 {
+	DG("Exclusion");
 	DIR			*rep;
 	char		*tmp;
 
@@ -35,6 +36,8 @@ static int		c_exclusion_folder(t_comp *c)
 			data_singleton()->line.input = ft_strdup(tmp);
 		data_singleton()->line.pos = data_singleton()->line.pos + 1;
 		c->isfolder = 1;
+		tmp ? ft_memdel((void *)&tmp) : (0);
+		return (1);
 	}
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (0);
