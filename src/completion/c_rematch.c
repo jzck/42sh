@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 15:17:52 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 15:31:40 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int		c_refresh_match(t_comp *c, long int keypress)
 	tmp = ft_strjoin(c->rcmd, kpconv);
 	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
 	c->rcmd = ft_strdup(tmp);
+	c->ircmd++;
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (0);
 }
@@ -50,11 +51,19 @@ int				c_rematch(t_comp *c, long int keypress)
 	if (ft_isascii(keypress))
 	{
 		c_term_clear(c);
+		ft_putchar(keypress);
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
 		c->lst = NULL;
 		if (c_matching(data_singleton(), c))
+		{
+//			if (c->lst)
+//			{
+//				ft_putstr(tgetstr("le", NULL));
+//				ft_putstr(tgetstr("nd", NULL));
+//			}
 			return (1);
+		}
 	}
 	return (0);
 }
