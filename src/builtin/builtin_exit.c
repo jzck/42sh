@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 15:04:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/16 12:44:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		/* status = ft_atoi(ft_getenv(data_singleton()->env, "?")); */
 		status = 0;
 	}
+	ft_save_termios(-1);
 	exit(status);
 	return (0);
 }

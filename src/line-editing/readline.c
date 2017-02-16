@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 15:17:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 12:45:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ void			ft_init_history(void)
 {
 	int		fd;
 	char	*str;
+	char	*home;
+	char	*path;
 
-	fd = open(".42sh_history", O_RDONLY);
+	if (!(home = ft_getenv(data_singleton()->env, "HOME")))
+		return ;
+	path = ft_str3join(home, "/", ".42sh_history");
+	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return ;
 	while (get_next_line(fd, &str) > 0)
@@ -38,6 +43,7 @@ void			ft_init_history(void)
 		ft_create_history_list(str));
 		free(str);
 	}
+	free(path);
 	free(str);
 	close(fd);
 }
@@ -46,7 +52,12 @@ struct termios	*ft_save_termios(int save)
 {
 	static struct termios	*term_save = NULL;
 
-	if (save)
+	if (save < 0)
+	{
+		free(term_save);
+		return (NULL);
+	}
+	if (save > 0)
 	{
 		term_save = (struct termios *)malloc(sizeof(struct termios));
 		tcgetattr(0, term_save);
@@ -73,9 +84,9 @@ void	readline_init(char *prompt)
 	{
 		ft_init_line();
 		ft_init_history();
+		ft_save_termios(1);
 		beg = 1;
 	}
-	ft_save_termios(1);
 	ft_init_termios();
 	if (STR)
 		ft_strdel(&STR);

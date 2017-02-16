@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 15:45:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 12:40:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_sstr_freeone(char **sstr, int index)
 {
 	char	*tmp;
 
+	if (!sstr || !sstr[index])
+		return ;
 	tmp = sstr[index];
 	while (sstr[index])
 	{

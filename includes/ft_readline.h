@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 15:14:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 12:44:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void			ft_read_it(int input, size_t *pos, char **str);
 char			*readline(char *);
 int				ft_completion(int ret);
 
-void			ft_check_heredoc(char **str);
+struct termios	*ft_save_termios(int save);
 
 char			*ft_strdupi_w(char const *s);
 

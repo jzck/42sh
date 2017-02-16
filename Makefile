@@ -184,7 +184,6 @@ line-editing/control_c_and_d.c\
 line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\
-line-editing/heredoc.c\
 line-editing/home_end.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\

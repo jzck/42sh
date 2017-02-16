@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/15 11:52:24 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 12:38:58 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,27 @@ static int	ft_git_status(void)
 
 static int	ft_currend_dir(void)
 {
-	int		i;
-	int		j;
 	char	**env;
+	char	*pwd;
+	char	*currend_dir;
 
-	i = 0;
 	env = data_singleton()->env;
-	while (ft_strncmp(env[i], "PWD=", 4))
-		++i;
-	j = ft_strlen(env[i]);
-	while (j && env[i][j] != '/')
-		--j;
-	ft_printf("%s ", env[i] + j + 1);
-	return (ft_strlen(env[i] + j + 1));
+	if (!(pwd = ft_getenv(env, "PWD")))
+		return (0);
+	if (ft_getenv(env, "HOME") && !ft_strcmp(pwd, ft_getenv(env, "HOME")))
+	{
+		ft_printf("%c ", '~');
+		return (1);
+	}
+	if (!(currend_dir = ft_strrchr(pwd, '/')))
+		return (0);
+	if (!*(currend_dir + 1))
+	{
+		ft_printf("%c ", '/');
+		return (1);
+	}
+	ft_printf("%s ", currend_dir + 1);
+	return (ft_strlen(currend_dir + 1));
 }
 
 void		ft_prompt()
@@ -94,8 +102,6 @@ void		ft_prompt()
 	ft_putstr("\x1b[38;5;361m");
 	ret += ft_currend_dir();
 	ret += ft_git_status();
-	printf("\x1b[38;5;184m%C ", L'›');
-	fflush(NULL);
 	ft_putstr("\033[22;37m");
-	data_singleton()->line.prompt_size = ret + 6;
+	data_singleton()->line.prompt_size = ret + 4;
 }
