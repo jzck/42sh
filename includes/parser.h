@@ -215,6 +215,16 @@ typedef struct s_stackmatch	t_stackmatch;
 
 extern t_stackmatch g_stackmatch[];
 
+struct	s_treematch	g_treemacth[];
+{
+	t_type	token;
+	void	(*add)(t_btree **ast, t_type )
+};		
+
+typedef struct s_treematch	t_treematch;
+
+extern t_treematch g_treematch[];
+
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
 int		eval_sym(t_sym stack, t_sym new_sym);
