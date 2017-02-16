@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_do.c                                         :+:      :+:    :+:   */
+/*   tree_wrapper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:28:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 19:08:49 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/15 20:56:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_do(t_btree **ast, t_list **start, t_list **lst)
+int			join_ast(t_btree **ast, t_btree **new_node)
 {
-	t_astnode	*node;
-	t_token		*token;
+	(*new_node)->left = *ast; 
+	*ast = *new_node;	
+	return (0);
+}
 
-	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_DO;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(ast, start);
+int			gen_node(t_btree **ast)
+{
+	t_astnode	item;
+
+	if (!*ast)
+	{
+		*ast = btree_create_node(&item, sizeof(item));
+		((t_astnode *)(*ast)->item)->data.token = NULL;
+	}
 	return (0);
 }

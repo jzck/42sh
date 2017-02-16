@@ -1,1 +1,1 @@
-ls | cat | cat > file1
+ls | cat 
