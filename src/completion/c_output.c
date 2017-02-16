@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 12:10:24 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 15:16:10 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int				c_updater(t_comp *c, char *select)
 		tmp = ft_strdup(c->rcmd);
 	rt = ft_strjoin(tmp, select);
 	tmp ? ft_memdel((void *)&tmp) : (0);
+	data_singleton()->line.input ? ft_memdel((void *)&data_singleton()->line.input) : (0);
 	if (c->trail)
 		data_singleton()->line.input = ft_strjoin(rt, c->trail);
 	else

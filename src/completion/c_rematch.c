@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 12:15:28 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 15:17:52 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ static int		c_refresh_match(t_comp *c, long int keypress)
 	char		*tmp;
 	char		kpconv[2];
 
-	kpconv[0] = keypress;
+	kpconv[0] = (char)keypress;
 	kpconv[1] = '\0';
 	tmp = c->match ? ft_strjoin(c->match, kpconv) : ft_strdup(kpconv);
 	c->match ? ft_memdel((void *)&c->match) : (0);
 	c->match = ft_strdup(tmp);
 	tmp ? ft_memdel((void *)&tmp) : (0);
-	(void)c;
+	tmp = ft_strjoin(c->rcmd, kpconv);
+	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
+	c->rcmd = ft_strdup(tmp);
+	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (0);
 }
 
@@ -50,12 +53,8 @@ int				c_rematch(t_comp *c, long int keypress)
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
 		c->lst = NULL;
-		c_seek_files(data_singleton(), c);
-		if (c->lst)
-		{
-			c_sizing(c);
+		if (c_matching(data_singleton(), c))
 			return (1);
-		}
 	}
 	return (0);
 }
