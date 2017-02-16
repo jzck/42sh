@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 15:31:40 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 16:01:12 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ int				c_rematch(t_comp *c, long int keypress)
 //				ft_putstr(tgetstr("le", NULL));
 //				ft_putstr(tgetstr("nd", NULL));
 //			}
+			return (1);
+		}
+		if (c->lst == NULL)
+		{
+			DG("Clear");
+			c_clear(data_singleton());
+//			data_singleton()->line.pos += 1;
 			return (1);
 		}
 	}
