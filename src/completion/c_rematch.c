@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 16:01:12 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 16:21:02 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,15 @@ int				c_rematch(t_comp *c, long int keypress)
 	if (ft_isascii(keypress))
 	{
 		c_term_clear(c);
-		ft_putchar(keypress);
+		ft_print(keypress);
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
 		c->lst = NULL;
 		if (c_matching(data_singleton(), c))
-		{
-//			if (c->lst)
-//			{
-//				ft_putstr(tgetstr("le", NULL));
-//				ft_putstr(tgetstr("nd", NULL));
-//			}
 			return (1);
-		}
 		if (c->lst == NULL)
 		{
-			DG("Clear");
 			c_clear(data_singleton());
-//			data_singleton()->line.pos += 1;
 			return (1);
 		}
 	}
