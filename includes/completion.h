@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/15 20:00:32 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 01:19:17 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int							c_rematch(t_comp *c, long int keypress);
 
 void						c_term_mv_down(t_comp *c);
 void						c_term_mv_back(t_comp *c);
+void						c_term_clear(t_comp *c);
 void						c_printer(t_comp *c);
 
 /*
@@ -110,6 +111,7 @@ void						c_printer(t_comp *c);
 */
 
 int							c_clear(t_data *s);
+int							c_clear_lst(t_comp *c);
 char						*path_solver(t_comp *c, char *cmd, char *cwd);
 int							test(t_comp *c);
 

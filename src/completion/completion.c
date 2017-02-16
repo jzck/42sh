@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/15 19:30:18 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 11:47:59 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ static int		c_dispatcher(t_data *s)
 	if (s->comp && s->comp->lst == NULL && s->comp->isfolder)
 	{
 		c_clear(s);
-		return(1);
+		return (1);
 	}
 	if (s->comp && s->comp->lst == NULL)
 	{
 		c_clear(s);
+		return (1);
 	}
 	else if (s->comp && s->comp->lst == s->comp->lst->next)
 		return (c_updater(s->comp, s->comp->lst->name));
@@ -96,7 +97,10 @@ int				completion(long int keypress)
 		if (keypress == TOUCHE_TAB)
 			c_next_item(s->comp);
 		else
-			return (c_gtfo(s->comp, keypress));
+		{
+			if (c_gtfo(s->comp, keypress))
+				return (1);
+		}
 	}
 	return (c_dispatcher(s));
 }

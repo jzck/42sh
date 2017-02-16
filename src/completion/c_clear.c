@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:32:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/16 11:37:43 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Clear the list from the memory
 */
 
-static void			c_clear_lst(t_comp *c)
+int					c_clear_lst(t_comp *c)
 {
 	t_clst		*c_lst;
 	t_clst		*p_lst;
@@ -35,6 +35,7 @@ static void			c_clear_lst(t_comp *c)
 	}
 	c_lst->name ? ft_memdel((void *)&c_lst->name) : (0);
 	c_lst ? ft_memdel((void *)&c_lst) : (0);
+	return (0);
 }
 
 /*
@@ -55,6 +56,7 @@ int					c_clear(t_data *s)
 	ptr->trail ? ft_memdel((void *)&ptr->trail) : (0);
 	if (ptr->lst && ptr->lst->name)
 		c_clear_lst(ptr);
+	s->comp ? ft_memdel((void *)&s->comp) : (0);
 	s->comp = NULL;
 	return (0);
 }

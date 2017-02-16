@@ -6,15 +6,18 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/15 20:17:55 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 12:15:28 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
+/*
+** Recreate a c->match value by adding the new key pressed to it.
+*/
+
 static int		c_refresh_match(t_comp *c, long int keypress)
 {
-	DG("Refresh match");
 	char		*tmp;
 	char		kpconv[2];
 
@@ -28,44 +31,31 @@ static int		c_refresh_match(t_comp *c, long int keypress)
 	return (0);
 }
 
-static int		c_refresh_list(t_comp *c)
-{
-	DG("Refresh list");
-	t_clst		*ptr;
-	t_clst		*ptr_bk;
-
-	ptr = c->lst;
-	c->lst->prev->next = NULL;
-	c->lst->prev = NULL;
-	while (ptr->next)
-	{
-		DG("Refresh list loop on [%s]", ptr->name);
-		if (ft_strncmp(c->match, ptr->name, ft_strlen(c->match)) != 0)
-		{
-			if (ptr == c->lst)
-			{
-				c->lst = ptr->next;
-				c->lst->prev = NULL;
-			}
-			ptr->prev->next = ptr->next;
-			ptr->next->prev = ptr->prev;
-			ptr_bk = ptr->next;
-			ptr->name ? ft_memdel((void *)&ptr->name) : (0);
-			ptr ? ft_memdel((void *)&ptr) : (0);
-			ptr = ptr_bk;
-		}
-		ptr = ptr->next;
-	}
-	DG("Refresh list end");
-	return (0);
-}
+/*
+** The function is called when the module already exist and a foreign key is
+** pressed (like a new letter). If the input key is on the ascii table, the
+** previous display of the list is cleared and a new c->match values is
+** created. The previous list is then cleared followed by a call to
+** c_seek_files() function which will try to recreate a list. If so, the sizing
+** is updated and the function return 1. If the research for a new listing fail
+** the function return 0 which will tell the next function to cancel the update
+** and clear the module memory.
+*/
 
 int				c_rematch(t_comp *c, long int keypress)
 {
 	if (ft_isascii(keypress))
 	{
+		c_term_clear(c);
 		c_refresh_match(c, keypress);
-		c_refresh_list(c);
+		c_clear_lst(c);
+		c->lst = NULL;
+		c_seek_files(data_singleton(), c);
+		if (c->lst)
+		{
+			c_sizing(c);
+			return (1);
+		}
 	}
 	return (0);
 }

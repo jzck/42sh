@@ -6,15 +6,16 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:31:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/16 12:02:41 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
 /*
-** Retrieve the path from the env and cycle through it to find the matching
-** element with the c_parser() function
+** Retrieve the path from the env and create a char ** from the PATH pattern.
+** The function will cycle through it to find the matching element using the
+** c_parser() function
 */
 
 int				c_seek_binary(t_data *s, t_comp *c)

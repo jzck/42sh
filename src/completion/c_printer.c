@@ -6,17 +6,18 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/02/15 19:28:43 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 12:20:20 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
 /*
-** AUTOCOMPLETION: Print the name with or without an underline and colored upon
-**                 file type as follow:
-**                 - (4) Folder: Red "\e[1;31m"
-**                 - (10) Symlink: Cyan "\e[96m"
+**  Print the name with or without an underline and colored upon file type
+** as follow:
+**    - (4) Folder: Red "\e[1;31m"
+**    - (10) Symlink: Cyan "\e[96m"
+** If the element is under selection, the video mode is inverted instead.
 */
 
 static void	c_printer_node(t_clst *lst, int c_sx)
@@ -45,9 +46,9 @@ static void	c_printer_node(t_clst *lst, int c_sx)
 }
 
 /*
-** AUTOCOMPLETION: Cycle through the line to print on the same line the
-** number of time to fill it PER LINE and add 2 space after the print to
-** accomodate the trailing / for folder and a space in between.
+** Cycle through the line to print on the same line the number of time to
+** fill it PER LINE and add 2 space after the print to accomodate the
+** trailing / for folder and a space in between.
 */
 
 static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
@@ -78,7 +79,7 @@ static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 }
 
 /*
-** AUTOCOMPLETION: Control the number of time it cycle for LINE
+** Control the number of time it cycle for LINE
 */
 
 void		c_printer(t_comp *c)

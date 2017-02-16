@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 18:21:54 by alao              #+#    #+#             */
-/*   Updated: 2017/02/03 17:32:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/16 12:18:45 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ char	*ft_sstrtostr(char **s, char *sep)
 	return (tmp);
 }
 
+/*
+** Solve the tilde pattern in the path
+*/
+
 static char		*tilde(t_comp *c, char *cmd)
 {
 	char	*t_home;
@@ -75,8 +79,8 @@ static char		*tilde(t_comp *c, char *cmd)
 }
 
 /*
-** BUILTINS: Advanced dots purge if the first is not enough. Remove a /path/
-**           from the raw command if .. is found. Delete the . .
+** Advanced dots purge if the first is not enough. Remove a /path/ from
+** the raw command if .. is found. Delete the . .
 */
 
 static char		*dots_purge(char **scwd, char **scmd, int i)
@@ -109,7 +113,7 @@ static char		*dots_purge(char **scwd, char **scmd, int i)
 }
 
 /*
-** BUILTINS: Solve the dots pattern in the path
+** Solve the dots pattern in the path
 */
 
 static char		*dots(char *cmd, char *cwd, int i)
@@ -141,7 +145,7 @@ static char		*dots(char *cmd, char *cwd, int i)
 }
 
 /*
-** BUILTINS: Determine the type of commands and redistribute it
+** Path solving function. Turn any abstract path to the full version.
 */
 
 char			*path_solver(t_comp *c, char *cmd, char *cwd)
@@ -152,7 +156,7 @@ char			*path_solver(t_comp *c, char *cmd, char *cwd)
 
 	dir = NULL;
 	tmp = NULL;
-	ncmd = cmd ? ft_strtrim(cmd) : NULL;
+	ncmd = (cmd != NULL) ? ft_strtrim(cmd) : NULL;
 	cwd = getcwd(cwd, 512);
 	!cwd ? cwd = ft_strdup(c->pwd) : (0);
 	if (!ncmd || (*ncmd != '.' && *ncmd != '~' && *ncmd != '/'))
