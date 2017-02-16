@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 01:19:17 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 17:09:17 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ typedef struct				s_comp
 	char					*match;
 	char					*home;
 	char					*pwd;
+	char					*start;
+	char					*between;
 	char					*trail;
+	int						cutpoint;
 	int						prompt;
 	int						c_sx;
 	int						c_sy;

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 11:37:43 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 17:43:57 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int					c_clear(t_data *s)
 	ptr->cpath ? ft_memdel((void *)&ptr->cpath) : (0);
 	ptr->home ? ft_memdel((void *)&ptr->home) : (0);
 	ptr->pwd ? ft_memdel((void *)&ptr->pwd) : (0);
+	ptr->start ? ft_memdel((void *)&ptr->start) : (0);
+	ptr->between ? ft_memdel((void *)&ptr->between) : (0);
 	ptr->trail ? ft_memdel((void *)&ptr->trail) : (0);
 	if (ptr->lst && ptr->lst->name)
 		c_clear_lst(ptr);

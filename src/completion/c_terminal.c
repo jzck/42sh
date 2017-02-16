@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 12:16:30 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 16:58:53 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			c_term_clear(t_comp *c)
 	ft_putstr(tgetstr("up", NULL));
 	i = 0;
 	lcmd = 0;
-	c->rcmd ? lcmd += (int)ft_strlen(c->rcmd) + c->prompt + 1 : 0;
+	c->rcmd ? lcmd += c->ircmd + c->prompt + 1 : 0;
 	while (i < lcmd)
 	{
 		ft_putstr(tgetstr("nd", NULL));
@@ -53,7 +53,7 @@ void			c_term_mv_back(t_comp *c)
 	ft_putstr(tgetstr("cr", NULL));
 	i = 0;
 	lcmd = 0;
-	c->rcmd ? lcmd += (int)ft_strlen(c->rcmd) + c->prompt + 1 : 0;
+	c->rcmd ? lcmd += c->ircmd + c->prompt + 1 : 0;
 	while (i < lcmd)
 	{
 		ft_putstr(tgetstr("nd", NULL));

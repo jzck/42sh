@@ -6,11 +6,30 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 15:16:10 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 18:02:47 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
+
+static int		c_updater_rcmd(t_comp *c)
+{
+	char		*tmp;
+	char		*tmp2;
+	int			new_pos;
+
+	tmp = ft_strjoin(c->start, c->between);
+	tmp2 = ft_strjoin(tmp, c->rcmd);
+	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
+	c->rcmd = ft_strjoin(tmp2, c->trail);
+	tmp ? ft_memdel((void *)&tmp) : (0);
+	tmp2 ? ft_memdel((void *)&tmp2) : (0);
+	data_singleton()->line.input ? ft_memdel((void *)&data_singleton()->line.input) : (0);
+	data_singleton()->line.input = ft_strdup(c->rcmd);
+	new_pos = ft_strlen(c->start) + ft_strlen(c->between) + ft_strlen(c->rcmd);
+	data_singleton()->line.pos = new_pos;
+	return (1);
+}
 
 /*
 ** Output function. Will update the data->line.input along with the
@@ -34,14 +53,12 @@ int				c_updater(t_comp *c, char *select)
 		tmp = ft_strdup(c->rcmd);
 	rt = ft_strjoin(tmp, select);
 	tmp ? ft_memdel((void *)&tmp) : (0);
-	data_singleton()->line.input ? ft_memdel((void *)&data_singleton()->line.input) : (0);
-	if (c->trail)
-		data_singleton()->line.input = ft_strjoin(rt, c->trail);
-	else
-		data_singleton()->line.input = ft_strdup(rt);
-	data_singleton()->line.pos = ft_strlen(c->rcmd) + ft_strlen(select);
+	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
+	c->rcmd = ft_strdup(rt);
+	c_updater_rcmd(c);
 	rt ? ft_memdel((void *)&rt) : (0);
 	c_clear(data_singleton());
+//	DG("Module complete commands [%s] with pos [%d]", data_singleton()->line.input, data_singleton()->line.pos);
 	return (1);
 }
 

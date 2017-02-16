@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 11:47:59 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 17:59:23 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int				completion(long int keypress)
 				s->line.input[s->line.pos] != '\0')
 			return (0);
 		c_init(s, keypress);
+		if (s->comp == NULL)
+			return (1);
 	}
 	else
 	{

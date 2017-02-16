@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/02/15 19:05:04 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 17:45:54 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 static char				*c_trimmer(char *cmd, int st, int nd)
 {
 	char				*rt;
+	char				*tmp;
 	int					len;
 
 	rt = NULL;
+	tmp = NULL;
 	len = ft_strlen(cmd);
 	if (st == len)
 		st--;
@@ -31,7 +33,15 @@ static char				*c_trimmer(char *cmd, int st, int nd)
 	while (nd < len && cmd[nd] && cmd[nd] != ';' && cmd[nd] != ' ')
 		nd++;
 	rt = ft_strsub(cmd, st, nd - st);
-	return (rt);
+	data_singleton()->comp->cutpoint = st;
+	st = 0;
+	while (rt[st] == ' ')
+		st++;
+	tmp = ft_strsub(rt, st, ft_strlen(rt));
+	if (st)
+		data_singleton()->comp->between = ft_strsub(rt, 0, st);
+	rt ? ft_memdel((void *)&rt) : (0);
+	return (tmp);
 }
 
 /*
@@ -46,12 +56,19 @@ void					c_init(t_data *s, long int input)
 
 	if (!(s->comp = (t_comp *)malloc((sizeof(t_comp)))))
 		return ;
+	s->comp->cutpoint = 0;
+	s->comp->between = NULL;
 	s->comp->rcmd = c_trimmer(s->line.input, s->line.pos, s->line.pos);
 	len_trail = ft_strlen(s->line.input) - s->line.pos;
 	if (ft_strlen(s->line.input) > s->line.pos)
 		s->comp->trail = ft_strsub(s->line.input, s->line.pos, len_trail);
 	else
 		s->comp->trail = NULL;
+
+	if (s->comp->cutpoint)
+		s->comp->start = ft_strsub(s->line.input, 0, s->comp->cutpoint);
+	else
+		s->comp->start = NULL;
 	s->comp->ircmd = s->line.pos;
 	s->comp->match = NULL;
 	s->comp->cpath = NULL;
@@ -63,5 +80,10 @@ void					c_init(t_data *s, long int input)
 	s->comp->key = input;
 	s->comp->isfolder = 0;
 	s->comp->prompt = s->line.prompt_size;
+//	DG("Init end as:");
+//	DG("Start [%s]", s->comp->start);
+//	DG("Between [%s]", s->comp->between);
+//	DG("RCMD [%s]", s->comp->rcmd);
+//	DG("Trail [%s]", s->comp->trail);
 	c_matching(s, s->comp);
 }

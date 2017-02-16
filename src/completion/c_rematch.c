@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 16:37:35 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/16 18:04:15 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ int				c_rematch(t_comp *c, long int keypress)
 			ft_print(keypress);
 			return(1);
 		}
+	}
+	else
+	{
+		c_term_clear(c);
+		c_clear(data_singleton());
 	}
 	return (0);
 }
