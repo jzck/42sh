@@ -6,21 +6,19 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 15:48:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/17 16:34:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		bquotes_insert_words(t_list *cur_word, char *word, char *after_bq)
+int		bquotes_insert_words(t_list *cur_word, char *word, char *after_bq, char *ifs)
 {
-	char	*ifs;
 	t_list	*new_word;
 	t_list	*after_word;
 	t_token	*token;
 
 	after_word = cur_word->next;
-	ifs = ft_getenv(data_singleton()->env, "IFS");
 	if (ifs)
 		word = ft_strtok(word, ifs);
 	token = cur_word->content;
@@ -46,6 +44,8 @@ int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
 	char	*output;
 	char	*last_char;
 	char	*after_bq;
+	char	*ifs;
+	t_token	*token;
 
 	*bq_start = 0;
 	*bq_end = 0;
@@ -57,7 +57,10 @@ int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
 	}
 	DG("output = [%s]", output);
 	after_bq = ft_strdup(bq_end + 1);
-	bquotes_insert_words(cur_word, output ? output : "", after_bq);
+	token = cur_word->content;
+	ifs = is_char_esc(token->esc, token->data, bq_start) ?
+		NULL : ft_getenv(data_singleton()->env, "IFS");
+	bquotes_insert_words(cur_word, output ? output : "", after_bq, ifs);
 	ft_strdel(&output);
 	ft_strdel(&after_bq);
 	return (0);
@@ -66,17 +69,18 @@ int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
 int		bquotes_expand(t_list **alst)
 {
 	t_list	*cur_word;
-	t_list	*lst;
 	char	*bq_start;
 	char	*bq_end;
-	t_flag	tk;
+	t_flag	tk_word;
+	t_token	*token;
 
-	tk = TK_WORD;
+	tk_word = TK_WORD;
 	cur_word = *alst;
-	while ((lst = ft_lst_find(cur_word, &tk, token_cmp_type)))
+	while ((cur_word = ft_lst_find(cur_word, &tk_word, token_cmp_type)))
 	{
-		cur_word = lst;
-		if (!(bq_start = ft_strchr(((t_token*)cur_word->content)->data, '`')))
+		token = cur_word->content;
+		if (!(bq_start = ft_strchr(token->data, '`'))
+				|| is_char_esc(token->esc2, token->data, bq_start))
 		{
 			cur_word = cur_word->next;
 			return (0);
@@ -88,9 +92,9 @@ int		bquotes_expand(t_list **alst)
 		}
 		if (bquotes_substitute(cur_word, bq_start, bq_end))
 			return (-1);
-		if (!(*((t_token*)cur_word->content)->data))
+		if (!(*token->data))
 			ft_lst_delif(alst, cur_word->content, ft_addrcmp, token_free);
-		cur_word = lst;
+		cur_word = *alst;
 	}
 	return (0);
 }
