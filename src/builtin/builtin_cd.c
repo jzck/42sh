@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 14:29:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/17 13:51:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char		*builtin_cd_special(char *const av[], char *const env[])
 			return (NULL);
 	}
 	else if (ft_strcmp(*av, "-") == 0)
-		target = ft_getenv((char**)env, "OLDPWD");
+		target = ft_strdup(ft_getenv((char**)env, "OLDPWD"));
 	else
 		target = *av;
 	return (target);
@@ -66,12 +66,15 @@ int				builtin_cd(const char *path, char *const av[], char *const envp[])
 	int		i;
 	int		opts;
 	char	*target;
+	char	*cwd;
 
 	opts = 0;
 	i = builtin_cd_opts(av, &opts);
 	if (!(target = builtin_cd_special(av + i, envp)))
 		return (0);
-	builtin_setenv(path, (char*[3]){"OLDPWD", getcwd(NULL, 0)}, envp);
+	cwd = getcwd(NULL, 0);
+	builtin_setenv(path, (char*[3]){"OLDPWD", cwd, NULL}, envp);
+	free(cwd);
 	if (chdir(target))
 	{
 		ft_printf(CDERR_1, target);
@@ -79,6 +82,10 @@ int				builtin_cd(const char *path, char *const av[], char *const envp[])
 	}
 	else if (target != av[i])
 		ft_printf("%s\n", target);
-	builtin_setenv(path, (char*[3]){"PWD", getcwd(NULL, 0)}, envp);
+	cwd = getcwd(NULL, 0);
+	builtin_setenv(path, (char*[3]){"PWD", cwd, NULL}, envp);
+	free(cwd);
+	if (!ft_strcmp(*(av + i), "-"))
+		free(target);
 	return (0);
 }
