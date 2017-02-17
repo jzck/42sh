@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 12:38:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 14:27:57 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_currend_dir(void)
 
 	env = data_singleton()->env;
 	if (!(pwd = ft_getenv(env, "PWD")))
-		return (0);
+		return (-1);
 	if (ft_getenv(env, "HOME") && !ft_strcmp(pwd, ft_getenv(env, "HOME")))
 	{
 		ft_printf("%c ", '~');
