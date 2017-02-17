@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 18:49:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 23:18:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ enum	e_sym
 	CMD_SUPERIOR,
 	AND_OR_MAJOR,
 	AND_OR_MINOR,
+	END_COMMAND,
 	ALL = 200,
 };
 
@@ -201,6 +202,9 @@ int		build_tree(t_btree **ast, t_list **lst);
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);
 int		add_file(t_btree **ast, t_list **lst);
+int		add_loop_cmd(t_btree **ast, t_list **lst);
+int		add_loop_sep(t_btree **ast, t_list **lst);
+int		isloop(t_btree **ast);
 int		isdir(t_btree **ast);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
@@ -245,6 +249,7 @@ union	u_astdata
 	t_ld	*token;
 	char	**sstr;
 	char	*str;
+	int		loop;
 };
 
 struct	s_astnode

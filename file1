@@ -1,3 +1,4 @@
+42sh
 Makefile
 blind.text
 debug
@@ -5,6 +6,7 @@ file1
 grammar
 includes
 libft
+objs
 pdf
 sample
 script.sh

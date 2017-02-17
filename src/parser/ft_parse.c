@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 19:48:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 23:39:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int			ft_parse2(t_btree **ast, t_list **token)
 		if (state == SUCCESS)
 			ft_putstr("success");
 		build_tree(ast, token);
+		btree_print(STDBUG, *ast, &ft_putast);
 		if (end_instruction(*stack) && !(*token)->next)
 			insert_linebreak(token);
 		else

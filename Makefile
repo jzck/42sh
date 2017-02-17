@@ -199,7 +199,8 @@ parser/build_tree.c\
 parser/tree_wrapper.c\
 parser/add_sep.c\
 parser/add_cmd.c\
-parser/add_file.c
+parser/add_file.c\
+parser/add_loop.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

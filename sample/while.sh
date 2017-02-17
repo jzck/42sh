@@ -1,1 +1,4 @@
-ls | cat | cat | cat | cat | cat
+while ls | cat ; 
+do 
+	pwd | cat ;
+done 
