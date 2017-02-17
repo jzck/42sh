@@ -22,6 +22,8 @@ char	*ft_putast(void *nodein)
 	node = nodein;
 	if (node->type == TK_AMP)
 		return ("  &  ");
+	else if (node->type == TK_N_WORD)
+		return (" TK_N_WORD");
 	else if (node->type == TK_SEMI)
 		return ("  ;  ");
 	else if (node->type == TK_AND_IF)

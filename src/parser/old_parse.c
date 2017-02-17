@@ -48,7 +48,6 @@ int		ft_parse(t_btree **ast, t_list **start)
 	{
 		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
 		{
-			DG("match : %s", read_state(g_parser[i].type));
 			if (g_parser[i].f)
 				(*g_parser[i].f)(ast, start, &lst);
 			return (0);

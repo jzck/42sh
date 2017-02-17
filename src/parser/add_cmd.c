@@ -25,7 +25,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	my_tab = NULL;
 	token = (*lst)->content;
 	node = (*ast)->item;
-	node->type = TK_COMMAND;
+	node->type = token->type;
 	my_tab = ft_sstradd(my_tab, token->data);
 	my_tab = ft_sstradd(my_tab, (char *)token->esc);
 	ft_ld_pushback(&node->data.token, my_tab);

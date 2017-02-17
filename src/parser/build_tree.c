@@ -16,6 +16,11 @@ t_treematch			g_treematch[] =
 {
 	{TK_N_WORD, &add_cmd},
 	{TK_PIPE, &add_sep},
+	{TK_SEMI, &add_sep},
+	{TK_GREAT, &add_sep},
+	{TK_LESS, &add_sep},
+	{TK_OR_IF, &add_sep},
+	{TK_AND_IF, &add_sep},
 	{0, NULL},
 };
 
@@ -28,10 +33,13 @@ int		build_tree(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	while (g_treematch[i].type)
 	{
-		DG("func TK : '%s' TK : '%s'",
-		read_state(g_treematch[i].type) ,read_state(token->type));
 		if (g_treematch[i].type == token->type)
-		   return (g_treematch[i].add(ast, lst));	
+		{
+		
+			DG("func TK : '%s' TK : '%s'",
+			read_state(g_treematch[i].type) ,read_state(token->type));
+		   return (g_treematch[i].add(ast, lst));
+		}
 		i++;
 	}
 	return (0);

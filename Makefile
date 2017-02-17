@@ -168,19 +168,7 @@ main/shell_get_opts.c\
 main/shell_init.c\
 main/shell_script.c\
 main/sig_handler.c\
-parser/parse.c\
-parser/ft_parse.c\
 parser/old_parse.c\
-parser/produce_sym.c\
-parser/eval_sym.c\
-parser/aggregate_sym.c\
-parser/pop_stack.c\
-parser/push_stack.c\
-parser/error_syntax.c\
-parser/build_tree.c\
-parser/tree_wrapper.c\
-parser/add_sep.c\
-parser/add_cmd.c\
 parser/get_instruction.c\
 parser/get_sub_instruction.c\
 parser/parse_dgreat.c\
@@ -198,7 +186,19 @@ parser/parse_if.c\
 parser/parse_elif.c\
 parser/parse_else.c\
 parser/parse_word.c\
-parser/read_stack.c
+parser/read_stack.c\
+parser/parse.c\
+parser/ft_parse.c\
+parser/produce_sym.c\
+parser/eval_sym.c\
+parser/aggregate_sym.c\
+parser/pop_stack.c\
+parser/push_stack.c\
+parser/error_syntax.c\
+parser/build_tree.c\
+parser/tree_wrapper.c\
+parser/add_sep.c\
+parser/add_cmd.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

@@ -27,6 +27,8 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, CMD_NAME, CMD_SUFFIX},
 	{TK_N_WORD, LINEBREAK, CMD_NAME},
 	{TK_N_WORD, TK_PIPE, CMD_NAME},
+	{TK_N_WORD, AND_OR, CMD_NAME},
+	{TK_N_WORD, AND_OR_MAJOR, CMD_NAME},
 
 	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
 	{TK_N_WORD, TK_BANG, CMD_NAME},
@@ -64,8 +66,8 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 	int			i;
 
 	token = (*lst)->content;
-//	DG("produce stack : %s && token : %s", read_state(stack),
-//	read_state(token->type));
+	DG("produce stack : %s && token : %s", read_state(stack),
+	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)

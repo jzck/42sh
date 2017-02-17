@@ -28,7 +28,8 @@ t_execmap	g_execmap[] =
 	{TK_ELIF, &exec_elif},
 	{TK_ELSE, &exec_else},
 	{TK_UNTIL, &exec_until},
-	{TK_COMMAND | TK_SUBSHELL, &exec_command},
+	{TK_COMMAND, &exec_command},
+	{TK_SUBSHELL, &exec_command},
 	{0, 0},
 };
 
@@ -43,9 +44,10 @@ int		ft_exec(t_btree **ast)
 	item = (*ast)->item;
 	while (g_execmap[i].type)
 	{
-		if (item->type & g_execmap[i].type)
-
+		if (item->type == g_execmap[i].type)
 		{
+			DG("match : %s and %s", 
+			read_state(item->type), read_state(g_execmap[i].type));
 			/* return ((*g_execmap[i].f)(ast)); */
 			(*g_execmap[i].f)(ast);
 		}

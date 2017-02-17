@@ -14,8 +14,36 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == AND_OR_MINOR)
+		return("AND_OR_MINOR");
+	if (current == AND_OR_MAJOR)
+		return ("AND_OR_MAJOR");	
+	if (current == TK_COMMAND)
+		return ("TK_COMMAND");
+	if (current == TK_AND_IF)
+		return ("TK_AND_IF");
+	if (current == TK_OR_IF)
+		return ("TK_OR_IF");
+	if (current == TK_AMP)
+		return ("TK_AMP");
+	if (current == TK_PIPE)
+		return ("TK_PIPE");
+	if (current == TK_LESS)
+		return ("TK_LESS");
+	if (current == TK_GREAT)
+		return ("TK_GREAT");
 	if (current == TK_DLESS)
 		return ("TK_DLESS");
+	if (current == TK_DGREAT)
+		return ("TK_DGREAT");
+	if (current == TK_DGREAT)
+		return ("TK_DGREAT");
+	if (current == TK_LESSAND)
+		return ("TK_LESSAND");
+	if (current == TK_GREATAND)
+		return ("TK_GREATAND");
+	if (current == TK_SUBSHELL)
+		return ("TK_SUBSEHLL");
 	if (current == CMD_SUPERIOR)
 		return ("CMD_SUPERIOR");
 	if (current == TK_IO_NUMBER)

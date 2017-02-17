@@ -36,8 +36,8 @@ typedef long long		t_type;
  *
 */
 
-/*
 
+/*
 # define TK_LESS		(1 << 0)	//transparent
 # define TK_GREAT		(1 << 1)	//transparent
 # define TK_DLESS		(1 << 2)
@@ -67,10 +67,8 @@ typedef long long		t_type;
 # define TK_ELIF		(1 << 26)
 # define TK_ELSE		(1 << 27)
 # define TK_UNTIL		(1 << 28)
-
 */
 
-# define TK_COMMAND			(1 << 10)
 # define TK_WORD			(TK_N_WORD | TK_Q_WORD | TK_DQ_WORD)
 # define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
 # define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)

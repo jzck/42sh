@@ -20,9 +20,11 @@
  *
 */
 
+
 enum	e_sym
 {
 	LINEBREAK = 1,
+	TK_COMMAND,
 	TK_LESS,
 	TK_GREAT,
 	TK_DLESS,
@@ -116,6 +118,8 @@ enum	e_sym
 	PIPE_SEMI_SEQUENCE,
 	PATTERN_CASE,
 	CMD_SUPERIOR,
+	AND_OR_MAJOR,
+	AND_OR_MINOR,
 	ALL = 200,
 };
 
@@ -215,7 +219,7 @@ typedef long long		t_type;
 
 struct	s_parser
 {
-	t_type	type;
+	t_type		type;
 	int		(*f)(t_btree **ast,
 			t_list **start, t_list **token);
 };

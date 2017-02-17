@@ -23,23 +23,21 @@ int		shell_script()
 	ast = NULL;
 	list_ast = NULL;
 	script = &data_singleton()->script;
-//	while (script->size)
-//	{
+	while (script->size)
+	{
 		if (ft_lexer(&token, &data_singleton()->script.buffer) || !token)
 			return (1);
 		DG("after post_tokenize");
 		token_print(token);
-//		if (ft_parse2(&ast, &token))
-//			return (1);
-		if (ft_parse(&ast, &token))
+		if (ft_parse2(&ast, &token))
 			return (1);
 		btree_print(STDBUG, ast, &ft_putast);
-		if (ft_exec(&ast))
-			return (1);
+//		if (ft_exec(&ast))
+//			return (1);
 		ast = NULL;
 		script->size = 0;
 		get_script_content(script);	
-//	}
+	}
 	close(script->fd);
 	return (0);
 }
