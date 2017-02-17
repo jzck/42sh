@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 21:02:51 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/17 11:10:48 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,12 @@ void						c_printer(t_comp *c);
 int							c_clear(t_data *s);
 int							c_clear_lst(t_comp *c);
 char						*path_solver(t_comp *c, char *cmd, char *cwd);
+
+/*
+**	ajout rapide gwojda pour compiler :
+*/
+
+int			ft_sstrlen(char **s);
+char		*ft_sstrtostr(char **s, char *sep);
 
 #endif
