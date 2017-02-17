@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 22:40:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 19:40:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == SEQUENTIAL_SEP)
+		return ("SEQUENTIAL_SEP");
+	if (current == SEPARATOR)
+		return ("SEPARATOR");
+	if (current == SEPARATOR_OP)
+		return ("SEPARATOR_OP");
+	if (current == TERM)
+		return ("TERM");
+	if (current == COMPOUND_LIST)
+		return ("COMPOUND_LIST");
+	if (current == DO_GROUP)
+		return ("DO_GROUP");
+	if (current == TK_NEWLINE)
+		return ("TK_NEWLINE");
+	if (current == TK_WHILE)
+		return ("TK_WHILE");
+	if (current == TK_DO)
+		return ("TK_DO");
+	if (current == TK_DONE)
+		return ("TK_DONE");
 	if (current == AND_OR_MINOR)
 		return("AND_OR_MINOR");
 	if (current == AND_OR_MAJOR)
@@ -92,27 +112,9 @@ char			*read_state(t_sym current)
 		return ("TK_SEMI");
 	if (current == ALL)
 		return ("ALL");
-/*	if (current == NEWLINE_LIST)
+	if (current == NEWLINE_LIST)
 		return ("NEWLINE_LIST");
-	if (current == SYM_DLESS)
-		return ("DLESS");
-	if (current == SYM_DGREAT)
-		return ("DGREAT");
-	if (current == SYM_GREATAND)
-		return ("GREATAND");
-*/	if (current == TK_GREAT)
-		return ("GREAT");
-	if (current == TK_LESS)
-		return ("LESS");
-/*	if (current == SYM_LESSAND)
-		return ("LESSAND");
-	if (current == SYM_LESS)
-		return ("LESS");
-	if (current == SIMPLE_COMMAND)
-		return ("SIMPLE_COMMAND");
-	if (current == PROGRAM)
-		return ("PROGRAM");
-*/	if (current == LINEBREAK)
+	if (current == LINEBREAK)
 		return ("LINEBREAK");
 	if (current != 0)
 		return ("NON-DEFINED");

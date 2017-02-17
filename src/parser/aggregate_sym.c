@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 17:05:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 19:48:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ t_aggrematch		g_aggrematch[] =
 	{TK_WORD, WORDLIST, WORDLIST, 0},
 	{TK_ASSIGNEMENT_WORD, CMD_PREFIX,CMD_PREFIX, 0},
 	{TK_PIPE, CMD_SUPERIOR, SIMPLE_COMMAND, CMD_SUPERIOR},
-	{TK_FI, ELSE_PART, IF_CLAUSE, IF},
-	{TK_FI, COMPOUND_LIST, IF_CLAUSE, IF},
-	{TK_DONE, COMPOUND_LIST, DO_GROUP, DO},
+	{TK_FI, ELSE_PART, IF_CLAUSE, TK_IF},
+	{TK_FI, COMPOUND_LIST, IF_CLAUSE, TK_IF},
+	{TK_DONE, CMD_SUPERIOR, DO_GROUP, TK_DO},
+	{TK_DONE, COMPOUND_LIST, DO_GROUP, TK_DO},
 //Esac ?
 	{TK_ESAC, CASE_LIST, CASE_CLAUSE, TK_CASE},
 	{TK_ESAC, CASE_LIST_NS, CASE_CLAUSE, TK_CASE},
@@ -31,7 +32,10 @@ t_aggrematch		g_aggrematch[] =
 	{TK_AND_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
 	{TK_OR_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
 //watch this
-	{SEPARATOR, COMPOUND_LIST, COMPOUND_LIST, 0},
+	{SEPARATOR_OP, CMD_SUPERIOR, SEPARATOR, 0},
+	{SEPARATOR_OP, COMPOUND_LIST, SEPARATOR, 0},
+	{SEPARATOR, CMD_SUPERIOR, SIMPLE_COMMAND, CMD_SUPERIOR},
+	{SEPARATOR, COMPOUND_LIST, COMPOUND_LIST, COMPOUND_LIST},
 	{LINEBREAK, SEPARATOR_OP, SEPARATOR, SEPARATOR_OP},
 	{LINEBREAK, TK_SEMI, SEQUENTIAL_SEP, TK_SEMI},
 
@@ -45,6 +49,9 @@ t_aggrematch		g_aggrematch[] =
 	{LINEBREAK, COMPLETE_COMMANDS, PROGRAM, LINEBREAK}, 
 	{LINEBREAK, CMD_SUPERIOR, SIMPLE_COMMAND, CMD_SUPERIOR},
 	{LINEBREAK, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
+	{LINEBREAK, COMPOUND_LIST, COMPOUND_LIST, COMPOUND_LIST},
+	{NEWLINE_LIST, CMD_NAME, CMD_SUPERIOR, CMD_NAME},
+	{NEWLINE_LIST, TK_DO, TK_DO, TK_DO},
 	{NEWLINE_LIST, NEWLINE_LIST, NEWLINE_LIST, NEWLINE},
 	{NEWLINE_LIST, NAME, SEQUENTIAL_SEP, 0},
 	{NEWLINE_LIST, IN, SEQUENTIAL_SEP, 0},
@@ -94,18 +101,20 @@ t_aggrematch		g_aggrematch[] =
 	{CMD_NAME, TK_BANG, CMD_SUPERIOR, 0},
 	{CMD_NAME, SEPARATOR_OP, CMD_SUPERIOR, 0},
 	{CMD_NAME, NEWLINE_LIST, CMD_SUPERIOR, 0},
+	{CMD_NAME, TK_WHILE, CMD_SUPERIOR, 0},
 	{CMD_NAME, TK_PIPE, CMD_SUPERIOR, 0},
 	{CMD_NAME, PIPE_SEMI_SEQUENCE, CMD_SUPERIOR, 0},
 	{CMD_NAME, AND_OR_MAJOR, CMD_SUPERIOR, 0},
 	{SIMPLE_COMMAND, ALL, COMMAND, 0},
 	{DO_GROUP, NAME, FOR_CLAUSE, TK_FOR},
 	{DO_GROUP, SEQUENTIAL_SEP, FOR_CLAUSE, TK_FOR},
+	{DO_GROUP, CMD_SUPERIOR, LOOP, CMD_SUPERIOR},
 	{DO_GROUP, COMPOUND_LIST, LOOP, COMPOUND_LIST},
-	{LOOP, WHILE, WHILE_CLAUSE, WHILE},
-	{LOOP, TK_UNTIL, UNTIL_CLAUSE, TK_UNTIL},
 	{BRACE_GROUP, ALL, COMPOUND_COMMAND, 0},
 	{FUNCTION_BODY, FUNC, FUNCTION_DEFINITION, 0},
 	{FUNCTION_DEFINITION, ALL, COMMAND, 0},
+	{LOOP, TK_WHILE, WHILE_CLAUSE, TK_WHILE},
+	{LOOP, TK_UNTIL, UNTIL_CLAUSE, TK_UNTIL},
 	{UNTIL_CLAUSE, ALL, COMPOUND_COMMAND, 0},
 	{WHILE_CLAUSE, ALL, COMPOUND_COMMAND, 0},
 	{ELSE_PART, COMPOUND_LIST, ELSE_PART, TK_ELIF},
@@ -126,22 +135,26 @@ t_aggrematch		g_aggrematch[] =
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE},
 	{AND_OR_MINOR, LINEBREAK, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, AND_OR_MAJOR, AND_OR_MAJOR, 0},
-	{COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},		
+	{COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
+	{COMMAND, TK_WHILE, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, TK_BANG, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, SEPARATOR_OP, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, NEWLINE_LIST, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, LINEBREAK, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE, 0},
+	{PIPE_SEQUENCE, TK_WHILE, PIPELINE, 0},
 	{PIPE_SEQUENCE, TK_BANG, PIPELINE, TK_BANG},
 	{PIPE_SEQUENCE, SEPARATOR_OP, PIPELINE, 0},
 	{PIPE_SEQUENCE, NEWLINE_LIST, PIPELINE, 0},
 	{PIPE_SEQUENCE, LINEBREAK, PIPELINE, 0},
 	{PIPE_SEQUENCE, AND_OR_MAJOR, PIPELINE, 0},
+	{PIPELINE, TK_WHILE, AND_OR, 0},
 	{PIPELINE, LINEBREAK, AND_OR, 0},
 //	{PIPELINE, LINEBREAK, AND_OR, AND_OR},
 	{PIPELINE, SEPARATOR_OP, AND_OR, 0},
 	{PIPELINE, AND_OR_MAJOR, AND_OR, AND_OR_MAJOR},
 	{AND_OR_MAJOR, AND_OR_MAJOR, AND_OR_MAJOR, AND_OR_MAJOR},
+	{AND_OR, TK_WHILE, COMPOUND_LIST, 0},
 	{AND_OR, SEPARATOR_OP, LIST, LIST},
 	{AND_OR, NEWLINE_LIST, LIST, 0},
 	{AND_OR, LINEBREAK, LIST, 0},
@@ -159,20 +172,20 @@ int			aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state)
 	int		i;
 
 	i = 0;
-//	DG("aggregate head %s && sym %s",
-//	read_state(**stack), read_state(*new_sym));
+	DG("aggregate head %s && sym %s",
+	read_state(**stack), read_state(*new_sym));
 	while (g_aggrematch[i].top)
 	{
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(**stack, g_aggrematch[i].under))
 	
 		{
-//			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
+			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
-//				DG("stack after pop: %s", read_state(**stack));
+				DG("stack after pop: %s", read_state(**stack));
 			}
 			if (eval_sym(**stack, *new_sym))
 				return ((*state = ERROR));

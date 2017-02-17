@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 17:04:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 19:48:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, TK_PIPE, CMD_NAME},
 	{TK_N_WORD, AND_OR, CMD_NAME},
 	{TK_N_WORD, AND_OR_MAJOR, CMD_NAME},
+	{TK_N_WORD, TK_WHILE, CMD_NAME},
+	{TK_N_WORD, TK_DO, CMD_NAME},
 
 	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
 	{TK_N_WORD, TK_BANG, CMD_NAME},
@@ -46,13 +48,18 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NAME, SEPARATOR_OP, FNAME},
 	{TK_NAME, NEWLINE_LIST, FNAME},
 	{TK_NAME, TK_FOR, NAME},
+	{TK_NEWLINE, TK_DO, NEWLINE_LIST},
+	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},
 	{TK_NEWLINE, PIPE_SEMI_SEQUENCE, LINEBREAK},
+	{TK_NEWLINE, COMPOUND_LIST, NEWLINE_LIST},
+	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_SEMI, TERM, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
 	{TK_SEMI, COMPOUND_LIST, SEPARATOR_OP},
+	{TK_AMP, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_AMP, TERM, SEPARATOR_OP},
 	{TK_AMP, LIST, SEPARATOR_OP},
 	{TK_AMP, COMPOUND_LIST, SEPARATOR_OP},

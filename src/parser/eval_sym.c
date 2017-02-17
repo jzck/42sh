@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 17:05:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 19:43:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,11 @@ t_stackmatch	g_stackmatch[] =
 	{TK_ELIF, COMPOUND_LIST},	
 	{TK_FI, ELSE_PART},
 	{TK_FI, COMPOUND_LIST},	
+	{TK_DO, CMD_SUPERIOR},
 	{TK_DO, COMPOUND_LIST},
 	{TK_DO, NAME},
 	{TK_DO, SEQUENTIAL_SEP},
+	{TK_DONE, CMD_SUPERIOR},
 	{TK_DONE, COMPOUND_LIST},
 	{TK_CASE, LINEBREAK},
 	{TK_CASE, TK_BANG},
@@ -236,8 +238,10 @@ t_stackmatch	g_stackmatch[] =
 	{SEQUENTIAL_SEP, NAME},
 	{SEQUENTIAL_SEP, IN},
 	{SEQUENTIAL_SEP, WORDLIST},
+	{SEPARATOR, CMD_SUPERIOR},
 	{SEPARATOR, TERM},
 	{SEPARATOR, COMPOUND_LIST},
+	{SEPARATOR_OP, CMD_SUPERIOR},
 	{SEPARATOR_OP, LIST},
 	{SEPARATOR_OP, TERM},
 	{SEPARATOR_OP, COMPOUND_LIST},
@@ -253,6 +257,9 @@ t_stackmatch	g_stackmatch[] =
 	{LINEBREAK, COMPLETE_COMMANDS},
 	{LINEBREAK, CMD_SUPERIOR},
 	{LINEBREAK, PIPE_SEMI_SEQUENCE},
+	{LINEBREAK, COMPOUND_LIST},
+	{NEWLINE_LIST, TK_DO},
+	{NEWLINE_LIST, CMD_NAME},
 	{NEWLINE_LIST, NEWLINE_LIST},
 	{NEWLINE_LIST, NAME},
 	{NEWLINE_LIST, IN},
@@ -319,7 +326,11 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_NAME, NEWLINE_LIST},
 	{CMD_NAME, PIPE_SEMI_SEQUENCE},
 	{CMD_NAME, AND_OR_MAJOR},
+	{CMD_NAME, TK_WHILE},
+	{CMD_NAME, TK_DO},
 	
+	{CMD_SUPERIOR, TK_WHILE},
+	{CMD_SUPERIOR, TK_DO},
 	{CMD_SUPERIOR, LINEBREAK,},
 	{CMD_SUPERIOR, TK_BANG},
 	{CMD_SUPERIOR, SEPARATOR_OP},
@@ -328,12 +339,14 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_SUPERIOR, PIPE_SEMI_SEQUENCE},
 	{CMD_SUPERIOR, AND_OR_MAJOR},
 	
+	{SIMPLE_COMMAND, TK_WHILE},
 	{SIMPLE_COMMAND, LINEBREAK},
 	{SIMPLE_COMMAND, TK_BANG},
 	{SIMPLE_COMMAND, SEPARATOR_OP},
 	{SIMPLE_COMMAND, NEWLINE_LIST},
 	{SIMPLE_COMMAND, PIPE_SEMI_SEQUENCE},
 	{SIMPLE_COMMAND, AND_OR_MAJOR},
+	{DO_GROUP, CMD_SUPERIOR},
 	{DO_GROUP, COMPOUND_LIST},
 	{DO_GROUP, NAME},
 	{DO_GROUP, SEQUENTIAL_SEP},
@@ -412,6 +425,7 @@ t_stackmatch	g_stackmatch[] =
 	{COMPOUND_COMMAND, NEWLINE_LIST},
 	{COMPOUND_COMMAND, PIPE_SEMI_SEQUENCE},
 	{COMPOUND_COMMAND, FUNC},
+	{COMMAND, TK_WHILE},
 	{COMMAND, LINEBREAK},
 	{COMMAND, TK_BANG},
 	{COMMAND, SEPARATOR_OP},
@@ -421,22 +435,26 @@ t_stackmatch	g_stackmatch[] =
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE},
 	{AND_OR_MINOR, LINEBREAK},
 	{AND_OR_MINOR, AND_OR_MAJOR},
+	{PIPE_SEQUENCE, TK_WHILE},
 	{PIPE_SEQUENCE, LINEBREAK},
 	{PIPE_SEQUENCE, TK_BANG},
 	{PIPE_SEQUENCE, SEPARATOR_OP},
 	{PIPE_SEQUENCE, NEWLINE_LIST},
 	{PIPE_SEQUENCE, AND_OR_MAJOR},
+	{PIPE_SEMI_SEQUENCE, TK_WHILE},
 	{PIPE_SEMI_SEQUENCE, LINEBREAK},
 	{PIPE_SEMI_SEQUENCE, TK_BANG},
 	{PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{PIPE_SEMI_SEQUENCE, NEWLINE_LIST},
 	{PIPE_SEMI_SEQUENCE, AND_OR_MAJOR},
+	{PIPELINE, TK_WHILE},
 	{PIPELINE, LINEBREAK},
 	{PIPELINE, SEPARATOR_OP},
 	{PIPELINE, NEWLINE_LIST},
 	{PIPELINE, AND_OR_MAJOR},
 	{AND_OR_MAJOR, LINEBREAK},
 	{AND_OR_MAJOR, AND_OR_MAJOR},
+	{AND_OR, TK_WHILE},
 	{AND_OR, LINEBREAK},
 	{AND_OR, SEPARATOR_OP},
 	{AND_OR, NEWLINE_LIST},
@@ -452,7 +470,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 {
 	int				i;
 
-//	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
