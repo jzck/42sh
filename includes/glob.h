@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/08 13:54:57 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/17 15:42:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_expand
 */
 char			**glob(char *str, unsigned char *esc,
 										unsigned char *dbl_esc);
+void	 		esc_print(char *str, unsigned char *esc);
 
 /*
 ** return TRUE if path file is a directory.

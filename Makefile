@@ -84,6 +84,7 @@ exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
 glob/dir_glob.c\
+glob/esc_print.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
 glob/expand_var.c\
