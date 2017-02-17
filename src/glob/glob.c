@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 19:57:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/17 17:47:27 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char			**glob(char *pat, unsigned char *esc,
 	expand_var(&gl);
 	ft_memdel((void **)&gl.esc2);
 	expand_brace(&gl);
+	expand_bquote(&gl);
 	while (gl.m_pat->next && !(gl.found = 0))
 	{
 		gl.cur_dir = 1;
