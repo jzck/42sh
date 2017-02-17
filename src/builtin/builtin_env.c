@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 11:06:40 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/17 15:56:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,12 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 		{
 			ft_sstrprint(env, '\n');
 			ft_putchar('\n');
-			return (0);
+			break ;
 		}
 		if (*argv && ft_strcmp(*argv, "env"))
 		{
 			ft_env_execute(argv, env);
-			return (0);
+			break ;
 		}
 		if (*argv)
 			++argv;
