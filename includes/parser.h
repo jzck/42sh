@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 20:50:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 17:11:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,8 @@ int		build_tree(t_btree **ast, t_list **lst);
 
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);
+int		add_file(t_btree **ast, t_list **lst);
+int		isdir(t_btree **ast);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);

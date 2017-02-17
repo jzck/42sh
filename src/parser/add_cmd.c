@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 20:57:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 16:52:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int			add_cmd(t_btree **ast, t_list **lst)
 
 	if (!*ast)
 		gen_node(ast);
+	else if (isdir(ast))
+	   return (add_file(ast, lst));	
 	else
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;

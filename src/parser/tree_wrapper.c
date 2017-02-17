@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 20:56:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 17:14:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			gen_node(t_btree **ast)
 	{
 		*ast = btree_create_node(&item, sizeof(item));
 		((t_astnode *)(*ast)->item)->data.token = NULL;
+		((t_astnode *)(*ast)->item)->data.redir.word.word = NULL;
 	}
 	return (0);
 }

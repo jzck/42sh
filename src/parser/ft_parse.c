@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 20:40:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/17 17:05:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_parse2(t_btree **ast, t_list **token)
 	while (*token)
 	{
 		produce_sym(*stack, new_sym, token);	
-		DG("new sym %s", read_state(*new_sym));
+//		DG("new sym %s", read_state(*new_sym));
 		if (eval_sym(*stack, *new_sym))
 			state = ERROR;
 		else
