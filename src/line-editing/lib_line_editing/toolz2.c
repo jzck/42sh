@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 14:43:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/16 16:05:40 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_puttermcaps(char *str)
 	char	*res;
 	char	*env;
 
-	env = getenv("TERM");
+	env = ft_getenv(data_singleton()->env, "TERM");
 	if ((res = tgetstr(str, &env)) == NULL)
 		return ;
 	tputs(res, 0, ft_put);
