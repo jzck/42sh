@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 23:24:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/18 16:43:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			add_file(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	
-	DG("add file");
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->data.redir.n = ft_atoi(token->data);

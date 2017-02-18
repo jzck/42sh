@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 23:38:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/18 20:10:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@ int		isloop(t_btree **ast)
 	node = NULL;
 	if (*ast)
 	{
-		DG("end isloop");
 		node = (*ast)->item;
-		if (node->data.loop == 1)
+		DG("TEST LOOP");
+		if (node->type == TK_WHILE && node->full == 1)
+		{
+			DG("DON ENTER");
 			return (2);
-		if (node->type == TK_WHILE)
+		}
+		if (node->type == TK_WHILE && node->full == 0)
+		{
+			DG(" NOFULL");
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -34,12 +40,26 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_astnode	*node;
 
-	DG("add loop cmd");
 	token = (*lst)->content;
 	node = (*ast)->item;
-	if (token->type == TK_DONE)
-		return ((node->data.loop = 1));
-	else if (token->type == TK_DO)
+	DG("add loop cmd");
+	if (token->type == TK_WHILE && node->type == TK_WHILE)
+	{
+		DG("nest one more");
+		node->nest++;
+	}
+	if (token->type == TK_DONE && node->type == TK_WHILE && node->nest > 0)
+	{
+		node->nest--;
+		DG("nest one less");
+	}
+	else if (token->type == TK_DONE && node->type == TK_WHILE
+		&& node->nest == 0)
+	{
+		DG("WHILE FULL");
+		return ((node->full = 1));
+	}
+	if (token->type == TK_DO)
 		return (add_cmd(&(*ast)->right, lst));
 	else if (!(*ast)->right && isloop(&(*ast)->left) != 2)
 		return (add_cmd(&(*ast)->left, lst));
@@ -50,7 +70,6 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 
 int		add_loop_sep(t_btree **ast, t_list **lst)
 {
-	DG("add loop sep");
 	if (!(*ast)->right)
 		return (add_sep(&(*ast)->left, lst));
 	else

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 23:18:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/18 20:06:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,11 +249,13 @@ union	u_astdata
 	t_ld	*token;
 	char	**sstr;
 	char	*str;
-	int		loop;
 };
 
 struct	s_astnode
 {
+
+	int			nest;
+	int			full;
 	t_type		type;
 	t_astdata	data;
 };

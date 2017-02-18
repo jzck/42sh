@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 23:34:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/18 18:43:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,36 @@ t_treematch			g_treematch[] =
 	{TK_WHILE, &add_cmd},
 	{TK_DO, &add_cmd},
 	{TK_DONE, &add_cmd},
+	{TK_NEWLINE, &add_sep},
 	{0, NULL},
 };
 
-int		build_tree(t_btree **ast, t_list **lst)
+static int	isseparator(int type, int cache)
 {
-	int		i;
+	if (type == TK_NEWLINE && (cache == TK_WHILE 
+		|| cache == TK_DO))
+		return (0);
+	return (1);
+}
+
+int			build_tree(t_btree **ast, t_list **lst)
+{
+	int			i;
+	static int	cache;
 	t_token	*token;
 
 	i = 0;
 	token = (*lst)->content;
 	while (g_treematch[i].type)
 	{
-		if (g_treematch[i].type == token->type)
+		if (g_treematch[i].type == token->type
+		&& isseparator(token->type, cache))
 		{
 		
 			DG("func TK : '%s' TK : '%s'",
 			read_state(g_treematch[i].type) ,read_state(token->type));
-		   return (g_treematch[i].add(ast, lst));
+			cache = token->type;
+		   	return (g_treematch[i].add(ast, lst));
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/17 21:35:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/18 18:50:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_WHILE, SEPARATOR_OP},
 	{TK_WHILE, NEWLINE_LIST},
 	{TK_WHILE, PIPE_SEMI_SEQUENCE},
+	{TK_WHILE, TK_DO},
 	{TK_UNTIL, LINEBREAK},
 	{TK_UNTIL, TK_BANG},
 	{TK_UNTIL, SEPARATOR_OP},
@@ -243,6 +244,7 @@ t_stackmatch	g_stackmatch[] =
 	{END_COMMAND, TK_WHILE},
 	{END_COMMAND, TK_DO},
 	{END_COMMAND, LINEBREAK},
+	{END_COMMAND, COMPOUND_LIST},
 	{SEPARATOR, CMD_SUPERIOR},
 	{SEPARATOR, TERM},
 	{SEPARATOR, COMPOUND_LIST},
@@ -387,6 +389,7 @@ t_stackmatch	g_stackmatch[] =
 	{WHILE_CLAUSE, SEPARATOR_OP},
 	{WHILE_CLAUSE, NEWLINE_LIST},
 	{WHILE_CLAUSE, PIPE_SEMI_SEQUENCE},
+	{WHILE_CLAUSE, TK_DO},
 	{ELSE_PART, COMPOUND_LIST},
 	{IF_CLAUSE, LINEBREAK},
 	{IF_CLAUSE, TK_BANG},
@@ -435,6 +438,7 @@ t_stackmatch	g_stackmatch[] =
 	{COMPOUND_COMMAND, NEWLINE_LIST},
 	{COMPOUND_COMMAND, PIPE_SEMI_SEQUENCE},
 	{COMPOUND_COMMAND, FUNC},
+	{COMPOUND_COMMAND, TK_DO},
 	{COMMAND, TK_WHILE},
 	{COMMAND, LINEBREAK},
 	{COMMAND, TK_DO},

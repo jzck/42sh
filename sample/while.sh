@@ -1,4 +1,8 @@
-while ls | cat ; 
+while ls 
 do 
-	pwd | cat ;
+	while ls
+	do
+		pwd
+	done	
+	pwd ; ls
 done 
