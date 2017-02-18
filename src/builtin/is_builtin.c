@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 11:44:31 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/18 16:44:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_stof g_builtin[] =
 	{"bg", &builtin_bg},
 	{"history", &builtin_history},
 	{"read", &builtin_read},
+	{"hash", &builtin_hash},
 	{NULL, NULL},
 };
 

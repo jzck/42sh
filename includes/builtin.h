@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:21:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 11:45:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/18 16:44:35 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int		builtin_jobs(const char *path, char *const av[], char *const envp[]);
 int		builtin_fg(const char *path, char *const av[], char *const envp[]);
 int		builtin_bg(const char *path, char *const av[], char *const envp[]);
 int		builtin_history(const char *path, char *const av[], char *const envp[]);
+int		builtin_hash(const char *path, char *const av[], char *const envp[]);
 
 #endif

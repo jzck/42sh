@@ -1,0 +1,21 @@
+[7m[33m         shell_init.c [1m[34m28 [0minteractive shell settings[0m
+[7m[33m               main.c [1m[34m88 [0m[7m[1m[32mstart of shell[0m JOBC is ON[0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhash -r[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[hash][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[-r][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhash[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[hash][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mls[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mls[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[ls][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mgrep[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[grep][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhash[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[hash][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhash -r[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[hash][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[-r][0m
+[7m[33m               main.c [1m[34m64 [0m[[35mhash[0m] stack=[0] state=[4][0m
+[7m[33m        token_print.c [1m[34m29 [0m13:[hash][0m
+[7m[33m         shell_exit.c [1m[34m17 [0mshell_exit()[0m
