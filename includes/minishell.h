@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 14:20:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/18 11:10:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "job_control.h"
 # include "glob.h"
 # include "completion.h"
+# include "hash.h"
 
 # include <dirent.h>
 # include <sys/stat.h>

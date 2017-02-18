@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_setexec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 12:07:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/18 13:24:16 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int		process_setexec(t_type type, t_process *p)
 		p->attributes |= PROCESS_SCRIPT;
 		p->path = ft_strdup(p->av[0]);
 	}
-	else if ((p->path = ft_findexec(ft_getenv(
-						data_singleton()->env, "PATH"), p->av[0])))
+	else if (ft_hash(p))
 	{
 		p->execf = &execve;
 		p->attributes |= PROCESS_BINARY;

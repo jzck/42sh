@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/16 12:44:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/18 14:17:28 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		status = 0;
 	}
 	ft_save_termios(-1);
+	ft_free_hash_table();
 	exit(status);
 	return (0);
 }

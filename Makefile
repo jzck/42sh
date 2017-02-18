@@ -110,6 +110,11 @@ glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/lib_perso/ft_tablen.c\
 glob/match_pattern.c\
+hash_table/ft_add_hash.c\
+hash_table/hash.c\
+hash_table/hash_free.c\
+hash_table/hash_str.c\
+hash_table/is_hash.c\
 history/add_str_in_history.c\
 history/history.c\
 history/history_parsing.c\
