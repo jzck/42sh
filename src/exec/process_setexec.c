@@ -14,6 +14,7 @@
 
 int		process_setexec(t_type type, t_process *p)
 {
+	p->path = NULL;
 	if (type == TK_SUBSHELL)
 	{
 		p->execf = &execve;
@@ -21,7 +22,9 @@ int		process_setexec(t_type type, t_process *p)
 		p->path = ft_strdup(p->av[0]);
 	}
 	else if ((p->execf = is_builtin(p)))
+	{
 		p->attributes |= PROCESS_BUILTIN;
+	}
 	else if (ft_strchr(p->av[0], '/'))
 	{
 		p->execf = &execve;

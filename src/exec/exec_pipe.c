@@ -22,7 +22,7 @@ int		exec_pipe(t_btree **ast)
 	data = data_singleton();
 	p = &data_singleton()->exec.process;
 	pipe(fds);
-	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
+	/* DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]); */
 	p->fdout = fds[PIPE_WRITE];
 	start = IS_PIPESTART(p->attributes);
 	p->toclose = fds[PIPE_READ];
