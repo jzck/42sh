@@ -54,5 +54,6 @@ int		process_redirect(t_process *p)
 		dup2_close(p->fdin, STDIN);
 	if (p->fdout != STDOUT)
 		dup2_close(p->fdout, STDOUT);
+	ft_lstdel(&p->redirs, ft_lst_cfree);
 	return (0);
 }

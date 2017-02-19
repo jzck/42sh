@@ -18,18 +18,18 @@ int		lexer_great(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token_append(token, lexer, 0, 0);
-	if (lexer->str[lexer->pos + 1] == '&')
+	DG("lexer->str=[%s]", lexer->str);
+	lexer->pos++;
+	if (lexer->str[lexer->pos] == '&')
 	{
 		token->type = TK_GREATAND;
-		lexer->pos++;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_greatand(alst, lexer));
 	}
-	if (lexer->str[lexer->pos + 1] == '>')
+	if (lexer->str[lexer->pos] == '>')
 	{
 		token->type = TK_DGREAT;
-		lexer->pos++;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		lexer->state = DEFAULT;

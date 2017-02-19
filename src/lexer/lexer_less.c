@@ -18,20 +18,20 @@ int		lexer_less(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token_append(token, lexer, 0, 0);
-	if (lexer->str[lexer->pos + 1] == '&')
+	lexer->pos++;
+	if (lexer->str[lexer->pos] == '&')
 	{
 		token->type = TK_LESSAND;
-		lexer->pos++;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_lessand(alst, lexer));
 	}
-	if (lexer->str[lexer->pos + 1] == '<')
+	if (lexer->str[lexer->pos] == '<')
 	{
 		token_free(token, 0);
 		(*alst)->content = token_init();
 		token->type = TK_DLESS;
-		lexer->pos += 2;
+		lexer->pos++;
 		push(&lexer->stack, DLESS);
 		lexer->state = DEFAULT;
 		ft_lsteadd(&lexer->heredoc_stack, ft_lstnew(alst, sizeof(alst)));

@@ -60,7 +60,7 @@ int		interactive_shell()
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
 		ltoken = ft_lstlast(token);
-		if (lexer_lex((token ? &ltoken : &token), &lexer))
+		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
 		DG("[{mag}%s{eoc}] stack=[%i] state=[%i]", lexer.str, lexer.stack ? *(int*)lexer.stack->content : 0, lexer.state);
 		token_print(token);
@@ -75,7 +75,6 @@ int		interactive_shell()
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
-	DG("gonna free [%s] @ [%p]", lexer.str, lexer.str);
 	ft_strdel(&lexer.str);
 	return (0);
 }
