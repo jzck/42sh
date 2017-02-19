@@ -26,11 +26,8 @@ int		put_job_in_foreground(t_job *j, int cont)
 		if (kill(-j->pgid, SIGCONT) < 0)
 			DG("kill(SIGCONT) failed");
 	}
-	DG("check 00");
 	job_wait(j->id);
-	DG("check 01");
 	job_remove(j->id);
-	DG("check 02");
 
 	tcsetpgrp(STDIN, jobc->shell_pgid);
 
