@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/18 20:06:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 16:29:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,16 @@ struct	s_stackmatch
 typedef struct s_stackmatch	t_stackmatch;
 
 extern t_stackmatch g_stackmatch[];
+
+struct	s_errormatch
+{
+	t_type	token;
+	char	*error;
+};
+
+typedef struct s_errormatch t_errormatch;
+
+extern t_errormatch	g_errormatch[];
 
 int		ft_parse2(t_btree **ast, t_list **token);
 

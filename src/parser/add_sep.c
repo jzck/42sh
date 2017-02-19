@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:12:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/18 20:06:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 16:48:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int			add_sep(t_btree **ast, t_list **lst)
 	DG("add sep");
 	if (isloop(ast) == 1)
 		return (add_loop_sep(ast, lst));
+	if (!*ast)
+		gen_node(ast);
 	node = (*ast)->item;
 	token = (*lst)->content;
 //	if (node->type != TK_DO)

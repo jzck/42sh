@@ -4,5 +4,8 @@ do
 	do
 		pwd
 	done	
-	pwd ; ls
+	while ls 
+	do
+		pwd
+	done
 done 
