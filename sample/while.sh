@@ -1,11 +1,12 @@
-while ls 
-do 
-	while ls
+while 
+	while
+	   while ls | cat
+	   do
+			ls
+	 	done		
 	do
-		pwd
-	done	
-	while ls 
-	do
-		pwd
+		ls | cat
 	done
+do 
+	pwd
 done 

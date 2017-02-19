@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/18 18:42:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:35:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NAME, NEWLINE_LIST, FNAME},
 	{TK_NAME, TK_FOR, NAME},
 	{TK_NEWLINE, TK_DO, NEWLINE_LIST},
+	{TK_NEWLINE, TK_WHILE, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},

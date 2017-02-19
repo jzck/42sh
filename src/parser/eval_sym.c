@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 16:53:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:43:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_WHILE, NEWLINE_LIST},
 	{TK_WHILE, PIPE_SEMI_SEQUENCE},
 	{TK_WHILE, TK_DO},
+	{TK_WHILE, TK_WHILE},
 	{TK_WHILE, COMPOUND_LIST},
 	{TK_UNTIL, LINEBREAK},
 	{TK_UNTIL, TK_BANG},
@@ -268,6 +269,7 @@ t_stackmatch	g_stackmatch[] =
 	{LINEBREAK, COMPOUND_LIST},
 	{LINEBREAK, PROGRAM},
 	{NEWLINE_LIST, TK_DO},
+	{NEWLINE_LIST, TK_WHILE},
 	{NEWLINE_LIST, CMD_NAME},
 	{NEWLINE_LIST, NEWLINE_LIST},
 	{NEWLINE_LIST, NAME},
@@ -392,6 +394,7 @@ t_stackmatch	g_stackmatch[] =
 	{WHILE_CLAUSE, NEWLINE_LIST},
 	{WHILE_CLAUSE, PIPE_SEMI_SEQUENCE},
 	{WHILE_CLAUSE, TK_DO},
+	{WHILE_CLAUSE, TK_WHILE},
 	{WHILE_CLAUSE, COMPOUND_LIST},
 	{ELSE_PART, COMPOUND_LIST},
 	{IF_CLAUSE, LINEBREAK},
@@ -442,6 +445,7 @@ t_stackmatch	g_stackmatch[] =
 	{COMPOUND_COMMAND, PIPE_SEMI_SEQUENCE},
 	{COMPOUND_COMMAND, FUNC},
 	{COMPOUND_COMMAND, TK_DO},
+	{COMPOUND_COMMAND, TK_WHILE},
 	{COMPOUND_COMMAND, COMPOUND_LIST},
 	{COMMAND, TK_WHILE},
 	{COMMAND, LINEBREAK},
@@ -498,7 +502,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 {
 	int				i;
 
-	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+//	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

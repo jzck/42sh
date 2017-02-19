@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/18 20:12:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 17:52:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int		isloop(t_btree **ast)
 	{
 		node = (*ast)->item;
 		DG("TEST LOOP");
+		if ((node->type == TK_NEWLINE || node->type == TK_SEMI ||
+			node->type == TK_AMP) && (isloop(&(*ast)->right) == 1))
+			return (1);
 		if (node->type == TK_WHILE && node->full == 1)
 		{
 			DG("DON ENTER");
@@ -59,7 +62,7 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 		DG("WHILE FULL");
 		return ((node->full = 1));
 	}
-	if (token->type == TK_DO)
+	if (token->type == TK_DO && node->nest == 0)
 		return (add_cmd(&(*ast)->right, lst));
 	else if (!(*ast)->right && isloop(&(*ast)->left) != 2)
 		return (add_cmd(&(*ast)->left, lst));
