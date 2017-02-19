@@ -53,7 +53,8 @@ int		interactive_shell()
 	token = NULL;
 	ast = NULL;
 	do {
-		ft_strappend(&lexer.str, readline(stack_to_prompt(lexer.stack)));
+		char	*str = readline(stack_to_prompt(lexer.stack));
+		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
 		else if (get_lexer_stack(lexer) == DLESS)
@@ -74,6 +75,7 @@ int		interactive_shell()
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
+	DG("gonna free [%s] @ [%p]", lexer.str, lexer.str);
 	ft_strdel(&lexer.str);
 	return (0);
 }

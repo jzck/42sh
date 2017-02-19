@@ -21,13 +21,13 @@ int		lexer_lessand(t_list **alst, t_lexer *lexer)
 	if (ft_isdigit(lexer->str[lexer->pos]))
 	{
 		token_append(token, lexer, 0, 0);
-		lexer->str++;
+		lexer->pos++;
 		return (lexer_lessand(alst, lexer));
 	}
 	else if (lexer->str[lexer->pos] == '-')
 	{
 		token_append(token, lexer, 0, 0);
-		lexer->str++;
+		lexer->pos++;
 		lexer->state = DEFAULT;
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
