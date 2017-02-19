@@ -18,6 +18,7 @@ int		launch_process(t_process *p)
 	int		pid;
 
 	exec = &data_singleton()->exec;
+	DG("launching");
 	if (p->attributes & PROCESS_UNKNOWN)
 	{
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
@@ -25,6 +26,7 @@ int		launch_process(t_process *p)
 	}
 	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p->attributes))
 	{
+		DG("check 0");
 		if (process_redirect(p))
 			return (1);
 		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
@@ -40,6 +42,7 @@ int		launch_process(t_process *p)
 			set_exitstatus(126, 1);
 			return (1);
 		}
+		DG("gonna fork now");
 		pid = fork();
 		if (pid == 0)
 		{

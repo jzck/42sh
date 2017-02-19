@@ -33,7 +33,7 @@
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
-# define IS_PIPESINGLE(a)	(a & (PROCESS_PIPESTART | PROCESS_PIPEEND))
+# define IS_PIPESINGLE(a)	((a & PROCESS_PIPESTART) && (a & PROCESS_PIPEEND))
 
 # include "libft.h"
 # include "types.h"
