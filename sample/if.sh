@@ -1,13 +1,13 @@
-while ls
-do
 if ls
 then
-	echo hello
-else
-	while ls
-	do
-		echo hello world
-		pwd
-	done
+	pwd
+elif ls
+then
+	pwd
+elif ls
+then
+	pwd
+else ls
+then
+	pwd
 fi
-done

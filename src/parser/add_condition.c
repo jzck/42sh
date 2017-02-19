@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_loop.c                                         :+:      :+:    :+:   */
+/*   add_condition.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 18:38:25 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/19 18:12:52 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/19 18:46:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		isloop(t_btree **ast)
+int		iscondition(t_btree **ast)
 {
 	t_astnode	*node;
 
@@ -20,62 +20,37 @@ int		isloop(t_btree **ast)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		DG("TEST LOOP");
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && isloop(&(*ast)->right) == 1)
+			|| node->type == TK_AMP) && iscondition(&(*ast)->right) == 1)
 			return (1);
-		if (node->type == TK_WHILE && node->full == 1)
-		{
-			DG("DON ENTER");
+		if ((node->type == TK_IF || node->type == TK_ELIF)
+			&& node->full == 1)
 			return (2);
-		}
-		if (node->type == TK_WHILE && node->full == 0)
-		{
-			DG(" NOFULL");
+		if ((node->type == TK_IF || node->type == TK_ELIF)
+			&& node->full == 0)
 			return (1);
-		}
 	}
 	return (0);
 }
 
-int		add_loop_cmd(t_btree **ast, t_list **lst)
+int		add_condition_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	DG("add loop cmd");
-	if (token->type == TK_WHILE && node->type == TK_WHILE)
-	{
-		DG("nest one more");
+	if (token->type == TK_IF && node->type == TK_IF)
 		node->nest++;
-	}
-	if (token->type == TK_DONE && node->type == TK_WHILE && node->nest > 0)
-	{
+	if (token->type == TK_FI && node->type == TK_IF && node->nest > 0)
 		node->nest--;
-		DG("nest one less");
-	}
-	else if (token->type == TK_DONE && node->type == TK_WHILE
-		&& node->nest == 0)
-	{
-		DG("WHILE FULL");
+	else if (token->type == TK_FI && node->type == TK_IF && node->nest == 0)
 		return ((node->full = 1));
-	}
-	if (token->type == TK_DO && node->nest == 0)
+	if (token->type == TK_THEN)
 		return (add_cmd(&(*ast)->right, lst));
-	else if (!(*ast)->right && isloop(&(*ast)->left) != 2)
+	else if (!(*ast)->right && iscondition(&(*ast)->left) != 2)
 		return (add_cmd(&(*ast)->left, lst));
 	else
 		return (add_cmd(&(*ast)->right, lst));
-	return (0);
-}
-
-int		add_loop_sep(t_btree **ast, t_list **lst)
-{
-	if (!(*ast)->right)
-		return (add_sep(&(*ast)->left, lst));
-	else
-		return (add_sep(&(*ast)->right, lst));
 	return (0);
 }

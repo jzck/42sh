@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/18 20:03:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 19:31:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TK_FI)
+		return ("TK_FI");
+	if (current == TK_IF)
+		return ("TK_IF");
+	if (current == TK_ELIF)
+		return ("TK_ELIF");
+	if (current == TK_THEN)
+		return ("TK_THEN");
 	if (current == COMPOUND_COMMAND)
 		return ("COMPOUND_COMMAND");
 	if (current == WHILE_CLAUSE)

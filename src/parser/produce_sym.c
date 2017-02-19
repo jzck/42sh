@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 17:35:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 19:31:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, AND_OR_MAJOR, CMD_NAME},
 	{TK_N_WORD, TK_WHILE, CMD_NAME},
 	{TK_N_WORD, TK_DO, CMD_NAME},
+	{TK_N_WORD, TK_IF, CMD_NAME},
+	{TK_N_WORD, TK_THEN, CMD_NAME},
+	{TK_N_WORD, TK_ELIF, CMD_NAME},
 	{TK_N_WORD, COMPOUND_LIST, CMD_NAME},
 
 	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
@@ -51,6 +54,10 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NAME, TK_FOR, NAME},
 	{TK_NEWLINE, TK_DO, NEWLINE_LIST},
 	{TK_NEWLINE, TK_WHILE, NEWLINE_LIST},
+	{TK_NEWLINE, TK_IF, NEWLINE_LIST},
+	{TK_NEWLINE, TK_FI, NEWLINE_LIST},
+	{TK_NEWLINE, TK_ELIF, NEWLINE_LIST},
+	{TK_NEWLINE, TK_ELSE, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},

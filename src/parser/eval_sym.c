@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 17:43:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/19 19:31:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_ELIF, COMPOUND_LIST},	
 	{TK_FI, ELSE_PART},
 	{TK_FI, COMPOUND_LIST},	
+	{TK_FI, CMD_SUPERIOR},
+	{TK_FI, END_COMMAND},
 	{TK_DO, CMD_SUPERIOR},
 	{TK_DO, COMPOUND_LIST},
 	{TK_DO, NAME},
@@ -502,7 +504,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 {
 	int				i;
 
-//	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
