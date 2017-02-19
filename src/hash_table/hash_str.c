@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:32:18 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/19 12:01:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/19 12:58:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ int		ft_hash_str(char *str)
 		id *= -1;
 		id = id % MAX_HASH;
 	}
-	ft_printf("id = %d\n", id);
 	return (id);
 }
