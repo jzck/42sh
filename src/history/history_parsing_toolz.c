@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:09:39 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/03 17:03:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/19 11:55:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void		ft_realloc_str_history(char **str, size_t pos, int nb_his, int len)
 	if (new_str3)
 	{
 		new_str2 = ft_strjoin(new_str, new_str3);
-		free(new_str);
 		new_str3 = ft_strjoin(new_str2, (*str) + pos + len);
 		free(new_str2);
 	}
 	else
 		new_str3 = ft_strjoin(new_str, (*str) + pos + len);
+	free(new_str);
 	free(*str);
 	*str = new_str3;
 }
@@ -81,12 +81,12 @@ void		ft_realloc_str_history_2(char **str, size_t pos, char *s)
 	if (new_str3)
 	{
 		new_str2 = ft_strjoin(new_str, new_str3);
-		free(new_str);
 		new_str3 = ft_strjoin(new_str2, (*str) + pos + ft_strlen(s) + 1);
 		free(new_str2);
 	}
 	else
 		new_str3 = ft_strjoin(new_str, (*str) + pos + ft_strlen(s) + 1);
+	free(new_str);
 	free(s);
 	free(*str);
 	*str = new_str3;
