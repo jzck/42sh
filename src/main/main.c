@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 15:00:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:13:50 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		non_interactive_shell(char *command)
 		} while (lexer.str[lexer.pos] == '\n');
 		if (!token)
 			return (0);
-		if (bquotes_expand(&token))
-			return (1);
+//		if (bquotes_expand(&token))
+//			return (1);
 		//token_print(token);
 		if (ft_parse(&ast, &token))
 			return (1);
@@ -63,8 +63,8 @@ int		interactive_shell()
 			return (1);
 		//token_print(token);
 	} while (get_lexer_stack(lexer));
-	if (bquotes_expand(&token))
-		return (1);
+//	if (bquotes_expand(&token))
+//		return (1);
 	if (!token)
 		return (0);
 	ft_add_str_in_history(lexer.str);

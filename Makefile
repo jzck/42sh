@@ -83,6 +83,7 @@ exec/redirect_greatand.c\
 exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
+glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
 glob/expand_bquote.c\
@@ -151,8 +152,6 @@ job-control/sigint_handler.c\
 job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
-lexer/command_getoutput.c\
-lexer/expand_bquotes.c\
 lexer/get_lexer_stack.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
