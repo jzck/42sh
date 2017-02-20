@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 18:50:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 19:26:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_WHILE, TK_IF},
 	{TK_WHILE, TK_ELIF},
 	{TK_WHILE, TK_THEN},
+	{TK_WHILE, COMPLETE_CONDITION},
 	{TK_UNTIL, LINEBREAK},
 	{TK_UNTIL, TK_BANG},
 	{TK_UNTIL, SEPARATOR_OP},
@@ -229,6 +230,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_UNTIL, TK_IF},
 	{TK_UNTIL, TK_ELIF},
 	{TK_UNTIL, TK_THEN},
+	{TK_UNTIL, COMPLETE_CONDITION},
 	{TK_FOR, LINEBREAK},
 	{TK_FOR, TK_BANG},
 	{TK_FOR, SEPARATOR_OP},
