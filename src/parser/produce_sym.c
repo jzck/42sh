@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 19:31:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 15:54:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, TK_CLOBBER, FILENAME},
 	{TK_N_WORD, CMD_WORD, CMD_SUFFIX},
 	{TK_N_WORD, CMD_NAME, CMD_SUFFIX},
+	{TK_N_WORD, CMD_SUPERIOR, CMD_SUFFIX},
 	{TK_N_WORD, LINEBREAK, CMD_NAME},
 	{TK_N_WORD, TK_PIPE, CMD_NAME},
 	{TK_N_WORD, AND_OR, CMD_NAME},
@@ -36,7 +37,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_N_WORD, TK_ELIF, CMD_NAME},
 	{TK_N_WORD, TK_ELSE, CMD_NAME},
 	{TK_N_WORD, COMPOUND_LIST, CMD_NAME},
-
+	{TK_N_WORD, COMPLETE_CONDITION, CMD_NAME},
 	{TK_N_WORD, NEWLINE_LIST, CMD_NAME},
 	{TK_N_WORD, TK_BANG, CMD_NAME},
 	{TK_N_WORD, PIPE_SEMI_SEQUENCE, CMD_NAME},
@@ -66,9 +67,12 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},
 	{TK_NEWLINE, PIPE_SEMI_SEQUENCE, LINEBREAK},
 	{TK_NEWLINE, COMPOUND_LIST, NEWLINE_LIST},
+	{TK_NEWLINE, COMPLETE_CONDITION, NEWLINE_LIST},
+	{TK_NEWLINE, CONDITION, NEWLINE_LIST},
 	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_SEMI, TERM, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
+	{TK_SEMI, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{TK_AMP, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_AMP, TERM, SEPARATOR_OP},
 	{TK_AMP, LIST, SEPARATOR_OP},

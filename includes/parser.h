@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/19 18:43:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 14:57:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ enum	e_sym
 	AND_OR_MAJOR,
 	AND_OR_MINOR,
 	END_COMMAND,
+	CONDITION,
+	COMPLETE_CONDITION,
 	ALL = 200,
 };
 
