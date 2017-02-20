@@ -14,6 +14,12 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TK_ELSE)
+		return ("TK_ELSE");
+	if (current == TK_FI)
+		return ("TK_FI");
+	if (current == ELSE_PART)
+		return ("ELSE_PART");
 	if (current == TK_FI)
 		return ("TK_FI");
 	if (current == TK_IF)
