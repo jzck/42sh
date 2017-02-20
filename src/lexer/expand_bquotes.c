@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:46:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 16:34:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:17:03 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int		bquotes_substitute(t_list *cur_word, char *bq_start, char *bq_end)
 
 int		bquotes_expand(t_list **alst)
 {
+	(void) alst;
+	/*
 	t_list	*cur_word;
 	char	*bq_start;
 	char	*bq_end;
@@ -96,6 +98,7 @@ int		bquotes_expand(t_list **alst)
 			ft_lst_delif(alst, cur_word->content, ft_addrcmp, token_free);
 		cur_word = *alst;
 	}
+	*/
 	return (0);
 }
 

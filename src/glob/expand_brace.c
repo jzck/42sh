@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 16:10:20 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:05:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void					iter_on_each(t_expand *me)
 		modify_esc_split(second, me->m_esc[i],
 				ft_strlen(me->s1), ft_strlen(me->split[i]));
 		my_new = gen_tab(first, second, 0);
-		ft_ld_pushfront(&wk_tmp, my_new);
+		ft_ld_pushfront(me->wk, my_new);
 	}
 	me->wk = &wk_tmp;
 }
@@ -87,22 +87,23 @@ static int					init_expand(t_expand *me, char *start)
 static int					search_brace(t_expand *me)
 {
 	char			*start;
-	int				comma;
+	int				com;
 	int				nb;
 
 	start = NULL;
 	nb = 0;
-	comma = 0;
+	com = 0;
 	while (*me->str)
 	{
 		start = *me->str == '{' && !is_char_esc(me->esc, CH(*me->wk)[0],
 				me->str) && nb == 0 ? me->str : start;
 		nb += *me->str == '{' && !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
 		nb -= *me->str == '}' && !is_char_esc(me->esc, CH(*me->wk)[0], me->str);
-		comma += *me->str == ',' && nb == 1;
+		com += *me->str == ',' && !is_char_esc(me->esc, CH(*me->wk)[0], me->str)
+			&& nb == 1;
 		if (!nb && start)
 		{
-			if (comma)
+			if (com)
 				return (init_expand(me, start));
 			set_char_esc(me->esc, CH(*me->wk)[0], start);
 			set_char_esc(me->esc, CH(*me->wk)[0], me->str);

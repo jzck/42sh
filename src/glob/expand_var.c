@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 16:09:27 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 17:18:33 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:24:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void			insert_var(t_glob *gl, char *pos, char *name, char *content)
 	s1 = ft_strsub(gl->pat, 0, delta);
 	delta += ft_strlen(name) + 1;
 	s2 = ft_strsubf(gl->pat, delta, ft_strlen(gl->pat) - delta, 1);
-	gl->pat = ft_strjoinf(ft_strjoinf(s1, content, 1), s2, 3);
+	gl->pat = ft_strjoinf(ft_strjoin(s1, content), s2, 1);
 	new_esc = calc_expand_esc(gl->esc, ft_strlen(s1),
 			(int [2]){ft_strlen(content), 1},
 			(int [2]){delta, ft_strlen(s2)});
@@ -40,6 +40,9 @@ static void			insert_var(t_glob *gl, char *pos, char *name, char *content)
 			(int [2]){delta, ft_strlen(s2)});
 	ft_memdel((void **)&gl->esc2);
 	gl->esc2 = new_esc;
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	ft_strdel(&content);
 }
 
 static char			*get_name(t_glob *gl, const char *pat)
@@ -49,11 +52,11 @@ static char			*get_name(t_glob *gl, const char *pat)
 	str = pat;
 	if (ft_isdigit(*str))
 		return (ft_strsub(pat, 0, str - pat + 1));
+	if (*str == '?')
+		return (ft_strsub(pat, 0, str - pat + 1));
 	while ((ft_isalnum(*str) || *str == '_' || *str == '-')
 			&& !is_char_esc(gl->esc2, gl->pat, str))
 		++str;
-	if (is_char_esc(gl->esc2, gl->pat, str))
-		return (ft_strsub(pat, 0, str - pat));
 	return (ft_strsub(pat, 0, str - pat));
 }
 
