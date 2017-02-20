@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 18:03:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:50:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, TK_ELIF, TK_ELIF, TK_ELIF},
 	{NEWLINE_LIST, TK_ELSE, TK_ELSE, TK_ELSE},
 	{NEWLINE_LIST, TK_WHILE, TK_WHILE, TK_WHILE},
+	{NEWLINE_LIST, TK_UNTIL, TK_UNTIL, TK_UNTIL},
 	{NEWLINE_LIST, NEWLINE_LIST, NEWLINE_LIST, NEWLINE},
 	{NEWLINE_LIST, NAME, SEQUENTIAL_SEP, 0},
 	{NEWLINE_LIST, IN, SEQUENTIAL_SEP, 0},
@@ -114,6 +115,7 @@ t_aggrematch		g_aggrematch[] =
 	{CMD_NAME, SEPARATOR_OP, CMD_SUPERIOR, 0},
 	{CMD_NAME, NEWLINE_LIST, CMD_SUPERIOR, 0},
 	{CMD_NAME, TK_WHILE, CMD_SUPERIOR, 0},
+	{CMD_NAME, TK_UNTIL, CMD_SUPERIOR, 0},
 	{CMD_NAME, TK_DO, CMD_SUPERIOR, 0},
 	{CMD_NAME, TK_IF, CMD_SUPERIOR, 0},
 	{CMD_NAME, TK_ELIF, CMD_SUPERIOR, 0},
@@ -162,6 +164,7 @@ t_aggrematch		g_aggrematch[] =
 	{COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{COMMAND, COMPOUND_LIST, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, TK_WHILE, PIPE_SEMI_SEQUENCE, 0},
+	{COMMAND, TK_UNTIL, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, TK_DO, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, TK_IF, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, TK_THEN, PIPE_SEMI_SEQUENCE, 0},
@@ -175,6 +178,7 @@ t_aggrematch		g_aggrematch[] =
 	{COMMAND, COMPLETE_CONDITION, PIPE_SEMI_SEQUENCE, 0},
 	{END_COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{END_COMMAND, TK_WHILE, PIPE_SEQUENCE, 0},
+	{END_COMMAND, TK_UNTIL, PIPE_SEQUENCE, 0},
 	{END_COMMAND, LINEBREAK, PIPE_SEQUENCE, 0},
 	{END_COMMAND, TK_DO, PIPE_SEQUENCE, 0},
 	{END_COMMAND, TK_IF, PIPE_SEQUENCE, 0},
@@ -184,6 +188,7 @@ t_aggrematch		g_aggrematch[] =
 	{END_COMMAND, COMPLETE_CONDITION, PIPE_SEQUENCE, 0},
 	{END_COMMAND, COMPOUND_LIST, COMPOUND_LIST, COMPOUND_LIST},
 	{PIPE_SEQUENCE, TK_WHILE, PIPELINE, 0},
+	{PIPE_SEQUENCE, TK_UNTIL, PIPELINE, 0},
 	{PIPE_SEQUENCE, TK_BANG, PIPELINE, TK_BANG},
 	{PIPE_SEQUENCE, SEPARATOR_OP, PIPELINE, 0},
 	{PIPE_SEQUENCE, NEWLINE_LIST, PIPELINE, 0},
@@ -197,6 +202,7 @@ t_aggrematch		g_aggrematch[] =
 	{PIPE_SEQUENCE, COMPOUND_LIST, PIPELINE, 0},
 	{PIPE_SEQUENCE, COMPLETE_CONDITION, PIPELINE, 0},
 	{PIPELINE, TK_WHILE, AND_OR, 0},
+	{PIPELINE, TK_UNTIL, AND_OR, 0},
 	{PIPELINE, TK_DO, AND_OR, 0},
 	{PIPELINE, TK_IF, AND_OR, 0},
 	{PIPELINE, TK_ELIF, AND_OR, 0},
@@ -211,6 +217,7 @@ t_aggrematch		g_aggrematch[] =
 	{AND_OR_MAJOR, AND_OR_MAJOR, AND_OR_MAJOR, AND_OR_MAJOR},
 	{AND_OR, TK_DO, COMPOUND_LIST, 0},
 	{AND_OR, TK_WHILE, COMPOUND_LIST, 0},
+	{AND_OR, TK_UNTIL, COMPOUND_LIST, 0},
 	{AND_OR, TK_IF, COMPOUND_LIST, 0},
 	{AND_OR, TK_ELIF, COMPOUND_LIST, 0},
 	{AND_OR, TK_THEN, COMPOUND_LIST, 0},

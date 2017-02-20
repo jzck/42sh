@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 17:46:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:58:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int		isloop(t_btree **ast)
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
 			|| node->type == TK_AMP) && isloop(&(*ast)->right) == 1)
 			return (1);
-		if (node->type == TK_WHILE && node->full == 1)
+		if ((node->type == TK_WHILE || node->type == TK_UNTIL) && node->full == 1)
 		{
 			DG("DON ENTER");
 			return (2);
 		}
-		if (node->type == TK_WHILE && node->full == 0)
+		if ((node->type == TK_WHILE || node->type == TK_UNTIL) && node->full == 0)
 		{
 			DG(" NOFULL");
 			return (1);
@@ -46,18 +46,20 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	DG("add loop cmd");
-	if (token->type == TK_WHILE && node->type == TK_WHILE)
+	if ((token->type == TK_WHILE || token->type == TK_UNTIL) 
+		&& (node->type == TK_WHILE || node->type == TK_UNTIL))
 	{
 		DG("nest one more");
 		node->nest++;
 	}
-	if (token->type == TK_DONE && node->type == TK_WHILE && node->nest > 0)
+	if (token->type == TK_DONE && (node->type == TK_WHILE || node->type == TK_UNTIL)
+		&& node->nest > 0)
 	{
 		node->nest--;
 		DG("nest one less");
 	}
-	else if (token->type == TK_DONE && node->type == TK_WHILE
-		&& node->nest == 0)
+	else if (token->type == TK_DONE && (node->type == TK_WHILE 
+		|| node->type == TK_UNTIL) && node->nest == 0)
 	{
 		DG("WHILE FULL");
 		return ((node->full = 1));

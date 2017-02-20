@@ -2,8 +2,7 @@ if ls
 then
 	if ls
 	then
-		pwd
-	else pwd
+		ls | cat
+		pwd ; ls
 	fi
-else ls
 fi
