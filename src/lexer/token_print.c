@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:35:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:55:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	token_print(t_list *lst)
 		type = token->type;
 		while (type >> (i++ + 2))
 			;
-		DG("%02i '%s'", i, token->data);
+		DG("%02i:[%s]", i, token->data);
 		index = -1;
 		lst = lst->next;
 	}

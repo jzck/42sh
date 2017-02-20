@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/01 19:46:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:00:41 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 	if (gl->pat[1] == '*' &&
 		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
 		dir_research(gl, full_word, gl->pat + 1, 1);
-	if (!*++gl->pat)
+	if (!*gl->pat || (*gl->pat == '*' && !*++gl->pat))
 		return (1);
 	fix = str + ft_strlen(str);
 	while (fix > str)
@@ -85,17 +85,20 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 	return (0);
 }
 
-const char		*manage_pat(const char *pat, char *str)
+static char		*manage_pat(t_glob *gl, char *pat, char *str)
 {
 	if (pat[0] == '.' && pat[1] == '/'
 			&& ((str[0] == '.' && str[1] != '/') || str[0] != '.'))
+	{
+		gl->cur_dir = 0;
 		return (pat + 2);
+	}
 	return (pat);
 }
 
 int				match_pattern(t_glob *gl, char *str, char *full_word)
 {
-	gl->pat = manage_pat(gl->pat, str);
+	gl->pat = manage_pat(gl, gl->pat, str);
 	while (*gl->pat)
 	{
 		if (is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat))
@@ -104,7 +107,7 @@ int				match_pattern(t_glob *gl, char *str, char *full_word)
 				return (0);
 		}
 		else if (*gl->pat == '?')
-			str++;
+			;
 		else if (*gl->pat == '[')
 		{
 			if (!match_bracket(gl, *str))

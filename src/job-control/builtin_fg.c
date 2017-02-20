@@ -21,9 +21,9 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
-	if (!SHELL_HAS_JOBC(data_singleton()->opts))
+	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
-		ft_dprintf(2, "{red}fg: %s{eoc}\n", SHELL_MSG_NOJOBC);
+		ft_dprintf(2, "{red}fg: %s{eoc}\n", SH_MSG_NOJOBC);
 		return (-1);
 	}
 	jobc = &data_singleton()->jobc;

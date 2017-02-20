@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_comment.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/24 18:22:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 17:22:48 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/07 12:15:59 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/20 21:03:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_comment(t_list **alst, char *str)
+int		lexer_comment(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
-	(void)str;
 	token = (*alst)->content;
-	if (!token->type)
-		ft_lstdel(alst, &token_free);
-	return (0);
+	if (lexer->str[lexer->pos] == '\n')
+		return (lexer_lex(&(*alst)->next, lexer));
+	return (lexer_comment(alst, lexer));
 }

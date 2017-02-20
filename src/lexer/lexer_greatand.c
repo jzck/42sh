@@ -6,27 +6,31 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:56:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:49:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:52:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_greatand(t_list **alst, char *str)
+int		lexer_greatand(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
 	token->type = TK_GREATAND;
-	if (ft_isdigit(*str))
+	if (ft_isdigit(lexer->str[lexer->pos]))
 	{
-		token_append(token, *str, 0);
-		return (lexer_greatand(alst, str + 1));
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		return (lexer_greatand(alst, lexer));
 	}
-	else if (*str == '-')
+	else if (lexer->str[lexer->pos] == '-')
 	{
-		token_append(token, *str, 0);
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
-	return (ft_tokenize(alst, str, DEFAULT));
+	lexer->state = DEFAULT;
+	return (lexer_lex(alst, lexer));
 }

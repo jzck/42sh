@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/15 19:22:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:23:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define SHELL_NAME		"minishell"
 
 # include "libft.h"
-
 # include "types.h"
 # include "lexer.h"
 # include "parser.h"
@@ -24,6 +23,8 @@
 # include "builtin.h"
 # include "job_control.h"
 # include "glob.h"
+# include "completion.h"
+# include "hash.h"
 
 # include <dirent.h>
 # include <sys/stat.h>
@@ -32,21 +33,17 @@
 # include <fcntl.h>
 # include <errno.h>
 
-struct	s_comp
-{
-	int		a;
-};
+# define SH_INTERACTIVE			(1 << 0)
+# define SH_OPTS_JOBC			(1 << 1)
+# define SH_OPTS_LC				(1 << 2)
+# define SH_MODE_INPUT			(1 << 3)
+# define SH_MODE_EXEC			(1 << 4)
 
-# define SHELL_OPTS_JOBC	(1 << 0)
-# define SHELL_OPTS_LC		(1 << 1)
-# define SHELL_MODE_INPUT	(1 << 2)
-# define SHELL_MODE_EXEC	(1 << 3)
-# define SHELL_MODE_SCRIPT	(1 << 4)
+# define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
+# define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
+# define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
 
-# define SHELL_MODE_MASK	(SHELL_MODE_INPUT | SHELL_MODE_EXEC | SHELL_MODE_SCRIPT)
-# define SHELL_HAS_JOBC(b)	(b & SHELL_OPTS_JOBC)
-
-# define SHELL_MSG_NOJOBC	"no job-control"
+# define SH_MSG_NOJOBC	"no job-control"
 
 struct	s_script
 {
@@ -65,7 +62,7 @@ struct	s_data
 	char	**argv;
 	t_flag	opts;
 	t_line	line;
-	t_comp	comp;
+	t_comp	*comp;
 	t_exec	exec;
 	t_jobc	jobc;
 	t_script	 script;
@@ -80,17 +77,7 @@ void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
 
-int		shell_single_command(char *command);
-
-int		read_script(char *file);
-int		shell_script(void);
-int		get_script_content(t_script *script);
-
-void	ft_expand_dollar(char **av, char **env);
-char	*ft_findexec(char *path, char *file);
-
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);
-void	ft_print_all_ast(t_list *lst_ast);
 
 #endif

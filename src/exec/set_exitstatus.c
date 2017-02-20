@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 21:05:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:43:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_exitstatus(int status, int override)
 			exitval = 128 + WTERMSIG(status);
 		else
 		{
-			DG("fail: process was not exited nor signaled.");
+			DG("%s: process was not exited nor signaled.", SHELL_NAME);
 			return ;
 		}
 	}

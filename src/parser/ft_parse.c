@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 19:03:07 by ariard           ###   ########.fr       */
+/*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
+/*   Updated: 2017/02/20 21:01:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		insert_linebreak(t_list **lst)
 {
 	t_token		*token;
-
 	token = (*lst)->content;
 	token->type = LINEBREAK;
 }
@@ -67,6 +66,6 @@ int			ft_parse2(t_btree **ast, t_list **token)
 	{
 		ft_putstr("syntax error: unexpected end of file\n");
 		return (0);
-	}
+	}	
 	return (0);
 }

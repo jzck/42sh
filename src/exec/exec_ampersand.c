@@ -14,10 +14,10 @@
 
 int		exec_ampersand(t_btree **ast)
 {
-	if (SHELL_HAS_JOBC(data_singleton()->opts))
+	if (SH_HAS_JOBC(data_singleton()->opts))
 		data_singleton()->exec.job.attributes |= JOB_BG;
 	ft_exec(&(*ast)->left);
-	if (SHELL_HAS_JOBC(data_singleton()->opts))
+	if (SH_HAS_JOBC(data_singleton()->opts))
 		data_singleton()->exec.job.attributes &= ~JOB_BG;
 	ft_exec(&(*ast)->right);
 

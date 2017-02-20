@@ -6,51 +6,92 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 18:54:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:59:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		shell_single_command(char *command)
+int		non_interactive_shell(char *command)
 {
 	t_list	*token;
+	t_lexer	lexer;
 	t_btree	*ast;
 
+	lexer_init(&lexer);
+	lexer.str = command;
 	token = NULL;
 	ast = NULL;
+	while (lexer.str[lexer.pos])
+	{
+		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
+			pop(&lexer.stack);
+		do {
+			lexer_lex(&token, &lexer);
+		} while (lexer.str[lexer.pos] == '\n');
+		if (!token)
+			return (0);
+//		if (bquotes_expand(&token))
+//			return (1);
+		//token_print(token);
+		if (ft_parse(&ast, &token))
+			return (1);
+		if (ft_exec(&ast))
+			return (1);
+	}
+	return (0);
+}
 
-	DG("{inv}{mag}got command '%s'", command);
-	if (ft_lexer(&token, &command) || !token)
-		return (1);
-	token_print(token);
-//	if (ft_parse(&ast, &token))
+int		interactive_shell()
+{
+	t_list	*token;
+	t_list	*ltoken;
+	t_lexer	lexer;
+	t_btree	*ast;
+
+	lexer_init(&lexer);
+	token = NULL;
+	ast = NULL;
+	do {
+		char	*str = readline(stack_to_prompt(lexer.stack));
+		ft_strappend(&lexer.str, str);
+		if (get_lexer_stack(lexer) == BACKSLASH)
+			pop(&lexer.stack);
+		else if (get_lexer_stack(lexer) == DLESS)
+			lexer.state = DLESS;
+		ltoken = ft_lstlast(token);
+		if (lexer_lex(token ? &ltoken : &token, &lexer))
+			return (1);
+		//token_print(token);
+	} while (get_lexer_stack(lexer));
+//	if (bquotes_expand(&token))
 //		return (1);
+	if (!token)
+		return (0);
+	ft_add_str_in_history(lexer.str);
+	if (ft_parse(&ast, &token))
+		return (1);
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
+	ft_strdel(&lexer.str);
 	return (0);
 }
 
 int		main(int ac, char **av)
 {
+	t_data	*data;
+
+	data = data_singleton();
 	setlocale(LC_ALL, "");
-	DG("{inv}{bol}{gre}start of shell{eoc} job_control is %s", data_singleton()->opts & SHELL_OPTS_JOBC ? "ON" : "OFF");
 	shell_init(ac, av);
-	if (data_singleton()->opts & SHELL_OPTS_LC)
+//	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
+	if (SH_IS_INTERACTIVE(data->opts))
 	{
-		shell_single_command(ft_strdup(shell_get_avdata()));
-		return (0);
+		while (1)
+			interactive_shell();
 	}
-	if (data_singleton()->opts & SHELL_MODE_SCRIPT)
-	{		
-		shell_script();
-		return (0);
-	}
-	while (1)
-	{	
-		if (shell_single_command(ft_strdup(data_singleton()->line.input)) < 0)
-			return (1);
-	}
+	else
+		non_interactive_shell(shell_get_avdata());
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 17:07:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:26:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,13 +239,6 @@ typedef union u_astdata		t_astdata;
 typedef union u_word		t_word;
 typedef long long		t_type;
 
-struct	s_parser
-{
-	t_type		type;
-	int		(*f)(t_btree **ast,
-			t_list **start, t_list **token);
-};
-
 union	u_word
 {
 	char	*word;
@@ -254,9 +247,10 @@ union	u_word
 
 struct	s_redir
 {
+	t_flag	type;
 	int		n;
-	int		close;
 	t_word	word;
+	int		close;
 };
 
 union	u_astdata
@@ -285,6 +279,7 @@ int		get_sub_instruction(t_btree **ast, t_list **start, t_list **lst);
 
 int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
 int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
+int		parse_redir(t_btree **ast, t_list **start, t_list **lst);
 int		parse_less(t_btree **ast, t_list **start, t_list **lst);
 int		parse_great(t_btree **ast, t_list **start, t_list **lst);
 int		parse_dless(t_btree **ast, t_list **start, t_list **lst);

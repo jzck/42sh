@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/05 22:09:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:32:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static char		**token_to_argv(t_astnode *node)
 		while (ld)
 		{
 			content = ld->content;
-			expand = glob(content[0], (unsigned char *)content[1]);
-			index = -1;
-			while (expand[++index])
-				my_tab = ft_sstradd(my_tab, expand[index]);
-			ft_tabdel(&expand);
+			if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2])))
+			{
+				index = -1;
+				while (expand[++index])
+					my_tab = ft_sstradd(my_tab, expand[index]);
+				ft_tabdel(&expand);
+			}
 			ld = ld->next;
 		}
 		return (my_tab);
@@ -63,9 +65,7 @@ int				exec_command(t_btree **ast)
 			job->pgid = 0;
 		}
 	}
-	p->av = NULL;
-	p->pid = 0;
-	p->attributes &= ~(PROCESS_STATE_MASK | PROCESS_TYPE_MASK);
+	process_reset(p);
 //	btree_delone(ast, &ast_free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/05 22:14:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:32:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		exec_pipe(t_btree **ast)
 	data = data_singleton();
 	p = &data_singleton()->exec.process;
 	pipe(fds);
-	DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]);
+	/* DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]); */
 	p->fdout = fds[PIPE_WRITE];
 	start = IS_PIPESTART(p->attributes);
 	p->toclose = fds[PIPE_READ];

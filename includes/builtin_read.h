@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 18:56:58 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/03 15:59:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define BUILTIN_READ_H
 
 # include "types.h"
-# include "libft.h"
 # include "builtin.h"
 # include "minishell.h"
 

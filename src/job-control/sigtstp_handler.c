@@ -18,5 +18,6 @@ void	sigtstp_handler(int signo)
 
 	(void)signo;
 	jobc = &data_singleton()->jobc;
-	DG("got SIGTSTP in process %i", getpid());
+	DG("got SIGTSTP pid=%i, pgrp=%i, shell_pgid=%i", getpid(), getpgrp(), data_singleton()->jobc.shell_pgid);
+	ft_putchar('\x1A');
 }

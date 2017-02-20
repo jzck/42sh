@@ -90,9 +90,9 @@ int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
-	if (!SHELL_HAS_JOBC(data_singleton()->opts))
+	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
-		ft_dprintf(2, "{red}jobs: %s{eoc}\n", SHELL_MSG_NOJOBC);
+		ft_dprintf(2, "{red}jobs: %s{eoc}\n", SH_MSG_NOJOBC);
 		return (1);
 	}
 	if ((opts = bt_jobs_parse((char**)av, &i)) < 0)

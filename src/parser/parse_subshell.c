@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:52:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 16:45:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 21:02:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int		parse_subshell(t_btree **ast, t_list **start, t_list **lst)
 
 	(void)start;
 	token = (*lst)->content;
+	if ((*lst)->next && ((t_token*)(*lst)->next->content)->type & TK_WORD)
+	{
+		ft_dprintf(2, "{red}%s: parse error near ')'{eoc}\n", SHELL_NAME);
+		return (-1);
+	}
 	node = (*ast)->item;
 	node->type = TK_SUBSHELL;
 	node->data.sstr = malloc(4 * sizeof(char *));

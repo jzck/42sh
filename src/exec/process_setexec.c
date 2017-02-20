@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_setexec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/30 18:29:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:42:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		process_setexec(t_type type, t_process *p)
 {
+	p->path = NULL;
 	if (type == TK_SUBSHELL)
 	{
 		p->execf = &execve;
@@ -21,15 +22,16 @@ int		process_setexec(t_type type, t_process *p)
 		p->path = ft_strdup(p->av[0]);
 	}
 	else if ((p->execf = is_builtin(p)))
+	{
 		p->attributes |= PROCESS_BUILTIN;
+	}
 	else if (ft_strchr(p->av[0], '/'))
 	{
 		p->execf = &execve;
 		p->attributes |= PROCESS_SCRIPT;
 		p->path = ft_strdup(p->av[0]);
 	}
-	else if ((p->path = ft_findexec(ft_getenv(
-						data_singleton()->env, "PATH"), p->av[0])))
+	else if (ft_hash(p))
 	{
 		p->execf = &execve;
 		p->attributes |= PROCESS_BINARY;

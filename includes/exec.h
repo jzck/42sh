@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 20:41:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:20:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
-# define IS_PIPESINGLE(a)	(a & (PROCESS_PIPESTART | PROCESS_PIPEEND))
+# define IS_PIPESINGLE(a)	((a & PROCESS_PIPESTART) && (a & PROCESS_PIPEEND))
 
 # define SCRIPT_LOOP		(1 << 0)
 
@@ -49,6 +49,7 @@ struct	s_process
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
+	t_list	*redirs;
 	int		toclose;
 	int		status;
 	t_flag	attributes;
@@ -61,6 +62,9 @@ struct	s_exec
 	int			aol_search;
 	t_job		job;
 	t_process	process;
+	int			fd0save;
+	int			fd1save;
+	int			fd2save;
 };
 
 struct	s_execmap
@@ -69,9 +73,16 @@ struct	s_execmap
 	int		(*f)(t_btree **ast);
 };
 
+struct	s_redirmap
+{
+	t_flag	type;
+	int		(*f)(t_redir *redir);
+};
+
 #include "minishell.h"
 
 extern t_execmap	g_execmap[];
+extern t_redirmap	g_redirmap[];
 
 int		ft_exec(t_btree **ast);
 
@@ -82,10 +93,7 @@ int		exec_ampersand(t_btree **ast);
 int		exec_or_if(t_btree **ast);
 int		exec_and_if(t_btree **ast);
 int		exec_pipe(t_btree **ast);
-
-int		exec_less(t_btree **ast);
-int		exec_great(t_btree **ast);
-int		exec_dgreat(t_btree **ast);
+int		exec_redir(t_btree **ast);
 int		exec_command(t_btree **ast);
 
 int		exec_while(t_btree **ast);		
@@ -99,13 +107,20 @@ int		exec_default(t_btree **ast);
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
-int		process_redirect(t_process *p);
 void	process_setsig(void);
 void	process_free(void *content, size_t content_size);
-void	process_reset(void);
+void	process_reset(t_process *p);
+void	process_resetfds(void);
 
-void	fd_redirect(void);
-void	fd_reset(void);
+int		fd_is_valid(int fd);
+int		bad_fd(int fd);
+int		process_redirect(t_process *p);
+int		redirect_great(t_redir *redir);
+int		redirect_less(t_redir *redir);
+int		redirect_dgreat(t_redir *redir);
+int		redirect_dless(t_redir *redir);
+int		redirect_greatand(t_redir *redir);
+int		redirect_lessand(t_redir *redir);
 
 char	*ft_findexec(char *path, char *file);
 

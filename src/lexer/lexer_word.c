@@ -6,25 +6,30 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 15:37:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:54:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_word(t_list **alst, char *str)
+int		lexer_word(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 	t_lexstate	state;
 
 	token = (*alst)->content;
-	token->type = TK_N_WORD;
-	if ((state = get_lexer_state(str)))
-		return (ft_tokenize(alst, str, state));
-	if (*str == '>')
-		return (ft_tokenize(&(*alst)->next, str, GREAT));
-	else if (*str == '<')
-		return (ft_tokenize(&(*alst)->next, str, LESS));
-	token_append(token, *str, 0);
-	return (ft_tokenize(alst, str + 1, WORD));
+	token->type = TK_WORD;
+	if ((state = get_state_global(lexer)))
+	{
+		lexer->state = state;
+		return (lexer_lex(alst, lexer));
+	}
+	if ((state = get_state_redir(lexer)))
+	{
+		lexer->state = state;
+		return (lexer_lex(alst, lexer));
+	}
+	token_append(token, lexer, 0, 0);
+	lexer->pos++;
+	return (lexer_lex(alst, lexer));
 }

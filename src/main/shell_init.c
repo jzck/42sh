@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 20:02:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 21:00:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 void	shell_init(int ac, char **av)
 {
 	int		*shell_pgid;
+	t_data	*data;
 
 	data_init();
-	data_singleton()->argc = ac;
-	data_singleton()->argv = ft_sstrdup(av);
+	data = data_singleton();
+	data->argc = ac;
+	data->argv = ft_sstrdup(av);
 	atexit(&shell_exit);
-	if (isatty(STDIN))
+	shell_get_opts(ac, av);
+	if (SH_IS_INTERACTIVE(data->opts))
 	{
-		shell_pgid = &data_singleton()->jobc.shell_pgid;
+		DG("interactive shell settings");
+		shell_pgid = &data->jobc.shell_pgid;
 		while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 			kill(-*shell_pgid, SIGTTIN);
 		signal(SIGINT, sigint_handler);
@@ -38,8 +42,6 @@ void	shell_init(int ac, char **av)
 			exit (1);
 		}
 		tcsetpgrp(STDIN, *shell_pgid);
-		tcgetattr(STDIN, &data_singleton()->jobc.shell_tmodes);
+		tcgetattr(STDIN, &data->jobc.shell_tmodes);
 	}
-	read_script(av[1]);
-	shell_get_opts(ac, av);
 }

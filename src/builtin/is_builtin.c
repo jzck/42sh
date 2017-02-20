@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:31:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:30:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_stof g_builtin[] =
 {
 	{"echo", &builtin_echo},
 	{"cd", &builtin_cd},
+	{"export", &builtin_export},
+	{"unset", &builtin_unset},
 	{"setenv", &builtin_setenv},
 	{"unsetenv", &builtin_unsetenv},
 	{"env", &builtin_env},
@@ -24,6 +26,7 @@ t_stof g_builtin[] =
 	{"fg", &builtin_fg},
 	{"bg", &builtin_bg},
 	{"read", &builtin_read},
+	{"hash", &builtin_hash},
 	{NULL, NULL},
 };
 

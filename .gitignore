@@ -2,6 +2,7 @@ minishell
 21sh
 42sh
 out
+STDBUG
 debug
 .42sh_history
 *.dSYM

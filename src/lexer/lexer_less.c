@@ -6,33 +6,41 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 15:00:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 20:53:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int		lexer_less(t_list **alst, char *str)
+int		lexer_less(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
 	token = (*alst)->content;
-	token_append(token, str[0], 0);
-	if (*(str + 1) == '&')
+	token_append(token, lexer, 0, 0);
+	lexer->pos++;
+	if (lexer->str[lexer->pos] == '&')
 	{
 		token->type = TK_LESSAND;
-		token_append(token, str[1], 0);
-		return (lexer_lessand(alst, str + 2));
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
+		return (lexer_lessand(alst, lexer));
 	}
-	else if (*(str + 1) == '<')
+	if (lexer->str[lexer->pos] == '<')
 	{
+		token_free(token, 0);
+		(*alst)->content = token_init();
 		token->type = TK_DLESS;
-		token_append(token, str[1], 0);
-		return (ft_tokenize(&(*alst)->next, str + 2, DEFAULT));
+		lexer->pos++;
+		push(&lexer->stack, DLESS);
+		lexer->state = DEFAULT;
+		ft_lsteadd(&lexer->heredoc_stack, ft_lstnew(alst, sizeof(alst)));
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else
 	{
 		token->type = TK_LESS;
-		return (ft_tokenize(&(*alst)->next, str + 1, DEFAULT));
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 }
