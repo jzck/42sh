@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/17 15:42:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:03:45 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define CH(x) ((char **)(x)->content)
 # define UCH(x) ((unsigned char **)(x)->content)
+# define SCH(x) ((char **)(x).content)
+# define SUCH(x) ((unsigned char **)(x).content)
 
 typedef struct	s_ld
 {
@@ -46,6 +48,16 @@ typedef struct	s_expand
 	char			*s1;
 }				t_expand;
 
+typedef struct	s_bquote
+{
+	t_ld			**wk;
+	char			*str;
+	unsigned char	*esc;
+	unsigned char	*esc2;
+	char			*s1;
+	char			*s2;
+	char			*mid;
+}				t_bquote;
 /*
 ** interface of glob.
 */
@@ -82,9 +94,12 @@ unsigned char	*calc_expand_esc(const unsigned char *esc,
 void			modify_esc_split(unsigned char *esc_dest,
 								unsigned char *esc_src, int start, int len);
 void			expand_brace(t_glob *tglob);
+void			expand_bquote(t_glob *gl);
 void			expand_var(t_glob *tglob);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
 int				dir_research(t_glob *tglob, char *p, char *pat, int rec);
+char			**gen_tab(const char *pat, const unsigned char *esc,
+				const unsigned char *esc2, int dup);
 char			**ft_strsplit_spe(const char *str,
 								const unsigned char *esc, char c);
 unsigned char	**ft_strsplit_esc(const char *str,

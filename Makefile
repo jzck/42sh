@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/16 22:19:03 by alao             ###   ########.fr        #
+#    Updated: 2017/02/17 17:16:16 by wescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,8 +84,10 @@ exec/redirect_greatand.c\
 exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
+glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
+glob/expand_bquote.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
 glob/expand_var.c\
@@ -156,8 +158,6 @@ job-control/sigint_handler.c\
 job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
-lexer/command_getoutput.c\
-lexer/expand_bquotes.c\
 lexer/get_lexer_stack.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
@@ -238,7 +238,7 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make $(NAME)
+	@make -j $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(FLAGS) $(D_FLAGS) \

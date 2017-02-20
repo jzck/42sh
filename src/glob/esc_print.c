@@ -6,20 +6,20 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:38:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 16:29:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:49:02 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 
-void esc_print(char *str, unsigned char *esc)
+void		esc_print(char *str, unsigned char *esc)
 {
 	char *cur;
 
 	cur = str;
 	while (*cur)
 	{
-		if (is_char_esc(esc,str,cur))
+		if (is_char_esc(esc, str, cur))
 			printf("\\%c", *cur);
 		else
 			printf("%c", *cur);
@@ -27,4 +27,3 @@ void esc_print(char *str, unsigned char *esc)
 	}
 	printf("\n");
 }
-
