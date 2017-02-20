@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 19:03:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:16:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_treematch			g_treematch[] =
 {
-	{TK_N_WORD, &add_cmd},
+	{TK_WORD, &add_cmd},
 	{TK_PIPE, &add_sep},
 	{TK_SEMI, &add_sep},
 	{TK_GREAT, &add_sep},
@@ -36,8 +36,8 @@ t_treematch			g_treematch[] =
 
 static int	isseparator(int type, int cache)
 {
-	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO 
-		|| cache == TK_NEWLINE || cache == TK_THEN))
+	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
+				|| cache == TK_NEWLINE || cache == TK_THEN))
 		return (0);
 	return (1);
 }
@@ -53,13 +53,13 @@ int			build_tree(t_btree **ast, t_list **lst)
 	while (g_treematch[i].type)
 	{
 		if (g_treematch[i].type == token->type
-		&& isseparator(token->type, cache))
+				&& isseparator(token->type, cache))
 		{
-		
+
 			DG("func TK : '%s' TK : '%s'",
-			read_state(g_treematch[i].type) ,read_state(token->type));
+					read_state(g_treematch[i].type) ,read_state(token->type));
 			cache = token->type;
-		   	return (g_treematch[i].add(ast, lst));
+			return (g_treematch[i].add(ast, lst));
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 18:50:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:38:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char			*read_state(t_sym current)
 	if (current == AND_OR_MINOR)
 		return("AND_OR_MINOR");
 	if (current == AND_OR_MAJOR)
-		return ("AND_OR_MAJOR");	
+		return ("AND_OR_MAJOR");
 	if (current == TK_COMMAND)
 		return ("TK_COMMAND");
 	if (current == TK_AND_IF)
@@ -104,7 +104,7 @@ char			*read_state(t_sym current)
 		return ("CMD_SUPERIOR");
 	if (current == TK_IO_NUMBER)
 		return ("IO_NUMBER");
-	if (current == CMD_SUFFIX)	
+	if (current == CMD_SUFFIX)
 		return ("CMD_SUFFIX");
 	if (current == CMD_PREFIX)
 		return ("CMD_PREFIX");
@@ -132,7 +132,7 @@ char			*read_state(t_sym current)
 		return ("COMPLETE_COMMAND");
 	if (current == COMPLETE_COMMANDS)
 		return ("COMPLETE_COMMANDS");
-	if (current == TK_N_WORD)
+	if (current == TK_WORD)
 		return ("TK_WORD");
 	if (current == CMD_NAME)
 		return ("CMD_NAME");
@@ -159,7 +159,7 @@ char			*read_state(t_sym current)
 	return ("NULL");
 }
 
-int			ft_read_stack(t_sym *stack)	
+int			ft_read_stack(t_sym *stack)
 {
 	while (*stack)
 	{

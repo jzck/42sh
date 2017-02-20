@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD:src/lexer/ft_tokenize.c
-/*   Created: 2016/11/10 13:37:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 17:28:23 by ariard           ###   ########.fr       */
-=======
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 22:58:48 by jhalford         ###   ########.fr       */
->>>>>>> master:src/lexer/lexer_lex.c
+/*   Updated: 2017/02/20 21:55:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

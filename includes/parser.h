@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:26:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:39:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  * Parse POSIX grammar
  *
 */
-
 
 enum	e_sym
 {
@@ -50,11 +49,9 @@ enum	e_sym
 	TK_ELIF,
 	TK_ELSE,
 	TK_UNTIL,
-	TK_N_WORD,
-	TK_Q_WORD,
-	TK_DQ_WORD,
+	TK_WORD,
 	TK_ASSIGNEMENT_WORD = 50,
-	TK_BANG,	
+	TK_BANG,
 	TK_NAME,
 	TK_FOR,
 	TK_IO_NUMBER,
@@ -126,6 +123,8 @@ enum	e_sym
 	ALL = 200,
 };
 
+# define TK_REDIR(x)			(TK_LESS <= x && x <= TK_GREATAND)
+
 typedef int		t_sym;
 
 # define MATCH_STACK(x, y)		(x == y || y == ALL)
@@ -175,7 +174,7 @@ typedef struct s_errormatch t_errormatch;
 
 extern t_errormatch	g_errormatch[];
 
-int		ft_parse2(t_btree **ast, t_list **token);
+int		ft_parse(t_btree **ast, t_list **token);
 
 int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
@@ -187,7 +186,7 @@ int		pop_stack(t_sym **stack, t_sym erase_sym);
 
 int		error_syntax(t_list **token);
 
-int		ft_read_stack(t_sym *stack); 
+int		ft_read_stack(t_sym *stack);
 char		*read_state(t_sym current);
 
 #define UNDEFINED	(1 << 0)
@@ -228,7 +227,7 @@ int		gen_node(t_btree **ast);
 
 /*
  * Build AST
- * 
+ *
 */
 
 typedef struct s_parser		t_parser;
@@ -269,8 +268,6 @@ struct	s_astnode
 	t_type		type;
 	t_astdata	data;
 };
-
-extern t_parser		g_parser[];
 
 int		parse(t_btree **ast, t_list **token);
 

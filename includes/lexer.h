@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:20:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:26:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ enum	e_lexstate
 	BACKSLASH,
 	VAR,
 	SPECIAL,
-	WHILE,
-	DO,
-	DONE,
-	IF,
-	THEN,
-	FI,
-	COMMENT,
 	PAREN,
 	COMMENT,
 	END,
@@ -94,34 +87,7 @@ char		*command_getoutput(char *command);
 int			ft_is_delim(char c);
 int			ft_is_delim_list(char c);
 
-t_lexstate	get_lexer_state(char *str);
-int			get_reserved_words(t_list **alst);
-int			lexer_default(t_list **alst, char *str);
-int			lexer_newline(t_list **alst, char *str);
-int			lexer_delim(t_list **alst, char *str);
-int			lexer_sep(t_list **alst, char *str);
-int			lexer_word(t_list **alst, char *str);
-int			lexer_number(t_list **alst, char *str);
-int			lexer_less(t_list **alst, char *str);
-int			lexer_great(t_list **alst, char *str);
-int			lexer_lessand(t_list **alst, char *str);
-int			lexer_greatand(t_list **alst, char *str);
-int			lexer_quote(t_list **alst, char *str);
-int			lexer_dquote(t_list **alst, char *str);
-int			lexer_backslash(t_list **alst, char *str);
-int			lexer_var(t_list **alst, char *str);
-int			lexer_special(t_list **alst, char *str);
-int			lexer_while(t_list **alst, char *str);
-int			lexer_do(t_list **alst, char *str);
-int			lexer_done(t_list **alst, char *str);
-int			lexer_if(t_list **alst, char *str);
-int			lexer_then(t_list **alst, char *str);
-int			lexer_fi(t_list **alst, char *str);
-int			lexer_list(t_list **alst, char *str);
-int			lexer_comment(t_list **alst, char *str);
-=======
 char		*stack_to_prompt(t_list	*stack);
-
 t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
@@ -145,6 +111,5 @@ int			lexer_backslash(t_list **alst, t_lexer *lexer);
 int			lexer_paren(t_list **alst, t_lexer *lexer);
 int			lexer_comment(t_list **alst, t_lexer *lexer);
 int			lexer_end(t_list **alst, t_lexer *lexer);
->>>>>>> master
 
 #endif

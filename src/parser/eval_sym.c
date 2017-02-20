@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 19:26:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:20:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_stackmatch	g_stackmatch[] =
 {
-	{TK_N_WORD, CMD_SUFFIX},
-	{TK_N_WORD, TK_PIPE},
-	{TK_N_WORD, TK_CASE},
-	{TK_N_WORD, WORDLIST},
-	{TK_N_WORD, LINEBREAK},
+	{TK_WORD, CMD_SUFFIX},
+	{TK_WORD, TK_PIPE},
+	{TK_WORD, TK_CASE},
+	{TK_WORD, WORDLIST},
+	{TK_WORD, LINEBREAK},
 	{TK_ASSIGNEMENT_WORD, CMD_PREFIX},
 	{TK_IO_NUMBER, REDIRECT_LIST},
 	{TK_IO_NUMBER, CMD_SUFFIX},
@@ -187,7 +187,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_ELIF, COMPLETE_CONDITION},
 	{TK_ELIF, CONDITION},
 	{TK_FI, ELSE_PART},
-	{TK_FI, COMPOUND_LIST},	
+	{TK_FI, COMPOUND_LIST},
 	{TK_FI, CMD_SUPERIOR},
 	{TK_FI, END_COMMAND},
 	{TK_FI, CONDITION},
@@ -291,7 +291,7 @@ t_stackmatch	g_stackmatch[] =
 	{SEPARATOR_OP, COMPOUND_LIST},
 	{SEPARATOR_OP, PIPE_SEMI_SEQUENCE},
 	{LINEBREAK, TK_SEMI},
-	{LINEBREAK, SEPARATOR_OP},	
+	{LINEBREAK, SEPARATOR_OP},
 	{LINEBREAK, TK_PAREN_CLOSE},
 	{LINEBREAK, WORD},
 	{LINEBREAK, IN},
@@ -318,7 +318,7 @@ t_stackmatch	g_stackmatch[] =
 	{NEWLINE_LIST, WORDLIST},
 	{NEWLINE_LIST, TERM},
 	{NEWLINE_LIST, COMPOUND_LIST},
-	{NEWLINE_LIST, COMPLETE_COMMANDS}, 
+	{NEWLINE_LIST, COMPLETE_COMMANDS},
 	{NEWLINE_LIST, COMPLETE_CONDITION},
 	{NEWLINE_LIST, CONDITION},
 	{HERE_END, TK_DLESS},
@@ -390,7 +390,7 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_NAME, TK_ELSE},
 	{CMD_NAME, COMPOUND_LIST},
 	{CMD_NAME, COMPLETE_CONDITION},
-	
+
 	{CMD_SUPERIOR, TK_WHILE},
 	{CMD_SUPERIOR, TK_UNTIL},
 	{CMD_SUPERIOR, TK_DO},
@@ -407,7 +407,7 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_SUPERIOR, TK_PIPE},
 	{CMD_SUPERIOR, PIPE_SEMI_SEQUENCE},
 	{CMD_SUPERIOR, AND_OR_MAJOR},
-	
+
 	{SIMPLE_COMMAND, TK_WHILE},
 	{SIMPLE_COMMAND, TK_UNTIL},
 	{SIMPLE_COMMAND, TK_DO},

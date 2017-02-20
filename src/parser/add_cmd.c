@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 18:19:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:27:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	if (!*ast)
 		gen_node(ast);
 	else if (isdir(ast))
-		return (add_file(ast, lst));	
+		return (add_file(ast, lst));
 	else if (isloop(ast))
 		return (add_loop_cmd(ast, lst));
 	else if (iscondition(ast, lst) == 1)
@@ -35,7 +35,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = token->type;
-	if (token->type == TK_N_WORD)
+	if (token->type == TK_WORD)
 	{
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);

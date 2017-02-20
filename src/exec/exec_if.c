@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/06 20:39:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:31:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int			exec_if(t_btree **ast)
 {
 	ft_exec(&(*ast)->right);
-	data_singleton()->script.lc = 0;
 //	btree_delone(ast, &ast_free);
 	return (0);
 }
