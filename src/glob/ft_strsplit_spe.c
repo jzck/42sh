@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 20:49:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 12:37:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:57:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ char			**ft_strsplit_spe(const char *str,
 	const char	*fix;
 	int			len;
 
-	if (!str)
-		return (NULL);
-	if (!(s1 = (char**)malloc(sizeof(*s1) * (ft_nbstr_c(str, esc, c) + 1))))
+	if (!str || !(s1 =
+				(char**)malloc(sizeof(*s1) * (ft_nbstr_c(str, esc, c) + 1))))
 		return (NULL);
 	i = 0;
 	fix = str;

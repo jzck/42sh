@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 16:09:27 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 15:24:34 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:56:50 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void			insert_var(t_glob *gl, char *pos, char *name, char *content)
 	s2 = ft_strsubf(gl->pat, delta, ft_strlen(gl->pat) - delta, 1);
 	gl->pat = ft_strjoinf(ft_strjoin(s1, content), s2, 1);
 	new_esc = calc_expand_esc(gl->esc, ft_strlen(s1),
-			(int [2]){ft_strlen(content), 1},
-			(int [2]){delta, ft_strlen(s2)});
+			(int[2]){ft_strlen(content), 1},
+			(int[2]){delta, ft_strlen(s2)});
 	ft_memdel((void **)&gl->esc);
 	gl->esc = new_esc;
 	new_esc = calc_expand_esc(gl->esc2, ft_strlen(s1),
-			(int [2]){ft_strlen(content), 1},
-			(int [2]){delta, ft_strlen(s2)});
+			(int[2]){ft_strlen(content), 1},
+			(int[2]){delta, ft_strlen(s2)});
 	ft_memdel((void **)&gl->esc2);
 	gl->esc2 = new_esc;
 	ft_strdel(&s1);
@@ -72,7 +72,7 @@ void				expand_var(t_glob *gl)
 		if (*pat == '$' && !is_char_esc(gl->esc2, gl->pat, pat) &&
 				(var = get_name(gl, pat + 1)))
 		{
-			if (ft_strlen(var))
+			if (var && *var)
 			{
 				content = ft_getenv(data_singleton()->env, var);
 				insert_var(gl, pat, var, content);

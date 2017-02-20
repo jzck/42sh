@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:18:56 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 15:49:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:25:43 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ unsigned char				*calc_expand_esc(const unsigned char *esc,
 	int				pos;
 
 	if (!(new_esc = (unsigned char *)ft_strnew(((nb_start + nb_middle[0]
-							+ nb_end[1]) / 8) + 1)))
+							+ nb_end[1]) >> 3) + 1)))
 		return (NULL);
 	index = -1;
 	while (++index < nb_start)
-		new_esc[index / 8] |=
-			((esc[index / 8] >> (7 - index % 8)) & 1) << (7 - index % 8);
+		new_esc[index >> 3] |=
+			((esc[index >> 3] >> (7 - index % 8)) & 1) << (7 - index % 8);
 	pos = -1;
 	while (++pos < nb_middle[0])
 	{
-		new_esc[index / 8] |= nb_middle[1] << (7 - index % 8);
+		new_esc[index >> 3] |= nb_middle[1] << (7 - index % 8);
 		++index;
 	}
 	pos = nb_end[0];
 	while (++pos <= nb_end[0] + nb_end[1])
 	{
-		new_esc[index / 8] |=
-			((esc[pos / 8] >> (7 - pos % 8)) & 1) << (7 - index % 8);
+		new_esc[index >> 3] |=
+			((esc[pos >> 3] >> (7 - pos % 8)) & 1) << (7 - index % 8);
 		++index;
 	}
 	return (new_esc);
@@ -52,8 +52,8 @@ void						modify_esc_split(unsigned char *esc_dest,
 	while (++index < len)
 	{
 		wk = index + start - 1;
-		esc_dest[wk / 8] |=
-			((esc_src[index / 8] >> (7 - index % 8)) & 1) << (7 - wk % 8);
+		esc_dest[wk >> 3] |=
+			((esc_src[index >> 3] >> (7 - index % 8)) & 1) << (7 - wk % 8);
 	}
 }
 
@@ -63,13 +63,13 @@ unsigned char				*ft_sub_esc(const unsigned char *esc,
 	unsigned char	*new_esc;
 	int				index;
 
-	if (!(new_esc = (unsigned char *)ft_strnew(((len) / 8) + 1)))
+	if (!(new_esc = (unsigned char *)ft_strnew(((len) >> 3) + 1)))
 		return (NULL);
 	index = -1;
 	while (++index < len)
 	{
-		new_esc[index / 8] |=
-			((esc[start / 8] >> (7 - start % 8)) & 1) << (7 - index % 8);
+		new_esc[index >> 3] |=
+			((esc[start >> 3] >> (7 - start % 8)) & 1) << (7 - index % 8);
 		++start;
 	}
 	return (new_esc);

@@ -6,13 +6,13 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:19:55 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/17 16:29:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/20 18:51:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 
-int		is_char_esc(const unsigned char *esc,
+int				is_char_esc(const unsigned char *esc,
 		const char *ini_str, const char *str_pos)
 {
 	int		pos;
@@ -27,7 +27,7 @@ int		is_char_esc(const unsigned char *esc,
 	return (0);
 }
 
-void	set_char_esc_mode(unsigned char *esc,
+void			set_char_esc_mode(unsigned char *esc,
 		const char *ini_str, const char *str_pos, int mode)
 {
 	int		pos;
@@ -38,7 +38,7 @@ void	set_char_esc_mode(unsigned char *esc,
 	esc[pos >> 3] |= mode << (7 - pos % 8);
 }
 
-void	set_char_esc(unsigned char *esc,
+void			set_char_esc(unsigned char *esc,
 		const char *ini_str, const char *str_pos)
 {
 	int		pos;
@@ -49,7 +49,7 @@ void	set_char_esc(unsigned char *esc,
 	esc[pos >> 3] |= 1 << (7 - pos % 8);
 }
 
-void	set_char_no_esc(unsigned char *esc,
+void			set_char_no_esc(unsigned char *esc,
 		const char *ini_str, const char *str_pos)
 {
 	int		pos;

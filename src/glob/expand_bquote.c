@@ -6,106 +6,133 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 15:26:26 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:11:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glob.h"
 
-/*
-** expand_bquote return expansion of a string after subshell execution
-** input parameters are :
-**			-t_glob		*gl  -> struct of expanding
-*/
-
-static void			insert_bquote(t_glob *gl, char *pos, char *name, char *content)
+static void					expand_all_bquote(t_bquote *me, char *content,
+											char *ifs)
 {
-	char			*s1;
-	char			*s2;
-	int				delta;
-	unsigned char	*new_esc;
+	char	*content2;
 
-	delta = pos - gl->pat;
-	s1 = ft_strsub(gl->pat, 0, delta);
-	delta += ft_strlen(name) + 1;
-	s2 = ft_strsubf(gl->pat, delta, ft_strlen(gl->pat) - delta, 1);
-	gl->pat = ft_strjoinf(ft_strjoin(s1, content), s2, 1);
-	new_esc = calc_expand_esc(gl->esc, ft_strlen(s1),
-			(int [2]){ft_strlen(content), 1},
-			(int [2]){delta, ft_strlen(s2)});
-	ft_memdel((void **)&gl->esc);
-	gl->esc = new_esc;
-	new_esc = calc_expand_esc(gl->esc2, ft_strlen(s1),
-			(int [2]){ft_strlen(content), 1},
-			(int [2]){delta, ft_strlen(s2)});
-	ft_memdel((void **)&gl->esc2);
-	gl->esc2 = new_esc;
-	ft_strdel(&s1);
-	ft_strdel(&s2);
-	ft_strdel(&content);
+	while ((content2 = ft_strtok(NULL, ifs)))
+	{
+		ft_ld_pushfront(me->wk, gen_tab(ft_strdup(content),
+					calc_expand_esc(me->esc, 0,
+						(int[2]){ft_strlen(content), 1}, (int[2]){0, 0}),
+					calc_expand_esc(me->esc2, 0,
+						(int[2]){ft_strlen(content), 1}, (int[2]){0, 0}), 0));
+		content = content2;
+	}
+	ft_ld_pushfront(me->wk, gen_tab(ft_strjoin(content, me->s2),
+				calc_expand_esc(me->esc, 0,
+					(int[2]){ft_strlen(content), 1},
+					(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+					ft_strlen(me->s2)}),
+				calc_expand_esc(me->esc2, ft_strlen(me->s1),
+					(int[2]){ft_strlen(content), 1},
+					(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+					ft_strlen(me->s2)}),
+				0));
 }
 
-static void			manage_bquote(int esc, char *str)
+static void					init_expand(t_bquote *me, char *content, int esc)
 {
-	int		len;
-	char	*ifs;
-	char	*pos;
+	char			*ifs;
+	char			*content2;
 
-	len = ft_strlen(str) - 1;
-	while (str[len] == '\n')
-	{
-		str[len--] = '\0';
-	}
 	ifs = esc ? NULL : ft_getenv(data_singleton()->env, "IFS");
-	if (ifs)
+	content = ft_strtok(content, ifs);
+	if (!(content2 = ft_strtok(NULL, ifs)))
+		ft_ld_pushfront(me->wk, gen_tab(ft_strjoinf(ft_strjoin(me->s1, content),
+						me->s2, 1),
+					calc_expand_esc(me->esc, ft_strlen(me->s1),
+						(int[2]){ft_strlen(content), 1},
+						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+						ft_strlen(me->s2)}),
+					calc_expand_esc(me->esc2, ft_strlen(me->s1),
+						(int[2]){ft_strlen(content), 1},
+						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+						ft_strlen(me->s2)}), 0));
+	else
 	{
-		while (*ifs)
-		{
-			while ((pos = ft_strchr(str, *ifs)))
-				*pos = ' ';
-			++ifs;
-		}
+		ft_ld_pushfront(me->wk, gen_tab(ft_strjoin(me->s1, content),
+					calc_expand_esc(me->esc, ft_strlen(me->s1),
+						(int[2]){ft_strlen(content), 1}, (int[2]){0, 0}),
+					calc_expand_esc(me->esc2, ft_strlen(me->s1),
+						(int[2]){ft_strlen(content), 1}, (int[2]){0, 0}), 0));
+		expand_all_bquote(me, content2, ifs);
 	}
 }
 
-static char			*get_cmd(t_glob *gl, const char *pat)
+static char					*get_output(char *command)
 {
-	const char		*str;
+	char	*output;
+	int		len;
 
-	str = pat;
-	while (*str)
-	{
-		if (*str == '`' && !is_char_esc(gl->esc2, gl->pat, str))
-			break ;
-		++str;
-	}
-	if (*str)
-		return (ft_strsub(pat, 0, str - pat));
-	return (NULL);
+	output = command_getoutput(command);
+	len = ft_strlen(output);
+	while (output[--len] == '\n')
+		output[len] = '\0';
+	return (output);
 }
 
+static int					search_bquote(t_bquote *me)
+{
+	char			*sta;
+	char			*content;
+
+	sta = NULL;
+	while (*me->str)
+	{
+		sta = *me->str == '`' && !sta
+			&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str) ? me->str : sta;
+		if (sta && *me->str == '`' && me->str != sta
+				&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str))
+		{
+			me->mid = ft_strsub(sta, 1, me->str - sta - 1);
+			me->s1 = ft_strsub(CH(*me->wk)[0], 0, sta - CH(*me->wk)[0]);
+			me->s2 = ft_strdup(me->str + 1);
+			content = get_output(me->mid);
+			init_expand(me, content, is_char_esc(me->esc, CH(*me->wk)[0], sta));
+			ft_strdel(&me->mid);
+			ft_strdel(&me->s1);
+			ft_strdel(&me->s2);
+			ft_strdel(&content);
+			return (1);
+		}
+		++me->str;
+	}
+	return (0);
+}
 
 void						expand_bquote(t_glob *gl)
 {
-	char			*pat;
-	char			*var;
-	char			*content;
+	t_ld		*tmp;
+	t_bquote	me;
+	int			do_it;
 
-	pat = gl->pat;
-	while (*pat)
+	ft_ld_pushfront(&gl->m_pat, gen_tab(gl->pat, gl->esc, gl->esc2, 0));
+	me = (t_bquote){NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+	do_it = 1;
+	while ((gl->m_pat = ft_ld_front(gl->m_pat)) && do_it)
 	{
-		if (*pat == '`' && !is_char_esc(gl->esc2, gl->pat, pat) &&
-				(var = get_cmd(gl, pat + 1)))
+		do_it = 0;
+		while (gl->m_pat && !do_it)
 		{
-			if (ft_strlen(var))
-			{
-				if ((content = command_getoutput(var)))
-					manage_bquote(is_char_esc(gl->esc, gl->pat, pat), content);
-				insert_bquote(gl, pat, var, content);
-				pat = gl->pat;
-			}
-			ft_strdel(&var);
+			me.wk = &gl->m_pat;
+			me.esc = UCH(gl->m_pat)[1];
+			me.esc2 = UCH(gl->m_pat)[2];
+			me.str = CH(gl->m_pat)[0];
+			if ((tmp = gl->m_pat) &&
+					(do_it = search_bquote(&me)) == 1)
+				ft_ld_del(&tmp, &ft_tabdel);
+			if (!gl->m_pat->next)
+				break ;
+			gl->m_pat = gl->m_pat->next;
 		}
-		++pat;
 	}
+	ft_ld_reverse(&gl->m_pat);
 }
