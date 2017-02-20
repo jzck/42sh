@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 16:32:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:16:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int			ft_parse2(t_btree **ast, t_list **token)
 			insert_linebreak(token);
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
+	}
+	if (state == UNDEFINED)
+	{
+		ft_putstr("syntax error: unexpected end of file\n");
+		return (0);
 	}
 	return (0);
 }

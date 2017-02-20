@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 18:12:52 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 17:23:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:17:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		iscondition(t_btree **ast, t_list **lst)
 		node = (*ast)->item;
 		if ((node->type == TK_IF || iscondition(&(*ast)->right, lst))
 			&& (token->type == TK_ELIF || token->type == TK_ELSE) 
-			&& node->full == 0)
+			&& node->nest == 0)
 			return (2);
 		if ((node->type == TK_IF || node->type == TK_ELIF || node->type == TK_ELSE)
 			&& node->full == 0)

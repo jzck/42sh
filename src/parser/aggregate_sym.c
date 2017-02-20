@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 16:10:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:03:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_aggrematch		g_aggrematch[] =
 	{COMMAND, NEWLINE_LIST, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, LINEBREAK, PIPE_SEMI_SEQUENCE, 0},
 	{COMMAND, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE, 0},
+	{COMMAND, COMPLETE_CONDITION, PIPE_SEMI_SEQUENCE, 0},
 	{END_COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{END_COMMAND, TK_WHILE, PIPE_SEQUENCE, 0},
 	{END_COMMAND, LINEBREAK, PIPE_SEQUENCE, 0},

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 16:10:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:03:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_IF, TK_DO},
 	{TK_IF, TK_ELIF},
 	{TK_IF, TK_THEN},
+	{TK_IF, COMPLETE_CONDITION},
 	{TK_IF, COMPOUND_LIST},
 	{TK_THEN, CONDITION},
 	{TK_THEN, COMPOUND_LIST},
@@ -416,7 +417,9 @@ t_stackmatch	g_stackmatch[] =
 	{LOOP, TK_UNTIL},
 	{CONDITION, LINEBREAK},
 	{CONDITION, COMPOUND_LIST},
+	{CONDITION, COMPLETE_CONDITION},
 	{COMPLETE_CONDITION, LINEBREAK},
+	{COMPLETE_CONDITION, COMPLETE_CONDITION},
 	{BRACE_GROUP, LINEBREAK},
 	{BRACE_GROUP, TK_BANG},
 	{BRACE_GROUP, SEPARATOR_OP},
@@ -466,6 +469,7 @@ t_stackmatch	g_stackmatch[] =
 	{IF_CLAUSE, TK_ELSE},
 	{IF_CLAUSE, COMPOUND_LIST},
 	{IF_CLAUSE, COMPLETE_COMMAND},
+	{IF_CLAUSE, COMPLETE_CONDITION},
 
 	{PATTERN, TK_PAREN_OPEN},
 	{PATTERN, CASE_LIST},
@@ -600,7 +604,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 {
 	int				i;
 
-//	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

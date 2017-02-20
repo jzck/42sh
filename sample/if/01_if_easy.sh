@@ -1,10 +1,9 @@
 if ls
 then
-	pwd
-elif ls
-then
-	pwd
-elif ls
-then
-	pwd
+	if ls
+	then
+		pwd
+	else pwd
+	fi
+else ls
 fi

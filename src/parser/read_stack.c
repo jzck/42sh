@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 16:09:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 18:03:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == IF_CLAUSE)
+		return ("IF_CLAUSE");
 	if (current == CONDITION)
 		return ("CONDITION");
 	if (current == COMPLETE_CONDITION)
