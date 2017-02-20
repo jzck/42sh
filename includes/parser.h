@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 14:57:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 17:07:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,9 +217,11 @@ int		add_file(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
 int		add_condition_cmd(t_btree **ast, t_list **lst);
+int		add_condition_sep(t_btree **ast, t_list **lst);
+int		add_branch(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast);
 int		isdir(t_btree **ast);
-int		iscondition(t_btree **ast);
+int		iscondition(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);

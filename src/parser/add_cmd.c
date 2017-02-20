@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 18:46:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 17:03:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (add_file(ast, lst));	
 	else if (isloop(ast))
 		return (add_loop_cmd(ast, lst));
-	else if (iscondition(ast))
+	else if (iscondition(ast, lst) == 1)
 		return (add_condition_cmd(ast, lst));
+	else if (iscondition(ast, lst) == 2)
+		return (add_branch(ast, lst));
 	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN)
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:30:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 18:41:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 16:32:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			ft_parse2(t_btree **ast, t_list **token)
 	t_sym			*stack;
 	t_parstate		state;
 
-	(void)ast;
 	state = UNDEFINED;
 	new_sym = ft_memalloc(sizeof(t_sym));
 	stack = ft_memalloc(sizeof(t_sym) * 1000);
@@ -57,8 +56,8 @@ int			ft_parse2(t_btree **ast, t_list **token)
 			return (error_syntax(token));		
 		if (state == SUCCESS)
 			ft_putstr("success");
-//		build_tree(ast, token);
-//		btree_print(STDBUG, *ast, &ft_putast);
+		build_tree(ast, token);
+		btree_print(STDBUG, *ast, &ft_putast);
 		if ((end_instruction(*stack) && !(*token)->next) || *stack == PROGRAM)
 			insert_linebreak(token);
 		else

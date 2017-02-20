@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 23:41:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 16:42:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ char	*ft_putast(void *nodein)
 		t_type	type;
 	};
 	node = nodein;
-	if (node->type == TK_DO)
+	if (node->type == TK_THEN)
+		return ("THEN");
+	else if (node->type == TK_FI)
+		return ("FI");
+	else if (node->type == TK_DO)
 		return ("TK_DO");
-	if (node->type == TK_AMP)
+	else if (node->type == TK_AMP)
 		return ("  &  ");
 	else if (node->type == TK_N_WORD)
 		return (" TK_N_WORD");

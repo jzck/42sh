@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 18:40:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 16:53:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_treematch			g_treematch[] =
 static int	isseparator(int type, int cache)
 {
 	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO 
-		|| cache == TK_NEWLINE))
+		|| cache == TK_NEWLINE || cache == TK_THEN))
 		return (0);
 	return (1);
 }
