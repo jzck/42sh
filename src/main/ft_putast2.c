@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/05 22:48:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:08:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putast2(void *nodein)
 		ft_sstrprint_fd(2, node->data.sstr, ',');
 		ft_putchar_fd('\n', 2);
 	}
-	else if (node->type & TK_REDIR)
+	else if (TK_REDIR(node->type))
 	{
 		ft_putnbr_fd(node->data.redir.n, 2);
 		if (node->type == TK_GREATAND || node->type == TK_LESSAND)

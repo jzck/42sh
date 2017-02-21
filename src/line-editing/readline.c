@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 12:45:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/21 14:20:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,15 @@ void	readline_init(char *prompt)
 	prompt ? ft_putstr(prompt) : ft_prompt();
 }
 
-char	*readline(char *prompt)
+char	*readline(int fd, char *prompt)
 {
 	char	*input;
 
+	if (fd != STDIN)
+	{
+		get_next_line(fd, &input);
+		return (input);
+	}
 	readline_init(prompt);
 	input = ft_read_stdin();
 	ft_putchar('\n');

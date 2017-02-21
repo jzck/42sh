@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 21:01:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/20 22:39:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		end_instruction(t_sym sym)
 	return (0);
 }
 
-int			ft_parse2(t_btree **ast, t_list **token)
+int			ft_parse(t_btree **ast, t_list **token)
 {
 	t_sym			*new_sym;
 	t_sym			*stack;
