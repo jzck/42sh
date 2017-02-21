@@ -14,6 +14,7 @@
 static void		insert_linebreak(t_list **lst)
 {
 	t_token		*token;
+	
 	token = (*lst)->content;
 	token->type = LINEBREAK;
 }
@@ -32,12 +33,14 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		produce_sym(*parser->stack, parser->new_sym, token);
 		DG("new sym %s", read_state(*parser->new_sym));
 		if (eval_sym(*parser->stack, *parser->new_sym))
-			parser->state = ERROR;
+			return ((parser->state = ERROR));
 		else
 		{
 			aggregate_sym(&parser->stack, parser->new_sym, &parser->state);
 			push_stack(++parser->stack, *parser->new_sym);
 		}
+		ft_read_stack(parser->stack);
+		DG("\n");
 		if (*parser->stack == PROGRAM)
 			parser->state = SUCCESS;
 		else
@@ -50,6 +53,5 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
-	ft_read_stack(parser->stack);
 	return (0);
 }

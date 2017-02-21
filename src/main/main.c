@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:31:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 22:44:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int		handle_instruction(int fd)
 	while (1)
 	{
 		if ((ret = readline(fd, get_lexer_stack(lexer), &str)))
-		{
-			DG("ret=%i, str=%s, state=%i", ret, str, parser.state);
+		{	
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF() : 1);
 		}
-		DG("ret=%i, str=%s", ret, str);
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
@@ -46,11 +44,16 @@ int		handle_instruction(int fd)
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-		//token_print(token);
 		if (get_lexer_stack(lexer))
-			continue ;
+			continue ;		
+		lexer.state = DEFAULT;
+		if (get_reserved_words(&token))
+			return (1);
+		if (insert_newline(&token))
+			return (1);
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
+		token = NULL;
 		DG("AFTER PARSING: state=%i", parser.state);
 		if (parser.state == SUCCESS)
 			break ;

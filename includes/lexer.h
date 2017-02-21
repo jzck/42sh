@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 22:26:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:12:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char		*stack_to_prompt(t_list	*stack);
 t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
+int			get_reserved_words(t_list **alst);
+int			insert_newline(t_list **alst);
 void		lexer_init(t_lexer *lexer);
 int			lexer_lex(t_list **alst, t_lexer *lexer);
 int			lexer_default(t_list **alst, t_lexer *lexer);

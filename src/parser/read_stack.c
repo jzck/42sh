@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 22:38:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 20:39:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == 0)
+		return ("NULL");
 	if (current == UNTIL_CLAUSE)
 		return ("UNTIL_CLAUSE");
 	if (current == TK_UNTIL)
@@ -161,10 +163,8 @@ char			*read_state(t_sym current)
 
 int			ft_read_stack(t_sym *stack)
 {
+	DG("read stack :");
 	while (*stack)
-	{
-		ft_putstr(read_state(*stack--));
-		ft_putchar(10);
-	}
+		DG("%s", read_state(*stack--));
 	return (0);
 }

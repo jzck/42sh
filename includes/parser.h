@@ -21,9 +21,9 @@
 
 enum	e_parstate
 {
+	ERROR = 0,
 	UNDEFINED,
 	SUCCESS,
-	ERROR,
 };
 
 enum	e_sym

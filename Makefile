@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/21 16:38:00 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/21 21:32:36 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,6 +171,7 @@ lexer/get_lexer_stack.c\
 lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
+lexer/insert_newline.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
