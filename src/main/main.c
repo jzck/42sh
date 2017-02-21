@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 18:13:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:33:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ int		handle_instruction(int fd)
 			return (1);
 		//token_print(token);
 		if (get_lexer_stack(lexer))
-			return (1);
-		if (!token)
-			return (0);
-		ft_add_str_in_history(lexer.str);
+			continue;	
 		if (ft_parse(&ast, &token, &parser))
-			return (1);
+			continue;
 		if (parser.state == SUCCESS)
 			break;
 		if (parser.state == ERROR)
@@ -54,7 +51,7 @@ int		handle_instruction(int fd)
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
-	ft_strdel(&lexer.str);
+	ft_add_str_in_history(lexer.str);
 	return (1);
 }
 
@@ -69,9 +66,7 @@ int		get_input_fd()
 	/* { */
 	/* } */
 	else
-	{
 		return (open(shell_get_avdata(), O_RDONLY));
-	}
 }
 
 int		main(int ac, char **av)
@@ -84,6 +79,8 @@ int		main(int ac, char **av)
 	fd = get_input_fd();
 	while (handle_instruction(fd))
 	{
+//		lexer_clean;
+//		parser_clean;
 		;
 	}
 	return (0);

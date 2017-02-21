@@ -11,3 +11,5 @@ debug
 *.swo
 *.o
 *.swn
+STDBUG
+STDEBUG
