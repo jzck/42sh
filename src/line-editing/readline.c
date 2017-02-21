@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/21 14:20:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 20:04:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_init_termios(void)
 	tcsetattr(0, TCSANOW, &term);
 }
 
-void	readline_init(char *prompt)
+void	readline_init(int prompt)
 {
 	static int	beg = 0;
 
@@ -92,24 +92,23 @@ void	readline_init(char *prompt)
 		ft_strdel(&STR);
 	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
 	POS = 0;
-	prompt ? ft_putstr(prompt) : ft_prompt();
+	prompt ? ft_putstr("> ") : ft_prompt();
 }
 
-char	*readline(int fd, char *prompt)
+int		readline(int fd, int prompt, char **input)
 {
-	char	*input;
-
-	if (fd != STDIN)
+	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
 	{
-		get_next_line(fd, &input);
-		return (input);
+		if (get_next_line(fd, input) == 0)
+			return (1);
+		return (0);
 	}
 	readline_init(prompt);
-	input = ft_read_stdin();
+	*input = ft_read_stdin();
 	ft_putchar('\n');
 	if (!prompt)
-		input = ft_history_parsing();
+		*input = ft_history_parsing();
 	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
-		return (NULL);
-	return (input);
+		return (-1);
+	return (0);
 }

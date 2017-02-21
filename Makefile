@@ -191,7 +191,6 @@ lexer/lexer_paren.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_word.c\
-lexer/stack_to_prompt.c\
 lexer/token_append.c\
 lexer/token_cmp_type.c\
 lexer/token_free.c\
@@ -219,7 +218,6 @@ main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
 main/ft_putast.c\
-main/ft_putast2.c\
 main/main.c\
 main/shell_exit.c\
 main/shell_get_avdata.c\
@@ -235,12 +233,12 @@ parser/build_tree.c\
 parser/error_syntax.c\
 parser/eval_sym.c\
 parser/ft_parse.c\
+parser/parser_init.c\
 parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
 parser/read_stack.c\
-parser/tree_wrapper.c\
-parser/parser_init.c
+parser/tree_wrapper.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
