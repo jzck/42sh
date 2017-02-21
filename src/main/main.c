@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 16:40:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:13:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		handle_instruction(int fd)
 	while (1)
 	{
 		str = readline(fd, stack_to_prompt(lexer.stack));
-//		if (parser.state == UNDEFINED && !str)
-//			return ((int)ft_putstr_fd("syntax error near unexpected EOF", 2));
+		if (parser.state == UNDEFINED && !str)
+			return (error_EOF());
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);

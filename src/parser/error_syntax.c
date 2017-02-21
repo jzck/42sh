@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/19 17:06:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:13:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,11 @@ int				error_syntax(t_list **lst)
 		i++;
 	}
 	ft_putstr_fd("grammar error, notify ariard", 2);
+	return (1);
+}
+
+int			error_EOF(void)
+{
+	ft_putstr_fd("syntax error near unexpected EOF", 2);
 	return (1);
 }

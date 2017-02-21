@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 22:01:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 18:11:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_execmap	g_execmap[] =
 	{TK_ELSE, &exec_else},
 	{TK_UNTIL, &exec_until},
 	{TK_SUBSHELL, &exec_command},
-	{TK_COMMAND, &exec_command},
+	{TK_WORD, &exec_command},
 	{0, 0},
 };
 

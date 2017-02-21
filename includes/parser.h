@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 16:39:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:13:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int		push_stack(t_sym *stack, t_sym new_sym);
 int		pop_stack(t_sym **stack, t_sym erase_sym);
 
 int		error_syntax(t_list **token);
+int		error_EOF(void);
 
 int		ft_read_stack(t_sym *stack);
 char		*read_state(t_sym current);
