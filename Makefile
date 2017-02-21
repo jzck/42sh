@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/20 20:02:23 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/21 16:38:00 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -235,30 +235,12 @@ parser/build_tree.c\
 parser/error_syntax.c\
 parser/eval_sym.c\
 parser/ft_parse.c\
-parser/get_instruction.c\
-parser/get_sub_instruction.c\
-parser/parse.c\
-parser/parse_dgreat.c\
-parser/parse_dless.c\
-parser/parse_do.c\
-parser/parse_done.c\
-parser/parse_elif.c\
-parser/parse_else.c\
-parser/parse_great.c\
-parser/parse_greatand.c\
-parser/parse_if.c\
-parser/parse_less.c\
-parser/parse_lessand.c\
-parser/parse_redir.c\
-parser/parse_separator.c\
-parser/parse_subshell.c\
-parser/parse_while.c\
-parser/parse_word.c\
 parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
 parser/read_stack.c\
-parser/tree_wrapper.c
+parser/tree_wrapper.c\
+parser/parser_init.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))

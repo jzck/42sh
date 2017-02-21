@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 22:39:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:40:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,46 +26,29 @@ static int		end_instruction(t_sym sym)
 	return (0);
 }
 
-int			ft_parse(t_btree **ast, t_list **token)
+int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
-	t_sym			*new_sym;
-	t_sym			*stack;
-	t_parstate		state;
-
-	state = UNDEFINED;
-	new_sym = ft_memalloc(sizeof(t_sym));
-	stack = ft_memalloc(sizeof(t_sym) * 1000);
-	push_stack(stack, LINEBREAK);
 	while (*token)
 	{
-		produce_sym(*stack, new_sym, token);	
-		DG("new sym %s", read_state(*new_sym));
-		if (eval_sym(*stack, *new_sym))
-			state = ERROR;
+		produce_sym(*parser->stack, parser->new_sym, token);	
+		DG("new sym %s", read_state(*parser->new_sym));
+		if (eval_sym(*parser->stack, *parser->new_sym))
+			parser->state = ERROR;
 		else
 		{	
-			aggregate_sym(&stack, new_sym, &state);
-			push_stack(++stack, *new_sym);
+			aggregate_sym(&parser->stack, parser->new_sym, &parser->state);
+			push_stack(++parser->stack, *parser->new_sym);
 		}
 		ft_putstr("\n");
-		ft_read_stack(stack);
-		if (*stack == PROGRAM)
-			state = SUCCESS;
-		if (state == ERROR)
-			return (error_syntax(token));		
-		if (state == SUCCESS)
-			ft_putstr("success");
+		if (*parser->stack == PROGRAM)
+			parser->state = SUCCESS;
 		build_tree(ast, token);
 		btree_print(STDBUG, *ast, &ft_putast);
-		if ((end_instruction(*stack) && !(*token)->next) || *stack == PROGRAM)
+		if ((end_instruction(*parser->stack) && !(*token)->next) 
+			|| *parser->stack == PROGRAM)
 			insert_linebreak(token);
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
-	if (state == UNDEFINED)
-	{
-		ft_putstr("syntax error: unexpected end of file\n");
-		return (0);
-	}	
 	return (0);
 }

@@ -1,0 +1,37 @@
+[7m[33m           ft_parse.c [1m[34m42 [0mnew sym CMD_NAME[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym CMD_NAME[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym CMD_SUPERIOR[0m
+[7m[33m         build_tree.c [1m[34m60 [0mfunc TK : 'TK_WORD' TK : 'TK_WORD'[0m
+[7m[33m            add_cmd.c [1m[34m21 [0madd cmd[0m
+[7m[33m           ft_parse.c [1m[34m42 [0mnew sym CMD_SUFFIX[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head CMD_SUPERIOR && sym CMD_SUFFIX[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym SIMPLE_COMMAND[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym COMMAND[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym PIPE_SEMI_SEQUENCE[0m
+[7m[33m         build_tree.c [1m[34m60 [0mfunc TK : 'TK_WORD' TK : 'TK_WORD'[0m
+[7m[33m            add_cmd.c [1m[34m21 [0madd cmd[0m
+[7m[33m           add_loop.c [1m[34m23 [0mTEST LOOP[0m
+[7m[33m            add_cmd.c [1m[34m21 [0madd cmd[0m
+ TK_W                                                                           
+  +----+                                                                        
+      TK_W                                                                      
+[7m[33m           ft_parse.c [1m[34m42 [0mnew sym LINEBREAK[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head PIPE_SEMI_SEQUENCE && sym LINEBREAK[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym PIPE_SEQUENCE[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym PIPELINE[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym AND_OR[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym LIST[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym COMPLETE_COMMAND[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head LINEBREAK && sym COMPLETE_COMMANDS[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head NULL && sym PROGRAM[0m
+ TK_W                                                                           
+  +----+                                                                        
+      TK_W                                                                      
+[7m[33m           ft_parse.c [1m[34m42 [0mnew sym LINEBREAK[0m
+[7m[33m           eval_sym.c [1m[34m637[0meval head PROGRAM && sym LINEBREAK[0m
+ TK_W                                                                           
+  +----+                                                                        
+      TK_W                                                                      
+ TK_W                                                                           
+  +----+                                                                        
+      TK_W                                                                      

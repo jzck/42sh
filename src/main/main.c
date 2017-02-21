@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 14:29:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:40:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 int		handle_instruction(int fd)
 {
-	t_list	*token;
-	t_list	*ltoken;
-	t_lexer	lexer;
-	t_btree	*ast;
-	char	*str;
+	t_list		*token;
+	t_list		*ltoken;
+	t_lexer		lexer;
+	t_parser	parser;
+	t_btree		*ast;
+	char		*str;
 
 	lexer_init(&lexer);
+	parser_init(&parser);
 	token = NULL;
 	ast = NULL;
-	do {
+	while (1)
+	{
 		str = readline(fd, stack_to_prompt(lexer.stack));
+//		if (parser.state == UNDEFINED && !str)
+//			return ((int)ft_putstr_fd("syntax error near unexpected EOF", 2));
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
@@ -34,17 +39,23 @@ int		handle_instruction(int fd)
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
 		//token_print(token);
-	} while (get_lexer_stack(lexer));
-	if (!token)
-		return (0);
-	ft_add_str_in_history(lexer.str);
-	if (ft_parse(&ast, &token))
-		return (1);
+		if (get_lexer_stack(lexer))
+			return (1);
+		if (!token)
+			return (0);
+		ft_add_str_in_history(lexer.str);
+		if (ft_parse(&ast, &token, &parser))
+			return (1);
+		if (parser.state == SUCCESS)
+			break;
+		if (parser.state == ERROR)
+			return (error_syntax(&token));
+	}
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
 	ft_strdel(&lexer.str);
-	return (0);
+	return (1);
 }
 
 int		get_input_fd()
@@ -69,7 +80,7 @@ int		main(int ac, char **av)
 
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
-//	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
+	//	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
 	fd = get_input_fd();
 	while (handle_instruction(fd))
 	{

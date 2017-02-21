@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 15:20:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 16:39:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
  * Parse POSIX grammar
  *
 */
+
+enum	e_parstate
+{
+	UNDEFINED,
+	SUCCESS,
+	ERROR,
+};
 
 enum	e_sym
 {
@@ -125,11 +132,14 @@ enum	e_sym
 
 # define TK_REDIR(x)			(TK_LESS <= x && x <= TK_GREATAND)
 
-typedef int		t_sym;
-
 # define MATCH_STACK(x, y)		(x == y || y == ALL)
 
-typedef int  t_parstate;
+struct	s_parser
+{
+	t_parstate	state;
+	t_sym		*stack;
+	t_sym		*new_sym;
+};
 
 struct	s_aggrematch
 {
@@ -138,8 +148,6 @@ struct	s_aggrematch
 	t_sym 	new_sym;
 	int	erase_sym;
 };
-
-typedef struct s_aggrematch t_aggrematch;
 
 extern t_aggrematch g_aggrematch[];
 
@@ -150,8 +158,6 @@ struct	s_prodmatch
 	t_sym	new_sym;
 };
 
-typedef struct s_prodmatch t_prodmatch;
-
 extern t_prodmatch g_prodmatch[];
 
 struct	s_stackmatch
@@ -159,8 +165,6 @@ struct	s_stackmatch
 	t_sym top;
 	t_sym under;
 };
-
-typedef struct s_stackmatch	t_stackmatch;
 
 extern t_stackmatch g_stackmatch[];
 
@@ -170,13 +174,11 @@ struct	s_errormatch
 	char	*error;
 };
 
-typedef struct s_errormatch t_errormatch;
-
 extern t_errormatch	g_errormatch[];
 
-int		ft_parse(t_btree **ast, t_list **token);
+void	parser_init(t_parser *parser);
+int		ft_parse(t_btree **ast, t_list **token, t_parser *parser);
 
-int		ft_parse(t_btree **ast, t_list **token);
 int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
 int		eval_sym(t_sym stack, t_sym new_sym);
 int		aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state);
@@ -189,9 +191,6 @@ int		error_syntax(t_list **token);
 int		ft_read_stack(t_sym *stack);
 char		*read_state(t_sym current);
 
-#define UNDEFINED	(1 << 0)
-#define ERROR		(1 << 1)
-#define SUCCESS		(1 << 2)
 
 /*
  * Build AST - rewriting
@@ -203,8 +202,6 @@ struct	s_treematch
 	t_type	type;
 	int	(*add)(t_btree **ast, t_list **lst);
 };
-
-typedef struct s_treematch	t_treematch;
 
 extern t_treematch g_treematch[];
 
@@ -229,14 +226,6 @@ int		gen_node(t_btree **ast);
  * Build AST
  *
 */
-
-typedef struct s_parser		t_parser;
-typedef struct	s_ld		t_ld;
-typedef struct s_astnode	t_astnode;
-typedef struct s_redir		t_redir;
-typedef union u_astdata		t_astdata;
-typedef union u_word		t_word;
-typedef long long		t_type;
 
 union	u_word
 {

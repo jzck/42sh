@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_do.c                                         :+:      :+:    :+:   */
+/*   parser_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 16:28:41 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/15 19:08:49 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/21 16:14:04 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/21 16:38:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		parse_do(t_btree **ast, t_list **start, t_list **lst)
+void		parser_init(t_parser *parser)
 {
-	t_astnode	*node;
-	t_token		*token;
-
-	token = (*lst)->content;
-	node = (*ast)->item;
-	node->type = TK_DO;
-	ft_lst_delif(start, (*lst)->content, &ft_addrcmp, &token_free);
-	ft_parse(ast, start);
-	return (0);
+	parser->state = UNDEFINED;
+	parser->new_sym = ft_memalloc(sizeof(t_sym));
+	parser->stack = ft_memalloc(sizeof(t_sym) * 1000);
+	push_stack(parser->stack, LINEBREAK);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:04:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 21:00:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 15:37:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		shell_get_opts(int ac, char **av)
 	int		i;
 
 	i = 1;
-	if (isatty(STDIN))
+	if (isatty(STDIN) && !av[1])
 		data_singleton()->opts |= SH_INTERACTIVE;
 	while (i < ac && av[i][0] == '-')
 	{
