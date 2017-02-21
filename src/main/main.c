@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:07:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 20:32:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ int		handle_instruction(int fd)
 	parser_init(&parser);
 	token = NULL;
 	ast = NULL;
-	/* str = NULL; */
-	DG("START: state=%i", parser.state);
 	while (1)
 	{
 		if ((ret = readline(fd, get_lexer_stack(lexer), &str)))
 		{
-			DG("ret=%i, str=%s, state=%i", ret, str, parser.state);
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF() : 1);
 		}
-		DG("ret=%i, str=%s", ret, str);
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
@@ -46,22 +42,20 @@ int		handle_instruction(int fd)
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-		//token_print(token);
 		if (get_lexer_stack(lexer))
 			continue ;
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
-		DG("AFTER PARSING: state=%i", parser.state);
 		if (parser.state == SUCCESS)
 			break ;
 		else if (parser.state == ERROR)
 			return (error_syntax(&token));
 	}
-	DG("succesful parsing:");
+	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
-	/* if (ft_exec(&ast)) */
-	/* 	return (1); */
 	ft_add_str_in_history(lexer.str);
+	if (ft_exec(&ast))
+		return (1);
 	return (0);
 }
 

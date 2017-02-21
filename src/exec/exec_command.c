@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 22:43:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 22:41:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,28 @@ int				exec_command(t_btree **ast)
 	t_astnode	*node;
 	t_process	*p;
 	t_job		*job;
+	int			fds[2];
 
 	node = (*ast)->item;
 	p = &data_singleton()->exec.process;
 	job = &data_singleton()->exec.job;
-	p->av = token_to_argv(node);
+	if (!(p->av = token_to_argv(node)))
+	{
+		DG("globbing error");
+		return (1);
+	}
 	process_setexec(node->type, p);
+	if (p->pipe_count)
+	{
+		pipe(fds);
+		p->fdout = fds[PIPE_WRITE];
+		p->to_close = fds[PIPE_READ];
+		p->pipe_count--;
+	}
 	if (!(launch_process(p)))
 	{
 		job_addprocess(p);
-		if (IS_PIPEEND(p->attributes))
+		if (IS_PIPEEND(p))
 		{
 			JOB_IS_FG(job->attributes) ?
 				put_job_in_foreground(job, 0):
@@ -65,6 +77,8 @@ int				exec_command(t_btree **ast)
 			job->pgid = 0;
 		}
 	}
+	if (p->fdout == fds[PIPE_WRITE])
+		p->fdin = fds[PIPE_READ];
 	process_reset(p);
 //	btree_delone(ast, &ast_free);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:07:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:42:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		job_addprocess(t_process *p)
 
 	jobc = &data_singleton()->jobc;
 	job = &data_singleton()->exec.job;
-	if (IS_PIPESTART(p->attributes))
+	if (IS_PIPESTART(p))
 	{
 		job_update_id();
 		job->id = jobc->current_id;
@@ -31,7 +31,7 @@ int		job_addprocess(t_process *p)
 	{
 		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
 	}
-	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
+	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p))
 		job_notify_new(job);
 	return (0);
 }

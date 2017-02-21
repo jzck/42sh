@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:20:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 21:41:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@
 # define PROCESS_SCRIPT		(1 << 2)
 # define PROCESS_SUBSHELL	(1 << 3)
 # define PROCESS_UNKNOWN	(1 << 4)
-# define PROCESS_PIPESTART	(1 << 5)
-# define PROCESS_PIPEEND	(1 << 6)
-# define PROCESS_COMPLETED	(1 << 7)
-# define PROCESS_SUSPENDED	(1 << 8)
-# define PROCESS_RUNNING	(1 << 9)
-# define PROCESS_CONTINUED	(1 << 10)
+# define PROCESS_COMPLETED	(1 << 5)
+# define PROCESS_SUSPENDED	(1 << 6)
+# define PROCESS_RUNNING	(1 << 7)
+# define PROCESS_CONTINUED	(1 << 8)
 
 # define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4)
-# define PROCESS_STATE_MASK	(1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
+# define PROCESS_STATE_MASK	(1 << 5 | 1 << 6 | 1 << 7 | 1 << 8)
 
-# define IS_PIPESTART(a)	(a & PROCESS_PIPESTART)
-# define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
-# define IS_PIPESINGLE(a)	((a & PROCESS_PIPESTART) && (a & PROCESS_PIPEEND))
+# define IS_PIPESTART(p)	(p->fdin == STDIN)
+# define IS_PIPEEND(p)		(p->fdout == STDOUT)
+# define IS_PIPESINGLE(p)	(IS_PIPESTART(p) && IS_PIPEEND(p))
 
 # define SCRIPT_LOOP		(1 << 0)
 
@@ -49,8 +47,9 @@ struct	s_process
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
+	int		pipe_count;
+	int		to_close;
 	t_list	*redirs;
-	int		toclose;
 	int		status;
 	t_flag	attributes;
 	t_flag	script;
@@ -96,7 +95,7 @@ int		exec_pipe(t_btree **ast);
 int		exec_redir(t_btree **ast);
 int		exec_command(t_btree **ast);
 
-int		exec_while(t_btree **ast);		
+int		exec_while(t_btree **ast);
 int		exec_if(t_btree **ast);
 int		exec_elif(t_btree **ast);
 int		exec_else(t_btree **ast);

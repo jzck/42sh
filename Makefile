@@ -82,7 +82,6 @@ exec/loop_del.c\
 exec/loop_exec.c\
 exec/process_redirect.c\
 exec/process_reset.c\
-exec/process_resetfds.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\

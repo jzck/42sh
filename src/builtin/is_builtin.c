@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:30:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 22:40:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ t_execf		*is_builtin(t_process *p)
 
 	i = -1;
 	while (g_builtin[++i].name)
+	{
 		if (ft_strcmp(g_builtin[i].name, p->av[0]) == 0)
 			return (g_builtin[i].f);
+	}
 	return (NULL);
 }

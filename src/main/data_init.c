@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:57:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 22:41:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ int		data_init(void)
 
 	data->exec.process.path = NULL;
 	data->exec.process.av = NULL;
-	data->exec.process.toclose = STDIN;
+	data->exec.process.to_close = 0;
 	data->exec.process.fdin = STDIN;
 	data->exec.process.fdout = STDOUT;
 	data->exec.process.pid = 0;
-	data->exec.process.attributes = PROCESS_PIPESTART | PROCESS_PIPEEND;
+	data->exec.process.attributes = 0;
 	data->exec.process.redirs = NULL;
+	data->exec.process.pipe_count = 0;
 	data->exec.fd0save = fcntl(0, F_DUPFD_CLOEXEC);
 	data->exec.fd1save = fcntl(1, F_DUPFD_CLOEXEC);
 	data->exec.fd2save = fcntl(2, F_DUPFD_CLOEXEC);

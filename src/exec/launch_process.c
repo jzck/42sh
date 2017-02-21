@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:09:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:39:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		launch_process(t_process *p)
 		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
 		set_exitstatus(127, 1);
 	}
-	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p->attributes))
+	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p))
 	{
 		if (process_redirect(p))
 			return (1);
