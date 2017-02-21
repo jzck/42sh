@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 18:33:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 18:51:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		handle_instruction(int fd)
 			return (error_syntax(&token));
 	}
 	btree_print(STDBUG, ast, &ft_putast);
-	if (ft_exec(&ast))
-		return (1);
+//	if (ft_exec(&ast))
+//		return (1);
 	ft_add_str_in_history(lexer.str);
 	return (1);
 }
