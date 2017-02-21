@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/21 14:27:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 19:51:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void			ft_c(void);
 void			ft_x(void);
 void			ft_v(void);
 void			ft_read_it(int input, size_t *pos, char **str);
-char			*readline(int fd, char *prompt);
+int				readline(int fd, int prompt, char **input);
 int				ft_completion(int ret);
 
 struct termios	*ft_save_termios(int save);

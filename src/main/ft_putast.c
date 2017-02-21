@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 22:19:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 19:20:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
-	struct s_tmp{
-		char	str[5];
-		t_type	type;
-	};
 	node = nodein;
 	if (node->type == TK_THEN)
 		return ("THEN");
