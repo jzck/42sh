@@ -48,7 +48,7 @@ int		handle_instruction(int fd)
 		if (get_lexer_stack(lexer))
 			continue ;		
 		lexer.state = DEFAULT;
-		token_print(token);
+//		token_print(token);
 		if (get_reserved_words(&token))
 			return (1);
 		if (insert_newline(&token))
@@ -57,8 +57,9 @@ int		handle_instruction(int fd)
 			continue ;
 		if (parser.state == SUCCESS)
 			break ;
-		else if (parser.state == ERROR)
-			return (error_syntax(&token));	
+		else if (parser.state == ERROR)			
+			error_syntax(&token);	
+		token = NULL;
 	}
 	DG("succesful parsing:");
 //	btree_print(STDBUG, ast, &ft_putast);

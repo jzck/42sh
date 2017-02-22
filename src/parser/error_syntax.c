@@ -60,9 +60,9 @@ int				error_syntax(t_list **lst)
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_putstr_fd("syntax error near unexpetcted token `", 2);
+			ft_putstr_fd("syntax error near unexpected token `", 2);
 			ft_putstr_fd(g_errormatch[i].error, 2);
-			ft_putstr_fd("'", 2);
+			ft_putstr_fd("'\n", 2);
 			return (1);
 		}
 		i++;

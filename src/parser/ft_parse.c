@@ -21,7 +21,8 @@ static void		insert_linebreak(t_list **lst)
 
 static int		end_instruction(t_sym sym)
 {
-	if (sym == CMD_SUPERIOR || sym == PIPE_SEMI_SEQUENCE)
+	if (sym == CMD_SUPERIOR || sym == PIPE_SEMI_SEQUENCE
+		|| sym == COMPLETE_COMMANDS || sym == END_COMMAND)
 		return (1);
 	return (0);
 }
@@ -29,6 +30,8 @@ static int		end_instruction(t_sym sym)
 int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
 	(void)ast;
+	if (parser->state == SUCCESS || parser->state == ERROR)
+		parser_init(parser);
 	while (*token)
 	{
 		produce_sym(*parser->stack, parser->new_sym, token);
@@ -49,7 +52,6 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 //		build_tree(ast, token);
 //		btree_print(STDBUG, *ast, &ft_putast);
 		if ((end_instruction(*parser->stack) && !(*token)->next))
-			/* || *parser->stack == PROGRAM) */
 			insert_linebreak(token);
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
