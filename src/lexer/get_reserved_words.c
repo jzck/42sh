@@ -49,11 +49,15 @@ int		get_reserved_words(t_list **alst)
 					token->type = TK_UNTIL;
 				else if (ft_strncmp(token->data, "case", 4) == 0)
 					token->type = TK_CASE;
+				else if (ft_strncmp(token->data, "for", 3) == 0)
+					token->type = TK_FOR;
 			}
 		}
-		if (ante_token && ante_token->type == TK_CASE 
+		if (ante_token && (ante_token->type == TK_CASE || ante_token->type == TK_FOR)
 			&& ft_strncmp(token->data, "in", 2) == 0)
 			token->type = TK_IN;
+		if (previous_token && previous_token->type == TK_FOR && token->type == TK_WORD)
+			token->type = TK_NAME;
 		ante_token = previous_token;	
 		previous_token = token;
 		temp = temp->next;

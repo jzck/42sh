@@ -14,6 +14,16 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == FOR_WORDLIST)
+		return ("FOR_WORDLIST");
+	if (current == FOR_CLAUSE)
+		return ("FOR_CLAUSE");
+	if (current == TK_NAME)
+		return ("TK_NAME");
+	if (current == TK_FOR)
+		return ("FOR");
+	if (current == NAME)
+		return ("NAME");
 	if (current == 0)
 		return ("NULL");
 	if (current == PATTERN)

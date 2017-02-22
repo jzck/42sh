@@ -16,6 +16,7 @@ int			insert_newline(t_list **alst)
 {
 	t_token	*token;
 
+	DG("insert newline");
 	token = token_init();
 	token->type = TK_NEWLINE;
 	ft_lsteadd(alst, ft_lstnew(token, sizeof(*token)));
