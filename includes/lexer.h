@@ -39,9 +39,9 @@ enum	e_lexstate
 	BQUOTE,
 	DQUOTE_BQUOTE,
 	BACKSLASH,
-	VAR,
-	SPECIAL,
 	PAREN,
+//	VAR,
+//	SPECIAL,
 	COMMENT,
 	END,
 };

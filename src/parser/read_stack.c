@@ -14,6 +14,10 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TK_PAREN_OPEN)
+		return ("TK_PAREN_OPEN");
+	if (current == TK_PAREN_CLOSE)
+		return ("TK_PAREN_CLOSE");
 	if (current == FOR_WORDLIST)
 		return ("FOR_WORDLIST");
 	if (current == FOR_CLAUSE)
