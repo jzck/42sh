@@ -16,10 +16,12 @@ int		get_reserved_words(t_list **alst)
 {
 	t_token		*token;
 	t_token		*previous_token;
+	t_token		*ante_token;
 	t_list		*temp;
 
 	temp = *alst;
 	previous_token = NULL;
+	ante_token = NULL;
 	while (temp)
 	{
 		token = temp->content;
@@ -45,8 +47,14 @@ int		get_reserved_words(t_list **alst)
 					token->type = TK_ELSE;
 				else if (ft_strncmp(token->data, "until", 5) == 0)
 					token->type = TK_UNTIL;
+				else if (ft_strncmp(token->data, "case", 4) == 0)
+					token->type = TK_CASE;
 			}
 		}
+		if (ante_token && ante_token->type == TK_CASE 
+			&& ft_strncmp(token->data, "in", 2) == 0)
+			token->type = TK_IN;
+		ante_token = previous_token;	
 		previous_token = token;
 		temp = temp->next;
 	}

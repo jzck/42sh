@@ -28,6 +28,7 @@ static int		end_instruction(t_sym sym)
 
 int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
+	(void)ast;
 	while (*token)
 	{
 		produce_sym(*parser->stack, parser->new_sym, token);
@@ -45,8 +46,8 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 			parser->state = SUCCESS;
 		else
 			parser->state = UNDEFINED;
-		build_tree(ast, token);
-		btree_print(STDBUG, *ast, &ft_putast);
+//		build_tree(ast, token);
+//		btree_print(STDBUG, *ast, &ft_putast);
 		if ((end_instruction(*parser->stack) && !(*token)->next))
 			/* || *parser->stack == PROGRAM) */
 			insert_linebreak(token);

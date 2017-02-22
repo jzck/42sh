@@ -16,6 +16,14 @@ char			*read_state(t_sym current)
 {
 	if (current == 0)
 		return ("NULL");
+	if (current == PATTERN)
+		return ("PATTERN");
+	if (current == TK_CASE)
+		return ("TK_CASE");
+	if (current == TK_IN)
+		return ("TK_IN");
+	if (current == TK_ESAC)
+		return ("TK_ESAC");
 	if (current == UNTIL_CLAUSE)
 		return ("UNTIL_CLAUSE");
 	if (current == TK_UNTIL)

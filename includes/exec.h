@@ -128,7 +128,7 @@ void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
 
-int		loop_exec(t_list *list_ast);
-int		loop_del(t_list *list_ast);
+
+
 
 #endif

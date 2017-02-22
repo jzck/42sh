@@ -30,6 +30,7 @@ int		handle_instruction(int fd)
 	DG("START: state=%i", parser.state);
 	while (1)
 	{
+		DG("get input");
 		if ((ret = readline(fd, get_lexer_stack(lexer), &str)))
 		{	
 			if (ret == -1)
@@ -47,21 +48,20 @@ int		handle_instruction(int fd)
 		if (get_lexer_stack(lexer))
 			continue ;		
 		lexer.state = DEFAULT;
+		token_print(token);
 		if (get_reserved_words(&token))
 			return (1);
 		if (insert_newline(&token))
 			return (1);
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
-		token = NULL;
-		DG("AFTER PARSING: state=%i", parser.state);
 		if (parser.state == SUCCESS)
 			break ;
 		else if (parser.state == ERROR)
-			return (error_syntax(&token));
+			return (error_syntax(&token));	
 	}
 	DG("succesful parsing:");
-	btree_print(STDBUG, ast, &ft_putast);
+//	btree_print(STDBUG, ast, &ft_putast);
 	/* if (ft_exec(&ast)) */
 	/* 	return (1); */
 	ft_add_str_in_history(lexer.str);
