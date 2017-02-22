@@ -49,6 +49,8 @@ int		get_reserved_words(t_list **alst)
 					token->type = TK_UNTIL;
 				else if (ft_strncmp(token->data, "case", 4) == 0)
 					token->type = TK_CASE;
+				else if (ft_strncmp(token->data, "esac", 4) == 0)
+					token->type = TK_ESAC;
 				else if (ft_strncmp(token->data, "for", 3) == 0)
 					token->type = TK_FOR;
 			}

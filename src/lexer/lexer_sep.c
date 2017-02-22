@@ -38,6 +38,7 @@ int		lexer_sep(t_list **alst, t_lexer *lexer)
 	else if (c == '|')
 		token->type = cn == '|' ? TK_OR_IF : TK_PIPE;
 	token->type = (c == ';') ? TK_SEMI : token->type;
+	token->type = (c == ';') && (cn == ';') ? TK_DSEMI : token->type;
 	lexer->pos += 1 + (token->type & (TK_AND_IF | TK_OR_IF) ? 1 : 0);
 	return (lexer_lex(&(*alst)->next, lexer));
 }

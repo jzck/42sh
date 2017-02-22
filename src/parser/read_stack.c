@@ -14,6 +14,12 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == CASE_CLAUSE)
+		return ("CASE_CLAUSE");
+	if (current == CASE_LIST_NS)
+		return ("CASE_LIST_NS");
+	if (current == TK_DSEMI)
+		return ("TK_DSEMI");
 	if (current == TK_PAREN_OPEN)
 		return ("TK_PAREN_OPEN");
 	if (current == TK_PAREN_CLOSE)
