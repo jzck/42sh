@@ -9,33 +9,18 @@ int		iscase(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	if (*ast)
 	{
-		node = (*ast)->item;
+		node = (*ast)->item;			
+		if (node->type == TK_PAREN_OPEN && node->full == 0 && node->nest > 0)
+			return (4);
 		if (node->type == TK_PAREN_OPEN && node->full == 0)
-		{
-	//		DG("go right");
 			return (1);
-		}
 		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN 
 			|| iscase(&(*ast)->right, lst) == 1) && token->type == TK_WORD
 			&& node->pattern == 0)
-		{
-	//		DG("add pattern");
 			return (2);
-		}
-		if ((node->type == TK_CASE || iscase(&(*ast)->right, lst) == 4) 
+		if ((node->type == TK_CASE || iscase(&(*ast)->right, lst) == 1) 
 			&& token->type == TK_PAREN_OPEN)
-		{
-	//		DG("new branch");
 			return (3);
-		}
-		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && iscase(&(*ast)->right, lst) == 1)
-		{
-//			DG(" go right");
-			return (1);
-		}
-		if (node->type == TK_PAREN_OPEN && node->nest == 0)
-			return (4);
 	}
 	return (0);
 }
