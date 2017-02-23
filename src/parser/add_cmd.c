@@ -29,8 +29,24 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (add_condition_cmd(ast, lst));
 	else if (iscondition(ast, lst) == 2)
 		return (add_branch(ast, lst));
-	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN)
+	else if (iscase(ast, lst) == 1)
+	{
+		DG("go add cmd");
+		return (add_case_cmd(ast, lst));
+	}
+	else if (iscase(ast, lst) == 2)
+		return (add_pattern(ast, lst));
+	else if (iscase(ast, lst) == 3)
+	{
+		DG("add branc");
+		return (add_branch(ast, lst));
+	}
+	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN 
+		&& node->type != TK_PAREN_CLOSE && node->type != TK_ESAC)
+	{
+		DG("return cmd : %s", read_state(node->type));
 		return (add_cmd(&(*ast)->right, lst));
+	}
 	my_tab = NULL;
 	token = (*lst)->content;
 	node = (*ast)->item;

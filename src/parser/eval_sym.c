@@ -823,7 +823,7 @@ int			eval_sym(t_sym stack, t_sym new_sym)
 {
 	int				i;
 
-	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+//	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

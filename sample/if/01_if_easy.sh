@@ -1,8 +1,10 @@
 if ls
 then
-	if ls
-	then
-		ls | cat
-		pwd ; ls
-	fi
+	ls
+elif ls
+then
+	ls
+elif ls
+then
+	ls
 fi

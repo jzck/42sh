@@ -216,8 +216,12 @@ int		add_loop_sep(t_btree **ast, t_list **lst);
 int		add_condition_cmd(t_btree **ast, t_list **lst);
 int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
+int		add_case_cmd(t_btree **ast, t_list **lst);
+int		add_case_sep(t_btree **ast, t_list **lst);
+int		add_pattern(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast);
 int		isdir(t_btree **ast);
+int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
@@ -255,6 +259,7 @@ struct	s_astnode
 
 	int			nest;
 	int			full;
+	int			pattern;
 	t_type		type;
 	t_astdata	data;
 };

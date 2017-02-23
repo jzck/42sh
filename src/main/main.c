@@ -63,7 +63,7 @@ int		handle_instruction(int fd)
 		token = NULL;
 	}
 	DG("succesful parsing:");
-//	btree_print(STDBUG, ast, &ft_putast);
+	btree_print(STDBUG, ast, &ft_putast);
 	/* if (ft_exec(&ast)) */
 	/* 	return (1); */
 	ft_add_str_in_history(lexer.str);

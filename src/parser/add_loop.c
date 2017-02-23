@@ -20,7 +20,6 @@ int		isloop(t_btree **ast)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		DG("TEST LOOP");
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
 			|| node->type == TK_AMP) && isloop(&(*ast)->right) == 1)
 			return (1);

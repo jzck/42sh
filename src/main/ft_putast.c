@@ -16,7 +16,17 @@ char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
 	node = nodein;
-	if (node->type == TK_THEN)
+	if (node->type == TK_CASE)
+		return ("TK_CASE");
+	else if (node->type == TK_PAREN_OPEN)
+		return ("TK_OPE");
+	else if (node->type == TK_PAREN_CLOSE)
+		return ("TK_CLO");
+	else if (node->type == TK_IN)
+		return ("TK_IN");
+	else if (node->type ==TK_ESAC)
+		return ("TK_ESAC");
+	else if (node->type == TK_THEN)
 		return ("THEN");
 	else if (node->type == TK_FI)
 		return ("FI");

@@ -31,6 +31,9 @@ int			gen_node(t_btree **ast)
 		((t_astnode *)(*ast)->item)->nest = 0;
 		((t_astnode *)(*ast)->item)->full = 0;
 		((t_astnode *)(*ast)->item)->type = 0;
+		((t_astnode *)(*ast)->item)->pattern = 0;
 	}
 	return (0);
 }
+
+	

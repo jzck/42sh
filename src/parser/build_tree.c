@@ -31,13 +31,17 @@ t_treematch			g_treematch[] =
 	{TK_THEN, &add_cmd},
 	{TK_FI, &add_cmd},
 	{TK_NEWLINE, &add_sep},
+	{TK_CASE, &add_cmd},
+	{TK_ESAC, &add_cmd},
+	{TK_PAREN_OPEN, &add_cmd},
+	{TK_PAREN_CLOSE, &add_cmd},
 	{0, NULL},
 };
 
 static int	isseparator(int type, int cache)
 {
 	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
-				|| cache == TK_NEWLINE || cache == TK_THEN))
+		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN))
 		return (0);
 	return (1);
 }
@@ -50,6 +54,8 @@ int			build_tree(t_btree **ast, t_list **lst)
 
 	i = 0;
 	token = (*lst)->content;
+//check bug de cache
+	cache = token->type;
 	while (g_treematch[i].type)
 	{
 		if (g_treematch[i].type == token->type
@@ -57,8 +63,7 @@ int			build_tree(t_btree **ast, t_list **lst)
 		{
 
 			DG("func TK : '%s' TK : '%s'",
-					read_state(g_treematch[i].type) ,read_state(token->type));
-			cache = token->type;
+					read_state(g_treematch[i].type) ,read_state(token->type));	
 			return (g_treematch[i].add(ast, lst));
 		}
 		i++;

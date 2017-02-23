@@ -229,6 +229,7 @@ parser/add_condition.c\
 parser/add_file.c\
 parser/add_loop.c\
 parser/add_sep.c\
+parser/add_case.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\
