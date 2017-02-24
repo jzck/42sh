@@ -1,4 +1,6 @@
 hello() { 
-  ls | cat
-  pwd ; cd
+	yolo() {
+		echo bonjour
+	} 
 }
+

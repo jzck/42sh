@@ -226,11 +226,14 @@ int		add_case_sep(t_btree **ast, t_list **lst);
 int		add_pattern(t_btree **ast, t_list **lst);
 int		add_subshell_cmd(t_btree **ast, t_list **lst);
 int		add_subshell_sep(t_btree **ast, t_list **lst);
+int		add_func_cmd(t_btree **ast, t_list **lst);
+int		add_func_sep(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
+int		isfunc(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);

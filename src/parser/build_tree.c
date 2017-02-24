@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 23:14:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 23:58:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ t_treematch			g_treematch[] =
 	{TK_FOR, &add_cmd},
 	{TK_ASSIGNEMENT_WORD, &add_cmd},
 	{SUBSHELL, &add_cmd},
+	{TK_LBRACE, &add_cmd},
+	{TK_RBRACE, &add_cmd},
+	{CLOSE_LIST, &add_cmd},
 	{0, NULL},
 };
 
@@ -47,8 +50,9 @@ static int	isseparator(t_token *token, int cache)
 {
 	if (token->type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
 		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN
-		|| cache == TK_WORD || cache == TK_DSEMI))
+		|| cache == TK_DSEMI))
 		return (0);
+//check cache == WORD
 	return (1);
 }
 
@@ -62,8 +66,11 @@ int			build_tree(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 //check bug de cache case ?
 //	cache = token->type;
-	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI)
+	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI
+		&& cache != TK_WORD)
 		token->type = SUBSHELL;
+	if (token->type == TK_PAREN_CLOSE && cache == TK_PAREN_OPEN)
+		token->type = CLOSE_LIST;	
 	while (g_treematch[i].type)
 	{
 		if ((isseparator(token, cache) && g_treematch[i].type == token->type))

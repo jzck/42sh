@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/24 20:59:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 00:17:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
 	node = nodein;
+	
+	if (node->type == CLOSE_LIST)
+		return ("CLOSE_LIST");
+	if (node->type == FNAME)
+		return ("FNAME");
+	if (node->type == TK_LBRACE)
+		return ("TK_LBRACE");
 	if (node->type == TK_ASSIGNEMENT_WORD)
 		return ("ASSIGNEMENT_WORD");
 	if (node->type == SUBSHELL)

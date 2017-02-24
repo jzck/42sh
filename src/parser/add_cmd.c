@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 19:40:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 00:11:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	char		**my_tab;
 
 	DG("add cmd");
-	if ((token = (*lst)->content)->type == TK_IN)
+	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
 		return (0);
 	else if (!*ast)
 		gen_node(ast);
@@ -41,6 +41,8 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (add_branch(ast, lst));
 	else if (issubshell(ast, lst))
 		return (add_subshell_cmd(ast, lst));
+	else if (isfunc(ast, lst))
+		return (add_func_cmd(ast, lst));
 	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
 		&& node->type != TK_PAREN_CLOSE)
 		return (add_cmd(&(*ast)->right, lst));
