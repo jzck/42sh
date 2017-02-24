@@ -44,7 +44,6 @@ enum	e_sym
 	TK_PAREN_OPEN,
 	TK_PAREN_CLOSE,
 	TK_BQUOTE,
-	TK_SUBSHELL,
 	TK_NEWLINE,
 	TK_WHILE,
 	TK_DO,
@@ -63,6 +62,7 @@ enum	e_sym
 	TK_IO_NUMBER,
 	TK_DLESSDASH,
 	TK_LESSGREAT,
+	TK_SUBSHELL,
 	TK_CASE,
 	TK_IN,
 	TK_ESAC,
@@ -119,7 +119,6 @@ enum	e_sym
 	LOOP,
 	FUNC,
 	PIPE_SEMI_SEQUENCE,
-	PATTERN_CASE,
 	CMD_SUPERIOR,
 	AND_OR_MAJOR,
 	AND_OR_MINOR,
@@ -127,6 +126,7 @@ enum	e_sym
 	CONDITION,
 	COMPLETE_CONDITION,
 	FOR_WORDLIST,
+	PATTERN_CASE,
 	ALL = 200,
 };
 
@@ -220,10 +220,13 @@ int		add_branch(t_btree **ast, t_list **lst);
 int		add_case_cmd(t_btree **ast, t_list **lst);
 int		add_case_sep(t_btree **ast, t_list **lst);
 int		add_pattern(t_btree **ast, t_list **lst);
+int		add_subshell_cmd(t_btree **ast, t_list **lst);
+int		add_subshell_sep(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
+int		issubshell(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);

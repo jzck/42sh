@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 16:24:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 19:27:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,20 @@ t_treematch			g_treematch[] =
 	{TK_NEWLINE, &add_sep},
 	{TK_CASE, &add_cmd},
 	{TK_ESAC, &add_cmd},
+	{TK_IN, &add_cmd},
+	{TK_DSEMI, &add_cmd},
 	{TK_PAREN_OPEN, &add_cmd},
 	{TK_PAREN_CLOSE, &add_cmd},
 	{TK_FOR, &add_cmd},
+	{SUBSHELL, &add_cmd},
 	{0, NULL},
 };
 
-static int	isseparator(int type, int cache)
+static int	isseparator(t_token *token, int cache)
 {
-	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
+	if (token->type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
 		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN
-		|| cache == TK_WORD))
+		|| cache == TK_WORD || cache == TK_DSEMI))
 		return (0);
 	return (1);
 }
@@ -58,10 +61,11 @@ int			build_tree(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 //check bug de cache case ?
 //	cache = token->type;
+	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI)
+		token->type = SUBSHELL;
 	while (g_treematch[i].type)
 	{
-		if (g_treematch[i].type == token->type
-				&& isseparator(token->type, cache))
+		if ((isseparator(token, cache) && g_treematch[i].type == token->type))
 		{
 
 			DG("func TK : '%s' TK : '%s'",

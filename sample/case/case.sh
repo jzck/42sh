@@ -3,5 +3,4 @@ case $rental in
 			("yolo") echo bonjour				
 			esac ;;
 	("van") echo yolo ;;
-	("bicycle") echo hola ;;
 esac

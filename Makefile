@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/21 21:32:36 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/24 18:49:55 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -225,6 +225,7 @@ main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
 parser/add_cmd.c\
+parser/add_subshell.c\
 parser/add_condition.c\
 parser/add_file.c\
 parser/add_loop.c\

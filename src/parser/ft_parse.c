@@ -43,7 +43,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 			aggregate_sym(&parser->stack, parser->new_sym, &parser->state);
 			push_stack(++parser->stack, *parser->new_sym);
 		}
-//		ft_read_stack(parser->stack);
+		ft_read_stack(parser->stack);
 		DG("\n");
 		if (*parser->stack == PROGRAM)
 			parser->state = SUCCESS;
@@ -56,5 +56,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
+	if (parser->state == SUCCESS)
+		DG("sucessful parsing");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 22:21:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 18:25:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,17 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, TK_BANG, CMD_NAME},
 	{TK_WORD, PIPE_SEMI_SEQUENCE, CMD_NAME},
 	{TK_WORD, SEPARATOR_OP, CMD_NAME},
+	{TK_WORD, TK_PAREN_OPEN, CMD_NAME},
 	{TK_WORD, CASE_LIST, PATTERN},
-	{TK_WORD, TK_PAREN_OPEN, PATTERN},	
+	{TK_WORD, PATTERN_CASE, PATTERN},	
 	{TK_WORD, COMPLETE_COMMANDS, CMD_NAME},
 	{TK_ASSIGNEMENT_WORD, LINEBREAK, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_PAREN_OPEN, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
 	{TK_NAME, LINEBREAK, FNAME},
+	{TK_NAME, TK_PAREN_OPEN, FNAME},
 	{TK_NAME, TK_BANG, FNAME},
 	{TK_NAME, SEPARATOR_OP, FNAME},
 	{TK_NAME, NEWLINE_LIST, FNAME},
@@ -71,6 +74,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
+	{TK_NEWLINE, TK_PAREN_OPEN, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},
 	{TK_NEWLINE, PIPE_SEMI_SEQUENCE, LINEBREAK},
 	{TK_NEWLINE, CASE_LIST_NS, NEWLINE_LIST},
@@ -97,8 +101,8 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 	int			i;
 
 	token = (*lst)->content;
-//	DG("produce stack : %s && token : %s", read_state(stack),
-//	read_state(token->type));
+	DG("produce stack : %s && token : %s", read_state(stack),
+	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
@@ -106,7 +110,7 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 		if (token->type == g_prodmatch[i].token
 			&& stack == g_prodmatch[i].stack)
 		{
-//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
+			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
 		}
 		i++;

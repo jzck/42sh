@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:12:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 16:08:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 18:54:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int			add_sep(t_btree **ast, t_list **lst)
 		return (add_condition_sep(ast, lst));
 	else if (iscase(ast, lst) == 2)
 		return (add_case_sep(ast, lst));
+	else if (issubshell(ast, lst))
+		return (add_subshell_sep(ast, lst));
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
