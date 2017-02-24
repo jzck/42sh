@@ -213,13 +213,14 @@ int		add_cmd(t_btree **ast, t_list **lst);
 int		add_file(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
+int		add_loop_condition(t_btree **ast, t_list **lst);
 int		add_condition_cmd(t_btree **ast, t_list **lst);
 int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
 int		add_case_cmd(t_btree **ast, t_list **lst);
 int		add_case_sep(t_btree **ast, t_list **lst);
 int		add_pattern(t_btree **ast, t_list **lst);
-int		isloop(t_btree **ast);
+int		isloop(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
@@ -250,6 +251,7 @@ union	u_astdata
 {
 	t_redir	redir;
 	t_ld	*token;
+	t_list	*wordlist;
 	char	**sstr;
 	char	*str;
 };
@@ -263,32 +265,5 @@ struct	s_astnode
 	t_type		type;
 	t_astdata	data;
 };
-
-int		parse(t_btree **ast, t_list **token);
-
-int		get_instruction(t_list **lst);
-int		get_sub_instruction(t_btree **ast, t_list **start, t_list **lst);
-
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
-int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
-int		parse_redir(t_btree **ast, t_list **start, t_list **lst);
-int		parse_less(t_btree **ast, t_list **start, t_list **lst);
-int		parse_great(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dless(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst);
-int		parse_lessand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_greatand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_word(t_btree **ast, t_list **start, t_list **lst);
-int		parse_subshell(t_btree **ast, t_list **start, t_list **lst);
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
-int		parse_while(t_btree **ast, t_list **start, t_list **lst);
-int		parse_if(t_btree **ast, t_list **start, t_list **lst);
-int		parse_do(t_btree **ast, t_list **start, t_list **lst);
-int		parse_done(t_btree **ast, t_list **start, t_list **lst);
-int		parse_elif(t_btree **ast, t_list **start, t_list **lst);
-int		parse_else(t_btree **ast, t_list **start, t_list **lst);
-
-int		delete_newline(t_list **start, t_list **lst);
-int		parse_head(t_btree **ast, t_btree **new_ast, t_list **start, t_list **lst);
 
 #endif

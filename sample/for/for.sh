@@ -1,11 +1,11 @@
-for i in ls
- do
+for i in hello bonjour salut comment
+do
 	for i in echo
 	do
 		pwd	
 	done
-	for i in cd
+	for i in echo
 	do
-		cat
+		pwd
 	done
 done

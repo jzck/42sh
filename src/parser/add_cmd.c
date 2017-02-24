@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 15:30:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 16:29:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		gen_node(ast);
 	else if (isdir(ast))
 		return (add_file(ast, lst));
-	else if (isloop(ast))
+	else if (isloop(ast, lst) == 3)
+		return (add_loop_condition(ast, lst));
+	else if (isloop(ast, lst))
 		return (add_loop_cmd(ast, lst));
 	else if (iscondition(ast, lst) == 1)
 		return (add_condition_cmd(ast, lst));

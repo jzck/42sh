@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 15:21:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 16:24:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ t_treematch			g_treematch[] =
 	{TK_ESAC, &add_cmd},
 	{TK_PAREN_OPEN, &add_cmd},
 	{TK_PAREN_CLOSE, &add_cmd},
+	{TK_FOR, &add_cmd},
 	{0, NULL},
 };
 
 static int	isseparator(int type, int cache)
 {
 	if (type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
-		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN))
+		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN
+		|| cache == TK_WORD))
 		return (0);
 	return (1);
 }
@@ -54,8 +56,8 @@ int			build_tree(t_btree **ast, t_list **lst)
 
 	i = 0;
 	token = (*lst)->content;
-//check bug de cache
-	cache = token->type;
+//check bug de cache case ?
+//	cache = token->type;
 	while (g_treematch[i].type)
 	{
 		if (g_treematch[i].type == token->type
@@ -63,7 +65,8 @@ int			build_tree(t_btree **ast, t_list **lst)
 		{
 
 			DG("func TK : '%s' TK : '%s'",
-					read_state(g_treematch[i].type) ,read_state(token->type));	
+			read_state(g_treematch[i].type) ,read_state(token->type));
+			cache = token->type;
 			return (g_treematch[i].add(ast, lst));
 		}
 		i++;

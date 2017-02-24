@@ -55,7 +55,7 @@ int		add_pattern(t_btree **ast, t_list **lst)
 	
 	token = (*lst)->content;
 	node = (*ast)->item;
-	node->data.redir.word.word = ft_strdup(token->data);
+	node->data.str = ft_strdup(token->data);
 	node->pattern = 1;
 	return (0);
 }
