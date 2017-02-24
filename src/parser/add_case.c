@@ -9,18 +9,15 @@ int		iscase(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	if (*ast)
 	{
-		node = (*ast)->item;			
-		if (node->type == TK_PAREN_OPEN && node->full == 0 && node->nest > 0)
-			return (4);
-		if (node->type == TK_PAREN_OPEN && node->full == 0)
+		node = (*ast)->item;
+		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN)
+			&& token->type == TK_WORD && node->pattern == 0)
 			return (1);
-		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN 
-			|| iscase(&(*ast)->right, lst) == 1) && token->type == TK_WORD
-			&& node->pattern == 0)
-			return (2);
-		if ((node->type == TK_CASE || iscase(&(*ast)->right, lst) == 1) 
-			&& token->type == TK_PAREN_OPEN)
+		if ((node->type == TK_PAREN_OPEN || node->type == TK_CASE)
+			&& node->nest == 0 && token->type == TK_PAREN_OPEN)
 			return (3);
+		if (node->type == TK_CASE || node->type == TK_PAREN_OPEN)
+			return (2);
 	}
 	return (0);
 }
@@ -32,19 +29,17 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	DG("add case cmd");
-	if (token->type == TK_CASE && node->type == TK_PAREN_OPEN)
-	{
-		DG("nesting");
+	if (token->type == TK_CASE && (node->type == TK_PAREN_OPEN
+		|| node->type == TK_CASE))
 		node->nest++;
-	}
-	if (token->type == TK_ESAC && node->type == TK_PAREN_OPEN && node->nest > 0)
-	{
-		DG("nesting less");
-		node->nest--;
-	}
-	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN)
+	if (token->type == TK_ESAC && (node->type == TK_PAREN_OPEN
+		|| node->type == TK_CASE) && node->nest > 0)
+		return ((node->nest--));
+	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN 
+		&& node->nest == 0)
 		return ((node->full = 1));
+	else if (token->type == TK_ESAC)
+		return (0);
 	return (add_cmd(&(*ast)->right, lst));
 }	
 
