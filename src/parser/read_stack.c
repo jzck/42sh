@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 20:39:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 20:57:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TK_ASSIGNEMENT_WORD)
+		return ("TK_ASSIGNEMENT_WORD");
 	if (current == CASE_CLAUSE)
 		return ("CASE_CLAUSE");
 	if (current == CASE_LIST_NS)

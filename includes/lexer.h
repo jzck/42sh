@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 21:12:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 20:45:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum	e_lexstate
 	DQUOTE_BQUOTE,
 	BACKSLASH,
 	PAREN,
+	ASSIGNEMENT_WORD,
 //	VAR,
 //	SPECIAL,
 	COMMENT,
@@ -111,6 +112,7 @@ int			lexer_dquote(t_list **alst, t_lexer *lexer);
 int			lexer_bquote(t_list **alst, t_lexer *lexer);
 int			lexer_backslash(t_list **alst, t_lexer *lexer);
 int			lexer_paren(t_list **alst, t_lexer *lexer);
+int			lexer_assignement_word(t_list **alst, t_lexer *lexer);
 int			lexer_comment(t_list **alst, t_lexer *lexer);
 int			lexer_end(t_list **alst, t_lexer *lexer);
 
