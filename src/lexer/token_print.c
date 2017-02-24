@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 22:20:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 21:48:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	token_print(t_list *lst)
 
 	while (lst)
 	{
-	
-		token = lst->content;
-		DG("token : %s data [%s]\n", read_state(token->type), token->data);
+		DG("token print");
+		if (lst->content)
+			token = lst->content;
+		if (token->type)
+			DG("token : %s data [%s]\n", read_state(token->type), token->data);
 		lst = lst->next;
 	}
 }

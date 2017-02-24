@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/24 20:51:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 21:38:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_bquote,
 	&lexer_backslash,
 	&lexer_paren,
+	&lexer_curly_brackets,
 	&lexer_assignement_word,
 	&lexer_comment,
 	&lexer_end,

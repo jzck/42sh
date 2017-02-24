@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/24 20:51:33 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/24 21:33:24 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,6 +189,7 @@ lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
 lexer/lexer_paren.c\
+lexer/lexer_curly_brackets.c\
 lexer/lexer_assignement_word.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\

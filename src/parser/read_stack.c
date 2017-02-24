@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 20:57:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 22:59:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == BRACE_CLAUSE)
+		return ("BRACE_CLAUSE");
+	if (current == FUNC_NAME)
+		return ("FUNC_NAME");
+	if (current == TK_LBRACE)
+		return ("TK_LBRACE");
+	if (current == TK_RBRACE)
+		return ("TK_RBRACE");
 	if (current == TK_ASSIGNEMENT_WORD)
 		return ("TK_ASSIGNEMENT_WORD");
 	if (current == CASE_CLAUSE)

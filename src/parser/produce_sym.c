@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 18:25:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 23:10:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,19 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, PIPE_SEMI_SEQUENCE, CMD_NAME},
 	{TK_WORD, SEPARATOR_OP, CMD_NAME},
 	{TK_WORD, TK_PAREN_OPEN, CMD_NAME},
+	{TK_WORD, TK_LBRACE, CMD_NAME},
 	{TK_WORD, CASE_LIST, PATTERN},
 	{TK_WORD, PATTERN_CASE, PATTERN},	
 	{TK_WORD, COMPLETE_COMMANDS, CMD_NAME},
 	{TK_ASSIGNEMENT_WORD, LINEBREAK, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_PAREN_OPEN, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_LBRACE, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
 	{TK_NAME, LINEBREAK, FNAME},
 	{TK_NAME, TK_PAREN_OPEN, FNAME},
+	{TK_NAME, TK_LBRACE, FNAME},
 	{TK_NAME, TK_BANG, FNAME},
 	{TK_NAME, SEPARATOR_OP, FNAME},
 	{TK_NAME, NEWLINE_LIST, FNAME},
@@ -75,6 +78,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
 	{TK_NEWLINE, TK_PAREN_OPEN, NEWLINE_LIST},
+	{TK_NEWLINE, TK_LBRACE, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},
 	{TK_NEWLINE, PIPE_SEMI_SEQUENCE, LINEBREAK},
 	{TK_NEWLINE, CASE_LIST_NS, NEWLINE_LIST},

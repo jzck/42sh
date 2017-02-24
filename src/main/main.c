@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/24 20:58:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 21:48:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		handle_instruction(int fd)
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
 		if (get_lexer_stack(lexer))
-			continue ;		
+			continue ;
 		lexer.state = DEFAULT;
 		token_print(token);
 		if (get_reserved_words(&token))
