@@ -1,1 +1,2 @@
-(ls | cat && pwd)
+(ls | cat
+pwd ;  ls)

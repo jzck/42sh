@@ -26,114 +26,6 @@ enum	e_parstate
 	SUCCESS,
 };
 
-enum	e_sym
-{
-	LINEBREAK = 1,
-	TK_COMMAND,
-	TK_LESS,
-	TK_GREAT,
-	TK_DLESS,
-	TK_DGREAT,
-	TK_LESSAND,
-	TK_GREATAND,
-	TK_SEMI,
-	TK_PIPE,
-	TK_AND_IF,
-	TK_OR_IF,
-	TK_AMP,
-	TK_PAREN_OPEN,
-	TK_PAREN_CLOSE,
-	TK_BQUOTE,
-	TK_NEWLINE,
-	TK_WHILE,
-	TK_DO,
-	TK_DONE,
-	TK_IF,
-	TK_THEN,
-	TK_FI,
-	TK_ELIF,
-	TK_ELSE,
-	TK_UNTIL,
-	TK_WORD,
-	TK_ASSIGNEMENT_WORD = 50,
-	TK_BANG,
-	TK_NAME,
-	TK_FOR,
-	TK_IO_NUMBER,
-	TK_DLESSDASH,
-	TK_LESSGREAT,
-	TK_SUBSHELL,
-	TK_CASE,
-	TK_IN,
-	TK_ESAC,
-	TK_CLOBBER,
-	TK_LBRACE,
-	TK_RBRACE,
-	TK_DSEMI,
-	PROGRAM = 100,
-	COMPLETE_COMMAND,
-	COMPLETE_COMMANDS,
-	LIST,
-	AND_OR,
-	PIPELINE,
-	PIPE_SEQUENCE,
-	COMMAND,
-	COMPOUND_COMMAND,
-	SUBSHELL,
-	COMPOUND_LIST,
-	TERM,
-	FOR_CLAUSE,
-	NAME,
-	IN,
-	WORDLIST,
-	CASE_CLAUSE,
-	CASE_LIST,
-	CASE_LIST_NS,
-	CASE_ITEM,
-	CASE_ITEM_NS,
-	PATTERN,
-	IF_CLAUSE,
-	BRACE_CLAUSE,
-	ELSE_PART,
-	WHILE_CLAUSE,
-	UNTIL_CLAUSE,
-	FUNCTION_DEFINITION,
-	FUNCTION_BODY,
-	FNAME,
-	BRACE_GROUP,
-	DO_GROUP,
-	SIMPLE_COMMAND,
-	CMD_NAME,
-	CMD_WORD,
-	CMD_PREFIX,
-	CMD_SUFFIX,
-	REDIRECT_LIST,
-	IO_REDIRECT,
-	IO_FILE,
-	FILENAME,
-	IO_HERE,
-	HERE_END,
-	NEWLINE_LIST,
-	SEPARATOR_OP,
-	SEPARATOR,
-	SEQUENTIAL_SEP,
-	BRACE,
-	LOOP,
-	FUNC,
-	PIPE_SEMI_SEQUENCE,
-	CMD_SUPERIOR,
-	AND_OR_MAJOR,
-	AND_OR_MINOR,
-	END_COMMAND,
-	CONDITION,
-	COMPLETE_CONDITION,
-	FOR_WORDLIST,
-	PATTERN_CASE,
-	FUNC_NAME,
-	CLOSE_LIST,
-	ALL = 200,
-};
-
 # define TK_REDIR(x)			(TK_LESS <= x && x <= TK_GREATAND)
 
 # define MATCH_STACK(x, y)		(x == y || y == ALL)
@@ -215,6 +107,7 @@ int		build_tree(t_btree **ast, t_list **lst);
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);
 int		add_file(t_btree **ast, t_list **lst);
+int		add_redir(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
 int		add_loop_condition(t_btree **ast, t_list **lst);
@@ -229,7 +122,7 @@ int		add_subshell_sep(t_btree **ast, t_list **lst);
 int		add_func_cmd(t_btree **ast, t_list **lst);
 int		add_func_sep(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast, t_list **lst);
-int		isdir(t_btree **ast);
+int		isdir(t_btree **ast, t_list **lst);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
