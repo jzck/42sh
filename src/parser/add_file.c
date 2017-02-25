@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 19:29:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 20:33:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			isdir(t_btree **ast, t_list **list)
 	t_token		*token;
 
 	token = (*list)->content;
-	if (ast)
+	if (*ast)
 	{
 		DG("isdir");
 		node = (*ast)->item;
@@ -61,7 +61,9 @@ int			add_redir(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_redir		*redir;
 
-	DG("add_redir");
+	DG("add redir");
+	if (!ast)
+		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
 	redir = ft_memalloc(sizeof(redir));

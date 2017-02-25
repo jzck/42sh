@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:35 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 21:09:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 20:12:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		lexer_great(t_list **alst, t_lexer *lexer)
 	lexer->pos++;
 	if (lexer->str[lexer->pos] == '&')
 	{
+		DG("lex greatand");	
 		token->type = TK_GREATAND;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
@@ -28,6 +29,7 @@ int		lexer_great(t_list **alst, t_lexer *lexer)
 	}
 	if (lexer->str[lexer->pos] == '>')
 	{
+		DG("lex great");
 		token->type = TK_DGREAT;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
