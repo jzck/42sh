@@ -49,7 +49,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	my_tab = NULL;
 	node = (*ast)->item;
 	node->type = token->type;
-	if (token->type == TK_WORD)
+	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);

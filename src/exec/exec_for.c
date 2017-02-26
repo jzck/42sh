@@ -12,13 +12,24 @@
 
 #include "exec.h"
 
-int			exec_until(t_btree **ast)
+int			exec_for(t_btree **ast)
 {
-	ft_exec(&(*ast)->left);
-	while (data_singleton()->exec.process.status == 0)
+	t_astnode	*node;
+	t_list		*temp;
+//	char		**av = NULL;
+	char		*var;
+	
+	
+	node = (*ast)->item;
+	temp = node->data.wordlist;
+	var = temp->content;
+	builtin_setenv("setenv", (char*[]){var, 0}, data_singleton()->local_var);
+	while (temp)
 	{
+	//process expansion av = token_to_char(temp->content)
+		builtin_setenv("setenv", (char*[]){var, 0}, data_singleton()->local_var);
 		ft_exec(&(*ast)->right);
-		ft_exec(&(*ast)->left);
+		temp = temp->next;
 	}
 	return (0);
 }

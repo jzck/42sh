@@ -34,6 +34,7 @@ typedef union u_astdata			t_astdata;
 typedef union u_word			t_word;
 typedef long long				t_type;
 
+typedef int 				t_condition;
 typedef struct s_job			t_job;
 typedef struct s_execmap		t_execmap;
 typedef struct s_redirmap		t_redirmap;

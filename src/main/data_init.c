@@ -23,7 +23,6 @@ int		data_init(void)
 	data->env = ft_sstrdup(environ);
 	data->comp = NULL;
 	data->opts = SH_OPTS_JOBC;
-
 	data->exec.process.path = NULL;
 	data->exec.process.av = NULL;
 	data->exec.process.toclose = STDIN;
@@ -45,6 +44,9 @@ int		data_init(void)
 
 	data->jobc.first_job = NULL;
 	data->jobc.current_id = 1;
+
+	data->local_var = NULL;
+	data->lst_func = NULL;
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		return (-1);
 	if (tgetent(NULL, term_name) != 1)

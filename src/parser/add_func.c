@@ -23,7 +23,10 @@ int			isfunc(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if (node->type == TK_WORD && token->type == CLOSE_LIST)
+		{	
 			node->type = FNAME;
+			add_one_func(ast, lst);
+		}		
 		if (node->type == FNAME && node->full == 0)
 			return (1);
 		if (isfunc(&(*ast)->right, lst) == 1)
@@ -62,4 +65,9 @@ int		add_func_sep(t_btree **ast, t_list **lst)
 	return (add_sep(&(*ast)->right, lst));
 }
 
-
+int		add_one_func(t_btree **ast, t_list **lst)
+{
+	(void)lst;
+	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(ast, sizeof(*ast)));
+	return (0);
+}

@@ -121,6 +121,7 @@ int		add_subshell_cmd(t_btree **ast, t_list **lst);
 int		add_subshell_sep(t_btree **ast, t_list **lst);
 int		add_func_cmd(t_btree **ast, t_list **lst);
 int		add_func_sep(t_btree **ast, t_list **lst);
+int		add_one_func(t_btree **ast, t_list **lst);
 int		isloop(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast, t_list **lst);
 int		iscase(t_btree **ast, t_list **lst);

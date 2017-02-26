@@ -35,8 +35,6 @@
 # define IS_PIPEEND(a)		(a & PROCESS_PIPEEND)
 # define IS_PIPESINGLE(a)	((a & PROCESS_PIPESTART) && (a & PROCESS_PIPEEND))
 
-# define SCRIPT_LOOP		(1 << 0)
-
 # include "libft.h"
 # include "types.h"
 # include "job_control.h"
@@ -53,7 +51,9 @@ struct	s_process
 	int		toclose;
 	int		status;
 	t_flag	attributes;
-	t_flag	script;
+	t_condition	if_branch;
+	t_condition	case_branch;
+	char		*case_pattern;
 };
 
 struct	s_exec
@@ -102,7 +102,10 @@ int		exec_elif(t_btree **ast);
 int		exec_else(t_btree **ast);
 int		exec_until(t_btree **ast);
 int		exec_default(t_btree **ast);
-
+int		exec_var(t_btree **ast);
+int		exec_for(t_btree **ast);
+int		exec_case(t_btree **ast);
+int		exec_case_branch(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		process_setexec(t_type type, t_process *p);
@@ -128,7 +131,6 @@ void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
 
-
-
+char	**token_to_argv(t_astnode *node);
 
 #endif
