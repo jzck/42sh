@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 11:10:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/18 14:35:10 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COMPLETION_H
 
 # include "minishell.h"
+#define RETARDED_BEHAVIOR	0
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
@@ -55,6 +56,7 @@ typedef struct				s_clst
 **  c_pline : Number of item per line when printing.
 **   c_line : Number of line required to move to terminal up.
 **    win_x : Size of the window in length.
+**    win_y : Size of the window in height.
 **      key : The keypressed lastly.
 ** isfolder : If the match is a folder. boolean.
 **      lst : List of the item corresponding to the completion.
@@ -90,8 +92,10 @@ typedef struct				s_comp
 	int						c_pline;
 	int						c_line;
 	int						win_x;
+	int						win_y;
 	int						key;
 	int						isfolder;
+	int						isrematch;
 	t_clst					*lst;
 }							t_comp;
 
@@ -132,12 +136,14 @@ int							c_rematch(t_comp *c, long int keypress);
 **    c_term_mv_down : Make space for the list.
 **    c_term_mv_back : Reset the cursor position.
 **      c_term_clear : Delete the list from the terminal.
+**     c_term_resize : Refresh win_x and win_y.
 **         c_printer : Printer of the list.
 */
 
 void						c_term_mv_down(t_comp *c);
 void						c_term_mv_back(t_comp *c);
 void						c_term_clear(t_comp *c);
+int							c_term_resize(t_comp *c);
 void						c_printer(t_comp *c);
 
 /*
@@ -151,12 +157,9 @@ void						c_printer(t_comp *c);
 int							c_clear(t_data *s);
 int							c_clear_lst(t_comp *c);
 char						*path_solver(t_comp *c, char *cmd, char *cwd);
-
-/*
-**	ajout rapide gwojda pour compiler :
-*/
-
-int			ft_sstrlen(char **s);
-char		*ft_sstrtostr(char **s, char *sep);
+int							c_spacing_escape(t_clst *node, int x, int o);
+int							c_spacing_clear(t_comp *c);
+int							ft_sstrlen(char **s);
+char						*ft_sstrtostr(char **s, char *sep);
 
 #endif
