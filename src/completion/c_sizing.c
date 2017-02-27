@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 08:50:26 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:01:47 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/17 13:45:33 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ int				c_sizing(t_comp *c)
 	c->c_line = 0;
 	while ((c->c_line * c->c_pline) < c->c_sy)
 		c->c_line++;
-	if (c->win_x < c->c_sx)
+	if ((c->win_x < c->c_sx))
 	{
 		c->c_pline = 0;
 		c->c_line = 0;
 	}
+	if ((c->win_y < c->c_line))
+		c_clear(data_singleton());
 	return (0);
 }

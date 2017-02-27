@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 21:57:47 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/17 12:29:20 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			c_matching(t_data *s, t_comp *c)
 		c_seek_binary(s, c);
 	else
 		c_seek_files(s, c);
-	if (s->comp && c->lst)
+	if (s->comp && s->comp->lst)
 	{
 		c_sizing(c);
 		return (1);

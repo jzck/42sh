@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:01:37 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/17 18:36:56 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,23 @@ void			c_term_mv_down(t_comp *c)
 		ft_putstr(tgetstr("up", NULL));
 		i++;
 	}
+}
+
+/*
+** If the terminal has chaged in size, the function will refresh these values
+** and clear the previous print list.
+*/
+
+int				c_term_resize(t_comp *c)
+{
+	struct winsize	win;
+
+	ioctl(0, TIOCGWINSZ, &win);
+	if ((win.ws_col == c->win_x) && (win.ws_row == c->win_y))
+		return (0);
+	c->win_x = win.ws_col;
+	c->win_y = win.ws_row;
+	c_sizing(c);
+	c_term_clear(c);
+	return (0);
 }
