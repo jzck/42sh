@@ -18,6 +18,7 @@ int		lexer_greatand(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = TK_GREATAND;
+	DG("lexer->str=[%s]", lexer->str + lexer->pos);
 	if (ft_isdigit(lexer->str[lexer->pos]))
 	{
 		token_append(token, lexer, 0, 0);
@@ -32,5 +33,5 @@ int		lexer_greatand(t_list **alst, t_lexer *lexer)
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	lexer->state = DEFAULT;
-	return (lexer_lex(alst, lexer));
+	return (lexer_lex(&(*alst)->next, lexer));
 }

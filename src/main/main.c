@@ -62,7 +62,7 @@ int		interactive_shell()
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-		//token_print(token);
+		token_print(token);
 	} while (get_lexer_stack(lexer));
 //	if (bquotes_expand(&token))
 //		return (1);
