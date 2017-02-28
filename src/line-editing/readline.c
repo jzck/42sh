@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 12:45:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/28 10:43:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ char	*readline(char *prompt)
 
 	readline_init(prompt);
 	input = ft_read_stdin();
+	if (STR)
+		ft_current_str(STR, POS);
 	ft_putchar('\n');
 	if (!prompt)
 		input = ft_history_parsing();
