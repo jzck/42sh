@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:11 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:13:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:11:26 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		ft_get_size_prev(char *str, size_t pos)
 		--pos;
 		++len;
 	}
+	if (str[pos] == '\n')
+		--len;
 	return (len);
 }
 
