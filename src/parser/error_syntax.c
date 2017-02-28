@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 19:27:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/24 19:12:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_errormatch	g_errormatch[] =
 {
 	{TK_NEWLINE, "newline"},
 	{TK_SEMI, ";"},
+	{TK_DSEMI, ";;"},
 	{TK_PIPE, "|"},
 	{TK_AMP, "&"},
 	{TK_LESS, "<"},
@@ -60,9 +61,9 @@ int				error_syntax(t_list **lst)
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_putstr_fd("syntax error near unexpetcted token `", 2);
+			ft_putstr_fd("syntax error near unexpected token `", 2);
 			ft_putstr_fd(g_errormatch[i].error, 2);
-			ft_putstr_fd("'", 2);
+			ft_putstr_fd("'\n", 2);
 			return (1);
 		}
 		i++;

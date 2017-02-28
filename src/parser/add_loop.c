@@ -6,34 +6,33 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 19:03:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 19:18:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		isloop(t_btree **ast)
+int		isloop(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
+	t_token		*token;
 
 	node = NULL;
+	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
-		DG("TEST LOOP");
+		if (node->type == TK_FOR && token->type == TK_WORD && node->pattern == 0)
+			return (3);
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && isloop(&(*ast)->right) == 1)
+			|| node->type == TK_AMP) && isloop(&(*ast)->right, lst) == 1)
 			return (1);
-		if ((node->type == TK_WHILE || node->type == TK_UNTIL) && node->full == 1)
-		{
-			DG("DON ENTER");
+		if ((node->type == TK_WHILE || node->type == TK_UNTIL 
+			|| node->type == TK_FOR) && node->full == 1)
 			return (2);
-		}
-		if ((node->type == TK_WHILE || node->type == TK_UNTIL) && node->full == 0)
-		{
-			DG(" NOFULL");
+		if ((node->type == TK_WHILE || node->type == TK_UNTIL
+			|| node->type == TK_FOR) && node->full == 0)
 			return (1);
-		}
 	}
 	return (0);
 }
@@ -46,27 +45,20 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	DG("add loop cmd");
-	if ((token->type == TK_WHILE || token->type == TK_UNTIL) 
-		&& (node->type == TK_WHILE || node->type == TK_UNTIL))
-	{
-		DG("nest one more");
+	if (token->type == TK_DO && node->type == TK_FOR)
+		node->pattern = 1;
+	if ((token->type == TK_WHILE || token->type == TK_UNTIL || token->type == TK_FOR) 
+		&& (node->type == TK_WHILE || node->type == TK_UNTIL || node->type == TK_FOR))
 		node->nest++;
-	}
-	if (token->type == TK_DONE && (node->type == TK_WHILE || node->type == TK_UNTIL)
-		&& node->nest > 0)
-	{
+	if (token->type == TK_DONE && (node->type == TK_WHILE
+		|| node->type == TK_UNTIL || node->type == TK_FOR) && node->nest > 0)
 		node->nest--;
-		DG("nest one less");
-	}
 	else if (token->type == TK_DONE && (node->type == TK_WHILE 
-		|| node->type == TK_UNTIL) && node->nest == 0)
-	{
-		DG("WHILE FULL");
+		|| node->type == TK_UNTIL || node->type == TK_FOR) && node->nest == 0)
 		return ((node->full = 1));
-	}
 	if (token->type == TK_DO && node->nest == 0)
 		return (add_cmd(&(*ast)->right, lst));
-	else if (!(*ast)->right && isloop(&(*ast)->left) != 2)
+	else if (!(*ast)->right && isloop(&(*ast)->left, lst) != 2)
 		return (add_cmd(&(*ast)->left, lst));
 	else
 		return (add_cmd(&(*ast)->right, lst));
@@ -79,5 +71,17 @@ int		add_loop_sep(t_btree **ast, t_list **lst)
 		return (add_sep(&(*ast)->left, lst));
 	else
 		return (add_sep(&(*ast)->right, lst));
+	return (0);
+}
+
+int		add_loop_condition(t_btree **ast, t_list **lst)
+{
+	t_astnode	*node;
+	t_token		*token;
+
+	token = (*lst)->content;
+	node = (*ast)->item;
+	ft_lsteadd(&node->data.wordlist, ft_lstnew(ft_strdup(token->data),
+		ft_strlen(token->data)));
 	return (0);
 }

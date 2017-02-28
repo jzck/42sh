@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/20 22:38:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/25 00:15:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,46 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == BRACE_CLAUSE)
+		return ("BRACE_CLAUSE");
+	if (current == FUNC_NAME)
+		return ("FUNC_NAME");
+	if (current == TK_LBRACE)
+		return ("TK_LBRACE");
+	if (current == TK_RBRACE)
+		return ("TK_RBRACE");
+	if (current == TK_ASSIGNEMENT_WORD)
+		return ("TK_ASSIGNEMENT_WORD");
+	if (current == CASE_CLAUSE)
+		return ("CASE_CLAUSE");
+	if (current == CASE_LIST_NS)
+		return ("CASE_LIST_NS");
+	if (current == TK_DSEMI)
+		return ("TK_DSEMI");
+	if (current == TK_PAREN_OPEN)
+		return ("TK_PAREN_OPEN");
+	if (current == TK_PAREN_CLOSE)
+		return ("TK_PAREN_CLOSE");
+	if (current == FOR_WORDLIST)
+		return ("FOR_WORDLIST");
+	if (current == FOR_CLAUSE)
+		return ("FOR_CLAUSE");
+	if (current == TK_NAME)
+		return ("TK_NAME");
+	if (current == TK_FOR)
+		return ("FOR");
+	if (current == NAME)
+		return ("NAME");
+	if (current == 0)
+		return ("NULL");
+	if (current == PATTERN)
+		return ("PATTERN");
+	if (current == TK_CASE)
+		return ("TK_CASE");
+	if (current == TK_IN)
+		return ("TK_IN");
+	if (current == TK_ESAC)
+		return ("TK_ESAC");
 	if (current == UNTIL_CLAUSE)
 		return ("UNTIL_CLAUSE");
 	if (current == TK_UNTIL)
@@ -161,10 +201,8 @@ char			*read_state(t_sym current)
 
 int			ft_read_stack(t_sym *stack)
 {
+	DG("read stack :");
 	while (*stack)
-	{
-		ft_putstr(read_state(*stack--));
-		ft_putchar(10);
-	}
+		DG("%s", read_state(*stack--));
 	return (0);
 }

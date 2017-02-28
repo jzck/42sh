@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:53:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 19:55:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 	t_lexstate	state;
 
 	token = (*alst)->content;
+	token->type = TK_IO_NUMBER;
 	if ((state = get_state_global(lexer)))
 	{
 		lexer->state = state;

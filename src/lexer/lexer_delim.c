@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 22:14:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/25 19:56:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int		lexer_delim(t_list **alst, t_lexer *lexer)
 		lexer->pos++;
 	lexer->state = DEFAULT;
 	if (token->type)
-	{
 		return (lexer_lex(&(*alst)->next, lexer));
-	}
 	else
 	{
 		if (lexer->str[lexer->pos] == 0)

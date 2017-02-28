@@ -1,6 +1,6 @@
 if ls
 then
-	ls | cat
+    ls ; cat
 	while ls
 	do
 		until ls

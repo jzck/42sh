@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:32:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/25 20:34:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,22 @@ int		handle_instruction(int fd)
 			return (1);
 		if (get_lexer_stack(lexer))
 			continue ;
+		lexer.state = DEFAULT;
+		token_print(token);
+		if (get_reserved_words(&token))
+			return (1);
+		if (insert_newline(&token))
+			return (1);
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
 		if (parser.state == SUCCESS)
 			break ;
-		else if (parser.state == ERROR)
+		else if (parser.state == ERROR && !SH_IS_INTERACTIVE(data_singleton()->opts))
 			return (error_syntax(&token));
+		else if (parser.state == ERROR)
+			error_syntax(&token);	
+		token = NULL;
+		ast = NULL;
 	}
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);

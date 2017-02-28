@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 22:40:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/25 18:50:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,41 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	char		**my_tab;
 
 	DG("add cmd");
-	if (!*ast)
+	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
+		return (0);
+	else if (!*ast)
 		gen_node(ast);
-	else if (isdir(ast))
+	else if (isdir(ast, lst))
 		return (add_file(ast, lst));
-	else if (isloop(ast))
+	else if (isloop(ast, lst) == 3)
+		return (add_loop_condition(ast, lst));
+	else if (isloop(ast, lst))
 		return (add_loop_cmd(ast, lst));
 	else if (iscondition(ast, lst) == 1)
 		return (add_condition_cmd(ast, lst));
 	else if (iscondition(ast, lst) == 2)
 		return (add_branch(ast, lst));
-	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN)
+	else if (iscase(ast, lst) == 1)
+		return (add_pattern(ast, lst));
+	else if (iscase(ast, lst) == 2)
+		return (add_case_cmd(ast, lst));
+	else if (iscase(ast, lst) == 3)
+		return (add_branch(ast, lst));
+	else if (issubshell(ast, lst))
+		return (add_subshell_cmd(ast, lst));
+	else if (isfunc(ast, lst))
+		return (add_func_cmd(ast, lst));
+	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
+		&& node->type != TK_PAREN_CLOSE)
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;
-	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = token->type;
-	if (token->type == TK_WORD)
+	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
-//		ft_ld_pushback(&node->data.token, my_tab);
+		ft_ld_pushback(&node->data.token, my_tab);
 	}
 	return (0);
 }

@@ -14,7 +14,12 @@
 
 int			exec_if(t_btree **ast)
 {
-	ft_exec(&(*ast)->right);
-//	btree_delone(ast, &ast_free);
+	data_singleton()->exec.process.if_branch = 0;
+	ft_exec(&(*ast)->left);
+	if (data_singleton()->exec.process.status == 1)
+	{
+		data_singleton()->exec.process.if_branch = 1;
+		ft_exec(&(*ast)->right);
+	}
 	return (0);
 }

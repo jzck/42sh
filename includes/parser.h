@@ -6,7 +6,6 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:13:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,112 +21,9 @@
 
 enum	e_parstate
 {
+	ERROR = 0,
 	UNDEFINED,
 	SUCCESS,
-	ERROR,
-};
-
-enum	e_sym
-{
-	LINEBREAK = 1,
-	TK_COMMAND,
-	TK_LESS,
-	TK_GREAT,
-	TK_DLESS,
-	TK_DGREAT,
-	TK_LESSAND,
-	TK_GREATAND,
-	TK_SEMI,
-	TK_PIPE,
-	TK_AND_IF,
-	TK_OR_IF,
-	TK_AMP,
-	TK_PAREN_OPEN,
-	TK_PAREN_CLOSE,
-	TK_BQUOTE,
-	TK_SUBSHELL,
-	TK_NEWLINE,
-	TK_WHILE,
-	TK_DO,
-	TK_DONE,
-	TK_IF,
-	TK_THEN,
-	TK_FI,
-	TK_ELIF,
-	TK_ELSE,
-	TK_UNTIL,
-	TK_WORD,
-	TK_ASSIGNEMENT_WORD = 50,
-	TK_BANG,
-	TK_NAME,
-	TK_FOR,
-	TK_IO_NUMBER,
-	TK_DLESSDASH,
-	TK_LESSGREAT,
-	TK_CASE,
-	TK_IN,
-	TK_ESAC,
-	TK_CLOBBER,
-	TK_LBRACE,
-	TK_RBRACE,
-	TK_DSEMI,
-	PROGRAM = 100,
-	COMPLETE_COMMAND,
-	COMPLETE_COMMANDS,
-	LIST,
-	AND_OR,
-	PIPELINE,
-	PIPE_SEQUENCE,
-	COMMAND,
-	COMPOUND_COMMAND,
-	SUBSHELL,
-	COMPOUND_LIST,
-	TERM,
-	FOR_CLAUSE,
-	NAME,
-	IN,
-	WORDLIST,
-	CASE_CLAUSE,
-	CASE_LIST,
-	CASE_LIST_NS,
-	CASE_ITEM,
-	CASE_ITEM_NS,
-	PATTERN,
-	IF_CLAUSE,
-	ELSE_PART,
-	WHILE_CLAUSE,
-	UNTIL_CLAUSE,
-	FUNCTION_DEFINITION,
-	FUNCTION_BODY,
-	FNAME,
-	BRACE_GROUP,
-	DO_GROUP,
-	SIMPLE_COMMAND,
-	CMD_NAME,
-	CMD_WORD,
-	CMD_PREFIX,
-	CMD_SUFFIX,
-	REDIRECT_LIST,
-	IO_REDIRECT,
-	IO_FILE,
-	FILENAME,
-	IO_HERE,
-	HERE_END,
-	NEWLINE_LIST,
-	SEPARATOR_OP,
-	SEPARATOR,
-	SEQUENTIAL_SEP,
-	LOOP,
-	FUNC,
-	PIPE_SEMI_SEQUENCE,
-	PATTERN_CASE,
-	CMD_SUPERIOR,
-	AND_OR_MAJOR,
-	AND_OR_MINOR,
-	END_COMMAND,
-	CONDITION,
-	COMPLETE_CONDITION,
-	ALL = 200,
 };
 
 # define TK_REDIR(x)			(TK_LESS <= x && x <= TK_GREATAND)
@@ -211,14 +107,27 @@ int		build_tree(t_btree **ast, t_list **lst);
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);
 int		add_file(t_btree **ast, t_list **lst);
+int		add_redir(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
+int		add_loop_condition(t_btree **ast, t_list **lst);
 int		add_condition_cmd(t_btree **ast, t_list **lst);
 int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
-int		isloop(t_btree **ast);
-int		isdir(t_btree **ast);
+int		add_case_cmd(t_btree **ast, t_list **lst);
+int		add_case_sep(t_btree **ast, t_list **lst);
+int		add_pattern(t_btree **ast, t_list **lst);
+int		add_subshell_cmd(t_btree **ast, t_list **lst);
+int		add_subshell_sep(t_btree **ast, t_list **lst);
+int		add_func_cmd(t_btree **ast, t_list **lst);
+int		add_func_sep(t_btree **ast, t_list **lst);
+int		add_one_func(t_btree **ast, t_list **lst);
+int		isloop(t_btree **ast, t_list **lst);
+int		isdir(t_btree **ast, t_list **lst);
+int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
+int		issubshell(t_btree **ast, t_list **lst);
+int		isfunc(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
@@ -246,6 +155,7 @@ union	u_astdata
 {
 	t_redir	redir;
 	t_ld	*token;
+	t_list	*wordlist;
 	char	**sstr;
 	char	*str;
 };
@@ -255,35 +165,9 @@ struct	s_astnode
 
 	int			nest;
 	int			full;
+	int			pattern;
 	t_type		type;
 	t_astdata	data;
 };
-
-int		parse(t_btree **ast, t_list **token);
-
-int		get_instruction(t_list **lst);
-int		get_sub_instruction(t_btree **ast, t_list **start, t_list **lst);
-
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
-int		parse_separator(t_btree **ast, t_list **start, t_list **lst);
-int		parse_redir(t_btree **ast, t_list **start, t_list **lst);
-int		parse_less(t_btree **ast, t_list **start, t_list **lst);
-int		parse_great(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dless(t_btree **ast, t_list **start, t_list **lst);
-int		parse_dgreat(t_btree **ast, t_list **start, t_list **lst);
-int		parse_lessand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_greatand(t_btree **ast, t_list **start, t_list **lst);
-int		parse_word(t_btree **ast, t_list **start, t_list **lst);
-int		parse_subshell(t_btree **ast, t_list **start, t_list **lst);
-int		parse_newline(t_btree **ast, t_list **start, t_list **lst);
-int		parse_while(t_btree **ast, t_list **start, t_list **lst);
-int		parse_if(t_btree **ast, t_list **start, t_list **lst);
-int		parse_do(t_btree **ast, t_list **start, t_list **lst);
-int		parse_done(t_btree **ast, t_list **start, t_list **lst);
-int		parse_elif(t_btree **ast, t_list **start, t_list **lst);
-int		parse_else(t_btree **ast, t_list **start, t_list **lst);
-
-int		delete_newline(t_list **start, t_list **lst);
-int		parse_head(t_btree **ast, t_btree **new_ast, t_list **start, t_list **lst);
 
 #endif

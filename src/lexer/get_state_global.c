@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:39:06 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:48:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/24 21:39:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ t_lexstate		get_state_global(t_lexer *lexer)
 		return (BQUOTE);
 	else if (c == '(' || c == ')')
 		return (PAREN);
+	else if (c == '{' || c == '}')
+		return (CURLY_BRACKETS);
+	else if (c == '=')
+		return (ASSIGNEMENT_WORD);
 	else if (c == 0)
 		return (END);
 	return (0);

@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-static char		**token_to_argv(t_astnode *node)
+char			**token_to_argv(t_astnode *node)
 {
 	char	**my_tab;
 	int		index;
@@ -20,7 +20,7 @@ static char		**token_to_argv(t_astnode *node)
 	char	**content;
 	t_ld	*ld;
 
-	if (node->type == TK_COMMAND)
+	if (node->type == TK_WORD || node->type == TK_ASSIGNEMENT_WORD)
 	{
 		ld = node->data.token;
 		my_tab = NULL;

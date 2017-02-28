@@ -14,12 +14,11 @@
 
 int			exec_until(t_btree **ast)
 {
-	int		test;
-
-	test = 0;
-	while (test++ != 10)
+	ft_exec(&(*ast)->left);
+	while (data_singleton()->exec.process.status == 0)
+	{
 		ft_exec(&(*ast)->right);
-	
-//	btree_delone(ast, &ast_free);
+		ft_exec(&(*ast)->left);
+	}
 	return (0);
 }
