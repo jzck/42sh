@@ -27,7 +27,7 @@ int		lexer_word(t_list **alst, t_lexer *lexer)
 	if ((state = get_state_redir(lexer)))
 	{
 		lexer->state = state;
-		return (lexer_lex(alst, lexer));
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	token_append(token, lexer, 0, 0);
 	lexer->pos++;

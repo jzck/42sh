@@ -45,7 +45,7 @@ int		non_interactive_shell(char *command)
 int		interactive_shell()
 {
 	t_list	*token;
-	t_list	*ltoken;
+	t_list	*token_tail;
 	t_lexer	lexer;
 	t_btree	*ast;
 
@@ -59,13 +59,13 @@ int		interactive_shell()
 			pop(&lexer.stack);
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
-		ltoken = ft_lstlast(token);
-		if (lexer_lex(token ? &ltoken : &token, &lexer))
+		token_tail = ft_lstlast(token);
+		/* if (token_tail) */
+		/* 	token_tail = token_tail->next; */
+		if (lexer_lex(token ? &token_tail : &token, &lexer))
 			return (1);
 		token_print(token);
 	} while (get_lexer_stack(lexer));
-//	if (bquotes_expand(&token))
-//		return (1);
 	if (!token)
 		return (0);
 	ft_add_str_in_history(lexer.str);

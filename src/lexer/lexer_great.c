@@ -17,8 +17,8 @@ int		lexer_great(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	token = (*alst)->content;
-	if (token->type)
-		return (lexer_lex(&(*alst)->next, lexer));
+	/* if (token->type) */
+	/* 	return (lexer_lex(&(*alst)->next, lexer)); */
 	token_append(token, lexer, 0, 0);
 	lexer->pos++;
 	if (lexer->str[lexer->pos] == '&')
