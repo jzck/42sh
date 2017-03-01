@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/25 00:13:39 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/01 15:37:46 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -234,6 +234,7 @@ parser/add_loop.c\
 parser/add_sep.c\
 parser/add_case.c\
 parser/add_func.c\
+parser/add_redir.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\
