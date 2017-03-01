@@ -6,21 +6,27 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 16:25:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 17:59:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int			isdir_sep(t_list **list)
+int			isdir_sep(t_btree **ast, t_list **list)
 {
+	t_astnode	*node;
 	t_token		*token;
 
 	token = (*list)->content;
-	if (token->type == TK_LESS || token->type == TK_GREAT ||
-		|| token->type == TK_GREATAND || token->type == TK_LESSAND
-		|| token->type == TK_DLESS || TK_DGREAT)
-		return (1);
+	if (*ast)
+	{
+		node = (*ast)->item;	
+		if ((node->type == TK_WORD || node->type == REDIR) 
+			&& (token->type == TK_LESS || token->type == TK_GREAT 
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT))
+			return (1);
+	}
 	return (0);
 }
 
@@ -53,7 +59,7 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 		redir =	(ft_lstlast(node->data.cmd.redir))->content;
 		if (redir->type == TK_DLESS)
 			redir->word.word = NULL;
-		else if (ft_stris((char *)token->data, &isdigit))
+		else if (ft_stris((char *)token->data, &ft_isdigit))
 			redir->word.fd = ft_atoi(token->data);	
 		else
 			redir->word.word = token->data;
@@ -68,7 +74,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_redir		*redir;
 
 	DG("add redir");
-	if (!ast)
+	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;

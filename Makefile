@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/01 15:37:46 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/01 16:42:16 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -231,7 +231,6 @@ main/shell_init.c\
 parser/add_cmd.c\
 parser/add_subshell.c\
 parser/add_condition.c\
-parser/add_file.c\
 parser/add_loop.c\
 parser/add_sep.c\
 parser/add_case.c\

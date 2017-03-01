@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:12:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 16:25:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 18:02:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int			add_sep(t_btree **ast, t_list **lst)
 		return (add_case_sep(ast, lst));
 	else if (issubshell(ast, lst))
 		return (add_subshell_sep(ast, lst));
-	else if (isdir(ast, lst) == 2)
-		return (add_redir(ast, lst));
 	else if (isfunc(ast, lst))
 		return (add_func_sep(ast, lst));
 	if (!*ast)

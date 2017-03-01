@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 15:55:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 17:50:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		handle_instruction(int fd)
 	DG("START: state=%i", parser.state);
 	while (1)
 	{
-		if ((ret = readline(fd, get_lexer_stack(lexer), &str)))
+		if ((ret = readline(fd, get_lexer_stack(lexer) || parser.state == UNDEFINED, &str)))
 		{	
 			if (ret == -1)
 				return (-1);

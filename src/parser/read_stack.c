@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 16:25:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 17:17:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == UNDEFINED)
+		return ("UNDEFINED");
 	if (current == BRACE_CLAUSE)
 		return ("BRACE_CLAUSE");
 	if (current == FUNC_NAME)

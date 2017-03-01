@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 16:25:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 18:02:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (0);
 	else if (!*ast)
 		gen_node(ast);
-	else if (isdir(ast, lst))
+	else if (isdir_word(ast, lst))
 		return (add_redir_word(ast, lst));
+	else if (isdir_sep(ast, lst))
+		return (add_redir_type(ast, lst));
 	else if (isloop(ast, lst) == 3)
 		return (add_loop_condition(ast, lst));
 	else if (isloop(ast, lst))
@@ -43,7 +45,8 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	else if (isfunc(ast, lst))
 		return (add_func_cmd(ast, lst));
 	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
-		&& node->type != TK_PAREN_CLOSE && node->type != TK_WORD)
+		&& node->type != TK_PAREN_CLOSE && node->type != TK_WORD
+		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;
 	node = (*ast)->item;
