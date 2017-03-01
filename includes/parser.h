@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 16:24:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 16:28:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,27 @@ int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
 int		add_redir_word(t_btree **ast, t_list **lst)
 int		add_redir_type(t_btree **ast, t_list **lst)
+int		add_case_cmd(t_btree **ast, t_list **lst);
+int		add_case_sep(t_btree **ast, t_list **lst);
+int		add_pattern(t_btree **ast, t_list **lst);
+int		add_subshell_cmd(t_btree **ast, t_list **lst);
+int		add_subshell_sep(t_btree **ast, t_list **lst);
+int		add_func_cmd(t_btree **ast, t_list **lst);
+int		add_func_sep(t_btree **ast, t_list **lst);
+int		add_one_func(t_btree **ast, t_list **lst);
+int		isloop(t_btree **ast, t_list **lst);
+int		isdir(t_btree **ast, t_list **lst);
+int		iscase(t_btree **ast, t_list **lst);
+int		iscondition(t_btree **ast, t_list **lst);
+int		issubshell(t_btree **ast, t_list **lst);
+int		isfunc(t_btree **ast, t_list **lst);
+int		join_ast(t_btree **ast, t_btree **new_node);
+int		gen_node(t_btree **ast);
 int		isloop(t_btree **ast);
 int		isdir(t_btree **ast);
 int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
-
-int		join_ast(t_btree **ast, t_btree **new_node);
-int		gen_node(t_btree **ast);
 
 /*
  * Build AST
@@ -158,7 +171,7 @@ union	u_astdata
 
 struct	s_astnode
 {
-
+	int			pattern;
 	int			nest;
 	int			full;
 	t_type		type;

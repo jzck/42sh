@@ -74,12 +74,14 @@ exec/exec_redir.c\
 exec/exec_semi.c\
 exec/exec_until.c\
 exec/exec_while.c\
+exec/exec_var.c\
+exec/exec_for.c\
+exec/exec_case.c\
+exec/exec_case_branch.c\
 exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
-exec/loop_del.c\
-exec/loop_exec.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_resetfds.c\

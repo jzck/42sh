@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 14:45:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 16:27:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ t_aggrematch		g_aggrematch[] =
 	{CLOSE_LIST, PATTERN, CASE_LIST_NS, PATTERN_CASE},
 	{CLOSE_LIST, FUNC_NAME, FUNCTION_DEFINITION, FUNC_NAME},
 	{SUBSHELL, ALL, COMPOUND_COMMAND, 0},
-	{BRACE_CLAUSE, ALL, COMPOUND_COMMAND,  0},
+	{BRACE_CLAUSE, ALL, COMPOUND_COMMAND, 0},
 	{COMPOUND_COMMAND, ALL, COMMAND, 0},
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE},
 	{AND_OR_MINOR, LINEBREAK, AND_OR_MAJOR, 0},

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_exec.c                                        :+:      :+:    :+:   */
+/*   exec_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 21:02:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 19:27:49 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/20 22:31:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		loop_exec(t_list *list_ast)
+int			exec_case(t_btree **ast)
 {
+	t_astnode	*node;
+	char		**av;
 
-//	DG("begin exec loop");
-//	ft_print_all_ast(*list_ast);
-	while (list_ast)
-	{
-		if (ft_exec((t_btree **)list_ast->content))
-			return (1);
-		list_ast = list_ast->next;
-	}
+	data_singleton()->exec.process.case_branch = 0;
+	node = (*ast)->item;
+	av = token_to_argv(node);
+	data_singleton()->exec.process.case_pattern = av[0];
 	return (0);
 }

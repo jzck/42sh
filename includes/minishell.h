@@ -65,6 +65,8 @@ struct	s_data
 	t_comp	*comp;
 	t_exec	exec;
 	t_jobc	jobc;
+	char	**local_var;
+	t_list	*lst_func;
 };
 
 extern t_stof	g_builtins[];
