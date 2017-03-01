@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 17:59:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 22:44:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ int			isdir_sep(t_btree **ast, t_list **list)
 			&& (token->type == TK_LESS || token->type == TK_GREAT 
 			|| token->type == TK_GREATAND || token->type == TK_LESSAND
 			|| token->type == TK_DLESS || token->type == TK_DGREAT))
+			return (1);
+	}
+	if (!*ast)
+	{
+		if (token->type == TK_LESS || token->type == TK_GREAT
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT)
 			return (1);
 	}
 	return (0);

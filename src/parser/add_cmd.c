@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 18:02:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 22:46:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int			add_cmd(t_btree **ast, t_list **lst)
 
 	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
 		return (0);
+	else if (isdir_sep(ast, lst))
+		return (add_redir_type(ast, lst));
 	else if (!*ast)
 		gen_node(ast);
 	else if (isdir_word(ast, lst))
 		return (add_redir_word(ast, lst));
-	else if (isdir_sep(ast, lst))
-		return (add_redir_type(ast, lst));
 	else if (isloop(ast, lst) == 3)
 		return (add_loop_condition(ast, lst));
 	else if (isloop(ast, lst))
