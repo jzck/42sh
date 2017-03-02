@@ -58,5 +58,6 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	}
 	if (parser->state == SUCCESS)
 		DG("sucessful parsing");
+	DG("yolo");
 	return (0);
 }

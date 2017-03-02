@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 20:33:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 22:44:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int			isdir(t_btree **ast, t_list **list)
+int			isdir_sep(t_btree **ast, t_list **list)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -20,25 +20,39 @@ int			isdir(t_btree **ast, t_list **list)
 	token = (*list)->content;
 	if (*ast)
 	{
-		DG("isdir");
-		node = (*ast)->item;
-		if ((node->type == TK_LESS || node->type == TK_GREAT 
-			|| node->type == TK_LESSAND || node->type == TK_GREATAND 
-			|| node->type == TK_DGREAT)
-			&& token->type == TK_WORD)
-			return (1);	
-		if ((node->type == TK_LESS || node->type == TK_GREAT 
-			|| node->type == TK_LESSAND || node->type == TK_GREATAND 
-			|| node->type == TK_DGREAT)
+		node = (*ast)->item;	
+		if ((node->type == TK_WORD || node->type == REDIR) 
 			&& (token->type == TK_LESS || token->type == TK_GREAT 
-			|| token->type == TK_LESSAND || token->type == TK_GREATAND 
-			|| token->type == TK_DGREAT))
-			return (2);
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT))
+			return (1);
+	}
+	if (!*ast)
+	{
+		if (token->type == TK_LESS || token->type == TK_GREAT
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT)
+			return (1);
 	}
 	return (0);
 }
 
-int			add_file(t_btree **ast, t_list **lst)
+int			isdir_word(t_btree **ast, t_list **list)
+{
+	t_astnode	*node;
+	t_token		*token;
+
+	token = (*list)->content;
+	if (*ast)
+	{
+		node = (*ast)->item;
+		if (token->type == TK_WORD && node->type == REDIR)
+			return (1);
+	}
+	return (0);
+}
+
+int			add_redir_word(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -46,28 +60,34 @@ int			add_file(t_btree **ast, t_list **lst)
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	if (node->data.wordlist)
+	if (node->data.cmd.redir)
 	{
 		DG("add file");
-		redir =	(ft_lstlast(node->data.wordlist))->content;
-		redir->word.word = token->data;
-	}	
+		redir =	(ft_lstlast(node->data.cmd.redir))->content;
+		if (redir->type == TK_DLESS)
+			redir->word.word = NULL;
+		else if (ft_stris((char *)token->data, &ft_isdigit))
+			redir->word.fd = ft_atoi(token->data);	
+		else
+			redir->word.word = token->data;
+	}
 	return (0);
 }
 
-int			add_redir(t_btree **ast, t_list **lst)
+int			add_redir_type(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
 
 	DG("add redir");
-	if (!ast)
+	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
+	node->type = REDIR;
 	redir = ft_memalloc(sizeof(redir));
 	redir->type = token->type;
-	ft_lsteadd(&node->data.wordlist, ft_lstnew(redir, sizeof(redir)));
+	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(redir, sizeof(redir)));
 	return (0);
 }

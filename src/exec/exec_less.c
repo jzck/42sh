@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:32:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 16:37:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int		exec_less(t_btree **ast)
 	t_astnode	*node;
 	int			fd;
 
+	fd = 0;
 	node = (*ast)->item;
-	fd = open(node->data.redir.word.word, O_RDONLY);
+//	fd = open(node->data.redir.word.word, O_RDONLY);
 	data_singleton()->exec.process.fdin = fd;
 	/* ft_strappend(&data->exec.process.command, "<"); */
 	/* ft_strappend(&data->exec.process.command, node->data.redir.word.word); */

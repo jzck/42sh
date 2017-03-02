@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/25 20:34:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 12:37:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int		handle_instruction(int fd)
 	ast = NULL;
 	while (1)
 	{
-		if ((ret = readline(fd, get_lexer_stack(lexer), &str)))
+		if ((ret = readline(fd, get_lexer_stack(lexer) ||
+			parser.state == UNDEFINED, &str)))
 		{
+			/* ft_putstr("bonjour"); */
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF() : 1);
@@ -57,7 +59,7 @@ int		handle_instruction(int fd)
 		else if (parser.state == ERROR && !SH_IS_INTERACTIVE(data_singleton()->opts))
 			return (error_syntax(&token));
 		else if (parser.state == ERROR)
-			error_syntax(&token);	
+			error_syntax(&token);
 		token = NULL;
 		ast = NULL;
 	}

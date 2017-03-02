@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 00:15:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 22:53:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == LINEBREAK)
+		return ("LINEBREAK");
+	if (current == CLOSE_LIST)
+		return ("CLOSE_LIST");
 	if (current == BRACE_CLAUSE)
 		return ("BRACE_CLAUSE");
 	if (current == FUNC_NAME)
@@ -190,8 +194,6 @@ char			*read_state(t_sym current)
 		return ("ALL");
 	if (current == NEWLINE_LIST)
 		return ("NEWLINE_LIST");
-	if (current == LINEBREAK)
-		return ("LINEBREAK");
 	if (current != 0)
 		return ("NON-DEFINED");
 	if (current == 0)

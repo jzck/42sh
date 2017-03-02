@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 13:53:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 22:55:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, FOR_WORDLIST, SEQUENTIAL_SEP, 0},
 
 //to check
-	{HERE_END, TK_DLESS, IO_HERE, TK_DLESS},
-	{IO_HERE, TK_IO_NUMBER, IO_REDIRECT, TK_IO_NUMBER},
-	{IO_HERE, ALL, IO_REDIRECT, 0},	
 	{FILENAME, TK_LESS, IO_FILE, TK_LESS},
 	{FILENAME, TK_LESSAND, IO_FILE, TK_LESSAND},
 	{FILENAME, TK_GREAT, IO_FILE, TK_GREAT},
@@ -103,9 +100,12 @@ t_aggrematch		g_aggrematch[] =
 	{FILENAME, TK_LESSGREAT, IO_FILE, TK_LESSGREAT},
 	{FILENAME, TK_CLOBBER, IO_FILE, TK_CLOBBER},
 
+	{HERE_END, TK_DLESS, IO_HERE, TK_DLESS},
 //to check
 	{IO_FILE, TK_IO_NUMBER, IO_REDIRECT, TK_IO_NUMBER},
 	{IO_FILE, ALL, IO_REDIRECT, 0},
+	{IO_HERE, TK_IO_NUMBER, IO_REDIRECT, TK_IO_NUMBER},
+	{IO_HERE, ALL, IO_REDIRECT, 0},	
 	{IO_REDIRECT, CMD_SUPERIOR, CMD_SUPERIOR, CMD_SUPERIOR},
 	{IO_REDIRECT, COMPOUND_COMMAND, REDIRECT_LIST, REDIRECT_LIST},
 

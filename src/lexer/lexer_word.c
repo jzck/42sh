@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/25 20:10:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/01 14:06:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		lexer_word(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = TK_WORD;
-	DG("lexer word");
 	if ((state = get_state_global(lexer)))
 	{
 		lexer->state = state;

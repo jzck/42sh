@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 22:41:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/02 12:36:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char			**token_to_argv(t_astnode *node)
 
 	if (node->type == TK_WORD || node->type == TK_ASSIGNEMENT_WORD)
 	{
-		ld = node->data.token;
+		ld = node->data.cmd.token;
 		my_tab = NULL;
 		while (ld)
 		{
