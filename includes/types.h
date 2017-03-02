@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/25 19:37:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 20:36:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_token			t_token;
 typedef struct s_ld				t_ld;
 typedef struct s_astnode		t_astnode;
 typedef struct s_redir			t_redir;
+typedef struct s_cmd			t_cmd;
 typedef union u_astdata			t_astdata;
 typedef union u_word			t_word;
 typedef long long				t_type;
@@ -157,6 +158,8 @@ enum	e_sym
 	PATTERN_CASE,
 	FUNC_NAME,
 	CLOSE_LIST,
+	REDIR,
+	JOB,
 	ALL = 200,
 };
 

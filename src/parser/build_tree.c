@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 19:21:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:41:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ t_treematch			g_treematch[] =
 	{TK_WORD, &add_cmd},
 	{TK_PIPE, &add_sep},
 	{TK_SEMI, &add_sep},
-	{TK_GREAT, &add_sep},
-	{TK_LESS, &add_sep},
-	{TK_DGREAT, &add_sep},
-	{TK_DLESS, &add_sep},
+	{TK_GREAT, &add_cmd},
+	{TK_LESS, &add_cmd},
+	{TK_DGREAT, &add_cmd},
+	{TK_DLESS, &add_cmd},
 	{TK_OR_IF, &add_sep},
 	{TK_AND_IF, &add_sep},
+	{TK_AMP, &add_sep},
 	{TK_WHILE, &add_cmd},
 	{TK_UNTIL, &add_cmd},
 	{TK_DO, &add_cmd},

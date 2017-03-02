@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:27:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:14:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/01 16:38:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		exec_redir(t_btree **ast)
 
 	p = &data_singleton()->exec.process;
 	node = (*ast)->item;
-	node->data.redir.type = node->type;
-	ft_lsteadd(&p->redirs, ft_lstnew(&node->data.redir,sizeof(node->data.redir)));
+//	node->data.redir.type = node->type;
+//	ft_lsteadd(&p->redirs, ft_lstnew(&node->data.redir,sizeof(node->data.redir)));
 	ft_exec(&(*ast)->left);
 //	btree_delone(ast, &ast_free);
 	return (0);

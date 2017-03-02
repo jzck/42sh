@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:50:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:41:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:40:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ void	ast_free(void *data, size_t content_size)
 {
 	t_astnode	*node;
 
+	(void)node;
+	(void)data;
+	(void)content_size;
+
+	return ;
+/*
 	(void)content_size;
 	node = data;
 	if (node->type == TK_COMMAND)
-		ft_ld_clear(&node->data.token, &ft_tabdel);
+		ft_ld_clear(&node->data.cmd.token, &ft_tabdel);
 	else if (node->type == TK_SUBSHELL)
 	{
 		ft_sstrfree(node->data.sstr);
@@ -27,6 +33,7 @@ void	ast_free(void *data, size_t content_size)
 	}
 	else if (node->type == TK_LESS || node->type == TK_GREAT || node->type == TK_DGREAT)
 	{
-		ft_strdel(&node->data.redir.word.word);
+		ft_strdel(&node->data.cmd.redir.word.word);
 	}
+*/
 }
