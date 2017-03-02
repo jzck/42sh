@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 21:41:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/02 21:02:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@
 # define IS_PIPEEND(p)		(p->fdout == STDOUT)
 # define IS_PIPESINGLE(p)	(IS_PIPESTART(p) && IS_PIPEEND(p))
 
+# define EXEC_BG			(1 << 1)
+# define EXEC_AND_IF		(1 << 2)
+# define EXEC_OR_IF			(1 << 3)
+# define EXEC_IS_BG(j)		(j & EXEC_BG)
+# define EXEC_IS_FG(j)		(!EXEC_IS_BG(j))
+# define EXEC_IS_AND_IF(j)	(j & EXEC_AND_IF)
+# define EXEC_IS_OR_IF(j)	(j & EXEC_JOB_OR_IF)
+# define EXEC_AOL_MASK		(EXEC_AND_IF | EXEC_OR_IF)
+
 # include "libft.h"
 # include "types.h"
 # include "job_control.h"
@@ -45,7 +54,6 @@ struct	s_process
 	pid_t	pid;
 	int		fdin;
 	int		fdout;
-	int		pipe_count;
 	int		to_close;
 	t_list	*redirs;
 	int		status;
@@ -57,13 +65,13 @@ struct	s_process
 
 struct	s_exec
 {
-	char		*aol_status;
-	int			aol_search;
-	t_job		job;
-	t_process	process;
-	int			fd0save;
-	int			fd1save;
-	int			fd2save;
+	/* char		*aol_status; */
+	/* int			aol_search; */
+	/* t_job		job; */
+	/* t_process	process; */
+	int			fd_save[3];
+	t_flag		attrs;
+	t_list		*op_stack;
 };
 
 struct	s_execmap
@@ -92,8 +100,8 @@ int		exec_ampersand(t_btree **ast);
 int		exec_or_if(t_btree **ast);
 int		exec_and_if(t_btree **ast);
 int		exec_pipe(t_btree **ast);
-int		exec_redir(t_btree **ast);
-int		exec_command(t_btree **ast);
+/* int		exec_redir(t_btree **ast); */
+int		exec_job(t_btree **ast);
 
 int		exec_while(t_btree **ast);
 int		exec_if(t_btree **ast);

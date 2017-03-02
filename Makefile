@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/01 16:42:16 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/02 16:23:48 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	42sh
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
-D_FLAGS		=	-g 
+D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
 
@@ -62,22 +62,22 @@ exec/ast_free.c\
 exec/bad_fd.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
+exec/exec_case.c\
+exec/exec_case_branch.c\
 exec/exec_command.c\
 exec/exec_default.c\
 exec/exec_elif.c\
 exec/exec_else.c\
+exec/exec_for.c\
+exec/exec_func.c\
 exec/exec_if.c\
 exec/exec_less.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
-exec/exec_redir.c\
 exec/exec_semi.c\
 exec/exec_until.c\
-exec/exec_while.c\
 exec/exec_var.c\
-exec/exec_for.c\
-exec/exec_case.c\
-exec/exec_case_branch.c\
+exec/exec_while.c\
 exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
@@ -173,9 +173,11 @@ lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/insert_newline.c\
+lexer/lexer_assignement_word.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
+lexer/lexer_curly_brackets.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dless.c\
@@ -190,8 +192,6 @@ lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
 lexer/lexer_paren.c\
-lexer/lexer_curly_brackets.c\
-lexer/lexer_assignement_word.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_word.c\
@@ -227,14 +227,14 @@ main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
-parser/add_cmd.c\
-parser/add_subshell.c\
-parser/add_condition.c\
-parser/add_loop.c\
-parser/add_sep.c\
 parser/add_case.c\
+parser/add_cmd.c\
+parser/add_condition.c\
 parser/add_func.c\
+parser/add_loop.c\
 parser/add_redir.c\
+parser/add_sep.c\
+parser/add_subshell.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\

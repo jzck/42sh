@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 14:43:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:01:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
-# define JOB_IS_BG(j)		(j & JOB_BG)
-# define JOB_IS_FG(j)		!(j & JOB_BG)
 
-#define JOBS_OPTS_L			(1 << 0)
+# define JOBS_OPTS_L		(1 << 0)
 
 struct	s_job
 {

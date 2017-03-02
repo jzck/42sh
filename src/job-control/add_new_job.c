@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_addprocess.c                                   :+:      :+:    :+:   */
+/*   add_new_job.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 21:42:53 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/02 20:44:21 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/02 21:04:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		job_addprocess(t_process *p)
+int		add_new_job(t_list	*first_process, int foreground)
 {
 	t_jobc	*jobc;
-	t_job	*job;
+	t_job	job;
 
+	if (!first_process)
+		return (1);
 	jobc = &data_singleton()->jobc;
-	job = &data_singleton()->exec.job;
-	if (IS_PIPESTART(p))
-	{
-		job_update_id();
-		job->id = jobc->current_id;
-		job->pgid = p->pid;
-		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
-	}
-	job = jobc->first_job->content;
-	if (p->pid > 0)
-	{
-		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-	}
-	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p))
+	job_update_id();
+	job->id = jobc->current_id;
+	job->pgid = ((t_process*)first_process->content)->pid;
+	job->attrs = foreground ? 0 : JOB_BG;
+	job->first_process = first_process;
+	ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
+	if (JOB_IS_FG(job->attrs))
+		put_job_in_foreground(job, 0);
+	else
 		job_notify_new(job);
+		put_job_in_background(job, 0);
 	return (0);
 }
