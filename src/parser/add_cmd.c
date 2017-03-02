@@ -1,6 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+" ============================================================================
+" Netrw Directory Listing                                        (netrw v140)
+"   /Users/antoineriard/42sh
+"   Sorted by      name
+"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
+"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:exec
+" ============================================================================
+../
+.git/
+includes/
+libft/
+pdf/
+sample/
+src/
+.gitignore
+.gitmodules
+.tags
+.valgrind.supp
+Makefile
+STDBUG
+donovan_segaults_06-02
+update_makefile.sh*
+.swp
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
