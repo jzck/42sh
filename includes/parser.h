@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 22:39:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 22:02:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ struct	s_cmd
 
 union	u_astdata
 {
-	t_cmd	cmd;
+	t_list	*cmds;
 	t_list	*wordlist;
 	char	**sstr;
 	char	*str;

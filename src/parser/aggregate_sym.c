@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 22:55:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:41:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_aggrematch		g_aggrematch[] =
 	{IO_HERE, TK_IO_NUMBER, IO_REDIRECT, TK_IO_NUMBER},
 	{IO_HERE, ALL, IO_REDIRECT, 0},	
 	{IO_REDIRECT, CMD_SUPERIOR, CMD_SUPERIOR, CMD_SUPERIOR},
+	{IO_REDIRECT, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{IO_REDIRECT, COMPOUND_COMMAND, REDIRECT_LIST, REDIRECT_LIST},
 
 //to check 
@@ -305,20 +306,20 @@ int			aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state)
 	int		i;
 
 	i = 0;
-	DG("aggregate head %s && sym %s",
-	read_state(**stack), read_state(*new_sym));
+//	DG("aggregate head %s && sym %s",
+//	read_state(**stack), read_state(*new_sym));
 	while (g_aggrematch[i].top)
 	{
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(**stack, g_aggrematch[i].under))
 	
 		{
-			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
+//			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
-				DG("stack after pop: %s", read_state(**stack));
+//				DG("stack after pop: %s", read_state(**stack));
 			}
 			if (eval_sym(**stack, *new_sym))
 				return ((*state = ERROR));

@@ -1,0 +1,14 @@
+total 576
+-rwxr-xr-x   1 ariard  2016_paris     690 Feb 21 15:30 update_makefile.sh
+drwxr-xr-x  13 ariard  2016_paris     442 Feb 21 15:30 src
+drwxr-xr-x  28 ariard  2016_paris     952 Feb 25 18:21 sample
+drwxr-xr-x   6 ariard  2016_paris     204 Feb 21 15:30 pdf
+drwxr-xr-x  13 ariard  2016_paris     442 Mar  2 20:15 objs
+drwxr-xr-x  12 ariard  2016_paris     408 Mar  2 20:15 libft
+drwxr-xr-x  19 ariard  2016_paris     646 Mar  2 20:36 includes
+-rw-r--r--   1 ariard  2016_paris       0 Mar  2 20:40 file2
+-rw-r--r--   1 ariard  2016_paris       0 Mar  2 20:40 file1
+-rw-r--r--   1 ariard  2016_paris    4396 Feb 21 15:40 donovan_segaults_06-02
+-rw-r--r--   1 ariard  2016_paris   21985 Mar  2 20:39 STDBUG
+-rw-r--r--   1 ariard  2016_paris    8051 Mar  1 16:42 Makefile
+-rwxr-xr-x   1 ariard  2016_paris  246884 Mar  2 20:38 42sh

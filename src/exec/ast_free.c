@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:50:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 16:36:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:40:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ast_free(void *data, size_t content_size)
 	(void)node;
 	(void)data;
 	(void)content_size;
+
+	return ;
 /*
 	(void)content_size;
 	node = data;

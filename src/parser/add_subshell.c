@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/24 23:38:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:41:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int			issubshell(t_btree **ast, t_list **lst)
 
 	node = NULL;
 	token = (*lst)->content;
-	DG("test loop");
 	if (*ast)
 	{
 		node = (*ast)->item;

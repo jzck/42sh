@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 14:40:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:40:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 	int			i;
 
 	token = (*lst)->content;
-	DG("produce stack : %s && token : %s", read_state(stack),
-	read_state(token->type));
+//	DG("produce stack : %s && token : %s", read_state(stack),
+//	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
@@ -114,7 +114,7 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 		if (token->type == g_prodmatch[i].token
 			&& stack == g_prodmatch[i].stack)
 		{
-			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
+//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
 		}
 		i++;

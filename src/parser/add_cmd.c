@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/01 22:46:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:53:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,18 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	else if (isfunc(ast, lst))
 		return (add_func_cmd(ast, lst));
 	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
-		&& node->type != TK_PAREN_CLOSE && node->type != TK_WORD
+		&& node->type != TK_PAREN_CLOSE && node->type != JOB
 		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;
 	node = (*ast)->item;
-	node->type = token->type;
+	node->type = JOB;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		DG("add data");
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
+		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
 		ft_ld_pushback(&node->data.cmd.token, my_tab);
 	}
 	return (0);

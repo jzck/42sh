@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 22:59:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 21:40:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int		handle_instruction(int fd)
 		else if (parser.state == ERROR)
 			error_syntax(&token);	
 		token = NULL;
-		ast = NULL;
 	}
 	DG("succesful parsing:");
 	btree_print(STDBUG, ast, &ft_putast);
 	/* if (ft_exec(&ast)) */
 	/* 	return (1); */
+	btree_del(&ast, &ast_free);
 	ft_add_str_in_history(lexer.str);
 	return (0);
 }
