@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 19:04:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/03 12:11:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,23 @@ static char		**treat_glob(t_glob *gl)
 {
 	char	**ret;
 
-	ret= NULL;
+	ret = NULL;
 	ft_ld_clear(&gl->m_pat, &ft_tabdel);
 	ft_ld_reverse(&gl->match);
 	ret = ft_ld_to_tab(gl->match);
 	ft_ld_clear(&gl->match, &ft_strdel);
 	return (ret);
+}
+
+static void		normal_expand_before_match(t_glob *gl)
+{
+	char	*home;
+
+	expand_var(gl);
+	expand_bquote(gl);
+	expand_brace(gl);
+	if ((home = ft_getenv(data_singleton()->env, "HOME")))
+		expand_home(gl, home);
 }
 
 char			**glob(char *pat, unsigned char *esc,
@@ -43,9 +54,7 @@ char			**glob(char *pat, unsigned char *esc,
 	len = ft_strlen(pat);
 	gl = (t_glob){0, 0, ft_strdup(pat), dup_char_esc(esc, (len >> 3) + 1),
 		dup_char_esc(esc2, (len >> 3) + 1), NULL, NULL};
-	expand_var(&gl);
-	expand_bquote(&gl);
-	expand_brace(&gl);
+	normal_expand_before_match(&gl);
 	while (gl.m_pat && !(gl.found = 0))
 	{
 		gl.cur_dir = 1;

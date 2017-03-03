@@ -90,6 +90,7 @@ glob/esc_print.c\
 glob/expand_bquote.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
+glob/expand_home.c\
 glob/expand_var.c\
 glob/ft_strsplit_esc.c\
 glob/ft_strsplit_spe.c\

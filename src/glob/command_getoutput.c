@@ -6,24 +6,36 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/02 15:16:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 14:27:40 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define BUF_SIZE	1024
 
-char	*command_getoutput(char *command)
+static char		*manage_output(int *fds)
+{
+	int			ret;
+	char		buf[BUF_SIZE + 1];
+	char		*output;
+
+	output = NULL;
+	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)) > 0)
+	{
+		buf[ret] = 0;
+		ft_strappend(&output, buf);
+	}
+	close(fds[PIPE_READ]);
+	return (output);
+}
+
+char			*command_getoutput(char *command)
 {
 	int			fds[2];
 	t_btree		*ast;
 	t_astnode	item;
-	char		*output;
-	char		buf[BUF_SIZE + 1];
-	int			ret;
 	t_exec		*exec;
 
-	output = NULL;
 	exec = &data_singleton()->exec;
 	item.type = TK_SUBSHELL;
 	item.data.sstr = malloc(4 * sizeof(char *));
@@ -37,11 +49,5 @@ char	*command_getoutput(char *command)
 	exec_command(&ast);
 	exec->process.fdout = STDOUT;
 	close(fds[PIPE_WRITE]);
-	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)))
-	{
-		buf[ret] = 0;
-		ft_strappend(&output, buf);
-	}
-	close(fds[PIPE_READ]);
-	return (output);
+	return (manage_output(fds));
 }
