@@ -32,7 +32,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	while (*token)
 	{
 		produce_sym(*parser->stack, parser->new_sym, token);
-		//DG("new sym %s", read_state(*parser->new_sym));
+		DG("new sym %s", read_state(*parser->new_sym));
 
 		if (eval_sym(*parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));

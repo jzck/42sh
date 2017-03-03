@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 14:16:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 16:07:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,21 @@ int		add_func_cmd(t_btree **ast, t_list **lst);
 int		add_func_sep(t_btree **ast, t_list **lst);
 int		add_one_func(t_btree **ast, t_list **lst);
 int		add_pipe(t_btree **ast, t_list **lst);
+int		add_var(t_btree **ast, t_list **lst);
+
 int		isloop(t_btree **ast, t_list **lst);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
 int		isfunc(t_btree **ast, t_list **lst);
-int		join_ast(t_btree **ast, t_btree **new_node);
-int		gen_node(t_btree **ast);
 int		isdir(t_btree **ast);
 int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_btree **ast, t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
+int		isvar(t_btree **ast, t_list **list);
+
+int		join_ast(t_btree **ast, t_btree **new_node);
+int		gen_node(t_btree **ast);
 
 /*
  * Build AST
