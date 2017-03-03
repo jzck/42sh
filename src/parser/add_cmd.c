@@ -17,6 +17,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_astnode	*node;
 	t_cmd		*cmd;
+	t_redir		*redir;
 	char		**my_tab;
 
 	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
@@ -54,16 +55,22 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	node->type = JOB;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
-		
 		DG("add data");
-		return ; 
-		if (!node->data.cmds)	
-			node->data.cmds = ft_lstnew(&cmd, sizeof(t_ld));
-		ft_lstlast(node->data.cmds)->content;	
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
-		
+		if (!node->data.cmds)
+		{
+			DG("new cmd");
+			cmd = ft_memalloc(sizeof(cmd));
+			ft_ld_new(&cmd->token, my_tab);
+			redir = ft_memalloc(sizeof(redir));
+			ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
+			ft_lsteadd(&node->data.cmds, ft_lstnew(&cmd, sizeof(t_ld)));
+		}
+		else
+			cmd = ft_lstlast(node->data.cmds)->content;
+		DG("again");
 		ft_ld_pushback(&cmd->token, my_tab);
 	}
 	return (0);

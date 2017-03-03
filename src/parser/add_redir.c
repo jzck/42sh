@@ -92,8 +92,20 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	redir = ft_memalloc(sizeof(redir));
 	redir->type = token->type;
 	if (!node->data.cmds)
+	{
+		cmd = ft_memalloc(sizeof(cmd));
+		cmd->token = NULL;
+		cmd->redir = NULL; 
 		node->data.cmds = ft_lstnew(&cmd, sizeof(cmd));
-	cmd = (node->data.cmds)->content;
-	ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
+	}
+	cmd = ft_lstlast(node->data.cmds)->content;
+	DG("still");		
+	if (!cmd->redir)
+		cmd->redir = ft_lstnew(redir, sizeof(redir));
+	else
+	{
+		DG("flag");
+		ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
+	}
 	return (0);
 }
