@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:33:40 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:05:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int		get_input_fd()
 		return (fd);
 	}
 	else if ((file = shell_get_avdata()))
-		return (open(file, O_RDONLY));
+	{
+		if (fd = open(file, O_RDONLY))
+		return (fd);
+	}
 	else
 		return (STDIN);
 }
@@ -108,13 +111,13 @@ int		main(int ac, char **av)
 
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
-	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s",
-			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
 	if ((fd = get_input_fd()) < 0)
 	{
 		ft_printf("{red}%s: No such file or directory\n{eoc}", SHELL_NAME);
 		return (1);
 	}
+	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s, fd=[%i]",
+			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
 //		lexer_clean;

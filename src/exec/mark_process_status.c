@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:32:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:02:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		mark_process_status(pid_t pid, int status)
 	t_list		*plist;
 	t_process	*p;
 
-	DG("PMS pid=%i,s=%i", pid, status);
 	if (pid > 1)
 	{
+		DG("MPS pid=%i,s=%i", pid, status);
 		if ((plist = job_getprocess(pid)))
 		{
 			p = plist->content;

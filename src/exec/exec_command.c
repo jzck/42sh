@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:50:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:02:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ int				exec_cmd(t_btree **ast)
 	if (fds[PIPE_WRITE] != STDOUT)
 		close(fds[PIPE_WRITE]);
 	if (IS_PIPEEND(p))
-		add_new_job(job);
-	if (JOB_IS_FG(job->attrs))
-		put_job_in_foreground(job, 0);
-	else
 	{
-		job_notify_new(job);
-		put_job_in_background(job, 0);
+		add_new_job(job);
+		if (JOB_IS_FG(job->attrs))
+			put_job_in_foreground(job, 0);
+		else
+		{
+			job_notify_new(job);
+			put_job_in_background(job, 0);
+		}
 	}
 	return (0);
 }
