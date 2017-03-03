@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 17:37:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:59:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				exec_cmd(t_btree **ast)
 	job = &data_singleton()->exec.job;
 	process_reset(&p);
 	op = pop(&exec->op_stack);
+	DG("op=%i", op);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
 	if (op == TK_AMP)
