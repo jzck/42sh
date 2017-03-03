@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 17:32:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:55:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		handle_instruction(int fd)
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED, &str)))
 		{
-			/* ft_putstr("bonjour"); */
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF() : 1);
@@ -42,9 +41,11 @@ int		handle_instruction(int fd)
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
 		ltoken = ft_lstlast(token);
+	DG();
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-		if (get_lexer_stack(lexer))
+	DG();
+		if (get_lexer_stack(lexer) > 1)
 			continue ;
 		lexer.state = DEFAULT;
 		token_print(token);
@@ -62,6 +63,7 @@ int		handle_instruction(int fd)
 			error_syntax(&token);
 		token = NULL;
 	}
+	DG();
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))

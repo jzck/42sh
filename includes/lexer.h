@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 17:15:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 17:55:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 							| TK_DO | TK_IF | TK_FI | TK_THEN | TK_ELIF | TK_ELSE)
 enum	e_lexstate
 {
+	PAREN,
 	DEFAULT,
 	NEWLINE,
 	DELIM,
@@ -39,7 +40,6 @@ enum	e_lexstate
 	BQUOTE,
 	DQUOTE_BQUOTE,
 	BACKSLASH,
-	PAREN,
 	CURLY_BRACKETS,
 	ASSIGNEMENT_WORD,
 	COMMENT,
