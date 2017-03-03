@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/03 12:11:17 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:18:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ static char		**treat_glob(t_glob *gl)
 	return (ret);
 }
 
-static void		normal_expand_before_match(t_glob *gl)
+static void		normal_expand_before_match(t_glob *gl, int do_match)
 {
 	char	*home;
 
 	expand_var(gl);
 	expand_bquote(gl);
-	expand_brace(gl);
+	if (do_match)
+		expand_brace(gl);
 	if ((home = ft_getenv(data_singleton()->env, "HOME")))
 		expand_home(gl, home);
 }
 
 char			**glob(char *pat, unsigned char *esc,
-		unsigned char *esc2)
+		unsigned char *esc2, int do_match)
 {
 	t_glob	gl;
 	int		len;
@@ -54,21 +55,22 @@ char			**glob(char *pat, unsigned char *esc,
 	len = ft_strlen(pat);
 	gl = (t_glob){0, 0, ft_strdup(pat), dup_char_esc(esc, (len >> 3) + 1),
 		dup_char_esc(esc2, (len >> 3) + 1), NULL, NULL};
-	normal_expand_before_match(&gl);
-	while (gl.m_pat && !(gl.found = 0))
-	{
-		gl.cur_dir = 1;
-		gl.pat = CH(gl.m_pat)[0];
-		if ((gl.esc = UCH(gl.m_pat)[1]) && gl.pat[0] != '/')
-			dir_research(&gl, ".", gl.pat, 0);
-		else
-			dir_research(&gl, "/", gl.pat + 1, 0);
-		if (!gl.found)
-			ft_ld_pushfront(&gl.match,
-					ft_strjoin(gl.cur_dir ? "" : "./", CH(gl.m_pat)[0]));
-		if (!gl.m_pat->next)
-			break ;
-		gl.m_pat = gl.m_pat->next;
-	}
+	normal_expand_before_match(&gl, do_match);
+	if (do_match)
+		while (gl.m_pat && !(gl.found = 0))
+		{
+			gl.cur_dir = 1;
+			gl.pat = CH(gl.m_pat)[0];
+			if ((gl.esc = UCH(gl.m_pat)[1]) && gl.pat[0] != '/')
+				dir_research(&gl, ".", gl.pat, 0);
+			else
+				dir_research(&gl, "/", gl.pat + 1, 0);
+			if (!gl.found)
+				ft_ld_pushfront(&gl.match,
+						ft_strjoin(gl.cur_dir ? "" : "./", CH(gl.m_pat)[0]));
+			if (!gl.m_pat->next)
+				break ;
+			gl.m_pat = gl.m_pat->next;
+		}
 	return (treat_glob(&gl));
 }
