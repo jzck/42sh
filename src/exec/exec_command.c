@@ -6,67 +6,69 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 16:32:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 17:31:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char			**token_to_argv(t_astnode *node)
+char			**token_to_argv(t_ld *ld)
 {
 	char	**my_tab;
 	int		index;
 	char	**expand;
 	char	**content;
-	t_ld	*ld;
 
-	if (node->type == TK_WORD || node->type == TK_ASSIGNEMENT_WORD)
+	my_tab = NULL;
+	while (ld)
 	{
-		ld = NULL;
-//		ld = node->data.cmd.token;
-		my_tab = NULL;
-		while (ld)
+		content = ld->content;
+		if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2])))
 		{
-			content = ld->content;
-			if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2])))
-			{
-				index = -1;
-				while (expand[++index])
-					my_tab = ft_sstradd(my_tab, expand[index]);
-				ft_tabdel(&expand);
-			}
-			ld = ld->next;
+			index = -1;
+			while (expand[++index])
+				my_tab = ft_sstradd(my_tab, expand[index]);
+			ft_tabdel(&expand);
 		}
-		return (my_tab);
+		ld = ld->next;
 	}
-	else if (node->type == TK_SUBSHELL)
-		return (ft_sstrdup(node->data.sstr));
-	return (NULL);
+	return (my_tab);
 }
 
-int				exec_command(t_btree **ast)
+int				exec_cmd(t_btree **ast)
 {
-	t_astnode	*node;
-	t_process	*p;
+	t_cmd		*cmd;
 	t_job		*job;
+	t_exec		*exec;
+	t_process	p;
+	int			fds[2];
+	int			op;
 
-	node = (*ast)->item;
-	p = &data_singleton()->exec.process;
+	cmd = &((t_astnode *)(*ast)->item)->data.cmd;
+	exec = &data_singleton()->exec;
 	job = &data_singleton()->exec.job;
-	p->av = token_to_argv(node);
-	process_setexec(node->type, p);
-	if (!(launch_process(p)))
+	process_reset(&p);
+	op = pop(&exec->op_stack);
+	fds[PIPE_WRITE] = STDOUT;
+	fds[PIPE_READ] = STDIN;
+	if (op == TK_AMP)
+		exec->attrs |= JOB_BG;
+	else if (op == TK_PIPE)
+		pipe(fds);
+	p.fdin = exec->fdin;
+	p.fdout = fds[PIPE_WRITE];
+	exec->fdin = fds[PIPE_READ];
+	if (IS_PIPESTART(p))
 	{
-		job_addprocess(p);
-		if (IS_PIPEEND(p->attributes))
-		{
-			JOB_IS_FG(job->attributes) ?
-				put_job_in_foreground(job, 0):
-				put_job_in_background(job, 0);
-			job->pgid = 0;
-		}
+		job->first_process = NULL;
+		job->attrs = EXEC_IS_FG(exec->attrs) ? 0 : JOB_BG;
 	}
-	process_reset(p);
-//	btree_delone(ast, &ast_free);
+	if (!(p.av = token_to_argv(cmd->token)))
+		return (1);
+	process_setexec(&p);
+	if (!(launch_process(&p)))
+		ft_lstadd(&job->first_process, ft_lstnew(&p, sizeof(p)));
+	if (IS_PIPEEND(p))
+		add_new_job(job);
 	return (0);
 }

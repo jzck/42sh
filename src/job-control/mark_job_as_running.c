@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:08:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:47:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	mark_job_as_running(t_job *j)
 		}
 		plist = plist->next;
 	}
-	j->attributes &= ~JOB_NOTIFIED;
+	j->attrs &= ~JOB_NOTIFIED;
 }

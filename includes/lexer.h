@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/24 21:46:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/02 17:15:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ enum	e_lexstate
 	PAREN,
 	CURLY_BRACKETS,
 	ASSIGNEMENT_WORD,
-//	VAR,
-//	SPECIAL,
 	COMMENT,
 	END,
 };

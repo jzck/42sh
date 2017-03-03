@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:09:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:29:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ int		launch_process(t_process *p)
 	int		pid;
 
 	exec = &data_singleton()->exec;
-	if (p->attributes & PROCESS_UNKNOWN)
-	{
-		ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
-		set_exitstatus(127, 1);
-	}
-	else if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(p->attributes))
+	if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(*p))
 	{
 		if (process_redirect(p))
 			return (1);
@@ -43,6 +38,12 @@ int		launch_process(t_process *p)
 		pid = fork();
 		if (pid == 0)
 		{
+			if (p->attributes & PROCESS_UNKNOWN)
+			{
+				ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
+				exit(127);
+				/* set_exitstatus(127, 1); */
+			}
 			process_setgroup(p, 0);
 			process_setsig();
 			if (process_redirect(p))
