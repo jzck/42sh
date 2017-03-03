@@ -22,7 +22,8 @@ char			**token_to_argv(t_astnode *node)
 
 	if (node->type == TK_WORD || node->type == TK_ASSIGNEMENT_WORD)
 	{
-		ld = node->data.cmd.token;
+		ld = NULL;
+//		ld = node->data.cmd.token;
 		my_tab = NULL;
 		while (ld)
 		{

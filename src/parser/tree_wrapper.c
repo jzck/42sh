@@ -27,7 +27,6 @@ int			gen_node(t_btree **ast)
 	{
 		*ast = btree_create_node(&item, sizeof(item));
 		ft_bzero((void *)&((t_astnode *)(*ast)->item)->data, sizeof(t_astdata));
-//		((t_astnode *)(*ast)->item)->data.cmd.token = NULL;
 		((t_astnode *)(*ast)->item)->nest = 0;
 		((t_astnode *)(*ast)->item)->full = 0;
 		((t_astnode *)(*ast)->item)->type = 0;

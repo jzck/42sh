@@ -57,17 +57,19 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
+	t_cmd		*cmd;	
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	if (node->data.cmd.redir)
+	cmd = (ft_lstlast(node->data.cmds))->content;
+	if (cmd->redir)
 	{
 		DG("add file");
-		redir =	(ft_lstlast(node->data.cmd.redir))->content;
+		redir =	(ft_lstlast(cmd->redir))->content;
 		if (redir->type == TK_DLESS)
 			redir->word.word = NULL;
-		else if (ft_stris((char *)token->data, &ft_isdigit))
-			redir->word.fd = ft_atoi(token->data);	
+//		else if (ft_stris((char *)token->data, &ft_isdigit))
+//			redir->word.fd = ft_atoi(token->data);	
 		else
 			redir->word.word = token->data;
 	}
@@ -79,6 +81,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
+	t_cmd		*cmd;
 
 	DG("add redir");
 	if (!*ast)
@@ -88,6 +91,9 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	node->type = REDIR;
 	redir = ft_memalloc(sizeof(redir));
 	redir->type = token->type;
-	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(redir, sizeof(redir)));
+	if (!node->data.cmds)
+		node->data.cmds = ft_lstnew(&cmd, sizeof(cmd));
+	cmd = (node->data.cmds)->content;
+	ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
 	return (0);
 }

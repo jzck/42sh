@@ -15,7 +15,7 @@
 t_treematch			g_treematch[] =
 {
 	{TK_WORD, &add_cmd},
-	{TK_PIPE, &add_sep},
+	{TK_PIPE, &add_pipe},
 	{TK_SEMI, &add_sep},
 	{TK_GREAT, &add_cmd},
 	{TK_LESS, &add_cmd},

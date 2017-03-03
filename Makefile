@@ -236,6 +236,7 @@ parser/add_sep.c\
 parser/add_case.c\
 parser/add_func.c\
 parser/add_redir.c\
+parser/add_pipe.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\

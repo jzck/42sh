@@ -1,29 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-" ============================================================================
-" Netrw Directory Listing                                        (netrw v140)
-"   /Users/antoineriard/42sh
-"   Sorted by      name
-"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
-"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:exec
-" ============================================================================
-../
-.git/
-includes/
-libft/
-pdf/
-sample/
-src/
-.gitignore
-.gitmodules
-.tags
-.valgrind.supp
-Makefile
-STDBUG
-donovan_segaults_06-02
-update_makefile.sh*
-.swp
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
@@ -39,6 +16,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
+	t_cmd		*cmd;
 	char		**my_tab;
 
 	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
@@ -76,11 +54,17 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	node->type = JOB;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
+		
 		DG("add data");
+		return ; 
+		if (!node->data.cmds)	
+			node->data.cmds = ft_lstnew(&cmd, sizeof(t_ld));
+		ft_lstlast(node->data.cmds)->content;	
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
-		ft_ld_pushback(&node->data.cmd.token, my_tab);
+		
+		ft_ld_pushback(&cmd->token, my_tab);
 	}
 	return (0);
 }
