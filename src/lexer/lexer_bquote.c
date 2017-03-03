@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 22:03:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 15:36:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:48:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 			push(&lexer->stack, lexer->state);
 			return (lexer_lex(alst, lexer));
 		}
-		top_state = *(int*)pop(&lexer->stack)->content;
+		top_state = pop(&lexer->stack);
 		lexer->state = top_state == DQUOTE_BQUOTE ? DQUOTE : DEFAULT;
 		return (lexer_lex(alst, lexer));
 	}

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:33:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 17:33:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		&& node->type != TK_PAREN_CLOSE && node->type != CMD
 		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
-	my_tab = NULL;
 	node = (*ast)->item;
 	node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		DG("add data");
-		my_tab = ft_sstradd(my_tab, token->data);
-		my_tab = ft_sstradd(my_tab, (char *)token->esc);
-		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
+		if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
+		{
+			my_tab[0] = ft_strdup(token->data);
+			my_tab[1] = (char *)dup_char_esc(token->esc, token->size >> 3);
+			my_tab[2] = (char *)dup_char_esc(token->esc2, token->size >> 3);
+			my_tab[3] = NULL;
+		}
 		ft_ld_pushback(&node->data.cmd.token, my_tab);
 	}
 	return (0);

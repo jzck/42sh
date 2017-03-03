@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:44:22 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:48:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:36:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	process_reset(t_process	*p)
 {
-	process_resetfds();
 	p->av = NULL;
+	p->path = NULL;
+	p->execf = NULL;
 	p->pid = 0;
+	/* p->fdin = STDIN; */
+	/* p->fdout = STDOUT; */
+	p->to_close = 0;
 	p->redirs = NULL;
-	p->attributes &= ~(PROCESS_STATE_MASK | PROCESS_TYPE_MASK);
+	p->status = -1;
+	p->attributes = 0;
 }
