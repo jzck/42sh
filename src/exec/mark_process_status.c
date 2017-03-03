@@ -6,17 +6,18 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:50:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:32:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
 
-int		process_mark_status(pid_t pid, int status)
+int		mark_process_status(pid_t pid, int status)
 {
 	t_list		*plist;
 	t_process	*p;
 
+	DG("PMS pid=%i,s=%i", pid, status);
 	if (pid > 1)
 	{
 		if ((plist = job_getprocess(pid)))

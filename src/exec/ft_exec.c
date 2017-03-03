@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:02:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:26:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_execmap	g_execmap[] =
 	{TK_AMP, &exec_ampersand},
 	{TK_AND_IF, &exec_and_if},
 	{TK_OR_IF, &exec_or_if},
-	/* {TK_PIPE, &exec_pipe}, */
+	{TK_PIPE, &exec_pipe},
 	{TK_WHILE, &exec_while},
 	{TK_IF, &exec_if},
 	{TK_ELIF, &exec_elif},
@@ -36,7 +36,6 @@ int		ft_exec(t_btree **ast)
 	int			i;
 
 	i = 0;
-	DG();
 	if (!*ast)
 		return (0);
 	item = (*ast)->item;

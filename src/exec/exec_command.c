@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 17:59:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:49:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ int				exec_cmd(t_btree **ast)
 	job = &data_singleton()->exec.job;
 	process_reset(&p);
 	op = pop(&exec->op_stack);
-	DG("op=%i", op);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
 	if (op == TK_AMP)
 		exec->attrs |= JOB_BG;
 	else if (op == TK_PIPE)
+	{
 		pipe(fds);
+		DG("%i -> PIPE -> %i", fds[PIPE_WRITE], fds[PIPE_READ]);
+	}
 	p.fdin = exec->fdin;
+	p.to_close = fds[PIPE_READ];
 	p.fdout = fds[PIPE_WRITE];
+	p.redirs = cmd->redir;
 	exec->fdin = fds[PIPE_READ];
 	if (IS_PIPESTART(p))
 	{
@@ -69,7 +73,16 @@ int				exec_cmd(t_btree **ast)
 	process_setexec(&p);
 	if (!(launch_process(&p)))
 		ft_lstadd(&job->first_process, ft_lstnew(&p, sizeof(p)));
+	if (fds[PIPE_WRITE] != STDOUT)
+		close(fds[PIPE_WRITE]);
 	if (IS_PIPEEND(p))
 		add_new_job(job);
+	if (JOB_IS_FG(job->attrs))
+		put_job_in_foreground(job, 0);
+	else
+	{
+		job_notify_new(job);
+		put_job_in_background(job, 0);
+	}
 	return (0);
 }

@@ -81,6 +81,7 @@ exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
+exec/mark_process_status.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
@@ -159,7 +160,6 @@ job-control/mark_job_as_running.c\
 job-control/process_cmp_pid.c\
 job-control/process_format.c\
 job-control/process_free.c\
-job-control/process_mark_status.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\

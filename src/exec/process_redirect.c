@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 19:44:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:49:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int		process_redirect(t_process *p)
 		}
 		redirs = redirs->next;
 	}
-	if (p->to_close != 0)
+	if (p->to_close != STDIN)
 		close(p->to_close);
 	if (p->fdin != STDIN)
-		dup2_close(p->fdout, STDOUT);
+		dup2_close(p->fdin, STDIN);
 	if (p->fdout != STDOUT)
 		dup2_close(p->fdout, STDOUT);
 	return (0);
