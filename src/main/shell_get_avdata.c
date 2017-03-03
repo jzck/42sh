@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 17:14:52 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/19 20:56:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 17:33:33 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*shell_get_avdata()
 	data = data_singleton();
 	av = data->argv;
 	i = 1;
-	while (av[i][0] == '-')
+	while (av[i] && av[i][0] == '-')
 	{
 		if (ft_strcmp(av[i], "--") == 0)
 		{

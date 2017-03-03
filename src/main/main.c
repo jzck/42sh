@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:30:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 20:05:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ int		handle_instruction(int fd)
 	parser_init(&parser);
 	token = NULL;
 	ast = NULL;
-	/* str = NULL; */
-	DG("START: state=%i", parser.state);
 	while (1)
 	{
-		if ((ret = readline(fd, get_lexer_stack(lexer) || 
+		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED, &str)))
-		{	
-			ft_putstr("bonjour");
+		{
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF() : 1);
@@ -46,7 +43,7 @@ int		handle_instruction(int fd)
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-		if (get_lexer_stack(lexer))
+		if (get_lexer_stack(lexer) > 1)
 			continue ;
 		lexer.state = DEFAULT;
 		token_print(token);
@@ -61,13 +58,13 @@ int		handle_instruction(int fd)
 		else if (parser.state == ERROR && !SH_IS_INTERACTIVE(data_singleton()->opts))
 			return (error_syntax(&token));
 		else if (parser.state == ERROR)
-			error_syntax(&token);	
+			error_syntax(&token);
 		token = NULL;
 	}
-	DG("succesful parsing:");
+	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
-	/* if (ft_exec(&ast)) */
-	/* 	return (1); */
+	if (ft_exec(&ast))
+		return (1);
 	btree_del(&ast, &ast_free);
 	ft_add_str_in_history(lexer.str);
 	return (0);
@@ -86,6 +83,7 @@ int		get_input_fd()
 		return (fd);
 	else if (data->opts & SH_OPTS_LC)
 	{
+		DG();
 		pipe(fds);
 		fd = fds[PIPE_READ];
 		file = shell_get_avdata();
@@ -95,7 +93,11 @@ int		get_input_fd()
 		return (fd);
 	}
 	else if ((file = shell_get_avdata()))
-		return (open(file, O_RDONLY));
+	{
+		if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			return (-1);
+		return (fd);
+	}
 	else
 		return (STDIN);
 }
@@ -106,9 +108,13 @@ int		main(int ac, char **av)
 
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
-	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s",
-			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
-	fd = get_input_fd();
+	if ((fd = get_input_fd()) < 0)
+	{
+		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, shell_get_avdata());
+		return (1);
+	}
+	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s, fd=[%i]",
+			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
 //		lexer_clean;

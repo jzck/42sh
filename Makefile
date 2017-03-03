@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/03 18:20:32 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/03 20:06:37 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	42sh
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
-D_FLAGS		=	-g 
+D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
 
@@ -72,10 +72,8 @@ exec/exec_else.c\
 exec/exec_for.c\
 exec/exec_func.c\
 exec/exec_if.c\
-exec/exec_less.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
-exec/exec_redir.c\
 exec/exec_semi.c\
 exec/exec_until.c\
 exec/exec_var.c\
@@ -84,9 +82,9 @@ exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
+exec/mark_process_status.c\
 exec/process_redirect.c\
 exec/process_reset.c\
-exec/process_resetfds.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
@@ -138,11 +136,11 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
+job-control/add_new_job.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
 job-control/do_job_notification.c\
-job-control/job_addprocess.c\
 job-control/job_cmp_id.c\
 job-control/job_format.c\
 job-control/job_format_head.c\
@@ -163,7 +161,6 @@ job-control/mark_job_as_running.c\
 job-control/process_cmp_pid.c\
 job-control/process_format.c\
 job-control/process_free.c\
-job-control/process_mark_status.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\

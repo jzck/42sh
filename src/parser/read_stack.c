@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 18:44:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 20:03:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,8 @@ char			*read_state(t_sym current)
 		return ("ALL");
 	if (current == NEWLINE_LIST)
 		return ("NEWLINE_LIST");
+	if (current == CMD)
+		return ("CMD");
 	if (current != 0)
 		return ("NON-DEFINED");
 	if (current == 0)
