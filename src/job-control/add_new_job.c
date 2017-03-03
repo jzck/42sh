@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:44:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:47:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:44:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int		add_new_job(t_job *job)
 	if (JOB_IS_FG(job->attrs))
 		put_job_in_foreground(job, 0);
 	else
+	{
 		job_notify_new(job);
 		put_job_in_background(job, 0);
+	}
 	return (0);
 }

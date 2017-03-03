@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 20:59:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:44:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		put_job_in_foreground(t_job *j, int cont)
 	jobc = &data_singleton()->jobc;
 	tcsetpgrp(STDIN, j->pgid);
 	tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
-
 	if (cont)
 	{
 		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
