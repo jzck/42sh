@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:28:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:02:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_execmap	g_execmap[] =
 	{TK_ELSE, &exec_else},
 	{TK_UNTIL, &exec_until},
 	/* {TK_SUBSHELL, &exec_}, */
-	{TK_WORD, &exec_cmd},
+	{CMD, &exec_cmd},
 	{0, 0},
 };
 
@@ -36,6 +36,7 @@ int		ft_exec(t_btree **ast)
 	int			i;
 
 	i = 0;
+	DG();
 	if (!*ast)
 		return (0);
 	item = (*ast)->item;
@@ -43,8 +44,8 @@ int		ft_exec(t_btree **ast)
 	{
 		if (item->type == g_execmap[i].type)
 		{
-			/* DG("match : %s and %s", */
-			/* read_state(item->type), read_state(g_execmap[i].type)); */
+			DG("match : %s and %s",
+			read_state(item->type), read_state(g_execmap[i].type));
 			return ((*g_execmap[i].f)(ast));
 		}
 		i++;

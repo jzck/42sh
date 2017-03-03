@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:03:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:05:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int		handle_instruction(int fd)
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
 		ltoken = ft_lstlast(token);
-	DG();
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
-	DG();
 		if (get_lexer_stack(lexer) > 1)
 			continue ;
 		lexer.state = DEFAULT;
@@ -63,7 +61,6 @@ int		handle_instruction(int fd)
 			error_syntax(&token);
 		token = NULL;
 	}
-	DG();
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
