@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:35:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 20:02:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 		else if (ft_stris((char *)token->data, &ft_isdigit))
 			redir->word.fd = ft_atoi(token->data);	
 		else
-			redir->word.word = token->data;
+			redir->word.word = ft_strdup(token->data);
 	}
 	return (0);
 }
@@ -78,7 +78,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
-	t_redir		*redir;
+	t_redir		redir;
 
 	DG("add redir");
 	if (!*ast)
@@ -86,8 +86,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	node->type = REDIR;
-	redir = ft_memalloc(sizeof(redir));
-	redir->type = token->type;
-	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(redir, sizeof(redir)));
+	redir.type = token->type;
+	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
 	return (0);
 }

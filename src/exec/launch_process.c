@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:29:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:53:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ int		launch_process(t_process *p)
 	int		pid;
 
 	exec = &data_singleton()->exec;
+	DG("gonna launch [%s]", p->av[0]);
+	DG("fdin=[%i]", p->fdin);
+	DG("fdout=[%i]", p->fdout);
 	if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(*p))
 	{
 		if (process_redirect(p))
 			return (1);
 		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
+		return (0);
 	}
 	else
 	{

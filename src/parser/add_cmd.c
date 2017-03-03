@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 17:33:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 20:04:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		gen_node(ast);
 	else if (isdir_word(ast, lst))
 		return (add_redir_word(ast, lst));
+	else if (isvar(ast, lst))
+		return (add_var(ast, lst));
 	else if (isloop(ast, lst) == 3)
 		return (add_loop_condition(ast, lst));
 	else if (isloop(ast, lst))

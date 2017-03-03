@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:28:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 18:43:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,11 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, FOR_WORDLIST, NEWLINE_LIST},
 	{TK_NEWLINE, SEQUENTIAL_SEP, NEWLINE_LIST},
 	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
-	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
-	{TK_SEMI, TERM, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
 	{TK_SEMI, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{TK_AMP, CMD_SUPERIOR, SEPARATOR_OP},
-	{TK_AMP, TERM, SEPARATOR_OP},
 	{TK_AMP, LIST, SEPARATOR_OP},
+	{TK_AMP, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 
 	{0, 0, 0},
 };
@@ -105,8 +103,8 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 	int			i;
 
 	token = (*lst)->content;
-//	DG("produce stack : %s && token : %s", read_state(stack),
-//	read_state(token->type));
+	DG("produce stack : %s && token : %s", read_state(stack),
+	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
@@ -114,7 +112,7 @@ int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
 		if (token->type == g_prodmatch[i].token
 			&& stack == g_prodmatch[i].stack)
 		{
-//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
+			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:38:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:35:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		job_format_head(t_job *j);
 
 void		job_update_status(void);
 void		mark_job_as_running (t_job *j);
-int			process_mark_status(pid_t pid, int status);
+int			mark_process_status(pid_t pid, int status);
 int			job_is_stopped(int id);
 int			job_is_completed(int id);
 

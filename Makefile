@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/03 18:05:32 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/03 20:06:37 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
+exec/redir_free.c\
 exec/bad_fd.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
@@ -81,6 +82,7 @@ exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/launch_process.c\
+exec/mark_process_status.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_setexec.c\
@@ -159,7 +161,6 @@ job-control/mark_job_as_running.c\
 job-control/process_cmp_pid.c\
 job-control/process_format.c\
 job-control/process_free.c\
-job-control/process_mark_status.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\
@@ -234,6 +235,7 @@ parser/add_loop.c\
 parser/add_redir.c\
 parser/add_sep.c\
 parser/add_subshell.c\
+parser/add_var.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\
