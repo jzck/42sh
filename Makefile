@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/03 16:05:17 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/03 18:20:32 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
+exec/redir_free.c\
 exec/bad_fd.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\

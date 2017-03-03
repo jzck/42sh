@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 15:34:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 19:43:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
-		ft_ld_pushback(&node->data.cmd.token, my_tab);
+		ft_ld_pushback(&node->data.cmd.token, my_tab);			
 	}
 	return (0);
 }

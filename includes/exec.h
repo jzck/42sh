@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 20:20:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 18:39:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char	*ft_findexec(char *path, char *file);
 void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
+void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_astnode *node);
 
