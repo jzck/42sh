@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 17:55:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:03:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,11 @@ int		main(int ac, char **av)
 	shell_init(ac, av);
 	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s",
 			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
-	fd = get_input_fd();
+	if ((fd = get_input_fd() < 0))
+	{
+		ft_printf("{red}%s: No such file or directory\n{eoc}", SHELL_NAME);
+		return (1);
+	}
 	while (handle_instruction(fd) == 0)
 	{
 //		lexer_clean;
