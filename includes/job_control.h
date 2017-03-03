@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 21:01:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:38:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
+# define JOB_IS_BG(j)		(j & JOB_BG)
+# define JOB_IS_FG(j)		(!JOB_IS_BG(j))
 
 # define JOBS_OPTS_L		(1 << 0)
 
@@ -28,7 +30,7 @@ struct	s_job
 {
 	int				id;
 	pid_t			pgid;
-	t_flag			attributes;
+	t_flag			attrs;
 	t_list			*first_process;
 	struct termios	tmodes;
 };

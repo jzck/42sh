@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:01:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 21:02:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:05:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		exec_ampersand(t_btree **ast)
 	exec = &data_singleton()->exec;
 	push(&exec->op_stack, TK_AMP);
 	ft_exec(&(*ast)->left);
-	exec->attrs &= ~JOB_BG;
+	exec->attrs &= ~EXEC_BG;
 	ft_exec(&(*ast)->right);
 
 	/* if (SH_HAS_JOBC(data_singleton()->opts)) */

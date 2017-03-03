@@ -71,7 +71,6 @@ exec/exec_else.c\
 exec/exec_for.c\
 exec/exec_func.c\
 exec/exec_if.c\
-exec/exec_less.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_semi.c\
@@ -135,11 +134,11 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
+job-control/add_new_job.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
 job-control/do_job_notification.c\
-job-control/job_addprocess.c\
 job-control/job_cmp_id.c\
 job-control/job_format.c\
 job-control/job_format_head.c\

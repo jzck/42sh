@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 21:47:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:27:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 int		exec_pipe(t_btree **ast)
 {
-	t_data		*data;
-	t_process	*p;
+	t_exec	*exec;
 
-	DG("exec pipe");
-	data = data_singleton();
-	p = &data->exec.process;
-	p->pipe_count++;
+	exec = &data_singleton()->exec;
+	push(&exec->op_stack, TK_PIPE);
 	ft_exec(&(*ast)->left);
 	ft_exec(&(*ast)->right);
 	/* btree_delone(ast, &ast_free); */

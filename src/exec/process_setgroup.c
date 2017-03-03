@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 20:13:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:34:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		process_setgroup(t_process *p, pid_t pid)
 	if (!j->pgid)
 		j->pgid = pid ? pid : getpid();
 	setpgid(pid, j->pgid);
-	if (pid == 0 && JOB_IS_FG(j->attributes))
+	if (pid == 0 && JOB_IS_FG(j->attrs))
 		tcsetpgrp(STDIN, j->pgid);
 	return (0);
 }

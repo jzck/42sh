@@ -6,21 +6,19 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 21:16:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:36:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char			**token_to_argv(t_cmd *cmd)
+char			**token_to_argv(t_ld *ld)
 {
 	char	**my_tab;
 	int		index;
 	char	**expand;
 	char	**content;
-	t_ld	*ld;
 
-	ld = cmd->token;
 	my_tab = NULL;
 	while (ld)
 	{
@@ -37,33 +35,40 @@ char			**token_to_argv(t_cmd *cmd)
 	return (my_tab);
 }
 
-int				exec_job(t_btree **ast)
+int				exec_cmd(t_btree **ast)
 {
-	t_list		*cmd;
+	t_cmd		*cmd;
+	t_job		*job;
+	t_exec		*exec;
 	t_process	p;
-	t_list		*first_process;
 	int			fds[2];
+	int			op;
 
-	cmd = ((t_astnode *)(*ast)->item)->data;
+	cmd = &((t_astnode *)(*ast)->item)->data.cmd;
 	exec = &data_singleton()->exec;
-	if (pop(&exec.op_stack) == TK_AMP)
-		exec->attrs |= JOB_BG;
-	first_process = NULL;
+	job = &data_singleton()->exec.job;
+	process_reset(&p);
+	op = pop(&exec->op_stack);
+	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
-	while (cmd)
+	if (op == TK_AMP)
+		exec->attrs |= JOB_BG;
+	else if (op == TK_PIPE)
+		pipe(fds);
+	p.fdin = exec->fdin;
+	p.fdout = fds[PIPE_WRITE];
+	exec->fdin = fds[PIPE_READ];
+	if (IS_PIPESTART(p))
 	{
-		p.fdin = fds[PIPE_READ];
-		p.fdout = cmd->next ? pipe(fds) && fds[PIPE_WRITE] : STDOUT;
-		process_reset(&p);
-		if (!(p.av = token_to_argv(cmd->content)))
-			return (1);
-		process_setexec(cmd->content, &p);
-		if (!(launch_process(p)))
-			ft_lstadd(&first_process, ft_lstnew(&p, sizeof(p)));
-		cmd = cmd->next;
+		job->first_process = NULL;
+		job->attrs = EXEC_IS_FG(exec->attrs) ? 0 : JOB_BG;
 	}
-	add_new_job(first_process, EXEC_IS_FG(exec->attrs));
-	ft_lstadd(&jobc->first_job, ft_lstnew(&job, sizeof(*job)));
-//	btree_delone(ast, &ast_free);
+	if (!(p.av = token_to_argv(cmd->token)))
+		return (1);
+	process_setexec(&p);
+	if (!(launch_process(&p)))
+		ft_lstadd(&job->first_process, ft_lstnew(&p, sizeof(p)));
+	if (IS_PIPEEND(p))
+		add_new_job(job);
 	return (0);
 }

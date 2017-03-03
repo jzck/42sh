@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 21:02:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:48:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		data_init(void)
 	data->exec.fd_save[1] = fcntl(1, F_DUPFD_CLOEXEC);
 	data->exec.fd_save[2] = fcntl(2, F_DUPFD_CLOEXEC);
 	data->exec.op_stack = NULL;
-	data->attrs = 0;
+	data->exec.fdin = STDIN;
+	data->exec.attrs = 0;
 
 	/* data->exec.aol_status = NULL; */
 	/* data->exec.aol_search = 0; */
