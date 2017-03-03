@@ -6,13 +6,13 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:46:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 20:28:21 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char			**token_to_argv(t_ld *ld)
+char			**token_to_argv(t_ld *ld, int do_match)
 {
 	char	**my_tab;
 	int		index;
@@ -23,7 +23,7 @@ char			**token_to_argv(t_ld *ld)
 	while (ld)
 	{
 		content = ld->content;
-		if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2])))
+		if ((expand = glob(content[0], (unsigned char *)content[1], (unsigned char *)content[2], do_match)))
 		{
 			index = -1;
 			while (expand[++index])
@@ -65,7 +65,7 @@ int				exec_cmd(t_btree **ast)
 		job->first_process = NULL;
 		job->attrs = EXEC_IS_FG(exec->attrs) ? 0 : JOB_BG;
 	}
-	if (!(p.av = token_to_argv(cmd->token)))
+	if (!(p.av = token_to_argv(cmd->token, 1)))
 		return (1);
 	process_setexec(&p);
 	if (!(launch_process(&p)))

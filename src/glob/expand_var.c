@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 16:09:27 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/24 22:05:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 20:38:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void			insert_var(t_glob *gl, char *pos, char *name, char *content)
 	gl->esc2 = new_esc;
 	ft_strdel(&s1);
 	ft_strdel(&s2);
-	ft_strdel(&content);
 }
 
 static char			*get_name(t_glob *gl, const char *pat)

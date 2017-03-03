@@ -59,7 +59,6 @@ completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
-exec/redir_free.c\
 exec/bad_fd.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
@@ -88,6 +87,7 @@ exec/process_reset.c\
 exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
+exec/redir_free.c\
 exec/redirect_dgreat.c\
 exec/redirect_dless.c\
 exec/redirect_great.c\
@@ -101,6 +101,7 @@ glob/esc_print.c\
 glob/expand_bquote.c\
 glob/expand_brace.c\
 glob/expand_esc.c\
+glob/expand_home.c\
 glob/expand_var.c\
 glob/ft_strsplit_esc.c\
 glob/ft_strsplit_spe.c\

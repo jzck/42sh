@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:33:53 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 16:28:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 20:32:27 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		exec_var(t_btree **ast)
 	char		**av;	
 
 	node = (*ast)->item;
-	/* av = token_to_argv(node); */
+	av = token_to_argv(node->data.cmd.token, 0);
 	builtin_setenv("setenv", av, data_singleton()->local_var);
 	return (0);
 }

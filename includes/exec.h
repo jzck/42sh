@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 20:07:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 20:28:08 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	set_exitstatus(int status, int override);
 void	ast_free(void *data, size_t content_size);
 void	redir_free(void *data, size_t content_size);
 
-char	**token_to_argv(t_ld *ld);
+char	**token_to_argv(t_ld *ld, int do_match);
 
 int		add_new_job(t_job *job);
 

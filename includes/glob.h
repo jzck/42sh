@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 19:03:45 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/03 20:39:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct	s_bquote
 ** interface of glob.
 */
 char			**glob(char *str, unsigned char *esc,
-										unsigned char *dbl_esc);
+										unsigned char *dbl_esc, int do_match);
 void	 		esc_print(char *str, unsigned char *esc);
 
 /*
@@ -96,6 +96,7 @@ void			modify_esc_split(unsigned char *esc_dest,
 void			expand_brace(t_glob *tglob);
 void			expand_bquote(t_glob *gl);
 void			expand_var(t_glob *tglob);
+void			expand_home(t_glob *gl, char *str);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
 int				dir_research(t_glob *tglob, char *p, char *pat, int rec);
 char			**gen_tab(const char *pat, const unsigned char *esc,
