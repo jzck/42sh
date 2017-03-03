@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/02 21:53:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 14:33:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int			add_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
-	t_cmd		*cmd;
-	t_redir		*redir;
 	char		**my_tab;
 
 	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
@@ -47,31 +45,19 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	else if (isfunc(ast, lst))
 		return (add_func_cmd(ast, lst));
 	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
-		&& node->type != TK_PAREN_CLOSE && node->type != JOB
+		&& node->type != TK_PAREN_CLOSE && node->type != CMD
 		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
 	my_tab = NULL;
 	node = (*ast)->item;
-	node->type = JOB;
+	node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		DG("add data");
 		my_tab = ft_sstradd(my_tab, token->data);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc);
 		my_tab = ft_sstradd(my_tab, (char *)token->esc2);
-		if (!node->data.cmds)
-		{
-			DG("new cmd");
-			cmd = ft_memalloc(sizeof(cmd));
-			ft_ld_new(&cmd->token, my_tab);
-			redir = ft_memalloc(sizeof(redir));
-			ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
-			ft_lsteadd(&node->data.cmds, ft_lstnew(&cmd, sizeof(t_ld)));
-		}
-		else
-			cmd = ft_lstlast(node->data.cmds)->content;
-		DG("again");
-		ft_ld_pushback(&cmd->token, my_tab);
+		ft_ld_pushback(&node->data.cmd.token, my_tab);
 	}
 	return (0);
 }

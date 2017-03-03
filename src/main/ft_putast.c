@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 20:39:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 14:34:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*ft_putast(void *nodein)
 	t_astnode	*node;
 	node = nodein;
 	
-	if (node->type == JOB)
-		return ("JOB");
+	if (node->type == CMD)
+		return ("CMD");
 	if (node->type == REDIR)
 		return ("REDIR");
 	if (node->type == CLOSE_LIST)

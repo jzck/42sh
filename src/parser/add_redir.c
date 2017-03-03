@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/02 22:01:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/03 14:35:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			isdir_sep(t_btree **ast, t_list **list)
 	if (*ast)
 	{
 		node = (*ast)->item;	
-		if (node->type == JOB
+		if (node->type == CMD
 			&& (token->type == TK_LESS || token->type == TK_GREAT 
 			|| token->type == TK_GREATAND || token->type == TK_LESSAND
 			|| token->type == TK_DLESS || token->type == TK_DGREAT))
@@ -47,7 +47,7 @@ int			isdir_word(t_btree **ast, t_list **list)
 	{
 		node = (*ast)->item;
 		if (token->type == TK_WORD && node->type == REDIR)
-			return ((node->type = JOB));
+			return ((node->type = CMD));
 	}
 	return (0);
 }
@@ -57,19 +57,17 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	t_cmd		*cmd;	
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	cmd = (ft_lstlast(node->data.cmds))->content;
-	if (cmd->redir)
+	if (node->data.cmd.redir)
 	{
 		DG("add file");
-		redir =	(ft_lstlast(cmd->redir))->content;
+		redir =	(ft_lstlast(node->data.cmd.redir))->content;
 		if (redir->type == TK_DLESS)
 			redir->word.word = NULL;
-//		else if (ft_stris((char *)token->data, &ft_isdigit))
-//			redir->word.fd = ft_atoi(token->data);	
+		else if (ft_stris((char *)token->data, &ft_isdigit))
+			redir->word.fd = ft_atoi(token->data);	
 		else
 			redir->word.word = token->data;
 	}
@@ -81,7 +79,6 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	t_cmd		*cmd;
 
 	DG("add redir");
 	if (!*ast)
@@ -91,21 +88,6 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	node->type = REDIR;
 	redir = ft_memalloc(sizeof(redir));
 	redir->type = token->type;
-	if (!node->data.cmds)
-	{
-		cmd = ft_memalloc(sizeof(cmd));
-		cmd->token = NULL;
-		cmd->redir = NULL; 
-		node->data.cmds = ft_lstnew(&cmd, sizeof(cmd));
-	}
-	cmd = ft_lstlast(node->data.cmds)->content;
-	DG("still");		
-	if (!cmd->redir)
-		cmd->redir = ft_lstnew(redir, sizeof(redir));
-	else
-	{
-		DG("flag");
-		ft_lsteadd(&cmd->redir, ft_lstnew(redir, sizeof(redir)));
-	}
+	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(redir, sizeof(redir)));
 	return (0);
 }
