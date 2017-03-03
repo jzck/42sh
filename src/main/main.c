@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:05:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:37:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int		get_input_fd()
 	}
 	else if ((file = shell_get_avdata()))
 	{
-		if (fd = open(file, O_RDONLY))
+		if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			return (-1);
 		return (fd);
 	}
 	else
@@ -113,7 +114,7 @@ int		main(int ac, char **av)
 	shell_init(ac, av);
 	if ((fd = get_input_fd()) < 0)
 	{
-		ft_printf("{red}%s: No such file or directory\n{eoc}", SHELL_NAME);
+		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, shell_get_avdata());
 		return (1);
 	}
 	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s, fd=[%i]",

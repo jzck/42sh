@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:02:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:46:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ int				exec_cmd(t_btree **ast)
 	if (op == TK_AMP)
 		exec->attrs |= JOB_BG;
 	else if (op == TK_PIPE)
-	{
 		pipe(fds);
-		DG("%i -> PIPE -> %i", fds[PIPE_WRITE], fds[PIPE_READ]);
-	}
 	p.fdin = exec->fdin;
 	p.to_close = fds[PIPE_READ];
 	p.fdout = fds[PIPE_WRITE];
