@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */ /*                                                        :::      ::::::::   */
+/*                                                                            */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
@@ -82,13 +82,6 @@ int		aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state);
 int		push_stack(t_list **stack, t_sym new_sym);
 int		pop_stack(t_list **stack, t_sym erase_sym);
 
-/*int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst);
-int		eval_sym(t_sym stack, t_sym new_sym);
-int		aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state);
-
-int		push_stack(t_sym *stack, t_sym new_sym);
-int		pop_stack(t_sym **stack, t_sym erase_sym);
-*/
 int		error_syntax(t_list **token, t_parser *parser, t_btree **ast);
 int		error_EOF(t_list **token, t_parser *parser, t_btree **ast);
 
@@ -113,6 +106,7 @@ int		build_tree(t_btree **ast, t_list **lst);
 
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);
+
 int		add_file(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
@@ -132,10 +126,15 @@ int		add_func_sep(t_btree **ast, t_list **lst);
 int		add_one_func(t_btree **ast, t_list **lst);
 int		add_pipe(t_btree **ast, t_list **lst);
 int		add_var(t_btree **ast, t_list **lst);
+int		add_null(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
+int		isloop_condition(t_btree **ast, t_list **lst);
 int		iscase(t_btree **ast, t_list **lst);
+int		iscase_pattern(t_btree **ast, t_list **lst);
+int		iscase_branch(t_btree **ast, t_list **lst);
 int		iscondition(t_btree **ast, t_list **lst);
+int		iscondition_branch(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
 int		isfunc(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
@@ -143,9 +142,19 @@ int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_btree **ast, t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
 int		isvar(t_btree **ast, t_list **list);
+int		isnull(t_btree **ast, t_list **list);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
+int		superflous_token(t_btree **ast, t_list **list);
+
+struct s_distrostree
+{
+	int	(*test)(t_btree **ast, t_list **lst);
+	int	(*add)(t_btree **ast, t_list **lst);
+};
+
+extern t_distrostree g_distrostree[];
 
 union	u_word
 {

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 20:07:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 19:50:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_prodmatch		t_prodmatch;
 typedef struct s_stackmatch		t_stackmatch;
 typedef struct s_errormatch		t_errormatch;
 typedef struct s_treematch		t_treematch;
+typedef struct s_distrostree	t_distrostree;
 
 t_data		*data_singleton();
 

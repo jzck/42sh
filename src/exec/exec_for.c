@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 20:42:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 16:26:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/04 18:17:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int			exec_for(t_btree **ast)
 	t_list		*temp;
 //	char		**av = NULL;
 	char		*var;
-	
-	
+		
 	node = (*ast)->item;
 	temp = node->data.wordlist;
 	var = temp->content;

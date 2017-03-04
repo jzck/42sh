@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:28:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 21:20:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,18 @@ int			gen_node(t_btree **ast)
 	}
 	return (0);
 }	
+
+int			isnull(t_btree **ast, t_list **lst)
+{
+	(void)ast;
+	(void)lst;
+	return (-1);
+}
+
+int			add_null(t_btree **ast, t_list **lst)
+{
+	(void)ast;
+	(void)lst;
+	return (-1);
+}
+

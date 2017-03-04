@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 18:01:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 22:05:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,32 @@ int		isloop(t_btree **ast, t_list **lst)
 
 	node = NULL;
 	token = (*lst)->content;
+	DG("isloop");
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if (node->type == TK_FOR && token->type == TK_WORD && node->pattern == 0)
-			return (3);
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
 			|| node->type == TK_AMP) && isloop(&(*ast)->right, lst) == 1)
 			return (1);
-		if ((node->type == TK_WHILE || node->type == TK_UNTIL 
-			|| node->type == TK_FOR) && node->full == 1)
-			return (2);
 		if ((node->type == TK_WHILE || node->type == TK_UNTIL
 			|| node->type == TK_FOR) && node->full == 0)
+			return (1);
+	}
+	return (0);
+}
+
+int		isloop_condition(t_btree **ast, t_list **lst)
+{
+	t_astnode	*node;
+	t_token		*token;
+
+	node = NULL;
+	token = (*lst)->content;
+	if (*ast)
+	{
+		node = (*ast)->item;
+		if (node->type == TK_FOR && token->type == TK_WORD 
+			&& node->pattern == 0)
 			return (1);
 	}
 	return (0);

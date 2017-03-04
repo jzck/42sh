@@ -1,6 +1,4 @@
 case $rental in
-	("bus") case $rental in
-			("yolo") echo bonjour				
-			esac ;;
-	("van") echo yolo ;;
+	( "bus" ) echo Hello world ;;
+	( "van" ) echo Comment va ? ;;
 esac

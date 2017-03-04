@@ -1,4 +1,4 @@
-while pwd
+while ls
 do
 	while cat rwgwghe
 	do

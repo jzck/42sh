@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_case.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/04 21:54:21 by ariard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 int		iscase(t_btree **ast, t_list **lst)
@@ -10,14 +22,42 @@ int		iscase(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
+		if (node->type == TK_CASE || node->type == TK_PAREN_OPEN)
+			return (1);
+	}
+	return (0);
+}
+
+int		iscase_pattern(t_btree **ast, t_list **lst)
+{
+	t_astnode	*node;
+	t_token		*token;
+
+	node = NULL;
+	token = (*lst)->content;
+	if (*ast)
+	{
+		node = (*ast)->item;
 		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN)
 			&& token->type == TK_WORD && node->pattern == 0)
 			return (1);
+	}
+	return (0);
+}
+
+int		iscase_branch(t_btree **ast, t_list **lst)
+{
+	t_astnode	*node;
+	t_token		*token;
+
+	node = NULL;
+	token = (*lst)->content;
+	if (*ast)
+	{
+		node = (*ast)->item;
 		if ((node->type == TK_PAREN_OPEN || node->type == TK_CASE)
 			&& node->nest == 0 && token->type == TK_PAREN_OPEN)
-			return (3);
-		if (node->type == TK_CASE || node->type == TK_PAREN_OPEN)
-			return (2);
+			return (1);
 	}
 	return (0);
 }
@@ -42,11 +82,6 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 		return (0);
 	return (add_cmd(&(*ast)->right, lst));
 }	
-
-int		add_case_sep(t_btree **ast, t_list **lst)
-{
-	return (add_sep(&(*ast)->right, lst));
-}
 
 int		add_pattern(t_btree **ast, t_list **lst)
 {

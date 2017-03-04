@@ -6,86 +6,50 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 22:05:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 21:31:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-t_distrostree	g_distrostree[] =
-{
-	{&superflous_token, &add_null},
-	{&isdir_sep, &add_redir_type},
-	{&isdir_word, &add_redir_word},
-	{&isvar, &add_var},
-	{&isloop_condition, &add_loop_condition},
-	{&isloop, &add_loop_cmd},
-	{&iscondition_branch, &add_branch},
-	{&iscondition, &add_condition_cmd},
-	{&iscase_pattern, &add_pattern},
-	{&iscase_branch, &add_branch},
-	{&iscase, &add_case_cmd},
-	{&issubshell, &add_subshell_cmd},
-	{&isfunc, &add_func_cmd},
-	{&isnull, &add_null},
-
-};
-
-int					superflous_token(t_btree **ast, t_list **lst)
-{
-	t_token	*token;
-
-	(void)ast;
-	DG("superflous token");
-	if (*lst)
-	{
-		token = (*lst)->content;
-		if (token->type == TK_IN || token->type == TK_PAREN_OPEN)
-			return (1);
-	}
-	return (0);
-}
-
-static int			no_del_token(t_btree **ast, t_list **lst)
-{
-	t_astnode	*node;
-
-	(void)lst;
-	node = NULL;
-	if (*ast)
-	{
-		node = (*ast)->item;
-		if (node->type != TK_DO && node->type != TK_THEN && node->type != TK_PAREN_CLOSE
-			&& node->type != CMD && node->type != REDIR)
-			return (1);
-	}
-	return (0);
-}
 
 int			add_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
 	char		**my_tab;
-	int			i;
 
-	i = 0;
-	DG("add cmd");
-	while (i < 14)
-	{
-		DG("test");
-		if (g_distrostree[i].test(ast, lst) == 1)
-		{
-			DG("add : %d", i);
-			return (g_distrostree[i].add(ast, lst));
-		}
-		i++;
-	}
-	if (!*ast)
+	if ((token = (*lst)->content)->type == TK_IN || token->type == TK_PAREN_OPEN)
+		return (0);
+	else if (isdir_sep(ast, lst))
+		return (add_redir_type(ast, lst));
+	else if (!*ast)
 		gen_node(ast);
-	else if (no_del_token(ast, lst))
+	else if (isdir_word(ast, lst))
+		return (add_redir_word(ast, lst));
+	else if (isvar(ast, lst))
+		return (add_var(ast, lst));
+	else if (isloop(ast, lst) == 3)
+		return (add_loop_condition(ast, lst));
+	else if (isloop(ast, lst))
+		return (add_loop_cmd(ast, lst));
+	else if (iscondition(ast, lst) == 1)
+		return (add_condition_cmd(ast, lst));
+	else if (iscondition(ast, lst) == 2)
+		return (add_branch(ast, lst));
+	else if (iscase(ast, lst) == 1)
+		return (add_pattern(ast, lst));
+	else if (iscase(ast, lst) == 2)
+		return (add_case_cmd(ast, lst));
+	else if (iscase(ast, lst) == 3)
+		return (add_branch(ast, lst));
+	else if (issubshell(ast, lst))
+		return (add_subshell_cmd(ast, lst));
+	else if (isfunc(ast, lst))
+		return (add_func_cmd(ast, lst));
+	else if ((node = (*ast)->item)->type != TK_DO && node->type != TK_THEN
+		&& node->type != TK_PAREN_CLOSE && node->type != CMD
+		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
-	token = (*lst)->content;
 	node = (*ast)->item;
 	if (token->type != TK_WORD)
 		node->type = token->type;
@@ -93,6 +57,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
+		DG("add data");
 		if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
 		{
 			my_tab[0] = ft_strdup(token->data);
