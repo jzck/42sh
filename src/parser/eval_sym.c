@@ -1020,15 +1020,17 @@ t_stackmatch	g_stackmatch[] =
 	{0, 0},
 };
 
-int			eval_sym(t_sym stack, t_sym new_sym)
+int			eval_sym(t_list **stack, t_sym new_sym)
 {
-	int				i;
+	t_sym		*head;	
+	int		i;
 
-	DG("eval head %s && sym %s", read_state(stack), read_state(new_sym));
+	head = (*stack)->content;
+	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
-		if (new_sym == g_stackmatch[i].top && stack == g_stackmatch[i].under)
+		if (new_sym == g_stackmatch[i].top && *head == g_stackmatch[i].under)
 			return (0);
 		i++;
 	}

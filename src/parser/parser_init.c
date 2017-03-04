@@ -16,6 +16,8 @@ void		parser_init(t_parser *parser)
 {
 	parser->state = SUCCESS;
 	parser->new_sym = ft_memalloc(sizeof(t_sym));
-	parser->stack = ft_memalloc(sizeof(t_sym) * 1000);
-	push_stack(parser->stack, LINEBREAK);
+	push_stack(&parser->stack, TERMINUS);
+	push_stack(&parser->stack, LINEBREAK);
+//	parser->stack = ft_memalloc(sizeof(t_sym) * 1000);
+//	push_stack(parser->stack, LINEBREAK);
 }

@@ -19,37 +19,41 @@ static void		insert_linebreak(t_list **lst)
 	token->type = LINEBREAK;
 }
 
-static int		end_instruction(t_sym sym)
+static int		end_instruction(t_list **stack)
 {
-	if (sym == CMD_SUPERIOR || sym == PIPE_SEMI_SEQUENCE
-		|| sym == COMPLETE_COMMANDS || sym == END_COMMAND)
+	t_sym		*head;
+	
+	head = (*stack)->content;
+	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE
+		|| *head == COMPLETE_COMMANDS || *head == END_COMMAND)
 		return (1);
 	return (0);
 }
 
 int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
+	t_sym		*head;
+
 	while (*token)
 	{
-		produce_sym(*parser->stack, parser->new_sym, token);
+		produce_sym(&parser->stack, parser->new_sym, token);
 		DG("new sym %s", read_state(*parser->new_sym));
-		DG("number of token to treat: %d", ft_lstsize(*token));
-		if (eval_sym(*parser->stack, *parser->new_sym))
+		if (eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		else
 		{
 			aggregate_sym(&parser->stack, parser->new_sym, &parser->state);
-			push_stack(++parser->stack, *parser->new_sym);
+			push_stack(&parser->stack, *parser->new_sym);
 		}
 //		ft_read_stack(parser->stack);
 		DG("\n");
-		if (*parser->stack == PROGRAM)
+		if (*(head = (parser->stack)->content) == PROGRAM)
 			parser->state = SUCCESS;
 		else
 			parser->state = UNDEFINED;
 		build_tree(ast, token);
 	//	btree_print(STDBUG, *ast, &ft_putast);
-		if ((end_instruction(*parser->stack) && !(*token)->next))
+		if ((end_instruction(&parser->stack) && !(*token)->next))
 			insert_linebreak(token);
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);

@@ -99,20 +99,22 @@ t_prodmatch		g_prodmatch[] =
 	{0, 0, 0},
 };
 
-int		produce_sym(t_sym stack, t_sym *new_sym, t_list **lst)
+int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 {
 	t_token		*token;
-	int			i;
+	t_sym		*head;
+	int		i;
 
 	token = (*lst)->content;
-	DG("produce stack : %s && token : %s", read_state(stack),
+	head = (*stack)->content;
+	DG("produce stack : %s && token : %s", read_state(*head),
 	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
 	{
 		if (token->type == g_prodmatch[i].token
-			&& stack == g_prodmatch[i].stack)
+			&& *head == g_prodmatch[i].stack)
 		{
 			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;

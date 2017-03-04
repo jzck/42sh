@@ -12,8 +12,10 @@
 
 #include "parser.h"
 
-int		push_stack(t_sym *stack, t_sym new_sym)
+//int		push_stack(t_sym *stack, t_sym new_sym)
+int		push_stack(t_list **stack, t_sym sym)
 {
-	*stack = new_sym;
+	ft_lstadd(stack, ft_lstnew(&sym, sizeof(sym)));
+//	*stack = sym;
 	return (0);
 }

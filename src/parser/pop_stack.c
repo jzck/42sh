@@ -12,15 +12,29 @@
 
 #include "parser.h"
 
-int			pop_stack(t_sym **stack, t_sym erase_sym)
+int			pop_stack(t_list **stack, t_sym erase_sym)
 {
-	t_sym	*temp;
+	t_sym		*head;
+	t_list		*temp;
 
-//	DG("pop until :%s", read_state(erase_sym));
+	DG("pop until :%s", read_state(erase_sym));
+	head = (*stack)->content;
+	while ((*stack) && *head != erase_sym)
+	{
+		temp = *stack;
+		(*stack) = (*stack)->next;
+		ft_lstdelone(&temp, NULL);
+		head = (*stack)->content;
+	}
+	temp = *stack;
+	(*stack) = (*stack)->next;
+	ft_lstdelone(&temp, NULL);
+/*	
+	DG("pop until :%s", read_state(erase_sym));
 	temp = *stack; 
 	while (*temp != erase_sym)
 		*temp-- = 0;
 	*temp-- = 0;
 	*stack = temp;
-	return (0);
+ */	return (0);
 }	

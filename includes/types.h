@@ -162,6 +162,7 @@ enum	e_sym
 	REDIR,
 	CMD,
 	ALL = 200,
+	TERMINUS = 300,
 };
 
 #endif
