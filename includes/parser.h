@@ -89,8 +89,8 @@ int		aggregate_sym(t_sym **stack, t_sym *new_sym, t_parstate *state);
 int		push_stack(t_sym *stack, t_sym new_sym);
 int		pop_stack(t_sym **stack, t_sym erase_sym);
 */
-int		error_syntax(t_list **token);
-int		error_EOF(void);
+int		error_syntax(t_list **token, t_parser *parser, t_btree **ast);
+int		error_EOF(t_list **token, t_parser *parser, t_btree **ast);
 
 int		ft_read_stack(t_sym *stack);
 char	*read_state(t_sym current);

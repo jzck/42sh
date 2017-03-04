@@ -33,7 +33,8 @@ int		handle_instruction(int fd)
 		{
 			if (ret == -1)
 				return (-1);
-			return (parser.state == UNDEFINED ? error_EOF() : 1);
+			return (parser.state == UNDEFINED ? error_EOF(&token,
+			&parser, &ast) : 1);
 		}
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
@@ -56,16 +57,15 @@ int		handle_instruction(int fd)
 		if (parser.state == SUCCESS)
 			break ;
 		else if (parser.state == ERROR && !SH_IS_INTERACTIVE(data_singleton()->opts))
-			return (error_syntax(&token));
+			return (error_syntax(&token, &parser, &ast));
 		else if (parser.state == ERROR)
-			error_syntax(&token);
-		token = NULL;
+			error_syntax(&token, &parser, &ast);
 	}
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
-	btree_del(&ast, &ast_free);
+	instruction_free(&token, &parser, &ast);
 	ft_add_str_in_history(lexer.str);
 	return (0);
 }

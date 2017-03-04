@@ -78,6 +78,9 @@ void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
 
+int	instruction_free(t_list **token, t_parser *parser,
+	t_btree **ast);
+
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);
 

@@ -50,13 +50,16 @@ t_errormatch	g_errormatch[] =
 	{0, NULL},
 };
 
-int				error_syntax(t_list **lst)
+int				error_syntax(t_list **lst, t_parser *parser,
+				t_btree **ast)
 {	
 	t_token		*token;
 	int			i;
-
+	int		temp;
+	
 	token = (*lst)->content;
 	i = 0;
+	temp = 0;
 	while (g_errormatch[i].token)
 	{
 		if (g_errormatch[i].token == token->type)
@@ -64,16 +67,20 @@ int				error_syntax(t_list **lst)
 			ft_putstr_fd("syntax error near unexpected token `", 2);
 			ft_putstr_fd(g_errormatch[i].error, 2);
 			ft_putstr_fd("'\n", 2);
-			return (1);
+			temp = 1;
+			break ;
 		}
 		i++;
 	}
-	ft_putstr_fd("grammar error, notify ariard", 2);
+	instruction_free(lst, parser, ast);
+	if (temp == 0)
+		ft_putstr_fd("grammar error, notify ariard", 2);
 	return (1);
 }
 
-int			error_EOF(void)
+int			error_EOF(t_list **lst, t_parser *parser, t_btree **ast)
 {
 	ft_putstr_fd("syntax error near unexpected EOF", 2);
+	instruction_free(lst, parser, ast);	
 	return (1);
 }

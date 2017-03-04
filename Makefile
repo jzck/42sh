@@ -228,6 +228,7 @@ main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
+main/instruction_free.c\
 parser/add_case.c\
 parser/add_cmd.c\
 parser/add_condition.c\
