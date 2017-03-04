@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:03:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/04 17:16:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ int		ft_exec(t_btree **ast)
 	while (g_execmap[i].type)
 	{
 		if (item->type == g_execmap[i].type)
-		{
-			DG("match : %s and %s",
-			read_state(item->type), read_state(g_execmap[i].type));
 			return ((*g_execmap[i].f)(ast));
-		}
 		i++;
 	}
 	return (0);

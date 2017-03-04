@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:55:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 15:56:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/04 18:00:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ int		exec_else(t_btree **ast)
 
 	exec = &data_singleton()->exec;
 	if (EXEC_IS_IF_BRANCH(exec->attrs))
-	/* if (data_singleton()->exec.process.if_branch == 0) */
-	{
-		exec->attrs |= EXEC_IF_BRANCH;
-		/* data_singleton()->exec.process.if_branch = 1; */
-		ft_exec(&(*ast)->right);
-	}
+		return (0);
+	exec->attrs |= EXEC_IF_BRANCH;
+	ft_exec(&(*ast)->left);
 	return (0);
 }

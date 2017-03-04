@@ -1,11 +1,11 @@
-while ls
+while pwd
 do
-	while ls
+	while cat rwgwghe
 	do
-		pwd
+		echo Hello World
 	done
-	while ls
+	while pwd
 	do
-		pwd
+		echo Bonjour ca va
 	done
 done

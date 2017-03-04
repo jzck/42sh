@@ -1,10 +1,9 @@
-if ls
+if cat wef4eeef
 then
-	ls
-elif ls
+	echo Conditon 1
+elif cat yulu
 then
-	ls
-elif ls
-then
-	ls
+	echo Condition 2
+else
+	echo Condition 3
 fi

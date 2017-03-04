@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 20:04:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 17:08:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		&& node->type != REDIR)
 		return (add_cmd(&(*ast)->right, lst));
 	node = (*ast)->item;
-	node->type = CMD;
+	if (token->type != TK_WORD)
+		node->type = token->type;
+	else
+		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
 		DG("add data");

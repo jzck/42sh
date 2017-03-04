@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/04 16:49:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 17:35:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int		handle_instruction(int fd)
 			return (parser.state == UNDEFINED ? error_EOF(&token,
 			&parser, &ast) : 1);
 		}
-		DG("after readline %s", str);
-		DG("in lexer %s", lexer.str);
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
 		else if (get_lexer_stack(lexer) == DLESS)
 			lexer.state = DLESS;
-		DG("after readline %s", lexer.str);
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
