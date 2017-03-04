@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:39:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 16:35:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/04 16:16:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ t_aggrematch		g_aggrematch[] =
 	{CMD_SUFFIX, CMD_WORD, SIMPLE_COMMAND, CMD_PREFIX},
 	{CMD_SUFFIX, CMD_NAME, SIMPLE_COMMAND, CMD_NAME},
 	{CMD_SUFFIX, CMD_SUPERIOR, CMD_SUPERIOR, CMD_SUPERIOR},
+	{CMD_SUFFIX, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
 //to abstract
 	{CMD_PREFIX, LINEBREAK, SIMPLE_COMMAND, 0},
 	{CMD_PREFIX, TK_PAREN_OPEN, SIMPLE_COMMAND, 0},

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 17:15:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:46:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
 # define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
 # define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
+# define SH_NO_INTERACTIVE(b)	!(b & SH_INTERACTIVE)
 
 # define SH_MSG_NOJOBC	"no job-control"
 
