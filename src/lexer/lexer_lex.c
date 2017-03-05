@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:28:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:32:09 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
+	ft_putnbr(__LINE__);
+	ft_putendl(__FILE__);
 	if (lexer->str[lexer->pos] == 0)
 		return (lexer_end(alst, lexer));
 	if (!*alst)
