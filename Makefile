@@ -179,7 +179,7 @@ lexer/lexer_assignement_word.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
-lexer/lexer_curly_brackets.c\
+lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dless.c\
