@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:05:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:18:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int		set_process(t_process *p, t_btree *ast)
 	process_reset(p);
 	exec = &data_singleton()->exec;
 	op = pop(&exec->op_stack);
+	if ((EXEC_IS_AND_IF(exec->attrs)
+		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") != 0)
+	|| (EXEC_IS_OR_IF(exec->attrs)
+		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
+			return (1);
 	if (!(p->av = token_to_argv(cmd->token, 1)))
 		return (1);
 	fds[PIPE_WRITE] = STDOUT;
