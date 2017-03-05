@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:32:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:08:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int		launch_process(t_process *p)
 		}
 		process_setgroup(p, 0);
 		process_setsig();
-		DG("gonna redirect");
 		if (process_redirect(p))
 			exit (1);
+		if (p->attributes & PROCESS_BUILTIN)
+			exit((*p->execf)(p->path, p->av, data_singleton()->env));
 		(*p->execf)(p->path, p->av, data_singleton()->env);
-		ft_dprintf(2, "{red}%s: internal excve error{eoc}\n", SHELL_NAME);
+		ft_dprintf(2, "{red}%s: internal execve error on %s{eoc}\n", SHELL_NAME, p->av[0]);
 	}
 	else if (pid > 0)
 	{
