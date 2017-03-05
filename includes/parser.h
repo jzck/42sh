@@ -161,7 +161,7 @@ struct	s_redir
 	t_flag	type;
 	int		n;
 	char	*word;
-	int		close;
+	/* int		close; */
 };
 
 struct	s_cmd
