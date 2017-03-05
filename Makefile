@@ -239,6 +239,7 @@ parser/add_redir.c\
 parser/add_sep.c\
 parser/add_subshell.c\
 parser/add_var.c\
+parser/add_number.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\

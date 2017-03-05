@@ -125,6 +125,7 @@ int		add_one_func(t_btree **ast, t_list **lst);
 int		add_pipe(t_btree **ast, t_list **lst);
 int		add_var(t_btree **ast, t_list **lst);
 int		add_null(t_btree **ast, t_list **lst);
+int		add_ionumbr(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
 int		isloop_condition(t_btree **ast, t_list **lst);
@@ -141,6 +142,7 @@ int		isdir_sep(t_btree **ast, t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
 int		isvar(t_btree **ast, t_list **list);
 int		isnull(t_btree **ast, t_list **list);
+int		isionumber(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
@@ -154,17 +156,11 @@ struct s_distrostree
 
 extern t_distrostree g_distrostree[];
 
-union	u_word
-{
-	char	*word;
-	int		fd;
-};
-
 struct	s_redir
 {
 	t_flag	type;
 	int		n;
-	t_word	word;
+	char	*word;
 	int		close;
 };
 

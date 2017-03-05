@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 22:42:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:07:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		redirect_great(t_redir* redir)
 	int		fdnew;
 
 	fdnew = redir->n;
-	if ((fdold = open(redir->word.word,
+	if ((fdold = open(redir->word,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 	{
 		DG("open errno=%i", errno);
