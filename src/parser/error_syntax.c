@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 16:50:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 18:23:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_errormatch	g_errormatch[] =
 	{TK_FOR, "for"},
 	{TK_LBRACE, "{"},
 	{TK_RBRACE, "}"},
+	{TK_PAREN_OPEN, "("},
+	{TK_PAREN_CLOSE, ")"},
 	{TK_BANG, "!"},
 	{TK_IN, "in"},
 	{0, NULL},
