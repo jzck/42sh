@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 20:56:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:04:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_treematch			g_treematch[] =
 	{TK_PAREN_OPEN, &add_cmd},
 	{TK_PAREN_CLOSE, &add_cmd},
 	{TK_FOR, &add_cmd},
+	{TK_NAME, &add_cmd},
 	{TK_ASSIGNEMENT_WORD, &add_cmd},
 	{SUBSHELL, &add_cmd},
 	{TK_LBRACE, &add_cmd},

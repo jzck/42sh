@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:12:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:54:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:12:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int		redirect_greatand(t_redir *redir)
 	int		fdold;
 	int		fdnew;
 
+	(void)redir;
+	(void)fdold;
+	(void)fdnew;
 	DG("redir greatand");
+	/*
 	if (redir->close)
 	{
 		close(redir->n);
@@ -33,5 +37,6 @@ int		redirect_greatand(t_redir *redir)
 		dup2_close(fdold, fdnew);
 	else
 		return (bad_fd(fdold));
+		*/
 	return (0);
 }

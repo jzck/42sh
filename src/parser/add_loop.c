@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 15:33:35 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/05 16:46:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		isloop_condition(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if (node->type == TK_FOR && token->type == TK_WORD 
+		if (node->type == TK_FOR && (token->type == TK_WORD || token->type == TK_NAME) 
 			&& node->pattern == 0)
 			return (1);
 	}
@@ -94,7 +94,8 @@ int		add_loop_condition(t_btree **ast, t_list **lst)
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	ft_lsteadd(&node->data.wordlist, ft_lstnew(ft_strdup(token->data),
+	DG("add word");
+	ft_lsteadd(&node->data.cmd.wordlist, ft_lstnew(ft_strdup(token->data),
 		ft_strlen(token->data)));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 21:20:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:56:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			gen_node(t_btree **ast)
 		ft_bzero((void *)&((t_astnode *)(*ast)->item)->data, sizeof(t_astdata));
 		((t_astnode *)(*ast)->item)->nest = 0;
 		((t_astnode *)(*ast)->item)->full = 0;
-		((t_astnode *)(*ast)->item)->type = 0;
+		((t_astnode *)(*ast)->item)->type = TK_NEWLINE;
 		((t_astnode *)(*ast)->item)->pattern = 0;
 	}
 	return (0);

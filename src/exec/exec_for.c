@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 20:42:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 18:17:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:22:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			exec_for(t_btree **ast)
 	char		*var;
 		
 	node = (*ast)->item;
-	temp = node->data.wordlist;
+	temp = node->data.cmd.wordlist;
 	var = temp->content;
 	builtin_setenv("setenv", (char*[]){var, 0}, data_singleton()->local_var);
 	while (temp)

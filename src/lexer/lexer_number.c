@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 17:15:52 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:03:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,3 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 		return (lexer_lex(alst, lexer));
 	}
 }
-/*
-int		lexer_number(t_list **alst, t_lexer *lexer)
-{
-	t_token		*token;
-	t_lexstate	state;
-
-	token = (*alst)->content;
-	token->type = TK_IO_NUMBER;
-	if ((state = get_state_global(lexer))
-			|| (state = get_state_redir(lexer)))
-	{
-		lexer->state = state;
-		return (lexer_lex(alst, lexer));
-	}
-	else if (ft_isdigit(lexer->str[lexer->pos])
-		&& (lexer->str[lexer->pos + 1] == '>' || lexer->str[lexer->pos + 1] == '<'))
-	{
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
-		return (lexer_number(alst, lexer));
-	}
-	else
-	{
-		token->type = TK_WORD;
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
-		return (lexer_lex(alst, lexer));
-	}
-	lexer->state = DEFAULT;
-	return (lexer_lex(alst, lexer));
-}
-*/

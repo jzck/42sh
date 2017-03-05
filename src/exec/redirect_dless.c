@@ -17,7 +17,7 @@ int		redirect_dless(t_redir *redir)
 	char	*str;
 
 	pipe(fds);
-	str = redir->word.word;
+	str = redir->word;
 	write(fds[PIPE_WRITE], str, ft_strlen(str));
 	close(fds[PIPE_WRITE]);
 	dup2(fds[PIPE_READ], 0);

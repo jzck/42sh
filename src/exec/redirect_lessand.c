@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:11:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:54:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:13:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int		redirect_lessand(t_redir *redir)
 	int		fdold;
 	int		fdnew;
 
+	(void)redir;
+	(void)fdold;
+	(void)fdnew;
+	/*
 	if (redir->close)
 	{
 		close(redir->n);
@@ -35,5 +39,6 @@ int		redirect_lessand(t_redir *redir)
 	}
 	else
 		return (bad_fd(fdold));
+		*/
 	return (0);
 }
