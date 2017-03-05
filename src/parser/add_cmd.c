@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 22:05:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:34:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int					superflous_token(t_btree **ast, t_list **lst)
 	t_token	*token;
 
 	(void)ast;
-	DG("superflous token");
 	if (*lst)
 	{
 		token = (*lst)->content;
@@ -73,7 +72,6 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	DG("add cmd");
 	while (i < 14)
 	{
-		DG("test");
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
 			DG("add : %d", i);

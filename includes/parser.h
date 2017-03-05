@@ -26,8 +26,6 @@ enum	e_parstate
 	SUCCESS,
 };
 
-# define TK_REDIR(x)			(TK_LESS <= x && x <= TK_GREATAND)
-
 # define MATCH_STACK(x, y)		(x == y || y == ALL)
 
 struct	s_parser
@@ -174,12 +172,12 @@ struct	s_cmd
 {
 	t_list	*redir;
 	t_ld	*token;
+	t_list	*wordlist;
 };
 
 union	u_astdata
 {
 	t_cmd	cmd;
-	t_list	*wordlist;
 	char	**sstr;
 	char	*str;
 };

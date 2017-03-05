@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 20:00:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:39:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int			isdir_word(t_btree **ast, t_list **list)
 	{
 		node = (*ast)->item;
 		if (token->type == TK_WORD && node->type == REDIR)
-			return ((node->type = CMD));
+		{
+			node->type = CMD;
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -80,7 +83,6 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_redir		redir;
 
-	DG("add redir");
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;

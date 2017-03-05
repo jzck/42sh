@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 20:05:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 14:57:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_putast(void *nodein)
 	t_astnode	*node;
 	node = nodein;
 	
+	if (node->type == WORDLIST)
+		return ("WORDLIST");
 	if (node->type == CMD)
 		return ("CMD");
 	if (node->type == REDIR)

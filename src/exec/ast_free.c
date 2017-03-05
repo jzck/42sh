@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:50:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/04 17:09:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:24:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ast_free(void *data, size_t content_size)
   	if (node->type == CMD)
 	{
 		ft_ld_clear(&node->data.cmd.token, &ft_tabdel);
-		ft_lstdel(&node->data.cmd.redir, &redir_free);
+//		ft_lstdel(&node->data.cmd.redir, &redir_free);
 	}
 //	if (node->type == WORDLIST)
 //		do clear
