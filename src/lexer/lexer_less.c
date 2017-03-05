@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/25 20:11:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 18:19:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int		lexer_less(t_list **alst, t_lexer *lexer)
 		ft_lsteadd(&lexer->heredoc_stack, ft_lstnew(alst, sizeof(alst)));
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
-	else
-	{
-		token->type = TK_LESS;
-		lexer->state = DEFAULT;
-		return (lexer_lex(&(*alst)->next, lexer));
-	}
+	token->type = TK_LESS;
+	lexer->state = DEFAULT;
+	return (lexer_lex(&(*alst)->next, lexer));
 }

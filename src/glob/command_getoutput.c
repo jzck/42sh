@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:45:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 18:07:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*command_getoutput(char *command)
 {
-	return (command);
+	return (ft_strdup(command));
 	/* int			fds[2]; */
 	/* t_btree		*ast; */
 	/* t_astnode	item; */

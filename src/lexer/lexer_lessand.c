@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:58:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/25 20:11:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 18:05:39 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ int		lexer_lessand(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = TK_LESSAND;
-	if (ft_isdigit(lexer->str[lexer->pos]))
+	lexer->state = DEFAULT;
+	return (lexer_lex(&(*alst)->next, lexer));
+/*	if (ft_isdigit(lexer->str[lexer->pos]))
 	{
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
-		return (lexer_lessand(alst, lexer));
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else if (lexer->str[lexer->pos] == '-')
 	{
@@ -32,5 +35,5 @@ int		lexer_lessand(t_list **alst, t_lexer *lexer)
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	lexer->state = DEFAULT;
-	return (lexer_lex(alst, lexer));
+	return (lexer_lex(alst, lexer));*/
 }
