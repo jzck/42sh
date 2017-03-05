@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:28:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 17:30:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_backslash,
 	&lexer_curly_braces,
 	&lexer_assignement_word,
-	&lexer_comment,
 	&lexer_end,
 };
 
@@ -51,7 +50,10 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 {
 	t_token	*token;
 
-	if (lexer->str[lexer->pos] == 0)
+	if (lexer->str[lexer->pos] == 0
+		|| (lexer->str[lexer->pos] == '#'
+			&& lexer->state != QUOTE
+			&& lexer->state != DQUOTE))
 		return (lexer_end(alst, lexer));
 	if (!*alst)
 	{
