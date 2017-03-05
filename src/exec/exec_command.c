@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/04 17:11:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:03:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,51 +37,25 @@ char			**token_to_argv(t_ld *ld, int do_match)
 
 int				exec_cmd(t_btree **ast)
 {
-	t_cmd		*cmd;
-	t_job		*job;
-	t_exec		*exec;
 	t_process	p;
-	int			fds[2];
-	int			op;
+	t_job		*job;
 
-	cmd = &((t_astnode *)(*ast)->item)->data.cmd;
-	exec = &data_singleton()->exec;
 	job = &data_singleton()->exec.job;
-	process_reset(&p);
-	op = pop(&exec->op_stack);
-	fds[PIPE_WRITE] = STDOUT;
-	fds[PIPE_READ] = STDIN;
-	if (op == TK_AMP)
-		exec->attrs |= JOB_BG;
-	else if (op == TK_PIPE)
-		pipe(fds);
-	p.fdin = exec->fdin;
-	p.to_close = fds[PIPE_READ];
-	p.fdout = fds[PIPE_WRITE];
-	p.redirs = cmd->redir;
-	exec->fdin = fds[PIPE_READ];
-	if (IS_PIPESTART(p))
-	{
-		job->first_process = NULL;
-		job->attrs = EXEC_IS_FG(exec->attrs) ? 0 : JOB_BG;
-	}
-	if (!(p.av = token_to_argv(cmd->token, 1)))
+	if (set_process(&p, *ast))
 		return (1);
-	process_setexec(&p);
 	if (!(launch_process(&p)))
-		ft_lstadd(&job->first_process, ft_lstnew(&p, sizeof(p)));
-	if (fds[PIPE_WRITE] != STDOUT)
-		close(fds[PIPE_WRITE]);
-	if (IS_PIPEEND(p))
 	{
-		add_new_job(job);
-		if (JOB_IS_FG(job->attrs))
-			put_job_in_foreground(job, 0);
-		else
+		job_addprocess(&p);
+		if (IS_PIPEEND(p))
 		{
-			job_notify_new(job);
-			put_job_in_background(job, 0);
+			if (JOB_IS_FG(job->attrs))
+				put_job_in_foreground(job, 0);
+			else
+				put_job_in_background(job, 0);
 		}
+		job->pgid = 0;
 	}
+	if (p.fdout != STDOUT)
+		close(p.fdout);
 	return (0);
 }

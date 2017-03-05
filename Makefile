@@ -95,6 +95,7 @@ exec/redirect_greatand.c\
 exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
+exec/set_process.c\
 glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
@@ -137,11 +138,11 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
-job-control/add_new_job.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
 job-control/do_job_notification.c\
+job-control/job_addprocess.c\
 job-control/job_cmp_id.c\
 job-control/job_format.c\
 job-control/job_format_head.c\
@@ -223,12 +224,12 @@ main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
 main/ft_putast.c\
+main/instruction_free.c\
 main/main.c\
 main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
-main/instruction_free.c\
 parser/add_case.c\
 parser/add_cmd.c\
 parser/add_condition.c\
