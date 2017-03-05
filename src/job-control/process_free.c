@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/02 17:48:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 16:00:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	process_free(void *content, size_t content_size)
 	p = content;
 	ft_strdel(&p->path);
 	ft_sstrfree(p->av);
-	ft_lstdel(&p->redirs, ft_lst_cfree);
+	/* ft_lstdel(&p->redirs, ft_lst_cfree); */
 	free(p);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:39:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/01 16:25:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:27:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	token_print(t_list *lst)
 
 	while (lst)
 	{
-		DG("token print");
 		if (lst->content)
 			token = lst->content;
 		if (token->type)
