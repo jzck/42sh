@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:27:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:34:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int			issubshell(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-	t_token		*token;
+//	t_token		*token;
 
+	(void)lst;
 	node = NULL;
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 14:41:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:30:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		launch_process(t_process *p)
 {
-	t_exec	*exec;
+//	t_exec	*exec;
 	int		pid;
 
-	exec = &data_singleton()->exec;
+//	exec = &data_singleton()->exec;
 	DG("gonna launch [%s]", p->av[0]);
 	DG("fdin=[%i]", p->fdin);
 	DG("fdout=[%i]", p->fdout);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:16:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:42:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int		get_input_fd()
 		return (fd);
 	else if (data->opts & SH_OPTS_LC)
 	{
-		DG();
 		pipe(fds);
 		fd = fds[PIPE_READ];
 		file = shell_get_avdata();

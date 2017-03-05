@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 18:23:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:29:46 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int			exec_case_branch(t_btree **ast)
 {
-	t_astnode	*node;
+//	t_astnode	*node;
 	/* char		**av; */
 	t_exec	*exec;
 
+	(void)ast;
 	return (0);
 	exec = &data_singleton()->exec;
 	/* if (data_singleton()->exec.process.case_branch == 1) */
 	if (EXEC_IS_CASE_BRANCH(exec->attrs))
 		return (0);
-	node = (*ast)->item;
+//	node = (*ast)->item;
 	/* av = token_to_argv(node); */
 	/* if (ft_strcmp(av[0], data_singleton()->exec.process.case_pattern) == 1) */
 	/* { */
