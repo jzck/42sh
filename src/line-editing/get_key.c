@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:16:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 19:38:09 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_key	g_key[] =
 	{FLECHE_GAUCHE		, &ft_move_left			},
 	{FLECHE_DROITE		, &ft_move_right		},
 	{TOUCHE_DELETE		, &ft_del				},
+	{TOUCHE_CTRL_L		, &ft_control_l			},
 	{TOUCHE_CTRL_C		, &ft_control_c			},
 	{TOUCHE_CTRL_D		, &ft_control_d			},
 	{TOUCHE_CTRL_R		, &ft_surch_in_history	},

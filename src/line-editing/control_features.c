@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   control_c_and_d.c                                  :+:      :+:    :+:   */
+/*   control_features.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 14:08:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 19:36:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ void	ft_control_c(void)
 {
 	ft_putchar('\n');
 	set_exitstatus(1, 1);
+	ft_prompt();
+	ft_strdel(&STR);
+	POS = 0;
+}
+
+void	ft_control_l(void)
+{
+	ft_clear_window();
 	ft_prompt();
 	ft_strdel(&STR);
 	POS = 0;

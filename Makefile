@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/17 17:16:16 by wescande         ###   ########.fr        #
+#    Updated: 2017/03/04 17:27:41 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -190,7 +190,7 @@ lexer/token_free.c\
 lexer/token_init.c\
 lexer/token_print.c\
 line-editing/completion.c\
-line-editing/control_c_and_d.c\
+line-editing/control_features.c\
 line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\

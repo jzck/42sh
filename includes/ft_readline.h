@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 12:44:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 19:37:38 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define TOUCHE_DELETE 2117294875
 # define TOUCHE_CTRL_C 3
 # define TOUCHE_CTRL_D 4
+# define TOUCHE_CTRL_L 12
 # define TOUCHE_CTRL_R 18
 # define TOUCHE_SUPPR 127
 # define TOUCHE_HOME 4741915
@@ -51,20 +52,6 @@
 # define TOUCHE_OPT_X 8948194
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
-
-/* # define PROMPT_QUOTES "quote> " */
-/* # define PROMPT_DQUOTES "dquote> " */
-/* # define PROMPT_BQUOTES "bquote> " */
-/* # define PROMPT_ACCOLADE "cursh> " */
-/* # define PROMPT_BRACKET "subsh> " */
-/* # define PROMPT_BSLASH "> " */
-
-/* # define SIZE_PROMPT_QUOTES 7 */
-/* # define SIZE_PROMPT_DQUOTES 8 */
-/* # define SIZE_PROMPT_BQUOTES 8 */
-/* # define SIZE_PROMPT_ACCOLADE 7 */
-/* # define SIZE_PROMPT_BRACKET 7 */
-/* # define SIZE_PROMPT_BSLASH 2 */
 
 # define IS_QUOTES (1 << 0)
 # define IS_BQUOTES (1 << 1)
@@ -106,22 +93,7 @@ typedef struct	s_key
 	void	(*f)(void);
 }				t_key;
 
-typedef struct	s_prompt_type
-{
-	char	key;
-	int		value;
-	char	*new_prompt;
-}				t_prompt_type;
-
-typedef struct	s_brackets
-{
-	int		pos;
-	char	tabl[100];
-}				t_brackets;
-
 extern t_key			g_keys[];
-extern t_prompt_type	g_prompt_tab[];
-extern t_brackets		g_brackets;
 
 void			ft_reset_tab(char *tabl);
 void			ft_putnc(char c, int n);
@@ -152,6 +124,7 @@ char			*ft_strget_history(char *str);
 int				ft_nb_last_line(char *str, size_t pos);
 int				ft_put(int nb);
 void			ft_check_line(void);
+void			ft_clear_window(void);
 
 char			*ft_read_stdin(void);
 void			ft_end(void);
@@ -163,6 +136,7 @@ void			ft_down(void);
 void			ft_buff_f6(void);
 void			ft_control_d(void);
 void			ft_control_c(void);
+void			ft_control_l(void);
 void			ft_del(void);
 void			ft_suppr(void);
 void			ft_print(int ret);

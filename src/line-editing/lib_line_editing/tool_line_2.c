@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 17:06:07 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 19:36:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_clear_window(void)
+void	ft_clear_window(void)
 {
 	pid_t	soon_pid;
 	char	*tab_str[2];
