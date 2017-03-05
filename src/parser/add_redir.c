@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 16:39:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 17:14:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
+	if (!(node->type == TK_IO_NUMBER))
+		redir.n = (token->type == TK_LESS || token->type == TK_DLESS
+		|| token->type == TK_LESSAND) ? STDIN : STDOUT;
 	node->type = REDIR;
 	redir.type = token->type;
 	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
