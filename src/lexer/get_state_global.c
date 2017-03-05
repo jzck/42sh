@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:39:06 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 17:56:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 16:28:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_lexstate		get_state_global(t_lexer *lexer)
 	char	c;
 
 	c = lexer->str[lexer->pos];
+	DG("check, c=%c", lexer->str[lexer->pos]);
 	if (ft_is_delim(c))
 		return (DELIM);
 	else if (c == '#')

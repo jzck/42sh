@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 20:52:28 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:05:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:18:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		exec_and_if(t_btree **ast)
 	exec = &data_singleton()->exec;
 	push(&exec->op_stack, TK_AND_IF);
 	ft_exec(&(*ast)->left);
+	exec->attrs &= ~EXEC_OR_IF;
 	exec->attrs |= EXEC_AND_IF;
 	ft_exec(&(*ast)->right);
 

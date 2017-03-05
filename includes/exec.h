@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 20:28:08 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:19:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define EXEC_IS_BG(j)			(j & EXEC_BG)
 # define EXEC_IS_FG(j)			(!EXEC_IS_BG(j))
 # define EXEC_IS_AND_IF(j)		(j & EXEC_AND_IF)
-# define EXEC_IS_OR_IF(j)		(j & EXEC_JOB_OR_IF)
+# define EXEC_IS_OR_IF(j)		(j & EXEC_OR_IF)
 # define EXEC_AOL_MASK			(EXEC_AND_IF | EXEC_OR_IF)
 
 # define EXEC_IS_IF_BRANCH(j)	(j & EXEC_IF_BRANCH)
@@ -119,6 +119,7 @@ int		exec_case(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
 
 int		launch_process(t_process *p);
+int		set_process(t_process *p, t_btree *ast);
 int		process_setexec(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);

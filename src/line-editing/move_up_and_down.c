@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:18:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:32:18 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	ft_up_2(size_t *pos, char *str)
 
 void		ft_up(void)
 {
-	int		i;
+//	int		i;
 
-	i = 0;
+//	i = 0;
 	if (!STR || !POS)
 		return ;
 	if (STR[POS - 1] == '\n')

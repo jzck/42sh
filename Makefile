@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/03 20:06:37 by ariard           ###   ########.fr        #
+#*   Updated: 2017/03/05 15:36:45 by wescande         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ exec/redirect_greatand.c\
 exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
+exec/set_process.c\
 glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
@@ -137,11 +138,11 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
-job-control/add_new_job.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
 job-control/do_job_notification.c\
+job-control/job_addprocess.c\
 job-control/job_cmp_id.c\
 job-control/job_format.c\
 job-control/job_format_head.c\
@@ -178,7 +179,7 @@ lexer/lexer_assignement_word.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
 lexer/lexer_comment.c\
-lexer/lexer_curly_brackets.c\
+lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
 lexer/lexer_dless.c\
@@ -223,12 +224,12 @@ main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
 main/ft_putast.c\
+main/instruction_free.c\
 main/main.c\
 main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
-main/instruction_free.c\
 parser/add_case.c\
 parser/add_cmd.c\
 parser/add_condition.c\
@@ -259,13 +260,13 @@ all :
 	@make -j $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(FLAGS) $(D_FLAGS) \
+	@$(CC) $(OBJS) -o $(NAME) \
 		-I $(INC_DIR) \
 		-I $(LIBFT_INC) \
 		$(LIBS) \
-		$(LIBFT_LIB) $(OBJS) \
-		-o $(NAME)
-	@printf "\r\e[48;5;15;38;5;25m✅ MAKE $(NAME)\e[0m\e[K\n"
+		$(LIBFT_LIB) \
+		$(FLAGS) $(D_FLAGS)
+	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
@@ -279,7 +280,7 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
 	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
-	@printf "\r\e[38;5;11m⌛ MAKE %10.10s : %2d%% \e[48;5;%dm%*s\e[0m%*s\e[48;5;255m \e[0m \e[38;5;11m %*s\e[0m\e[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
+	@printf "\r\033[38;5;11m⌛ MAKE %10.10s : %2d%% \033[48;5;%dm%*s\033[0m%*s\033[48;5;255m \033[0m \033[38;5;11m %*s\033[0m\033[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
 	@$(CC) $(FLAGS) $(D_FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)
@@ -287,14 +288,14 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 
 clean:			cleanlib
 	@rm -rf $(OBJ_DIR)
-	@printf "\r\e[38;5;202m✖ clean $(NAME).\e[0m\e[K\n"
+	@printf "\r\033[38;5;202m✖ clean $(NAME).\033[0m\033[K\n"
 
 cleanlib:
 	@make -C $(LIBFT_DIR) clean
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
-	@printf "\r\e[38;5;196m❌ fclean $(NAME).\e[0m\e[K\n"
+	@printf "\r\033[38;5;196m❌ fclean $(NAME).\033[0m\033[K\n"
 
 fcleanlib:		cleanlib
 	@make -C $(LIBFT_DIR) fclean

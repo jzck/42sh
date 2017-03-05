@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 15:51:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 16:46:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int		isloop(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-	t_token		*token;
+//	t_token		*token;
 
 	node = NULL;
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	DG("isloop");
 	if (*ast)
 	{
