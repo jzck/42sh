@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:25:22 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/27 19:40:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:28:10 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ int					bt_read_parse(t_read *data, char **av)
 {
 	int			i;
 	int			j;
-	int			k;
 	t_readopt	*opt;
 
 	i = 1;
-	k = 0;
 	while (av[i])
 	{
 		j = 0;

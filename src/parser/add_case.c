@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 21:54:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:33:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int		iscase(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-	t_token		*token;
+//	t_token		*token;
 
+	(void)lst;
 	node = NULL;
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 18:12:52 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/04 21:51:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:32:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int		iscondition(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-	t_token		*token;
+//	t_token		*token;
 
 	node = NULL;
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	DG("iscondition");
 	if (*ast)
 	{

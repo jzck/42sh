@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:14:46 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 14:29:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/05 15:31:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*ft_realloc_imput(char *str, int a, size_t pos)
 {
-	int		i;
+//	int		i;
 	char	tmp[2];
 	char	*str_tmp;
 	char	*new_str;
 
-	i = 0;
+//	i = 0;
 	tmp[0] = (char)a;
 	tmp[1] = '\0';
 	if (!str)
