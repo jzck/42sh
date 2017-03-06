@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 12:33:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:56:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	process_free(void *content, size_t content_size);
 void	process_reset(t_process *p);
 void	process_resetfds(void);
 
-int		fd_is_valid(int fd);
+int		fd_is_valid(int fd, int flag);
 int		bad_fd(int fd);
 int		process_redirect(t_process *p);
 int		redirect_great(t_redir *redir);
