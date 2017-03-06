@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 17:44:22 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 16:36:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 12:29:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	process_reset(t_process	*p)
 	p->to_close = 0;
 	p->redirs = NULL;
 	p->status = -1;
-	p->attributes = 0;
+	p->attrs = 0;
 }
