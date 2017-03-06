@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 18:11:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 19:16:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ struct	s_exec
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;
-	char		*case_pattern;
+	char		**case_pattern;
 	int			control_count;
 };
 
