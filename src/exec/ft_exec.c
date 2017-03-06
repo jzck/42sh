@@ -28,6 +28,7 @@ t_execmap	g_execmap[] =
 	{TK_FOR, &exec_for},
 	{TK_CASE, &exec_case},
 	{TK_PAREN_OPEN, &exec_case_branch},
+	{TK_ASSIGNEMENT_WORD, &exec_var},
 	/* {TK_SUBSHELL, &exec_}, */
 	{CMD, &exec_cmd},
 	{0, 0},
