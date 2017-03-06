@@ -17,7 +17,6 @@ t_lexstate		get_state_global(t_lexer *lexer)
 	char	c;
 
 	c = lexer->str[lexer->pos];
-	DG("check, c=%c", lexer->str[lexer->pos]);
 	if (ft_is_delim(c))
 		return (DELIM);
 	else if (c == '&' || c == ';' || c == '|')

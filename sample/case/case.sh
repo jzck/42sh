@@ -1,4 +1,5 @@
-case $rental in
+case van in
 	( "bus" ) echo Hello world ;;
-	( "van" ) echo Comment va ? ;;
+	( "velo" ) echo Comment va  ;;
+	( "van" ) ls ;;
 esac

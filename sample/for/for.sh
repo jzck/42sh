@@ -1,4 +1,8 @@
 for i in hello bonjour salut comment
 do
-	ls
+	while cat efezf
+	do
+		echo INSIDE
+	done
+	ls | cat
 done

@@ -34,6 +34,7 @@ int		iscase_pattern(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 
+	DG(" add pattern");
 	node = NULL;
 	token = (*lst)->content;
 	if (*ast)
