@@ -14,19 +14,17 @@
 
 int			exec_case(t_btree **ast)
 {
-//	t_astnode	*node;
-	/* char		**av; */
-	t_exec	*exec;
+	t_astnode	*node;
+	char		*av;
+	t_exec		*exec;
 
 	(void)ast;
-	return (0);
 	exec = &data_singleton()->exec;
-	/* data_singleton()->exec.process.case_branch = 0; */
-	exec->attrs |= EXEC_CASE_BRANCH;
+	exec->attrs &= ~EXEC_CASE_BRANCH;
 
-//	node = (*ast)->item;
-	/* av = token_to_argv(node); */
-	/* data_singleton()->exec.process.case_pattern = av[0]; */
-	/* exec->case_pattern = av[0]; */
+	node = (*ast)->item;
+	av = node->data.str;
+//	av = token_to_argv(node);
+	exec->case_pattern = av;
 	return (0);
 }

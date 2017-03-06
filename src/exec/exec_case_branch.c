@@ -14,22 +14,24 @@
 
 int			exec_case_branch(t_btree **ast)
 {
-//	t_astnode	*node;
-	/* char		**av; */
+	t_astnode	*node;
+	char		*av;
 	t_exec	*exec;
 
 	(void)ast;
-	return (0);
 	exec = &data_singleton()->exec;
-	/* if (data_singleton()->exec.process.case_branch == 1) */
+
+	DG("case");
 	if (EXEC_IS_CASE_BRANCH(exec->attrs))
 		return (0);
-//	node = (*ast)->item;
-	/* av = token_to_argv(node); */
-	/* if (ft_strcmp(av[0], data_singleton()->exec.process.case_pattern) == 1) */
-	/* { */
-	/* 	data_singleton()->exec.process.case_branch = 1; */
-	/* 	ft_exec(&(*ast)->right); */
-	/* } */		
+	DG("case2");
+	node = (*ast)->item;
+	av = node->data.str;
+//	av = token_to_argv(node);
+	if (ft_strcmp(av, exec->case_pattern) == 0)
+	{ 
+		exec->attrs |= EXEC_CASE_BRANCH;
+	 	ft_exec(&(*ast)->right);
+	} 		
 	return (0);
 }

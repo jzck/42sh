@@ -19,7 +19,6 @@ int		iscondition(t_btree **ast, t_list **lst)
 
 	node = NULL;
 //	token = (*lst)->content;
-	DG("iscondition");
 	if (*ast)
 	{
 		node = (*ast)->item;

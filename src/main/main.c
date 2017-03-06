@@ -62,7 +62,7 @@ int		handle_instruction(int fd)
 			error_syntax(&token, &parser, &ast);
 	}
 	DG("Before execution:");
-	btree_print(STDBUG, ast, &ft_putast);
+//	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
 	instruction_free(&token, &parser, &ast);

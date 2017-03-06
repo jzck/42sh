@@ -50,6 +50,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_DSEMI, COMPLETE_COMMANDS},
 	{TK_DSEMI, COMPOUND_LIST},
 	{TK_DSEMI, CASE_LIST_NS},
+	{TK_DSEMI, CMD_SUPERIOR},
 	{TK_DSEMI, PIPE_SEMI_SEQUENCE},
 	{TK_DSEMI, SEQUENCE},
 //	watch!
@@ -853,7 +854,7 @@ t_stackmatch	g_stackmatch[] =
 	{COMPOUND_LIST, TK_ELSE},
 	{COMPOUND_LIST, COMPOUND_LIST},
 	{COMPOUND_LIST, COMPLETE_CONDITION},
-	{CLOSE_LIST, PATTERN_CASE},
+	{CLOSE_LIST, PATTERN},
 	{CLOSE_LIST, FUNC_NAME},
 	{SUBSHELL, LINEBREAK},
 	{SUBSHELL, COMPLETE_COMMANDS},
@@ -1027,7 +1028,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	int		i;
 
 	head = (*stack)->content;
-	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+//	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

@@ -39,7 +39,8 @@ int					superflous_token(t_btree **ast, t_list **lst)
 	if (*lst)
 	{
 		token = (*lst)->content;
-		if (token->type == TK_IN || token->type == TK_PAREN_OPEN)
+		if (token->type == TK_IN || token->type == TK_PAREN_CLOSE
+			|| token->type == TK_DSEMI)
 			return (1);
 	}
 	return (0);
@@ -54,7 +55,7 @@ static int			no_del_token(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if (node->type != TK_DO && node->type != TK_THEN && node->type != TK_PAREN_CLOSE
+		if (node->type != TK_DO && node->type != TK_THEN
 			&& node->type != CMD && node->type != REDIR)
 			return (1);
 	}
@@ -91,6 +92,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
 	{
+		DG("add cmd default");
 		if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
 		{
 			my_tab[0] = ft_strdup(token->data);
