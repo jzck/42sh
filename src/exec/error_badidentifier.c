@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_semi.c                                        :+:      :+:    :+:   */
+/*   error_badidentifier.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 20:52:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 18:09:54 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/06 18:03:51 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/06 18:11:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int		exec_semi(t_btree **ast)
+int			error_badidentifier(char *name)
 {
-	t_exec	*exec;
-
-	exec = &data_singleton()->exec;
-	push(&exec->op_stack, TK_SEMI);
-	ft_exec(&(*ast)->left);
-	exec->attrs &= ~EXEC_AOL_MASK;
-	ft_exec(&(*ast)->right);
-//	btree_delone(ast, &ast_free);
-	return (0);
+	ft_putstr_fd("`", 2);
+	ft_putstr(name);
+	ft_putstr_fd("' not a valid identifier", 2);
+	return (1);
 }

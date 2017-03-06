@@ -168,7 +168,7 @@ struct	s_cmd
 {
 	t_list	*redir;
 	t_ld	*token;
-	t_list	*wordlist;
+	t_ld	*wordlist;
 };
 
 union	u_astdata

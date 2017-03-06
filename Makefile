@@ -96,6 +96,7 @@ exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
 exec/set_process.c\
+exec/error_badidentifier.c\
 glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
