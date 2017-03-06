@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 17:28:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 18:19:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:56:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		add_ionumber(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_redir		redir;
 
+	DG("add io_number");
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;

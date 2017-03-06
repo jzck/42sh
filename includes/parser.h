@@ -125,7 +125,7 @@ int		add_one_func(t_btree **ast, t_list **lst);
 int		add_pipe(t_btree **ast, t_list **lst);
 int		add_var(t_btree **ast, t_list **lst);
 int		add_null(t_btree **ast, t_list **lst);
-int		add_ionumbr(t_btree **ast, t_list **lst);
+int		add_ionumber(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
 int		isloop_condition(t_btree **ast, t_list **lst);
@@ -158,7 +158,7 @@ extern t_distrostree g_distrostree[];
 
 struct	s_redir
 {
-	t_flag	type;
+	t_type	type;
 	int		n;
 	char	*word;
 	/* int		close; */

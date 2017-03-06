@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/04 19:50:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:31:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_redir			t_redir;
 typedef struct s_cmd			t_cmd;
 typedef union u_astdata			t_astdata;
 typedef union u_word			t_word;
-typedef long long				t_type;
 
 typedef int 				t_condition;
 typedef struct s_job			t_job;

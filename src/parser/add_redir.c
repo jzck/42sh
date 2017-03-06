@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 18:14:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:54:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	{
 		DG("add file");
 		redir =	(ft_lstlast(node->data.cmd.redir))->content;
+		DG("now redir.type :%s", read_state(redir->type));
+		DG("n is ? : %d", redir->n);
 		if (redir->type == TK_DLESS)
 			redir->word = NULL;
 		else
@@ -80,6 +82,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		redir;
+	t_redir		*temp;
 
 	if (!*ast)
 		gen_node(ast);
@@ -87,11 +90,17 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	node = (*ast)->item;
 	if (!(node->type == TK_IO_NUMBER))
 	{
+		DG("add redir");
 		redir.n = (token->type == TK_LESS || token->type == TK_DLESS
 		|| token->type == TK_LESSAND) ? STDIN : STDOUT;
+		redir.type = token->type; 
 		ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
 	}
+	else
+	{
+		temp = (ft_lstlast(node->data.cmd.redir))->content;
+		temp->type = token->type;
+	}
 	node->type = REDIR;
-	redir.type = token->type;
 	return (0);
 }

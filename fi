@@ -3,6 +3,7 @@ Makefile
 STDBUG
 TESTSHELL
 donovan_segaults_06-02
+fi
 file
 includes
 libft

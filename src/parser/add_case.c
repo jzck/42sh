@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 17:30:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:11:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		iscase_pattern(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 
-	DG(" add pattern");
+//	DG(" add pattern");
 	node = NULL;
 	token = (*lst)->content;
 	if (*ast)

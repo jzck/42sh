@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 16:34:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:57:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_distrostree	g_distrostree[] =
 	{&iscase, &add_case_cmd},
 	{&issubshell, &add_subshell_cmd},
 	{&isfunc, &add_func_cmd},
+	{&isionumber, &add_ionumber},
 	{&isnull, &add_null},
 
 };
