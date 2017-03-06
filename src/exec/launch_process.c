@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 15:04:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:20:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ int		launch_process(t_process *p)
 	/* DG("gonna launch [%s]", p->av[0]); */
 	/* DG("fdin=[%i]", p->fdin); */
 	/* DG("fdout=[%i]", p->fdout); */
-	if (p->attributes & PROCESS_BUILTIN && IS_PIPESINGLE(*p))
+	if (p->attrs & PROCESS_BUILTIN && IS_PIPESINGLE(*p))
 	{
 		if (process_redirect(p))
 			return (1);
 		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
 		return (1);
 	}
-	p->attributes &= ~PROCESS_STATE_MASK;
-	p->attributes |= PROCESS_RUNNING;
-	if (p->attributes & (PROCESS_BINARY | PROCESS_SCRIPT)
+	p->attrs &= ~PROCESS_STATE_MASK;
+	p->attrs |= PROCESS_RUNNING;
+	if (p->attrs & (PROCESS_BINARY | PROCESS_SCRIPT)
 			&& access(p->path, X_OK) == -1)
 	{
 		ft_dprintf(2, "{red}%s: permission denied: %s{eoc}\n", SHELL_NAME, p->av[0]);
@@ -38,7 +38,7 @@ int		launch_process(t_process *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (p->attributes & PROCESS_UNKNOWN)
+		if (p->attrs & PROCESS_UNKNOWN)
 		{
 			ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
 			exit(127);
@@ -47,7 +47,7 @@ int		launch_process(t_process *p)
 		process_setsig();
 		if (process_redirect(p))
 			exit (1);
-		if (p->attributes & PROCESS_BUILTIN)
+		if (p->attrs & PROCESS_BUILTIN)
 			exit((*p->execf)(p->path, p->av, data_singleton()->env));
 		(*p->execf)(p->path, p->av, data_singleton()->env);
 		ft_dprintf(2, "{red}%s: internal execve error on %s{eoc}\n", SHELL_NAME, p->av[0]);

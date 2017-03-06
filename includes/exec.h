@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:19:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 12:33:24 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # define PROCESS_SCRIPT		(1 << 2)
 # define PROCESS_SUBSHELL	(1 << 3)
 # define PROCESS_UNKNOWN	(1 << 4)
-# define PROCESS_COMPLETED	(1 << 5)
-# define PROCESS_SUSPENDED	(1 << 6)
-# define PROCESS_RUNNING	(1 << 7)
-# define PROCESS_CONTINUED	(1 << 8)
+# define PROCESS_CONTROL	(1 << 5)
+# define PROCESS_COMPLETED	(1 << 6)
+# define PROCESS_SUSPENDED	(1 << 7)
+# define PROCESS_RUNNING	(1 << 8)
+# define PROCESS_CONTINUED	(1 << 9)
 
-# define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4)
-# define PROCESS_STATE_MASK	(1 << 5 | 1 << 6 | 1 << 7 | 1 << 8)
+# define PROCESS_TYPE_MASK	(1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4 | 1 << 5)
+# define PROCESS_STATE_MASK	(1 << 6 | 1 << 7 | 1 << 8 | 1 << 9)
 
 # define IS_PIPESTART(p)	((p).fdin == STDIN)
 # define IS_PIPEEND(p)		((p).fdout == STDOUT)
@@ -62,20 +63,18 @@ struct	s_process
 	int		to_close;
 	t_list	*redirs;
 	int		status;
-	t_flag	attributes;
+	t_flag	attrs;
 };
 
 struct	s_exec
 {
-	/* char		*aol_status; */
-	/* int			aol_search; */
 	t_job		job;
-	/* t_process	process; */
 	int			fd_save[3];
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;
 	char		*case_pattern;
+	int			control_count;
 };
 
 struct	s_execmap

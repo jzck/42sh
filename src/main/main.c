@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 17:55:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 17:58:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int		handle_instruction(int fd)
 		if (parser.state == SUCCESS)
 			break ;
 		else if (parser.state == ERROR && SH_IS_INTERACTIVE(data_singleton()->opts))
+		{
+			ft_add_str_in_history(lexer.str);
 			return (error_syntax(&token, &parser, &ast));
+		}
 		else if (parser.state == ERROR)
 			error_syntax(&token, &parser, &ast);
 	}
