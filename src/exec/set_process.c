@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:42:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 12:26:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,16 @@ int		set_process(t_process *p, t_btree *ast)
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];
 	exec->fdin = fds[PIPE_READ];
-	p->redirs = cmd->redir;
+	p->redirs = ft_lstmap(cmd->redir, ft_id);
+	t_list *tmp = p->redirs;
+	while (tmp)
+	{
+		t_redir *toto = tmp->content;
+		printf("IIIIIIIIIIIIIIIIIIIIIII%lld |%d| {%s}\n", toto->type, toto->n, toto->word);
+		tmp= tmp->next;
+	}
 	process_setexec(p);
+	if (exec->control_count)
+		p->attrs |= PROCESS_CONTROL;
 	return (0);
 }

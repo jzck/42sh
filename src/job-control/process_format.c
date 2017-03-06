@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:10:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 12:32:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	process_format_state(t_process *p)
 {
 	int			state;
 
-	state = p->attributes & PROCESS_STATE_MASK;
+	state = p->attrs & PROCESS_STATE_MASK;
 	if (state == PROCESS_RUNNING)
 		ft_putstr("running  ");
 	else if (state == PROCESS_SUSPENDED)
@@ -24,8 +24,8 @@ static void	process_format_state(t_process *p)
 	else if (state == PROCESS_CONTINUED)
 	{
 		ft_putstr("continued");
-		p->attributes &= ~PROCESS_STATE_MASK;
-		p->attributes |= PROCESS_RUNNING;
+		p->attrs &= ~PROCESS_STATE_MASK;
+		p->attrs |= PROCESS_RUNNING;
 	}
 	else if (state == PROCESS_COMPLETED)
 	{
@@ -42,7 +42,9 @@ static void	process_format_com_long(t_list **plist)
 	t_process	*p;
 
 	p = (*plist)->content;
-	if (p->attributes & PROCESS_SUBSHELL)
+	if (p->attrs & PROCESS_CONTROL)
+		ft_putstr("script");
+	else if (p->attrs & PROCESS_SUBSHELL)
 	{
 		ft_putstr("( ");
 		ft_putstr(p->av[2]);
@@ -62,15 +64,17 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 	while (*plist)
 	{
 		p = (*plist)->content;
-		if (!(p->attributes & state) ||
+		if (!(p->attrs & state) ||
 				(state == PROCESS_COMPLETED && p->status != 0))
 			break ;
-		if (p->attributes & PROCESS_CONTINUED)
+		if (p->attrs & PROCESS_CONTINUED)
 		{
-			p->attributes &= ~PROCESS_STATE_MASK;
-			p->attributes &= ~PROCESS_RUNNING;
+			p->attrs &= ~PROCESS_STATE_MASK;
+			p->attrs &= ~PROCESS_RUNNING;
 		}
-		if (p->attributes & PROCESS_SUBSHELL)
+		if (p->attrs & PROCESS_CONTROL)
+			ft_putstr("script");
+		else if (p->attrs & PROCESS_SUBSHELL)
 		{
 			ft_putstr("( ");
 			ft_putstr(p->av[2]);
@@ -90,7 +94,7 @@ void		process_format(t_list **plist, int firstp, int opts)
 	t_flag		state;
 
 	p = (*plist)->content;
-	state = p->attributes & PROCESS_STATE_MASK;
+	state = p->attrs & PROCESS_STATE_MASK;
 	if (!firstp)
 		ft_printf("       ");
 	if (opts & JOBS_OPTS_L)
