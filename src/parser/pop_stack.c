@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 19:12:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 16:28:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 17:09:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ int			pop_stack(t_list **stack, t_sym erase_sym)
 	t_sym		*head;
 	t_list		*temp;
 
-	head = (*stack)->content;
-	while ((*stack) && *head != erase_sym)
+	while ((*stack) && *(head = (*stack)->content) != erase_sym)
+	{
+		temp = *stack;
+		(*stack) = (*stack)->next;
+		ft_lstdelone(&temp, NULL);	
+	}
+	if (*stack)
 	{
 		temp = *stack;
 		(*stack) = (*stack)->next;
 		ft_lstdelone(&temp, NULL);
-		head = (*stack)->content;
 	}
-	temp = *stack;
-	(*stack) = (*stack)->next;
-	ft_lstdelone(&temp, NULL);
+	else
+		return (1);
 	return (0);
 }	

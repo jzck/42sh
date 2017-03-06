@@ -37,12 +37,13 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	while (*token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
-//		DG("new sym %s", read_state(*parser->new_sym));
+		DG("new sym %s", read_state(*parser->new_sym));
 		if (eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		else
 		{
-			aggregate_sym(&parser->stack, parser->new_sym, &parser->state);
+			if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
+				return (1);
 			push_stack(&parser->stack, *parser->new_sym);
 		}
 //		ft_read_stack(parser->stack);

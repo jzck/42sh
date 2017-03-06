@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 17:29:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 17:52:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ struct	s_lexer
 	t_list		*heredoc_stack;
 };
 
+struct	s_rvwords
+{
+	char	*word;
+	int		type;
+};
+
+extern t_rvwords g_rvwords[];
 
 extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer);
 

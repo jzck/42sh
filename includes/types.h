@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 15:31:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 17:51:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_mode				t_mode;
 typedef struct s_lexer			t_lexer;
 typedef enum e_lexstate			t_lexstate;
 typedef struct s_token			t_token;
+typedef struct s_rvwords		t_rvwords;
 
 typedef struct s_ld				t_ld;
 typedef struct s_astnode		t_astnode;
