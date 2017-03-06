@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:11:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 18:13:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/05 19:43:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,25 @@ int		redirect_lessand(t_redir *redir)
 	int		fdold;
 	int		fdnew;
 
-	(void)redir;
-	(void)fdold;
-	(void)fdnew;
-	/*
-	if (redir->close)
+	if (ft_strcmp(redir->word, "-"))
 	{
 		close(redir->n);
 		return (0);
 	}
-	if (redir->word.fd == redir->n)
-		return (0);
-	if (redir->word.fd > 9)
-		return (bad_fd(redir->word.fd));
-	fdold = redir->word.fd;
-	fdnew = redir->n;
-	if (fd_is_valid(fdold))
+	if (!ft_stris(redir->word, ft_isdigit))
 	{
-		dup2(fdold, fdnew);
-		close(fdold);
+		ft_dprintf(2, "%s: %s: can only be digits", SHELL_NAME, redir->word);
+		return (1);
 	}
+	fdold = ft_atoi(redir->word);
+	fdnew = redir->n;
+	if (fdold == fdnew)
+		return (0);
+	if (fdold > 9)
+		return (bad_fd(fdold));
+	if (fd_is_valid(fdold))
+		dup2_close(fdold, fdnew);
 	else
 		return (bad_fd(fdold));
-		*/
 	return (0);
 }
