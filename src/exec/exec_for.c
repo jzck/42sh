@@ -22,11 +22,12 @@ int			exec_for(t_btree **ast)
 	node = (*ast)->item;
 	temp = node->data.cmd.wordlist;
 	var = temp->content;
-	builtin_setenv("setenv", (char*[]){var, 0}, data_singleton()->local_var);
+	temp = temp->next;
+//	declare error bad identifier
 	while (temp)
-	{
-	//process expansion av = token_to_char(temp->content)
-		builtin_setenv("setenv", (char*[]){var, 0}, data_singleton()->local_var);
+	{		
+		builtin_setenv("setenv", (char*[]){var, temp->content, 0},
+		data_singleton()->local_var);
 		ft_exec(&(*ast)->right);
 		temp = temp->next;
 	}

@@ -15,13 +15,25 @@
 int			isdir_sep(t_btree **ast, t_list **list)
 {
 	t_token		*token;
+	t_astnode	*node;
 
-	(void)ast;
 	token = (*list)->content;
-	if (token->type == TK_LESS || token->type == TK_GREAT
-		|| token->type == TK_GREATAND || token->type == TK_LESSAND
-		|| token->type == TK_DLESS || token->type == TK_DGREAT)
+	if (*ast)
+	{
+		node = (*ast)->item;
+		if ((node->type == CMD || node->type == TK_IO_NUMBER) && 
+			(token->type == TK_LESS || token->type == TK_GREAT
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT))
+			return (1);
+	}
+	if (!*ast)
+	{	
+		if (token->type == TK_LESS || token->type == TK_GREAT
+			|| token->type == TK_GREATAND || token->type == TK_LESSAND
+			|| token->type == TK_DLESS || token->type == TK_DGREAT)
 		return (1);
+	}
 	return (0);
 }
 

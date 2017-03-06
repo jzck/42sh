@@ -15,11 +15,20 @@
 int		isionumber(t_btree **ast, t_list **lst)
 {
 	t_token 	*token;
+	t_astnode	*node;
 
-	(void)ast;
 	token = (*lst)->content;
-	if (token->type == TK_IO_NUMBER)
-		return (1);
+	if (*ast)
+	{
+		node = (*ast)->item;
+		if (node->type == CMD && token->type == TK_IO_NUMBER)
+			return (1);
+	}
+	if (!*ast)
+	{
+		if (token->type == TK_IO_NUMBER)
+			return (1);
+	}
 	return (0);
 }
 

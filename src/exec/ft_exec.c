@@ -25,6 +25,7 @@ t_execmap	g_execmap[] =
 	{TK_ELIF, &exec_elif},
 	{TK_ELSE, &exec_else},
 	{TK_UNTIL, &exec_until},
+	{TK_FOR, &exec_for},
 	/* {TK_SUBSHELL, &exec_}, */
 	{CMD, &exec_cmd},
 	{0, 0},
