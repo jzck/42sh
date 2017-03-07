@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:17:21 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 16:21:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct	s_data_cmd
 	char		**av;
 	char		*path;
 	t_execf		*execf;
+	struct stat	stat;
 };
 
 struct	s_data_cond
@@ -134,18 +135,19 @@ int		exec_or_if(t_btree **ast);
 int		exec_and_if(t_btree **ast);
 int		exec_pipe(t_btree **ast);
 /* int		exec_redir(t_btree **ast); */
-int		exec_cmd(t_btree **ast);
+//int		exec_cmd(t_btree **ast);
+int		exec_leaf(t_btree **ast);
 
-int		exec_while(t_btree **ast);
-int		exec_if(t_btree **ast);
-int		exec_elif(t_btree **ast);
-int		exec_else(t_btree **ast);
-int		exec_until(t_btree **ast);
-int		exec_default(t_btree **ast);
+//int		exec_while(t_btree **ast);
+//int		exec_if(t_btree **ast);
+//int		exec_elif(t_btree **ast);
+//int		exec_else(t_btree **ast);
+//int		exec_until(t_btree **ast);
+//int		exec_default(t_btree **ast);
 int		exec_var(t_btree **ast);
-int		exec_for(t_btree **ast);
-int		exec_case(t_btree **ast);
-int		exec_case_branch(t_btree **ast);
+//int		exec_for(t_btree **ast);
+//int		exec_case(t_btree **ast);
+//int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
 
 int		launch_process(t_process *p);
@@ -180,4 +182,10 @@ int		add_new_job(t_job *job);
 
 int		error_badidentifier(char *name);
 
+/*
+** Mapping pour set les process
+*/
+int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
+
+int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:19:05 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:42:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_itof	g_launchmap[] =
 	{PROCESS_IF, NULL},
 	{PROCESS_FOR, NULL},
 	{PROCESS_CASE, NULL},
+	{0, NULL}
 };
 
 int		launch_process(t_process *p)
@@ -29,9 +30,9 @@ int		launch_process(t_process *p)
 	int			i;
 
 	i = 0;
-	while (g_launchmap[i].type)
+	while (g_launchmap[i].id)
 	{
-		if (p->type == g_launchmap[i].type)
+		if (p->type == g_launchmap[i].id)
 			if (!g_launchmap[i].f)
 				return (-1);
 			return ((*g_launchmap[i].f)(p));
