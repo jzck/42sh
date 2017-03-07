@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_reset.c                                    :+:      :+:    :+:   */
+/*   set_process_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 17:44:22 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 14:36:21 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/07 15:06:05 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 15:07:39 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	process_reset(t_process	*p)
+int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd)
 {
-//	p->av = NULL;
-//	p->path = NULL;
-//	p->execf = NULL;
-	p->pid = 0;
-	/* p->fdin = STDIN; */
-	/* p->fdout = STDOUT; */
-	p->to_close = 0;
-	p->redirs = NULL;
-	p->status = -1;
-	p->attrs = 0;
-//	p->condition = NULL;
-//	p->content = NULL;
+	if (!(p->data.cmd.av = token_to_argv(cmd->token, 1)))
+		return (1);
+	process_setexec(p);
+	return (0);
 }

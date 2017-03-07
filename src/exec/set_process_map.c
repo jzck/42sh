@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec.c                                          :+:      :+:    :+:   */
+/*   set_process_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 14:33:06 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/07 15:08:12 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 15:11:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_execmap	g_execmap[] =
+t_setprocessmap		g_setprocessmap[] =
 {
 	{TK_NEWLINE, &exec_semi},
 	{TK_SEMI, &exec_semi},
@@ -34,19 +34,17 @@ t_execmap	g_execmap[] =
 	{0, 0},
 };
 
-int		ft_exec(t_btree **ast)
+int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd)
 {
-	t_astnode	*item;
 	int			i;
 
 	i = 0;
-	if (!*ast)
+	if (!ast)
 		return (0);
-	item = (*ast)->item;
 	while (g_execmap[i].type)
 	{
-		if (item->type == g_execmap[i].type)
-			return ((*g_execmap[i].f)(ast));
+		if (p->type == g_setprocessmap[i].type)
+			return ((*g_setprocessmap[i].f)(p, ast, cmd));
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 12:32:05 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 14:46:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	process_format_com_long(t_list **plist)
 	else if (p->attrs & PROCESS_SUBSHELL)
 	{
 		ft_putstr("( ");
-		ft_putstr(p->av[2]);
+//		ft_putstr(p->data.cmd.av[2]);
 		ft_putstr(" )");
 	}
 	else
-		ft_sstrprint(p->av, ' ');
+		ft_sstrprint(p->data.cmd.av, ' ');
 	if ((*plist)->next)
 		ft_putstr(" |");
 	(*plist) = (*plist)->next;
@@ -77,11 +77,11 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 		else if (p->attrs & PROCESS_SUBSHELL)
 		{
 			ft_putstr("( ");
-			ft_putstr(p->av[2]);
+			ft_putstr(p->data.cmd.av[2]);
 			ft_putstr(" )");
 		}
 		else
-			ft_sstrprint(p->av, ' ');
+			ft_sstrprint(p->data.cmd.av, ' ');
 		if ((*plist)->next)
 			ft_putstr(" | ");
 		(*plist) = (*plist)->next;

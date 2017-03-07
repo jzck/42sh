@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 19:16:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 14:41:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,60 @@
 # define EXEC_IS_IF_BRANCH(j)	(j & EXEC_IF_BRANCH)
 # define EXEC_IS_CASE_BRANCH(j)	(j & EXEC_CASE_BRANCH)
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include "types.h"
 # include "job_control.h"
 
+struct	s_data_cmd
+{
+	char		**av;
+	char		*path;
+	t_execf		*execf;
+};
+
+struct	s_data_cond
+{
+	t_btree		*condition;
+	t_btree		*content;
+};
+
+struct	s_data_list
+{
+	char	*word;
+	t_ld	*list_word;
+	t_btree	*content;
+};
+
+union	u_process_data
+{
+	struct s_data_cmd	cmd;
+	struct s_data_cond	d_while;
+	struct s_data_cond	d_if;
+	struct s_data_cond	d_else;
+	struct s_data_cond	d_elif;
+	struct s_data_list	d_for;
+//	struct s_data_cond	case;
+};
+
+typedef union u_process_data	t_pdata;
+typedef struct s_data_cond		t_data_while;
+typedef struct s_data_cond		t_data_if;
 struct	s_process
 {
-	char	**av;
-	char	*path;
-	t_execf	*execf;
+	//normal_cmd
+//	char	**av;
+//	char	*path;
+//	t_execf	*execf;
+	//while, if, elif ....
+//	t_btree		*condition;
+//	t_btree		*content;
+	//for => utilisation du av et du content
+//	char		**av;
+//	t_btree		*content;
+
+
+	t_pdata	data;
+
 	pid_t	pid;
 	int		fdin;
 	int		fdout;

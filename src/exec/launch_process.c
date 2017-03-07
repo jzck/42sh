@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 16:20:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 14:43:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ int		launch_process(t_process *p)
 	{
 		if (process_redirect(p))
 			return (1);
-		set_exitstatus((*p->execf)(p->path, p->av, data_singleton()->env), 1);
+		set_exitstatus((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env), 1);
 		return (1);
 	}
 	p->attrs &= ~PROCESS_STATE_MASK;
 	p->attrs |= PROCESS_RUNNING;
 	if (p->attrs & (PROCESS_BINARY | PROCESS_SCRIPT)
-			&& access(p->path, X_OK) == -1)
+			&& access(p->data.cmd.path, X_OK) == -1)
 	{
-		ft_dprintf(2, "{red}%s: permission denied: %s{eoc}\n", SHELL_NAME, p->av[0]);
+		ft_dprintf(2, "{red}%s: permission denied: %s{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 		set_exitstatus(126, 1);
 		return (1);
 	}
@@ -40,7 +40,7 @@ int		launch_process(t_process *p)
 	{
 		if (p->attrs & PROCESS_UNKNOWN)
 		{
-			ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->av[0]);
+			ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 			exit(127);
 		}
 		process_setgroup(p, 0);
@@ -48,9 +48,9 @@ int		launch_process(t_process *p)
 		if (process_redirect(p))
 			exit (1);
 		if (p->attrs & PROCESS_BUILTIN)
-			exit((*p->execf)(p->path, p->av, data_singleton()->env));
-		(*p->execf)(p->path, p->av, data_singleton()->env);
-		ft_dprintf(2, "{red}%s: internal execve error on %s{eoc}\n", SHELL_NAME, p->av[0]);
+			exit((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env));
+		(*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env);
+		ft_dprintf(2, "{red}%s: internal execve error on %s{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 	}
 	else if (pid > 0)
 	{

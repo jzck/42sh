@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 18:41:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 15:07:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int		set_process(t_process *p, t_btree *ast)
 	|| (EXEC_IS_OR_IF(exec->attrs)
 		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
 			return (1);
-	if (!(p->av = token_to_argv(cmd->token, 1)))
-		return (1);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
 	if (op == TK_AMP)
@@ -41,14 +39,8 @@ int		set_process(t_process *p, t_btree *ast)
 	p->fdout = fds[PIPE_WRITE];
 	exec->fdin = fds[PIPE_READ];
 	p->redirs = ft_lstmap(cmd->redir, ft_id);
-	t_list *tmp = p->redirs;
-	while (tmp)
-	{
-		t_redir *toto = tmp->content;
-		printf("IIIIIIIIIIIIIIIIIIIIIII%lld |%d| {%s}\n", toto->type, toto->n, toto->word);
-		tmp= tmp->next;
-	}
-	process_setexec(p);
+	if (set_process_map(p, ast, cmd))
+		return (1);
 	if (exec->control_count)
 		p->attrs |= PROCESS_CONTROL;
 	return (0);
