@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 20:55:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:08:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 # include <sys/stat.h>
+# include "minishell.h"
 
 # define PIPE_READ		0
 # define PIPE_WRITE		1
@@ -146,8 +147,6 @@ int		exec_var(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
 
-int		launch_process(t_process *p);
-int		set_process(t_process *p, t_btree *ast);
 int		process_setexec(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
@@ -175,15 +174,25 @@ void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
 
-# include <sys/stat.h>
 int		add_new_job(t_job *job);
 
 int		error_badidentifier(char *name);
 
 /*
+** Mapping pour launch les process
+*/
+int		launch_process(t_process *p);
+int		launch_if(t_process *p);
+int		launch_while(t_process *p);
+int		launch_for(t_process *p);
+int		launch_case(t_process *p);
+int		launch_file(t_process *p);
+int		launch_builtin(t_process *p);
+
+/*
 ** Mapping pour set les process
 */
+int		set_process(t_process *p, t_btree *ast);
 int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
-
 int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
 #endif

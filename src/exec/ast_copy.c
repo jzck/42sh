@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 20:44:42 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:50:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:25:15 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 t_btree		*ast_copy(t_btree *tree)
 {

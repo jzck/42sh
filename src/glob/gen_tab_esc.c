@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 20:04:40 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:07:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:14:55 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 char						**gen_tab(const char *pat,
 		const unsigned char *esc,

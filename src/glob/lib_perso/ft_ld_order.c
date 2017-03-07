@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 19:20:45 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 19:40:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:19:13 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 t_ld	*ft_ld_order(t_ld *ld, int (*f)(), void (*del)())
 {

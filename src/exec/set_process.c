@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:34:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:12:02 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		set_process(t_process *p, t_btree *ast)
 	p->redirs = ft_lstmap(cmd->redir, ft_id);
 	if (set_process_map(p, ast, cmd))
 		return (1);
-	if (exec->control_count)
-		p->attrs |= PROCESS_CONTROL;
+//	if (exec->control_count)
+//		p->attrs |= PROCESS_CONTROL;
 	return (0);
 }

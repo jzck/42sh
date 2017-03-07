@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 15:12:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 21:04:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redirmap	g_redirmap[] =
+t_itof		g_redirmap[] =
 {
 	{TK_LESS, redirect_less},
 	{TK_GREAT, redirect_great},
@@ -38,10 +38,10 @@ int		process_redirect(t_process *p)
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
 		i = 0;
-		while (g_redirmap[i].type)
+		while (g_redirmap[i].id)
 		{
 			DG("process redirect");
-			if (g_redirmap[i].type == redir->type)
+			if (g_redirmap[i].id == redir->type)
 			{
 				if ((g_redirmap[i].f)(redir))
 					return (1);

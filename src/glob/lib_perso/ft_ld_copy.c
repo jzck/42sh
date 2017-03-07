@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:42:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:29:28 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:21:30 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 t_ld	*ft_ld_copy(t_ld *src, void *(*f)(void *elem))
 {
@@ -21,9 +21,9 @@ t_ld	*ft_ld_copy(t_ld *src, void *(*f)(void *elem))
 	while (src)
 	{
 		content = (*f)(src->content);
-		ft_ld_pushfront(dst, content);
+		ft_ld_pushfront(&dst, content);
 		src = src->next;
 	}
-	ft_ld_reverse(dst);
+	ft_ld_reverse(&dst);
 	return (dst);
 }

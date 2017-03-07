@@ -58,6 +58,7 @@ completion/c_rematch.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
+exec/ast_copy.c\
 exec/ast_free.c\
 exec/bad_fd.c\
 exec/error_badidentifier.c\

@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 18:59:11 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 18:59:38 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:20:53 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 int				word_is_assignment(char **content)
 {

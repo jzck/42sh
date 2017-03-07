@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 18:47:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 21:24:40 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
-	{TK_NAME, TK_BAMG, FNAME},
+	{TK_NAME, TK_BANG, FNAME},
 	{TK_NAME, LINEBREAK, FNAME},
 	{TK_NAME, TK_PAREN_OPEN, FNAME},
 	{TK_NAME, TK_LBRACE, FNAME},

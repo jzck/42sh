@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 18:38:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:13:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include "types.h"
 # include "lexer.h"
 # include "parser.h"

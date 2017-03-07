@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:26:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 18:36:02 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:03:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 static int		do_if(t_process *p)
 {

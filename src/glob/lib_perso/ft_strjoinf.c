@@ -6,11 +6,11 @@
 /*   By: wescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 13:33:24 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/24 16:53:13 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:19:55 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 char	*ft_strjoinf(char *s1, char *s2, int state)
 {

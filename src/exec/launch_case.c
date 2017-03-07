@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:02:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:38:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:02:46 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 /*
 int			exec_case(t_btree **ast)
 {
