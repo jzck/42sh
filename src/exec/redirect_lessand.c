@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:11:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 19:43:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:53:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		redirect_lessand(t_redir *redir)
 		return (0);
 	if (fdold > 9)
 		return (bad_fd(fdold));
-	if (fd_is_valid(fdold))
+	if (fd_is_valid(fdold, O_WRONLY))
 		dup2_close(fdold, fdnew);
 	else
 		return (bad_fd(fdold));
