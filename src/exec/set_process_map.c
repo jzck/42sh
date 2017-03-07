@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:08:12 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 15:50:56 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 22:24:21 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_itof		g_setprocessmap[] =
 	{TK_AND_IF, NULL},
 	{TK_OR_IF,NULL},
 	{TK_PIPE, NULL},
-	{TK_WHILE, NULL},
-	{TK_IF, NULL},
+	{TK_WHILE, &set_process_while},
+	{TK_IF, &set_process_if},
 	{TK_ELIF, NULL},
 	{TK_ELSE, NULL},
-	{TK_UNTIL, NULL},
-	{TK_FOR, NULL},
-	{TK_CASE, NULL},
+	{TK_UNTIL, &set_process_until},
+	{TK_FOR, &set_process_for},
+	{TK_CASE, &set_process_case},
 	{TK_PAREN_OPEN, NULL},
 	{TK_ASSIGNEMENT_WORD, NULL},
 	{MATH, NULL},
@@ -38,15 +38,18 @@ t_itof		g_setprocessmap[] =
 int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd)
 {
 	int			i;
+	t_astnode	*item;
 
-	i = 0;
+	i = -1;
 	if (!ast)
 		return (0);
-	while (g_setprocessmap[i].id)
-	{
-		if (p->type == g_setprocessmap[i].id)
+	item = ast->item;
+	while (g_setprocessmap[++i].id)
+		if (item->type == g_setprocessmap[i].id)
+		{
+			if (!g_setprocessmap[i].f)
+				return (0);
 			return ((*g_setprocessmap[i].f)(p, ast, cmd));
-		i++;
-	}
+		}
 	return (0);
 }

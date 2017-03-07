@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:08:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 22:23:06 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ enum	e_process_type
 	PROCESS_FILE,
 	PROCESS_SUBSHELL,
 	PROCESS_WHILE,
+	PROCESS_UNTIL,
 	PROCESS_IF,
 	PROCESS_FOR,
 	PROCESS_CASE,
+	PROCESS_MAX
 };
 
 typedef enum e_process_type		t_process_type;
@@ -184,6 +186,7 @@ int		error_badidentifier(char *name);
 int		launch_process(t_process *p);
 int		launch_if(t_process *p);
 int		launch_while(t_process *p);
+int		launch_until(t_process *p);
 int		launch_for(t_process *p);
 int		launch_case(t_process *p);
 int		launch_file(t_process *p);
@@ -195,4 +198,9 @@ int		launch_builtin(t_process *p);
 int		set_process(t_process *p, t_btree *ast);
 int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
 int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_while(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_for(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_case(t_process *p, t_btree *ast, t_cmd *cmd);
 #endif

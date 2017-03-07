@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:07:33 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 22:21:07 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_itof	g_launchmap[] =
 	{PROCESS_FILE, launch_file},
 	{PROCESS_SUBSHELL, NULL},
 	{PROCESS_WHILE, launch_while},
+	{PROCESS_UNTIL, launch_until},
 	{PROCESS_IF, launch_if},
 	{PROCESS_FOR, launch_for},
 	{PROCESS_CASE, launch_case},
@@ -27,9 +28,21 @@ t_itof	g_launchmap[] =
 
 int		launch_process(t_process *p)
 {
-	int			i;
+//	int			i;
 	int			pid;
 
+	if (p->type >= PROCESS_MAX)
+		return (-1);
+	if (!g_launchmap[p->type].f)
+		return (-1);
+	p->attrs &= ~PROCESS_STATE_MASK;
+	p->attrs |= PROCESS_RUNNING;
+	if (!(pid = (*g_launchmap[p->type].f)(p)))
+		return (-1);
+	p->pid = pid;
+	process_setgroup(p, pid);
+	return (0);
+	/*
 	i = 0;
 	while (g_launchmap[i].id)
 	{
@@ -49,4 +62,5 @@ int		launch_process(t_process *p)
 		i++;
 	}
 	return (-1);
+	*/
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 20:58:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:33:56 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		launch_file(t_process *p)
 {
 	int		pid;
 
+	DG("in file");
 	pid = fork();
 	if (pid == 0)
 	{
