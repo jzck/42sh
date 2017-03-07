@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 10:58:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 12:19:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 13:33:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ int			exec_math(t_btree **ast)
 	node = (*ast)->item;
 	av = token_to_argv(node->data.cmd.wordlist, 1);
 	get_math(av[0], &var, &value, &operator);
-	DG("var : %s", var);
-	DG("value : %s", value);
-	DG("operator : %s", operator);
 	do_math(&value, operator);
-	DG("value : %s", value);
 	builtin_setenv("setenv", (char *[]){var, value, 0}, data_singleton()->local_var);
 	return (0);
 }
