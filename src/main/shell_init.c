@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 17:07:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:23:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	shell_init(int ac, char **av)
 	data = data_singleton();
 	data->argc = ac;
 	data->argv = ft_sstrdup(av);
-	atexit(&shell_exit);
 	shell_get_opts(ac, av);
 	if (SH_IS_INTERACTIVE(data->opts))
 	{

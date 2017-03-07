@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/20 19:13:50 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:24:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int		main(int ac, char **av)
 	t_data	*data;
 
 	data = data_singleton();
+	DG();DG();
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
 //	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
@@ -93,5 +94,6 @@ int		main(int ac, char **av)
 	}
 	else
 		non_interactive_shell(shell_get_avdata());
+	builtin_exit(0);
 	return (0);
 }

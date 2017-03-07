@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/18 16:48:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 15:24:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		ft_dprintf(2, "{red}%s: you have live jobs (running or suspended).{eoc}\n", SHELL_NAME);
 		return (0);
 	}
-	if (av[1])
+	if (av && av[1])
 		status = ft_atoi(av[1]);
 	else
 	{
@@ -38,6 +38,9 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 	}
 	ft_save_termios(-1);
 	ft_free_hash_table();
+	data_exit();
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
+		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 	exit(status);
 	return (0);
 }
