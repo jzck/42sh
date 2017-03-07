@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/05 17:07:12 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 17:08:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void		ft_c(void)
 {
 	char	*tmp;
 
+	if (!STR)
+		return ;
 	tmp = data_singleton()->line.copy_tmp;
 	if (tmp)
 		ft_strdel(&tmp);
