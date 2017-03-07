@@ -78,6 +78,7 @@ exec/exec_semi.c\
 exec/exec_until.c\
 exec/exec_var.c\
 exec/exec_while.c\
+exec/exec_math.c\
 exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\

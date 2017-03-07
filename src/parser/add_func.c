@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 14:27:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 10:49:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		add_one_func(t_btree **ast, t_list **lst)
 	t_btree	*func_ast;
 
 	(void)lst;
-	func_ast = btree_map(*ast, &id);
+//	func_ast = btree_map(*ast, &id);
 	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(&func_ast, sizeof(*ast)));
 	DG("arbre ajoute");
 	return (0);

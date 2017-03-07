@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 14:33:06 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:18:27 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_execmap	g_execmap[] =
+t_itof	g_execmap[] =
 {
 	{TK_NEWLINE, &exec_semi},
 	{TK_SEMI, &exec_semi},
@@ -29,6 +29,7 @@ t_execmap	g_execmap[] =
 	{TK_CASE, &exec_case},
 	{TK_PAREN_OPEN, &exec_case_branch},
 	{TK_ASSIGNEMENT_WORD, &exec_var},
+	{MATH, &exec_math},
 	/* {TK_SUBSHELL, &exec_}, */
 	{CMD, &exec_cmd},
 	{0, 0},

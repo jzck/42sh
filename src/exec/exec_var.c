@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_while.c                                       :+:      :+:    :+:   */
+/*   exec_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 17:33:53 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 12:17:43 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/07 14:40:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 static int	set_var(char *stream, char **var, char **value)
 {
-	(void)stream;
-	(void)var;
-	(void)value;
-/*	*var = ft_strdupchr(stream, '=');
+	*var = ft_strdupchr(stream, '=');
 	stream += ft_strlenchr(stream, '=') + 1;
-	value = ft_strdup(stream);*/
+	*value = ft_strdup(stream);
 	return (0);
 }
 
