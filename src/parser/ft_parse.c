@@ -43,7 +43,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 		{
 			if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
-				return (1);
+				return (0);
 			push_stack(&parser->stack, *parser->new_sym);
 		}
 //		ft_read_stack(parser->stack);
