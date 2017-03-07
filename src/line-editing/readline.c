@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/04 16:50:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 11:20:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void			ft_init_history(void)
 		return ;
 	while (get_next_line(fd, &str) > 0)
 	{
+		if (!*str)
+			continue ;
 		ft_push_back_history(&data_singleton()->line.list_beg,
 		ft_create_history_list(str));
 		free(str);
