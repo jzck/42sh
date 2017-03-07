@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 19:16:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 11:47:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		exec_var(t_btree **ast);
 int		exec_for(t_btree **ast);
 int		exec_case(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
+int		exec_math(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		set_process(t_process *p, t_btree *ast);

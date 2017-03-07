@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 19:36:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 11:52:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		add_pattern(t_btree **ast, t_list **lst)
 	t_token		*token;
 	char		**my_tab;
 	
+	DG("add pattern");
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
