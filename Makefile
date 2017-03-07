@@ -60,6 +60,7 @@ completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
 exec/bad_fd.c\
+exec/error_badidentifier.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_case.c\
@@ -96,7 +97,6 @@ exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
 exec/set_process.c\
-exec/error_badidentifier.c\
 glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
@@ -235,12 +235,12 @@ parser/add_cmd.c\
 parser/add_condition.c\
 parser/add_func.c\
 parser/add_loop.c\
+parser/add_math.c\
+parser/add_number.c\
 parser/add_redir.c\
 parser/add_sep.c\
 parser/add_subshell.c\
 parser/add_var.c\
-parser/add_number.c\
-parser/add_math.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
 parser/error_syntax.c\

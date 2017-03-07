@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:33:53 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 20:32:27 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 12:17:43 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static int	set_var(char *stream, char **var, char **value)
 {
-	*var = ft_strdupchr(stream, '=');
+	(void)stream;
+	(void)var;
+	(void)value;
+/*	*var = ft_strdupchr(stream, '=');
 	stream += ft_strlenchr(stream, '=') + 1;
-	*value = ft_strdup(stream);
+	value = ft_strdup(stream);*/
 	return (0);
 }
 
