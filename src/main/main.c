@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 17:58:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 14:43:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		handle_instruction(int fd)
 		token_print(token);
 		if (insert_newline(&token))
 			return (1);
+		DG("exit newline");
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
 		if (parser.state == SUCCESS)

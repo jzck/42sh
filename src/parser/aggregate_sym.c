@@ -99,7 +99,7 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, COMPLETE_COMMANDS, LINEBREAK, 0},
 	{NEWLINE_LIST, LINEBREAK, PROGRAM, LINEBREAK},
 	{NEWLINE_LIST, FOR_WORDLIST, SEQUENTIAL_SEP, 0},
-
+	{SEQUENTIAL_SEP, FOR_WORDLIST, SEQUENTIAL_SEP, FOR_WORDLIST},
 //to check
 	{FILENAME, TK_LESS, IO_FILE, TK_LESS},
 	{FILENAME, TK_LESSAND, IO_FILE, TK_LESSAND},
@@ -322,6 +322,8 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 	t_sym		*head;
 	int		i;
 
+	if (!*stack || !*new_sym || !*state)
+		return (1);
 	i = 0;
 	head = (*stack)->content;
 	DG("aggregate head %s && sym %s",
@@ -336,13 +338,15 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
-				if (pop_stack(stack, g_aggrematch[i].erase_sym))
-				return (1);
+				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
 				DG("stack after pop: %s", read_state(*head));
 			}
 			if (eval_sym(stack, *new_sym))
-				return ((*state = ERROR));
+			{
+				*state = ERROR;
+				return (1);
+			}
 			aggregate_sym(stack, new_sym, state);
 			return (0);
 		}
