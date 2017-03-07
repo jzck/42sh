@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:11 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/28 11:11:26 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 17:33:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				ft_put(int nb)
+int		ft_put(int nb)
 {
 	write(1, &nb, 1);
 	return (1);

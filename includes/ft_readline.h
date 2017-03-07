@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/05 19:37:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 17:36:15 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,8 @@ char			*ft_strdupi_w(char const *s);
 void			ft_add_str_in_history(char *str);
 void			ft_init_history(void);
 char			*ft_history_parsing(void);
+struct termios	*ft_save_termios(int save);
+void			ft_init_termios(void);
+void			readline_init(char *prompt);
 
 #endif

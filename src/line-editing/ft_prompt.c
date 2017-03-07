@@ -6,20 +6,45 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 14:27:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 17:32:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_git_status(void)
+static int	promt_git_status(int fd)
 {
-	int		pip[2];
 	int		len;
 	char	*tmp;
 	char	*line;
-	pid_t	soon;
-	char	*exec[] = {"git", "status", "--porcelain", "--branch", NULL};
+
+	get_next_line(fd, &line);
+	tmp = line;
+	if (ft_strrchr(line, '/'))
+		line = ft_strdup(ft_strrchr(line, '/') + 1);
+	else
+		line = ft_strdup(line + 3);
+	ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
+	free(tmp);
+	if (!get_next_line(fd, &tmp))
+		printf("\x1b[38;5;83m %C ", L'✓');
+	else
+	{
+		printf("\x1b[38;5;1m %C ", L'✗');
+		while (get_next_line(fd, &tmp))
+			free(tmp);
+	}
+	len = ft_strlen(line);
+	ft_strdel(&line);
+	fflush(NULL);
+	return (len + 8);
+}
+
+static int	ft_git_status(void)
+{
+	static char	*exec[] = {"git", "status", "--porcelain", "--branch", NULL};
+	int			pip[2];
+	pid_t		soon;
 
 	pipe(pip);
 	if ((soon = fork()))
@@ -28,28 +53,7 @@ static int	ft_git_status(void)
 		if (WEXITSTATUS(soon))
 			return (-1);
 		close(pip[1]);
-		get_next_line(pip[0], &line);
-		tmp = line;
-		if (ft_strrchr(line, '/'))
-		{
-			line = ft_strdup(ft_strrchr(line, '/') + 1);
-			ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
-			free(tmp);
-		}
-		else
-		{
-			line = ft_strdup(line + 3);
-			ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
-			free(tmp);
-		}
-		if (!get_next_line(pip[0], &tmp))
-			printf("\x1b[38;5;83m %C ", L'✓');
-		else
-		{
-			printf("\x1b[38;5;1m %C ", L'✗');
-			free(tmp);
-		}
-		fflush(NULL);
+		return (promt_git_status(pip[0]));
 	}
 	else
 	{
@@ -58,9 +62,7 @@ static int	ft_git_status(void)
 		close(pip[0]);
 		execve("/usr/bin/git", exec, data_singleton()->env);
 	}
-	len = ft_strlen(line);
-	ft_strdel(&line);
-	return (len + 8);
+	return (0);
 }
 
 static int	ft_currend_dir(void)
@@ -88,13 +90,14 @@ static int	ft_currend_dir(void)
 	return (ft_strlen(currend_dir + 1));
 }
 
-void		ft_prompt()
+void		ft_prompt(void)
 {
-	int 	ret;
+	int ret;
 
 	ret = 0;
 	do_job_notification();
-	if (ft_getenv(data_singleton()->env, "?") && ft_atoi(ft_getenv(data_singleton()->env, "?")))
+	if (ft_getenv(data_singleton()->env, "?") &&
+					ft_atoi(ft_getenv(data_singleton()->env, "?")))
 		printf("\x1b[38;5;1m%C  ", L'➜');
 	else
 		printf("\x1b[38;5;10m%C  ", L'➜');

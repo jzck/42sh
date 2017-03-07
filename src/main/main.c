@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:24:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:28:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ int		main(int ac, char **av)
 	}
 	else
 		non_interactive_shell(shell_get_avdata());
-	builtin_exit(0);
+//	builtin_exit(0);
 	return (0);
 }

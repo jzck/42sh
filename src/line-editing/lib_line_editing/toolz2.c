@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/20 14:32:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 17:32:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ long long	ft_pow(int nbr, int power)
 	return (ret);
 }
 
-char	*ft_strdupi_w(char const *s)
+char		*ft_strdupi_w(char const *s)
 {
 	int		i;
 	char	*str;

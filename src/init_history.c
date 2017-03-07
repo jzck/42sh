@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   init_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:35:13 by gwojda           ###   ########.fr       */
+/*   Created: 2017/03/07 17:34:23 by gwojda            #+#    #+#             */
+/*   Updated: 2017/03/07 17:34:35 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*readline(char *prompt)
+void			ft_init_history(void)
 {
-	char	*input;
+	int		fd;
+	char	*str;
+	char	*home;
+	char	*path;
 
-	readline_init(prompt);
-	input = ft_read_stdin();
-	if (STR)
-		ft_current_str(STR, POS);
-	ft_putchar('\n');
-	if (!prompt)
-		input = ft_history_parsing();
-	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
-		return (NULL);
-	return (input);
+	if (!(home = ft_getenv(data_singleton()->env, "HOME")))
+		return ;
+	path = ft_str3join(home, "/", ".42sh_history");
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return ;
+	while (get_next_line(fd, &str) > 0)
+	{
+		ft_push_back_history(&data_singleton()->line.list_beg,
+		ft_create_history_list(str));
+		free(str);
+	}
+	free(path);
+	free(str);
+	close(fd);
 }

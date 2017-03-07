@@ -126,6 +126,8 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
+init_history.c\
+init_line.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
@@ -195,6 +197,7 @@ line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\
 line-editing/home_end.c\
+line-editing/init_termcaps.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\
 line-editing/lib_line_editing/toolz.c\
@@ -216,7 +219,6 @@ main/ft_putast2.c\
 main/lib_expansion.c\
 main/main.c\
 main/remove_trailing_esc_nl.c\
-main/shell_exit.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
