@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 18:23:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:38:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include "lexer.h"
 # include "parser.h"
 # include "ft_readline.h"
+# include "job_control.h"
 # include "exec.h"
 # include "builtin.h"
-# include "job_control.h"
 # include "glob.h"
 # include "completion.h"
 # include "hash.h"
