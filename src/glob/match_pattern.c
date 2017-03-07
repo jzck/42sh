@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 static int		match_bracket_char(char **cmp, const char *pat, char c, int neg)
 {

@@ -6,11 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 10:58:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 13:42:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 16:00:24 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 static int	get_math(char *stream, char **var, char **value, char **operator)
 {
@@ -45,7 +45,7 @@ static int	do_math(char **value, char *operator)
 		ope2 = ft_atoi(&operator[2]);
 	else
 		ope2 = 0;
-	if (operator[0] == '/' && ope2 == 0)
+	if ((operator[0] == '/' || operator[0] == '%') && ope2 == 0)
 		ope1 = 0;
 	else
 	{

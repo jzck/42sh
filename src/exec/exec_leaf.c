@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   exec_leaf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 17:28:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 17:33:50 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 17:34:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int				exec_cmd(t_btree **ast)
+
+int				exec_leaf(t_btree **ast)
 {
 	t_process	p;
 	t_job		*job;
@@ -35,4 +35,4 @@ int				exec_cmd(t_btree **ast)
 	if (p.fdout != STDOUT)
 		close(p.fdout);
 	return (0);
-}*/
+}

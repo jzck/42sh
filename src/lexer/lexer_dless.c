@@ -1,4 +1,4 @@
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_dless(t_list **alst, t_lexer *lexer)
 {

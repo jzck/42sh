@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 18:03:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 13:55:25 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_number(t_list **alst, t_lexer *lexer)
 {
@@ -28,6 +28,7 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 	else if (ft_isdigit(lexer->str[lexer->pos])
 			&& ft_isdigit(lexer->str[lexer->pos + 1]))
 	{
+		DG();
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_number(alst, lexer));
@@ -36,13 +37,16 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 			&& (lexer->str[lexer->pos + 1] == '>'
 				|| lexer->str[lexer->pos + 1] == '<'))
 	{
+		DG();
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	else
 	{
+		DG();
 		token->type = TK_WORD;
+		lexer->state = DEFAULT;
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_lex(alst, lexer));

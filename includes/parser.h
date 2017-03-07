@@ -12,11 +12,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minishell.h"
-
 /*
- * Parse POSIX grammar
- *
+** Parse POSIX grammar
 */
 
 enum	e_parstate
@@ -43,8 +40,6 @@ struct	s_aggrematch
 	int	erase_sym;
 };
 
-extern t_aggrematch g_aggrematch[];
-
 struct	s_prodmatch
 {
 	t_type	token;
@@ -52,15 +47,11 @@ struct	s_prodmatch
 	t_sym	new_sym;
 };
 
-extern t_prodmatch g_prodmatch[];
-
 struct	s_stackmatch
 {
 	t_sym top;
 	t_sym under;
 };
-
-extern t_stackmatch g_stackmatch[];
 
 struct	s_errormatch
 {
@@ -68,6 +59,9 @@ struct	s_errormatch
 	char	*error;
 };
 
+extern t_aggrematch g_aggrematch[];
+extern t_prodmatch g_prodmatch[];
+extern t_stackmatch g_stackmatch[];
 extern t_errormatch	g_errormatch[];
 
 void	parser_init(t_parser *parser);

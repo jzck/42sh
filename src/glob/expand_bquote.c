@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 static void					expand_all_bquote(t_bquote *me, char *content,
 											char *ifs)

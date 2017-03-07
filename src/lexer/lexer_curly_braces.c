@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 int			lexer_curly_braces(t_list **alst, t_lexer *lexer)
 {

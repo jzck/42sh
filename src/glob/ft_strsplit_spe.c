@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 static int		ft_strlen_c(const char *str, const char *fix,
 							const unsigned char *esc, char c)

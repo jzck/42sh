@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
-#include "exec.h"
+#include "minishell.h"
+#include "minishell.h"
 
 int		process_setgroup(t_process *p, pid_t pid)
 {

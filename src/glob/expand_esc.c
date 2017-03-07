@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 unsigned char				*calc_expand_esc(const unsigned char *esc,
 							int nb_start, int *nb_middle, int *nb_end)

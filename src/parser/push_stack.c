@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 //int		push_stack(t_sym *stack, t_sym new_sym)
 int		push_stack(t_list **stack, t_sym sym)

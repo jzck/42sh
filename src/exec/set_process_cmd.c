@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_free.c                                       :+:      :+:    :+:   */
+/*   set_process_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 12:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:57:46 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/07 15:06:05 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 15:50:51 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	token_free(void *data, size_t size)
+int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd)
 {
-	t_token		*token;
-
-	(void)size;
-	token = data;
-	ft_strdel(&token->data);
-	ft_memdel((void **)&token->esc);
-	ft_memdel((void **)&token->esc2);
-	free(token);
+	if (!(p->data.cmd.av = token_to_argv(cmd->token, 1)))
+		return (1);
+	process_setexec(p);
+	return (0);
 }

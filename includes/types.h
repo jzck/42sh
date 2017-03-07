@@ -6,22 +6,42 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:37:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 19:43:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 
-typedef struct s_data			t_data;
+# include <sys/types.h>
+
+# define SH_INTERACTIVE			(1 << 0)
+# define SH_OPTS_JOBC			(1 << 1)
+# define SH_OPTS_LC				(1 << 2)
+# define SH_MODE_INPUT			(1 << 3)
+# define SH_MODE_EXEC			(1 << 4)
+
+# define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
+# define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
+# define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
+# define SH_NO_INTERACTIVE(b)	!(b & SH_INTERACTIVE)
+
+# define SH_MSG_NOJOBC	"no job-control"
 
 typedef long long				t_type;
 typedef long long				t_flag;
+
+typedef struct s_data			t_data;
 typedef struct s_line			t_line;
 typedef struct s_comp			t_comp;
 typedef struct s_exec			t_exec;
 typedef struct s_jobc			t_jobc;
 typedef enum e_mode				t_mode;
+
+/*
+**	Execution types
+*/
 
 typedef struct s_lexer			t_lexer;
 typedef enum e_lexstate			t_lexstate;
@@ -29,21 +49,29 @@ typedef struct s_token			t_token;
 typedef struct s_rvwords		t_rvwords;
 
 typedef struct s_ld				t_ld;
+
+/*
+**	Execution types
+*/
+
+typedef int		 				t_condition;
+typedef struct s_job			t_job;
+typedef struct s_process		t_process;
+typedef int						(t_execf)(const char *path,
+		char *const argv[],
+		char *const envp[]);
+
+/*
+**	Parser types
+*/
+
 typedef struct s_astnode		t_astnode;
 typedef struct s_redir			t_redir;
 typedef struct s_cmd			t_cmd;
 typedef union u_astdata			t_astdata;
 typedef union u_word			t_word;
-
-typedef int 				t_condition;
-typedef struct s_job			t_job;
-typedef struct s_execmap		t_execmap;
-typedef struct s_redirmap		t_redirmap;
-typedef struct s_process		t_process;
-typedef int		(t_execf)(const char *path, char *const argv[], char *const envp[]);
-
-typedef int						t_sym;
 typedef struct s_parser			t_parser;
+typedef int						t_sym;
 typedef enum e_parstate			t_parstate;
 typedef struct s_aggrematch		t_aggrematch;
 typedef struct s_prodmatch		t_prodmatch;
@@ -168,5 +196,34 @@ enum	e_sym
 	ALL = 200,
 	TERMINUS = 300,
 };
+
+/*
+** LIST D:
+*/
+
+void			ft_ld_new(t_ld **alst, void *content);
+t_ld			*ft_ld_front(t_ld	*ld);
+void			ft_ld_pushfront(t_ld **alst, void *content);
+void			ft_ld_pushback(t_ld **alst, void *content);
+size_t			ft_ld_size(t_ld *ld);
+void			ft_ld_del(t_ld **ld, void (*del)());
+void			ft_ld_clear(t_ld **ld, void (*del)());
+void			ft_ld_reverse(t_ld **lst);
+t_ld			*ft_ld_back(t_ld *ld);
+t_ld			*ft_ld_swap(t_ld *l_cur);
+char			**ft_ld_to_tab(t_ld *ld);
+t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
+
+/*
+** str:
+*/
+
+char			*ft_strjoinf(char *str, char *str2, int mode);
+char			*ft_strsubf(char *s, unsigned int start,
+							size_t len, short int mode);
+void			ft_tabdel(char ***mytab);
+int				ft_tablen(char **mytab);
+
+void			*ft_memrealloc(void *ptr, size_t old_s, size_t new_s);
 
 #endif

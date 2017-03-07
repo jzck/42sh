@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "completion.h"
+#include "minishell.h"
 
 /*
 ** Support: Return the size of a char**.

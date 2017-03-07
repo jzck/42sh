@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		token_append_char(t_token *token, char c,
 		short int esc, short int esc2)

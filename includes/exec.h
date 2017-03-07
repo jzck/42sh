@@ -6,12 +6,14 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:36:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 19:43:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+# include <sys/stat.h>
 
 # define PIPE_READ		0
 # define PIPE_WRITE		1
@@ -42,9 +44,37 @@
 # define EXEC_IS_IF_BRANCH(j)	(j & EXEC_IF_BRANCH)
 # define EXEC_IS_CASE_BRANCH(j)	(j & EXEC_CASE_BRANCH)
 
-# include "libft.h"
-# include "types.h"
-# include "job_control.h"
+struct	s_data_cmd
+{
+	char		**av;
+	char		*path;
+	t_execf		*execf;
+	struct stat	stat;
+};
+
+struct	s_data_cond
+{
+	t_btree		*condition;
+	t_btree		*content;
+};
+
+struct	s_data_list
+{
+	char	*word;
+	t_ld	*list_word;
+	t_btree	*content;
+};
+
+union	u_process_data
+{
+	struct s_data_cmd	cmd;
+	struct s_data_cond	d_while;
+	struct s_data_cond	d_if;
+	struct s_data_cond	d_else;
+	struct s_data_cond	d_elif;
+	struct s_data_list	d_for;
+//	struct s_data_cond	case;
+};
 
 enum	e_process_type
 {
@@ -59,12 +89,12 @@ enum	e_process_type
 };
 
 typedef enum e_process_type		t_process_type;
+typedef union u_process_data	t_process_data;
+typedef struct s_data_cond		t_data_while;
+typedef struct s_data_cond		t_data_if;
 
 struct	s_process
 {
-	/* char	**av; */
-	/* char	*path; */
-	/* t_execf	*execf; */
 	t_process_type	type;
 	t_process_data	data;
 	pid_t			pid;
@@ -87,7 +117,6 @@ struct	s_exec
 	int			control_count;
 };
 
-#include "minishell.h"
 
 extern t_itof	g_execmap[];
 extern t_itof	g_redirmap[];
@@ -103,18 +132,19 @@ int		exec_or_if(t_btree **ast);
 int		exec_and_if(t_btree **ast);
 int		exec_pipe(t_btree **ast);
 /* int		exec_redir(t_btree **ast); */
-int		exec_cmd(t_btree **ast);
+//int		exec_cmd(t_btree **ast);
+int		exec_leaf(t_btree **ast);
 
-int		exec_while(t_btree **ast);
-int		exec_if(t_btree **ast);
-int		exec_elif(t_btree **ast);
-int		exec_else(t_btree **ast);
-int		exec_until(t_btree **ast);
-int		exec_default(t_btree **ast);
+//int		exec_while(t_btree **ast);
+//int		exec_if(t_btree **ast);
+//int		exec_elif(t_btree **ast);
+//int		exec_else(t_btree **ast);
+//int		exec_until(t_btree **ast);
+//int		exec_default(t_btree **ast);
 int		exec_var(t_btree **ast);
-int		exec_for(t_btree **ast);
-int		exec_case(t_btree **ast);
-int		exec_case_branch(t_btree **ast);
+//int		exec_for(t_btree **ast);
+//int		exec_case(t_btree **ast);
+//int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
 
 int		launch_process(t_process *p);
@@ -145,8 +175,15 @@ void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
 
+# include <sys/stat.h>
 int		add_new_job(t_job *job);
 
 int		error_badidentifier(char *name);
 
+/*
+** Mapping pour set les process
+*/
+int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
+
+int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
 #endif

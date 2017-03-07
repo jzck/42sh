@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "completion.h"
+#include "minishell.h"
 
 /*
 **  Print the name with or without an underline and colored upon file type
