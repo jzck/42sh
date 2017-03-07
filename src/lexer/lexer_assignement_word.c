@@ -6,11 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:28:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/02 19:11:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:36:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int			lexer_assignement_word(t_list **alst, t_lexer *lexer)
 {

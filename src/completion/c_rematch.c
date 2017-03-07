@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "completion.h"
+#include "minishell.h"
 
 /*
 ** Recreate a c->match value by adding the new key pressed to it.

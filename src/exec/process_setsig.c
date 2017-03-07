@@ -1,4 +1,4 @@
-#include "exec.h"
+#include "minishell.h"
 
 void	process_setsig(void)
 {

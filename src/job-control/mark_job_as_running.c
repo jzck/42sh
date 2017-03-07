@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 void	mark_job_as_running(t_job *j)
 {

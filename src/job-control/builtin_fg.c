@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 int		builtin_fg(const char *path, char *const av[], char *const envp[])
 {

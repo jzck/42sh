@@ -9,7 +9,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 static void		insert_linebreak(t_list **lst)
 {

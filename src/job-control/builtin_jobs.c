@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 static int	bt_jobs_parse(char **av, int *i)
 {

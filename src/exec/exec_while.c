@@ -6,11 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:33:53 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 16:41:50 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:35:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		exec_while(t_btree **ast)
 {

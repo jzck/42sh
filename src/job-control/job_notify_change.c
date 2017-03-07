@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 void	job_notify_change(int id)
 {

@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:20:18 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:00:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 t_itof	g_execmap[] =
 {
@@ -22,7 +22,7 @@ t_itof	g_execmap[] =
 	{TK_PIPE, &exec_pipe},
 	{TK_WHILE, &exec_leaf},
 	{TK_IF, &exec_leaf},
-	{TK_ELIF, &exec_leaf},
+	{TK_ELIF, &exec_elif},
 	{TK_ELSE, &exec_leaf},
 	{TK_UNTIL, &exec_leaf},
 	{TK_FOR, &exec_leaf},
@@ -30,7 +30,7 @@ t_itof	g_execmap[] =
 	{TK_PAREN_OPEN, &exec_case_branch},
 	{TK_ASSIGNEMENT_WORD, &exec_var},
 	{MATH, &exec_math},
-	/* {TK_SUBSHELL, &exec_}, */
+	/* {TK_SUBSHELL, &exec_leaf}, */
 	{CMD, &exec_leaf},
 	{0, 0},
 };

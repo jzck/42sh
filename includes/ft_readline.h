@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/21 19:51:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:36:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,6 @@
 # define TOUCHE_OPT_X 8948194
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
-
-/* # define PROMPT_QUOTES "quote> " */
-/* # define PROMPT_DQUOTES "dquote> " */
-/* # define PROMPT_BQUOTES "bquote> " */
-/* # define PROMPT_ACCOLADE "cursh> " */
-/* # define PROMPT_BRACKET "subsh> " */
-/* # define PROMPT_BSLASH "> " */
-
-/* # define SIZE_PROMPT_QUOTES 7 */
-/* # define SIZE_PROMPT_DQUOTES 8 */
-/* # define SIZE_PROMPT_BQUOTES 8 */
-/* # define SIZE_PROMPT_ACCOLADE 7 */
-/* # define SIZE_PROMPT_BRACKET 7 */
-/* # define SIZE_PROMPT_BSLASH 2 */
 
 # define IS_QUOTES (1 << 0)
 # define IS_BQUOTES (1 << 1)

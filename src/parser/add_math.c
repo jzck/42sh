@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "minishell.h"
 
 int	ismath(t_btree **ast, t_list **lst)
 {

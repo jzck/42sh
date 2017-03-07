@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_bquote(t_list **alst, t_lexer *lexer)
 {

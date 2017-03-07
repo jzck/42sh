@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 void		esc_print(char *str, unsigned char *esc)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "completion.h"
+#include "minishell.h"
 
 /*
 ** If the parsing for local file fail. The function is called to check if the

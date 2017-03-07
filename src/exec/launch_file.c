@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:49:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:02:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		launch_file(t_process *p)
 {

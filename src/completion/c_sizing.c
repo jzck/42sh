@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "completion.h"
+#include "minishell.h"
 
 /*
 ** Get the max length from the list

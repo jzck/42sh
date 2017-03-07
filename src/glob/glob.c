@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 /*
  ** glob return expansion of a string.

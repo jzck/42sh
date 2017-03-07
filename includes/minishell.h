@@ -6,13 +6,19 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 14:27:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:23:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define SHELL_NAME		"minishell"
+
+# include <dirent.h>
+# include <sys/stat.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <errno.h>
 
 # include "libft.h"
 # include "types.h"
@@ -25,36 +31,6 @@
 # include "glob.h"
 # include "completion.h"
 # include "hash.h"
-
-# include <dirent.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <errno.h>
-
-# define SH_INTERACTIVE			(1 << 0)
-# define SH_OPTS_JOBC			(1 << 1)
-# define SH_OPTS_LC				(1 << 2)
-# define SH_MODE_INPUT			(1 << 3)
-# define SH_MODE_EXEC			(1 << 4)
-
-# define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
-# define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
-# define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
-# define SH_NO_INTERACTIVE(b)	!(b & SH_INTERACTIVE)
-
-# define SH_MSG_NOJOBC	"no job-control"
-
-struct	s_script
-{
-	char	*buffer;
-	int		fd;
-	int		size;
-	int		lc;
-};
-
-typedef struct s_script	t_script;
 
 struct	s_data
 {
@@ -69,8 +45,6 @@ struct	s_data
 	char	**local_var;
 	t_list	*lst_func;
 };
-
-extern t_stof	g_builtins[];
 
 void	shell_get_opts(int ac, char **av);
 char	*shell_get_avdata();

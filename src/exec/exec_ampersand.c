@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:01:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:35:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 18:24:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		exec_ampersand(t_btree **ast)
 {
