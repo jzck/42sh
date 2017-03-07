@@ -144,6 +144,8 @@ int		isdir_word(t_btree **ast, t_list **list);
 int		isvar(t_btree **ast, t_list **list);
 int		isnull(t_btree **ast, t_list **list);
 int		isionumber(t_btree **ast, t_list **lst);
+int		ismath(t_btree **ast, t_list **lst);
+int		ismath_expr(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);

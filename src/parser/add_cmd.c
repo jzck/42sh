@@ -25,6 +25,8 @@ t_distrostree	g_distrostree[] =
 	{&iscase_pattern, &add_pattern},
 	{&iscase_branch, &add_branch},
 	{&iscase, &add_case_cmd},
+	{&ismath, &add_null},
+	{&ismath_expr, &add_pattern},
 	{&issubshell, &add_subshell_cmd},
 	{&isfunc_name, &add_null},
 	{&isfunc, &add_func_cmd},
