@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 14:36:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:09:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NAME, SEPARATOR_OP, FNAME},
 	{TK_NAME, NEWLINE_LIST, FNAME},
 	{TK_NAME, TK_FOR, NAME},
+	{TK_NEWLINE, MATH_SUP, NEWLINE_LIST},
 	{TK_NEWLINE, CASE_LIST_NS, NEWLINE_LIST},
 	{TK_NEWLINE, TK_DO, NEWLINE_LIST},
 	{TK_NEWLINE, TK_PAREN_CLOSE, NEWLINE_LIST},
@@ -89,9 +90,11 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CONDITION, NEWLINE_LIST},
 	{TK_NEWLINE, FOR_WORDLIST, NEWLINE_LIST},
 	{TK_NEWLINE, SEQUENTIAL_SEP, NEWLINE_LIST},
+	{TK_SEMI, MATH_SUP, SEPARATOR_OP},
 	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
 	{TK_SEMI, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
+	{TK_AMP, MATH_SUP, SEPARATOR_OP},
 	{TK_AMP, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_AMP, LIST, SEPARATOR_OP},
 	{TK_AMP, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
@@ -107,8 +110,8 @@ int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 
 	token = (*lst)->content;
 	head = (*stack)->content;
-//	DG("produce stack : %s && token : %s", read_state(*head),
-//	read_state(token->type));
+	DG("produce stack : %s && token : %s", read_state(*head),
+	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
@@ -116,7 +119,7 @@ int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 		if (token->type == g_prodmatch[i].token
 			&& *head == g_prodmatch[i].stack)
 		{
-//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
+			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
 		}
 		i++;

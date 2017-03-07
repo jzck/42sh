@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == TERMINUS)
+		return ("TERMINUS");
 	if (current == SEQUENCE)
 		return ("SEQUENCE");
 	if (current == LINEBREAK)

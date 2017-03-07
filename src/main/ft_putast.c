@@ -17,6 +17,8 @@ char	*ft_putast(void *nodein)
 	t_astnode	*node;
 	node = nodein;
 	
+	if (node->type == MATH)
+		return ("MATH");
 	if (node->type == TK_DSEMI)
 		return ("TK_DSEMI");
 	if (node->type == WORDLIST)

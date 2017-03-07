@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 16:46:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 19:06:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int		isloop(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-//	t_token		*token;
 
+	(void)lst;
 	node = NULL;
-//	token = (*lst)->content;
-	DG("isloop");
 	if (*ast)
 	{
 		node = (*ast)->item;
@@ -91,11 +89,18 @@ int		add_loop_condition(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
+	char		**my_tab;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
 	DG("add word");
-	ft_lsteadd(&node->data.cmd.wordlist, ft_lstnew(ft_strdup(token->data),
-		ft_strlen(token->data)));
+	if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
+	{
+		my_tab[0] = ft_strdup(token->data);
+		my_tab[1] = (char *)dup_char_esc(token->esc, token->size >> 3);
+		my_tab[2] = (char *)dup_char_esc(token->esc2, token->size >> 3);
+		my_tab[3] = NULL;
+	}	
+	ft_ld_pushback(&node->data.cmd.wordlist, my_tab);
 	return (0);
 }

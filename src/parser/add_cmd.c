@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 15:57:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/06 19:36:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ t_distrostree	g_distrostree[] =
 	{&iscase_pattern, &add_pattern},
 	{&iscase_branch, &add_branch},
 	{&iscase, &add_case_cmd},
+	{&ismath, &add_null},
+	{&ismath_expr, &add_pattern},
 	{&issubshell, &add_subshell_cmd},
+	{&isfunc_name, &add_null},
 	{&isfunc, &add_func_cmd},
 	{&isionumber, &add_ionumber},
 	{&isnull, &add_null},
-
 };
 
 int					superflous_token(t_btree **ast, t_list **lst)
@@ -40,8 +42,7 @@ int					superflous_token(t_btree **ast, t_list **lst)
 	if (*lst)
 	{
 		token = (*lst)->content;
-		if (token->type == TK_IN || token->type == TK_PAREN_CLOSE
-			|| token->type == TK_DSEMI)
+		if (token->type == TK_IN || token->type == TK_DSEMI)
 			return (1);
 	}
 	return (0);
@@ -71,7 +72,6 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = 0;
-	DG("add cmd");
 	while (i < 14)
 	{
 		if (g_distrostree[i].test(ast, lst) == 1)

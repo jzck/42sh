@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop_stack.c                                        :+:      :+:    :+:   */
+/*   error_badidentifier.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 19:12:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 17:09:00 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/06 18:03:51 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/06 18:11:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "exec.h"
 
-int			pop_stack(t_list **stack, t_sym erase_sym)
+int			error_badidentifier(char *name)
 {
-	t_sym		*head;
-	t_list		*temp;
-
-	while ((*stack) && *(head = (*stack)->content) != erase_sym)
-	{
-		temp = *stack;
-		(*stack) = (*stack)->next;
-		ft_lstdelone(&temp, NULL);	
-	}
-	if (*stack)
-	{
-		temp = *stack;
-		(*stack) = (*stack)->next;
-		ft_lstdelone(&temp, NULL);
-	}
-	else
-		return (1);
-	return (0);
-}	
+	ft_putstr_fd("`", 2);
+	ft_putstr(name);
+	ft_putstr_fd("' not a valid identifier", 2);
+	return (1);
+}

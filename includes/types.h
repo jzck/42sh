@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 14:35:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:08:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_mode				t_mode;
 typedef struct s_lexer			t_lexer;
 typedef enum e_lexstate			t_lexstate;
 typedef struct s_token			t_token;
+typedef struct s_rvwords		t_rvwords;
 
 typedef struct s_ld				t_ld;
 typedef struct s_astnode		t_astnode;
@@ -159,6 +160,9 @@ enum	e_sym
 	PATTERN_CASE,
 	FUNC_NAME,
 	CLOSE_LIST,
+	MATH,
+	MATH_PLUS,
+	MATH_SUP,
 	REDIR,
 	CMD,
 	ALL = 200,

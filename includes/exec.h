@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:04:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:07:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ struct	s_exec
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;
-	char		*case_pattern;
+	char		**case_pattern;
 	int			control_count;
 };
 
@@ -115,6 +115,7 @@ int		exec_var(t_btree **ast);
 int		exec_for(t_btree **ast);
 int		exec_case(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
+int		exec_math(t_btree **ast);
 
 int		launch_process(t_process *p);
 int		set_process(t_process *p, t_btree *ast);
@@ -145,5 +146,7 @@ void	redir_free(void *data, size_t content_size);
 char	**token_to_argv(t_ld *ld, int do_match);
 
 int		add_new_job(t_job *job);
+
+int		error_badidentifier(char *name);
 
 #endif

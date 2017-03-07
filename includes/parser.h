@@ -136,6 +136,7 @@ int		iscondition(t_btree **ast, t_list **lst);
 int		iscondition_branch(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
 int		isfunc(t_btree **ast, t_list **lst);
+int		isfunc_name(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_btree **ast, t_list **list);
@@ -143,6 +144,8 @@ int		isdir_word(t_btree **ast, t_list **list);
 int		isvar(t_btree **ast, t_list **list);
 int		isnull(t_btree **ast, t_list **list);
 int		isionumber(t_btree **ast, t_list **lst);
+int		ismath(t_btree **ast, t_list **lst);
+int		ismath_expr(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
@@ -168,7 +171,7 @@ struct	s_cmd
 {
 	t_list	*redir;
 	t_ld	*token;
-	t_list	*wordlist;
+	t_ld	*wordlist;
 };
 
 union	u_astdata
