@@ -6,12 +6,14 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 20:50:23 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:55:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+# include <sys/stat.h>
 
 # define PIPE_READ		0
 # define PIPE_WRITE		1
@@ -41,11 +43,6 @@
 # define EXEC_IS_OR_IF(j)		(j & EXEC_OR_IF)
 # define EXEC_IS_IF_BRANCH(j)	(j & EXEC_IF_BRANCH)
 # define EXEC_IS_CASE_BRANCH(j)	(j & EXEC_CASE_BRANCH)
-
-# include "../libft/includes/libft.h"
-# include "types.h"
-# include "job_control.h"
-# include "minishell.h"
 
 struct	s_data_cmd
 {
@@ -146,7 +143,7 @@ int		exec_else(t_btree **ast);
 int		exec_var(t_btree **ast);
 //int		exec_for(t_btree **ast);
 //int		exec_case(t_btree **ast);
-//int		exec_case_branch(t_btree **ast);
+int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
 
 int		launch_process(t_process *p);
@@ -178,6 +175,7 @@ void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
 
+# include <sys/stat.h>
 int		add_new_job(t_job *job);
 
 int		error_badidentifier(char *name);

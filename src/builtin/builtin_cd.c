@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 #define CDOPT_L	(1 << 0)
 #define CDOPT_P	(1 << 1)

@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 17:30:16 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:59:40 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 /*
 int		exec_while(t_btree **ast)
 {

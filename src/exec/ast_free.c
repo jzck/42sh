@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:50:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 18:05:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 18:34:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 void	read_redir(void *data)
 {

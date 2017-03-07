@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 int				is_char_esc(const unsigned char *esc,
 		const char *ini_str, const char *str_pos)

@@ -6,14 +6,12 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:40:28 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:57:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOB_H
 # define GLOB_H
-
-# include "minishell.h"
 
 # define CH(x) ((char **)(x)->content)
 # define UCH(x) ((unsigned char **)(x)->content)
@@ -107,32 +105,5 @@ char			**ft_strsplit_spe(const char *str,
 								const unsigned char *esc, char c);
 unsigned char	**ft_strsplit_esc(const char *str,
 								const unsigned char *esc, char c);
-/*
-** LIST D:
-*/
-void			ft_ld_new(t_ld **alst, void *content);
-t_ld			*ft_ld_front(t_ld	*ld);
-void			ft_ld_pushfront(t_ld **alst, void *content);
-void			ft_ld_pushback(t_ld **alst, void *content);
-size_t			ft_ld_size(t_ld *ld);
-void			ft_ld_del(t_ld **ld, void (*del)());
-void			ft_ld_clear(t_ld **ld, void (*del)());
-void			ft_ld_reverse(t_ld **lst);
-t_ld			*ft_ld_back(t_ld *ld);
-t_ld			*ft_ld_swap(t_ld *l_cur);
-char			**ft_ld_to_tab(t_ld *ld);
-t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
-t_ld			*ft_ld_copy(t_ld *src, void *(*f)(void *elem));
 
-/*
-** str:
-*/
-
-char			*ft_strjoinf(char *str, char *str2, int mode);
-char			*ft_strsubf(char *s, unsigned int start,
-							size_t len, short int mode);
-void			ft_tabdel(char ***mytab);
-int				ft_tablen(char **mytab);
-
-void			*ft_memrealloc(void *ptr, size_t old_s, size_t new_s);
 #endif

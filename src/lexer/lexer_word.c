@@ -6,31 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 19:00:22 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:00:18 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-/*
-static int	word_is_assignment(t_token *token)
-{
-	const int	len = ft_strlen(token->data);
-	int			pos;
-	char		c;
-
-	pos = -1;
-	if (ft_isdigit(token->data[pos]))
-		return (0);
-	while (++pos < len)
-	{
-		if (is_char_esc(token->esc, token->data, token->data + pos))
-			return (0);
-		c = token->data[pos];
-		if (!ft_isalnum(c) && c != '_')
-			return (0);
-	}
-	return (1);
-}*/
+#include "minishell.h"
 
 int			lexer_word(t_list **alst, t_lexer *lexer)
 {

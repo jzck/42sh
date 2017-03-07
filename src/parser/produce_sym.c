@@ -6,11 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 15:53:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 18:47:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 t_prodmatch		g_prodmatch[] =
 {
@@ -28,6 +28,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, CMD_SUPERIOR, CMD_SUFFIX},
 	{TK_WORD, PIPE_SEMI_SEQUENCE, CMD_SUFFIX},
 	{TK_WORD, LINEBREAK, CMD_NAME},
+	{TK_WORD, TK_BANG, CMD_NAME},
 	{TK_WORD, TK_PIPE, CMD_NAME},
 	{TK_WORD, AND_OR, CMD_NAME},
 	{TK_WORD, AND_OR_MAJOR, CMD_NAME},
@@ -35,6 +36,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, TK_UNTIL, CMD_NAME},
 	{TK_WORD, TK_DO, CMD_NAME},
 	{TK_WORD, TK_PAREN_CLOSE, CMD_NAME},
+	{TK_WORD, TK_RBRACE, CMD_NAME},
 	{TK_WORD, TK_IF, CMD_NAME},
 	{TK_WORD, TK_THEN, CMD_NAME},
 	{TK_WORD, TK_ELIF, CMD_NAME},
@@ -51,12 +53,14 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, CASE_LIST, PATTERN},
 	{TK_WORD, PATTERN_CASE, PATTERN},	
 	{TK_WORD, COMPLETE_COMMANDS, CMD_NAME},
+	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, LINEBREAK, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_PAREN_OPEN, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_LBRACE, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
+	{TK_NAME, TK_BAMG, FNAME},
 	{TK_NAME, LINEBREAK, FNAME},
 	{TK_NAME, TK_PAREN_OPEN, FNAME},
 	{TK_NAME, TK_LBRACE, FNAME},
@@ -68,6 +72,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CASE_LIST_NS, NEWLINE_LIST},
 	{TK_NEWLINE, TK_DO, NEWLINE_LIST},
 	{TK_NEWLINE, TK_PAREN_CLOSE, NEWLINE_LIST},
+	{TK_NEWLINE, TK_RBRACE, CMD_NAME},
 	{TK_NEWLINE, TK_IN, NEWLINE_LIST},
 	{TK_NEWLINE, TK_WHILE, NEWLINE_LIST},
 	{TK_NEWLINE, TK_UNTIL, NEWLINE_LIST},
@@ -79,6 +84,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
+	{TK_NEWLINE, TK_BANG, NEWLINE_LIST},
 	{TK_NEWLINE, TK_PAREN_OPEN, NEWLINE_LIST},
 	{TK_NEWLINE, TK_LBRACE, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},

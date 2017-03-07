@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd)
 {
