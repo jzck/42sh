@@ -15,11 +15,9 @@
 int		isloop(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-//	t_token		*token;
 
+	(void)lst;
 	node = NULL;
-//	token = (*lst)->content;
-	DG("isloop");
 	if (*ast)
 	{
 		node = (*ast)->item;

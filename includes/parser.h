@@ -136,6 +136,7 @@ int		iscondition(t_btree **ast, t_list **lst);
 int		iscondition_branch(t_btree **ast, t_list **lst);
 int		issubshell(t_btree **ast, t_list **lst);
 int		isfunc(t_btree **ast, t_list **lst);
+int		isfunc_name(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_btree **ast, t_list **list);

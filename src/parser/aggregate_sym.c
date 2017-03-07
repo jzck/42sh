@@ -61,7 +61,6 @@ t_aggrematch		g_aggrematch[] =
 
 //to abstract TK_ESAC
 	{LINEBREAK, TK_PAREN_CLOSE, FUNC, FNAME},
-//paren open
 	{LINEBREAK, COMPLETE_COMMANDS, PROGRAM, LINEBREAK}, 
 	{LINEBREAK, CMD_SUPERIOR, SEPARATOR_OP, 0},
 	{LINEBREAK, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
@@ -72,6 +71,7 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST,  SEQUENTIAL_SEP, SEQUENTIAL_SEP, SEQUENTIAL_SEP},
 	{NEWLINE_LIST, TK_DO, TK_DO, TK_DO},
 	{NEWLINE_LIST, TK_PAREN_CLOSE, TK_PAREN_CLOSE, TK_PAREN_CLOSE},
+	{NEWLINE_LIST, TK_PAREN_OPEN, TK_PAREN_OPEN, TK_PAREN_OPEN},
 	{NEWLINE_LIST, TK_IN, TK_IN, TK_IN},
 	{NEWLINE_LIST, TK_THEN, TK_THEN, TK_THEN},
 	{NEWLINE_LIST, TK_IF, TK_IF, TK_IF},
@@ -329,7 +329,7 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 			if (g_aggrematch[i].erase_sym)
 			{
 				if (pop_stack(stack, g_aggrematch[i].erase_sym))
-					return (1);
+				return (1);
 				head = (*stack)->content;
 				DG("stack after pop: %s", read_state(*head));
 			}

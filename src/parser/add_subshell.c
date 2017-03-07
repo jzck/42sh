@@ -15,17 +15,13 @@
 int			issubshell(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-//	t_token		*token;
 
 	(void)lst;
 	node = NULL;
-//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
 		if (node->type == SUBSHELL && node->full == 0)
-			return (1);
-		if (node->type == TK_LBRACE && node->full == 0)
 			return (1);
 	}
 	return (0);

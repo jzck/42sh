@@ -1,6 +1,3 @@
-hello() { 
-	yolo() {
-		echo bonjour
-	} 
-}
-
+hello () (
+	echo HELLO
+)

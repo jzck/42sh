@@ -70,12 +70,9 @@ int			build_tree(t_btree **ast, t_list **lst)
 	i = 0;
 	token = (*lst)->content;
 //check bug de cache case ?
-//	cache = token->type;
 	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI
 		&& cache != TK_WORD)
 		token->type = SUBSHELL;
-	if (token->type == TK_PAREN_CLOSE && cache == TK_PAREN_OPEN)
-		token->type = CLOSE_LIST;	
 	while (g_treematch[i].type)
 	{
 		if ((isseparator(token, cache) && g_treematch[i].type == token->type))

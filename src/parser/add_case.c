@@ -15,11 +15,9 @@
 int		iscase(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-//	t_token		*token;
 
 	(void)lst;
 	node = NULL;
-//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
@@ -80,7 +78,8 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN 
 		&& node->nest == 0)
 		return ((node->full = 1));
-	else if (token->type == TK_ESAC)
+	else if ((token->type == TK_ESAC || token->type == TK_PAREN_CLOSE)
+		&& node->nest == 0)
 		return (0);
 	return (add_cmd(&(*ast)->right, lst));
 }	
