@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:20:11 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/04 18:51:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 14:43:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int		ft_add_hash(t_process *p)
 	hash.key = ft_strdup(p->av[0]);
 	id = ft_hash_str(p->av[0]);
 	ft_lsteadd(&(g_hash[id]), ft_lstnew(&hash, sizeof(t_hash)));
-	p->path = ft_strdup(hash.path);
+	p->data.cmd.path = ft_strdup(hash.path);
 	return (1);
 }

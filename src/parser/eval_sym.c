@@ -187,7 +187,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_GREATAND, NEWLINE_LIST},
 	{TK_GREATAND, PIPE_SEMI_SEQUENCE},
 	{TK_GREATAND, SEQUENCE},
-//	watch ! 
+//	watch !
 	{TK_GREATAND, CMD_SUPERIOR},
 	{TK_GREATAND, AND_OR_MAJOR},
 

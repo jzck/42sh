@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 15:01:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 14:54:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_execmap	g_execmap[] =
+t_itof	g_execmap[] =
 {
 	{TK_NEWLINE, &exec_semi},
 	{TK_SEMI, &exec_semi},
