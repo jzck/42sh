@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_if.c                                          :+:      :+:    :+:   */
+/*   set_process_while.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 19:37:20 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/07 19:38:10 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 20:51:24 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int			exec_case(t_btree **ast)
+int		set_process_while(t_process *p, t_btree *ast, t_cmd *cmd)
 {
-	t_astnode	*node;
-	char		**av;
-	t_exec		*exec;
-
-	(void)ast;
-	exec = &data_singleton()->exec;
-	exec->attrs &= ~EXEC_CASE_BRANCH;
-
-	node = (*ast)->item;
-	av = token_to_argv(node->data.cmd.wordlist, 1);
-	exec->case_pattern = av;
+	p->data.d_while.condition = ast_copy(ast->left);
+	p->data.d_while.content = ast_copy(ast->right);
 	return (0);
 }

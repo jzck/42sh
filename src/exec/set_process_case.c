@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_if.c                                          :+:      :+:    :+:   */
+/*   set_process_case.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 18:07:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 15:12:28 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/07 20:36:04 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 20:51:41 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int			exec_if(t_btree **ast)
+int		set_process_case(t_process *p, t_btree *ast, t_cmd *cmd)
 {
-	t_exec	*exec;
-
-	exec = &data_singleton()->exec;
-
-	exec->attrs &= ~EXEC_IF_BRANCH;
-	ft_exec(&(*ast)->left);
-	if (ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0)
-	{
-		exec->attrs |= EXEC_IF_BRANCH;
-		ft_exec(&(*ast)->right);
-	}
+	p->data.d_case.list_word = ft_ld_copy(((t_astnode *)ast->item)->data.cmd.wordlist, tab_esc_copy);
+	p->data.d_case.content = ast_copy(ast->right);
 	return (0);
 }

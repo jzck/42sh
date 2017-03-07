@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:20:18 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:22:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_itof	g_execmap[] =
 	{TK_PIPE, &exec_pipe},
 	{TK_WHILE, &exec_leaf},
 	{TK_IF, &exec_leaf},
-	{TK_ELIF, &exec_leaf},
-	{TK_ELSE, &exec_leaf},
+	{TK_ELIF, &exec_elif},
+	{TK_ELSE, &exec_else},
 	{TK_UNTIL, &exec_leaf},
 	{TK_FOR, &exec_leaf},
 	{TK_CASE, &exec_leaf},

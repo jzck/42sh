@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/03 20:39:05 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:40:28 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct	s_bquote
 char			**glob(char *str, unsigned char *esc,
 										unsigned char *dbl_esc, int do_match);
 void	 		esc_print(char *str, unsigned char *esc);
+int				word_is_assignment(char **content);
+void			*tab_esc_copy(void *content);
 
 /*
 ** return TRUE if path file is a directory.
@@ -120,6 +122,7 @@ t_ld			*ft_ld_back(t_ld *ld);
 t_ld			*ft_ld_swap(t_ld *l_cur);
 char			**ft_ld_to_tab(t_ld *ld);
 t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
+t_ld			*ft_ld_copy(t_ld *src, void *(*f)(void *elem));
 
 /*
 ** str:

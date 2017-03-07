@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 19:00:29 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/24 22:05:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 20:03:35 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,6 @@
 ** input parameters are :
 **			-t_glob		*gl  -> struct of expanding
 */
-
-char						**gen_tab(const char *pat,
-		const unsigned char *esc,
-		const unsigned char *esc2,
-		int dup)
-{
-	char	**my_tab;
-
-	if (!(my_tab = (char **)malloc(sizeof(char *) * (esc2 ? 4 : 3))))
-		return (NULL);
-	if (dup)
-	{
-		my_tab[0] = ft_strdup(pat);
-		my_tab[1] = ft_strdup((const char *)esc);
-		if (esc2)
-			my_tab[2] = ft_strdup((const char *)esc2);
-	}
-	else
-	{
-		my_tab[0] = (char *)pat;
-		my_tab[1] = (char *)esc;
-		if (esc2)
-			my_tab[2] = (char *)esc2;
-	}
-	if (esc2)
-		my_tab[3] = NULL;
-	else
-		my_tab[2] = NULL;
-	return (my_tab);
-}
 
 static void					iter_on_each(t_expand *me)
 {

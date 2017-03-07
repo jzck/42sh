@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 19:36:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/07 20:10:10 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,15 @@ int			add_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
-	char		**my_tab;
 	int			i;
 
-	i = 0;
-	while (i < 14)
-	{
+	i = -1;
+	while (++i < 14)
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
 			DG("add : %d", i);
 			return (g_distrostree[i].add(ast, lst));
 		}
-		i++;
-	}
 	if (!*ast)
 		gen_node(ast);
 	else if (no_del_token(ast, lst))
@@ -92,16 +88,14 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	else
 		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
-	{
-		DG("add cmd default");
-		if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
+/*		if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
 		{
 			my_tab[0] = ft_strdup(token->data);
 			my_tab[1] = (char *)dup_char_esc(token->esc, token->size >> 3);
 			my_tab[2] = (char *)dup_char_esc(token->esc2, token->size >> 3);
 			my_tab[3] = NULL;
-		}
-		ft_ld_pushback(&node->data.cmd.token, my_tab);
-	}
+		}*/
+		ft_ld_pushback(&node->data.cmd.token,
+				gen_tab(token->data, token->esc, token->esc2, 1));
 	return (0);
 }

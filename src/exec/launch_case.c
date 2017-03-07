@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   launch_case.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/07 19:02:23 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/07 20:38:19 by wescande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "exec.h"
+/*
+int			exec_case(t_btree **ast)
+{
+	t_astnode	*node;
+	char		**av;
+	t_exec		*exec;
+
+	(void)ast;
+	exec = &data_singleton()->exec;
+	exec->attrs &= ~EXEC_CASE_BRANCH;
+
+	node = (*ast)->item;
+	av = token_to_argv(node->data.cmd.wordlist, 1);
+	exec->case_pattern = av;
+	return (0);
+}
+*/
+
+static int		do_case(t_process *p)
+{
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	exec->attrs &= ~EXEC_CASE_BRANCH;
+	exec->case_pattern = token_to_argv(p->data.d_case.list_word, 1);
+/*	ft_exec(&p->data.d_if.condition);
+	if (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
+	{
+		exec->attrs |= EXEC_IF_BRANCH;
+		ft_exec(&p->data.d_if.content);
+	}
+	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));*/
+	return (0);
+}
+
+int				launch_case(t_process *p)
+{
+	pid_t	pid;
+
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			data_singleton()->opts &= ~SH_INTERACTIVE;
+			data_singleton()->opts &= ~SH_OPTS_JOBC;
+			exit(do_case(p));
+		}
+		else if (pid > 0)
+			return (pid);
+	}
+	else
+		do_case(p);
+	return (0);
+}

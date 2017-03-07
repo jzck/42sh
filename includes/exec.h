@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:55:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:50:23 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ struct	s_data_cond
 
 struct	s_data_list
 {
-	char	*word;
 	t_ld	*list_word;
 	t_btree	*content;
 };
@@ -76,7 +75,7 @@ union	u_process_data
 	struct s_data_cond	d_else;
 	struct s_data_cond	d_elif;
 	struct s_data_list	d_for;
-//	struct s_data_cond	case;
+	struct s_data_list	d_case;
 };
 
 enum	e_process_type
@@ -140,8 +139,8 @@ int		exec_leaf(t_btree **ast);
 
 //int		exec_while(t_btree **ast);
 //int		exec_if(t_btree **ast);
-//int		exec_elif(t_btree **ast);
-//int		exec_else(t_btree **ast);
+int		exec_elif(t_btree **ast);
+int		exec_else(t_btree **ast);
 //int		exec_until(t_btree **ast);
 //int		exec_default(t_btree **ast);
 int		exec_var(t_btree **ast);
@@ -174,6 +173,7 @@ char	*ft_findexec(char *path, char *file);
 void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
+t_btree	*ast_copy(t_btree *tree);
 void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
