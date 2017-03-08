@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 17:37:15 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:48:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 12:14:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		lexer_paren(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	if (token->type)
-		lexer_lex(&(*alst)->next, lexer);
+		return (lexer_lex(&(*alst)->next, lexer));
 	if (lexer->str[lexer->pos] == '(')
 	{
 		token->type = TK_PAREN_OPEN;

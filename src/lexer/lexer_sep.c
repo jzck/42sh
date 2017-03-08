@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:29:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 20:26:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 12:20:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,20 @@ int		lexer_sep(t_list **alst, t_lexer *lexer)
 	char	cn;
 
 	lexer->state = DEFAULT;
-	if (*alst)
-	{
-		token = (*alst)->content;
-		if (*token->data)
-			return (lexer_sep(&(*alst)->next, lexer));
-	}
-	else
-	{
-		token = token_init();
-		*alst = ft_lstnew(token, sizeof(*token));
-	}
 	token = (*alst)->content;
+	if (token->type)
+		return (lexer_lex(&(*alst)->next, lexer));
 	c = lexer->str[lexer->pos];
-	cn = lexer->str[lexer->pos + 1];
+	lexer->pos++;
+	cn = lexer->str[lexer->pos];
 	if (c == '&')
 		token->type = cn == '&' ? TK_AND_IF : TK_AMP;
 	else if (c == '|')
 		token->type = cn == '|' ? TK_OR_IF : TK_PIPE;
-	token->type = (c == ';') ? TK_SEMI : token->type;
-	token->type = (c == ';') && (cn == ';') ? TK_DSEMI : token->type;
-	lexer->pos += 1 + (token->type & (TK_AND_IF | TK_OR_IF | TK_DSEMI) ? 1 : 0);
+	else if (c == ';')
+		token->type = cn == ';' ? TK_DSEMI : TK_SEMI;
+	if (token->type == TK_AND_IF || token->type == TK_OR_IF
+			|| token->type == TK_DSEMI)
+		lexer->pos++;
 	return (lexer_lex(&(*alst)->next, lexer));
 }
