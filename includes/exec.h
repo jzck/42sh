@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 01:04:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 02:38:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ union	u_process_data
 	struct s_data_cmd		cmd;
 	struct s_data_subshell	subshell;
 	struct s_data_cond		d_while;
+	struct s_data_cond		d_until;
 	struct s_data_cond		d_if;
-	struct s_data_cond		d_else;
-	struct s_data_cond		d_elif;
 	struct s_data_list		d_for;
 	struct s_data_list		d_case;
 };
@@ -190,7 +189,10 @@ int		error_badidentifier(char *name);
 ** Mapping pour free les process
 */
 void	process_free(void *content, size_t content_size);
-void	process_free_cmd(t_process *p);
+int		process_free_cmd(t_process *p);
+int		process_free_cond(t_process *p);
+int		process_free_list(t_process *p);
+int		process_free_subshell(t_process *p);
 
 /*
 ** Mapping pour launch les process

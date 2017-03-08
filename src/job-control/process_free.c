@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 01:38:58 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 02:38:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_itof	g_freemap[] =
 	{PROCESS_FUNCTION, NULL},
 	{PROCESS_BUILTIN, NULL},
 	{PROCESS_FILE, process_free_cmd},
-	{PROCESS_SUBSHELL, NULL},
-	{PROCESS_WHILE, NULL},
-	{PROCESS_UNTIL, NULL},
-	{PROCESS_IF, NULL},
-	{PROCESS_FOR, NULL},
-	{PROCESS_CASE, NULL},
+	{PROCESS_SUBSHELL, process_free_subshell},
+	{PROCESS_WHILE, process_free_cond},
+	{PROCESS_UNTIL, process_free_cond},
+	{PROCESS_IF, process_free_cond},
+	{PROCESS_FOR, process_free_list},
+	{PROCESS_CASE, process_free_list},
 	{0, NULL}
 };
 
@@ -34,9 +34,8 @@ void	process_free(void *content, size_t content_size)
 	(void)content_size;
 	if (p->type >= PROCESS_MAX)
 		return ;
-	if (!g_launchmap[p->type].f)
-		return ;
-	(g_freemap[p->type].f)(p);
+	if (g_freemap[p->type].f)
+		(g_freemap[p->type].f)(p);
 	ft_lstdel(&p->redirs, ft_lst_cfree);
 	free(p);
 }
