@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/18 14:35:10 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/08 13:34:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,11 @@ int							c_spacing_escape(t_clst *node, int x, int o);
 int							c_spacing_clear(t_comp *c);
 int							ft_sstrlen(char **s);
 char						*ft_sstrtostr(char **s, char *sep);
+
+/*
+**	yolo je mets ca au pif - gwojda
+*/
+
+int		c_exclusion_folder(t_comp *c);
 
 #endif

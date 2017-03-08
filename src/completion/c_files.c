@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 15:34:30 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/08 13:33:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** Returning 1 if success (trigger an update) or 0.
 */
 
-static int		c_exclusion_folder(t_comp *c)
+int		c_exclusion_folder(t_comp *c)
 {
 	DIR			*rep;
 	char		*tmp;
