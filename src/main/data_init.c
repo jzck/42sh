@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 16:38:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 13:05:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		data_init(void)
 
 	data = data_singleton();
 	data->env = ft_sstrdup(environ);
+	set_exitstatus(0, 1);
 	data->comp = NULL;
 	data->opts = 0;
 	data->exec.fd_save[0] = fcntl(0, F_DUPFD_CLOEXEC);
