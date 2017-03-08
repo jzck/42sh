@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/24 22:04:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 14:50:58 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ int				dir_research(t_glob *gl, char *p,
 {
 	DIR				*dir;
 	struct dirent	*in;
-	int				ret;
 
-	ret = 0;
+	if (!pat)
+	{
+		gl->found = 1;
+		ft_ld_pushfront(&gl->match, ft_strjoin(p, "/"));
+		return (0);
+	}
 	if ((ft_strlen(p) <= 1 || p[ft_strlen(p) - 1] != '.') && is_directory(p))
 	{
 		dir = opendir(p);
@@ -60,5 +64,5 @@ int				dir_research(t_glob *gl, char *p,
 					(char *[2]){p, in->d_name}, pat, recursive);
 		closedir(dir);
 	}
-	return (ret);
+	return (0);
 }
