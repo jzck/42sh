@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 17:40:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:31:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int				exec_leaf(t_btree **ast)
 		return (1);
 	if (!(launch_process(&p)))
 	{
+		DG("forked pid=[%i], name=[%s]", p.pid, p.data.cmd.av[0]);
 		job_addprocess(&p);
 		if (IS_PIPEEND(p))
 		{
@@ -29,8 +30,8 @@ int				exec_leaf(t_btree **ast)
 				put_job_in_foreground(job, 0);
 			else
 				put_job_in_background(job, 0);
+			job->pgid = 0;
 		}
-		job->pgid = 0;
 	}
 	if (p.fdout != STDOUT)
 		close(p.fdout);

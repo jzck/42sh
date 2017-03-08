@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 16:21:18 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:08:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ static void	process_format_com_long(t_list **plist)
 	t_process	*p;
 
 	p = (*plist)->content;
-/*	if (p->attrs & PROCESS_CONTROL)
-		ft_putstr("script");
-	else if (p->attrs & PROCESS_SUBSHELL)
-	{
-		ft_putstr("( ");
-//		ft_putstr(p->data.cmd.av[2]);
-		ft_putstr(" )");
-	}
-	else*/
 	process_print(p);
 	if ((*plist)->next)
 		ft_putstr(" |");

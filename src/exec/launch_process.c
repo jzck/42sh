@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:46:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ t_itof	g_launchmap[] =
 	{PROCESS_IF, launch_if},
 	{PROCESS_FOR, launch_for},
 	{PROCESS_CASE, launch_case},
-	{0, NULL}
 };
 
 int		launch_process(t_process *p)
 {
 	int			pid;
 
+	DG("launchprocess");
 	if (p->type >= PROCESS_MAX)
 		return (-1);
 	if (!g_launchmap[p->type].f)

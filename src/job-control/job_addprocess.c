@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 17:40:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:16:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		job_addprocess(t_process *p)
 
 	jobc = &data_singleton()->jobc;
 	job = &data_singleton()->exec.job;
-	DG("adding pid=[%i] to job");
+	DG("adding pid=[%i] to job", p->pid);
 	if (IS_PIPESTART(*p))
 	{
 		job_update_id();

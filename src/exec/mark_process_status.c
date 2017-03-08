@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 17:44:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:49:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int		mark_process_status(pid_t pid, int status)
 	t_list		*plist;
 	t_process	*p;
 
+	DG("MPS pid=%i,s=%i", pid, status);
 	if (pid > 1)
 	{
-		DG("MPS pid=%i,s=%i", pid, status);
 		if ((plist = job_getprocess(pid)))
 		{
 			p = plist->content;
 			p->status = status;
+			DG("marking pid=[%i], name=[%s]", p->pid, p->data.cmd.av[0]);
 			if (WIFSTOPPED(status))
 			{
 				p->attrs &= ~PROCESS_STATE_MASK;

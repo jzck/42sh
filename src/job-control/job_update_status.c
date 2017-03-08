@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 12:56:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 17:41:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:35:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	job_update_status(void)
 	pid_t	pid;
 
 	do
-		pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
-	while (!mark_process_status (pid, status));
+	{
+		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
+		DG("pid=[%d]", pid);
+	}
+	while (!mark_process_status(pid, status));
 }

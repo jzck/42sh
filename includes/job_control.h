@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 16:45:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:06:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,17 @@ void		sigttou_handler(int signo);
 
 int			process_cmp_pid(t_process *p, pid_t *pid);
 void		process_format(t_list **p, int firstp, int opts);
+/*
+** Mapping pour afficher les process
+*/
+void	process_print(t_process *p);
+int		process_print_subshell(t_process *p);
+int		process_print_while(t_process *p);
+int		process_print_if(t_process *p);
+int		process_print_case(t_process *p);
+int		process_print_until(t_process *p);
+int		process_print_function(t_process *p);
+int		process_print_for(t_process *p);
+int		process_print_cmd(t_process *p);
 
 #endif
