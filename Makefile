@@ -188,6 +188,15 @@ job-control/process_free_cmd.c\
 job-control/process_free_cond.c\
 job-control/process_free_list.c\
 job-control/process_free_subshell.c\
+job-control/process_print.c\
+job-control/process_print_case.c\
+job-control/process_print_cmd.c\
+job-control/process_print_for.c\
+job-control/process_print_function.c\
+job-control/process_print_if.c\
+job-control/process_print_subshell.c\
+job-control/process_print_until.c\
+job-control/process_print_while.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 16:45:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:46:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,18 @@ int		exec_else(t_btree **ast);
 int		exec_var(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
+
+/*
+** Mapping pour afficher les process
+*/
+void	process_print(t_process *p);
+int		process_print_subshell(void);
+int		process_print_while(void);
+int		process_print_if(void);
+int		process_print_case(void);
+int		process_print_until(void);
+int		process_print_function(void);
+int		process_print_for(void);
+void	process_print_cmd(t_process *p);
 
 #endif
