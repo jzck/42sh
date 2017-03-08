@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 03:07:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 03:26:28 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_itof	g_freemap[] =
 {
-	{PROCESS_FUNCTION, NULL},
+	{PROCESS_FUNCTION, process_free_subshell},
 	{PROCESS_BUILTIN, NULL},
 	{PROCESS_FILE, process_free_cmd},
 	{PROCESS_SUBSHELL, process_free_subshell},

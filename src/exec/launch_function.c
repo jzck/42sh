@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_leaf.c                                        :+:      :+:    :+:   */
+/*   launch_function.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 03:25:23 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 03:24:53 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				exec_leaf(t_btree **ast)
+static int		do_function(t_process *p)
 {
-	t_process	p;
-	t_job		*job;
+	ft_exec(&p->data.function.content);
+	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
+}
 
-	job = &data_singleton()->exec.job;
-	if (set_process(&p, *ast))
-		return (1);
-	if (!(launch_process(&p)))
+int				launch_function(t_process *p)
+{
+	pid_t	pid;
+
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 	{
-		job_addprocess(&p);
-		if (IS_PIPEEND(p))
+		pid = fork();
+		if (pid == 0)
 		{
-			if (JOB_IS_FG(job->attrs))
-				put_job_in_foreground(job, 0);
-			else
-				put_job_in_background(job, 0);
+			data_singleton()->opts &= ~SH_INTERACTIVE;
+			data_singleton()->opts &= ~SH_OPTS_JOBC;
+			exit(do_function(p));
 		}
-		job->pgid = 0;
+		else if (pid > 0)
+			return (pid);
 	}
-	if (p.fdout != STDOUT)
-		close(p.fdout);
+	else
+		do_function(p);
 	return (0);
 }

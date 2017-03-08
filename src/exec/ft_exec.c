@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 01:48:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 03:34:10 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		ft_exec(t_btree **ast)
 	if (!*ast)
 		return (0);
 	item = (*ast)->item;
-	DG("COMPARE : %d vs %d (SUBSHEELLL)", item->type, SUBSHELL);
 	while (g_execmap[i].id)
 	{
 		if (item->type == g_execmap[i].id)
