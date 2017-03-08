@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 14:51:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 14:58:19 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,14 +193,14 @@ int		launch_function(t_process *p);
 */
 
 int		set_process(t_process *p, t_btree *ast);
-int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_while(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_for(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_case(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_subshell(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_map(t_process *p, t_btree *ast);
+int		set_process_cmd(t_process *p, t_btree *ast);
+int		set_process_while(t_process *p, t_btree *ast);
+int		set_process_until(t_process *p, t_btree *ast);
+int		set_process_if(t_process *p, t_btree *ast);
+int		set_process_for(t_process *p, t_btree *ast);
+int		set_process_case(t_process *p, t_btree *ast);
+int		set_process_subshell(t_process *p, t_btree *ast);
 
 /*
 ** Mapping pour exec les process

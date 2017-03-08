@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:08:12 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 14:48:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 14:58:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_itof		g_setprocessmap[] =
 	{0, NULL}
 };
 
-int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd)
+int		set_process_map(t_process *p, t_btree *ast)
 {
 	int			i;
 	t_astnode	*item;
@@ -49,7 +49,7 @@ int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd)
 		{
 			if (!g_setprocessmap[i].f)
 				return (1);
-			return ((*g_setprocessmap[i].f)(p, ast, cmd));
+			return ((*g_setprocessmap[i].f)(p, ast));
 		}
 	return (1);
 }
