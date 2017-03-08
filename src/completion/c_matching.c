@@ -6,12 +6,36 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 13:33:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 13:47:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
+static int		c_exclusion_folder(t_comp *c)
+{
+	DIR			*rep;
+	char		*tmp;
+	char		*tmp2;
+
+	tmp = ft_strjoin(c->cpath, c->match);
+	tmp2 = NULL;
+	if (tmp[ft_strlen(tmp) - 1] == '/')
+		return (0);
+	if ((rep = opendir(tmp)) && (!closedir(rep)))
+	{
+		tmp ? ft_memdel((void *)&tmp) : (0);
+		tmp2 = ft_strjoin(c->match, "/");
+		c_updater(c, tmp2);
+		tmp2 ? ft_memdel((void *)&tmp2) : (0);
+		ft_strdel(&c->match);
+		c->match = ft_strdup("/");
+		return (1);
+	}
+	tmp ? ft_memdel((void *)&tmp) : (0);
+	tmp ? ft_memdel((void *)&tmp) : (0);
+	return (0);
+}
 /*
 ** Start the parsing for the autocompletion.
 ** Check the first char of the c->rcmd for a . or /. to see if it's a local
