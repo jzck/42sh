@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:24:17 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:21:18 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	process_format_com_long(t_list **plist)
 		ft_putstr(" )");
 	}
 	else*/
-		ft_sstrprint(p->data.cmd.av, ' ');
+	process_print(p);
 	if ((*plist)->next)
 		ft_putstr(" |");
 	(*plist) = (*plist)->next;
@@ -72,16 +72,7 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 			p->attrs &= ~PROCESS_STATE_MASK;
 			p->attrs &= ~PROCESS_RUNNING;
 		}
-/*		if (p->attrs & PROCESS_CONTROL)
-			ft_putstr("script");
-		else if (p->attrs & PROCESS_SUBSHELL)
-		{
-			ft_putstr("( ");
-			ft_putstr(p->data.cmd.av[2]);
-			ft_putstr(" )");
-		}
-		else*/
-			ft_sstrprint(p->data.cmd.av, ' ');
+		process_print(p);
 		if ((*plist)->next)
 			ft_putstr(" | ");
 		(*plist) = (*plist)->next;
