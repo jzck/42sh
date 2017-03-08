@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 00:02:01 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 00:14:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 01:52:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		set_process_subshell(t_process *p, t_btree *ast, t_cmd *cmd)
 {
 	(void)cmd;
-	p->data.subshell.content = ast_copy(ast->right);
+	p->data.subshell.content = btree_map(ast->right, &node_copy);
 	p->type = PROCESS_SUBSHELL;
 	return (0);
 }

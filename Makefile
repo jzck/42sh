@@ -58,7 +58,6 @@ completion/c_rematch.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
-exec/ast_copy.c\
 exec/ast_free.c\
 exec/bad_fd.c\
 exec/error_badidentifier.c\
@@ -96,6 +95,8 @@ exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
 exec/redir_free.c\
+exec/redir_copy.c\
+exec/node_copy.c\
 exec/redirect_dgreat.c\
 exec/redirect_dless.c\
 exec/redirect_great.c\

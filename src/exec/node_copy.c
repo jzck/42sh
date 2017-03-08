@@ -6,20 +6,31 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 20:44:42 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:25:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 01:00:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_btree		*ast_copy(t_btree *tree)
+void		*node_copy(void *data)
 {
-	t_btree		*node;
+	t_astnode	*new;
+	t_astnode	*old;
 
-	if (!tree)
+	if (!data)
 		return (NULL);
-	node = btree_create_node(tree->item, tree->content_size);
-	node->left = ast_copy(tree->left);
-	node->right = ast_copy(tree->right);
-	return (node);
+	old = data;
+	ft_bzero((void *)&new, sizeof(t_astdata));
+	new->nest = old->nest;
+	new->full = old->full;
+	new->type = old->type;
+	new->pattern = old->pattern;
+	if (old->type == CMD || old->type == TK_ASSIGNEMENT_WORD)
+	{		
+		new->data.cmd.redir = ft_lstdup(&old->data.cmd.redir, &redir_copy);
+		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
+	}
+	if (old->type == TK_FOR || old->type == TK_PAREN_OPEN || old->type == TK_CASE)
+  		new->data.cmd.wordlist = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
+	return (new);
 }
