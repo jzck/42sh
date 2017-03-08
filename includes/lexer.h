@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/10 00:33:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 23:20:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,15 @@
 # include "libft.h"
 # include "types.h"
 
-# define TK_LESS		(1 << 0)
-# define TK_GREAT		(1 << 1)
-# define TK_DLESS		(1 << 2)
-# define TK_DGREAT		(1 << 3)
-# define TK_LESSAND		(1 << 4)
-# define TK_GREATAND	(1 << 5)
-# define TK_SEMI		(1 << 6)
-# define TK_PIPE		(1 << 7)
-# define TK_AND_IF		(1 << 8)
-# define TK_OR_IF		(1 << 9)
-# define TK_AMP			(1 << 10)
-# define TK_PAREN_OPEN	(1 << 11)
-# define TK_PAREN_CLOSE	(1 << 12)
-# define TK_WORD		(1 << 13)
-# define TK_COMMAND		(1 << 14)
-# define TK_SUBSHELL	(1 << 15)
-# define TK_NEWLINE		(1 << 16)
-
-# define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
-
+//# define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
+# define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)
+# define RW_SEP				(TK_NEWLINE | TK_AMP | TK_SEMI | TK_WHILE | TK_DONE\
+							| TK_DO | TK_IF | TK_FI | TK_THEN | TK_ELIF | TK_ELSE)
 enum	e_lexstate
 {
 	DEFAULT,
+	PAREN,
+	HEREDOC,
 	NEWLINE,
 	DELIM,
 	SEP,
@@ -49,14 +35,13 @@ enum	e_lexstate
 	GREAT,
 	LESSAND,
 	GREATAND,
-	DLESS,
 	QUOTE,
 	DQUOTE,
 	BQUOTE,
 	DQUOTE_BQUOTE,
 	BACKSLASH,
-	PAREN,
-	COMMENT,
+	CURLY_BRACKETS,
+	ASSIGNEMENT_WORD,
 	END,
 };
 
@@ -78,6 +63,13 @@ struct	s_lexer
 	t_list		*heredoc_stack;
 };
 
+struct	s_rvwords
+{
+	char	*word;
+	int		type;
+};
+
+extern t_rvwords g_rvwords[];
 
 extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer);
 
@@ -99,15 +91,21 @@ int			bquotes_expand(t_list **alst);
 char		*command_getoutput(char *command);
 
 int			ft_is_delim(char c);
-char		*stack_to_prompt(t_list	*stack);
+int			ft_is_delim_list(char c);
 
+char		*stack_to_prompt(t_list	*stack);
 t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
+int			get_reserved_words(t_list **alst);
+int			insert_newline(t_list **alst);
+
 void		lexer_init(t_lexer *lexer);
+
 int			lexer_lex(t_list **alst, t_lexer *lexer);
 int			lexer_default(t_list **alst, t_lexer *lexer);
 int			lexer_newline(t_list **alst, t_lexer *lexer);
+int			lexer_heredoc(t_list **alst, t_lexer *lexer);
 int			lexer_delim(t_list **alst, t_lexer *lexer);
 int			lexer_sep(t_list **alst, t_lexer *lexer);
 int			lexer_word(t_list **alst, t_lexer *lexer);
@@ -116,12 +114,13 @@ int			lexer_less(t_list **alst, t_lexer *lexer);
 int			lexer_great(t_list **alst, t_lexer *lexer);
 int			lexer_greatand(t_list **alst, t_lexer *lexer);
 int			lexer_lessand(t_list **alst, t_lexer *lexer);
-int			lexer_dless(t_list **alst, t_lexer *lexer);
 int			lexer_quote(t_list **alst, t_lexer *lexer);
 int			lexer_dquote(t_list **alst, t_lexer *lexer);
 int			lexer_bquote(t_list **alst, t_lexer *lexer);
 int			lexer_backslash(t_list **alst, t_lexer *lexer);
 int			lexer_paren(t_list **alst, t_lexer *lexer);
+int			lexer_curly_braces(t_list **alst, t_lexer *lexer);
+int			lexer_assignement_word(t_list **alst, t_lexer *lexer);
 int			lexer_comment(t_list **alst, t_lexer *lexer);
 int			lexer_end(t_list **alst, t_lexer *lexer);
 

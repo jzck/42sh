@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:10:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:33:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 int		put_job_in_foreground(t_job *j, int cont)
 {
@@ -18,8 +18,6 @@ int		put_job_in_foreground(t_job *j, int cont)
 
 	jobc = &data_singleton()->jobc;
 	tcsetpgrp(STDIN, j->pgid);
-	tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
-
 	if (cont)
 	{
 		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
@@ -28,10 +26,11 @@ int		put_job_in_foreground(t_job *j, int cont)
 	}
 	job_wait(j->id);
 	job_remove(j->id);
-
 	tcsetpgrp(STDIN, jobc->shell_pgid);
-
-	tcgetattr(STDIN, &j->tmodes);
-	tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
+	if (SH_HAS_JOBC(data_singleton()->opts))
+	{
+		tcgetattr(STDIN, &j->tmodes);
+		tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
+	}
 	return (0);
 }

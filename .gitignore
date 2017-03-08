@@ -6,3 +6,10 @@ STDBUG
 debug
 .42sh_history
 *.dSYM
+.script.sh.swp
+*.swp
+*.swo
+*.o
+*.swn
+STDBUG
+STDEBUG

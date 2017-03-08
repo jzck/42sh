@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/18 16:44:56 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/07 19:42:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_stof g_builtin[] =
 	{"jobs", &builtin_jobs},
 	{"fg", &builtin_fg},
 	{"bg", &builtin_bg},
-	{"history", &builtin_history},
 	{"read", &builtin_read},
 	{"hash", &builtin_hash},
+	{"history", &builtin_history},
 	{NULL, NULL},
 };
 
@@ -37,7 +37,9 @@ t_execf		*is_builtin(t_process *p)
 
 	i = -1;
 	while (g_builtin[++i].name)
-		if (ft_strcmp(g_builtin[i].name, p->av[0]) == 0)
+	{
+		if (ft_strcmp(g_builtin[i].name, p->data.cmd.av[0]) == 0)
 			return (g_builtin[i].f);
+	}
 	return (NULL);
 }

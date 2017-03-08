@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 14:18:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 23:35:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,52 @@
 char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
-	struct s_tmp{
-		char	str[5];
-		t_type	type;
-	};
 	node = nodein;
-	if (node->type == TK_AMP)
+	
+	if (node->type == MATH)
+		return ("MATH");
+	if (node->type == TK_DSEMI)
+		return ("TK_DSEMI");
+	if (node->type == WORDLIST)
+		return ("WORDLIST");
+	if (node->type == CMD)
+		return ("CMD");
+	if (node->type == REDIR)
+		return ("REDIR");
+	if (node->type == CLOSE_LIST)
+		return ("CLOSE_LIST");
+	if (node->type == FNAME)
+		return ("FNAME");
+	if (node->type == TK_LBRACE)
+		return ("TK_LBRACE");
+	if (node->type == TK_ASSIGNEMENT_WORD)
+		return ("ASSIGNEMENT_WORD");
+	if (node->type == SUBSHELL)
+		return ("SUBSHELL");
+	if (node->type == TK_NAME)
+		return ("TK_NAME");
+	if (node->type == TK_FOR)
+		return ("TK_FOR");
+	if (node->type == TK_CASE)
+		return ("TK_CASE");
+	else if (node->type == TK_PAREN_OPEN)
+		return ("TK_OPE");
+	else if (node->type == TK_PAREN_CLOSE)
+		return ("TK_CLO");
+	else if (node->type == TK_IN)
+		return ("TK_IN");
+	else if (node->type ==TK_ESAC)
+		return ("TK_ESAC");
+	else if (node->type == TK_THEN)
+		return ("THEN");
+	else if (node->type == TK_FI)
+		return ("FI");
+	else if (node->type == TK_DO)
+		return ("TK_DO");
+	else if (node->type == TK_AMP)
 		return ("  &  ");
+	else if (node->type == TK_WORD)
+		return (" TK_WORD");
 	else if (node->type == TK_SEMI)
 		return ("  ;  ");
 	else if (node->type == TK_AND_IF)
@@ -32,6 +71,18 @@ char	*ft_putast(void *nodein)
 		return ("  |  ");
 	else if (node->type == TK_COMMAND)
 		return (" COM ");
+	else if (node->type == TK_WHILE)
+		return (" WHILE ");
+	else if (node->type == TK_IF)
+		return ("IF");
+	else if (node->type == TK_ELIF)
+		return ("ELIF");
+	else if (node->type == TK_ELSE)
+		return ("ELSE");
+	else if (node->type == TK_UNTIL)
+		return ("UNTIL");
+	else if (node->type == TK_NEWLINE)
+		return ("NEW");
 	else if (node->type == TK_GREAT)
 		return ("  >  ");
 	else if (node->type == TK_LESS)

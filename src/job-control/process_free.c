@@ -6,20 +6,35 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 13:59:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:13:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
+
+t_itof	g_freemap[] =
+{
+	{PROCESS_FUNCTION, process_free_subshell},
+	{PROCESS_BUILTIN, process_free_cmd},
+	{PROCESS_FILE, process_free_cmd},
+	{PROCESS_SUBSHELL, process_free_subshell},
+	{PROCESS_WHILE, process_free_cond},
+	{PROCESS_UNTIL, process_free_cond},
+	{PROCESS_IF, process_free_cond},
+	{PROCESS_FOR, process_free_list},
+	{PROCESS_CASE, process_free_list},
+};
 
 void	process_free(void *content, size_t content_size)
 {
 	t_process	*p;
 
-	(void)content_size;
 	p = content;
-	ft_strdel(&p->path);
-	ft_sstrfree(p->av);
-	ft_lstdel(&p->redirs, ft_lst_cfree);
+	(void)content_size;
+	if (p->type >= PROCESS_MAX)
+		return ;
+	if (g_freemap[p->type].f)
+		(g_freemap[p->type].f)(p);
+	ft_lstdel(&p->redirs, redir_free);
 	free(p);
 }

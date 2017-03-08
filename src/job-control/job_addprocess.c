@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:07:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:16:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 int		job_addprocess(t_process *p)
 {
@@ -19,7 +19,8 @@ int		job_addprocess(t_process *p)
 
 	jobc = &data_singleton()->jobc;
 	job = &data_singleton()->exec.job;
-	if (IS_PIPESTART(p->attributes))
+	DG("adding pid=[%i] to job", p->pid);
+	if (IS_PIPESTART(*p))
 	{
 		job_update_id();
 		job->id = jobc->current_id;
@@ -27,11 +28,8 @@ int		job_addprocess(t_process *p)
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
 	}
 	job = jobc->first_job->content;
-	if (p->pid > 0)
-	{
-		ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-	}
-	if (JOB_IS_BG(job->attributes) && IS_PIPEEND(p->attributes))
+	ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
+	if (JOB_IS_BG(job->attrs) && IS_PIPEEND(*p))
 		job_notify_new(job);
 	return (0);
 }

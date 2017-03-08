@@ -6,12 +6,11 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:18:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 17:00:41 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:45:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-
+#include "minishell.h"
 
 int		token_append_char(t_token *token, char c,
 		short int esc, short int esc2)

@@ -3,46 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 14:38:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-t_parser	g_parser[] =
+static void		insert_linebreak(t_list **lst)
 {
-	{TK_SEMI, &parse_separator},
-	{TK_AND_IF | TK_OR_IF, &parse_separator},
-	{TK_AMP, &parse_separator},
-	{TK_PIPE, &parse_separator},
-	{TK_REDIR, &parse_redir},
-	{TK_SUBSHELL, &parse_subshell},
-	{TK_WORD, &parse_word},
-	{0, 0},
-};
+	t_token		*token;
+	
+	token = (*lst)->content;
+	token->type = LINEBREAK;
+}
 
-int		ft_parse(t_btree **ast, t_list **start)
+static int		end_instruction(t_list **stack)
 {
-	t_list		*lst;
-	t_astnode	item;
-	int			i;
+	t_sym		*head;
+	
+	head = (*stack)->content;
+	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE
+		|| *head == COMPLETE_COMMANDS || *head == END_COMMAND)
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	if (!*start)
+int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
+{
+	t_sym		*head;
+
+	if (pop_heredoc(&parser->heredoc_queue, token))
 		return (0);
-	if (!*ast)
+	while (*token)
 	{
-		*ast = btree_create_node(&item, sizeof(item));
-		((t_astnode *)(*ast)->item)->data.token = NULL;
+		produce_sym(&parser->stack, parser->new_sym, token);
+		DG("new sym %s", read_state(*parser->new_sym));
+		if (eval_sym(&parser->stack, *parser->new_sym))
+			return ((parser->state = ERROR));
+		else
+		{
+			if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
+				return (0);
+			push_stack(&parser->stack, *parser->new_sym);
+		}
+//		ft_read_stack(parser->stack);
+		DG("\n");
+		if (*(head = (parser->stack)->content) == PROGRAM)
+			parser->state = SUCCESS;
+		else
+			parser->state = UNDEFINED;
+		build_tree(ast, token);
+//		btree_print(STDBUG, *ast, &ft_putast);
+		if ((end_instruction(&parser->stack) && !(*token)->next))
+			insert_linebreak(token);
+		else
+			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
-	while (g_parser[i].type)
-	{
-		if ((lst = ft_lst_find(*start, &g_parser[i].type, &token_cmp_type)))
-			return ((*g_parser[i].f)(ast, start, &lst));
-		i++;
-	}
+	if (parser->state == SUCCESS)
+		DG("sucessful parsing");
 	return (0);
 }

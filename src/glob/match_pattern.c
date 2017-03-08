@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 14:00:41 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 14:35:43 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 static int		match_bracket_char(char **cmp, const char *pat, char c, int neg)
 {
@@ -90,6 +90,7 @@ static char		*manage_pat(t_glob *gl, char *pat, char *str)
 	if (pat[0] == '.' && pat[1] == '/'
 			&& ((str[0] == '.' && str[1] != '/') || str[0] != '.'))
 	{
+		DG("%s vs %s", pat, str);
 		gl->cur_dir = 0;
 		return (pat + 2);
 	}

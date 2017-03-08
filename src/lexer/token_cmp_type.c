@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 17:08:55 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/05 13:35:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:02:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		token_cmp_type(t_token *token, t_type *ref)
 {

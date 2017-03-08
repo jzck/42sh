@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 15:07:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:07:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 t_list	*job_getprocess(pid_t pid)
 {

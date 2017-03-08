@@ -6,17 +6,18 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 17:00:52 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 13:21:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 t_token		*token_init(void)
 {
 	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
+//non protege
 	token->type = 0;
 	token->size = 8;
 	token->data = ft_strnew(token->size + 1);

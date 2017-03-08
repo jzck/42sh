@@ -6,94 +6,128 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 17:28:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 23:42:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		non_interactive_shell(char *command)
+int		handle_instruction(int fd)
 {
-	t_list	*token;
-	t_lexer	lexer;
-	t_btree	*ast;
+	t_list		*token;
+	t_list		*ltoken;
+	t_lexer		lexer;
+	t_parser	parser;
+	t_btree		*ast;
+	char		*str;
+	int			ret;
 
 	lexer_init(&lexer);
-	lexer.str = command;
+	parser_init(&parser);
 	token = NULL;
 	ast = NULL;
-	while (lexer.str[lexer.pos])
+	while (1)
 	{
-		if (lexer.stack && *(int*)lexer.stack->content == BACKSLASH)
-			pop(&lexer.stack);
-		do {
-			lexer_lex(&token, &lexer);
-		} while (lexer.str[lexer.pos] == '\n');
-		if (!token)
-			return (0);
-//		if (bquotes_expand(&token))
-//			return (1);
-		//token_print(token);
-		if (ft_parse(&ast, &token))
-			return (1);
-		if (ft_exec(&ast))
-			return (1);
-	}
-	return (0);
-}
-
-int		interactive_shell()
-{
-	t_list	*token;
-	t_list	*token_tail;
-	t_lexer	lexer;
-	t_btree	*ast;
-
-	lexer_init(&lexer);
-	token = NULL;
-	ast = NULL;
-	do {
-		char	*str = readline(stack_to_prompt(lexer.stack));
+		if ((ret = readline(fd, get_lexer_stack(lexer) ||
+			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
+		{
+			if (ret == -1)
+				return (-1);
+			return (parser.state == UNDEFINED ? error_EOF(&token,
+			&parser, &ast) : 1);
+		}
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
-		else if (get_lexer_stack(lexer) == DLESS)
-			lexer.state = DLESS;
-		token_tail = ft_lstlast(token);
-		/* if (token_tail) */
-		/* 	token_tail = token_tail->next; */
-		if (lexer_lex(token ? &token_tail : &token, &lexer))
+		/* else if (get_lexer_stack(lexer) == DLESS) */
+		/* 	lexer.state = DLESS; */
+		ltoken = ft_lstlast(token);
+		if (lexer_lex(token ? &ltoken : &token, &lexer))
+			return (1);
+		if (get_lexer_stack(lexer) > 2)
+			continue ;
+		lexer.state = DEFAULT;
+		if (get_reserved_words(&token))
 			return (1);
 		token_print(token);
-	} while (get_lexer_stack(lexer));
-	if (!token)
-		return (0);
-	ft_add_str_in_history(lexer.str);
-	if (ft_parse(&ast, &token))
-		return (1);
-	btree_print(STDBUG, ast, &ft_putast);
+		if (insert_newline(&token))
+			return (1);
+		if (ft_parse(&ast, &token, &parser))
+			continue ;
+		DG();
+		lexer.state = (data_singleton()->heredoc_queue) ? HEREDOC : 0;
+		if (data_singleton()->heredoc_queue)
+			DG("still in HEREDOC");
+		if (lexer.state)
+			continue;
+		else if (parser.state == SUCCESS)
+			break ;
+		else if (parser.state == ERROR && SH_IS_INTERACTIVE(data_singleton()->opts))
+		{
+			ft_add_str_in_history(lexer.str);
+			return (error_syntax(&token, &parser, &ast));
+		}
+		else if (parser.state == ERROR)
+			error_syntax(&token, &parser, &ast);
+	}
+	DG("Before execution:");
+//	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
-	ft_strdel(&lexer.str);
+	instruction_free(&token, &parser, &ast);
+	ft_add_str_in_history(lexer.str);
 	return (0);
+}
+
+int		get_input_fd()
+{
+	t_data	*data;
+	char	*file;
+	int		fds[2];
+	int		fd;
+
+	data = data_singleton();
+	if (SH_IS_INTERACTIVE(data->opts))
+		return (fd);
+	else if (data->opts & SH_OPTS_LC)
+	{
+		pipe(fds);
+		fd = fds[PIPE_READ];
+		file = shell_get_avdata();
+		write(fds[PIPE_WRITE], file, ft_strlen(file));
+		close(fds[PIPE_WRITE]);
+		fcntl(fd, F_SETFD, FD_CLOEXEC);
+		return (fd);
+	}
+	else if ((file = shell_get_avdata()))
+	{
+		if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			return (-1);
+		return (fd);
+	}
+	else
+		return (STDIN);
 }
 
 int		main(int ac, char **av)
 {
-	t_data	*data;
+	int		fd;
 
-	data = data_singleton();
-	DG();DG();
 	setlocale(LC_ALL, "");
 	shell_init(ac, av);
-//	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s", SH_HAS_JOBC(data->opts)?"ON":"OFF");
-	if (SH_IS_INTERACTIVE(data->opts))
+	if ((fd = get_input_fd()) < 0)
 	{
-		while (1)
-			interactive_shell();
+		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, shell_get_avdata());
+		return (1);
 	}
-	else
-		non_interactive_shell(shell_get_avdata());
-//	builtin_exit(0);
+	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s, fd=[%i]",
+			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
+	while (handle_instruction(fd) == 0)
+	{
+//		lexer_clean;
+//		parser_clean;
+		;
+	}
+	builtin_exit(NULL, NULL, NULL);
 	return (0);
 }

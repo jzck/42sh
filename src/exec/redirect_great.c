@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 22:42:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/06 14:58:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		redirect_great(t_redir* redir)
 {
@@ -18,7 +18,8 @@ int		redirect_great(t_redir* redir)
 	int		fdnew;
 
 	fdnew = redir->n;
-	if ((fdold = open(redir->word.word,
+	DG("redir great");
+	if ((fdold = open(redir->word,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 	{
 		DG("open errno=%i", errno);

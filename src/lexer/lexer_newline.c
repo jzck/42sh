@@ -6,11 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 23:19:46 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 19:55:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:00:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_newline(t_list **alst, t_lexer *lexer)
 {

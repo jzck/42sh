@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/18 11:10:50 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 20:53:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,23 @@
 # define MINISHELL_H
 # define SHELL_NAME		"minishell"
 
-# include "libft.h"
-# include "types.h"
-# include "lexer.h"
-# include "parser.h"
-# include "ft_readline.h"
-# include "exec.h"
-# include "builtin.h"
-# include "job_control.h"
-# include "glob.h"
-# include "completion.h"
-# include "hash.h"
-
 # include <dirent.h>
 # include <sys/stat.h>
-# include <sys/types.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <errno.h>
 
-# define SH_INTERACTIVE			(1 << 0)
-# define SH_OPTS_JOBC			(1 << 1)
-# define SH_OPTS_LC				(1 << 2)
-# define SH_MODE_INPUT			(1 << 3)
-# define SH_MODE_EXEC			(1 << 4)
-
-# define SH_MODE_MASK			(SH_MODE_INPUT | SH_MODE_EXEC)
-# define SH_HAS_JOBC(b)			(b & SH_OPTS_JOBC)
-# define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
-
-# define SH_MSG_NOJOBC	"no job-control"
+# include "../libft/includes/libft.h"
+# include "types.h"
+# include "lexer.h"
+# include "parser.h"
+# include "ft_readline.h"
+# include "job_control.h"
+# include "exec.h"
+# include "builtin.h"
+# include "glob.h"
+# include "completion.h"
+# include "hash.h"
 
 struct	s_data
 {
@@ -55,9 +42,10 @@ struct	s_data
 	t_comp	*comp;
 	t_exec	exec;
 	t_jobc	jobc;
+	t_list	*heredoc_queue;
+	char	**local_var;
+	t_list	*lst_func;
 };
-
-extern t_stof	g_builtins[];
 
 void	shell_get_opts(int ac, char **av);
 char	*shell_get_avdata();
@@ -66,10 +54,8 @@ void	shell_exit(void);
 int		data_init(void);
 void	data_exit(void);
 
-void	ft_expand_dollar(char **av, char **env);
-char	*ft_findexec(char *path, char *file);
-
-int		remove_trailing_esc_nl(char *str);
+int	instruction_free(t_list **token, t_parser *parser,
+	t_btree **ast);
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

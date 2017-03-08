@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 14:40:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:06:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
 # define JOB_IS_BG(j)		(j & JOB_BG)
-# define JOB_IS_FG(j)		!(j & JOB_BG)
+# define JOB_IS_FG(j)		(!JOB_IS_BG(j))
 
-#define JOBS_OPTS_L			(1 << 0)
+# define JOBS_OPTS_L		(1 << 0)
 
 struct	s_job
 {
 	int				id;
 	pid_t			pgid;
-	t_flag			attributes;
+	t_flag			attrs;
 	t_list			*first_process;
 	struct termios	tmodes;
 };
@@ -58,7 +58,7 @@ void		job_format_head(t_job *j);
 
 void		job_update_status(void);
 void		mark_job_as_running (t_job *j);
-int			process_mark_status(pid_t pid, int status);
+int			mark_process_status(pid_t pid, int status);
 int			job_is_stopped(int id);
 int			job_is_completed(int id);
 
@@ -84,5 +84,17 @@ void		sigttou_handler(int signo);
 
 int			process_cmp_pid(t_process *p, pid_t *pid);
 void		process_format(t_list **p, int firstp, int opts);
+/*
+** Mapping pour afficher les process
+*/
+void	process_print(t_process *p);
+int		process_print_subshell(t_process *p);
+int		process_print_while(t_process *p);
+int		process_print_if(t_process *p);
+int		process_print_case(t_process *p);
+int		process_print_until(t_process *p);
+int		process_print_function(t_process *p);
+int		process_print_for(t_process *p);
+int		process_print_cmd(t_process *p);
 
 #endif

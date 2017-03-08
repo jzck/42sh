@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 23:18:56 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 17:25:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/24 22:05:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 unsigned char				*calc_expand_esc(const unsigned char *esc,
 							int nb_start, int *nb_middle, int *nb_end)

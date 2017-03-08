@@ -6,12 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 14:45:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:53:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
-#include "exec.h"
+#include "minishell.h"
+#include "minishell.h"
 
 int		process_setgroup(t_process *p, pid_t pid)
 {
@@ -26,7 +26,7 @@ int		process_setgroup(t_process *p, pid_t pid)
 	if (!j->pgid)
 		j->pgid = pid ? pid : getpid();
 	setpgid(pid, j->pgid);
-	if (pid == 0 && JOB_IS_FG(j->attributes))
+	if (pid == 0 && JOB_IS_FG(j->attrs))
 		tcsetpgrp(STDIN, j->pgid);
 	return (0);
 }

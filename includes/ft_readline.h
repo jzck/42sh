@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:36:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 23:23:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <time.h>
 # include <dirent.h>
 # include <locale.h>
+
+# include "ft_input.h"
 
 # define FLECHE_HAUT 4283163
 # define FLECHE_BAS 4348699
@@ -53,12 +55,12 @@
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
 
-# define IS_QUOTES (1 << 0)
-# define IS_BQUOTES (1 << 1)
-# define IS_DQUOTES (1 << 2)
-# define IS_BSLASH (1 << 3)
-# define IS_ACCOLADE (1 << 4)
-# define IS_BRACKET (1 << 5)
+/* # define IS_QUOTES (1 << 0) */
+/* # define IS_BQUOTES (1 << 1) */
+/* # define IS_DQUOTES (1 << 2) */
+/* # define IS_BSLASH (1 << 3) */
+/* # define IS_ACCOLADE (1 << 4) */
+/* # define IS_BRACKET (1 << 5) */
 
 # define STR data_singleton()->line.input
 # define POS data_singleton()->line.pos
@@ -150,7 +152,7 @@ void			ft_c(void);
 void			ft_x(void);
 void			ft_v(void);
 void			ft_read_it(int input, size_t *pos, char **str);
-char			*readline(char *);
+int				readline(int fd, int prompt, char **input);
 int				ft_completion(int ret);
 
 struct termios	*ft_save_termios(int save);

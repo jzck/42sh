@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 17:36:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:04:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
-t_redirmap	g_redirmap[] =
+t_itof		g_redirmap[] =
 {
 	{TK_LESS, redirect_less},
 	{TK_GREAT, redirect_great},
@@ -33,12 +33,15 @@ int		process_redirect(t_process *p)
 	while (redirs)
 	{
 		redir = redirs->content;
+		DG("redir type :%s", read_state(redir->type));
+		DG("redir word : %s", redir->word);
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
 		i = 0;
-		while (g_redirmap[i].type)
+		while (g_redirmap[i].id)
 		{
-			if (g_redirmap[i].type == redir->type)
+			DG("process redirect");
+			if (g_redirmap[i].id == redir->type)
 			{
 				if ((g_redirmap[i].f)(redir))
 					return (1);
@@ -48,12 +51,11 @@ int		process_redirect(t_process *p)
 		}
 		redirs = redirs->next;
 	}
-	if (p->toclose != STDIN)
-		close(p->toclose);
+	if (p->to_close != STDIN)
+		close(p->to_close);
 	if (p->fdin != STDIN)
 		dup2_close(p->fdin, STDIN);
 	if (p->fdout != STDOUT)
 		dup2_close(p->fdout, STDOUT);
-	ft_lstdel(&p->redirs, ft_lst_cfree);
 	return (0);
 }

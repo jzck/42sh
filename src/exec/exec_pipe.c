@@ -6,43 +6,20 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 21:13:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/17 14:36:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:27:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		exec_pipe(t_btree **ast)
 {
-	int			fds[2];
-	int			start;
-	t_data		*data;
-	t_process	*p;
+	t_exec	*exec;
 
-	data = data_singleton();
-	p = &data_singleton()->exec.process;
-	pipe(fds);
-	/* DG("pipe %i->%i", fds[PIPE_WRITE], fds[PIPE_READ]); */
-	p->fdout = fds[PIPE_WRITE];
-	start = IS_PIPESTART(p->attributes);
-	p->toclose = fds[PIPE_READ];
-
-	p->attributes &= ~PROCESS_PIPEEND;
+	exec = &data_singleton()->exec;
+	push(&exec->op_stack, TK_PIPE);
 	ft_exec(&(*ast)->left);
-	p->attributes &= ~PROCESS_PIPESTART;
-
-	p->toclose = STDIN;
-	close(fds[PIPE_WRITE]);
-	p->fdout = STDOUT;
-	p->fdin = fds[PIPE_READ];
-
-	p->attributes |= PROCESS_PIPEEND;
 	ft_exec(&(*ast)->right);
-	if (start)
-		p->attributes |= PROCESS_PIPESTART;
-
-	close(fds[PIPE_READ]);
-	p->fdin = STDIN;
-	btree_delone(ast, &ast_free);
+	/* btree_delone(ast, &ast_free); */
 	return (0);
 }

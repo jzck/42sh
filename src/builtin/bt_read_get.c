@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 18:00:03 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:58:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/07 11:27:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin_read.h"
+#include "minishell.h"
 
 int		bt_read_getdelim(t_read *data, char *arg)
 {

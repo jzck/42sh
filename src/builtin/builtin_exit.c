@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 15:24:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 23:25:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 	if (av && av[1])
 		status = ft_atoi(av[1]);
 	else
-	{
-		/* status = ft_atoi(ft_getenv(data_singleton()->env, "?")); */
-		status = 0;
-	}
+		status = ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	ft_save_termios(-1);
 	ft_free_hash_table();
 	data_exit();

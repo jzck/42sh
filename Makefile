@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/04 17:27:41 by gwojda           ###   ########.fr        #
+#*   Updated: 2017/03/05 15:36:45 by wescande         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,23 +60,42 @@ completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
 exec/bad_fd.c\
+exec/error_badidentifier.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
+exec/exec_case_branch.c\
 exec/exec_command.c\
+exec/exec_elif.c\
+exec/exec_else.c\
+exec/exec_leaf.c\
+exec/exec_math.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
-exec/exec_redir.c\
+exec/exec_reset.c\
 exec/exec_semi.c\
+exec/exec_var.c\
 exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
+exec/is_function.c\
+exec/launch_builtin.c\
+exec/launch_case.c\
+exec/launch_file.c\
+exec/launch_for.c\
+exec/launch_function.c\
+exec/launch_if.c\
 exec/launch_process.c\
+exec/launch_subshell.c\
+exec/launch_until.c\
+exec/launch_while.c\
+exec/mark_process_status.c\
+exec/node_copy.c\
 exec/process_redirect.c\
 exec/process_reset.c\
-exec/process_resetfds.c\
-exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
+exec/redir_copy.c\
+exec/redir_free.c\
 exec/redirect_dgreat.c\
 exec/redirect_dless.c\
 exec/redirect_great.c\
@@ -84,6 +103,16 @@ exec/redirect_greatand.c\
 exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
+exec/set_process.c\
+exec/set_process_case.c\
+exec/set_process_cmd.c\
+exec/set_process_for.c\
+exec/set_process_if.c\
+exec/set_process_map.c\
+exec/set_process_subshell.c\
+exec/set_process_until.c\
+exec/set_process_while.c\
+exec/token_to_argv.c\
 glob/command_getoutput.c\
 glob/dir_glob.c\
 glob/esc_print.c\
@@ -94,10 +123,12 @@ glob/expand_home.c\
 glob/expand_var.c\
 glob/ft_strsplit_esc.c\
 glob/ft_strsplit_spe.c\
+glob/gen_tab_esc.c\
 glob/glob.c\
 glob/is_char_esc.c\
 glob/lib_perso/ft_ld_back.c\
 glob/lib_perso/ft_ld_clear.c\
+glob/lib_perso/ft_ld_copy.c\
 glob/lib_perso/ft_ld_del.c\
 glob/lib_perso/ft_ld_front.c\
 glob/lib_perso/ft_ld_new.c\
@@ -114,6 +145,8 @@ glob/lib_perso/ft_strsubf.c\
 glob/lib_perso/ft_tabdel.c\
 glob/lib_perso/ft_tablen.c\
 glob/match_pattern.c\
+glob/tab_esc_copy.c\
+glob/word_is_assignment.c\
 hash_table/ft_add_hash.c\
 hash_table/hash.c\
 hash_table/hash_free.c\
@@ -126,8 +159,6 @@ history/history_parsing_toolz.c\
 history/history_parsing_toolz_2.c\
 history/list_toolz.c\
 history/surch_in_history.c\
-init_history.c\
-init_line.c\
 job-control/builtin_bg.c\
 job-control/builtin_fg.c\
 job-control/builtin_jobs.c\
@@ -153,7 +184,19 @@ job-control/mark_job_as_running.c\
 job-control/process_cmp_pid.c\
 job-control/process_format.c\
 job-control/process_free.c\
-job-control/process_mark_status.c\
+job-control/process_free_cmd.c\
+job-control/process_free_cond.c\
+job-control/process_free_list.c\
+job-control/process_free_subshell.c\
+job-control/process_print.c\
+job-control/process_print_case.c\
+job-control/process_print_cmd.c\
+job-control/process_print_for.c\
+job-control/process_print_function.c\
+job-control/process_print_if.c\
+job-control/process_print_subshell.c\
+job-control/process_print_until.c\
+job-control/process_print_while.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\
@@ -162,18 +205,21 @@ job-control/sigtstp_handler.c\
 job-control/sigttin_handler.c\
 job-control/sigttou_handler.c\
 lexer/get_lexer_stack.c\
+lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
+lexer/insert_newline.c\
+lexer/lexer_assignement_word.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
-lexer/lexer_comment.c\
+lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
-lexer/lexer_dless.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
+lexer/lexer_heredoc.c\
 lexer/lexer_init.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
@@ -184,8 +230,6 @@ lexer/lexer_paren.c\
 lexer/lexer_quote.c\
 lexer/lexer_sep.c\
 lexer/lexer_word.c\
-lexer/reduce_parens.c\
-lexer/stack_to_prompt.c\
 lexer/token_append.c\
 lexer/token_cmp_type.c\
 lexer/token_free.c\
@@ -197,6 +241,8 @@ line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\
 line-editing/home_end.c\
+line-editing/init_history.c\
+line-editing/init_line.c\
 line-editing/init_termcaps.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\
@@ -213,27 +259,35 @@ line-editing/readline.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
-main/ft_cleanup.c\
 main/ft_putast.c\
-main/ft_putast2.c\
-main/lib_expansion.c\
+main/instruction_free.c\
 main/main.c\
-main/remove_trailing_esc_nl.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
-main/sig_handler.c\
+parser/add_case.c\
+parser/add_cmd.c\
+parser/add_condition.c\
+parser/add_func.c\
+parser/add_loop.c\
+parser/add_math.c\
+parser/add_number.c\
+parser/add_redir.c\
+parser/add_sep.c\
+parser/add_subshell.c\
+parser/add_var.c\
+parser/aggregate_sym.c\
+parser/build_tree.c\
+parser/error_syntax.c\
+parser/eval_sym.c\
 parser/ft_parse.c\
-parser/parse_dgreat.c\
-parser/parse_dless.c\
-parser/parse_great.c\
-parser/parse_greatand.c\
-parser/parse_less.c\
-parser/parse_lessand.c\
-parser/parse_redir.c\
-parser/parse_separator.c\
-parser/parse_subshell.c\
-parser/parse_word.c
+parser/heredoc_parser.c\
+parser/parser_init.c\
+parser/pop_stack.c\
+parser/produce_sym.c\
+parser/push_stack.c\
+parser/read_stack.c\
+parser/tree_wrapper.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_BASE:.c=.o))
@@ -244,13 +298,13 @@ all :
 	@make -j $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(FLAGS) $(D_FLAGS) \
+	@$(CC) $(OBJS) -o $(NAME) \
 		-I $(INC_DIR) \
 		-I $(LIBFT_INC) \
 		$(LIBS) \
-		$(LIBFT_LIB) $(OBJS) \
-		-o $(NAME)
-	@printf "\r\e[48;5;15;38;5;25m✅ MAKE $(NAME)\e[0m\e[K\n"
+		$(LIBFT_LIB) \
+		$(FLAGS) $(D_FLAGS)
+	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
@@ -264,7 +318,7 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval COLOR=$(shell echo $$(($(PERCENT)%35+196))))
 	@$(eval TO_DO=$(shell echo $$((20-$(INDEX)*20/$(NB)))))
-	@printf "\r\e[38;5;11m⌛ MAKE %10.10s : %2d%% \e[48;5;%dm%*s\e[0m%*s\e[48;5;255m \e[0m \e[38;5;11m %*s\e[0m\e[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) "$@"
+	@printf "\r\033[38;5;11m⌛ MAKE %10.10s : %2d%% \033[48;5;%dm%*s\033[0m%*s\033[48;5;255m \033[0m \033[38;5;11m %*.*s\033[0m\033[K" $(NAME) $(PERCENT) $(COLOR) $(DONE) "" $(TO_DO) "" $(DELTA) $(DELTA) "$@"
 	@$(CC) $(FLAGS) $(D_FLAGS) -MMD -c $< -o $@\
 		-I $(INC_DIR)\
 		-I $(LIBFT_INC)
@@ -272,14 +326,14 @@ $(OBJ_DIR)%.o :	$(SRC_DIR)%.c | $(OBJ_DIR)
 
 clean:			cleanlib
 	@rm -rf $(OBJ_DIR)
-	@printf "\r\e[38;5;202m✖ clean $(NAME).\e[0m\e[K\n"
+	@printf "\r\033[38;5;202m✖ clean $(NAME).\033[0m\033[K\n"
 
 cleanlib:
 	@make -C $(LIBFT_DIR) clean
 
 fclean:			clean fcleanlib
 	@rm -f $(NAME)
-	@printf "\r\e[38;5;196m❌ fclean $(NAME).\e[0m\e[K\n"
+	@printf "\r\033[38;5;196m❌ fclean $(NAME).\033[0m\033[K\n"
 
 fcleanlib:		cleanlib
 	@make -C $(LIBFT_DIR) fclean

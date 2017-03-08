@@ -6,11 +6,11 @@
 /*   By: wescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:20:08 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/07 13:01:55 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:20:19 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 char	*ft_strsubf(char *s, unsigned int start, size_t len, short int mode)
 {

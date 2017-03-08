@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:30:07 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/31 15:05:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/02/21 20:09:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 int		builtin_fg(const char *path, char *const av[], char *const envp[])
 {

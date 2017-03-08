@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 22:18:46 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/31 23:15:17 by wescande         ###   ########.fr       */
+/*   Updated: 2017/02/24 22:05:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 static int		ft_strlen_c(const char *str, const char *fix,
 							const unsigned char *esc, char c)

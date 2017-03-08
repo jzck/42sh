@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:41 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/13 17:58:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/01/20 00:10:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 int		builtin_echo(const char *path, char *const av[], char *const envp[])
 {

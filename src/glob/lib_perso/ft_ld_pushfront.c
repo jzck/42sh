@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 18:32:40 by wescande          #+#    #+#             */
-/*   Updated: 2017/01/05 14:17:46 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:15:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 void	ft_ld_pushfront(t_ld **alst, void *content)
 {

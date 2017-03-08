@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 16:54:07 by wescande          #+#    #+#             */
-/*   Updated: 2016/12/28 16:55:46 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 21:18:23 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 int		ft_tablen(char **mytab)
 {

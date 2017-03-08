@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 14:11:46 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/03 14:19:22 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 23:30:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 void						do_expand_home(t_bquote *me, char *home)
 {

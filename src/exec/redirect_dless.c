@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
 /*   Updated: 2017/02/07 16:05:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int		redirect_dless(t_redir *redir)
 {
@@ -18,7 +17,7 @@ int		redirect_dless(t_redir *redir)
 	char	*str;
 
 	pipe(fds);
-	str = redir->word.word;
+	str = redir->word;
 	write(fds[PIPE_WRITE], str, ft_strlen(str));
 	close(fds[PIPE_WRITE]);
 	dup2(fds[PIPE_READ], 0);

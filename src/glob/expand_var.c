@@ -6,11 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 16:09:27 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 18:56:50 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/07 12:07:53 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 /*
 ** expand_var return value of $var in the string.
@@ -42,7 +42,6 @@ static void			insert_var(t_glob *gl, char *pos, char *name, char *content)
 	gl->esc2 = new_esc;
 	ft_strdel(&s1);
 	ft_strdel(&s2);
-	ft_strdel(&content);
 }
 
 static char			*get_name(t_glob *gl, const char *pat)
@@ -74,7 +73,8 @@ void				expand_var(t_glob *gl)
 		{
 			if (var && *var)
 			{
-				content = ft_getenv(data_singleton()->env, var);
+				if (!(content = ft_getenv(data_singleton()->env, var)))
+					content = ft_getenv(data_singleton()->local_var, var);
 				insert_var(gl, pat, var, content);
 				pat = gl->pat;
 			}

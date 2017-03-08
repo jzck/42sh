@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:58:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/09 20:02:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 12:09:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_delim(t_list **alst, t_lexer *lexer)
 {
@@ -21,9 +21,7 @@ int		lexer_delim(t_list **alst, t_lexer *lexer)
 		lexer->pos++;
 	lexer->state = DEFAULT;
 	if (token->type)
-	{
 		return (lexer_lex(&(*alst)->next, lexer));
-	}
 	else
 	{
 		if (lexer->str[lexer->pos] == 0)

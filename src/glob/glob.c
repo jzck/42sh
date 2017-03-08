@@ -6,21 +6,21 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/03 16:18:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 23:31:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "minishell.h"
 
 /*
-** glob return expansion of a string.
-** pattern searched are *, ?, [a-z], [!a-z], [^a-z], {ab, ac}, **
-** input parameters are :
-**			-char	*pat  -> pattern string to be looking for match
-**			-char	*esc  -> escape binary sequence of *pat
-**			-char	**env -> env var. could be NULL
-**				to just expanse in local directory and not in path dir
-*/
+ ** glob return expansion of a string.
+ ** pattern searched are *, ?, [a-z], [!a-z], [^a-z], {ab, ac}, **
+ ** input parameters are :
+ **			-char	*pat  -> pattern string to be looking for match
+ **			-char	*esc  -> escape binary sequence of *pat
+ **			-char	**env -> env var. could be NULL
+ **				to just expanse in local directory and not in path dir
+ */
 
 static char		**treat_glob(t_glob *gl)
 {
@@ -66,8 +66,7 @@ char			**glob(char *pat, unsigned char *esc,
 			else
 				dir_research(&gl, "/", gl.pat + 1, 0);
 			if (!gl.found)
-				ft_ld_pushfront(&gl.match,
-						ft_strjoin(gl.cur_dir ? "" : "./", CH(gl.m_pat)[0]));
+				ft_ld_pushfront(&gl.match, ft_strdup(CH(gl.m_pat)[0]));
 			if (!gl.m_pat->next)
 				break ;
 			gl.m_pat = gl.m_pat->next;

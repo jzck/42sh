@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:27:01 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/15 17:15:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:28:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "minishell.h"
 
 void	job_notify_new(t_job *job)
 {
