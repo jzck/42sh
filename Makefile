@@ -215,11 +215,11 @@ lexer/lexer_bquote.c\
 lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
-lexer/lexer_dless.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
 lexer/lexer_greatand.c\
+lexer/lexer_heredoc.c\
 lexer/lexer_init.c\
 lexer/lexer_less.c\
 lexer/lexer_lessand.c\
