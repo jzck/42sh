@@ -85,6 +85,8 @@ exec/launch_file.c\
 exec/launch_for.c\
 exec/launch_if.c\
 exec/launch_process.c\
+exec/launch_subshell.c\
+exec/launch_until.c\
 exec/launch_while.c\
 exec/mark_process_status.c\
 exec/process_redirect.c\
@@ -108,6 +110,8 @@ exec/set_process_cmd.c\
 exec/set_process_for.c\
 exec/set_process_if.c\
 exec/set_process_map.c\
+exec/set_process_subshell.c\
+exec/set_process_until.c\
 exec/set_process_while.c\
 exec/token_to_argv.c\
 glob/command_getoutput.c\

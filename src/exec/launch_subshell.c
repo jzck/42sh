@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_leaf.c                                        :+:      :+:    :+:   */
+/*   launch_subshell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:30:29 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/08 00:11:44 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 00:32:13 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				exec_leaf(t_btree **ast)
+static int		do_subshell(t_process *p)
 {
-	t_process	p;
-	t_job		*job;
+	ft_exec(&p->data.subshell.content);
+	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
+}
 
-	DG("in exec leaf");
-	job = &data_singleton()->exec.job;
-	if (set_process(&p, *ast))
-		return (1);
-	DG("set_process done");
-	if (!(launch_process(&p)))
+int				launch_subshell(t_process *p)
+{
+	pid_t	pid;
+
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 	{
-		job_addprocess(&p);
-		if (IS_PIPEEND(p))
+		pid = fork();
+		if (pid == 0)
 		{
-			if (JOB_IS_FG(job->attrs))
-				put_job_in_foreground(job, 0);
-			else
-				put_job_in_background(job, 0);
+			data_singleton()->opts &= ~SH_INTERACTIVE;
+			data_singleton()->opts &= ~SH_OPTS_JOBC;
+			exit(do_subshell(p));
 		}
-		job->pgid = 0;
+		else if (pid > 0)
+			return (pid);
 	}
-	if (p.fdout != STDOUT)
-		close(p.fdout);
+	else
+		do_subshell(p);
 	return (0);
 }

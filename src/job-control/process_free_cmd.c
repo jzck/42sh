@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process_if.c                                   :+:      :+:    :+:   */
+/*   process_free_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 19:19:50 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 01:51:09 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/08 00:58:02 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 00:59:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd)
+void	process_free_cmd(t_process *p)
 {
-	(void)cmd;
-	p->data.d_if.condition = btree_map(ast->left, &node_copy);
-	p->data.d_if.content = btree_map(ast->right, &node_copy);
-	p->type = PROCESS_IF;
-	return (0);
+	ft_strdel(&p->data.cmd.path);
+	ft_sstrfree(p->data.cmd.av);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/03 20:03:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 00:23:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ char			*read_state(t_sym current)
 		return ("TK_LESSAND");
 	if (current == TK_GREATAND)
 		return ("TK_GREATAND");
-	if (current == TK_SUBSHELL)
-		return ("TK_SUBSEHLL");
+	if (current == SUBSHELL)
+		return ("SUBSEHLL");
 	if (current == CMD_SUPERIOR)
 		return ("CMD_SUPERIOR");
 	if (current == TK_IO_NUMBER)

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process_if.c                                   :+:      :+:    :+:   */
+/*   set_process_until.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 19:19:50 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 01:51:09 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/07 22:22:24 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 01:54:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd)
+int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd)
 {
 	(void)cmd;
-	p->data.d_if.condition = btree_map(ast->left, &node_copy);
-	p->data.d_if.content = btree_map(ast->right, &node_copy);
-	p->type = PROCESS_IF;
+	p->data.d_while.condition = btree_map(ast->left, &node_copy);
+	p->data.d_while.content = btree_map(ast->right, &node_copy);
+	p->type = PROCESS_UNTIL;
 	return (0);
 }
