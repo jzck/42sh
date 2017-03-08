@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:06:05 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 15:55:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:13:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		set_process_cmd(t_process *p, t_btree *ast)
 	p->data.cmd.path = NULL;
 	p->data.cmd.execf = NULL;
 	p->data.cmd.stat = ft_memalloc(sizeof(struct stat));
-	DG("gonna setexec av[0]=[%s]", p->data.cmd.av[0]);
+	/* DG("gonna setexec av[0]=[%s]", p->data.cmd.av[0]); */
 	p->type = PROCESS_FILE;
 	if ((func = is_function(p)))
 	{
@@ -40,7 +40,7 @@ int		set_process_cmd(t_process *p, t_btree *ast)
 	else if (ft_hash(p))
 	{
 		p->data.cmd.execf = &execve;
-		DG("found hash at [%s]", p->data.cmd.path);
+		/* DG("found hash at [%s]", p->data.cmd.path); */
 		if (stat(p->data.cmd.path, p->data.cmd.stat) == -1)
 		{
 			ft_memdel((void**)&p->data.cmd.stat);
