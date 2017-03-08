@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process_while.c                                :+:      :+:    :+:   */
+/*   redir_copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 19:38:10 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 01:03:05 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/08 00:02:58 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/08 00:41:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		set_process_while(t_process *p, t_btree *ast, t_cmd *cmd)
+void			*redir_copy(void *data)
 {
-	(void)cmd;
-	p->data.d_while.condition = btree_map(ast->left, &node_copy);
-	p->data.d_while.content = btree_map(ast->right, &node_copy);
+	t_redir		*old;
+	t_redir		*new;	
+
+	if (!data)
+		return (NULL);
+	old = data;
+	ft_bzero((void *)&new, sizeof(t_astdata));
+	new->type = old->type;
+	new->n = old->n;
+	new->word = ft_strdup(old->word);
 	return (0);
-}
+}	

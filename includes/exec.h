@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:08:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 01:00:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,9 @@ char	*ft_findexec(char *path, char *file);
 void	set_exitstatus(int status, int override);
 
 void	ast_free(void *data, size_t content_size);
-t_btree	*ast_copy(t_btree *tree);
+void	*node_copy(void *data);
+void	*redir_copy(void *data);
+
 void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
