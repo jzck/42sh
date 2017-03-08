@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:48:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 14:43:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:10:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		launch_builtin(t_process *p)
 		process_setsig();
 		if (process_redirect(p))
 			exit (1);
+		exec_reset();///A FAIRE POUR LES BUILTIN OU PAS ? -> Q de William
 		exit((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env));
 	}
 	else if (pid > 0)

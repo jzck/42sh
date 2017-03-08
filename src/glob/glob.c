@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/03 20:38:53 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 14:50:56 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ char			**glob(char *pat, unsigned char *esc,
 			else
 				dir_research(&gl, "/", gl.pat + 1, 0);
 			if (!gl.found)
-				ft_ld_pushfront(&gl.match,
-						ft_strjoin(gl.cur_dir ? "" : "./", CH(gl.m_pat)[0]));
+				ft_ld_pushfront(&gl.match, ft_strdup(CH(gl.m_pat)[0]));
 			if (!gl.m_pat->next)
 				break ;
 			gl.m_pat = gl.m_pat->next;
