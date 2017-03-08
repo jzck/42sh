@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 18:07:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 00:24:07 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*command_getoutput(char *command)
 
 	/* output = NULL; */
 	/* exec = &data_singleton()->exec; */
-	/* item.type = TK_SUBSHELL; */
+	/* item.type = SUBSHELL; */
 	/* item.data.sstr = malloc(4 * sizeof(char *)); */
 	/* item.data.sstr[0] = ft_strdup(data_singleton()->argv[0]); */
 	/* item.data.sstr[1] = ft_strdup("-c"); */

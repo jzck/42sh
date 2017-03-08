@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 20:57:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 00:22:56 by wescande         ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -118,7 +118,6 @@ enum	e_sym
 	TK_IO_NUMBER,
 	TK_DLESSDASH,
 	TK_LESSGREAT,
-	TK_SUBSHELL,
 	TK_CASE,
 	TK_IN,
 	TK_ESAC,

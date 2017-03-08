@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 19:46:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 00:35:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ int		put_job_in_foreground(t_job *j, int cont)
 			if (kill(-j->pgid, SIGCONT) < 0)
 				DG("kill(SIGCONT) failed");
 		}
+		DG();
 		job_wait(j->id);
+		DG();
 		job_remove(j->id);
+		DG();
 
 		tcsetpgrp(STDIN, jobc->shell_pgid);
 
@@ -36,8 +39,11 @@ int		put_job_in_foreground(t_job *j, int cont)
 	}
 	else
 	{
+		DG();
 		job_wait(j->id);
+		DG();
 		job_remove(j->id);
+		DG();
 	}
 	return (0);
 }

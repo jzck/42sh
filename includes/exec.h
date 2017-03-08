@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 22:23:06 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 01:04:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,21 @@ struct	s_data_list
 	t_btree	*content;
 };
 
+struct	s_data_subshell
+{
+	t_btree	*content;
+};
+
 union	u_process_data
 {
-	struct s_data_cmd	cmd;
-	struct s_data_cond	d_while;
-	struct s_data_cond	d_if;
-	struct s_data_cond	d_else;
-	struct s_data_cond	d_elif;
-	struct s_data_list	d_for;
-	struct s_data_list	d_case;
+	struct s_data_cmd		cmd;
+	struct s_data_subshell	subshell;
+	struct s_data_cond		d_while;
+	struct s_data_cond		d_if;
+	struct s_data_cond		d_else;
+	struct s_data_cond		d_elif;
+	struct s_data_list		d_for;
+	struct s_data_list		d_case;
 };
 
 enum	e_process_type
@@ -93,6 +99,7 @@ enum	e_process_type
 typedef enum e_process_type		t_process_type;
 typedef union u_process_data	t_process_data;
 typedef struct s_data_cond		t_data_while;
+typedef struct s_data_cond		t_data_if;
 typedef struct s_data_cond		t_data_if;
 
 struct	s_process
@@ -152,7 +159,6 @@ int		exec_math(t_btree **ast);
 int		process_setexec(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
-void	process_free(void *content, size_t content_size);
 void	process_reset(t_process *p);
 void	process_resetfds(void);
 
@@ -181,6 +187,12 @@ int		add_new_job(t_job *job);
 int		error_badidentifier(char *name);
 
 /*
+** Mapping pour free les process
+*/
+void	process_free(void *content, size_t content_size);
+void	process_free_cmd(t_process *p);
+
+/*
 ** Mapping pour launch les process
 */
 int		launch_process(t_process *p);
@@ -191,6 +203,7 @@ int		launch_for(t_process *p);
 int		launch_case(t_process *p);
 int		launch_file(t_process *p);
 int		launch_builtin(t_process *p);
+int		launch_subshell(t_process *p);
 
 /*
 ** Mapping pour set les process
@@ -203,4 +216,6 @@ int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd);
 int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd);
 int		set_process_for(t_process *p, t_btree *ast, t_cmd *cmd);
 int		set_process_case(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_subshell(t_process *p, t_btree *ast, t_cmd *cmd);
+
 #endif
