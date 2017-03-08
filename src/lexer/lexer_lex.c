@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 14:55:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 15:51:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 {
 	&lexer_default,
 	&lexer_paren,
+	&lexer_heredoc,
 	&lexer_newline,
 	&lexer_delim,
 	&lexer_sep,
@@ -25,7 +26,6 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_great,
 	&lexer_lessand,
 	&lexer_greatand,
-	&lexer_dless,
 	&lexer_quote,
 	&lexer_dquote,
 	&lexer_bquote,
