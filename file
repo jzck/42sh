@@ -1,0 +1,16 @@
+total 80
+-rw-r--r--   1 ariard  2016_paris  8813 Mar  8 03:05 Makefile
+-rw-r--r--   1 ariard  2016_paris  6781 Mar  8 02:33 STDBUG
+drwxr-xr-x   7 ariard  2016_paris   238 Mar  4 14:53 TESTSHELL
+-rw-r--r--   1 ariard  2016_paris  4396 Mar  4 14:53 donovan_segaults_06-02
+-rw-r--r--   1 ariard  2016_paris     0 Mar  8 16:02 file
+drwxr-xr-x  16 ariard  2016_paris   544 Mar  8 15:52 includes
+-rw-r--r--   1 ariard  2016_paris   117 Mar  8 00:08 laurier.sh
+drwxr-xr-x  10 ariard  2016_paris   340 Mar  8 03:04 libft
+-rw-r--r--   1 ariard  2016_paris     0 Mar  4 14:53 parser_init.c
+drwxr-xr-x   6 ariard  2016_paris   204 Mar  4 14:53 pdf
+drwxr-xr-x  29 ariard  2016_paris   986 Mar  4 14:53 sample
+drwxr-xr-x  13 ariard  2016_paris   442 Mar  7 19:42 src
+-rwxr-xr-x   1 ariard  2016_paris   890 Mar  4 14:53 test_framework.sh
+-rwxr-xr-x   1 ariard  2016_paris   690 Mar  4 14:53 update_makefile.sh
+/Users/ariard/Projects/42sh

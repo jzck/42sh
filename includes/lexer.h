@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 18:28:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 15:49:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ enum	e_lexstate
 {
 	DEFAULT,
 	PAREN,
+	DLESS,
 	NEWLINE,
 	DELIM,
 	SEP,
@@ -34,7 +35,6 @@ enum	e_lexstate
 	GREAT,
 	LESSAND,
 	GREATAND,
-	DLESS,
 	QUOTE,
 	DQUOTE,
 	BQUOTE,
