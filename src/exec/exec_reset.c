@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_exit.c                                       :+:      :+:    :+:   */
+/*   exec_reset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/12 17:37:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/21 20:14:43 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/08 14:45:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	shell_exit(void)
+int		exec_reset(void)
 {
-	t_data	*data;
+	t_exec	*exec;
 
-	/* DG("shell_exit()"); */
-	data = data_singleton();
-	data_exit();
-	if (SH_HAS_JOBC(data->opts))
-		job_kill_all();
-	if (SH_IS_INTERACTIVE(data->opts))
-		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
+	exec = &data_singleton()->exec;
+	exec->fd_save[0] = fcntl(0, F_DUPFD_CLOEXEC);
+	exec->fd_save[1] = fcntl(1, F_DUPFD_CLOEXEC);
+	exec->fd_save[2] = fcntl(2, F_DUPFD_CLOEXEC);
+	exec->op_stack = NULL;
+	exec->fdin = STDIN;
+	exec->attrs = 0;
+	exec->job.id = 0;
+	exec->job.pgid = 0;
+	exec->job.attrs = 0;
+	exec->job.first_process = NULL;
+	return (0);
 }

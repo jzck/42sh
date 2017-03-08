@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 15:52:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:08:38 by ariard           ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -192,6 +192,7 @@ enum	e_sym
 	MATH_SUP,
 	REDIR,
 	CMD,
+	HEREDOCDATA,
 	ALL = 200,
 	TERMINUS = 300,
 };

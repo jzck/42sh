@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_until.c                                       :+:      :+:    :+:   */
+/*   is_function.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 20:42:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 02:09:21 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/08 02:45:15 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 03:22:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			exec_until(t_btree **ast)
+t_btree		*is_function(t_process *p)
 {
-	ft_exec(&(*ast)->left);
-	while (ft_strcmp(ft_getenv(data_singleton()->env, "?"), "1") == 0)
+	t_list	*tmp;
+
+	tmp = data_singleton()->lst_func;
+	while (tmp)
 	{
-		DG("before right");
-		ft_exec(&(*ast)->right);
-		DG("before left");
-		ft_exec(&(*ast)->left);
+		if (!ft_strcmp(((t_astnode *)tmp->content)->data.str, p->data.cmd.av[0]))
+			return (btree_map(p->data.subshell.content, node_copy));
+		tmp = tmp->next;
 	}
-	return (0);
+	return (NULL);
 }

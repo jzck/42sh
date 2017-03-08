@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 03:05:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 14:58:19 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ struct	s_data_cmd
 	char		**av;
 	char		*path;
 	t_execf		*execf;
-	struct stat	stat;
+	struct stat	*stat;
 };
 
 struct	s_data_cond
@@ -74,6 +74,7 @@ union	u_process_data
 {
 	struct s_data_cmd		cmd;
 	struct s_data_subshell	subshell;
+	struct s_data_subshell	function;
 	struct s_data_cond		d_while;
 	struct s_data_cond		d_until;
 	struct s_data_cond		d_if;
@@ -130,32 +131,8 @@ extern t_itof	g_execmap[];
 extern t_itof	g_redirmap[];
 extern t_itof	g_launchmap[];
 
-int		ft_exec(t_btree **ast);
 
-int		exec_default(t_btree **ast);
-
-int		exec_semi(t_btree **ast);
-int		exec_ampersand(t_btree **ast);
-int		exec_or_if(t_btree **ast);
-int		exec_and_if(t_btree **ast);
-int		exec_pipe(t_btree **ast);
-/* int		exec_redir(t_btree **ast); */
-//int		exec_cmd(t_btree **ast);
-int		exec_leaf(t_btree **ast);
-
-//int		exec_while(t_btree **ast);
-//int		exec_if(t_btree **ast);
-int		exec_elif(t_btree **ast);
-int		exec_else(t_btree **ast);
-//int		exec_until(t_btree **ast);
-//int		exec_default(t_btree **ast);
-int		exec_var(t_btree **ast);
-//int		exec_for(t_btree **ast);
-//int		exec_case(t_btree **ast);
-int		exec_case_branch(t_btree **ast);
-int		exec_math(t_btree **ast);
-
-int		process_setexec(t_process *p);
+int		exec_reset(void);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);
@@ -186,6 +163,7 @@ char	**token_to_argv(t_ld *ld, int do_match);
 int		add_new_job(t_job *job);
 
 int		error_badidentifier(char *name);
+t_btree		*is_function(t_process *p);
 
 /*
 ** Mapping pour free les process
@@ -208,18 +186,36 @@ int		launch_case(t_process *p);
 int		launch_file(t_process *p);
 int		launch_builtin(t_process *p);
 int		launch_subshell(t_process *p);
+int		launch_function(t_process *p);
 
 /*
 ** Mapping pour set les process
 */
+
 int		set_process(t_process *p, t_btree *ast);
-int		set_process_map(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_cmd(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_while(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_if(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_for(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_case(t_process *p, t_btree *ast, t_cmd *cmd);
-int		set_process_subshell(t_process *p, t_btree *ast, t_cmd *cmd);
+int		set_process_map(t_process *p, t_btree *ast);
+int		set_process_cmd(t_process *p, t_btree *ast);
+int		set_process_while(t_process *p, t_btree *ast);
+int		set_process_until(t_process *p, t_btree *ast);
+int		set_process_if(t_process *p, t_btree *ast);
+int		set_process_for(t_process *p, t_btree *ast);
+int		set_process_case(t_process *p, t_btree *ast);
+int		set_process_subshell(t_process *p, t_btree *ast);
+
+/*
+** Mapping pour exec les process
+*/
+int		ft_exec(t_btree **ast);
+int		exec_leaf(t_btree **ast);
+int		exec_semi(t_btree **ast);
+int		exec_ampersand(t_btree **ast);
+int		exec_or_if(t_btree **ast);
+int		exec_and_if(t_btree **ast);
+int		exec_pipe(t_btree **ast);
+int		exec_elif(t_btree **ast);
+int		exec_else(t_btree **ast);
+int		exec_var(t_btree **ast);
+int		exec_case_branch(t_btree **ast);
+int		exec_math(t_btree **ast);
 
 #endif

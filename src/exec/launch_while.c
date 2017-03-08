@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 20:59:40 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:18:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int				launch_while(t_process *p)
 		{
 			data_singleton()->opts &= ~SH_INTERACTIVE;
 			data_singleton()->opts &= ~SH_OPTS_JOBC;
+			process_setgroup(p, 0);
+			process_setsig();
+			if (process_redirect(p))
+				exit (1);
+			exec_reset();
 			exit(do_while(p));
 		}
 		else if (pid > 0)

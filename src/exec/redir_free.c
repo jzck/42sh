@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 18:12:57 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/05 18:06:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 12:40:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,5 @@ void		redir_free(void *data, size_t content_size)
 	{
 		ft_strdel(&redir->word);
 	}
-	/* else */
-	/* redir->type = 0; */
-	/* redir->n = 0; */
-	/* redir->close = 1; */
 	free(redir);
 }

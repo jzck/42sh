@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:30:29 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 14:47:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ int				exec_leaf(t_btree **ast)
 	t_process	p;
 	t_job		*job;
 
-	DG("in exec leaf");
 	job = &data_singleton()->exec.job;
 	if (set_process(&p, *ast))
 		return (1);
-	DG("set_process done");
 	if (!(launch_process(&p)))
 	{
 		job_addprocess(&p);

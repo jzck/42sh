@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:12:02 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:55:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int		set_process(t_process *p, t_btree *ast)
 {
 	t_exec		*exec;
-	t_cmd		*cmd;
+//	t_cmd		*cmd;
 	int			op;
 	int			fds[2];
 
-	cmd = &((t_astnode *)ast->item)->data.cmd;
-	process_reset(p);
+//	cmd = &((t_astnode *)ast->item)->data.cmd;
+	/* process_reset(p); */
 	exec = &data_singleton()->exec;
 	op = pop(&exec->op_stack);
 	if ((EXEC_IS_AND_IF(exec->attrs)
@@ -38,10 +38,6 @@ int		set_process(t_process *p, t_btree *ast)
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];
 	exec->fdin = fds[PIPE_READ];
-	p->redirs = ft_lstmap(cmd->redir, ft_id);
-	if (set_process_map(p, ast, cmd))
-		return (1);
-//	if (exec->control_count)
-//		p->attrs |= PROCESS_CONTROL;
-	return (0);
+	p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir, &redir_copy);
+	return (set_process_map(p, ast));
 }

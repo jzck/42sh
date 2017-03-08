@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 15:49:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:11:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ enum	e_lexstate
 {
 	DEFAULT,
 	PAREN,
-	DLESS,
+	HEREDOC,
 	NEWLINE,
 	DELIM,
 	SEP,
@@ -99,10 +99,13 @@ t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
 int			get_reserved_words(t_list **alst);
 int			insert_newline(t_list **alst);
+
 void		lexer_init(t_lexer *lexer);
+
 int			lexer_lex(t_list **alst, t_lexer *lexer);
 int			lexer_default(t_list **alst, t_lexer *lexer);
 int			lexer_newline(t_list **alst, t_lexer *lexer);
+int			lexer_heredoc(t_list **alst, t_lexer *lexer);
 int			lexer_delim(t_list **alst, t_lexer *lexer);
 int			lexer_sep(t_list **alst, t_lexer *lexer);
 int			lexer_word(t_list **alst, t_lexer *lexer);
@@ -111,7 +114,6 @@ int			lexer_less(t_list **alst, t_lexer *lexer);
 int			lexer_great(t_list **alst, t_lexer *lexer);
 int			lexer_greatand(t_list **alst, t_lexer *lexer);
 int			lexer_lessand(t_list **alst, t_lexer *lexer);
-int			lexer_dless(t_list **alst, t_lexer *lexer);
 int			lexer_quote(t_list **alst, t_lexer *lexer);
 int			lexer_dquote(t_list **alst, t_lexer *lexer);
 int			lexer_bquote(t_list **alst, t_lexer *lexer);

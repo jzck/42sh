@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_subshell.c                                  :+:      :+:    :+:   */
+/*   launch_function.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 00:11:44 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 15:08:04 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 15:08:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		do_subshell(t_process *p)
+static int		do_function(t_process *p)
 {
-	ft_exec(&p->data.subshell.content);
+	ft_exec(&p->data.function.content);
 	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
 }
 
-int				launch_subshell(t_process *p)
+int				launch_function(t_process *p)
 {
 	pid_t	pid;
 
@@ -34,12 +34,12 @@ int				launch_subshell(t_process *p)
 			if (process_redirect(p))
 				exit (1);
 			exec_reset();
-			exit(do_subshell(p));
+			exit(do_function(p));
 		}
 		else if (pid > 0)
 			return (pid);
 	}
 	else
-		do_subshell(p);
+		do_function(p);
 	return (0);
 }

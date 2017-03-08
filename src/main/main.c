@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 15:48:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:06:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		handle_instruction(int fd)
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
 			pop(&lexer.stack);
-		else if (get_lexer_stack(lexer) == DLESS)
-			lexer.state = DLESS;
+		/* else if (get_lexer_stack(lexer) == DLESS) */
+		/* 	lexer.state = DLESS; */
 		ltoken = ft_lstlast(token);
 		if (lexer_lex(token ? &ltoken : &token, &lexer))
 			return (1);
@@ -124,6 +124,6 @@ int		main(int ac, char **av)
 //		parser_clean;
 		;
 	}
-	shell_exit();
+	builtin_exit(NULL, NULL, NULL);
 	return (0);
 }
