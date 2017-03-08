@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:07:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:44:37 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 03:08:30 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int		process_setexec(t_process *p)
 {
 	p->data.cmd.path = NULL;
 	p->data.cmd.execf = NULL;
-	/* if ((p->execf = is_function(p))) */
-	/* 	p->type = PROCESS_FUNCTION; */
-	if ((p->data.cmd.execf = is_builtin(p)))
+	if ((p->data.subshell.content = is_function(p)))
+		p->type = PROCESS_FUNCTION;
+	else if ((p->data.cmd.execf = is_builtin(p)))
 		p->type = PROCESS_BUILTIN;
 	else if (ft_strchr(p->data.cmd.av[0], '/'))
 	{
