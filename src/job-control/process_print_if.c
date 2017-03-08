@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_update_status.c                                :+:      :+:    :+:   */
+/*   process_print_if.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 12:56:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 20:35:12 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/08 16:14:48 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 19:14:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	job_update_status(void)
+int		process_print_if(t_process *p)
 {
-	int		status;
-	pid_t	pid;
-
-	do
-	{
-		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
-		DG("pid=[%d]", pid);
-	}
-	while (!mark_process_status(pid, status));
+	(void)p;
+	ft_putstr("IF GROUP");
+	return (0);
 }

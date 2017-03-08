@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 15:55:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:46:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int		set_process(t_process *p, t_btree *ast)
 	int			op;
 	int			fds[2];
 
-//	cmd = &((t_astnode *)ast->item)->data.cmd;
-	/* process_reset(p); */
 	exec = &data_singleton()->exec;
 	op = pop(&exec->op_stack);
 	if ((EXEC_IS_AND_IF(exec->attrs)
@@ -31,7 +29,7 @@ int		set_process(t_process *p, t_btree *ast)
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
 	if (op == TK_AMP)
-		exec->attrs |= JOB_BG;
+		exec->job.attrs |= JOB_BG;
 	else if (op == TK_PIPE)
 		pipe(fds);
 	p->fdin = exec->fdin;

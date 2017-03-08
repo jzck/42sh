@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 17:37:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:30:35 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:21:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 void	sigchld_handler(int signo)
 {
-//	t_data	*data;
-
 	(void)signo;
-//	data = data_singleton();
 }

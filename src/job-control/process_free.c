@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 12:40:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:13:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_itof	g_freemap[] =
 	{PROCESS_IF, process_free_cond},
 	{PROCESS_FOR, process_free_list},
 	{PROCESS_CASE, process_free_list},
-	{0, NULL}
 };
 
 void	process_free(void *content, size_t content_size)
