@@ -6,11 +6,12 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 13:46:46 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:06:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
+int			c_chevron(t_comp *c);
 
 /*
 ** If the parsing for local file fail. The function is called to check if the
@@ -70,7 +71,9 @@ static char		*c_slicer(t_comp *c)
 		i--;
 	tmp[i] == '/' ? i++ : (0);
 	rt = (i == (int)ft_strlen(tmp) - 1) ? NULL : ft_strsub(tmp, 0, i);
-//	if (i <= (int)ft_strlen(tmp) - i + 1)
+	if (c_chevron(c))
+		c->match = ft_strdup("");
+	else
 		c->match = ft_strsub(tmp, i, ft_strlen(tmp) - i);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (rt);
@@ -85,6 +88,11 @@ int				c_seek_files(t_data *s, t_comp *c)
 	char	*path;
 
 	(void)s;
+	if (c->rcmd[0] == '.')
+	{
+		c->cpath = ft_strdup("./");
+		c->match = ft_strdup(".");
+	}
 	if (c->cpath == NULL)
 	{
 		path = c_slicer(c);

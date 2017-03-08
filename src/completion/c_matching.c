@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 13:47:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:06:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,26 @@ static int		c_exclusion_folder(t_comp *c)
 	return (0);
 }
 /*
+**	chevron y es-tu ???
+*/
+
+int			c_chevron(t_comp *c)
+{
+	size_t	pos;
+
+	pos = c->ircmd;
+	while (pos)
+	{
+		if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
+			return (1);
+		--pos;
+	}
+	if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
+		return (1);
+	return (0);
+}
+
+/*
 ** Start the parsing for the autocompletion.
 ** Check the first char of the c->rcmd for a . or /. to see if it's a local
 ** path to search even if there's no space in the command.
@@ -51,14 +71,22 @@ static int		c_exclusion_folder(t_comp *c)
 
 int			c_matching(t_data *s, t_comp *c)
 {
-	if (c->rcmd[0] == '.' || c->rcmd[0] == '/')
+	char	*tmp;
+
+	if (ft_strchr(c->rcmd, '/'))
 	{
 		c->cpath = ft_strndup(c->rcmd, ft_strrchr(c->rcmd, '/') - c->rcmd + 1);
+		if (c->rcmd[0] == '~')
+		{
+			tmp = c->cpath;
+			c->cpath = ft_str3join(getenv("PWD"), "/", c->cpath + 2);
+			free(tmp);
+		}
 		!c->match ? c->match = ft_strdupi_w(ft_strrchr(c->rcmd, '/') + 1) : 0;
 		c_parser(c, c->cpath, c->match);
 		c_exclusion_folder(c);
 	}
-	else if (!(ft_strchr(c->rcmd, ' ')))
+	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')) && !c_chevron(c))
 		c_seek_binary(s, c);
 	else
 		c_seek_files(s, c);
