@@ -71,6 +71,7 @@ exec/exec_leaf.c\
 exec/exec_math.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
+exec/exec_reset.c\
 exec/exec_semi.c\
 exec/exec_var.c\
 exec/fd_is_valid.c\
@@ -91,7 +92,6 @@ exec/mark_process_status.c\
 exec/node_copy.c\
 exec/process_redirect.c\
 exec/process_reset.c\
-exec/process_setexec.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
 exec/redir_copy.c\

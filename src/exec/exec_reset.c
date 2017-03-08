@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_reset.c                                    :+:      :+:    :+:   */
+/*   exec_reset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 17:44:22 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 14:51:19 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/08 14:45:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_reset(t_process	*p)
+int		exec_reset(void)
 {
-//	p->av = NULL;
-//	p->path = NULL;
-//	p->execf = NULL;
-	p->pid = 0;
-	p->fdin = STDIN;
-	p->fdout = STDOUT;
-	p->to_close = 0;
-	p->redirs = NULL;
-	p->status = -1;
-	p->attrs = 0;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	exec->fd_save[0] = fcntl(0, F_DUPFD_CLOEXEC);
+	exec->fd_save[1] = fcntl(1, F_DUPFD_CLOEXEC);
+	exec->fd_save[2] = fcntl(2, F_DUPFD_CLOEXEC);
+	exec->op_stack = NULL;
+	exec->fdin = STDIN;
+	exec->attrs = 0;
+	exec->job.id = 0;
+	exec->job.pgid = 0;
+	exec->job.attrs = 0;
+	exec->job.first_process = NULL;
+	return (0);
 }
