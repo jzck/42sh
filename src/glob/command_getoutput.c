@@ -6,14 +6,14 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:29:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 23:46:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define BUF_SIZE	1024
 
-static char		*manage_output(int *fds)
+/*static char		*manage_output(int *fds)
 {
 	int			ret;
 	char		buf[BUF_SIZE + 1];
@@ -28,7 +28,7 @@ static char		*manage_output(int *fds)
 	close(fds[PIPE_READ]);
 	return (output);
 }
-
+*/
 char			*command_getoutput(char *command)
 {
 	return (ft_strdup(command));

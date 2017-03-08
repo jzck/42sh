@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:35:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 23:52:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_init_line(void)
 	data_singleton()->line.opt = 0;
 }
 
-void	readline_init(char *prompt)
+void	readline_init(int prompt)
 {
 	static int	beg = 0;
 
@@ -40,5 +40,5 @@ void	readline_init(char *prompt)
 		ft_strdel(&STR);
 	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
 	POS = 0;
-	prompt ? ft_putstr(prompt) : ft_prompt();
+	prompt ? ft_putstr("> ") : ft_prompt();
 }

@@ -64,7 +64,6 @@ exec/error_badidentifier.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_case_branch.c\
-exec/exec_command.c\
 exec/exec_elif.c\
 exec/exec_else.c\
 exec/exec_leaf.c\

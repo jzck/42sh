@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:42:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 23:54:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		get_input_fd()
 
 	data = data_singleton();
 	if (SH_IS_INTERACTIVE(data->opts))
-		return (fd);
+		return (STDIN);
 	else if (data->opts & SH_OPTS_LC)
 	{
 		pipe(fds);
