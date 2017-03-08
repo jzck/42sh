@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/08 20:57:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 21:23:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static int	ft_git_status(void)
 	char	*line;
 	pid_t	soon;
 	char	*exec[] = {"git", "status", "--porcelain", "--branch", NULL};
+	int		ret;
 
 	pipe(pip);
 	if ((soon = fork()))
 	{
-		wait(&soon);
-		if (WEXITSTATUS(soon))
+		waitpid(soon, &ret, WUNTRACED);
+		if (WEXITSTATUS(ret))
 			return (-1);
 		close(pip[1]);
 		get_next_line(pip[0], &line);
