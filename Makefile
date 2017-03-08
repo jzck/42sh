@@ -185,6 +185,10 @@ job-control/mark_job_as_running.c\
 job-control/process_cmp_pid.c\
 job-control/process_format.c\
 job-control/process_free.c\
+job-control/process_free_cmd.c\
+job-control/process_free_cond.c\
+job-control/process_free_list.c\
+job-control/process_free_subshell.c\
 job-control/put_job_in_background.c\
 job-control/put_job_in_foreground.c\
 job-control/sigchld_handler.c\

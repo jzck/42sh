@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process_until.c                                :+:      :+:    :+:   */
+/*   process_free_cond.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 22:22:24 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 03:06:03 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/08 02:26:31 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/08 02:39:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		set_process_until(t_process *p, t_btree *ast, t_cmd *cmd)
+int		process_free_cond(t_process *p)
 {
-	(void)cmd;
-	p->data.d_while.condition = btree_map(ast->left, &node_copy);
-	p->data.d_while.content = btree_map(ast->right, &node_copy);
-	p->type = PROCESS_UNTIL;
+	btree_del(&p->data.d_while.condition, &ast_free);
+	btree_del(&p->data.d_while.content, &ast_free);
 	return (0);
 }
