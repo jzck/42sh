@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 00:23:48 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:39:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == HEREDOCDATA)
+		return ("HEREDOCDATA");
 	if (current == TERMINUS)
 		return ("TERMINUS");
 	if (current == SEQUENCE)

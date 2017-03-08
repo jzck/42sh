@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 14:39:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 21:02:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		data_init(void)
 
 	data->local_var = NULL;
 	data->lst_func = NULL;
+	data->heredoc_queue = NULL;
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		return (-1);
 	if (tgetent(NULL, term_name) != 1)

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:51:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 15:53:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:04:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ int		lexer_heredoc(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = HEREDOCDATA;
-	token_append_str(token, lexer->str, 0, 0);
+	//token_append_char(token, '\n', 0, 0);
+	while (lexer->str[lexer->pos])
+		if (token_append_char(token, lexer->str[lexer->pos++], 0, 0))
+			return (1);
 	return (0);
+	//ft_strappend(&lexer->str, (char[]){'\n', 0});
+	//lexer->pos++;
 	/* heredoc_lst = *(t_list**)lexer->heredoc_stack->content; */
 	/* heredoc_tok = heredoc_lst->content; */
 	/* if (!(heredoc_lst->next)) */

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 21:24:40 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:00:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, CONDITION, NEWLINE_LIST},
 	{TK_NEWLINE, FOR_WORDLIST, NEWLINE_LIST},
 	{TK_NEWLINE, SEQUENTIAL_SEP, NEWLINE_LIST},
+	{TK_NEWLINE, PROGRAM, NEWLINE_LIST},
 	{TK_SEMI, MATH_SUP, SEPARATOR_OP},
 	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
@@ -118,8 +119,8 @@ int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 		return (1);
 	token = (*lst)->content;
 	head = (*stack)->content;
-	DG("produce stack : %s && token : %s", read_state(*head),
-	read_state(token->type));
+//	DG("produce stack : %s && token : %s", read_state(*head),
+//	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
@@ -127,7 +128,7 @@ int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 		if (token->type == g_prodmatch[i].token
 			&& *head == g_prodmatch[i].stack)
 		{
-			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
+//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
 		}
 		i++;

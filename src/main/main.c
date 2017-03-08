@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 16:06:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 21:58:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		handle_instruction(int fd)
 	while (1)
 	{
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
-			parser.state == UNDEFINED, &str)))
+			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
 		{
 			if (ret == -1)
 				return (-1);
@@ -52,10 +52,15 @@ int		handle_instruction(int fd)
 		token_print(token);
 		if (insert_newline(&token))
 			return (1);
-		DG("exit newline");
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
-		if (parser.state == SUCCESS)
+		DG();
+		lexer.state = (data_singleton()->heredoc_queue) ? HEREDOC : 0;
+		if (data_singleton()->heredoc_queue)
+			DG("still in HEREDOC");
+		if (lexer.state)
+			continue;
+		else if (parser.state == SUCCESS)
 			break ;
 		else if (parser.state == ERROR && SH_IS_INTERACTIVE(data_singleton()->opts))
 		{
@@ -67,8 +72,8 @@ int		handle_instruction(int fd)
 	}
 	DG("Before execution:");
 //	btree_print(STDBUG, ast, &ft_putast);
-	if (ft_exec(&ast))
-		return (1);
+//	if (ft_exec(&ast))
+//		return (1);
 	instruction_free(&token, &parser, &ast);
 	ft_add_str_in_history(lexer.str);
 	return (0);

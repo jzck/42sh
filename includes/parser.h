@@ -30,6 +30,7 @@ struct	s_parser
 	t_parstate	state;
 	t_list		*stack;
 	t_sym		*new_sym;
+	t_list		*heredoc_queue;
 };
 
 struct	s_aggrematch
@@ -73,6 +74,8 @@ int		aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state);
 
 int		push_stack(t_list **stack, t_sym new_sym);
 int		pop_stack(t_list **stack, t_sym erase_sym);
+
+int		pop_heredoc(t_list **heredoc_queue, t_list **lst);
 
 int		error_syntax(t_list **token, t_parser *parser, t_btree **ast);
 int		error_EOF(t_list **token, t_parser *parser, t_btree **ast);
@@ -158,6 +161,7 @@ struct	s_redir
 	t_type	type;
 	int		n;
 	char	*word;
+	char	*heredoc_data;
 	/* int		close; */
 };
 

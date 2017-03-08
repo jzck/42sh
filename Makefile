@@ -269,6 +269,7 @@ parser/build_tree.c\
 parser/error_syntax.c\
 parser/eval_sym.c\
 parser/ft_parse.c\
+parser/heredoc_parser.c\
 parser/parser_init.c\
 parser/pop_stack.c\
 parser/produce_sym.c\

@@ -34,6 +34,8 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
 	t_sym		*head;
 
+	if (pop_heredoc(&parser->heredoc_queue, token))
+		return (0);
 	while (*token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
@@ -53,7 +55,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			parser->state = UNDEFINED;
 		build_tree(ast, token);
-		btree_print(STDBUG, *ast, &ft_putast);
+//		btree_print(STDBUG, *ast, &ft_putast);
 		if ((end_instruction(&parser->stack) && !(*token)->next))
 			insert_linebreak(token);
 		else

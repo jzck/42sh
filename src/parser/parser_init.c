@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:14:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 17:04:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 21:56:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void		parser_init(t_parser *parser)
 	parser->stack = NULL;
 	push_stack(&parser->stack, TERMINUS);
 	push_stack(&parser->stack, LINEBREAK);
+	parser->heredoc_queue = NULL;
 }

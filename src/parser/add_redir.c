@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 22:46:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/08 22:11:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
+	t_redir		*temp;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
@@ -67,12 +68,13 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	{
 		DG("add file");
 		redir =	(ft_lstlast(node->data.cmd.redir))->content;
-		DG("now redir.type :%s", read_state(redir->type));
-		DG("n is ? : %d", redir->n);
+		DG("now redir.type :%s", read_state(redir->type));		
+		redir->word = ft_strdup(token->data);
 		if (redir->type == TK_DLESS)
-			redir->word = NULL;
-		else
-			redir->word = ft_strdup(token->data);
+		{
+			temp = ft_lstlast((data_singleton()->heredoc_queue))->content;
+			temp->word = redir->word;
+		}
 	}
 	return (0);
 }
@@ -83,6 +85,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_redir		redir;
 	t_redir		*temp;
+	t_redir		*temp_heredoc;
 
 	if (!*ast)
 		gen_node(ast);
@@ -90,16 +93,23 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	node = (*ast)->item;
 	if (!(node->type == TK_IO_NUMBER))
 	{
-		DG("add redir");
 		redir.n = (token->type == TK_LESS || token->type == TK_DLESS
 		|| token->type == TK_LESSAND) ? STDIN : STDOUT;
-		redir.type = token->type; 
+		redir.type = token->type;		
+		redir.heredoc_data = NULL;
 		ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
+		if (token->type == TK_DLESS)
+			ft_lsteadd(&data_singleton()->heredoc_queue, ft_lstnew(&redir, sizeof(redir)));
 	}
 	else
 	{
 		temp = (ft_lstlast(node->data.cmd.redir))->content;
 		temp->type = token->type;
+		if (token->type == TK_DLESS)
+		{
+			temp_heredoc = data_singleton()->heredoc_queue->content;
+			temp_heredoc->n = temp->n;
+		}
 	}
 	node->type = REDIR;
 	return (0);
