@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 03:25:53 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 12:26:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ struct	s_data_cmd
 	char		**av;
 	char		*path;
 	t_execf		*execf;
-	struct stat	stat;
+	struct stat	*stat;
 };
 
 struct	s_data_cond

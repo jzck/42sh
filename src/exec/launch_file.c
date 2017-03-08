@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 21:33:56 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/08 12:42:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int		launch_file(t_process *p)
 			ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 			exit(127);
 		}
-		else if (S_ISDIR(p->data.cmd.stat.st_mode))
+		else if (!p->data.cmd.stat)
+		{
+			ft_dprintf(2, "{red}%s: %s: no such file or directory\n", SHELL_NAME, p->data.cmd.av[0]);
+			exit(127);
+		}
+		else if (S_ISDIR(p->data.cmd.stat->st_mode))
 		{
 			ft_dprintf(2, "{red}%s: %s: Is a directory{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 			exit(126);
