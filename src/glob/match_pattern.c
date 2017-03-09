@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 14:35:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/09 03:24:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,18 @@ static int		match_bracket(t_glob *gl, char c)
 static int		match_star(t_glob *gl, char *str, char *full_word)
 {
 	char	*fix;
+	char	*pat;
 
 	if (gl->pat[1] == '*' &&
 		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
 		dir_research(gl, full_word, gl->pat + 1, 1);
 	if (!*gl->pat || (*gl->pat == '*' && !*++gl->pat))
 		return (1);
+	pat = gl->pat;
 	fix = str + ft_strlen(str);
 	while (fix > str)
 	{
+		gl->pat = pat;
 		if (match_pattern(gl, fix, full_word))
 			return (1);
 		--fix;
@@ -90,7 +93,6 @@ static char		*manage_pat(t_glob *gl, char *pat, char *str)
 	if (pat[0] == '.' && pat[1] == '/'
 			&& ((str[0] == '.' && str[1] != '/') || str[0] != '.'))
 	{
-		DG("%s vs %s", pat, str);
 		gl->cur_dir = 0;
 		return (pat + 2);
 	}

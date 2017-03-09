@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 14:50:58 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/09 03:24:59 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void		dir_list_content(t_glob *gl, char **str, char *pat,
 			ft_ld_pushfront(&gl->match, ft_strdup(path_tmp + gl->cur_dir * 2 *
 						(path_tmp[0] == '.' && path_tmp[1] == '/')));
 		}
+		gl->pat = pat;
 		ft_strdel(&path_tmp);
 	}
 }
