@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 14:28:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:03:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		handle_instruction(int fd)
 	ast = NULL;
 	while (1)
 	{
+	
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
 		{
@@ -69,7 +70,7 @@ int		handle_instruction(int fd)
 			error_syntax(&token, &parser, &ast);
 	}
 	DG("Before execution:");
-//	btree_print(STDBUG, ast, &ft_putast);
+	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
 	instruction_free(&token, &parser, &ast);
@@ -122,6 +123,7 @@ int		main(int ac, char **av)
 			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
+		DG();
 //		lexer_clean;
 //		parser_clean;
 		;

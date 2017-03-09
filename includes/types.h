@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 14:34:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:16:47 by ariard           ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -186,6 +186,8 @@ enum	e_sym
 	FOR_WORDLIST,
 	PATTERN_CASE,
 	FUNC_NAME,
+	OPEN_FUNC,
+	CLOSE_FUNC,
 	CLOSE_LIST,
 	MATH,
 	MATH_PLUS,

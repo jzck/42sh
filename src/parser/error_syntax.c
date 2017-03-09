@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 18:07:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:44:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,26 @@ int				error_syntax(t_list **lst, t_parser *parser,
 {	
 	t_token		*token;
 	int			i;
-	int		temp;
-	
+
 	token = (*lst)->content;
 	i = 0;
-	temp = 0;
+
 	while (g_errormatch[i].token)
 	{
 		if (g_errormatch[i].token == token->type)
 		{
 			ft_putstr_fd("syntax error near unexpected token `", 2);
 			ft_putstr_fd(g_errormatch[i].error, 2);
-			ft_putstr_fd("'\n", 2);
-			temp = 1;
-			break ;
+			ft_putstr_fd("'\n", 2);	
+			instruction_free(lst, parser, ast);
+			return (0);	
 		}
 		i++;
 	}
+	ft_putstr_fd("syntax error near unexpected token`", 2);
+	ft_putstr_fd(token->data, 2);
+	ft_putstr_fd("'\n", 2);
 	instruction_free(lst, parser, ast);
-	if (temp == 0)
-		ft_putstr_fd("grammar error, notify ariard", 2);
 	return (0);
 }
 

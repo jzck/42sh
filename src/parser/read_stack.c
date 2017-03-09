@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 17:39:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:25:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == OPEN_FUNC)
+		return ("OPEN_FUNC");
+	if (current == CLOSE_FUNC)
+		return ("CLOSE_FUNC");
 	if (current == HEREDOCDATA)
 		return ("HEREDOCDATA");
 	if (current == TERMINUS)
