@@ -33,6 +33,7 @@ typedef struct	s_glob
 	unsigned char		*esc;
 	unsigned char		*esc2;
 	t_ld				*match;
+	t_ld				*match_tmp;
 	t_ld				*m_pat;
 }				t_glob;
 

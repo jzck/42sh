@@ -22,6 +22,40 @@
  **				to just expanse in local directory and not in path dir
  */
 
+static int		order_glob(const char *s1, const char *s2)
+{
+	char	c1;
+	char	c2;
+
+	if (!s1 || !s2)
+		return (1);
+	c1 = ft_tolower(*s1++);
+	c2 = ft_tolower(*s2++);
+	if (!c1)
+		return (-(c1 - c2));
+	while (c1 == c2)
+	{
+		c1 = ft_tolower(*s1++);
+		c2 = ft_tolower(*s2++);
+		if (!c1)
+			return (-(c1 - c2));
+	}
+	return (-(c1 - c2));
+}
+
+static void		merge_ld_glob(t_ld **match, t_ld **tmp)
+{
+	t_ld	*ultimate;
+
+	*tmp = ft_ld_order(*tmp, &order_glob);
+	ultimate = ft_ld_back(*tmp);
+	ultimate->next = *match;
+	if (*match)
+		(*match)->prev = ultimate;
+	*match = *tmp;
+	*tmp = NULL;
+}
+
 static char		**treat_glob(t_glob *gl)
 {
 	char	**ret;
@@ -54,7 +88,7 @@ char			**glob(char *pat, unsigned char *esc,
 
 	len = ft_strlen(pat);
 	gl = (t_glob){0, 0, ft_strdup(pat), dup_char_esc(esc, (len >> 3) + 1),
-		dup_char_esc(esc2, (len >> 3) + 1), NULL, NULL};
+		dup_char_esc(esc2, (len >> 3) + 1), NULL, NULL, NULL};
 	normal_expand_before_match(&gl, do_match);
 	if (do_match)
 		while (gl.m_pat && !(gl.found = 0))
@@ -67,6 +101,8 @@ char			**glob(char *pat, unsigned char *esc,
 				dir_research(&gl, "/", gl.pat + 1, 0);
 			if (!gl.found)
 				ft_ld_pushfront(&gl.match, ft_strdup(CH(gl.m_pat)[0]));
+			else
+				merge_ld_glob(&gl.match, &gl.match_tmp);
 			if (!gl.m_pat->next)
 				break ;
 			gl.m_pat = gl.m_pat->next;

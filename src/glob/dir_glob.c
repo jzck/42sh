@@ -37,7 +37,7 @@ static void		dir_list_content(t_glob *gl, char **str, char *pat,
 		if (match_pattern(gl, str[1], path_tmp))
 		{
 			gl->found = 1;
-			ft_ld_pushfront(&gl->match, ft_strdup(path_tmp + gl->cur_dir * 2 *
+			ft_ld_pushfront(&gl->match_tmp, ft_strdup(path_tmp + gl->cur_dir * 2 *
 						(path_tmp[0] == '.' && path_tmp[1] == '/')));
 		}
 		gl->pat = pat;
@@ -54,7 +54,7 @@ int				dir_research(t_glob *gl, char *p,
 	if (!pat)
 	{
 		gl->found = 1;
-		ft_ld_pushfront(&gl->match, ft_strjoin(p, "/"));
+		ft_ld_pushfront(&gl->match_tmp, ft_strjoin(p, "/"));
 		return (0);
 	}
 	if ((ft_strlen(p) <= 1 || p[ft_strlen(p) - 1] != '.') && is_directory(p))
