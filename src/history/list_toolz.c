@@ -6,11 +6,25 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/02 16:08:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:21:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			free_history_list(t_list_history *head)
+{
+	t_list_history	*prev;
+
+	free(head->prev);
+	while (head)
+	{
+		ft_strdel(&head->str);
+		prev = head;
+		head = head->next;
+		free(prev);
+	}
+}
 
 t_list_history	*ft_create_history_list(char *str)
 {

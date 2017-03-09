@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:25:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:17:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		status = ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	ft_save_termios(-1);
 	ft_free_hash_table();
+	free_history_list(data_singleton()->line.list_beg);
 	data_exit();
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);

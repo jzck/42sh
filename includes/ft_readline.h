@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/08 23:48:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:55:17 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_line
 	int						prompt_size;
 	int						list_size;
 	char					opt;
+	char					is_prompt;
 	t_list_history			*list_end;
 	t_list_history			*list_cur;
 	t_list_history			*list_beg;
@@ -127,6 +128,7 @@ int				ft_nb_last_line(char *str, size_t pos);
 int				ft_put(int nb);
 void			ft_check_line(void);
 void			ft_clear_window(void);
+void			free_history_list(t_list_history *head);
 
 char			*ft_read_stdin(void);
 void			ft_end(void);

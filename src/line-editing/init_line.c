@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/08 23:52:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:55:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	readline_init(int prompt)
 	data_singleton()->line.list_cur = data_singleton()->line.list_beg;
 	POS = 0;
 	prompt ? ft_putstr("> ") : ft_prompt();
+	data_singleton()->line.is_prompt = prompt ? 0 : 1;
 }
