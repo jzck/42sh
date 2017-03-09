@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:08:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:48:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void		ft_x(void)
 
 void		ft_c(void)
 {
-	char	*tmp;
+	char	**tmp;
 
 	if (!STR)
 		return ;
-	tmp = data_singleton()->line.copy_tmp;
-	if (tmp)
-		ft_strdel(&tmp);
-	tmp = ft_strdupi_space(STR + POS);
+	tmp = &data_singleton()->line.copy_tmp;
+	if (*tmp)
+		ft_strdel(tmp);
+	*tmp = ft_strdupi_space(STR + POS);
 }
