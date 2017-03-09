@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 16:06:13 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 17:25:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int		c_exclusion_folder(t_comp *c)
 		tmp2 = ft_strjoin(c->match, "/");
 		c_updater(c, tmp2);
 		tmp2 ? ft_memdel((void *)&tmp2) : (0);
-		ft_strdel(&c->match);
-		c->match = ft_strdup("/");
 		return (1);
 	}
 	tmp ? ft_memdel((void *)&tmp) : (0);
@@ -69,14 +67,28 @@ int			c_chevron(t_comp *c)
 ** Else 0 is returned.
 */
 
+static char	*c_current_words(t_comp *c)
+{
+	int	pos;
+
+	pos = c->ircmd;
+	while (pos && c->rcmd[pos] != ' ')
+		--pos;
+	if (c->rcmd[pos] == ' ')
+		++pos;
+	return (c->rcmd + pos);
+}
+
 int			c_matching(t_data *s, t_comp *c)
 {
+	char	*current_word;
 	char	*tmp;
 
+	current_word = c_current_words(c);
 	if (ft_strchr(c->rcmd, '/'))
 	{
-		c->cpath = ft_strndup(c->rcmd, ft_strrchr(c->rcmd, '/') - c->rcmd + 1);
-		if (c->rcmd[0] == '~')
+		c->cpath = ft_strndup(current_word, ft_strrchr(c->rcmd, '/') - current_word + 1);
+		if (current_word[0] == '~')
 		{
 			tmp = c->cpath;
 			c->cpath = ft_str3join(getenv("PWD"), "/", c->cpath + 2);
@@ -86,6 +98,8 @@ int			c_matching(t_data *s, t_comp *c)
 		c_parser(c, c->cpath, c->match);
 		c_exclusion_folder(c);
 	}
+	else if (ft_strchr(c->rcmd, '$'))
+		c_seek_env(c, current_word);
 	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')) && !c_chevron(c))
 		c_seek_binary(s, c);
 	else

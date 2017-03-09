@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 12:18:07 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:45:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void				c_init_base(t_comp *c)
 ** structure data and call for the c_matching() function.
 */
 
-void					c_init(t_data *s, long int input)
+void				c_init(t_data *s, long int input)
 {
 	int					len_trail;
 

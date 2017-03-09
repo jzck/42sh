@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 13:46:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:58:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,13 @@ int							c_spacing_escape(t_clst *node, int x, int o);
 int							c_spacing_clear(t_comp *c);
 int							ft_sstrlen(char **s);
 char						*ft_sstrtostr(char **s, char *sep);
+
+/*
+**	j'ajoute a la va vite^^
+*/
+
+int							c_glob_matching(void);
+int							c_seek_env(t_comp *c, char *current_word);
+void						c_add_to_lst(t_comp *c, t_clst *node);
 
 #endif

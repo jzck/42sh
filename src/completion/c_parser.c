@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/08 15:47:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 16:47:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Add the matching element to the list
 */
 
-static void			c_add_to_lst(t_comp *c, t_clst *node)
+void			c_add_to_lst(t_comp *c, t_clst *node)
 {
 	if (c->lst == NULL)
 	{

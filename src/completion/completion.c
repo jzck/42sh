@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 18:36:14 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/09 14:44:52 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int				completion(long int keypress)
 	t_data		*s;
 
 	s = data_singleton();
+	if (c_glob_matching())
+		return (1);
 	if (s->comp == NULL)
 	{
 		if (s->line.pos == 0)

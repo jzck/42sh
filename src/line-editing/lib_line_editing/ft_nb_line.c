@@ -1,44 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolz_termcaps.c                                   :+:      :+:    :+:   */
+/*   ft_nb_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:35:11 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/08 17:10:42 by gwojda           ###   ########.fr       */
+/*   Created: 2017/03/08 17:11:57 by gwojda            #+#    #+#             */
+/*   Updated: 2017/03/08 17:43:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				ft_put(int nb)
-{
-	write(1, &nb, 1);
-	return (1);
-}
-
-int		ft_get_ind_prev(char *str, size_t pos)
-{
-	while (pos && str[pos] != '\n')
-		--pos;
-	return (pos);
-}
-
-int		ft_get_size_prev(char *str, size_t pos)
-{
-	size_t	len;
-
-	len = 0;
-	while (pos && str[pos] != '\n')
-	{
-		--pos;
-		++len;
-	}
-	return (len);
-}
-
-int		ft_nb_last_line(char *str, size_t pos)
+int		ft_nb_of_line(char *str, size_t pos)
 {
 	int	len;
 
@@ -47,16 +21,5 @@ int		ft_nb_last_line(char *str, size_t pos)
 		--pos;
 	len += data_singleton()->line.prompt_size;
 	len += ft_get_size_prev(str, pos);
-	return (len % ft_size_term());
-}
-
-void	ft_check_end_of_line(char *str, size_t pos)
-{
-	if (!str)
-		return ;
-	if (ft_nb_last_line(str, pos) == 0)
-	{
-		ft_putchar(' ');
-		ft_puttermcaps("le");
-	}
+	return (len / ft_size_term());
 }

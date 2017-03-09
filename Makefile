@@ -44,9 +44,11 @@ builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
+c_seek_env.c\
 completion/c_binary.c\
 completion/c_clear.c\
 completion/c_files.c\
+completion/c_glob_matching.c\
 completion/c_init.c\
 completion/c_matching.c\
 completion/c_misc.c\
@@ -194,6 +196,7 @@ line-editing/copy_cut_paste.c\
 line-editing/ft_prompt.c\
 line-editing/get_key.c\
 line-editing/home_end.c\
+line-editing/lib_line_editing/ft_nb_line.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\
 line-editing/lib_line_editing/toolz.c\

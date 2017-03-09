@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 12:44:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/08 17:43:49 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ char			*ft_strget_history(char *str);
 int				ft_nb_last_line(char *str, size_t pos);
 int				ft_put(int nb);
 void			ft_check_line(void);
+int				ft_nb_of_line(char *str, size_t pos);
+int				ft_get_size_prev(char *str, size_t pos);
 
 char			*ft_read_stdin(void);
 void			ft_end(void);
