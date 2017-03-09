@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_reset.c                                       :+:      :+:    :+:   */
+/*   process_resetfds.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 15:22:51 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/09 14:51:23 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/09 15:20:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exec_reset(void)
+void	process_resetfds(t_process *p)
 {
 	t_exec	*exec;
 
+	(void)p;
 	exec = &data_singleton()->exec;
-	exec->fd_save[0] = fcntl(STDIN, F_DUPFD_CLOEXEC);
-	exec->fd_save[1] = fcntl(STDOUT, F_DUPFD_CLOEXEC);
-	exec->fd_save[2] = fcntl(STDERR, F_DUPFD_CLOEXEC);
-	exec->op_stack = NULL;
-	exec->fdin = STDIN;
-	exec->attrs = 0;
-	exec->job.id = 0;
-	exec->job.pgid = 0;
-	exec->job.attrs = 0;
-	exec->job.first_process = NULL;
-	return (0);
+	dup2(exec->fd_save[0], STDIN);
+	dup2(exec->fd_save[1], STDOUT);
+	dup2(exec->fd_save[2], STDERR);
 }

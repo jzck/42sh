@@ -91,6 +91,7 @@ exec/mark_process_status.c\
 exec/node_copy.c\
 exec/process_redirect.c\
 exec/process_reset.c\
+exec/process_resetfds.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
 exec/redir_copy.c\

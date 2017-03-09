@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:43:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:15:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int		launch_process(t_process *p)
 	p->attrs &= ~PROCESS_STATE_MASK;
 	p->attrs |= PROCESS_RUNNING;
 	if (!(pid = (*g_launchmap[p->type].f)(p)))
+	{
+		DG("gonna reset fds");
+		process_resetfds(p);
 		return (-1);
+	}
 	p->pid = pid;
 	process_setgroup(p, pid);
 	return (0);
