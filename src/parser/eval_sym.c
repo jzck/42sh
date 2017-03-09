@@ -490,7 +490,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_PAREN_CLOSE, TK_AND_IF},
 	{TK_PAREN_CLOSE, TK_OR_IF},
 	{TK_PAREN_CLOSE, TK_PIPE},
-	{TK_PAREN_CLOSE, TK_PAREN_CLOSE},
 	{TK_PAREN_CLOSE, COMPLETE_COMMANDS},
 	{TK_PAREN_CLOSE, CMD_SUPERIOR},
 	{TK_PAREN_CLOSE, PIPE_SEMI_SEQUENCE},
@@ -1038,6 +1037,7 @@ t_stackmatch	g_stackmatch[] =
 	{PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{PIPE_SEMI_SEQUENCE, NEWLINE_LIST},
 	{PIPE_SEMI_SEQUENCE, AND_OR_MAJOR},
+	{PIPE_SEMI_SEQUENCE, SEQUENCE},
 	{SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{SEQUENCE, TK_WHILE},
 	{SEQUENCE, TK_UNTIL},
@@ -1124,7 +1124,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	if (!*stack)
 		return (1);
 	head = (*stack)->content;
-//	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
