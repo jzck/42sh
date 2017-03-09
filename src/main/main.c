@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 16:03:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 17:37:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		handle_instruction(int fd)
 	ast = NULL;
 	while (1)
 	{
-	
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
 		{
@@ -53,10 +52,9 @@ int		handle_instruction(int fd)
 			return (1);
 		if (ft_parse(&ast, &token, &parser))
 			continue ;
-		DG();
-		lexer.state = (data_singleton()->heredoc_queue) ? HEREDOC : 0;
-		if (data_singleton()->heredoc_queue)
-			DG("still in HEREDOC");
+		if (parser.state == ERROR)
+			error_syntax(&token, &parser, &ast);
+		lexer.state = data_singleton()->heredoc_queue ? HEREDOC : 0;
 		if (lexer.state)
 			continue;
 		else if (parser.state == SUCCESS)
@@ -66,8 +64,6 @@ int		handle_instruction(int fd)
 			ft_add_str_in_history(lexer.str);
 			return (error_syntax(&token, &parser, &ast));
 		}
-		else if (parser.state == ERROR)
-			error_syntax(&token, &parser, &ast);
 	}
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);

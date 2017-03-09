@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/09 15:44:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 16:37:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	t_token		*token;
 	int			i;
 
+	if (!*lst)
+		return (0);
 	token = (*lst)->content;
 	i = 0;
-
 	while (g_errormatch[i].token)
 	{
 		if (g_errormatch[i].token == token->type)

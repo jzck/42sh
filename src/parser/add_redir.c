@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 22:11:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 18:29:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		|| token->type == TK_LESSAND) ? STDIN : STDOUT;
 		redir.type = token->type;		
 		redir.heredoc_data = NULL;
+		redir.word = NULL;
 		ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
 		if (token->type == TK_DLESS)
 			ft_lsteadd(&data_singleton()->heredoc_queue, ft_lstnew(&redir, sizeof(redir)));
