@@ -1,3 +1,3 @@
-hello () (
+hello() (
 	echo HELLO
 )

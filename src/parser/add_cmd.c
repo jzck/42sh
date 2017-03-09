@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 16:19:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 16:04:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 14)
+	while (++i < 17)
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
 			DG("add : %d", i);
