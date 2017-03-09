@@ -45,6 +45,7 @@ builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
 c_seek_env.c\
+completion/c_abs_path.c\
 completion/c_binary.c\
 completion/c_clear.c\
 completion/c_files.c\

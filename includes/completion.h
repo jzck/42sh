@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/09 15:58:27 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 17:34:53 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ char						*ft_sstrtostr(char **s, char *sep);
 */
 
 int							c_glob_matching(void);
-int							c_seek_env(t_comp *c, char *current_word);
 void						c_add_to_lst(t_comp *c, t_clst *node);
+int							c_seek_env(t_comp *c, char *current_word);
+void						c_seek_abs_path(t_comp *c, char *current_word);
 
 #endif
