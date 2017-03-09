@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 19:15:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:14:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int		exec_reset(void);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);
-void	process_resetfds(void);
+void	process_resetfds(t_process *p);
 
 int		fd_is_valid(int fd, int flag);
 int		bad_fd(int fd);

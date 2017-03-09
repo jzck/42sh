@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:40:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:23:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ int		data_init(void)
 
 	data = data_singleton();
 	data->env = ft_sstrdup(environ);
+	data->local_var = NULL;
 	set_exitstatus(0, 1);
 	data->comp = NULL;
 	data->opts = 0;
 	exec_reset();
-
 	data->jobc.first_job = NULL;
 	data->jobc.current_id = 1;
-
-	data->local_var = NULL;
 	data->lst_func = NULL;
 	data->heredoc_queue = NULL;
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
