@@ -12,12 +12,14 @@
 
 #include "minishell.h"
 
-t_ld	*ft_ld_order(t_ld *ld, int (*f)(), void (*del)())
+t_ld	*ft_ld_order(t_ld *ld, int (*f)())
 {
 	int		swap;
 
 	swap = 1;
 	ld = ft_ld_front(ld);
+	if (!f)
+		return (ld);
 	while (swap)
 	{
 		swap = 0;
@@ -25,8 +27,6 @@ t_ld	*ft_ld_order(t_ld *ld, int (*f)(), void (*del)())
 		{
 			if (f(ld->content, ld->next->content) > 0 && (swap = 1))
 				ld = ft_ld_swap(ld);
-			else if (!f(ld->content, ld->next->content))
-				ft_ld_del(&ld, del);
 			ld = ld->next;
 		}
 		ld = ft_ld_front(ld);

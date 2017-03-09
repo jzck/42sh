@@ -215,7 +215,7 @@ void			ft_ld_reverse(t_ld **lst);
 t_ld			*ft_ld_back(t_ld *ld);
 t_ld			*ft_ld_swap(t_ld *l_cur);
 char			**ft_ld_to_tab(t_ld *ld);
-t_ld			*ft_ld_order(t_ld *ld, int (*f)(), void (*del)());
+t_ld			*ft_ld_order(t_ld *ld, int (*f)());
 t_ld			*ft_ld_copy(t_ld *src, void *(*f)(void *elem));
 
 /*
