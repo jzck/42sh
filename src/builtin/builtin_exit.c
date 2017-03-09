@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 11:17:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:35:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	jobc = &data_singleton()->jobc;
 	jlist = jobc->first_job;
-	if (jlist && !notified)
+	if (SH_HAS_JOBC(data_singleton()->opts) && jlist && !notified)
 	{
 		notified = 1;
 		ft_dprintf(2, "{red}%s: you have live jobs (running or suspended).{eoc}\n", SHELL_NAME);
