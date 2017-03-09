@@ -66,6 +66,7 @@ unsigned char	*dup_char_esc(const unsigned char *esc, const int size)
 
 	if (!(new_esc = (unsigned char *)ft_strnew(size)))
 		return (NULL);
-	ft_memcpy(new_esc, esc, size);
+	new_esc = ft_memcpy(new_esc, esc, size);
+
 	return (new_esc);
 }

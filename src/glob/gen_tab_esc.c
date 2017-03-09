@@ -26,9 +26,9 @@ char						**gen_tab(const char *pat,
 	{
 		len = ft_strlen(pat);
 		my_tab[0] = ft_strdup(pat);
-		my_tab[1] = (char *)dup_char_esc(esc, len >> 3);
+		my_tab[1] = (char *)dup_char_esc(esc, (len >> 3) + 1);
 		if (esc2)
-			my_tab[2] = (char *)dup_char_esc(esc2, len >> 3);
+			my_tab[2] = (char *)dup_char_esc(esc2, (len >> 3) + 1);
 	}
 	else
 	{
