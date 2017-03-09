@@ -6,5 +6,6 @@ int	instruction_free(t_list **token, t_parser *parser, t_btree **ast)
 	token = NULL;
 	ft_lstdel(&parser->stack, NULL);
 	btree_del(ast, &ast_free);
+	ft_lstdel(&data_singleton()->heredoc_queue, &redir_free);
 	return (0);
 }

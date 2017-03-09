@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 15:16:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 17:58:18 by ariard           ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -176,6 +176,7 @@ enum	e_sym
 	LOOP,
 	FUNC,
 	PIPE_SEMI_SEQUENCE,
+	PIPE_CLOSE_SEQUENCE,
 	CMD_SUPERIOR,
 	SEQUENCE,
 	AND_OR_MAJOR,
