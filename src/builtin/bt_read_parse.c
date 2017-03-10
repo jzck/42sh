@@ -64,7 +64,7 @@ int					bt_read_parse(t_read *data, char **av)
 		i++;
 	}
 	data->names = av[i] ? av + i : NULL;
-	DG("read_opts: %b", data->opts);
+//	DG("read_opts: %b", data->opts);
 	DG("\ndelim=%c\nnchars=%i\nprompt=%s\ntimeout=%i\nfd=%i",
 		data->delim, data->nchars, data->prompt, data->timeout, data->fd);
 	return (0);

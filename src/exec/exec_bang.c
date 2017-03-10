@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_ampersand.c                                   :+:      :+:    :+:   */
+/*   exec_bang.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 16:01:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 15:36:48 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/10 14:46:27 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/10 15:51:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exec_ampersand(t_btree **ast)
+int		exec_bang(t_btree **ast)
 {
 	t_exec	*exec;
 
-	if (!SH_HAS_JOBC(data_singleton()->opts))
-		return (exec_semi(ast));
 	exec = &data_singleton()->exec;
-	push(&exec->op_stack, TK_AMP);
-	exec->job.attrs |= JOB_BG;
-	ft_exec(&(*ast)->left);
-	exec->attrs &= ~EXEC_AOL_MASK;
-	exec->job.attrs &= ~JOB_BG;
+	push(&exec->op_stack, TK_BANG);
+	ft_exec(&(*ast)->left);	
 	ft_exec(&(*ast)->right);
+	set_exitstatus(ft_atoi(ft_getenv(data_singleton()->env, "?")) ? 0 : 1, 1);
 	return (0);
 }

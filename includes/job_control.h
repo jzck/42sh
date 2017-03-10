@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 20:06:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 16:57:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
+
 # define JOB_IS_BG(j)		(j & JOB_BG)
 # define JOB_IS_FG(j)		(!JOB_IS_BG(j))
 

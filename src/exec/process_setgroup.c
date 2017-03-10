@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 14:28:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 16:51:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int		process_setgroup(t_process *p, pid_t pid)
 	if (!SH_HAS_JOBC(data->opts))
 		return (0);
 	j = &data->exec.job;
-	if (!j->pgid)
-		j->pgid = pid ? pid : getpid();
+	/* DG("setpgid(%i, %i)", pid, j->pgid); */
 	setpgid(pid, j->pgid);
 	if (pid == 0 && JOB_IS_FG(j->attrs))
 		tcsetpgrp(STDIN, j->pgid);

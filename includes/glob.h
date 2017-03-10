@@ -100,7 +100,7 @@ void			expand_home(t_glob *gl, char *str);
 void			expand_var(t_glob *tglob);
 void			expand_home(t_glob *gl, char *str);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
-int				dir_research(t_glob *tglob, char *p, char *pat, int rec);
+int				dir_research(t_glob *tglob, char *p, char *pat, int rec, int first);
 char			**gen_tab(const char *pat, const unsigned char *esc,
 				const unsigned char *esc2, int dup);
 char			**ft_strsplit_spe(const char *str,

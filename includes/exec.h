@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 17:42:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/10 17:45:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,6 @@ int		exec_else(t_btree **ast);
 int		exec_var(t_btree **ast);
 int		exec_case_branch(t_btree **ast);
 int		exec_math(t_btree **ast);
+int		exec_bang(t_btree **ast);
 
 #endif

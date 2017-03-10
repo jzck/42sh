@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 11:58:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 16:50:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ int		launch_process(t_process *p)
 	{
 		DG("gonna reset fds");
 		process_resetfds(p);
-		return (-1);
+		return (1);
 	}
 	p->pid = pid;
 	process_setgroup(p, pid);
+	/* process_resetfds(p); */
+	if (p->fdout != STDOUT)
+		close(p->fdout);
 	return (0);
 }
