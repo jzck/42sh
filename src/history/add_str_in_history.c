@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:27:03 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/04 15:52:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/10 12:10:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,26 @@
 void		ft_add_in_history_file(char *str)
 {
 	int		fd;
+	int		i;
 	char	*home;
 	char	*path;
+	char	**hist;
 
+	i = 0;
+	hist = ft_strsplit(str, '\n');
 	if (!(home = ft_getenv(data_singleton()->env, "HOME")))
 		return ;
 	path = ft_str3join(home, "/", ".42sh_history");
 	fd = open(path, O_CREAT | O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
 	if (fd == -1)
 		return ;
-	write(fd, str, ft_strlen(str));
-	write(fd, "\n", 1);
+	while (hist[i])
+	{
+		write(fd, hist[i], ft_strlen(str));
+		write(fd, "\n", 1);
+		++i;
+	}
+	ft_sstrfree(hist);
 	free(path);
 	close(fd);
 }
