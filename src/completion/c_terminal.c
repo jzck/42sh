@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 08:46:13 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 10:00:03 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			c_term_mv_down(t_comp *c)
 	int		i;
 
 	i = 0;
-	while (i < c->m_size)
+	while (i < c->m_size + 1)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cd", NULL));

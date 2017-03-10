@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/10 08:47:51 by alao             ###   ########.fr        #
+#    Updated: 2017/03/10 09:14:50 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
 c_seek_env.c\
 completion/c_abs_path.c\
+completion/c_arrow.c\
 completion/c_binary.c\
 completion/c_clear.c\
 completion/c_files.c\
@@ -242,7 +243,7 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make -f $(NAME)
+	@make $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(FLAGS) $(D_FLAGS) \

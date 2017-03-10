@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 13:44:51 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 09:05:23 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ int				c_gtfo(t_comp *c, long int keypress)
 			ptr = ptr->next;
 		c_updater(c, ptr->name);
 		return (1);
+	}
+	if (keypress == 4283163 || keypress == 4348699
+			|| keypress == 4479771 || keypress == 4414235)
+	{
+		c_arrow(c, keypress);
+		return (0);
 	}
 	return ((c_rematch(c, keypress)) ? (0) : (1));
 }
