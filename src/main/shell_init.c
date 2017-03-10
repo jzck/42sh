@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:42:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 12:12:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	shell_init(int ac, char **av)
 	int		*shell_pgid;
 	t_data	*data;
 
+	DG("check");
 	data_init();
 	data = data_singleton();
 	data->argc = ac;
