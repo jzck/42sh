@@ -17,7 +17,8 @@ int		redirect_dless(t_redir *redir)
 	char	*str;
 
 	pipe(fds);
-	str = redir->word;
+	str = redir->heredoc_data;
+	DG("[%s]", str);
 	write(fds[PIPE_WRITE], str, ft_strlen(str));
 	close(fds[PIPE_WRITE]);
 	dup2(fds[PIPE_READ], 0);
