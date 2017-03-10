@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:12:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 22:46:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 15:43:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int			add_sep(t_btree **ast, t_list **lst)
 		return (add_subshell_sep(ast, lst));
 	else if (isfunc(ast, lst))
 		return (add_func_sep(ast, lst));
+	else if (isbang_sep(ast, lst))
+		return (add_bang_sep(ast, lst));
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
-//watch != TK_DO
 	new_node = NULL;
 	gen_node(&new_node);
 	join_ast(ast, &new_node);

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process_while.c                                :+:      :+:    :+:   */
+/*   exec_bang.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 19:38:10 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/10 14:32:22 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/10 14:46:27 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/10 15:51:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		set_process_while(t_process *p, t_btree *ast)
+int		exec_bang(t_btree **ast)
 {
-	p->data.d_while.condition = btree_map(ast->left, &node_copy);
-	p->data.d_while.content = btree_map(ast->right, &node_copy);
-	p->type = PROCESS_WHILE;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	push(&exec->op_stack, TK_BANG);
+	ft_exec(&(*ast)->left);	
+	ft_exec(&(*ast)->right);
+	set_exitstatus(ft_atoi(ft_getenv(data_singleton()->env, "?")) ? 0 : 1, 1);
 	return (0);
 }

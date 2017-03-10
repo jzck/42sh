@@ -63,6 +63,7 @@ exec/bad_fd.c\
 exec/error_badidentifier.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
+exec/exec_bang.c\
 exec/exec_case_branch.c\
 exec/exec_elif.c\
 exec/exec_else.c\
@@ -265,6 +266,7 @@ main/main.c\
 main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
+parser/add_bang.c\
 parser/add_case.c\
 parser/add_cmd.c\
 parser/add_condition.c\

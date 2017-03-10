@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/09 19:44:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 15:22:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_distrostree	g_distrostree[] =
 	{&isfunc_name, &add_null},
 	{&isfunc, &add_func_cmd},
 	{&isionumber, &add_ionumber},
+	{&isbang, &add_bang},
 	{&isnull, &add_null},
 };
 
@@ -71,7 +72,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 17)
+	while (++i < 18)
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
 			DG("add : %d", i);
