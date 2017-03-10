@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 10:18:16 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 12:43:16 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,10 @@ static t_clst	*c_rolling(t_comp *c)
 	y = 1;
 	while ((y * (c->m_size - 1)) < id)
 		y++;
-		c->pos_x = x;
-		c->pos_y = y;
+	c->pos_x = id;
+	c->pos_y = y;
 	if (y > 1)
 	{
-		c->pos_x = x;
-		c->pos_y = y;
 		x = (y - 1) * (c->m_size - 1);
 		ptr = c->lst;
 		while (x)
@@ -125,10 +123,17 @@ void		c_printer(t_comp *c)
 	t_clst	*ptr;
 	int		loop;
 	int		max_line;
+	int		offset;
 
 	loop = c->c_line;
-	max_line = c->m_size - 1;
+
+	max_line = c->c_line - (c->m_size - 1);
 	ptr = c_rolling(c);
+	if ((c->pos_y * (c->m_size - 1)) > c->c_line)
+		max_line = (c->c_line % (c->m_size - 1));
+	else
+		max_line = c->m_size - 1;
+	offset = (c->m_size - 1) - max_line;
 	while (loop && max_line)
 	{
 		c_printer_line(c, ptr, c->c_pline, 1);
@@ -136,5 +141,10 @@ void		c_printer(t_comp *c)
 		ptr = ptr->next;
 		loop--;
 		max_line--;
+	}
+	while (offset)
+	{
+		ft_putstr(tgetstr("do", NULL));
+		offset--;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 11:45:57 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 12:06:22 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			c_term_mv_down(t_comp *c)
 
 	i = 0;
 	if (c->c_sy > c->win_y)
-		value = c->m_size + 1;
+		value = c->m_size;
 	else
 		value = c->c_line;
 	while (i < value)

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 09:04:42 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 10:21:01 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 12:44:05 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ static void		c_arrow_right(t_comp *c)
 			i += c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
 		i++;
 	}
-	DG("POSX [%d] C_PLINE [%d]", c->pos_x, c->c_line);
 	if (c->pos_x == (c->c_pline - 1))
 	{
-		DG("X");
 		i = c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
 		while (i < c->c_line)
 		{
