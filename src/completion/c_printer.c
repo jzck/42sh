@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:11:48 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 08:45:06 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,48 @@ static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 }
 
 /*
+** Controlling the offset value for the rolling list if the space in the
+** terminal is too small to display the whole list.
+**
+** Controlled value are:
+** - x : the column of the element currently selected.
+*/
+
+static t_clst	*c_rolling(t_comp *c)
+{
+	t_clst		*ptr;
+	int			x;
+	int			y;
+	int			id;
+
+	ptr = c->lst;
+	while (!ptr->cursor)
+		ptr = ptr->next;
+
+	x = 1;
+	while ((x * c->c_line) < ptr->id)
+		x++;
+	id = ((x == 1) ? ptr->id : (ptr->id - ((x - 1) * c->c_line)));
+	y = 1;
+	while ((y * (c->m_size - 1)) < id)
+		y++;
+	if (y > 1)
+	{
+		c->pos_x = x;
+		c->pos_y = y;
+		x = (y - 1) * (c->m_size - 1);
+		ptr = c->lst;
+		while (x)
+		{
+			ptr = ptr->next;
+			x--;
+		}
+		return (ptr);
+	}
+	return (c->lst);
+}
+
+/*
 ** Control the number of time it cycle for LINE
 */
 
@@ -80,14 +122,17 @@ void		c_printer(t_comp *c)
 {
 	t_clst	*ptr;
 	int		loop;
+	int		max_line;
 
-	ptr = c->lst;
 	loop = c->c_line;
-	while (loop)
+	max_line = c->m_size - 1;
+	ptr = c_rolling(c);
+	while (loop && max_line)
 	{
 		c_printer_line(c, ptr, c->c_pline, 1);
 		loop > 1 ? ft_putstr(tgetstr("do", NULL)) : (0);
 		ptr = ptr->next;
 		loop--;
+		max_line--;
 	}
 }

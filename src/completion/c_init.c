@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/03/09 14:45:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/10 08:32:11 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static void				c_init_base(t_comp *c)
 	ioctl(0, TIOCGWINSZ, &win);
 	c->win_x = win.ws_col;
 	c->win_y = win.ws_row;
+	c->m_size = data_singleton()->line.prompt_size;
+	c->m_size += ft_strlen(data_singleton()->line.input);
+	c->m_size = (c->m_size / c->win_y);
+	c->m_size = c->win_y - c->m_size - 1;
+	c->pos_x = 1;
+	c->pos_y = 1;
 	c->cutpoint = 0;
 	c->between = NULL;
 	c->isfolder = 0;

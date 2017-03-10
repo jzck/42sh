@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 18:36:56 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 08:46:13 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			c_term_mv_back(t_comp *c)
 	int		lcmd;
 
 	i = 0;
-	while (i != (c->c_line))
+	while (i != (c->m_size))
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;
@@ -71,14 +71,14 @@ void			c_term_mv_down(t_comp *c)
 	int		i;
 
 	i = 0;
-	while (i < c->c_line)
+	while (i < c->m_size)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cd", NULL));
 		i++;
 	}
 	i = 0;
-	while (i != (c->c_line - 1))
+	while (i != (c->m_size - 1))
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;
@@ -86,7 +86,7 @@ void			c_term_mv_down(t_comp *c)
 }
 
 /*
-** If the terminal has chaged in size, the function will refresh these values
+** If the terminal has changed in size, the function will refresh these values
 ** and clear the previous print list.
 */
 

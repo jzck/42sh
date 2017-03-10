@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/09 17:34:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/10 08:31:49 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct				s_clst
 **   c_line : Number of line required to move to terminal up.
 **    win_x : Size of the window in length.
 **    win_y : Size of the window in height.
+**   m_size : Max size of the list in pagination.
+**    pos_x : Position of the element relative to the terminal in list mode (X).
+**    pos_y : Position of the element relative to the terminal in list mode (Y).
 **      key : The keypressed lastly.
 ** isfolder : If the match is a folder. boolean.
 **      lst : List of the item corresponding to the completion.
@@ -65,9 +68,9 @@ typedef struct				s_clst
 **
 **          Exemple: [ ls / ; cd (tab) ; pwd ]
 **
-**                                   (int)cutpoint
-**                                       |
-**                                       |
+**                                               (int)cutpoint
+**                                                     |
+**                                                     |
 **  Become:  [ls / ;]         [ ]         [cd ]         [ ; pwd]
 **            |                |           |              |
 **            |                |           |              |
@@ -93,6 +96,9 @@ typedef struct				s_comp
 	int						c_line;
 	int						win_x;
 	int						win_y;
+	int						m_size;
+	int						pos_x;
+	int						pos_y;
 	int						key;
 	int						isfolder;
 	int						isrematch;

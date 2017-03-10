@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/02/17 17:16:16 by wescande         ###   ########.fr        #
+#    Updated: 2017/03/10 08:47:51 by alao             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -242,7 +242,7 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make -j $(NAME)
+	@make -f $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(FLAGS) $(D_FLAGS) \
