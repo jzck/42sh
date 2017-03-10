@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 12:43:16 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 16:09:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,5 @@ void		c_printer(t_comp *c)
 		ptr = ptr->next;
 		loop--;
 		max_line--;
-	}
-	while (offset)
-	{
-		ft_putstr(tgetstr("do", NULL));
-		offset--;
 	}
 }
