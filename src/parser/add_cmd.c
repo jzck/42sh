@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 15:22:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 17:55:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (add_cmd(&(*ast)->right, lst));
 	token = (*lst)->content;
 	node = (*ast)->item;
-	if (token->type != TK_WORD)
+	DG("add cmd");
+	if (token->type == TK_IF)
+		add_if(ast, lst);
+	else if (token->type != TK_WORD)
 		node->type = token->type;
 	else
 		node->type = CMD;

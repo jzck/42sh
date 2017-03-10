@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 00:02:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 17:49:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,15 @@ int			add_null(t_btree **ast, t_list **lst)
 	return (-1);
 }
 
+int			add_branch(t_btree **ast, t_list **lst)
+{
+	t_astnode	*node;
+	t_btree		*new_node;
+
+	new_node = NULL;
+	gen_node(&new_node);
+	join_ast(ast, &new_node);
+	node = (new_node)->item;
+	node->type = TK_NEWLINE;
+	return (add_cmd(ast, lst));
+}

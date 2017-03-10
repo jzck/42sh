@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:20:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 16:29:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int		handle_instruction(int fd)
 	}
 	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
-	if (ft_exec(&ast))
-		return (1);
+//	if (ft_exec(&ast))
+//		return (1);
 	instruction_free(&token, &parser, &ast);
 	ft_add_str_in_history(lexer.str);
 	return (0);

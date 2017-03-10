@@ -124,6 +124,7 @@ int		add_null(t_btree **ast, t_list **lst);
 int		add_ionumber(t_btree **ast, t_list **lst);
 int		add_bang(t_btree **ast, t_list **lst);
 int		add_bang_sep(t_btree **ast, t_list **lst);
+int		add_if(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
 int		isloop_condition(t_btree **ast, t_list **lst);
