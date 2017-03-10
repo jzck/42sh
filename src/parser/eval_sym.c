@@ -1308,7 +1308,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	if (!*stack)
 		return (1);
 	head = (*stack)->content;
-	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+//	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

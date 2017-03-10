@@ -55,7 +55,7 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			parser->state = UNDEFINED;
 		build_tree(ast, token);
-//		btree_print(STDBUG, *ast, &ft_putast);
+		btree_print(STDBUG, *ast, &ft_putast);
 		if ((end_instruction(&parser->stack) && !(*token)->next))
 			insert_linebreak(token);
 		else

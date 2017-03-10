@@ -187,6 +187,7 @@ struct	s_astnode
 	int		pattern;
 	int		nest;
 	int		full;
+	int		cache;
 	t_type		type;
 	t_astdata	data;
 };

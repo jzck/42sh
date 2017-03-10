@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 13:45:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 19:43:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int			isdir_sep(t_btree **ast, t_list **list)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if ((node->type == CMD || node->type == TK_IO_NUMBER) && 
-			(token->type == TK_LESS || token->type == TK_GREAT
+		if ((node->type == CMD || node->type == TK_IO_NUMBER
+			|| node->type == TK_WHILE || node->type == TK_IF
+			|| node->type == TK_FOR || node->type == SUBSHELL
+			|| node->type == TK_CASE || node->type == TK_RBRACE
+			|| node->type == TK_UNTIL) 
+			&& (token->type == TK_LESS || token->type == TK_GREAT
 			|| token->type == TK_GREATAND || token->type == TK_LESSAND
 			|| token->type == TK_DLESS || token->type == TK_DGREAT))
 			return (1);
@@ -48,7 +52,8 @@ int			isdir_word(t_btree **ast, t_list **list)
 		node = (*ast)->item;
 		if (token->type == TK_WORD && node->type == REDIR)
 		{
-			node->type = CMD;
+			node->type = node->cache;
+			node->cache = 0;
 			return (1);
 		}
 	}
@@ -91,6 +96,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
+	DG("node type is :%s", read_state(node->type));
 	if (!(node->type == TK_IO_NUMBER))
 	{
 		redir.n = (token->type == TK_LESS || token->type == TK_DLESS
@@ -112,6 +118,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 			temp_heredoc->n = temp->n;
 		}
 	}
+	node->cache = node->type;
 	node->type = REDIR;
 	return (0);
 }
