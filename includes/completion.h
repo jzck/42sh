@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 11:10:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/10 17:38:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COMPLETION_H
 
 # include "minishell.h"
+#define RETARDED_BEHAVIOR	0
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
@@ -55,6 +56,10 @@ typedef struct				s_clst
 **  c_pline : Number of item per line when printing.
 **   c_line : Number of line required to move to terminal up.
 **    win_x : Size of the window in length.
+**    win_y : Size of the window in height.
+**   m_size : Max size of the list in pagination.
+**    pos_x : Position of the element relative to the terminal in list mode (X).
+**    pos_y : Position of the element relative to the terminal in list mode (Y).
 **      key : The keypressed lastly.
 ** isfolder : If the match is a folder. boolean.
 **      lst : List of the item corresponding to the completion.
@@ -63,9 +68,9 @@ typedef struct				s_clst
 **
 **          Exemple: [ ls / ; cd (tab) ; pwd ]
 **
-**                                   (int)cutpoint
-**                                       |
-**                                       |
+**                                               (int)cutpoint
+**                                                     |
+**                                                     |
 **  Become:  [ls / ;]         [ ]         [cd ]         [ ; pwd]
 **            |                |           |              |
 **            |                |           |              |
@@ -90,8 +95,13 @@ typedef struct				s_comp
 	int						c_pline;
 	int						c_line;
 	int						win_x;
+	int						win_y;
+	int						m_size;
+	int						pos_x;
+	int						pos_y;
 	int						key;
 	int						isfolder;
+	int						isrematch;
 	t_clst					*lst;
 }							t_comp;
 
@@ -132,12 +142,14 @@ int							c_rematch(t_comp *c, long int keypress);
 **    c_term_mv_down : Make space for the list.
 **    c_term_mv_back : Reset the cursor position.
 **      c_term_clear : Delete the list from the terminal.
+**     c_term_resize : Refresh win_x and win_y.
 **         c_printer : Printer of the list.
 */
 
 void						c_term_mv_down(t_comp *c);
 void						c_term_mv_back(t_comp *c);
 void						c_term_clear(t_comp *c);
+int							c_term_resize(t_comp *c);
 void						c_printer(t_comp *c);
 
 /*
@@ -151,12 +163,20 @@ void						c_printer(t_comp *c);
 int							c_clear(t_data *s);
 int							c_clear_lst(t_comp *c);
 char						*path_solver(t_comp *c, char *cmd, char *cwd);
+int							c_spacing_escape(t_clst *node, int x, int o);
+int							c_spacing_clear(t_comp *c);
+int							ft_sstrlen(char **s);
+char						*ft_sstrtostr(char **s, char *sep);
 
 /*
-**	ajout rapide gwojda pour compiler :
+**	j'ajoute a la va vite^^
 */
 
-int			ft_sstrlen(char **s);
-char		*ft_sstrtostr(char **s, char *sep);
+int							c_glob_matching(void);
+void						c_add_to_lst(t_comp *c, t_clst *node);
+int							c_seek_env(t_comp *c, char *current_word);
+void						c_seek_abs_path(t_comp *c, char *current_word);
+void						c_arrow(t_comp *c, long int keypress);
+int							c_chevron(t_comp *c);
 
 #endif

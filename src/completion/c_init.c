@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:08:25 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 12:43:57 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,17 @@ static void				c_init_base(t_comp *c)
 
 	ioctl(0, TIOCGWINSZ, &win);
 	c->win_x = win.ws_col;
+	c->win_y = win.ws_row;
+	c->m_size = data_singleton()->line.prompt_size;
+	c->m_size += ft_strlen(data_singleton()->line.input);
+	c->m_size = (c->m_size / c->win_y);
+	c->m_size = c->win_y - c->m_size - 1;
+	c->pos_x = 1;
+	c->pos_y = 1;
 	c->cutpoint = 0;
 	c->between = NULL;
 	c->isfolder = 0;
+	c->isrematch = 0;
 	c->match = NULL;
 	c->cpath = NULL;
 	c->lst = NULL;
@@ -70,9 +78,8 @@ static void				c_init_base(t_comp *c)
 ** structure data and call for the c_matching() function.
 */
 
-void					c_init(t_data *s, long int input)
+void				c_init(t_data *s, long int input)
 {
-
 	int					len_trail;
 
 	if (!(s->comp = (t_comp *)malloc((sizeof(t_comp)))))

@@ -6,36 +6,55 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 14:15:55 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 14:22:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/09 15:20:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_completion(int ret)
+static size_t	ft_strleni_w(char *str, size_t pos, char c)
+{
+	size_t	len;
+
+	len = 0;
+	if (!STR)
+		return (0);
+	while (str[pos] && str[pos] != c)
+	{
+		++len;
+		++pos;
+	}
+	return (len);
+}
+
+int				ft_completion(int ret)
 {
 	size_t	tmp;
 	size_t	pos_tmp;
-	int		beg_len;
+	size_t	right;
 	char	boolean;
 
 	boolean = 0;
-	beg_len = ft_strlen(data_singleton()->line.input);
+	pos_tmp = POS;
+	right = ft_strleni_w(STR, POS, '\n');
 	if (((ret != TOUCHE_TAB && ret != 10)
 	|| (ret == 10)) && !(data_singleton()->comp))
 		return (0);
-	tmp = POS;
-	pos_tmp = POS;
 	if (data_singleton()->comp || ret == TOUCHE_TAB)
 		boolean = completion(ret);
 	if (boolean || ret == 10)
 	{
+		if (pos_tmp)
+			--pos_tmp;
+		else
+			ft_puttermcaps("nd");
+		ft_get_beggin_with_curs(STR, &pos_tmp);
+		tmp = pos_tmp;
 		ft_puttermcaps("cd");
 		ft_current_str(STR, tmp);
 		ft_get_next_str(STR, &tmp);
-		ft_putnc('\b', tmp -
-			(pos_tmp + ft_strlen(data_singleton()->line.input) - beg_len));
-		POS = pos_tmp + ft_strlen(data_singleton()->line.input) - beg_len;
+		ft_putnc('\b', right);
+		POS = ft_strleni_w(STR, pos_tmp, '\n') - right;
 	}
 	return (1);
 }

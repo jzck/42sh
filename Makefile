@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#*   Updated: 2017/03/05 15:36:45 by wescande         ###   ########.fr       *#
+#    Updated: 2017/03/10 17:40:02 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,12 @@ builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
+completion/c_abs_path.c\
+completion/c_arrow.c\
 completion/c_binary.c\
 completion/c_clear.c\
 completion/c_files.c\
+completion/c_glob_matching.c\
 completion/c_init.c\
 completion/c_matching.c\
 completion/c_misc.c\
@@ -55,6 +58,7 @@ completion/c_parser.c\
 completion/c_pathsolver.c\
 completion/c_printer.c\
 completion/c_rematch.c\
+completion/c_seek_env.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
@@ -244,6 +248,7 @@ line-editing/home_end.c\
 line-editing/init_history.c\
 line-editing/init_line.c\
 line-editing/init_termcaps.c\
+line-editing/lib_line_editing/ft_nb_line.c\
 line-editing/lib_line_editing/tool_line.c\
 line-editing/lib_line_editing/tool_line_2.c\
 line-editing/lib_line_editing/toolz.c\
@@ -295,7 +300,7 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make -j $(NAME)
+	@make $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) \
