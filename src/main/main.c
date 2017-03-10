@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 13:19:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 13:28:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int		handle_instruction(int fd)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF(&token,
 			&parser, &ast) : 1);
+		}
+		if (lexer.state == HEREDOC)
+		{
+			ft_strappend(&lexer.str, (char[]){'\n', 0});
+			lexer.pos++;
 		}
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
