@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:29:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 17:11:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/09 18:48:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		lexer_sep(t_list **alst, t_lexer *lexer)
 		token->type = cn == '|' ? TK_OR_IF : TK_PIPE;
 	else if (c == ';')
 		token->type = cn == ';' ? TK_DSEMI : TK_SEMI;
+	else if (c == '!')
+		token->type = TK_BANG;
 	if (token->type == TK_AND_IF || token->type == TK_OR_IF
 			|| token->type == TK_DSEMI)
 		lexer->pos++;

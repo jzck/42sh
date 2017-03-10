@@ -97,6 +97,7 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, TK_ELIF, TK_ELIF, TK_ELIF},
 	{NEWLINE_LIST, TK_ELSE, TK_ELSE, TK_ELSE},
 	{NEWLINE_LIST, TK_WHILE, TK_WHILE, TK_WHILE},
+	{NEWLINE_LIST, TK_LBRACE, TK_LBRACE, TK_LBRACE},
 	{NEWLINE_LIST, TK_UNTIL, TK_UNTIL, TK_UNTIL},
 	{NEWLINE_LIST, CASE_LIST_NS, CASE_LIST_NS, CASE_LIST_NS},
 	{NEWLINE_LIST, NEWLINE_LIST, NEWLINE_LIST, NEWLINE},
@@ -367,21 +368,21 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 		return (1);
 	i = 0;
 	head = (*stack)->content;
-//	DG("aggregate head %s && sym %s",
-//	read_state(*head), read_state(*new_sym));
+	DG("aggregate head %s && sym %s",
+	read_state(*head), read_state(*new_sym));
 	while (g_aggrematch[i].top)
 	{
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(*head, g_aggrematch[i].under))
 	
 		{
-//			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
+			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
-//				DG("stack after pop: %s", read_state(*head));
+				DG("stack after pop: %s", read_state(*head));
 			}
 			if (eval_sym(stack, *new_sym))
 			{

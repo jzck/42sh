@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 23:35:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/09 18:54:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ char	*ft_putast(void *nodein)
 	t_astnode	*node;
 	node = nodein;
 	
+	if (node->type == TK_BANG)
+		return ("TK_BANG");
 	if (node->type == MATH)
 		return ("MATH");
+	if (node->type == MATH_PLUS)
+		return ("MATH_PLUS");
 	if (node->type == TK_DSEMI)
 		return ("TK_DSEMI");
 	if (node->type == WORDLIST)

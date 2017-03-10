@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 17:37:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 13:31:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int		handle_instruction(int fd)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_EOF(&token,
 			&parser, &ast) : 1);
+		}
+		if (lexer.state == HEREDOC)
+		{
+			ft_strappend(&lexer.str, (char[]){'\n', 0});
+			lexer.pos++;
 		}
 		ft_strappend(&lexer.str, str);
 		if (get_lexer_stack(lexer) == BACKSLASH)
@@ -109,14 +114,14 @@ int		main(int ac, char **av)
 	int		fd;
 
 	setlocale(LC_ALL, "");
+	DG("{inv}{bol}{gre}start of shell{eoc}");
 	shell_init(ac, av);
 	if ((fd = get_input_fd()) < 0)
 	{
 		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, shell_get_avdata());
 		return (1);
 	}
-	DG("{inv}{bol}{gre}start of shell{eoc} JOBC is %s, fd=[%i]",
-			SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
+	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
 		DG();

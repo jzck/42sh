@@ -429,6 +429,7 @@ t_stackmatch	g_stackmatch[] =
 //	watch !
 	{TK_PAREN_OPEN, AND_OR_MAJOR},
 	{TK_PAREN_OPEN, TK_WHILE},
+	{TK_PAREN_OPEN, TK_LBRACE},
 	{TK_PAREN_OPEN, FUNC_NAME},
 	{TK_PAREN_OPEN, TK_UNTIL},
 	{TK_PAREN_OPEN, TK_DO},
@@ -817,6 +818,7 @@ t_stackmatch	g_stackmatch[] =
 	{WHILE_CLAUSE, TK_DO},
 	{WHILE_CLAUSE, TK_PAREN_CLOSE},
 	{WHILE_CLAUSE, TK_WHILE},
+	{WHILE_CLAUSE, TK_LBRACE},
 	{WHILE_CLAUSE, FUNC_NAME},
 	{WHILE_CLAUSE, TK_UNTIL},
 	{WHILE_CLAUSE, TK_IF},
@@ -954,6 +956,7 @@ t_stackmatch	g_stackmatch[] =
 	{SUBSHELL, SEPARATOR_OP},
 	{SUBSHELL, NEWLINE_LIST},
 	{SUBSHELL, SEQUENCE},
+	{SUBSHELL, TK_LBRACE},
 //	watch !
 	{SUBSHELL, SEPARATOR_OP},
 	{SUBSHELL, NEWLINE_LIST},
@@ -1059,8 +1062,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_BANG, TK_PAREN_OPEN},
 	{TK_BANG, TK_LBRACE},
 	{TK_BANG, COMPLETE_COMMANDS},
-	{TK_BANG, TK_BANG},
-	{TK_BANG, TK_BANG},
 	{TK_BANG, SEPARATOR_OP},
 	{TK_BANG, NEWLINE_LIST},
 	{TK_BANG, AND_OR_MAJOR},
@@ -1191,7 +1192,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	if (!*stack)
 		return (1);
 	head = (*stack)->content;
-//	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

@@ -161,7 +161,6 @@ struct	s_redir
 	int		n;
 	char	*word;
 	char	*heredoc_data;
-	/* int		close; */
 };
 
 struct	s_cmd
