@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 14:54:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 16:22:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ int		set_process(t_process *p, t_btree *ast)
 			return (1);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
-	if (op == TK_AMP)
-		exec->job.attrs |= JOB_BG;
-	else if (op == TK_PIPE)
+	if (op == TK_PIPE)
+	{
 		pipe(fds);
+		DG("[%i] -> PIPE -> [%i]", fds[PIPE_WRITE], fds[PIPE_READ]);
+	}
 	p->fdin = exec->fdin;
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];
