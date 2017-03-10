@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 21:03:18 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/27 13:17:27 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int				c_seek_binary(t_data *s, t_comp *c)
 	if (!(tmp = ft_strdup(ft_getenv(s->env, "PATH"))))
 		return (-1);
 	paths = ft_strsplit(tmp, ':');
-	c->match = ft_strdup(c->rcmd);
+	if (c->match == NULL)
+		c->match = ft_strdup(c->rcmd);
 	while (paths[i])
 		c_parser(c, paths[i++], c->rcmd);
 	tmp ? ft_memdel((void *)&tmp) : (0);

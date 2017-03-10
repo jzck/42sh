@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:03:41 by alao             ###   ########.fr       */
+/*   Updated: 2017/02/17 14:57:09 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int					c_clear_lst(t_comp *c)
 	t_clst		*c_lst;
 	t_clst		*p_lst;
 
+	if (c->lst == NULL)
+		return (0);
 	c_lst = c->lst;
 	c->lst->prev ? (c->lst = c->lst->prev) : (0);
 	c_lst->prev->next = NULL;
@@ -48,6 +50,8 @@ int					c_clear(t_data *s)
 {
 	t_comp			*ptr;
 
+	if (s->comp == NULL)
+		return (0);
 	ptr = s->comp;
 	ptr->rcmd ? ft_memdel((void *)&ptr->rcmd) : (0);
 	ptr->match ? ft_memdel((void *)&ptr->match) : (0);

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:01:37 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 16:07:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ void			c_term_mv_back(t_comp *c)
 {
 	int		i;
 	int		lcmd;
+	int		value;
 
 	i = 0;
-	while (i != (c->c_line))
+	if (c->c_sy > c->win_y)
+		value = c->m_size;
+	else
+		value = c->c_line;
+	while (i != value)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;
@@ -69,18 +74,46 @@ void			c_term_mv_back(t_comp *c)
 void			c_term_mv_down(t_comp *c)
 {
 	int		i;
+	int		value;
 
 	i = 0;
-	while (i < c->c_line)
+	if (c->c_sy > c->win_y)
+		value = c->m_size;
+	else
+		value = c->c_line;
+	while (i < value)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cd", NULL));
 		i++;
 	}
 	i = 0;
-	while (i != (c->c_line - 1))
+	if (c->c_sy > c->win_y)
+		value = c->m_size - 1;
+	else
+		value = c->c_line - 1;
+	while (i != value)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;
 	}
+}
+
+/*
+** If the terminal has changed in size, the function will refresh these values
+** and clear the previous print list.
+*/
+
+int				c_term_resize(t_comp *c)
+{
+	struct winsize	win;
+
+	ioctl(0, TIOCGWINSZ, &win);
+	if ((win.ws_col == c->win_x) && (win.ws_row == c->win_y))
+		return (0);
+	c->win_x = win.ws_col;
+	c->win_y = win.ws_row;
+	c_sizing(c);
+	c_term_clear(c);
+	return (0);
 }

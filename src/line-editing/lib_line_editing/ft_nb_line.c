@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   job_update_status.c                                :+:      :+:    :+:   */
+/*   ft_nb_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 12:56:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:45:32 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/08 17:11:57 by gwojda            #+#    #+#             */
+/*   Updated: 2017/03/08 17:43:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	job_update_status(void)
+int		ft_nb_of_line(char *str, size_t pos)
 {
-	int		status;
-	pid_t	pid;
+	int	len;
 
-	do
-	{
-		pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG);
-		DG("pid=[%d]", pid);
-	}
-	while (pid > 1 && !mark_process_status(pid, status));
+	len = 1;
+	if (pos && str[pos] == '\n')
+		--pos;
+	len += data_singleton()->line.prompt_size;
+	len += ft_get_size_prev(str, pos);
+	return (len / ft_size_term());
 }

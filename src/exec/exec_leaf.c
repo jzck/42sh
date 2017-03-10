@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/10 15:36:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/10 16:58:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int				exec_leaf(t_btree **ast)
 		{
 			if (JOB_IS_FG(job->attrs))
 				put_job_in_foreground(job, 0);
-			/* else */
-			/* 	put_job_in_background(job, 0); */
 			job->pgid = 0;
 		}
 	}
