@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/09 18:14:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/10 18:46:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, COMPOUND_LIST, CMD_NAME},
 	{TK_WORD, CASE_LIST_NS, CMD_NAME},
 	{TK_WORD, COMPLETE_CONDITION, CMD_NAME},
+	{TK_WORD, CONDITION, CMD_NAME},
 	{TK_WORD, NEWLINE_LIST, CMD_NAME},
 	{TK_WORD, TK_BANG, CMD_NAME},
 	{TK_WORD, SEQUENCE, CMD_NAME},
@@ -59,6 +60,13 @@ t_prodmatch		g_prodmatch[] =
 	{TK_ASSIGNEMENT_WORD, TK_LBRACE, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_WHILE, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_UNTIL, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_FOR, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_IF, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_FI, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_ELIF, CMD_PREFIX},
+	{TK_ASSIGNEMENT_WORD, TK_ELSE, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
 	{TK_NAME, TK_BANG, FNAME},
 	{TK_NAME, LINEBREAK, FNAME},
@@ -76,6 +84,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_NEWLINE, TK_IN, NEWLINE_LIST},
 	{TK_NEWLINE, TK_WHILE, NEWLINE_LIST},
 	{TK_NEWLINE, TK_UNTIL, NEWLINE_LIST},
+	{TK_NEWLINE, TK_FOR, NEWLINE_LIST},
 	{TK_NEWLINE, TK_IF, NEWLINE_LIST},
 	{TK_NEWLINE, TK_FI, NEWLINE_LIST},
 	{TK_NEWLINE, TK_ELIF, NEWLINE_LIST},
