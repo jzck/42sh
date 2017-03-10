@@ -122,6 +122,8 @@ int		add_pipe(t_btree **ast, t_list **lst);
 int		add_var(t_btree **ast, t_list **lst);
 int		add_null(t_btree **ast, t_list **lst);
 int		add_ionumber(t_btree **ast, t_list **lst);
+int		add_bang(t_btree **ast, t_list **lst);
+int		add_bang_sep(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
 int		isloop_condition(t_btree **ast, t_list **lst);
@@ -142,6 +144,8 @@ int		isnull(t_btree **ast, t_list **list);
 int		isionumber(t_btree **ast, t_list **lst);
 int		ismath(t_btree **ast, t_list **lst);
 int		ismath_expr(t_btree **ast, t_list **lst);
+int		isbang(t_btree **ast, t_list **lst);
+int		isbang_sep(t_btree **ast, t_list **lst);
 
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
