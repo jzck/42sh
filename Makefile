@@ -44,7 +44,6 @@ builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
 builtin/is_builtin.c\
-c_seek_env.c\
 completion/c_abs_path.c\
 completion/c_arrow.c\
 completion/c_binary.c\
@@ -59,6 +58,7 @@ completion/c_parser.c\
 completion/c_pathsolver.c\
 completion/c_printer.c\
 completion/c_rematch.c\
+completion/c_seek_env.c\
 completion/c_sizing.c\
 completion/c_terminal.c\
 completion/completion.c\
