@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 10:00:03 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 11:45:57 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ void			c_term_mv_back(t_comp *c)
 {
 	int		i;
 	int		lcmd;
+	int		value;
 
 	i = 0;
-	while (i != (c->m_size))
+	if (c->c_sy > c->win_y)
+		value = c->m_size;
+	else
+		value = c->c_line;
+	while (i != value)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;
@@ -69,16 +74,25 @@ void			c_term_mv_back(t_comp *c)
 void			c_term_mv_down(t_comp *c)
 {
 	int		i;
+	int		value;
 
 	i = 0;
-	while (i < c->m_size + 1)
+	if (c->c_sy > c->win_y)
+		value = c->m_size + 1;
+	else
+		value = c->c_line;
+	while (i < value)
 	{
 		ft_putstr(tgetstr("do", NULL));
 		ft_putstr(tgetstr("cd", NULL));
 		i++;
 	}
 	i = 0;
-	while (i != (c->m_size - 1))
+	if (c->c_sy > c->win_y)
+		value = c->m_size - 1;
+	else
+		value = c->c_line - 1;
+	while (i != value)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 08:32:11 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/10 11:38:35 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void				c_init_base(t_comp *c)
 	c->m_size += ft_strlen(data_singleton()->line.input);
 	c->m_size = (c->m_size / c->win_y);
 	c->m_size = c->win_y - c->m_size - 1;
+	DG("MS [%d] WX %d WY %d", c->m_size, c->win_x, c->win_y);
 	c->pos_x = 1;
 	c->pos_y = 1;
 	c->cutpoint = 0;
