@@ -119,7 +119,7 @@ int				match_pattern(t_glob *gl, char *str, char *full_word)
 		else if (*gl->pat == '*')
 			return (match_star(gl, str, full_word));
 		else if (*gl->pat == '/' && !*str && is_directory(full_word))
-			dir_research(gl, full_word, gl->pat + 1, 0);
+			return (dir_research(gl, full_word, gl->pat + 1, 0));
 		else if (*gl->pat != *str)
 			return (0);
 		++str;

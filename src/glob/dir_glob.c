@@ -21,27 +21,27 @@ int				is_directory(const char *path)
 }
 
 static void		dir_list_content(t_glob *gl, char **str, char *pat,
-								int recursive)
+		int recursive)
 {
-	char		*path_tmp;
+	char		*path;
 
 	if (str[1][0] != '.')
 	{
 		if (*str[0] == '/' && !*(str[0] + 1))
-			path_tmp = ft_strjoin(str[0], str[1]);
+			path = ft_strjoin(str[0], str[1]);
 		else
-			path_tmp = ft_strjoinf(ft_strjoin(str[0], "/"), str[1], 1);
+			path = ft_strjoinf(ft_strjoin(str[0], "/"), str[1], 1);
 		if (recursive)
-			dir_research(gl, path_tmp, pat, recursive);
+			dir_research(gl, path, pat, recursive);
 		gl->pat = pat;
-		if (match_pattern(gl, str[1], path_tmp))
+		if (match_pattern(gl, str[1], path))
 		{
 			gl->found = 1;
-			ft_ld_pushfront(&gl->match_tmp, ft_strdup(path_tmp + gl->cur_dir * 2 *
-						(path_tmp[0] == '.' && path_tmp[1] == '/')));
+			ft_ld_pushfront(&gl->match_tmp, ft_strdup(path + gl->cur_dir * 2 *
+						(path[0] == '.' && path[1] == '/')));
 		}
 		gl->pat = pat;
-		ft_strdel(&path_tmp);
+		ft_strdel(&path);
 	}
 }
 
@@ -51,10 +51,11 @@ int				dir_research(t_glob *gl, char *p,
 	DIR				*dir;
 	struct dirent	*in;
 
-	if (!pat)
+	if (!*pat)
 	{
 		gl->found = 1;
-		ft_ld_pushfront(&gl->match_tmp, ft_strjoin(p, "/"));
+		ft_ld_pushfront(&gl->match_tmp, ft_strjoin(p + gl->cur_dir * 2 *
+					(p[0] == '.' && p[1] == '/'), "/"));
 		return (0);
 	}
 	if ((ft_strlen(p) <= 1 || p[ft_strlen(p) - 1] != '.') && is_directory(p))
