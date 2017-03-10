@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 static void					expand_all_bquote(t_bquote *me, char *content,
-											char *ifs)
+		char *ifs)
 {
 	char	*content2;
 
@@ -45,7 +45,8 @@ static void					init_expand(t_bquote *me, char *content, int esc)
 
 	ifs = esc ? NULL : ft_getenv(data_singleton()->env, "IFS");
 	content = ft_strtok(content, ifs);
-	if (!(content2 = ft_strtok(NULL, ifs)))
+	if (!content || !(content2 = ft_strtok(NULL, ifs)))
+	{
 		ft_ld_pushfront(me->wk, gen_tab(ft_strjoinf(ft_strjoin(me->s1, content),
 						me->s2, 1),
 					calc_expand_esc(me->esc, ft_strlen(me->s1),
@@ -56,6 +57,7 @@ static void					init_expand(t_bquote *me, char *content, int esc)
 						(int[2]){ft_strlen(content), 1},
 						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
 						ft_strlen(me->s2)}), 0));
+	}
 	else
 	{
 		ft_ld_pushfront(me->wk, gen_tab(ft_strjoin(me->s1, content),
@@ -72,7 +74,8 @@ static char					*get_output(char *command)
 	char	*output;
 	int		len;
 
-	output = command_getoutput(command);
+	if (!(output = command_getoutput(command)))
+		return (ft_strnew(0));
 	len = ft_strlen(output);
 	while (output[--len] == '\n')
 		output[len] = '\0';
@@ -96,7 +99,9 @@ static int					search_bquote(t_bquote *me)
 			me->s1 = ft_strsub(CH(*me->wk)[0], 0, sta - CH(*me->wk)[0]);
 			me->s2 = ft_strdup(me->str + 1);
 			content = get_output(me->mid);
+			DG();
 			init_expand(me, content, is_char_esc(me->esc, CH(*me->wk)[0], sta));
+			DG();
 			ft_strdel(&me->mid);
 			ft_strdel(&me->s1);
 			ft_strdel(&me->s2);

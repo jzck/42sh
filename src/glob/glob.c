@@ -96,9 +96,9 @@ char			**glob(char *pat, unsigned char *esc,
 			gl.cur_dir = 1;
 			gl.pat = CH(gl.m_pat)[0];
 			if ((gl.esc = UCH(gl.m_pat)[1]) && gl.pat[0] != '/')
-				dir_research(&gl, ".", gl.pat, 0);
+				dir_research(&gl, ".", gl.pat, 0, 1);
 			else
-				dir_research(&gl, "/", gl.pat + 1, 0);
+				dir_research(&gl, "/", gl.pat + 1, 0, 1);
 			if (!gl.found)
 				ft_ld_pushfront(&gl.match, ft_strdup(CH(gl.m_pat)[0]));
 			else
