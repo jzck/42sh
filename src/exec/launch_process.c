@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 15:49:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:59:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		launch_process(t_process *p)
 	}
 	p->pid = pid;
 	process_setgroup(p, pid);
-	/* process_resetfds(p); */
+	if (p->fdin != STDIN)
+		close(p->fdin);
 	if (p->fdout != STDOUT)
 		close(p->fdout);
 	return (0);
