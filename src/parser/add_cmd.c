@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 17:55:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:06:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_distrostree	g_distrostree[] =
 {
 	{&superflous_token, &add_null},
+	{&isdir_condition, &add_redir_condition},
 	{&isdir_sep, &add_redir_type},
 	{&isdir_word, &add_redir_word},
 	{&isvar, &add_var},
@@ -72,7 +73,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 18)
+	while (++i < 19)
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
 			DG("add : %d", i);
@@ -84,7 +85,6 @@ int			add_cmd(t_btree **ast, t_list **lst)
 		return (add_cmd(&(*ast)->right, lst));
 	token = (*lst)->content;
 	node = (*ast)->item;
-	DG("add cmd");
 	if (token->type == TK_IF)
 		add_if(ast, lst);
 	else if (token->type != TK_WORD)
