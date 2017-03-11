@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:08:12 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 14:58:36 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/11 13:27:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 t_itof		g_setprocessmap[] =
 {
-	{TK_NEWLINE, NULL},
-	{TK_SEMI, NULL},
-	{TK_AMP, NULL},
-	{TK_AND_IF, NULL},
-	{TK_OR_IF,NULL},
-	{TK_PIPE, NULL},
 	{TK_WHILE, &set_process_while},
 	{TK_IF, &set_process_if},
 	{TK_ELIF, NULL},

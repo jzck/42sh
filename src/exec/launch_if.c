@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:26:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/10 17:08:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 13:48:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,3 @@ int				launch_if(t_process *p)
 		do_if(p);
 	return (0);
 }
-/*
-int			exec_if(t_btree **ast)
-{
-	t_exec	*exec;
-
-	exec = &data_singleton()->exec;
-
-	exec->attrs &= ~EXEC_IF_BRANCH;
-	ft_exec(&(*ast)->left);
-	if (ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0)
-	{
-		exec->attrs |= EXEC_IF_BRANCH;
-		ft_exec(&(*ast)->right);
-	}
-	return (0);
-}*/

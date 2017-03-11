@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/10 16:58:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 16:00:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int				exec_leaf(t_btree **ast)
 	{
 		DG("forked pid=[%i], name=[%s]", p.pid, p.data.cmd.av[0]);
 		job_addprocess(&p);
-		DG("[BG:%i]", JOB_IS_BG(job->attrs));
+		DG("[IS_BG->%i]", JOB_IS_BG(job->attrs));
 		if (IS_PIPEEND(p))
 		{
 			if (JOB_IS_FG(job->attrs))

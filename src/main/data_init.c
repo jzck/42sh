@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 13:48:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:19:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int		data_init(void)
 	data->comp = NULL;
 	data->opts = 0;
 	exec_reset();
-	data->jobc.first_job = NULL;
-	data->jobc.current_id = 1;
 	data->lst_func = NULL;
 	data->heredoc_queue = NULL;
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)

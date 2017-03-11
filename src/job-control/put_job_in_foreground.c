@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:27:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 15:39:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ int		put_job_in_foreground(t_job *j, int cont)
 	t_jobc	*jobc;
 
 	jobc = &data_singleton()->jobc;
-	DG("givving terminal to job [%i]", j->pgid);
+	DG("giving terminal to pgid->[%i]", j->pgid);
 	tcsetpgrp(STDIN, j->pgid);
-	/* tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes); */
 
 	if (cont)
 	{
@@ -30,11 +29,11 @@ int		put_job_in_foreground(t_job *j, int cont)
 	job_wait(j->id);
 	job_remove(j->id);
 
-	tcsetpgrp(STDIN, jobc->shell_pgid);
-	/* if (SH_HAS_JOBC(data_singleton()->opts)) */
-	/* { */
+	if (SH_HAS_JOBC(data_singleton()->opts))
+	{
+		tcsetpgrp(STDIN, jobc->shell_pgid);
 		tcgetattr(STDIN, &j->tmodes);
 		tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
-	/* } */
+	}
 	return (0);
 }
