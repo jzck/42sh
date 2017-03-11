@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 00:11:44 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/11 15:38:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 18:09:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static int		do_subshell(t_process *p)
 {
+	int		ret;
+
 	ft_exec(&p->data.subshell.content);
-	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
+	ret = ft_atoi(ft_getenv(data_singleton()->env, "?"));
+	DG("CHECK, ret=[%i]", ret);
+	return (ret);
 }
 
 int				launch_subshell(t_process *p)

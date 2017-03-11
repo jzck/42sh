@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 17:09:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 18:16:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@ int		mark_process_status(pid_t pid, int status)
 	t_list		*plist;
 	t_process	*p;
 
-	DG("MPS pid=%i,s=%i", pid, status);
+	if (WIFEXITED(status))
+		DG("MPS pid=[%i] s=[%i] ec=[%i] (exited)", pid, status,
+				WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		DG("MPS pid=[%i] s=[%i] sig=[%i] (signaled)", pid, status,
+				WTERMSIG(status));
+	else if (WIFSTOPPED(status))
+		DG("MPS pid=[%i] s=[%i] (stopped)", pid, status);
+	else
+		DG("MPS pid=[%i] s=[%i] (unknown)", pid, status);
+
 	if ((plist = job_getprocess(pid)))
 	{
 		p = plist->content;
