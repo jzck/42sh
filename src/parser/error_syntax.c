@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/09 16:37:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:10:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_errormatch	g_errormatch[] = 
+t_errormatch	g_errormatch[] =
 {
 	{TK_NEWLINE, "newline"},
 	{TK_SEMI, ";"},
@@ -54,7 +54,7 @@ t_errormatch	g_errormatch[] =
 
 int				error_syntax(t_list **lst, t_parser *parser,
 				t_btree **ast)
-{	
+{
 	t_token		*token;
 	int			i;
 
@@ -68,9 +68,9 @@ int				error_syntax(t_list **lst, t_parser *parser,
 		{
 			ft_putstr_fd("syntax error near unexpected token `", 2);
 			ft_putstr_fd(g_errormatch[i].error, 2);
-			ft_putstr_fd("'\n", 2);	
+			ft_putstr_fd("'\n", 2);
 			instruction_free(lst, parser, ast);
-			return (0);	
+			return (0);
 		}
 		i++;
 	}
@@ -81,9 +81,9 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	return (0);
 }
 
-int			error_EOF(t_list **lst, t_parser *parser, t_btree **ast)
+int				error_eof(t_list **lst, t_parser *parser, t_btree **ast)
 {
 	ft_putstr_fd("syntax error near unexpected EOF", 2);
-	instruction_free(lst, parser, ast);	
+	instruction_free(lst, parser, ast);
 	return (0);
 }

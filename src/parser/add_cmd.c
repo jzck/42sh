@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:06:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:34:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_distrostree	g_distrostree[] =
+t_distrostree		g_distrostree[] =
 {
 	{&superflous_token, &add_null},
 	{&isdir_condition, &add_redir_condition},
@@ -66,7 +66,7 @@ static int			no_del_token(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-int			add_cmd(t_btree **ast, t_list **lst)
+int					add_cmd(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
@@ -75,10 +75,7 @@ int			add_cmd(t_btree **ast, t_list **lst)
 	i = -1;
 	while (++i < 19)
 		if (g_distrostree[i].test(ast, lst) == 1)
-		{
-			DG("add : %d", i);
 			return (g_distrostree[i].add(ast, lst));
-		}
 	if (!*ast)
 		gen_node(ast);
 	else if (no_del_token(ast, lst))

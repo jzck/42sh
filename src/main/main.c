@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:29:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:10:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		handle_instruction(int fd)
 		{
 			if (ret == -1)
 				return (-1);
-			return (parser.state == UNDEFINED ? error_EOF(&token,
+			return (parser.state == UNDEFINED ? error_eof(&token,
 			&parser, &ast) : 1);
 		}
 		if (lexer.state == HEREDOC)
@@ -70,10 +70,9 @@ int		handle_instruction(int fd)
 			return (error_syntax(&token, &parser, &ast));
 		}
 	}
-	DG("Before execution:");
 	btree_print(STDBUG, ast, &ft_putast);
-//	if (ft_exec(&ast))
-//		return (1);
+	if (ft_exec(&ast))
+		return (1);
 	instruction_free(&token, &parser, &ast);
 	ft_add_str_in_history(lexer.str);
 	return (0);

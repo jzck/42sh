@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:08:16 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 22:47:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:56:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		isvar(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if (node->type != TK_ASSIGNEMENT_WORD && token->type == TK_ASSIGNEMENT_WORD)
+		if (node->type != TK_ASSIGNEMENT_WORD
+			&& token->type == TK_ASSIGNEMENT_WORD)
 			return (1);
 	}
 	return (0);

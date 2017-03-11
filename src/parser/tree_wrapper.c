@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:57:44 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 17:49:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:23:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			join_ast(t_btree **ast, t_btree **new_node)
 {
-	(*new_node)->left = *ast; 
-	*ast = *new_node;	
+	(*new_node)->left = *ast;
+	*ast = *new_node;
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int			gen_node(t_btree **ast)
 		((t_astnode *)(*ast)->item)->pattern = 0;
 	}
 	return (0);
-}	
+}
 
 int			isnull(t_btree **ast, t_list **lst)
 {

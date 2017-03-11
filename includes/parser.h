@@ -77,7 +77,7 @@ int		pop_stack(t_list **stack, t_sym erase_sym);
 int		pop_heredoc(t_list **lst);
 
 int		error_syntax(t_list **token, t_parser *parser, t_btree **ast);
-int		error_EOF(t_list **token, t_parser *parser, t_btree **ast);
+int		error_eof(t_list **token, t_parser *parser, t_btree **ast);
 
 int		ft_read_stack(t_sym *stack);
 char	*read_state(t_sym current);

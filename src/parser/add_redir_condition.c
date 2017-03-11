@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:54:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:17:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:54:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"minishell.h"
+#include "minishell.h"
 
-static int  	isdir_sep_condition(t_btree **ast, t_list **lst)
+static int		isdir_sep_condition(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
@@ -23,11 +23,11 @@ static int  	isdir_sep_condition(t_btree **ast, t_list **lst)
 		node = (*ast)->item;
 		if (node->type == TK_IF || node->type == TK_CASE)
 			return (1);
-	}	
+	}
 	return (0);
 }
 
-static int  	isdir_word_condition(t_btree **ast, t_list **lst)
+static int		isdir_word_condition(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
@@ -38,7 +38,7 @@ static int  	isdir_word_condition(t_btree **ast, t_list **lst)
 		node = (*ast)->item;
 		if (node->type == REDIR)
 			return (1);
-	}	
+	}
 	return (0);
 }
 
@@ -56,12 +56,12 @@ int				isdir_condition(t_btree **ast, t_list **lst)
 			|| token->type == TK_DLESS || token->type == TK_DGREAT)
 			&& isdir_sep_condition(&(*ast)->left, lst) == 1)
 			return (1);
-		if  (token->type == TK_WORD
+		if (token->type == TK_WORD
 			&& isdir_word_condition(&(*ast)->left, lst) == 1)
 			return (1);
 	}
 	return (0);
-}	
+}
 
 int				add_redir_condition(t_btree **ast, t_list **lst)
 {

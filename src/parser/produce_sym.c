@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 18:46:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:22:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_prodmatch		g_prodmatch[] =
+t_prodmatch			g_prodmatch[] =
 {
 	{TK_WORD, TK_DLESS, HERE_END},
 	{TK_WORD, TK_DLESSDASH, HERE_END},
@@ -52,7 +52,7 @@ t_prodmatch		g_prodmatch[] =
 	{TK_WORD, TK_PAREN_OPEN, CMD_NAME},
 	{TK_WORD, TK_LBRACE, CMD_NAME},
 	{TK_WORD, CASE_LIST, PATTERN},
-	{TK_WORD, PATTERN_CASE, PATTERN},	
+	{TK_WORD, PATTERN_CASE, PATTERN},
 	{TK_WORD, COMPLETE_COMMANDS, CMD_NAME},
 	{TK_ASSIGNEMENT_WORD, TK_BANG, CMD_PREFIX},
 	{TK_ASSIGNEMENT_WORD, LINEBREAK, CMD_PREFIX},
@@ -117,15 +117,14 @@ t_prodmatch		g_prodmatch[] =
 	{TK_AMP, LIST, SEPARATOR_OP},
 	{TK_AMP, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{TK_AMP, PIPE_CLOSE_SEQUENCE, SEPARATOR_OP},
-
 	{0, 0, 0},
 };
 
-int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
+int				produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 {
 	t_token		*token;
 	t_sym		*head;
-	int		i;
+	int			i;
 
 	if (!*stack || !*lst)
 		return (1);

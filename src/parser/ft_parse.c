@@ -5,7 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 17:14:58 by jhalford          #+#    #+#             */
+/*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/11 16:18:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +15,7 @@
 static void		insert_linebreak(t_list **lst)
 {
 	t_token		*token;
-	
+
 	token = (*lst)->content;
 	token->type = LINEBREAK;
 }
@@ -22,7 +23,7 @@ static void		insert_linebreak(t_list **lst)
 static int		end_instruction(t_list **stack)
 {
 	t_sym		*head;
-	
+
 	head = (*stack)->content;
 	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE
 		|| *head == COMPLETE_COMMANDS || *head == END_COMMAND)
@@ -30,7 +31,7 @@ static int		end_instruction(t_list **stack)
 	return (0);
 }
 
-int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
+int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
 	t_sym		*head;
 
@@ -49,7 +50,6 @@ int			ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 			push_stack(&parser->stack, *parser->new_sym);
 		}
 //		ft_read_stack(parser->stack);
-		DG("\n");
 		if (*(head = (parser->stack)->content) == PROGRAM)
 			parser->state = SUCCESS;
 		else

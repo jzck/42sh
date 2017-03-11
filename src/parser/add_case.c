@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 18:10:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:33:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		iscase(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if (node->type == TK_CASE|| node->type == TK_PAREN_OPEN)
+		if (node->type == TK_CASE || node->type == TK_PAREN_OPEN)
 			return (1);
 	}
 	return (0);
@@ -74,21 +74,21 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 	if (token->type == TK_ESAC && (node->type == TK_PAREN_OPEN
 		|| node->type == TK_CASE) && node->nest > 0)
 		return ((node->nest--));
-	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN 
+	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN
 		&& node->nest == 0)
 		return ((node->full = 1));
 	else if ((token->type == TK_ESAC || token->type == TK_PAREN_CLOSE)
 		&& node->nest == 0)
 		return (0);
 	return (add_cmd(&(*ast)->right, lst));
-}	
+}
 
 int		add_pattern(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
 	char		**my_tab;
-	
+
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if ((my_tab = (char **)malloc(sizeof(char *) * 4)))

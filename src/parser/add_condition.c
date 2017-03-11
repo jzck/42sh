@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:06:16 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 18:10:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:36:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		iscondition(t_btree **ast, t_list **lst)
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
 			|| node->type == TK_AMP) && iscondition(&(*ast)->right, lst) == 1)
 			return (1);
-		if ((node->type == TK_IF || node->type == TK_ELIF || node->type == TK_ELSE)
-			&& node->full == 0)
+		if ((node->type == TK_IF || node->type == TK_ELIF
+			|| node->type == TK_ELSE) && node->full == 0)
 			return (1);
 	}
 	return (0);
@@ -63,8 +63,8 @@ int		add_condition_cmd(t_btree **ast, t_list **lst)
 	if (token->type == TK_FI && (node->type == TK_IF || node->type == TK_ELIF
 		|| node->type == TK_ELSE) && node->nest > 0)
 		node->nest--;
-	else if (token->type == TK_FI && (node->type == TK_IF || node->type == TK_ELIF
-		|| node->type == TK_ELSE))
+	else if (token->type == TK_FI && (node->type == TK_IF
+		|| node->type == TK_ELIF || node->type == TK_ELSE))
 		return ((node->full = 1));
 	if (token->type == TK_THEN)
 		return (add_cmd(&(*ast)->right, lst));
@@ -74,7 +74,6 @@ int		add_condition_cmd(t_btree **ast, t_list **lst)
 		return (add_cmd(&(*ast)->right, lst));
 	return (0);
 }
-
 
 int		add_condition_sep(t_btree **ast, t_list **lst)
 {

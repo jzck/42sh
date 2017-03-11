@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 15:34:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:08:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,17 @@ static int	isseparator(t_token *token, int cache)
 		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN
 		|| cache == TK_DSEMI))
 		return (0);
-//check cache == WORD
 	return (1);
 }
 
 int			build_tree(t_btree **ast, t_list **lst)
 {
-	int			i;
-	static int	cache;
-	t_token	*token;
+	int				i;
+	static int		cache;
+	t_token			*token;
 
 	i = 0;
 	token = (*lst)->content;
-//check bug de cache case ?
 	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI
 		&& cache != TK_WORD)
 		token->type = SUBSHELL;
@@ -80,9 +78,6 @@ int			build_tree(t_btree **ast, t_list **lst)
 	{
 		if ((isseparator(token, cache) && g_treematch[i].type == token->type))
 		{
-
-			DG("func TK : '%s' TK : '%s'",
-			read_state(g_treematch[i].type) ,read_state(token->type));
 			cache = token->type;
 			return (g_treematch[i].add(ast, lst));
 		}

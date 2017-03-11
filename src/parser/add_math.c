@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_math.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/11 15:44:53 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/11 15:45:21 by ariard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ismath(t_btree **ast, t_list **lst)
@@ -20,7 +32,6 @@ int	ismath(t_btree **ast, t_list **lst)
 	}
 	return (0);
 }
-
 
 int	ismath_expr(t_btree **ast, t_list **lst)
 {

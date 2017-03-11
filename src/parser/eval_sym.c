@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 16:26:30 by ariard            #+#    #+#             */
+/*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/11 16:17:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-	
+
 t_stackmatch	g_stackmatch[] =
 {
 	{TK_WORD, CMD_SUFFIX},
@@ -70,7 +71,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_DSEMI, PIPE_SEMI_SEQUENCE},
 	{TK_DSEMI, PIPE_CLOSE_SEQUENCE},
 	{TK_DSEMI, SEQUENCE},
-//	watch!
 	{TK_LESS, TK_IO_NUMBER},
 	{TK_LESS, REDIRECT_LIST},
 	{TK_LESS, CMD_SUFFIX},
@@ -99,7 +99,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_LESS, COMPLETE_CONDITION},
 	{TK_LESS, CONDITION},
 	{TK_LESS, COMPOUND_LIST},
-//	watch !
 	{TK_LESS, CMD_SUPERIOR},
 	{TK_LESS, AND_OR_MAJOR},
 	{TK_GREAT, TK_IO_NUMBER},
@@ -130,11 +129,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_GREAT, COMPLETE_CONDITION},
 	{TK_GREAT, CONDITION},
 	{TK_GREAT, COMPOUND_LIST},
-//	watch !
-//duplicate and extend
 	{TK_GREAT, CMD_SUPERIOR},
 	{TK_GREAT, AND_OR_MAJOR},
-
 	{TK_DLESS, TK_IO_NUMBER},
 	{TK_DLESS, REDIRECT_LIST},
 	{TK_DLESS, CMD_SUFFIX},
@@ -163,10 +159,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_DLESS, COMPLETE_CONDITION},
 	{TK_DLESS, CONDITION},
 	{TK_DLESS, COMPOUND_LIST},
-//	watch !
 	{TK_DLESS, CMD_SUPERIOR},
 	{TK_DLESS, AND_OR_MAJOR},
-
 	{TK_DGREAT, TK_IO_NUMBER},
 	{TK_DGREAT, REDIRECT_LIST},
 	{TK_DGREAT, CMD_SUFFIX},
@@ -195,10 +189,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_DGREAT, COMPLETE_CONDITION},
 	{TK_DGREAT, CONDITION},
 	{TK_DGREAT, COMPOUND_LIST},
-//	watch !
 	{TK_DGREAT, CMD_SUPERIOR},
 	{TK_DGREAT, AND_OR_MAJOR},
-
 	{TK_LESSAND, TK_IO_NUMBER},
 	{TK_LESSAND, REDIRECT_LIST},
 	{TK_LESSAND, CMD_SUFFIX},
@@ -227,10 +219,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_LESSAND, COMPLETE_CONDITION},
 	{TK_LESSAND, CONDITION},
 	{TK_LESSAND, COMPOUND_LIST},
-//	watch !
 	{TK_LESSAND, CMD_SUPERIOR},
 	{TK_LESSAND, AND_OR_MAJOR},
-
 	{TK_GREATAND, TK_IO_NUMBER},
 	{TK_GREATAND, REDIRECT_LIST},
 	{TK_GREATAND, CMD_SUFFIX},
@@ -259,11 +249,8 @@ t_stackmatch	g_stackmatch[] =
 	{TK_GREATAND, COMPLETE_CONDITION},
 	{TK_GREATAND, CONDITION},
 	{TK_GREATAND, COMPOUND_LIST},
-//	watch ! 
 	{TK_GREATAND, CMD_SUPERIOR},
 	{TK_GREATAND, AND_OR_MAJOR},
-
-
 	{TK_IF, LINEBREAK},
 	{TK_IF, TK_BANG},
 	{TK_IF, TK_PAREN_OPEN},
@@ -272,7 +259,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_IF, SEPARATOR_OP},
 	{TK_IF, NEWLINE_LIST},
 	{TK_IF, SEQUENCE},
-//	watch !
 	{TK_IF, TK_WHILE},
 	{TK_IF, FUNC_NAME},
 	{TK_IF, TK_UNTIL},
@@ -328,7 +314,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_CASE, NEWLINE_LIST},
 	{TK_CASE, SEPARATOR_OP},
 	{TK_CASE, SEQUENCE},
-//	watch !
 	{TK_IN, TK_WORD},
 	{TK_IN, NAME},
 	{TK_ESAC, CASE_LIST_NS},
@@ -342,7 +327,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_WHILE, SEPARATOR_OP},
 	{TK_WHILE, NEWLINE_LIST},
 	{TK_WHILE, SEQUENCE},
-//	watch !
 	{TK_WHILE, TK_DO},
 	{TK_WHILE, TK_PAREN_CLOSE},
 	{TK_WHILE, TK_WHILE},
@@ -364,7 +348,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_UNTIL, SEPARATOR_OP},
 	{TK_UNTIL, NEWLINE_LIST},
 	{TK_UNTIL, SEQUENCE},
-//	watch !
 	{TK_UNTIL, TK_DO},
 	{TK_UNTIL, TK_PAREN_CLOSE},
 	{TK_UNTIL, TK_WHILE},
@@ -386,7 +369,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_FOR, SEPARATOR_OP},
 	{TK_FOR, NEWLINE_LIST},
 	{TK_FOR, SEQUENCE},
-//	watch !
 	{TK_FOR, TK_DO},
 	{TK_FOR, TK_PAREN_CLOSE},
 	{TK_FOR, TK_WHILE},
@@ -407,7 +389,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_LBRACE, SEPARATOR_OP},
 	{TK_LBRACE, NEWLINE_LIST},
 	{TK_LBRACE, SEQUENCE},
-//	watch !
 	{TK_LBRACE, AND_OR_MAJOR},
 	{TK_LBRACE, TK_WHILE},
 	{TK_LBRACE, FUNC_NAME},
@@ -476,7 +457,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_PAREN_OPEN, NEWLINE_LIST},
 	{TK_PAREN_OPEN, SEQUENCE},
 	{TK_PAREN_OPEN, FUNC_NAME},
-//	watch !
 	{TK_PAREN_OPEN, AND_OR_MAJOR},
 	{TK_PAREN_OPEN, TK_WHILE},
 	{TK_PAREN_OPEN, TK_LBRACE},
@@ -663,7 +643,6 @@ t_stackmatch	g_stackmatch[] =
 	{IO_HERE, COMPLETE_CONDITION},
 	{IO_HERE, CONDITION},
 	{IO_HERE, COMPOUND_LIST},
-//	watch !
 	{FILENAME, TK_LESS},
 	{FILENAME, TK_LESSAND},
 	{FILENAME, TK_GREAT},
@@ -698,7 +677,6 @@ t_stackmatch	g_stackmatch[] =
 	{IO_FILE, COMPLETE_CONDITION},
 	{IO_FILE, CONDITION},
 	{IO_FILE, COMPOUND_LIST},
-//	watch !
 	{IO_REDIRECT, REDIRECT_LIST},
 	{IO_REDIRECT, CMD_SUPERIOR},
 	{IO_REDIRECT, CMD_SUFFIX},
@@ -727,7 +705,6 @@ t_stackmatch	g_stackmatch[] =
 	{IO_REDIRECT, COMPLETE_CONDITION},
 	{IO_REDIRECT, CONDITION},
 	{IO_REDIRECT, COMPOUND_LIST},
-//	watch !/
 	{REDIRECT_LIST, COMPOUND_COMMAND},
 	{CMD_SUFFIX, CMD_WORD},
 	{CMD_SUFFIX, CMD_NAME},
@@ -754,7 +731,6 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_PREFIX, COMPLETE_CONDITION},
 	{CMD_PREFIX, CONDITION},
 	{CMD_PREFIX, COMPOUND_LIST},
-//	watch !
 	{CMD_WORD, CMD_PREFIX},
 	{CMD_NAME, COMPLETE_COMMANDS},
 	{CMD_NAME, LINEBREAK},
@@ -768,7 +744,6 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_NAME, AND_OR_MAJOR},
 	{CMD_NAME, CONDITION},
 	{CMD_NAME, COMPOUND_LIST},
-//	watch !
 	{CMD_NAME, AND_OR_MAJOR},
 	{CMD_NAME, TK_WHILE},
 	{CMD_NAME, FUNC_NAME},
@@ -783,7 +758,6 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_NAME, CASE_LIST_NS},
 	{CMD_NAME, COMPLETE_CONDITION},
 	{CMD_NAME, CONDITION},
-
 	{CMD_SUPERIOR, TK_WHILE},
 	{CMD_SUPERIOR, FUNC_NAME},
 	{CMD_SUPERIOR, TK_UNTIL},
@@ -806,9 +780,7 @@ t_stackmatch	g_stackmatch[] =
 	{CMD_SUPERIOR, NEWLINE_LIST},
 	{CMD_SUPERIOR, TK_PIPE},
 	{CMD_SUPERIOR, SEQUENCE},
-//	watch !
 	{CMD_SUPERIOR, AND_OR_MAJOR},
-
 	{CLOSE_FUNC, CMD_SUPERIOR},
 	{CLOSE_FUNC, OPEN_FUNC},
 	{MATH, LINEBREAK},
@@ -823,7 +795,6 @@ t_stackmatch	g_stackmatch[] =
 	{MATH_SUP, NEWLINE_LIST},
 	{MATH_SUP, SEPARATOR},
 	{MATH_SUP, SEPARATOR_OP},
-
 	{SIMPLE_COMMAND, TK_WHILE},
 	{SIMPLE_COMMAND, TK_UNTIL},
 	{SIMPLE_COMMAND, TK_DO},
@@ -844,7 +815,6 @@ t_stackmatch	g_stackmatch[] =
 	{SIMPLE_COMMAND, SEPARATOR_OP},
 	{SIMPLE_COMMAND, NEWLINE_LIST},
 	{SIMPLE_COMMAND, SEQUENCE},
-//	watch !
 	{SIMPLE_COMMAND, AND_OR_MAJOR},
 	{DO_GROUP, CMD_SUPERIOR},
 	{DO_GROUP, COMPOUND_LIST},
@@ -874,7 +844,6 @@ t_stackmatch	g_stackmatch[] =
 	{BRACE_GROUP, SEPARATOR_OP},
 	{BRACE_GROUP, NEWLINE_LIST},
 	{BRACE_GROUP, SEQUENCE},
-//	watch !
 	{FNAME, LINEBREAK},
 	{FNAME, TK_PAREN_OPEN},
 	{FNAME, TK_LBRACE},
@@ -883,7 +852,6 @@ t_stackmatch	g_stackmatch[] =
 	{FNAME, SEPARATOR_OP},
 	{FNAME, NEWLINE_LIST},
 	{FNAME, SEQUENCE},
-//	watch !
 	{FUNCTION_BODY, FUNC},
 	{FUNCTION_DEFINITION, LINEBREAK},
 	{FUNCTION_DEFINITION, TK_PAREN_OPEN},
@@ -893,7 +861,6 @@ t_stackmatch	g_stackmatch[] =
 	{FUNCTION_DEFINITION, SEPARATOR_OP},
 	{FUNCTION_DEFINITION, NEWLINE_LIST},
 	{FUNCTION_DEFINITION, SEQUENCE},
-//	watch !
 	{UNTIL_CLAUSE, LINEBREAK},
 	{UNTIL_CLAUSE, TK_PAREN_OPEN},
 	{UNTIL_CLAUSE, TK_LBRACE},
@@ -901,7 +868,7 @@ t_stackmatch	g_stackmatch[] =
 	{UNTIL_CLAUSE, TK_BANG},
 	{UNTIL_CLAUSE, SEPARATOR_OP},
 	{UNTIL_CLAUSE, NEWLINE_LIST},
-	{UNTIL_CLAUSE,	SEQUENCE},
+	{UNTIL_CLAUSE, SEQUENCE},
 	{UNTIL_CLAUSE, TK_DO},
 	{UNTIL_CLAUSE, TK_PAREN_CLOSE},
 	{UNTIL_CLAUSE, TK_WHILE},
@@ -922,7 +889,6 @@ t_stackmatch	g_stackmatch[] =
 	{WHILE_CLAUSE, SEPARATOR_OP},
 	{WHILE_CLAUSE, NEWLINE_LIST},
 	{WHILE_CLAUSE, SEQUENCE},
-//	watch !
 	{WHILE_CLAUSE, TK_DO},
 	{WHILE_CLAUSE, TK_PAREN_CLOSE},
 	{WHILE_CLAUSE, TK_WHILE},
@@ -946,7 +912,6 @@ t_stackmatch	g_stackmatch[] =
 	{IF_CLAUSE, SEPARATOR_OP},
 	{IF_CLAUSE, NEWLINE_LIST},
 	{IF_CLAUSE, SEQUENCE},
-//	watch !
 	{IF_CLAUSE, TK_DO},
 	{IF_CLAUSE, TK_PAREN_CLOSE},
 	{IF_CLAUSE, TK_WHILE},
@@ -970,7 +935,6 @@ t_stackmatch	g_stackmatch[] =
 	{BRACE_CLAUSE, SEPARATOR_OP},
 	{BRACE_CLAUSE, NEWLINE_LIST},
 	{BRACE_CLAUSE, SEQUENCE},
-//	watch !
 	{BRACE_CLAUSE, TK_DO},
 	{BRACE_CLAUSE, TK_PAREN_CLOSE},
 	{BRACE_CLAUSE, TK_WHILE},
@@ -999,7 +963,6 @@ t_stackmatch	g_stackmatch[] =
 	{CASE_CLAUSE, SEPARATOR_OP},
 	{CASE_CLAUSE, NEWLINE_LIST},
 	{CASE_CLAUSE, SEQUENCE},
-//	watch !
 	{CASE_CLAUSE, TK_PAREN_CLOSE},
 	{CASE_CLAUSE, CASE_LIST_NS},
 	{CASE_CLAUSE, TK_DO},
@@ -1015,7 +978,6 @@ t_stackmatch	g_stackmatch[] =
 	{CASE_CLAUSE, COMPLETE_CONDITION},
 	{CASE_CLAUSE, CONDITION},
 	{CASE_CLAUSE, AND_OR_MAJOR},
-	
 	{WORDLIST, IN},
 	{IN, LINEBREAK},
 	{NAME, TK_FOR},
@@ -1028,7 +990,6 @@ t_stackmatch	g_stackmatch[] =
 	{FOR_CLAUSE, SEPARATOR_OP},
 	{FOR_CLAUSE, NEWLINE_LIST},
 	{FOR_CLAUSE, SEQUENCE},
-//	watch !
 	{FOR_CLAUSE, TK_DO},
 	{FOR_CLAUSE, TK_PAREN_CLOSE},
 	{FOR_CLAUSE, TK_WHILE},
@@ -1066,7 +1027,6 @@ t_stackmatch	g_stackmatch[] =
 	{SUBSHELL, NEWLINE_LIST},
 	{SUBSHELL, SEQUENCE},
 	{SUBSHELL, TK_LBRACE},
-//	watch !
 	{SUBSHELL, SEPARATOR_OP},
 	{SUBSHELL, NEWLINE_LIST},
 	{SUBSHELL, TK_DO},
@@ -1091,7 +1051,6 @@ t_stackmatch	g_stackmatch[] =
 	{COMPOUND_COMMAND, SEPARATOR_OP},
 	{COMPOUND_COMMAND, NEWLINE_LIST},
 	{COMPOUND_COMMAND, SEQUENCE},
-//	watch !
 	{COMPOUND_COMMAND, FUNC},
 	{COMPOUND_COMMAND, TK_DO},
 	{COMPOUND_COMMAND, TK_PAREN_CLOSE},
@@ -1129,7 +1088,6 @@ t_stackmatch	g_stackmatch[] =
 	{COMMAND, SEQUENCE},
 	{COMMAND, AND_OR_MAJOR},
 	{AND_OR_MINOR, SEQUENCE},
-//	watch !
 	{AND_OR_MINOR, LINEBREAK},
 	{AND_OR_MINOR, TK_BANG},
 	{AND_OR_MINOR, TK_PAREN_OPEN},
@@ -1302,8 +1260,8 @@ t_stackmatch	g_stackmatch[] =
 
 int			eval_sym(t_list **stack, t_sym new_sym)
 {
-	t_sym		*head;	
-	int		i;
+	t_sym		*head;
+	int			i;
 
 	if (!*stack)
 		return (1);

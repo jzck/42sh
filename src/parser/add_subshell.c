@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/09 19:46:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 15:56:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int			add_subshell_cmd(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_astnode	*node;
 
-	DG("add subshell");
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if (token->type == TK_PAREN_CLOSE && node->type == SUBSHELL)
