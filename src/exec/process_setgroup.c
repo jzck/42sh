@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:51:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 16:05:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@ int		process_setgroup(t_process *p, pid_t pid)
 
 	(void)p;
 	data = data_singleton();
-	if (!SH_HAS_JOBC(data->opts))
-		return (0);
+	/* if (!SH_HAS_JOBC(data->opts)) */
+	/* 	return (0); */
 	j = &data->exec.job;
-	/* DG("setpgid(%i, %i)", pid, j->pgid); */
-	setpgid(pid, j->pgid);
+	/* if (!j->pgid) */
+	/* 	j->pgid = getpid(); */
+	DG("setpgid(%i, %i)", pid, j->pgid);
+	if (setpgid(pid, j->pgid) == -1)
+		ft_dprintf(2, "{red}%s: internal setpgid() error{eoc}\n", SHELL_NAME);
 	if (pid == 0 && JOB_IS_FG(j->attrs))
+	{
+		DG("I'm taking the terminal !");
 		tcsetpgrp(STDIN, j->pgid);
+	}
 	return (0);
 }

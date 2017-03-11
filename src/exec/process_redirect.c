@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 15:31:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 15:42:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ int		process_redirect(t_process *p)
 	while (redirs)
 	{
 		redir = redirs->content;
-		DG("redir type :%s", read_state(redir->type));
-		DG("redir word : %s", redir->word);
+		/* DG("redir type :%s", read_state(redir->type)); */
+		/* DG("redir word : %s", redir->word); */
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
 		i = 0;
 		while (g_redirmap[i].id)
 		{
-			DG("process redirect");
 			if (g_redirmap[i].id == redir->type)
 			{
 				if ((g_redirmap[i].f)(redir))
@@ -51,7 +50,7 @@ int		process_redirect(t_process *p)
 		}
 		redirs = redirs->next;
 	}
-	DG("redirecting [%i:%i] [%i]", p->fdin, p->fdout, p->to_close);
+	/* DG("redirecting [%i:%i] [%i]", p->fdin, p->fdout, p->to_close); */
 	if (p->to_close != STDIN)
 		close(p->to_close);
 	if (p->fdin != STDIN)

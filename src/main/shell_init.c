@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 12:12:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:08:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	shell_init(int ac, char **av)
 		signal(SIGTSTP, sigtstp_handler);
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
-		signal(SIGCHLD, sigchld_handler);
+		signal(SIGCHLD, SIG_DFL);
 		*shell_pgid = getpid();
 		if (setpgid(*shell_pgid, *shell_pgid))
 		{

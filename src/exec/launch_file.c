@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 12:12:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 16:00:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int		launch_file(t_process *p)
 {
 	int		pid;
 
-	/* DG("in file"); */
 	pid = fork();
 	if (pid == 0)
 	{
+		/* data_singleton()->opts &= ~SH_INTERACTIVE; */
+		/* data_singleton()->opts &= ~SH_OPTS_JOBC; */
+		DG("fork! [%s]", p->data.cmd.av[0]);
 		if (!p->data.cmd.path)
 		{
 			ft_dprintf(2, "{red}%s: command not found: %s{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
