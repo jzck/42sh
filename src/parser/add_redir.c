@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 18:41:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 19:57:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		redir;
+	t_list		*temp;
 
 	if (!*ast)
 		gen_node(ast);
@@ -118,10 +119,13 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		redir.type = token->type;
 		redir.heredoc_data = NULL;
 		redir.word = NULL;
-		ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
+		temp = ft_lstnew(&redir, sizeof(redir));
+		DG("adr is %p", temp);
+		ft_lsteadd(&node->data.cmd.redir, temp);
+		DG("adr is %p", node->data.cmd.redir);
 		if (token->type == TK_DLESS)
-			ft_lsteadd(&data_singleton()->heredoc_queue,
-				ft_lstnew(&redir, sizeof(redir)));
+			ft_lsteadd(&data_singleton()->heredoc_queue, temp);
+		DG("adr is %p", data_singleton()->heredoc_queue);
 	}
 	else
 		add_redir_type_number(ast, lst);

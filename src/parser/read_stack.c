@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/10 14:44:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 19:55:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,22 @@ int			ft_read_stack(t_sym *stack)
 	DG("read stack :");
 	while (*stack)
 		DG("%s", read_state(*stack--));
+	return (0);
+}
+
+
+int			ft_show_heredoc_data(t_btree **ast)
+{
+	t_astnode	*node;
+	t_redir		*redir;
+
+	if (*ast)
+		if ((*ast)->left)
+		{
+			node = ((*ast)->left)->item;
+			redir = (node->data.cmd.redir)->content;
+			if (redir->type == TK_DLESS)
+				DG("Show me heredoc data from node :%s", redir->heredoc_data);
+		}
 	return (0);
 }
