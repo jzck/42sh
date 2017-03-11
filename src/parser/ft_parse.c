@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 16:18:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:32:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
-	if (parser->state == SUCCESS)
-		DG("sucessful parsing");
+//	if (parser->state == SUCCESS)
+//		DG("sucessful parsing");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:52:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 16:45:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	}
 	else
 		add_redir_type_number(ast, lst);
-	node->cache = node->type;
+	if (!node->cache)
+		node->cache = node->type;
 	node->type = REDIR;
 	return (0);
 }
