@@ -19,7 +19,8 @@ int			lexer_curly_braces(t_list **alst, t_lexer *lexer)
 	token = (*alst)->content;
 	if (token->type)
 		lexer_lex(&(*alst)->next, lexer);
-	if (lexer->str[lexer->pos] == '{')
+	if (lexer->str[lexer->pos] == '{'
+			&& lexer->str[lexer->pos + 1] == ' ')
 	{
 		token->type = TK_LBRACE;
 		push(&lexer->stack, PAREN);
