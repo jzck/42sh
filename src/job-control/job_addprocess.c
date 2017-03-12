@@ -23,8 +23,8 @@ int		job_addprocess(t_process *p)
 	{
 		job_update_id();
 		job->id = jobc->current_id;
-		/* job->pgid = SH_HAS_JOBC(data_singleton()->opts) ? p->pid : getpid(); */
-		job->pgid = p->pid;
+		job->pgid = SH_IS_INTERACTIVE(data_singleton()->opts) ? p->pid : getpgid(0);
+		/* job->pgid = p->pid; */
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
 	}
 	DG("adding pid=[%i] to pgid=[%i]", p->pid, job->pgid);

@@ -29,7 +29,6 @@ int		launch_process(t_process *p)
 {
 	int			pid;
 
-	DG("launchprocess");
 	if (p->type >= PROCESS_MAX)
 		return (-1);
 	if (!g_launchmap[p->type].f)
@@ -38,7 +37,6 @@ int		launch_process(t_process *p)
 	p->attrs |= PROCESS_RUNNING;
 	if (!(pid = (*g_launchmap[p->type].f)(p)))
 	{
-		DG("gonna reset fds");
 		process_resetfds(p);
 		return (1);
 	}

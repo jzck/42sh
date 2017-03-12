@@ -23,7 +23,7 @@
 							| TK_DO | TK_IF | TK_FI | TK_THEN | TK_ELIF | TK_ELSE)
 enum	e_lexstate
 {
-	DEFAULT,
+	DEFAULT, //#define DEFAULT 0
 	PAREN,
 	HEREDOC,
 	NEWLINE,

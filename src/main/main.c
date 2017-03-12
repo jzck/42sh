@@ -124,7 +124,6 @@ int		main(int ac, char **av)
 	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
-		DG();
 //		lexer_clean;
 //		parser_clean;
 		;

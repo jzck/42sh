@@ -17,9 +17,9 @@ int		put_job_in_foreground(t_job *j, int cont)
 	t_jobc	*jobc;
 
 	jobc = &data_singleton()->jobc;
-	DG("giving terminal to pgid->[%i]", j->pgid);
-	tcsetpgrp(STDIN, j->pgid);
-
+	DG("tcsetpgrp[%i]", j->pgid);
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
+		tcsetpgrp(STDIN, j->pgid);
 	if (cont)
 	{
 		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
@@ -28,8 +28,7 @@ int		put_job_in_foreground(t_job *j, int cont)
 	}
 	job_wait(j->id);
 	job_remove(j->id);
-
-	if (SH_HAS_JOBC(data_singleton()->opts))
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 	{
 		tcsetpgrp(STDIN, jobc->shell_pgid);
 		tcgetattr(STDIN, &j->tmodes);

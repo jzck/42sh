@@ -32,7 +32,7 @@ int		mark_process_status(pid_t pid, int status)
 	{
 		p = plist->content;
 		p->status = status;
-		DG("marking pid=[%i], name=[%s]", p->pid, p->data.cmd.av[0]);
+		/* DG("found pid=[%i], name=[%s]", p->pid, p->data.cmd.av[0]); */
 		if (WIFSTOPPED(status))
 		{
 			p->attrs &= ~PROCESS_STATE_MASK;

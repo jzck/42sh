@@ -23,6 +23,7 @@ void	job_remove(int id)
 	if (job_is_completed(id))
 	{
 		p = ft_lstlast(j->first_process)->content;
+		/* DG("remove, status=%i", p->status); */
 		set_exitstatus(p->status, 0);
 		if (id < data_singleton()->jobc.current_id)
 			data_singleton()->jobc.current_id = id;
