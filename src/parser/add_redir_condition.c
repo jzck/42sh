@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-static int		isdir_sep_condition(t_btree **ast, t_list **lst)
+static int		isdir_sep_condition(t_btree **ast)//, t_list **lst)
 {
-	t_token		*token;
+//	t_token		*token;
 	t_astnode	*node;
 
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
@@ -27,12 +27,12 @@ static int		isdir_sep_condition(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-static int		isdir_word_condition(t_btree **ast, t_list **lst)
+static int		isdir_word_condition(t_btree **ast)//, t_list **lst)
 {
-	t_token		*token;
+//	t_token		*token;
 	t_astnode	*node;
 
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
@@ -45,19 +45,19 @@ static int		isdir_word_condition(t_btree **ast, t_list **lst)
 int				isdir_condition(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
-	t_astnode	*node;
+//	t_astnode	*node;
 
 	token = (*lst)->content;
 	if (*ast)
 	{
-		node = (*ast)->item;
+//		node = (*ast)->item;
 		if ((token->type == TK_LESS || token->type == TK_GREAT
 			|| token->type == TK_GREATAND || token->type == TK_LESSAND
 			|| token->type == TK_DLESS || token->type == TK_DGREAT)
-			&& isdir_sep_condition(&(*ast)->left, lst) == 1)
+			&& isdir_sep_condition(&(*ast)->left) == 1)
 			return (1);
 		if (token->type == TK_WORD
-			&& isdir_word_condition(&(*ast)->left, lst) == 1)
+			&& isdir_word_condition(&(*ast)->left) == 1)
 			return (1);
 	}
 	return (0);

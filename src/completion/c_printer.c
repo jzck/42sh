@@ -123,7 +123,7 @@ void		c_printer(t_comp *c)
 	t_clst	*ptr;
 	int		loop;
 	int		max_line;
-	int		offset;
+	//int		offset;
 
 	loop = c->c_line;
 
@@ -133,7 +133,7 @@ void		c_printer(t_comp *c)
 		max_line = (c->c_line % (c->m_size - 1));
 	else
 		max_line = c->m_size - 1;
-	offset = (c->m_size - 1) - max_line;
+//	offset = (c->m_size - 1) - max_line;
 	while (loop && max_line)
 	{
 		c_printer_line(c, ptr, c->c_pline, 1);

@@ -34,7 +34,7 @@ int		process_redirect(t_process *p)
 	{
 		redir = redirs->content;
 		DG("redirs content : %p", redirs->content);
-		DG("redir.type [%i]", redir->type);
+//		DG("redir.type [%li]", redir->type);
 		DG("redir.word [%s]", redir->word);
 		DG("redir.n    [%i]", redir->n);
 		if (redir->n > 9)

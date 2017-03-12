@@ -15,10 +15,10 @@
 int		iscondition(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
-	t_token		*token;
+//	t_token		*token;
 
 	node = NULL;
-	token = (*lst)->content;
+//	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
