@@ -70,7 +70,7 @@ int		handle_instruction(int fd)
 			return (error_syntax(&token, &parser, &ast));
 		}
 	}
-	ft_show_heredoc_data(&ast);
+	/* ft_show_heredoc_data(&ast); */
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
 		return (1);
