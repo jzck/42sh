@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 18:09:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 17:40:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ enum	e_process_type
 	PROCESS_IF,
 	PROCESS_FOR,
 	PROCESS_CASE,
+	PROCESS_EMPTY,
 	PROCESS_MAX
 };
 
@@ -187,6 +188,7 @@ int		launch_file(t_process *p);
 int		launch_builtin(t_process *p);
 int		launch_subshell(t_process *p);
 int		launch_function(t_process *p);
+int		launch_empty(t_process *p);
 
 /*
 ** Mapping pour set les process

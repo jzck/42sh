@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_great.c                                   :+:      :+:    :+:   */
+/*   process_empty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:40:54 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/13 17:26:01 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/13 17:31:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		redirect_great(t_redir* redir)
+int		launch_empty(t_process *p)
 {
-	int		fdold;
-	int		fdnew;
+	int		pid;
 
-	fdnew = redir->n;
-	if ((fdold = open(redir->word,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+	pid = fork();
+	if (pid == 0)
 	{
-		DG("open errno=%i", errno);
-		exit(1);
+		if (process_redirect(p))
+			exit (1);
+		process_setgroup(p, 0);
+		process_setsig();
+		exec_reset();
+		DG("empty exit");
+		exit(0);
 	}
-	dup2(fdold, fdnew);
+	else if (pid > 0)
+		return (pid);
+	else if (pid == -1)
+		ft_dprintf(2, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
 	return (0);
 }
+

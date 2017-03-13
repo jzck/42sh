@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 20:13:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 17:33:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_itof	g_freemap[] =
 	{PROCESS_IF, process_free_cond},
 	{PROCESS_FOR, process_free_list},
 	{PROCESS_CASE, process_free_list},
+	{PROCESS_EMPTY, NULL},
 };
 
 void	process_free(void *content, size_t content_size)
@@ -31,10 +32,13 @@ void	process_free(void *content, size_t content_size)
 
 	p = content;
 	(void)content_size;
+	DG("gonna free");
 	if (p->type >= PROCESS_MAX)
 		return ;
+	DG("gonna free");
 	if (g_freemap[p->type].f)
 		(g_freemap[p->type].f)(p);
+	DG("gonna free");
 	ft_lstdel(&p->redirs, redir_free);
 	free(p);
 }

@@ -94,6 +94,7 @@ exec/launch_until.c\
 exec/launch_while.c\
 exec/mark_process_status.c\
 exec/node_copy.c\
+exec/process_empty.c\
 exec/process_redirect.c\
 exec/process_reset.c\
 exec/process_resetfds.c\
