@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:09:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 00:03:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 00:04:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int				plaunch_brace(t_process *p)
 		return (0);
 	}
 	else
-		return (plaunch_subshell(p))
+		return (plaunch_subshell(p));
 }
