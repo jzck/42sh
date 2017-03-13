@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 16:59:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 19:22:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			isdir_sep(t_btree **ast, t_list **list)
 		if ((node->type == CMD || node->type == TK_IO_NUMBER
 			|| node->type == TK_WHILE || node->type == TK_IF
 			|| node->type == TK_FOR || node->type == SUBSHELL
-			|| node->type == TK_CASE || node->type == TK_RBRACE
+			|| node->type == TK_CASE || node->type == TK_LBRACE
 			|| node->type == TK_UNTIL)
 			&& (token->type == TK_LESS || token->type == TK_GREAT
 			|| token->type == TK_GREATAND || token->type == TK_LESSAND

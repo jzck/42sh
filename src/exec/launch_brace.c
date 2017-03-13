@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_less.c                                    :+:      :+:    :+:   */
+/*   launch_brace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 19:22:09 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/13 19:09:30 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/13 19:21:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		redirect_less(t_redir *redir)
+int				launch_brace(t_process *p)
 {
-	int		fdold;
-	int		fdnew;
-
-	fdnew = redir->n;
-	if ((fdold = open(redir->word, O_RDONLY)) < 0)
+	if (process_redirect(p))
 	{
-		ft_dprintf(2, "{red}%s: %s: no such file or directory\n",
-				SHELL_NAME, redir->word);
-		exit (1);
+		set_exitstatus(1, 1);
+		return (0);
 	}
-	dup2(fdold, fdnew);
+	ft_exec(&p->data.subshell.content);
 	return (0);
 }

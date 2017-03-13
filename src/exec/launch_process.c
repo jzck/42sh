@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:20:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:38:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:21:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_itof	g_launchmap[] =
 	{PROCESS_BUILTIN, launch_builtin},
 	{PROCESS_FILE, launch_file},
 	{PROCESS_SUBSHELL, launch_subshell},
+	{PROCESS_BRACE, launch_brace},
 	{PROCESS_WHILE, launch_while},
 	{PROCESS_UNTIL, launch_until},
 	{PROCESS_IF, launch_if},

@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_less.c                                    :+:      :+:    :+:   */
+/*   set_process_brace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 19:22:09 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/13 19:07:34 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/13 19:08:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-int		redirect_less(t_redir *redir)
+int		set_process_brace(t_process *p, t_btree *ast)
 {
-	int		fdold;
-	int		fdnew;
-
-	fdnew = redir->n;
-	if ((fdold = open(redir->word, O_RDONLY)) < 0)
-	{
-		ft_dprintf(2, "{red}%s: %s: no such file or directory\n",
-				SHELL_NAME, redir->word);
-		exit (1);
-	}
-	dup2(fdold, fdnew);
+	p->data.subshell.content = btree_map(ast->right, &node_copy);
+	p->type = PROCESS_BRACE;
 	return (0);
 }
