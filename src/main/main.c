@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:12:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:23:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int		handle_instruction(int fd)
 	if (ft_exec(&ast))
 		return (1);
 	instruction_free(&token, &parser, &ast);
-	ft_add_str_in_history(lexer.str);
+	if (SH_IS_INTERACTIVE(data_singleton()->opts))
+		ft_add_str_in_history(lexer.str);
 	return (0);
 }
 
