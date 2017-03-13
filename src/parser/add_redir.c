@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 20:36:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:58:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,39 +68,41 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	t_redir		*temp;
+	t_redir		*other;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
+	other = NULL;
 	if (node->data.cmd.redir)
 	{
 		redir = (ft_lstlast(node->data.cmd.redir))->content;
 		redir->word = ft_strdup(token->data);
-		if (redir->type == TK_DLESS)
+		if (TK_DLESS)
 		{
-			temp = ft_lstlast((data_singleton()->heredoc_queue))->content;
-			temp->word = redir->word;
+			DG();
+			other = ft_lstlast(data_singleton()->heredoc_queue)->content;
+			DG();
+			DG("type is %s", read_state(other->type));
+			DG("word is %s", other->word);
 		}
-	}
+	}	
 	return (0);
 }
 
 static int	add_redir_type_number(t_btree **ast, t_list **lst)
 {
 	t_redir		*temp;
-	t_redir		*temp_heredoc;
+//	t_redir		*temp_heredoc;
 	t_astnode	*node;
 	t_token		*token;
 
+	DG();
 	token = (*lst)->content;
 	node = (*ast)->item;
 	temp = (ft_lstlast(node->data.cmd.redir))->content;
 	temp->type = token->type;
 	if (token->type == TK_DLESS)
-	{
-		temp_heredoc = data_singleton()->heredoc_queue->content;
-		temp_heredoc->n = temp->n;
-	}
+		ft_lsteadd(&data_singleton()->heredoc_queue, ft_lstlast(node->data.cmd.redir));
 	return (0);
 }
 
@@ -123,12 +125,9 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		redir.heredoc_data = NULL;
 		redir.word = NULL;
 		temp = ft_lstnew(&redir, sizeof(redir));
-		DG("adr is %p", temp);
 		ft_lsteadd(&node->data.cmd.redir, temp);
-		DG("adr is %p", node->data.cmd.redir);
 		if (token->type == TK_DLESS)
 			ft_lsteadd(&data_singleton()->heredoc_queue, temp);
-		DG("adr is %p", data_singleton()->heredoc_queue);
 	}
 	else
 		add_redir_type_number(ast, lst);

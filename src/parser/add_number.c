@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 17:28:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 16:45:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 15:01:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		add_ionumber(t_btree **ast, t_list **lst)
 	t_token		*token;
 	t_redir		redir;
 
-	DG("add io_number");
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
@@ -46,6 +45,8 @@ int		add_ionumber(t_btree **ast, t_list **lst)
 	node->cache = node->type;
 	node->type = token->type;
 	redir.n = ft_atoi(token->data);
+	redir.word = NULL;
+	redir.heredoc_data = NULL;
 	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
 	return (0);
 }
