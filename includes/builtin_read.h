@@ -6,16 +6,16 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 15:59:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:39:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_READ_H
 # define BUILTIN_READ_H
 
-# include "types.h"
-# include "builtin.h"
-# include "minishell.h"
+/* # include "types.h" */
+/* # include "builtin.h" */
+/* # include "minishell.h" */
 
 # define READ_OPT_LA	(1 << 0)
 # define READ_OPT_LD	(1 << 1)

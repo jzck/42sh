@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/12 01:01:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 20:39:05 by jhalford         ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -60,6 +60,13 @@ typedef struct s_process		t_process;
 typedef int						(t_execf)(const char *path,
 		char *const argv[],
 		char *const envp[]);
+typedef enum e_process_type		t_process_type;
+typedef union u_process_data	t_process_data;
+typedef	struct s_process_map	t_process_map;
+typedef struct s_data_cond		t_data_while;
+typedef struct s_data_cond		t_data_if;
+typedef struct s_data_cond		t_data_if;
+
 
 /*
 **	Parser types

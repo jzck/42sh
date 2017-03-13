@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:46:06 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/13 22:25:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char			*command_getoutput(char *command)
 	DG("\033[38;5;46mbefore");
 	ast = gen_t_btree(command);
 	DG();
-	if (set_process(&p, ast))
+	if (process_set(&p, ast))
 		return (NULL);
 	DG();
-	if (!(pid = launch_subshell(&p)))
+	if (!(pid = plaunch_subshell(&p)))
 		return (NULL);
 	waitpid(pid, &ret, WUNTRACED);
 	DG();

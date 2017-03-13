@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 19:14:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 22:36:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define EXEC_H
 
 # include <sys/stat.h>
-# include "minishell.h"
+/* # include "types.h" */
+/* # include "minishell.h" */
 
 # define PIPE_READ		0
 # define PIPE_WRITE		1
@@ -99,16 +100,19 @@ enum	e_process_type
 	PROCESS_MAX
 };
 
-typedef enum e_process_type		t_process_type;
-typedef union u_process_data	t_process_data;
-typedef struct s_data_cond		t_data_while;
-typedef struct s_data_cond		t_data_if;
-typedef struct s_data_cond		t_data_if;
+struct	s_process_map
+{
+	int		type;
+	int		(*launch)();
+	int		(*print)();
+	int		(*free)();
+};
 
 struct	s_process
 {
 	t_process_type	type;
 	t_process_data	data;
+	t_process_map	map;
 	pid_t			pid;
 	int				fdin;
 	int				fdout;
@@ -129,11 +133,8 @@ struct	s_exec
 	int			control_count;
 };
 
-
-extern t_itof	g_execmap[];
-extern t_itof	g_redirmap[];
-extern t_itof	g_launchmap[];
-
+/* extern t_itof	g_redirmap[]; */
+/* extern t_itof	g_execmap[]; */
 
 int		exec_reset(void);
 int		process_setgroup(t_process *p, pid_t pid);
@@ -172,40 +173,41 @@ t_btree		*is_function(t_process *p);
 ** Mapping pour free les process
 */
 void	process_free(void *content, size_t content_size);
-int		process_free_cmd(t_process *p);
-int		process_free_cond(t_process *p);
-int		process_free_list(t_process *p);
-int		process_free_subshell(t_process *p);
+int		pfree_cmd(t_process *p);
+int		pfree_cond(t_process *p);
+int		pfree_list(t_process *p);
+int		pfree_subshell(t_process *p);
 
 /*
 ** Mapping pour launch les process
 */
-int		launch_process(t_process *p);
-int		launch_if(t_process *p);
-int		launch_while(t_process *p);
-int		launch_until(t_process *p);
-int		launch_for(t_process *p);
-int		launch_case(t_process *p);
-int		launch_file(t_process *p);
-int		launch_builtin(t_process *p);
-int		launch_subshell(t_process *p);
-int		launch_brace(t_process *p);
-int		launch_function(t_process *p);
-int		launch_empty(t_process *p);
+int		process_launch(t_process *p);
+int		plaunch_if(t_process *p);
+int		plaunch_while(t_process *p);
+int		plaunch_until(t_process *p);
+int		plaunch_for(t_process *p);
+int		plaunch_case(t_process *p);
+int		plaunch_file(t_process *p);
+int		plaunch_builtin(t_process *p);
+int		plaunch_subshell(t_process *p);
+int		plaunch_brace(t_process *p);
+int		plaunch_function(t_process *p);
+int		plaunch_empty(t_process *p);
 
 /*
 ** Mapping pour set les process
 */
 
-int		set_process(t_process *p, t_btree *ast);
-int		set_process_map(t_process *p, t_btree *ast);
-int		set_process_cmd(t_process *p, t_btree *ast);
-int		set_process_while(t_process *p, t_btree *ast);
-int		set_process_until(t_process *p, t_btree *ast);
-int		set_process_if(t_process *p, t_btree *ast);
-int		set_process_for(t_process *p, t_btree *ast);
-int		set_process_case(t_process *p, t_btree *ast);
-int		set_process_subshell(t_process *p, t_btree *ast);
+int		process_set(t_process *p, t_btree *ast);
+int		pset_map(t_process *p, t_btree *ast);
+int		pset_cmd(t_process *p, t_btree *ast);
+int		pset_while(t_process *p, t_btree *ast);
+int		pset_until(t_process *p, t_btree *ast);
+int		pset_if(t_process *p, t_btree *ast);
+int		pset_for(t_process *p, t_btree *ast);
+int		pset_case(t_process *p, t_btree *ast);
+int		pset_subshell(t_process *p, t_btree *ast);
+int		pset_brace(t_process *p, t_btree *ast);
 
 /*
 ** Mapping pour exec les process
