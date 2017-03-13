@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:41:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 16:24:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		isfunc(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && isfunc(&(*ast)->right, lst) == 1)
+			|| node->type == TK_AMP || node->type == TK_PIPE)
+			&& isfunc(&(*ast)->right, lst) == 1)
 			return (1);
 		if (node->type == FNAME && node->full == 0)
 			return (1);

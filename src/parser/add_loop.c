@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 14:23:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 16:12:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		isloop(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && isloop(&(*ast)->right, lst) == 1)
+			|| node->type == TK_AMP || node->type == TK_PIPE)
+			&& isloop(&(*ast)->right, lst) == 1)
 			return (1);
 		if ((node->type == TK_WHILE || node->type == TK_UNTIL
 			|| node->type == TK_FOR) && node->full == 0)
