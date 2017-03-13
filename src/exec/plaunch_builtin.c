@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:48:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:35:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int		plaunch_builtin(t_process *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		process_setgroup(p, 0);
-		process_setsig();
 		if (process_redirect(p))
 			exit (1);
+		process_setgroup(p, 0);
+		process_setsig();
 		exec_reset();///A FAIRE POUR LES BUILTIN OU PAS ? -> Q de William
+		// je pense ca ne change rien si on l'enleve car on excve apres
 		exit((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env));
 	}
 	else if (pid > 0)
