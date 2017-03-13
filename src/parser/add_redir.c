@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 13:06:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 16:11:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	t_redir		*temp;
+	/* t_redir		*temp; */
 
 	token = (*lst)->content;
 	node = (*ast)->item;
@@ -73,11 +73,12 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	{
 		redir = (ft_lstlast(node->data.cmd.redir))->content;
 		redir->word = ft_strdup(token->data);
-		if (redir->type == TK_DLESS)
-		{
-			temp = ft_lstlast((data_singleton()->heredoc_queue))->content;
-			temp->word = redir->word;
-		}
+		/* DG("redir1 @ %p word=[%s]", redir, redir->word); */
+		/* if (redir->type == TK_DLESS) */
+		/* { */
+		/* 	temp = ft_lstlast((data_singleton()->heredoc_queue))->content; */
+		/* 	temp->word = redir->word; */
+		/* } */
 	}
 	return (0);
 }
@@ -101,31 +102,40 @@ static int	add_redir_type_number(t_btree **ast, t_list **lst)
 	return (0);
 }
 
+int		redir_init(t_type type, t_redir *redir)
+{
+	redir->n = (type == TK_LESS || type == TK_DLESS
+	|| type == TK_LESSAND) ? STDIN : STDOUT;
+	redir->type = type;
+	redir->heredoc_data = NULL;
+	redir->word = NULL;
+	return (0);
+}
+
 int			add_redir_type(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		redir;
-	t_list		*temp;
+	t_list		*redir_lst;
+	t_list		**queue;
 
+	queue = &data_singleton()->heredoc_queue;
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if (!(node->type == TK_IO_NUMBER))
 	{
-		redir.n = (token->type == TK_LESS || token->type == TK_DLESS
-		|| token->type == TK_LESSAND) ? STDIN : STDOUT;
-		redir.type = token->type;
-		redir.heredoc_data = NULL;
-		redir.word = NULL;
-		temp = ft_lstnew(&redir, sizeof(redir));
-		DG("adr is %p", temp);
-		ft_lsteadd(&node->data.cmd.redir, temp);
-		DG("adr is %p", node->data.cmd.redir);
+		redir_init(token->type, &redir);
+		redir_lst = ft_lstnew(&redir, sizeof(redir));
+		ft_lsteadd(&node->data.cmd.redir, redir_lst);
+		/* DG("redir1 @ %p word=[%s]", redir_lst->content, ((t_redir*)redir_lst->content)->word); */
 		if (token->type == TK_DLESS)
-			ft_lsteadd(&data_singleton()->heredoc_queue, temp);
-		DG("adr is %p", data_singleton()->heredoc_queue);
+		{
+			ft_lsteadd(queue, ft_lstnew(&redir_lst->content, sizeof(t_redir*)));
+			/* DG("redir2 @ %p word=[%s]", *(t_redir**)(*queue)->content, (*(t_redir**)(*queue)->content)->word); */
+		}
 	}
 	else
 		add_redir_type_number(ast, lst);

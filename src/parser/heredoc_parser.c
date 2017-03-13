@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:21:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 14:01:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 16:10:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,27 @@
 int			pop_heredoc(t_list **lst)
 {
 	t_token	*token;
-	t_list	*temp;
-	t_list	*temp2;
-	t_redir	*head;
+	t_list	**head;
+	t_redir	*redir;
 
-	temp = NULL;
 	token = (*lst)->content;
 	if (token->type == HEREDOCDATA && data_singleton()->heredoc_queue != NULL)
 	{
-		head = data_singleton()->heredoc_queue->content;
-		temp = data_singleton()->heredoc_queue;
+		head = &data_singleton()->heredoc_queue;
+		redir = *(t_redir**)(*head)->content;
 		if (head && token)
 		{
-			if (ft_strcmp((char *)token->data, head->word) == 0)
+			/* DG("comparing w/ input [%s], head @ %p", token->data, *head); */
+			/* DG("redir1 @ %p word=[%s]", redir, redir->word); */
+			if (ft_strcmp((char *)token->data, redir->word) == 0)
 			{
-				temp2 = temp->next;
-//				free(temp);
-				data_singleton()->heredoc_queue = temp2;
-				DG("data is %s et adr %p", head->heredoc_data, head->heredoc_data);
-				DG("redir @ %p", head);
+				ft_lst_delif(head, (t_redir**)(*head)->content, ft_addrcmp, ft_lst_cfree);
+				/* DG("matched heredoc EOF, new head @ %p", *head); */
 			}
 			else
 			{
-				head->heredoc_data = ft_strjoin(head->heredoc_data,
-					token->data);
-				head->heredoc_data = ft_strjoin(head->heredoc_data, "\n");
+				redir->heredoc_data = ft_str3join(redir->heredoc_data,
+					(char*)token->data, "\n");
 			}
 		}
 		ft_lstdel(lst, &token_free);

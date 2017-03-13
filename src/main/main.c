@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:47:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 16:02:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		handle_instruction(int fd)
 		if (parser.state == ERROR)
 			error_syntax(&token, &parser, &ast);
 		lexer.state = data_singleton()->heredoc_queue ? HEREDOC : 0;
+		DG("lexer.state=%i", lexer.state);
 		if (lexer.state)
 			continue;
 		else if (parser.state == SUCCESS)
