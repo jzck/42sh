@@ -18,8 +18,6 @@ int		redirect_dless(t_redir *redir)
 
 	pipe(fds);
 	str = redir->heredoc_data;
-	DG("[%s] && adr %p", str, str);
-	DG("redir @ %p", redir);
 	write(fds[PIPE_WRITE], str, ft_strlen(str));
 	close(fds[PIPE_WRITE]);
 	dup2(fds[PIPE_READ], redir->n);
