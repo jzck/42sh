@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 17:56:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_putast(void *nodein)
 		return ("FNAME");
 	if (node->type == TK_LBRACE)
 		return ("TK_LBRACE");
-	if (node->type == TK_ASSIGNEMENT_WORD)
+	if (node->type == TK_ASSIGNMENT_WORD)
 		return ("ASSIGNEMENT_WORD");
 	if (node->type == SUBSHELL)
 		return ("SUBSHELL");

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 22:45:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_distrostree		g_distrostree[] =
 	{&superflous_token, &add_null},
 	{&isdir_sep, &add_redir_type},
 	{&isdir_word, &add_redir_word},
-	{&isvar, &add_var},
 	{&isloop_condition, &add_loop_condition},
 	{&isloop, &add_loop_cmd},
 	{&iscondition_branch, &add_branch},
@@ -59,7 +58,8 @@ static int			no_del_token(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if (node->type != TK_DO && node->type != TK_THEN
-			&& node->type != CMD && node->type != REDIR)
+			&& node->type != CMD && node->type != REDIR
+			&& node->type != TK_ASSIGNMENT_WORD)
 			return (1);
 	}
 	return (0);
@@ -72,7 +72,7 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 19)
+	while (++i < 18)
 	{
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
@@ -89,10 +89,13 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	if (token->type == TK_IF)
 		add_if(ast, lst);
 	else if (token->type != TK_WORD)
+	{
+		DG("type is %s", read_state(token->type));
 		node->type = token->type;
+	}
 	else
 		node->type = CMD;
-	if (token->type == TK_WORD || token->type == TK_ASSIGNEMENT_WORD)
+	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD)
 		ft_ld_pushback(&node->data.cmd.token,
 				gen_tab(token->data, token->esc, token->esc2, 1));
 	return (0);

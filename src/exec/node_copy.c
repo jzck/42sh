@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:38:36 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 12:01:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 00:49:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		*node_copy(void *data)
 	new->full = old->full;
 	new->type = old->type;
 	new->pattern = old->pattern;
-	if (old->type == CMD || old->type == TK_ASSIGNEMENT_WORD)
+	if (old->type == CMD || old->type == TK_ASSIGNMENT_WORD)
 	{
 		new->data.cmd.redir = ft_lstmap(old->data.cmd.redir, &redir_copy);
 		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);

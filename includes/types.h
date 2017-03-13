@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 20:39:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 00:49:40 by ariard           ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -118,7 +118,7 @@ enum	e_sym
 	TK_ELSE,
 	TK_UNTIL,
 	TK_WORD,
-	TK_ASSIGNEMENT_WORD = 50,
+	TK_ASSIGNMENT_WORD = 50,
 	TK_BANG,
 	TK_NAME,
 	TK_FOR,

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 20:36:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_aggrematch		g_aggrematch[] =
 	{TK_PAREN_OPEN, CASE_LIST_NS, PATTERN_CASE, 0},
 	{TK_PAREN_OPEN, TK_PAREN_OPEN, MATH, TK_PAREN_OPEN},
 	{TK_PAREN_OPEN, CMD_SUPERIOR, OPEN_FUNC, 0},
-	{TK_ASSIGNEMENT_WORD, CMD_PREFIX, CMD_PREFIX, 0},
+	{TK_ASSIGNMENT_WORD, CMD_PREFIX, CMD_PREFIX, 0},
 	{TK_PIPE, CMD_SUPERIOR, SEQUENCE, CMD_SUPERIOR},
 	{TK_PIPE, PIPE_SEMI_SEQUENCE, SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{TK_PIPE, PIPE_CLOSE_SEQUENCE, SEQUENCE, PIPE_CLOSE_SEQUENCE},
@@ -404,7 +404,7 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
-	//			DG("stack after pop: %s", read_state(*head));
+//				DG("stack after pop: %s", read_state(*head));
 			}
 			if (eval_sym(stack, *new_sym))
 			{

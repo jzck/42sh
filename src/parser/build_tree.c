@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 19:28:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_treematch			g_treematch[] =
 	{TK_PAREN_CLOSE, &add_cmd},
 	{TK_FOR, &add_cmd},
 	{TK_NAME, &add_cmd},
-	{TK_ASSIGNEMENT_WORD, &add_cmd},
+	{TK_ASSIGNMENT_WORD, &add_cmd},
 	{SUBSHELL, &add_cmd},
 	{TK_LBRACE, &add_cmd},
 	{TK_RBRACE, &add_cmd},
@@ -58,14 +58,16 @@ static int	isseparator(t_token *token, int cache)
 {
 	if (token->type == TK_NEWLINE && (cache == TK_WHILE || cache == TK_DO
 		|| cache == TK_NEWLINE || cache == TK_THEN || cache == TK_IN
-		|| cache == TK_DSEMI))
+		|| cache == TK_DSEMI || cache == SUBSHELL || cache == TK_ELIF
+		|| cache == TK_ELSE || cache == TK_ELSE || cache == TK_CASE
+		|| cache == TK_FOR || cache == TK_UNTIL))
 		return (0);
 	return (1);
 }
 
 static int	check_cache(t_token *token, int cache)
 {
-	if (token->type == TK_ASSIGNEMENT_WORD && cache == TK_WORD)
+	if (token->type == TK_ASSIGNMENT_WORD && cache == TK_WORD)
 		token->type = TK_WORD;
 	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI
 		&& cache != TK_WORD)

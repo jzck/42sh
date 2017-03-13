@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 10:58:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 16:00:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:59:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	get_math(char *stream, char **var, char **value, char **operator)
 	char	*temp;
 
 	*var = ft_strduptr(stream, &ft_isalpha);
-	temp = ft_sstrstr(data_singleton()->env, *var);
+	temp = ft_sstrstr(data_singleton()->local_var, *var);
 	if (temp)
 	{
 		temp += ft_strlenchr(temp, '=') + 1;
@@ -70,8 +70,12 @@ int			exec_math(t_btree **ast)
 
 	node = (*ast)->item;
 	av = token_to_argv(node->data.cmd.wordlist, 1);
+	DG("before get math : %s", av[0]);
 	get_math(av[0], &var, &value, &operator);
+	DG("before do math var %s value %s operator %s", var, value, operator);
 	do_math(&value, operator);
-	builtin_setenv("setenv", (char *[]){var, value, 0}, data_singleton()->local_var);
+	DG("before setenv %s", value);
+	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, data_singleton()->local_var);
+	DG("after setenv");
 	return (0);
 }
