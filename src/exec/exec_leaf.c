@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 22:37:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:56:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int				exec_leaf(t_btree **ast)
 	job = &data_singleton()->exec.job;
 	if (process_set(&p, *ast))
 		return (1);
-	DG("p.type=%i", p.type);
 	p.map = g_process_map[p.type];
 	if (!(process_launch(&p)))
 	{
-		DG("check");
 		DG("forked pid=[%i]", p.pid);
 		job_addprocess(&p);
 		/* DG("[IS_BG->%i]", JOB_IS_BG(job->attrs)); */

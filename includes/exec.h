@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 22:36:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:02:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ struct	s_data_list
 	t_btree	*content;
 };
 
-struct	s_data_subshell
+struct	s_data_tree
 {
 	t_btree	*content;
 };
@@ -74,9 +74,9 @@ struct	s_data_subshell
 union	u_process_data
 {
 	struct s_data_cmd		cmd;
-	struct s_data_subshell	subshell;
-	struct s_data_subshell	brace;
-	struct s_data_subshell	function;
+	struct s_data_tree		subshell;
+	struct s_data_tree		brace;
+	struct s_data_tree		function;
 	struct s_data_cond		d_while;
 	struct s_data_cond		d_until;
 	struct s_data_cond		d_if;
@@ -133,9 +133,6 @@ struct	s_exec
 	int			control_count;
 };
 
-/* extern t_itof	g_redirmap[]; */
-/* extern t_itof	g_execmap[]; */
-
 int		exec_reset(void);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
@@ -164,10 +161,10 @@ void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
 
-int		add_new_job(t_job *job);
+/* int		add_new_job(t_job *job); */
 
 int		error_badidentifier(char *name);
-t_btree		*is_function(t_process *p);
+t_btree	*is_function(t_process *p);
 
 /*
 ** Mapping pour free les process

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 22:35:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:10:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int		process_launch(t_process *p)
 	p->attrs |= PROCESS_RUNNING;
 	if (!(pid = (*p->map.launch)(p)))
 	{
+		DG("launcher did not fork!");
 		process_resetfds(p);
 		return (1);
 	}
-	DG("launcher did not fork!");
+	DG("launcher forked!");
 	p->pid = pid;
 	process_setgroup(p, pid);
 	if (p->fdin != STDIN)

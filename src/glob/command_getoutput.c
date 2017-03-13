@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:01:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 22:25:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:32:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
   return (output);
   }
   */
-
 
 static t_btree		*gen_t_btree(const char *command)
 {
