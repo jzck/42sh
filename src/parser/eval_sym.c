@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 17:28:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 19:39:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_DSEMI, CMD_SUPERIOR},
 	{TK_DSEMI, PIPE_SEMI_SEQUENCE},
 	{TK_DSEMI, PIPE_CLOSE_SEQUENCE},
-	{TK_DSEMI, SEQUENCE},
 	{TK_LESS, TK_IO_NUMBER},
 	{TK_LESS, REDIRECT_LIST},
 	{TK_LESS, CMD_SUFFIX},
