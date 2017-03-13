@@ -110,7 +110,6 @@ int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
 int		add_redir_word(t_btree **ast, t_list **lst);
 int		add_redir_type(t_btree **ast, t_list **lst);
-int		add_redir_condition(t_btree **ast, t_list **lst);
 int		redir_init(t_type type, t_redir *redir);
 int		add_case_cmd(t_btree **ast, t_list **lst);
 int		add_case_sep(t_btree **ast, t_list **lst);
@@ -141,7 +140,6 @@ int		isfunc_name(t_btree **ast, t_list **lst);
 int		isdir(t_btree **ast);
 int		iscondition(t_btree **ast, t_list **list);
 int		isdir_sep(t_btree **ast, t_list **list);
-int		isdir_condition(t_btree **ast, t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
 int		isvar(t_btree **ast, t_list **list);
 int		isnull(t_btree **ast, t_list **list);
@@ -154,8 +152,6 @@ int		isbang_sep(t_btree **ast, t_list **lst);
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
 int		superflous_token(t_btree **ast, t_list **list);
-
-int			ft_show_heredoc_data(t_astnode *node);
 
 struct s_distrostree
 {

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 17:37:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 22:45:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_distrostree		g_distrostree[] =
 {
 	{&superflous_token, &add_null},
-	{&isdir_condition, &add_redir_condition},
 	{&isdir_sep, &add_redir_type},
 	{&isdir_word, &add_redir_word},
 	{&isvar, &add_var},
@@ -24,8 +23,8 @@ t_distrostree		g_distrostree[] =
 	{&iscondition_branch, &add_branch},
 	{&iscondition, &add_condition_cmd},
 	{&iscase_pattern, &add_pattern},
-	{&iscase_branch, &add_branch},
 	{&iscase, &add_case_cmd},
+	{&iscase_branch, &add_branch},
 	{&ismath, &add_null},
 	{&ismath_expr, &add_pattern},
 	{&issubshell, &add_subshell_cmd},

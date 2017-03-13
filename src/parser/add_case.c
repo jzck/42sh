@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 17:32:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 22:38:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		iscase(t_btree **ast, t_list **lst)
 			|| node->type == TK_AMP || node->type == TK_PIPE)
 			&& iscase(&(*ast)->right, lst) == 1)
 			return (1);
-		if (node->type == TK_CASE || node->type == TK_PAREN_OPEN)
+		if (node->type == TK_CASE)
 			return (1);
 	}
 	return (0);
@@ -91,18 +91,12 @@ int		add_pattern(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
-	char		**my_tab;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	if ((my_tab = (char **)malloc(sizeof(char *) * 4)))
-	{
-		my_tab[0] = ft_strdup(token->data);
-		my_tab[1] = (char *)dup_char_esc(token->esc, token->size >> 3);
-		my_tab[2] = (char *)dup_char_esc(token->esc2, token->size >> 3);
-		my_tab[3] = NULL;
-	}
-	ft_ld_pushback(&node->data.cmd.wordlist, my_tab);
+	DG("node type is %s", read_state(node->type));
+	ft_ld_pushback(&node->data.cmd.wordlist,
+			gen_tab(token->data, token->esc, token->esc2, 1));
 	node->pattern = 1;
 	return (0);
 }
