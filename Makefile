@@ -82,6 +82,7 @@ exec/fd_is_valid.c\
 exec/ft_exec.c\
 exec/ft_findexec.c\
 exec/is_function.c\
+exec/launch_brace.c\
 exec/launch_builtin.c\
 exec/launch_case.c\
 exec/launch_file.c\
@@ -110,6 +111,7 @@ exec/redirect_less.c\
 exec/redirect_lessand.c\
 exec/set_exitstatus.c\
 exec/set_process.c\
+exec/set_process_brace.c\
 exec/set_process_case.c\
 exec/set_process_cmd.c\
 exec/set_process_for.c\

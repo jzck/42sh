@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:08:12 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 17:39:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:08:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_itof		g_setprocessmap[] =
 	{MATH, NULL},
 	{SUBSHELL, &set_process_subshell},
 	{CMD, &set_process_cmd},
+	{TK_LBRACE, &set_process_subshell},
 	{0, NULL}
 };
 

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:48:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 18:16:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:15:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int		launch_builtin(t_process *p)
 	if (IS_PIPESINGLE(*p))
 	{
 		if (process_redirect(p))
+		{
+			set_exitstatus(1, 1);
 			return (0);
+		}
 		set_exitstatus((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env), 1);
 		return (0);
 	}

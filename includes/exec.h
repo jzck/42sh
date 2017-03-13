@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:40:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:14:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ union	u_process_data
 {
 	struct s_data_cmd		cmd;
 	struct s_data_subshell	subshell;
+	struct s_data_subshell	brace;
 	struct s_data_subshell	function;
 	struct s_data_cond		d_while;
 	struct s_data_cond		d_until;
@@ -88,6 +89,7 @@ enum	e_process_type
 	PROCESS_BUILTIN,
 	PROCESS_FILE,
 	PROCESS_SUBSHELL,
+	PROCESS_BRACE,
 	PROCESS_WHILE,
 	PROCESS_UNTIL,
 	PROCESS_IF,
@@ -187,6 +189,7 @@ int		launch_case(t_process *p);
 int		launch_file(t_process *p);
 int		launch_builtin(t_process *p);
 int		launch_subshell(t_process *p);
+int		launch_brace(t_process *p);
 int		launch_function(t_process *p);
 int		launch_empty(t_process *p);
 

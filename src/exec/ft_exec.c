@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:30:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:03:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:08:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_itof	g_execmap[] =
 	{TK_ASSIGNEMENT_WORD, &exec_var},
 	{MATH, &exec_math},
 	{SUBSHELL, &exec_leaf},
+	{TK_LBRACE, &exec_leaf},
 	{TK_BANG, &exec_bang},
 	{CMD, &exec_leaf},
 	{0, 0},
