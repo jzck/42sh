@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 18:16:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 13:28:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int		launch_file(t_process *p)
 		/* data_singleton()->opts &= ~SH_INTERACTIVE; */
 		/* data_singleton()->opts &= ~SH_OPTS_JOBC; */
 		/* DG("fork! [%s]", p->data.cmd.av[0]); */
-		process_setgroup(p, 0);
-		process_setsig();
 		if (process_redirect(p))
 			exit (1);
+		process_setgroup(p, 0);
+		process_setsig();
 		exec_reset();
 		if (!p->data.cmd.path)
 		{

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 11:53:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:13:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void			*redir_copy(void *data)
 	new->type = old->type;
 	new->n = old->n;
 	new->word = ft_strdup(old->word);
+	new->heredoc_data = ft_strdup(old->heredoc_data);
 	return (new);
 }

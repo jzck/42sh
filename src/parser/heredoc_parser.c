@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:21:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 19:40:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:01:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int			pop_heredoc(t_list **lst)
 				temp2 = temp->next;
 //				free(temp);
 				data_singleton()->heredoc_queue = temp2;
-				DG("data is %s et adr %p", head->heredoc_data, temp);
+				DG("data is %s et adr %p", head->heredoc_data, head->heredoc_data);
+				DG("redir @ %p", head);
 			}
 			else
 			{

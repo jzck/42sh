@@ -154,7 +154,7 @@ int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
 int		superflous_token(t_btree **ast, t_list **list);
 
-int		ft_show_heredoc_data(t_btree **ast);
+int			ft_show_heredoc_data(t_astnode *node);
 
 struct s_distrostree
 {
