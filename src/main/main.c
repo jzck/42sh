@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:23:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:47:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int		handle_instruction(int fd)
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
 		{
+			DG("readline trap");
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_eof(&token,
 			&parser, &ast) : 1);
 		}
+		DG("INPUT STRING IS [%s]", str);
 		if (lexer.state == HEREDOC)
 		{
 			ft_strappend(&lexer.str, (char[]){'\n', 0});
@@ -71,7 +73,6 @@ int		handle_instruction(int fd)
 		}
 	}
 	btree_print(STDBUG, ast, &ft_putast);
-	/* ft_show_heredoc_data(ast->left->item); */
 	if (ft_exec(&ast))
 		return (1);
 	instruction_free(&token, &parser, &ast);
@@ -124,11 +125,8 @@ int		main(int ac, char **av)
 	}
 	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
-	{
-//		lexer_clean;
-//		parser_clean;
 		;
-	}
+	DG("gonna exit");
 	builtin_exit(NULL, NULL, NULL);
 	return (0);
 }

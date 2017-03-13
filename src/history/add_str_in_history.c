@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:27:03 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/13 14:23:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:30:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		ft_add_in_history_file(char *str)
 	char	**hist;
 
 	i = 0;
-	/* DG("gonna add [%s] in history"); */
 	hist = ft_strsplit(str, '\n');
 	if (!(home = ft_getenv(data_singleton()->env, "HOME")))
 		return ;

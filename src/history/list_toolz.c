@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 11:21:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:47:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void			free_history_list(t_list_history *head)
 {
 	t_list_history	*prev;
 
-	free(head->prev);
+	if (!head)
+		return ;
 	while (head)
 	{
 		ft_strdel(&head->str);
 		prev = head;
 		head = head->next;
-		free(prev);
 	}
 }
 
