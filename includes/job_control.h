@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:19:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 22:29:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,15 @@ void		process_format(t_list **p, int firstp, int opts);
 /*
 ** Mapping pour afficher les process
 */
-void	process_print(t_process *p);
-int		process_print_subshell(t_process *p);
-int		process_print_while(t_process *p);
-int		process_print_if(t_process *p);
-int		process_print_case(t_process *p);
-int		process_print_until(t_process *p);
-int		process_print_function(t_process *p);
-int		process_print_for(t_process *p);
-int		process_print_cmd(t_process *p);
+void		pprint(t_process *p);
+int			pprint_subshell(t_process *p);
+int			pprint_brace(t_process *p);
+int			pprint_while(t_process *p);
+int			pprint_if(t_process *p);
+int			pprint_case(t_process *p);
+int			pprint_until(t_process *p);
+int			pprint_function(t_process *p);
+int			pprint_for(t_process *p);
+int			pprint_cmd(t_process *p);
 
 #endif
