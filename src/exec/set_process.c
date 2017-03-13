@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:18:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 17:38:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		set_process(t_process *p, t_btree *ast)
 	if (op == TK_PIPE)
 	{
 		pipe(fds);
-		DG("[%i] -> PIPE -> [%i]", fds[PIPE_WRITE], fds[PIPE_READ]);
+		/* DG("[%i] -> PIPE -> [%i]", fds[PIPE_WRITE], fds[PIPE_READ]); */
 	}
 	p->fdin = exec->fdin;
 	p->to_close = fds[PIPE_READ];
