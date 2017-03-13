@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 16:08:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:37:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			build_tree(t_btree **ast, t_list **lst)
 	{
 		if ((isseparator(token, cache) && g_treematch[i].type == token->type))
 		{
+			DG("build %s", read_state(g_treematch[i].type));
 			cache = token->type;
 			return (g_treematch[i].add(ast, lst));
 		}

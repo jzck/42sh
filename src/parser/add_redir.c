@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 16:11:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 16:23:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int			isdir_word(t_btree **ast, t_list **list)
 		node = (*ast)->item;
 		if (token->type == TK_WORD && node->type == REDIR)
 		{
-			node->type = node->cache;
+			if (node->cache != TK_NEWLINE)
+				node->type = node->cache;
+			else
+				node->type = CMD;
 			node->cache = 0;
 			return (1);
 		}
@@ -65,7 +68,6 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	/* t_redir		*temp; */
 
 	token = (*lst)->content;
 	node = (*ast)->item;
@@ -73,32 +75,26 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	{
 		redir = (ft_lstlast(node->data.cmd.redir))->content;
 		redir->word = ft_strdup(token->data);
-		/* DG("redir1 @ %p word=[%s]", redir, redir->word); */
-		/* if (redir->type == TK_DLESS) */
-		/* { */
-		/* 	temp = ft_lstlast((data_singleton()->heredoc_queue))->content; */
-		/* 	temp->word = redir->word; */
-		/* } */
 	}
 	return (0);
 }
 
 static int	add_redir_type_number(t_btree **ast, t_list **lst)
 {
-	t_redir		*temp;
-	t_redir		*temp_heredoc;
+	t_redir		*redir;
 	t_astnode	*node;
 	t_token		*token;
+	t_list		**queue;
+	t_list		*redir_lst;
 
+	queue = &data_singleton()->heredoc_queue;
 	token = (*lst)->content;
 	node = (*ast)->item;
-	temp = (ft_lstlast(node->data.cmd.redir))->content;
-	temp->type = token->type;
+	redir_lst = ft_lstlast(node->data.cmd.redir);
+	redir = redir_lst->content;
+	redir->type = token->type;
 	if (token->type == TK_DLESS)
-	{
-		temp_heredoc = data_singleton()->heredoc_queue->content;
-		temp_heredoc->n = temp->n;
-	}
+		ft_lsteadd(queue, ft_lstnew(&redir_lst->content, sizeof(t_redir*)));
 	return (0);
 }
 
@@ -130,12 +126,8 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		redir_init(token->type, &redir);
 		redir_lst = ft_lstnew(&redir, sizeof(redir));
 		ft_lsteadd(&node->data.cmd.redir, redir_lst);
-		/* DG("redir1 @ %p word=[%s]", redir_lst->content, ((t_redir*)redir_lst->content)->word); */
 		if (token->type == TK_DLESS)
-		{
 			ft_lsteadd(queue, ft_lstnew(&redir_lst->content, sizeof(t_redir*)));
-			/* DG("redir2 @ %p word=[%s]", *(t_redir**)(*queue)->content, (*(t_redir**)(*queue)->content)->word); */
-		}
 	}
 	else
 		add_redir_type_number(ast, lst);

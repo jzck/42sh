@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:56:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:25:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int			issubshell(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
+		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
+			|| node->type == TK_AMP || node->type == TK_PIPE)
+			&& issubshell(&(*ast)->right, lst) == 1)
+			return (1);
 		if (node->type == SUBSHELL && node->full == 0)
 			return (1);
 		if (node->type == TK_LBRACE && node->full == 0)

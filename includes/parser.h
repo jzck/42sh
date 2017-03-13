@@ -111,6 +111,7 @@ int		add_branch(t_btree **ast, t_list **lst);
 int		add_redir_word(t_btree **ast, t_list **lst);
 int		add_redir_type(t_btree **ast, t_list **lst);
 int		add_redir_condition(t_btree **ast, t_list **lst);
+int		redir_init(t_type type, t_redir *redir);
 int		add_case_cmd(t_btree **ast, t_list **lst);
 int		add_case_sep(t_btree **ast, t_list **lst);
 int		add_pattern(t_btree **ast, t_list **lst);
