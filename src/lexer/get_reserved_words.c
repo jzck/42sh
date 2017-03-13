@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/06 17:59:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 16:55:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ t_rvwords		g_rvwords[] =
 
 static int		recognization_rvwords(t_token *pv_tk)
 {
-	if (!pv_tk || (pv_tk->type == TK_NEWLINE || pv_tk->type == TK_AMP 
-		|| pv_tk->type == TK_SEMI || pv_tk->type == TK_WHILE
-		|| pv_tk->type == TK_DONE || pv_tk->type == TK_DO
-		|| pv_tk->type == TK_IF || pv_tk->type == TK_FI || pv_tk->type == TK_THEN
-		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE))
+	if (!pv_tk || (pv_tk->type == TK_NEWLINE || pv_tk->type == TK_AMP
+		|| pv_tk->type == TK_SEMI || pv_tk->type == TK_PIPE
+		|| pv_tk->type == TK_WHILE || pv_tk->type == TK_DONE
+		|| pv_tk->type == TK_DO || pv_tk->type == TK_IF
+		|| pv_tk->type == TK_FI || pv_tk->type == TK_THEN
+		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE
+		|| pv_tk->type == TK_DSEMI))
 		return (1);
 	return (0);
 }

@@ -6,6 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/13 15:56:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,39 +68,28 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 	t_redir		*redir;
-	t_redir		*other;
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	other = NULL;
 	if (node->data.cmd.redir)
 	{
 		redir = (ft_lstlast(node->data.cmd.redir))->content;
 		redir->word = ft_strdup(token->data);
-		if (TK_DLESS)
-		{
-			DG();
-			other = ft_lstlast(data_singleton()->heredoc_queue)->content;
-			DG();
-			DG("type is %s", read_state(other->type));
-			DG("word is %s", other->word);
-		}
-	}	
+	}
 	return (0);
 }
 
 static int	add_redir_type_number(t_btree **ast, t_list **lst)
 {
-	t_redir		*temp;
-//	t_redir		*temp_heredoc;
+	t_redir		*redir;
 	t_astnode	*node;
 	t_token		*token;
 
 	DG();
 	token = (*lst)->content;
 	node = (*ast)->item;
-	temp = (ft_lstlast(node->data.cmd.redir))->content;
-	temp->type = token->type;
+	redir = (ft_lstlast(node->data.cmd.redir))->content;
+	redir->type = token->type;
 	if (token->type == TK_DLESS)
 		ft_lsteadd(&data_singleton()->heredoc_queue, ft_lstlast(node->data.cmd.redir));
 	return (0);

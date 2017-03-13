@@ -21,12 +21,12 @@ int			pop_heredoc(t_list **lst)
 	token = (*lst)->content;
 	if (token->type == HEREDOCDATA && data_singleton()->heredoc_queue != NULL)
 	{
-		head = data_singleton()->heredoc_queue->content;
 		temp = data_singleton()->heredoc_queue;
+		head = temp->content;
 		if (head && token)
 		{
 			if (ft_strcmp((char *)token->data, head->word) == 0)
-				data_singleton()->heredoc_queue = temp->next;
+				ft_lst_removeif(&data_singleton()->heredoc_queue, temp->content, &ft_addrcmp);
 			else
 			{
 				head->heredoc_data = ft_strjoin(head->heredoc_data,
