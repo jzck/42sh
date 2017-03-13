@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 17:28:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 15:57:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 16:58:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int		add_ionumber(t_btree **ast, t_list **lst)
 	node = (*ast)->item;
 	node->cache = node->type;
 	node->type = token->type;
+	redir_init(token->type, &redir);
 	redir.n = ft_atoi(token->data);
-	redir.word = NULL;
-	redir.heredoc_data = NULL;
 	ft_lsteadd(&node->data.cmd.redir, ft_lstnew(&redir, sizeof(redir)));
 	return (0);
 }

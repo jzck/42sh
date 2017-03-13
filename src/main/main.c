@@ -6,7 +6,6 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 16:36:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +61,7 @@ int		handle_instruction(int fd)
 		if (parser.state == ERROR)
 			error_syntax(&token, &parser, &ast);
 		lexer.state = data_singleton()->heredoc_queue ? HEREDOC : 0;
+		DG("lexer.state=%i", lexer.state);
 		if (lexer.state)
 			continue;
 		else if (parser.state == SUCCESS)
@@ -76,7 +76,7 @@ int		handle_instruction(int fd)
 //	if (ft_exec(&ast))
 //		return (1);
 	instruction_free(&token, &parser, &ast);
-	if (SH_IS_INTERACTIVE(data_singleton()->opts))
+	if (SH_IS_INTERACTIVE(data_singleton()->opts) && *lexer.str)
 		ft_add_str_in_history(lexer.str);
 	return (0);
 }
