@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 17:29:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 19:40:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ t_aggrematch		g_aggrematch[] =
 	{IO_REDIRECT, CMD_WORD, CMD_SUFFIX, 0},
 	{IO_REDIRECT, CMD_PREFIX, CMD_PREFIX, CMD_PREFIX},
 	{IO_REDIRECT, LINEBREAK, CMD_PREFIX, 0},
+	{IO_REDIRECT, SEQUENCE, CMD_PREFIX, 0},
 	{IO_REDIRECT, TK_PAREN_OPEN, CMD_PREFIX, 0},
 	{IO_REDIRECT, TK_LBRACE, CMD_PREFIX, 0},
 	{IO_REDIRECT, COMPLETE_COMMANDS, CMD_PREFIX, 0},
@@ -159,6 +160,7 @@ t_aggrematch		g_aggrematch[] =
 	{CMD_SUFFIX, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{CMD_SUFFIX, PIPE_CLOSE_SEQUENCE, PIPE_CLOSE_SEQUENCE, PIPE_CLOSE_SEQUENCE},
 	{CMD_PREFIX, LINEBREAK, SIMPLE_COMMAND, 0},
+	{CMD_PREFIX, SEQUENCE, SIMPLE_COMMAND, 0},
 	{CMD_PREFIX, TK_PAREN_OPEN, SIMPLE_COMMAND, 0},
 	{CMD_PREFIX, TK_LBRACE, SIMPLE_COMMAND, 0},
 	{CMD_PREFIX, COMPLETE_COMMANDS, SIMPLE_COMMAND, 0},
