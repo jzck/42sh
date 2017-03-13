@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 15:34:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/11 20:07:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,13 @@ int					add_cmd(t_btree **ast, t_list **lst)
 
 	i = -1;
 	while (++i < 19)
+	{
 		if (g_distrostree[i].test(ast, lst) == 1)
+		{
+			DG("add to %d", i);
 			return (g_distrostree[i].add(ast, lst));
+		}
+	}
 	if (!*ast)
 		gen_node(ast);
 	else if (no_del_token(ast, lst))

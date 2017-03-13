@@ -13,3 +13,8 @@ debug
 *.swn
 STDBUG
 STDEBUG
+display_env
+read_on_stdin
+write_on_stderr
+write_on_stdout
+write_on_stdout_and_stderr

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:28:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 18:36:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/11 20:48:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int			lexer_assignement_word(t_list **alst, t_lexer *lexer)
 		return (lexer_lex(alst, lexer));
 	if ((lexer->state = get_state_redir(lexer)))
 		return (lexer_lex(alst, lexer));
-	lexer->state = ft_isdigit(c) ? NUMBER : ASSIGNEMENT_WORD;
+	lexer->state = ASSIGNEMENT_WORD;
 	return(lexer_lex(alst, lexer));
 }
