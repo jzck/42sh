@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 20:05:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:08:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int		main(int ac, char **av)
 	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 	{
-		DG();
 //		lexer_clean;
 //		parser_clean;
 		;

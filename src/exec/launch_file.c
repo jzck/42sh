@@ -21,7 +21,7 @@ int		launch_file(t_process *p)
 	{
 		/* data_singleton()->opts &= ~SH_INTERACTIVE; */
 		/* data_singleton()->opts &= ~SH_OPTS_JOBC; */
-		DG("fork! [%s]", p->data.cmd.av[0]);
+		/* DG("fork! [%s]", p->data.cmd.av[0]); */
 		process_setgroup(p, 0);
 		process_setsig();
 		if (process_redirect(p))

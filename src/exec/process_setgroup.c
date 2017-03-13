@@ -21,13 +21,16 @@ int		process_setgroup(t_process *p, pid_t pid)
 	(void)p;
 	data = data_singleton();
 	j = &data->exec.job;
+	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
+		return (0);
 	DG("setpgid(%i, %i)", pid, j->pgid);
 	if (setpgid(pid, j->pgid) == -1)
 		ft_dprintf(2, "{red}%s: internal setpgid() error{eoc}\n", SHELL_NAME);
 	if (pid == 0 && JOB_IS_FG(j->attrs))
 	{
-		DG("I'm taking the terminal !");
+		DG("tcsetpgrp[%i]", j->pgid);
 		tcsetpgrp(STDIN, j->pgid);
+		DG("after tcsetpgrp");
 	}
 	return (0);
 }

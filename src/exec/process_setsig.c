@@ -19,5 +19,7 @@ void	process_setsig(void)
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
+	/* signal(SIGTTIN, sigttin_handler); */
+	/* signal(SIGTTOU, sigttou_handler); */
 	signal(SIGCHLD, SIG_DFL);
 }

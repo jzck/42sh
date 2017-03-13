@@ -58,7 +58,7 @@ int				dir_research(t_glob *gl, char *p,
 			ft_ld_pushfront(&gl->match_tmp, ft_strjoin(p + gl->cur_dir * 2 *
 						(p[0] == '.' && p[1] == '/'), "/"));
 		else
-			ft_ld_pushfront(&gl->match_tmp, ft_strdup(""));
+			ft_ld_pushfront(&gl->match_tmp, ft_strdup(CH(gl->m_pat)[0]));
 		return (0);
 	}
 	if ((ft_strlen(p) <= 1 || p[ft_strlen(p) - 1] != '.') && is_directory(p))

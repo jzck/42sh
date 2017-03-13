@@ -14,11 +14,14 @@
 
 static int		do_subshell(t_process *p)
 {
-	int		ret;
+	int			ret;
 
 	ft_exec(&p->data.subshell.content);
 	ret = ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	DG("CHECK, ret=[%i]", ret);
+	/* p = ft_lstlast(j->first_process)->content; */
+	/* ret = p->status */
+	/* DG("CHECK, ret=[%i]", ret); */
 	return (ret);
 }
 
