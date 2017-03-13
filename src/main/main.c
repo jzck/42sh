@@ -73,8 +73,8 @@ int		handle_instruction(int fd)
 		}
 	}
 	btree_print(STDBUG, ast, &ft_putast);
-//	if (ft_exec(&ast))
-//		return (1);
+	if (ft_exec(&ast))
+		return (1);
 	instruction_free(&token, &parser, &ast);
 	if (SH_IS_INTERACTIVE(data_singleton()->opts) && *lexer.str)
 		ft_add_str_in_history(lexer.str);
