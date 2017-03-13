@@ -281,7 +281,6 @@ parser/add_loop.c\
 parser/add_math.c\
 parser/add_number.c\
 parser/add_redir.c\
-parser/add_redir_condition.c\
 parser/add_sep.c\
 parser/add_subshell.c\
 parser/add_var.c\

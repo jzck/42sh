@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 14:13:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:52:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char			*read_state(t_sym current)
 {
+	if (current == PIPE_CLOSE_SEQUENCE)
+		return ("PIPE_CLOSE_SEQUENCE");
 	if (current == TK_BANG)
 		return ("TK_BANG");
 	if (current == OPEN_FUNC)

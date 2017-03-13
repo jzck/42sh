@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 19:39:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 20:36:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ t_stackmatch	g_stackmatch[] =
 	{TK_AND_IF, AND_OR},
 	{TK_AND_IF, CMD_SUPERIOR},
 	{TK_AND_IF, PIPE_SEMI_SEQUENCE},
+	{TK_AND_IF, PIPE_CLOSE_SEQUENCE},
 	{TK_AND_IF, COMPOUND_LIST},
 	{TK_OR_IF, AND_OR},
 	{TK_OR_IF, CMD_SUPERIOR},
 	{TK_OR_IF, PIPE_SEMI_SEQUENCE},
+	{TK_OR_IF, PIPE_CLOSE_SEQUENCE},
 	{TK_OR_IF, COMPOUND_LIST},
 	{TK_DSEMI, LINEBREAK},
 	{TK_DSEMI, TK_BANG},
@@ -542,8 +544,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_PAREN_CLOSE, SEPARATOR_OP},
 	{TK_PAREN_CLOSE, WORD},
 	{TK_PAREN_CLOSE, IN},
-	{TK_PAREN_CLOSE, TK_AND_IF},
-	{TK_PAREN_CLOSE, TK_OR_IF},
 	{TK_PAREN_CLOSE, TK_PIPE},
 	{TK_PAREN_CLOSE, COMPLETE_COMMANDS},
 	{TK_PAREN_CLOSE, CMD_SUPERIOR},
@@ -564,8 +564,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_RBRACE, SEPARATOR_OP},
 	{TK_RBRACE, WORD},
 	{TK_RBRACE, IN},
-	{TK_RBRACE, TK_AND_IF},
-	{TK_RBRACE, TK_OR_IF},
 	{TK_RBRACE, TK_PIPE},
 	{TK_RBRACE, TK_RBRACE},
 	{TK_RBRACE, COMPLETE_COMMANDS},
@@ -1266,7 +1264,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	if (!*stack)
 		return (1);
 	head = (*stack)->content;
-	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+//	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{

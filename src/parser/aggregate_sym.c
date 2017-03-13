@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 19:40:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 20:36:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ t_aggrematch		g_aggrematch[] =
 	{TK_RBRACE, CMD_SUPERIOR, BRACE_CLAUSE, TK_LBRACE},
 	{TK_RBRACE, PIPE_SEMI_SEQUENCE, BRACE_CLAUSE, TK_LBRACE},
 	{TK_RBRACE, PIPE_CLOSE_SEQUENCE, BRACE_CLAUSE, TK_LBRACE},
-
 	{TK_RBRACE, COMPOUND_LIST, BRACE_CLAUSE, TK_LBRACE},
 	{TK_RBRACE, CMD_SUPERIOR, BRACE_CLAUSE, TK_LBRACE},
 	{TK_AND_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
-	{TK_OR_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
+	{TK_AND_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE}, 
 	{TK_AND_IF, PIPE_SEMI_SEQUENCE, AND_OR_MINOR, PIPE_SEMI_SEQUENCE},
 	{TK_OR_IF, PIPE_SEMI_SEQUENCE, AND_OR_MINOR, PIPE_SEMI_SEQUENCE},
+	{TK_OR_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
+	{TK_OR_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE}, 
 	{SEPARATOR_OP, MATH_SUP, CMD_SUPERIOR, MATH_SUP},
 	{SEPARATOR_OP, CMD_SUPERIOR, SEPARATOR, 0},
 	{SEPARATOR_OP, COMPOUND_LIST, SEPARATOR, 0},
@@ -390,20 +391,20 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 		return (1);
 	i = 0;
 	head = (*stack)->content;
-	DG("aggregate head %s && sym %s",
-	read_state(*head), read_state(*new_sym));
+//	DG("aggregate head %s && sym %s",
+//	read_state(*head), read_state(*new_sym));
 	while (g_aggrematch[i].top)
 	{
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(*head, g_aggrematch[i].under))
 		{
-			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
+//			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
-				DG("stack after pop: %s", read_state(*head));
+	//			DG("stack after pop: %s", read_state(*head));
 			}
 			if (eval_sym(stack, *new_sym))
 			{

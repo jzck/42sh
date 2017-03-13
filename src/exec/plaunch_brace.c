@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:09:30 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 23:57:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/13 23:59:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				plaunch_brace(t_process *p)
 	{
 		DG("fork!");
 		data_singleton()->opts &= ~SH_INTERACTIVE;
-		/* data_singleton()->opts &= ~SH_OPTS_JOBC; */
+		data_singleton()->opts &= ~SH_OPTS_JOBC;
 		if (process_redirect(p))
 			exit (1);
 		process_setgroup(p, 0);

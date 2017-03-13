@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:06:16 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 16:10:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/13 20:46:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		iscondition_branch(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if ((node->type == TK_IF || node->type == TK_ELIF)
+		if ((node->type == TK_ELIF)
 			&& (token->type == TK_ELIF || token->type == TK_ELSE)
 			&& node->nest == 0)
 			return (1);
@@ -93,6 +93,6 @@ int		add_if(t_btree **ast, t_list **lst)
 	node = (*ast)->item;
 	node->type = TK_IF;
 	token->type = TK_ELIF;
-	add_cmd(ast, lst);
+	add_cmd(&(*ast)->right, lst);
 	return (0);
 }
