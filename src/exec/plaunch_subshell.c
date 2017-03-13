@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 00:11:44 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 23:59:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 00:00:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int				plaunch_subshell(t_process *p)
 	}
 	else if (pid > 0)
 		return (pid);
+	else if (pid == -1)
+		ft_dprintf(2, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
 	return (0);
 }
