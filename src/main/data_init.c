@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 23:48:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 21:39:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 extern char	**environ;
 
-int		data_init(void)
+int		data_init(int ac, char **av)
 {
 	t_data	*data;
 	char	*term_name;
 
 	data = data_singleton();
+	data->argc = ac;
+	data->argv = ft_sstrdup(av);
 	data->env = ft_sstrdup(environ);
 	data->local_var = NULL;
 	set_exitstatus(0, 1);

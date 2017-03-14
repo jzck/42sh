@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/12 01:01:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 21:34:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 
 struct	s_data
 {
+	t_flag	opts;
 	char	**env;
 	int		argc;
 	char	**argv;
-	t_flag	opts;
 	t_line	line;
 	t_comp	*comp;
 	t_exec	exec;
@@ -47,11 +47,9 @@ struct	s_data
 	t_list	*lst_func;
 };
 
-void	shell_get_opts(int ac, char **av);
-char	*shell_get_avdata();
-void	shell_init(int ac, char **av);
+int		shell_init(int ac, char **av);
 void	shell_exit(void);
-int		data_init(void);
+int		data_init(int ac, char **av);
 void	data_exit(void);
 
 int	instruction_free(t_list **token, t_parser *parser,

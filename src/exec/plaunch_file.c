@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 23:15:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:48:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		plaunch_file(t_process *p)
 		}
 		else if (S_ISDIR(p->data.cmd.stat->st_mode))
 		{
-			ft_dprintf(2, "{red}%s: %s: Is a directory{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
+			ft_dprintf(2, "{red}%s: %s: is a directory{eoc}\n", SHELL_NAME, p->data.cmd.av[0]);
 			exit(126);
 		}
 		else if (access(p->data.cmd.path, X_OK) == -1)

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:29:17 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/03 11:55:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:13:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 
 	(void)envp;
 	(void)path;
-	env = &data_singleton()->env;
+	env = ft_strcmp(av[0], "local") == 0 ?
+		&data_singleton()->local_var : &data_singleton()->env;
 	i = 1;
 	while (av[i])
 	{

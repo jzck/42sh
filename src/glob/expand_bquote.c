@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/24 22:04:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 20:07:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char					*get_output(char *command)
 	int		len;
 
 	if (!(output = command_getoutput(command)))
-		return (ft_strnew(0));
+		return (NULL);//ft_strnew(0));
 	len = ft_strlen(output);
 	while (output[--len] == '\n')
 		output[len] = '\0';
@@ -98,10 +98,8 @@ static int					search_bquote(t_bquote *me)
 			me->mid = ft_strsub(sta, 1, me->str - sta - 1);
 			me->s1 = ft_strsub(CH(*me->wk)[0], 0, sta - CH(*me->wk)[0]);
 			me->s2 = ft_strdup(me->str + 1);
-			content = get_output(me->mid);
-			DG();
-			init_expand(me, content, is_char_esc(me->esc, CH(*me->wk)[0], sta));
-			DG();
+			if ((content = get_output(me->mid)))
+				init_expand(me, content, is_char_esc(me->esc, CH(*me->wk)[0], sta));
 			ft_strdel(&me->mid);
 			ft_strdel(&me->s1);
 			ft_strdel(&me->s2);
@@ -113,6 +111,13 @@ static int					search_bquote(t_bquote *me)
 	return (0);
 }
 
+void						delete(t_ld **tmp, t_ld **src)
+{
+	if (*tmp == *src)
+		ft_ld_del(src, &ft_tabdel);
+	else
+		ft_ld_del(tmp, &ft_tabdel);
+}
 void						expand_bquote(t_glob *gl)
 {
 	t_ld		*tmp;
@@ -133,8 +138,9 @@ void						expand_bquote(t_glob *gl)
 			me.str = CH(gl->m_pat)[0];
 			if ((tmp = gl->m_pat) &&
 					(do_it = search_bquote(&me)) == 1)
-				ft_ld_del(&tmp, &ft_tabdel);
-			if (!gl->m_pat->next)
+				delete(&tmp, &gl->m_pat);
+//				ft_ld_del(&tmp, &ft_tabdel);
+			if (!gl->m_pat || !gl->m_pat->next)
 				break ;
 			gl->m_pat = gl->m_pat->next;
 		}

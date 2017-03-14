@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 22:44:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 22:53:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	i = 0;
 	env = ft_strcmp(av[0], "local") == 0 ?
 		&data_singleton()->local_var : &data_singleton()->env;
-	if (ft_strcmp(av[0], "setenv") == 0
-		|| ft_strcmp(av[0], "export") == 0
-		|| ft_strcmp(av[0], "local") == 0)
-		av++;
+	av++;
 	if (!av[0])
 	{
 		ft_sstrprint(*env, '\n');
@@ -34,7 +31,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	}
 	else
 	{
-		DG("str3join(%s,%s,%s)", av[0], "=", av[1]);
 		str = ft_str3join(av[0], "=", av[1]);
 		while ((*env) && (*env)[i])
 		{
