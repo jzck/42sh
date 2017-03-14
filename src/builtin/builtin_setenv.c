@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:11:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:40:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	}
 	else
 	{
-		DG("str3join(%s,%s,%s)", av[0], "=", av[1]);
 		str = ft_str3join(av[0], "=", av[1]);
 		while ((*env) && (*env)[i])
 		{

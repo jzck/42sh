@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:11:58 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:50:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int		handle_instruction(int fd)
 		if ((ret = readline(fd, get_lexer_stack(lexer) ||
 			parser.state == UNDEFINED || lexer.state == HEREDOC, &str)))
 		{
-			DG("readline trap");
 			if (ret == -1)
 				return (-1);
 			return (parser.state == UNDEFINED ? error_eof(&token,
 			&parser, &ast) : 1);
 		}
-		DG("INPUT STRING IS [%s]", str);
 		if (lexer.state == HEREDOC)
 		{
 			ft_strappend(&lexer.str, (char[]){'\n', 0});
@@ -62,7 +60,6 @@ int		handle_instruction(int fd)
 		if (parser.state == ERROR)
 			error_syntax(&token, &parser, &ast);
 		lexer.state = data_singleton()->heredoc_queue ? HEREDOC : 0;
-		/* DG("lexer.state=%i", lexer.state); */
 		if (lexer.state)
 			continue;
 		else if (parser.state == SUCCESS)
@@ -86,10 +83,11 @@ int		handle_instruction(int fd)
 
 int		get_input_fd(char **av)
 {
-	t_data	*data;
-	char	*file;
-	int		fds[2];
-	int		fd;
+	t_data		*data;
+	char		*file;
+	int			fds[2];
+	int			fd;
+	struct stat	buf;
 
 	data = data_singleton();
 	if (SH_IS_INTERACTIVE(data->opts))
@@ -98,22 +96,23 @@ int		get_input_fd(char **av)
 	{
 		pipe(fds);
 		fd = fds[PIPE_READ];
-		/* file = shell_get_avdata(); */
 		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
-	/* else if ((file = shell_get_avdata())) */
 	else if ((file = *cliopts_getdata(av)))
 	{
-		if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
-			return (-1);
+		stat(file, &buf);
+		fd = -1;
+		if (S_ISDIR(buf.st_mode))
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", g_argv[0], file);
+		else if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", g_argv[0], file);
 		return (fd);
 	}
-	else
-		return (STDIN);
+	return (STDIN);
 }
 
 int		main(int ac, char **av)
@@ -123,16 +122,13 @@ int		main(int ac, char **av)
 	g_argv = av;
 	setlocale(LC_ALL, "");
 	DG("{inv}{bol}{gre}start of shell{eoc}");
-	shell_init(ac, av);
-	if ((fd = get_input_fd(av)) < 0)
-	{
-		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, *cliopts_getdata(av));
+	if (shell_init(ac, av))
 		return (1);
-	}
+	if ((fd = get_input_fd(av)) < 0)
+		return (1);
 	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);
 	while (handle_instruction(fd) == 0)
 		;
-	DG("gonna exit");
 	builtin_exit(NULL, NULL, NULL);
 	return (0);
 }

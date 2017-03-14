@@ -6,19 +6,19 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 21:10:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:39:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cliopts	opts[] =
+static t_cliopts	export_opts[] =
 {
 	{'p', NULL, BT_EXPORT_LP, 0, NULL},
 	{0, NULL, 0, 0, NULL},
 };
 
-int		bt_export_print(void)
+int					bt_export_print(void)
 {
 	char	**env;
 	char	*equal;
@@ -35,7 +35,8 @@ int		bt_export_print(void)
 	return (0);
 }
 
-int		builtin_export(const char *path, char *const av[], char *const envp[])
+int					builtin_export(
+		const char *path, char *const av[], char *const envp[])
 {
 	char		*equal;
 	t_btexport	data;
@@ -44,7 +45,8 @@ int		builtin_export(const char *path, char *const av[], char *const envp[])
 	i = 0;
 	(void)envp;
 	(void)path;
-	if (cliopts_get((char**)av, opts, &data))
+	data.flag = 0;
+	if (cliopts_get((char**)av, export_opts, &data))
 		ft_perror();
 	if (data.flag & BT_EXPORT_LP)
 		return (bt_export_print());
