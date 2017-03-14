@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 22:22:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 00:45:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_distrostree		g_distrostree[] =
 	{&isloop, &add_loop_cmd},
 	{&iscondition_branch, &add_branch},
 	{&iscondition, &add_condition_cmd},
-	{&iscase_pattern, &add_pattern},
 	{&iscase, &add_case_cmd},
 	{&iscase_branch, &add_branch},
 	{&issubshell, &add_subshell_cmd},
@@ -40,7 +39,7 @@ int					superflous_token(t_btree **ast, t_list **lst)
 	if (*lst)
 	{
 		token = (*lst)->content;
-		if (token->type == TK_IN || token->type == TK_DSEMI)
+		if (token->type == TK_IN)
 			return (1);
 	}
 	return (0);
@@ -49,12 +48,16 @@ int					superflous_token(t_btree **ast, t_list **lst)
 static int			no_del_token(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
+	t_token		*token;
 
-	(void)lst;
 	node = NULL;
+	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
+		if (token->type == TK_WORD && (node->type == TK_CASE
+			|| node->type == TK_PAREN_OPEN))
+			return (0);
 		if (node->type != TK_DO && node->type != TK_THEN
 			&& node->type != CMD && node->type != REDIR
 			&& node->type != TK_ASSIGNMENT_WORD)
@@ -70,7 +73,7 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 16)
+	while (++i < 15)
 	{
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
@@ -87,17 +90,13 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	if (token->type == TK_IF)
 		add_if(ast, lst);
 	else if (token->type != TK_WORD)
-	{
-		DG("type is %s", read_state(token->type));
 		node->type = token->type;
-	}
-	else
+	else if (node->type != TK_CASE && node->type != TK_PAREN_OPEN)
 		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD)
-	{
-		DG("token data is %s", token->data);
 		ft_ld_pushback(&node->data.cmd.token,
 				gen_tab(token->data, token->esc, token->esc2, 1));
-	}
+	if (token->type == TK_WORD)
+		node->pattern = 1;
 	return (0);
 }

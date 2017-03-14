@@ -6,29 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:02:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 00:04:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int			exec_case(t_btree **ast)
-{
-	t_astnode	*node;
-	char		**av;
-	t_exec		*exec;
-
-	(void)ast;
-	exec = &data_singleton()->exec;
-	exec->attrs &= ~EXEC_CASE_BRANCH;
-
-	node = (*ast)->item;
-	av = token_to_argv(node->data.cmd.wordlist, 1);
-	exec->case_pattern = av;
-	return (0);
-}
-*/
-
 static int		do_case(t_process *p)
 {
 	t_exec	*exec;

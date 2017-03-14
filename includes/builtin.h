@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 22:59:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:09:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "types.h"
 # include "libft.h"
 # include "builtin_read.h"
+
+# define BT_EXPORT_LP	(1 << 0)
 
 t_execf	*is_builtin(t_process *p);
 int		builtin_export(const char *path, char *const av[], char *const envp[]);

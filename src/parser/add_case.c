@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 21:45:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 00:46:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,8 @@ int		iscase(t_btree **ast, t_list **lst)
 			|| node->type == TK_AMP || node->type == TK_PIPE)
 			&& iscase(&(*ast)->right, lst) == 1)
 			return (1);
-		if (node->type == TK_CASE)
-			return (1);
-	}
-	return (0);
-}
-
-int		iscase_pattern(t_btree **ast, t_list **lst)
-{
-	t_astnode	*node;
-	t_token		*token;
-
-	node = NULL;
-	token = (*lst)->content;
-	if (*ast)
-	{
-		node = (*ast)->item;
 		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN)
-			&& token->type == TK_WORD && node->pattern == 0)
+			&& node->pattern == 1 && node->full == 0)
 			return (1);
 	}
 	return (0);
@@ -58,7 +42,7 @@ int		iscase_branch(t_btree **ast, t_list **lst)
 	if (*ast)
 	{
 		node = (*ast)->item;
-		if ((node->type == TK_PAREN_OPEN || node->type == TK_CASE)
+		if ((node->type == TK_PAREN_OPEN)
 			&& node->nest == 0 && token->type == TK_PAREN_OPEN)
 			return (1);
 	}
@@ -81,23 +65,10 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN
 		&& node->nest == 0)
 		return ((node->full = 1));
-	else if ((token->type == TK_ESAC || token->type == TK_PAREN_CLOSE)
+	else if ((token->type == TK_ESAC)
 		&& node->nest == 0)
+		return ((node->full = 1));
+	else if (token->type == TK_PAREN_CLOSE)
 		return (0);
 	return (add_cmd(&(*ast)->right, lst));
-}
-
-int		add_pattern(t_btree **ast, t_list **lst)
-{
-	t_astnode	*node;
-	t_token		*token;
-
-	token = (*lst)->content;
-	node = (*ast)->item;
-	DG("token type is %s", read_state(token->type));
-	DG("node type is %s", read_state(node->type));
-	ft_ld_pushback(&node->data.cmd.token,
-			gen_tab(token->data, token->esc, token->esc2, 1));
-	node->pattern = 1;
-	return (0);
 }
