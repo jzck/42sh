@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/10 17:43:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 14:00:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int			c_glob_matching(void)
 	glob_echap = (unsigned char *)ft_strnew(ft_strlen(str) >> 3);
 	ft_bzero(glob_echap, ft_strlen(str) >> 3);
 	ss_glob = glob(current_word, glob_echap, glob_echap, 1);
-//	ss_glob = glob(current_word, glob_echap, glob_echap);
 	free(current_word);
 	if (!*ss_glob || !**ss_glob || !ft_strncmp(str + pos, *ss_glob, ft_strlen(*ss_glob)))
 		return (0);

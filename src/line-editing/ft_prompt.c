@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 12:32:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 16:00:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ static int	promt_git_status(int fd)
 		line = ft_strdup(ft_strrchr(line, '/') + 1);
 	else
 		line = ft_strdup(line + 3);
-	ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
 	free(tmp);
+	ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
 	if (!get_next_line(fd, &tmp))
 		printf("\x1b[38;5;83m %C ", L'✓');
 	else
 	{
 		printf("\x1b[38;5;1m %C ", L'✗');
-		while (get_next_line(fd, &tmp))
-			free(tmp);
+		free(tmp);
 	}
+	while (get_next_line(fd, &tmp))
+		free(tmp);
+	free(tmp);
 	len = ft_strlen(line);
 	ft_strdel(&line);
 	fflush(NULL);
