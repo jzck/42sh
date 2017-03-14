@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 00:49:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 22:04:24 by ariard           ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -197,9 +197,6 @@ enum	e_sym
 	OPEN_FUNC,
 	CLOSE_FUNC,
 	CLOSE_LIST,
-	MATH,
-	MATH_PLUS,
-	MATH_SUP,
 	REDIR,
 	CMD,
 	HEREDOCDATA,

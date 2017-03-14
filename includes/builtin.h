@@ -30,5 +30,6 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[]);
 int		builtin_bg(const char *path, char *const av[], char *const envp[]);
 int		builtin_history(const char *path, char *const av[], char *const envp[]);
 int		builtin_hash(const char *path, char *const av[], char *const envp[]);
+int		builtin_math(const char *path, char *const av[], char *const envp[]);
 
 #endif

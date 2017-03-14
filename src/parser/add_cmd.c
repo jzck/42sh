@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 22:22:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_distrostree		g_distrostree[] =
 	{&iscase_pattern, &add_pattern},
 	{&iscase, &add_case_cmd},
 	{&iscase_branch, &add_branch},
-	{&ismath, &add_null},
-	{&ismath_expr, &add_pattern},
 	{&issubshell, &add_subshell_cmd},
 	{&isfunc_name, &add_null},
 	{&isfunc, &add_func_cmd},
@@ -72,7 +70,7 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	int			i;
 
 	i = -1;
-	while (++i < 18)
+	while (++i < 16)
 	{
 		if (g_distrostree[i].test(ast, lst) == 1)
 		{
@@ -96,7 +94,10 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	else
 		node->type = CMD;
 	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD)
+	{
+		DG("token data is %s", token->data);
 		ft_ld_pushback(&node->data.cmd.token,
 				gen_tab(token->data, token->esc, token->esc2, 1));
+	}
 	return (0);
 }

@@ -142,8 +142,6 @@ int		isdir_sep(t_btree **ast, t_list **list);
 int		isdir_word(t_btree **ast, t_list **list);
 int		isnull(t_btree **ast, t_list **list);
 int		isionumber(t_btree **ast, t_list **lst);
-int		ismath(t_btree **ast, t_list **lst);
-int		ismath_expr(t_btree **ast, t_list **lst);
 int		isbang(t_btree **ast, t_list **lst);
 int		isbang_sep(t_btree **ast, t_list **lst);
 

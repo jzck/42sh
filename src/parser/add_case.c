@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 22:38:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 21:45:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ int		add_pattern(t_btree **ast, t_list **lst)
 
 	token = (*lst)->content;
 	node = (*ast)->item;
+	DG("token type is %s", read_state(token->type));
 	DG("node type is %s", read_state(node->type));
-	ft_ld_pushback(&node->data.cmd.wordlist,
+	ft_ld_pushback(&node->data.cmd.token,
 			gen_tab(token->data, token->esc, token->esc2, 1));
 	node->pattern = 1;
 	return (0);
