@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_job_in_foreground.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:37:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 12:45:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int		put_job_in_foreground(t_job *j, int cont)
 	DG("check");
 	job_wait(j->id);
 	DG("check");
-	job_remove(j->id);
-	DG("check");
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 	{
 		tcsetpgrp(STDIN, jobc->shell_pgid);
 		tcgetattr(STDIN, &j->tmodes);
 		tcsetattr(STDIN, TCSADRAIN, &jobc->shell_tmodes);
 	}
+	job_remove(j->id);
+	DG("check");
 	return (0);
 }
