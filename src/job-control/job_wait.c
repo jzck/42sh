@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 11:49:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:36:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:43:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		job_wait(int id)
 	DG("job wait id=[%i], pgid=[%i]", id, j->pgid);
 	do
 	{
-		if ((pid = waitpid(-j->pgid, &status, WUNTRACED)) == -1)
+		if ((pid = waitpid(-j->pgid, &status, WUNTRACED)) == -1
+				&& errno != ECHILD)
 			ft_dprintf(2, "{red}%s: waitpid error errno=%i{eoc}\n", SHELL_NAME, errno);
 		DG("waitpid->[%d]", pid);
 	}
