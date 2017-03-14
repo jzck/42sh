@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 21:34:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 22:19:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int		readline(int fd, int prompt, char **input)
 {
 	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
+	{
+		DG("GNL on fd=%i", fd);
 		return (get_next_line(fd, input) == 0);
+	}
 	readline_init(prompt);
 	*input = ft_read_stdin();
 	if (STR)
