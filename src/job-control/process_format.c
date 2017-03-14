@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 22:29:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 20:21:46 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	process_format_com_long(t_list **plist)
 	t_process	*p;
 
 	p = (*plist)->content;
-	(p->map.print)(p);
+	if (p->map.print)
+		(p->map.print)(p);
 	// faudrait printer les redirections (p->redir) ici genre avec ft_lstiter je pense
 	if ((*plist)->next)
 		ft_putstr(" |");
@@ -64,7 +65,8 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 			p->attrs &= ~PROCESS_STATE_MASK;
 			p->attrs &= ~PROCESS_RUNNING;
 		}
-		(p->map.print)(p);
+		if (p->map.print)
+			(p->map.print)(p);
 		// faudrait printer les redirections (p->redir) ici genre avec ft_lstiter je pense
 		if ((*plist)->next)
 			ft_putstr(" | ");

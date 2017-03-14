@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:21:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 19:28:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 15:02:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			pop_heredoc(t_list **lst)
 	t_token	*token;
 	t_list	**head;
 	t_redir	*redir;
+	char	*tmp;
 
 	token = (*lst)->content;
 	if (token->type == HEREDOCDATA && data_singleton()->heredoc_queue != NULL)
@@ -34,8 +35,10 @@ int			pop_heredoc(t_list **lst)
 			}
 			else
 			{
+				tmp = redir->heredoc_data;
 				redir->heredoc_data = ft_str3join(redir->heredoc_data,
-					(char*)token->data, "\n");
+						(char*)token->data, "\n");
+				ft_strdel(&tmp);
 			}
 		}
 		ft_lstdel(lst, &token_free);

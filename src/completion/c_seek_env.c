@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 15:50:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 10:10:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 17:21:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int			c_seek_env(t_comp *c, char *current_word)
 	match = ft_strdupi_w(current_word + 1);
 	while (env[i])
 	{
-		if (!ft_strncmp(match, env[i], ft_strlen(match)))
+		if (!ft_strncmp(match, env[i], ft_strlen(match)) &&
+												env[i][ft_strlen(match)] != '=')
 			c_storing(c, ft_strndup(env[i], ft_strchr(env[i], '=') - env[i]));
 		++i;
 	}

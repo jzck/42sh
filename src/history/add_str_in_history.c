@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:27:03 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 09:50:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 14:58:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_add_in_history_file(char *str)
 		return ;
 	while (hist[i])
 	{
-		write(fd, hist[i], ft_strlen(str));
+		write(fd, hist[i], ft_strlen(hist[i]));
 		write(fd, "\n", 1);
 		++i;
 	}
