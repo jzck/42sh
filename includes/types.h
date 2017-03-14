@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 00:49:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 20:25:53 by jhalford         ###   ########.fr       */
 /*   Updated: 2017/03/07 18:35:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -38,9 +38,10 @@ typedef struct s_comp			t_comp;
 typedef struct s_exec			t_exec;
 typedef struct s_jobc			t_jobc;
 typedef enum e_mode				t_mode;
+typedef struct s_data_template	t_btexport;
 
 /*
-**	Execution types
+**	Lexer types
 */
 
 typedef struct s_lexer			t_lexer;

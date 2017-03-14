@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "builtin_read.h"
 
+# define BT_EXPORT_LP	(1 << 0)
+
 t_execf	*is_builtin(t_process *p);
 int		builtin_export(const char *path, char *const av[], char *const envp[]);
 int		builtin_unset(const char *path, char *const av[], char *const envp[]);

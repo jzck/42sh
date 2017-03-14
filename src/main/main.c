@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 23:58:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 20:49:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		handle_instruction(int fd)
 	return (0);
 }
 
-int		get_input_fd()
+int		get_input_fd(char **av)
 {
 	t_data	*data;
 	char	*file;
@@ -96,13 +96,15 @@ int		get_input_fd()
 	{
 		pipe(fds);
 		fd = fds[PIPE_READ];
-		file = shell_get_avdata();
+		/* file = shell_get_avdata(); */
+		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
-	else if ((file = shell_get_avdata()))
+	/* else if ((file = shell_get_avdata())) */
+	else if ((file = *cliopts_getdata(av)))
 	{
 		if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
 			return (-1);
@@ -116,12 +118,13 @@ int		main(int ac, char **av)
 {
 	int		fd;
 
+	g_argv = av;
 	setlocale(LC_ALL, "");
 	DG("{inv}{bol}{gre}start of shell{eoc}");
 	shell_init(ac, av);
-	if ((fd = get_input_fd()) < 0)
+	if ((fd = get_input_fd(av)) < 0)
 	{
-		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, shell_get_avdata());
+		ft_printf("{red}%s: %s: No such file or directory\n{eoc}", SHELL_NAME, *cliopts_getdata(av));
 		return (1);
 	}
 	DG("JOBC is %s, fd=[%i]", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF", fd);

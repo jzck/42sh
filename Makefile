@@ -270,7 +270,6 @@ main/data_singleton.c\
 main/ft_putast.c\
 main/instruction_free.c\
 main/main.c\
-main/shell_get_avdata.c\
 main/shell_get_opts.c\
 main/shell_init.c\
 parser/add_bang.c\
