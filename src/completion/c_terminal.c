@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 16:07:36 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 10:51:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			c_term_mv_back(t_comp *c)
 	int		value;
 
 	i = 0;
-	if (c->c_sy > c->win_y)
+	if (c->c_line > c->win_y)
 		value = c->m_size;
 	else
 		value = c->c_line;
@@ -77,7 +77,7 @@ void			c_term_mv_down(t_comp *c)
 	int		value;
 
 	i = 0;
-	if (c->c_sy > c->win_y)
+	if (c->c_line > c->win_y)
 		value = c->m_size;
 	else
 		value = c->c_line;
@@ -88,7 +88,7 @@ void			c_term_mv_down(t_comp *c)
 		i++;
 	}
 	i = 0;
-	if (c->c_sy > c->win_y)
+	if (c->c_line > c->win_y)
 		value = c->m_size - 1;
 	else
 		value = c->c_line - 1;

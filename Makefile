@@ -263,6 +263,7 @@ line-editing/move_up_and_down.c\
 line-editing/print_and_del.c\
 line-editing/queue.c\
 line-editing/readline.c\
+line-editing/resize.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\

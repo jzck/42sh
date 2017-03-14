@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 14:08:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 11:09:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	shell_init(int ac, char **av)
 		signal(SIGTTIN, SIG_IGN);
 		signal(SIGTTOU, SIG_IGN);
 		signal(SIGCHLD, SIG_DFL);
+		signal(SIGWINCH, sigwinch_resize);
 		*shell_pgid = getpid();
 		if (setpgid(*shell_pgid, *shell_pgid))
 		{

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 17:20:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:12:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static char	*c_current_words(t_comp *c)
 		--pos;
 	if (c->rcmd[pos] == ' ')
 		++pos;
+	DG("rcmd = \"%s\"", c->rcmd);
 	return (c->rcmd + pos);
 }
 
@@ -69,7 +70,7 @@ int			c_matching(t_data *s, t_comp *c)
 	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')) && !c_chevron(c))
 		c_seek_binary(s, c);
 	else
-		c_seek_files(s, c);
+		c_seek_files(s, c, current_word);
 	if (s->comp && s->comp->lst)
 	{
 		c_sizing(c);

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 17:20:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 11:22:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		c_next_item(t_comp *c)
 ** of the cursor is restored.
 */
 
-static int		c_dispatcher(t_data *s)
+int		c_dispatcher(t_data *s)
 {
 	if (s->comp && s->comp->lst == NULL)
 	{

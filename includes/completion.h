@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 17:38:50 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:09:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int							completion(long int key);
 void						c_init(t_data *s, long int input);
 int							c_matching(t_data *s, t_comp *c);
 int							c_seek_binary(t_data *s, t_comp *c);
-int							c_seek_files(t_data *s, t_comp *c);
+int							c_seek_files(t_data *s, t_comp *c, char *current_word);
 int							c_parser(t_comp *c, char *path, char *name);
 int							c_sizing(t_comp *c);
 
