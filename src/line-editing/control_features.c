@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/08 23:36:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 09:40:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_control_d(void)
 	{
 		ft_putstr("exit\n");
 		builtin_exit(NULL, (char*[]){"exit", NULL}, NULL);
+		data_singleton()->line.is_prompt ? ft_prompt() : ft_putstr("> ");
 	}
 	else if (POS < ft_strlen(STR))
 		ft_del();
