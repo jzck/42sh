@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 12:12:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:29:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static char	*c_current_words(t_comp *c)
 		--pos;
 	if (c->rcmd[pos] == ' ')
 		++pos;
-	DG("rcmd = \"%s\"", c->rcmd);
 	return (c->rcmd + pos);
 }
 
