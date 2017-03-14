@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:50:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:08:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,24 @@ int		get_input_fd(char **av)
 	else if (data->opts & SH_OPTS_LC)
 	{
 		pipe(fds);
-		fd = fds[PIPE_READ];
+		dup2_close(fds[PIPE_READ], 10);
+		fd = 10;
+		//fd = fds[PIPE_READ];
 		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
-	else if ((file = *cliopts_getdata(av)))
+	else if ((file = *cliopts_getdata(av)) && !stat(file, &buf))
 	{
-		stat(file, &buf);
 		fd = -1;
 		if (S_ISDIR(buf.st_mode))
-			ft_printf("{red}%s: %s: is a directory\n{eoc}", g_argv[0], file);
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", av[0], file);
 		else if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
-			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", g_argv[0], file);
-		return (fd);
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", av[0], file);
+		if (fd > 0 && !dup2_close(fd, 10) && (fd = 10))
+			return (fd);
 	}
 	return (STDIN);
 }
