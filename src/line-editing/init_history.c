@@ -6,11 +6,25 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 00:09:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 13:42:15 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int		ft_str_is_print(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isprint(str[i]))
+			return (0);
+		++i;
+	}
+	return (1);
+}
 
 void			ft_init_history(void)
 {
@@ -27,8 +41,9 @@ void			ft_init_history(void)
 		return ;
 	while (get_next_line(fd, &str) > 0)
 	{
-		ft_push_back_history(&data_singleton()->line.list_beg,
-		ft_create_history_list(str));
+		if (ft_str_is_print(str) && *str)
+			ft_push_back_history(&data_singleton()->line.list_beg,
+												ft_create_history_list(str));
 		free(str);
 	}
 	free(path);
