@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:43 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 00:03:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 01:57:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static int		do_for(t_process *p)
 	char		**av;
 	char		*var;
 
-	temp = p->data.d_for.list_word;
+	temp = p->data.d_for.token;
 	var = ((char **)temp->content)[0];
 	if (!word_is_assignment(temp->content))
 		return (error_badidentifier(var));
+	DG();
 	temp = temp->next;
 	while (temp)
 	{

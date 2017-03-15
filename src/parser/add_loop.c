@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:17:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 16:12:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 01:45:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 int		isloop(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
+	t_token		*token;
 
-	(void)lst;
 	node = NULL;
+	token = (*lst)->content;
 	if (*ast)
 	{
 		node = (*ast)->item;
+		if (node->type == TK_FOR && (token->type == TK_NEWLINE
+			|| token->type == TK_SEMI) && node->pattern == 0)
+			return (1);
+		if (node->type == TK_FOR && (token->type == TK_WORD || token->type == TK_NAME)
+			&& node->pattern == 0)
+		   return (0);
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
 			|| node->type == TK_AMP || node->type == TK_PIPE)
 			&& isloop(&(*ast)->right, lst) == 1)
@@ -79,6 +86,15 @@ int		add_loop_cmd(t_btree **ast, t_list **lst)
 
 int		add_loop_sep(t_btree **ast, t_list **lst)
 {
+	t_astnode	*node;
+
+	node = NULL;
+	if (*ast)
+	{
+		node = (*ast)->item;
+		if (node->type == TK_FOR && node->pattern == 0)
+			return (0);
+	}
 	if (!(*ast)->right)
 		return (add_sep(&(*ast)->left, lst));
 	else
