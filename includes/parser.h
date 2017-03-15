@@ -104,7 +104,6 @@ int		add_cmd(t_btree **ast, t_list **lst);
 int		add_file(t_btree **ast, t_list **lst);
 int		add_loop_cmd(t_btree **ast, t_list **lst);
 int		add_loop_sep(t_btree **ast, t_list **lst);
-int		add_loop_condition(t_btree **ast, t_list **lst);
 int		add_condition_cmd(t_btree **ast, t_list **lst);
 int		add_condition_sep(t_btree **ast, t_list **lst);
 int		add_branch(t_btree **ast, t_list **lst);
@@ -127,7 +126,6 @@ int		add_bang_sep(t_btree **ast, t_list **lst);
 int		add_if(t_btree **ast, t_list **lst);
 
 int		isloop(t_btree **ast, t_list **lst);
-int		isloop_condition(t_btree **ast, t_list **lst);
 int		iscase(t_btree **ast, t_list **lst);
 int		iscase_pattern(t_btree **ast, t_list **lst);
 int		iscase_branch(t_btree **ast, t_list **lst);
@@ -169,7 +167,6 @@ struct	s_cmd
 {
 	t_list	*redir;
 	t_ld	*token;
-	t_ld	*wordlist;
 };
 
 union	u_astdata
