@@ -84,6 +84,7 @@ exec/ft_findexec.c\
 exec/is_function.c\
 exec/mark_process_status.c\
 exec/node_copy.c\
+exec/op_stack_free.c\
 exec/pfree_cmd.c\
 exec/pfree_cond.c\
 exec/pfree_list.c\
