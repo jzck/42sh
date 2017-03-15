@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 03:51:52 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/15 23:10:25 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int		do_for(t_process *p)
 	var = ((char **)temp->content)[0];
 	if (!word_is_assignment(temp->content))
 		return (error_badidentifier(var));
-	DG();
 	temp = temp->next;
 	while (temp)
 	{
