@@ -264,7 +264,6 @@ line-editing/print_and_del.c\
 line-editing/queue.c\
 line-editing/readline.c\
 line-editing/resize.c\
-main/content_free.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
