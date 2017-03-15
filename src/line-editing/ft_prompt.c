@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 13:55:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:14:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int	promt_git_status(int fd)
 	free(tmp);
 	ft_printf("\x1b[38;5;47mgit:(\x1b[38;5;203m%s\x1b[38;5;47m)", line);
 	if (!get_next_line(fd, &tmp))
-		printf("\x1b[38;5;83m %C ", L'✓');
+		ft_printf("\x1b[38;5;83m ✓ ");
 	else
 	{
-		printf("\x1b[38;5;1m %C ", L'✗');
+		ft_printf("\x1b[38;5;1m ✗ ");
 		free(tmp);
 	}
 	while (get_next_line(fd, &tmp))
@@ -101,9 +101,9 @@ void		ft_prompt(void)
 	do_job_notification();
 	if (ft_getenv(data_singleton()->env, "?") &&
 					ft_atoi(ft_getenv(data_singleton()->env, "?")))
-		printf("\x1b[38;5;1m%C  ", L'➜');
+		ft_printf("\x1b[38;5;1m➜  ");
 	else
-		printf("\x1b[38;5;10m%C  ", L'➜');
+		ft_printf("\x1b[38;5;10m➜  ");
 	fflush(NULL);
 	ft_putstr("\x1b[38;5;361m");
 	ret += ft_currend_dir();
