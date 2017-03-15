@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 02:12:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 10:47:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,24 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	(void)envp;
 	(void)path;
 	i = 0;
-	env = ft_strcmp(av[0], "local") == 0 ?
-		&data_singleton()->local_var : &data_singleton()->env;
+	if (ft_strcmp(av[0], "local") == 0)
+	{
+		env = &data_singleton()->local_var;
+		av++;
+	}
+	else
+		env = &data_singleton()->env;
 	av++;
 	if (!av[0])
 	{
 		ft_sstrprint(*env, '\n');
 		ft_putchar('\n');
 	}
+	else if (!av[1])
+		ft_putendl_fd("usage : name [space] value", 2);
 	else
 	{
-		str = ft_str3join(av[0], "=", av[2]);
+		str = ft_str3join(av[0], "=", av[1]);
 		while ((*env) && (*env)[i])
 		{
 			if (ft_strcmp((*env)[i], av[0]) == '=')
