@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/14 21:59:22 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/15 18:11:31 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -30,7 +30,6 @@ OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
 builtin/bt_read_get.c\
-builtin/bt_read_parse.c\
 builtin/bt_read_term.c\
 builtin/builtin_cd.c\
 builtin/builtin_echo.c\
@@ -264,7 +263,6 @@ line-editing/print_and_del.c\
 line-editing/queue.c\
 line-editing/readline.c\
 line-editing/resize.c\
-main/content_free.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
@@ -310,6 +308,7 @@ $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		$(LIBS) \
 		$(LIBFT_LIB) \
 		$(FLAGS) $(D_FLAGS)
+	@strip -x $@
 	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
 
 $(LIBFT_LIB):

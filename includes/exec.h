@@ -6,16 +6,16 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 16:35:30 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 21:54:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "types.h"
+# include "job_control.h"
 # include <sys/stat.h>
-/* # include "types.h" */
-/* # include "minishell.h" */
 
 # define PIPE_READ		0
 # define PIPE_WRITE		1
@@ -31,7 +31,6 @@
 # define IS_PIPEEND(p)		((p).fdout == STDOUT)
 # define IS_PIPESINGLE(p)	(IS_PIPESTART(p) && IS_PIPEEND(p))
 
-/* # define EXEC_BG				(1 << 1) */
 # define EXEC_AND_IF			(1 << 2)
 # define EXEC_OR_IF				(1 << 3)
 # define EXEC_IF_BRANCH			(1 << 4)
@@ -122,6 +121,15 @@ struct	s_process
 	t_flag			attrs;
 };
 
+struct	s_job
+{
+	int				id;
+	pid_t			pgid;
+	t_flag			attrs;
+	t_list			*first_process;
+	struct termios	tmodes;
+};
+
 struct	s_exec
 {
 	t_job		job;
@@ -160,8 +168,6 @@ void	*redir_copy(void *data);
 void	redir_free(void *data, size_t content_size);
 
 char	**token_to_argv(t_ld *ld, int do_match);
-
-/* int		add_new_job(t_job *job); */
 
 int		error_badidentifier(char *name);
 t_btree	*is_function(t_process *p);

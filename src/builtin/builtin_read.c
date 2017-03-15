@@ -6,29 +6,46 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 18:08:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 21:22:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_readopt	g_readtab[] =
+t_cliopts	g_read_opts[] =
 {
-	/* {'a', READ_OPT_LA, NULL}, */
-	{'d', READ_OPT_LD, bt_read_getdelim},
-	/* {'e', READ_OPT_LE, NULL}, */
-	/* {'i', READ_OPT_LI, NULL}, */
-	{'n', READ_OPT_LN, bt_read_getnchars},
-	/* {'N', READ_OPT_UN, bt_read_getnchars}, */
-	{'p', READ_OPT_LP, bt_read_getprompt},
-	{'r', READ_OPT_LR, NULL},
-	{'s', READ_OPT_LS, NULL},
-	{'t', READ_OPT_LT, bt_read_gettimeout},
-	{'u', READ_OPT_LU, bt_read_getfd},
-	{0, 0, 0},
+	{'d', NULL, READ_OPT_LD, 0, bt_read_getdelim},
+	{'n', NULL, READ_OPT_LN, 0, bt_read_getnchars},
+	{'p', NULL, READ_OPT_LP, 0, bt_read_getprompt},
+	{'r', NULL, READ_OPT_LR, 0, NULL},
+	{'s', NULL, READ_OPT_LS, 0, NULL},
+	{'t', NULL, READ_OPT_LT, 0, bt_read_gettimeout},
+	{'u', NULL, READ_OPT_LU, 0, bt_read_getfd},
+	{0, 0, 0, 0, 0},
 };
 
+void		bt_read_usage(void)
+{
+	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]{eoc}\n");
+}
 
+int			bt_read_init(t_read *data, char **av)
+{
+	data->opts = 0;
+	data->delim = '\n';
+	data->nchars = -1;
+	data->prompt = NULL;
+	data->fd = 0;
+	data->timeout = 0;
+	data->input = NULL;
+	data->names = NULL;
+	if ((cliopts_get(av, g_read_opts, data)))
+		return(ft_perror());
+	if (data->names)
+		DG("%s,%s", data->names[0], data->names[1]);
+	bt_read_terminit(data);
+	return (0);
+}
 int		bt_read_loop(t_read *data)
 {
 	int		i;
@@ -44,7 +61,8 @@ int		bt_read_loop(t_read *data)
 		if (read(data->fd, buf, 1) <= 0)
 			return (1);
 		buf[1] = 0;
-		DG("got input [%x]", *buf);
+		if (!(data->opts &READ_OPT_LS))
+			ft_putchar(*buf);
 		if (!esc && *buf == data->delim)
 			break ;
 		esc = esc ? 0 : !(data->opts & READ_OPT_LR) && (*buf == '\\');
@@ -54,7 +72,6 @@ int		bt_read_loop(t_read *data)
 		if ((data->opts & READ_OPT_LN) && ++i >= data->nchars)
 			break ;
 	}
-	ft_putchar('\n');
 	return (0);
 }
 
@@ -62,24 +79,23 @@ int		bt_read_assign(t_read *data)
 {
 	char	*input;
 	char	**names;
-	char	*IFS;
+	char	*ifs;
 	char	*start;
 
 	input = data->input;
 	names = data->names ? data->names : (char*[]){"REPLY", NULL};
-	IFS = ft_getenv(data_singleton()->env, "IFS");
+	ifs = ft_getenv(data_singleton()->env, "IFS");
 	start = input;
 	while (*start && *names)
 	{
-		if (!(names[1]) || !IFS)
+		if (!(names[1]) || !ifs)
 		{
-			DG("setting env: %s=%x%x%x", *names, *start, start[1],start[2]);
 			builtin_setenv("setenv", (char*[]){"setenv", *names, start}, NULL);
 			break ;
 		}
-		while (*input && !ft_strchr(IFS, *input))
+		while (*input && !ft_strchr(ifs, *input))
 			input++;
-		while (input && ft_strchr(IFS, *input))
+		while (input && ft_strchr(ifs, *input))
 			*(input++) = 0;
 		builtin_setenv("setenv", (char*[]){"setenv", *names, start}, NULL);
 		start = input;
@@ -102,6 +118,9 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 		ret = 1;
 	else if (bt_read_assign(&data))
 		ret = 1;
-	bt_read_exit(&data);
+	if (ret != 0)
+		bt_read_usage();
+	if (ret != 2)
+		bt_read_exit(&data);
 	return (ret);
 }

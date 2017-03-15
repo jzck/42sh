@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:17:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int		do_function(t_process *p)
 {
+	DG("do function");
 	ft_exec(&p->data.function.content);
 	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 22:29:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:31:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <termios.h>
-# include "libft.h"
+/* # include "libft.h" */
 # include "types.h"
+# include "exec.h"
 
 # define JOB_NOTIFIED		(1 << 0)
 # define JOB_BG				(1 << 1)
@@ -27,15 +28,6 @@
 
 # define JOBS_OPTS_L		(1 << 0)
 
-struct	s_job
-{
-	int				id;
-	pid_t			pgid;
-	t_flag			attrs;
-	t_list			*first_process;
-	struct termios	tmodes;
-};
-
 struct	s_jobc
 {
 	t_list			*first_job;
@@ -43,8 +35,6 @@ struct	s_jobc
 	int				current_id;
 	struct termios	shell_tmodes;
 };
-
-# include "exec.h"
 
 t_list		*job_getprocess(pid_t pid);
 int			job_addprocess(t_process *p);

@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 16:34:51 by sbenning          #+#    #+#             */
-/*   Updated: 2017/01/19 21:53:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:47:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_curs	t_curs;
 
 /*
- * Cursor data : cursor's coordonate and windows size
+** Cursor data : cursor's coordonate and windows size
 */
 
 struct s_curs
@@ -36,13 +36,13 @@ struct s_curs
 };
 
 /*
- * Cursor reference singleton
+** Cursor reference singleton
 */
 
 t_curs					*curs_single(t_curs *curs, int set);
 
 /*
- * Cursor setup
+** Cursor setup
 */
 
 int						curs_li_ask(void);
@@ -54,20 +54,20 @@ int						curs_coo_setup(t_curs *curs);
 int						curs_setup(t_curs *curs);
 
 /*
- * Cursor cleanup
+** Cursor cleanup
 */
 
 int						curs_term_cleanup(void);
 int						curs_cleanup(t_curs *curs);
 
 /*
- * Cursor's data reset
+** Cursor's data reset
 */
 
 void					curs_reset(int sig);
 
 /*
- * Cursor manipulation function
+** Cursor manipulation function
 */
 
 void					curs_clear(t_curs *curs);
@@ -78,6 +78,7 @@ void					curs_backward(t_curs *curs, int offset);
 void					curs_write(t_curs *curs, char *str, size_t len);
 void					curs_write_static(t_curs *curs, char *str, size_t len);
 void					curs_video_write(t_curs *curs, char *str, size_t len);
-void					curs_video_write_static(t_curs *curs, char *str, size_t len);
+void					curs_video_write_static(
+		t_curs *curs, char *str, size_t len);
 
 #endif
