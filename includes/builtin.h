@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 17:21:56 by jhalford          #+#    #+#             */
+/*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/15 00:48:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +33,6 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[]);
 int		builtin_bg(const char *path, char *const av[], char *const envp[]);
 int		builtin_history(const char *path, char *const av[], char *const envp[]);
 int		builtin_hash(const char *path, char *const av[], char *const envp[]);
+int		builtin_math(const char *path, char *const av[], char *const envp[]);
 
 #endif

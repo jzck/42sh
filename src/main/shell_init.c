@@ -6,13 +6,13 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:50:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:25:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_cliopts	shell_opts[] =
+static t_cliopts	g_opts[] =
 {
 	{'c', NULL, SH_OPTS_LC, SH_OPTS_JOBC | SH_INTERACTIVE, NULL},
 	{-1, "no-jobcontrol", 0, SH_OPTS_JOBC, NULL},
@@ -40,7 +40,7 @@ static int			interactive_settings(void)
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
 		ft_dprintf(2, "Couldnt put the shell in it's own process group");
-		exit (1);
+		exit(1);
 	}
 	tcsetpgrp(STDIN, *shell_pgid);
 	tcgetattr(STDIN, &data->jobc.shell_tmodes);
@@ -61,7 +61,7 @@ int					shell_init(int ac, char **av)
 	}
 	else
 		DG("non interactive");
-	if (cliopts_get(av, shell_opts, data))
+	if (cliopts_get(av, g_opts, data))
 		return (ft_perror());
 	if (SH_IS_INTERACTIVE(data->opts))
 		interactive_settings();

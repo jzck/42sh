@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 01:46:48 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/15 03:51:52 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static int		do_for(t_process *p)
 	char		**av;
 	char		*var;
 
-	temp = p->data.d_for.list_word;
+	temp = p->data.d_for.token;
 	var = ((char **)temp->content)[0];
 	if (!word_is_assignment(temp->content))
 		return (error_badidentifier(var));
+	DG();
 	temp = temp->next;
 	while (temp)
 	{
@@ -30,8 +31,8 @@ static int		do_for(t_process *p)
 		av = token_to_argv(temp, 1);
 		while (av[++i])
 		{
-			builtin_setenv("setenv", (char*[]){var, av[i], 0},
-					data_singleton()->local_var);
+			builtin_setenv("setenv", (char*[]){"local" ,var, av[i], 0},
+					NULL);
 			ft_exec(&p->data.d_for.content);
 		}
 		temp = temp->next;
@@ -64,33 +65,3 @@ int				plaunch_for(t_process *p)
 		do_for(p);
 	return (0);
 }
-/*
-   int			exec_for(t_btree **ast)
-   {
-   t_astnode	*node;
-   t_ld		*temp;
-   char		**av;
-   char		*var;
-   int			i;
-
-   node = (*ast)->item;
-   temp = node->data.cmd.wordlist;
-   var = ((char **)(temp->content))[0];
-   if (ft_isdigit(var[0]))
-   return (error_badidentifier(var));
-   temp = temp->next;
-   while (temp)
-   {	
-   i = 0;
-   av = token_to_argv(temp, 1);
-   while (av[i])
-   {
-   builtin_setenv("setenv", (char*[]){var, av[i], 0},
-   data_singleton()->local_var);
-   ft_exec(&(*ast)->right);
-   i++;
-   }
-   temp = temp->next;
-   }
-   return (0);
-   }*/

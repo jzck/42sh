@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:38:36 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 00:49:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 01:24:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void		*node_copy(void *data)
 		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
 	}
 	if (old->type == TK_FOR || old->type == TK_PAREN_OPEN || old->type == TK_CASE)
-		new->data.cmd.wordlist = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
+		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
 	return (new);
 }

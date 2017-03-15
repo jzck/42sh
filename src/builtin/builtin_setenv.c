@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:40:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 02:12:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		builtin_setenv(const char *path, char *const av[], char *const envp[])
 	}
 	else
 	{
-		str = ft_str3join(av[0], "=", av[1]);
+		str = ft_str3join(av[0], "=", av[2]);
 		while ((*env) && (*env)[i])
 		{
 			if (ft_strcmp((*env)[i], av[0]) == '=')

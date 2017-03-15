@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 23:08:20 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/15 03:52:32 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		handle_instruction(int fd)
 	}
 	btree_print(STDBUG, ast, &ft_putast);
 	if (ft_exec(&ast))
-		return (1);
+		return (2);
 	instruction_free(&token, &parser, &ast);
 	if (SH_IS_INTERACTIVE(data_singleton()->opts) && *lexer.str)
 		ft_add_str_in_history(lexer.str);
@@ -97,7 +97,6 @@ int		get_input_fd(char **av)
 		pipe(fds);
 		dup2_close(fds[PIPE_READ], 10);
 		fd = 10;
-		//fd = fds[PIPE_READ];
 		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);

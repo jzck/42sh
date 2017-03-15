@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:26:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 02:04:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ static int		do_if(t_process *p)
 
 	exec = &data_singleton()->exec;
 	exec->attrs &= ~EXEC_IF_BRANCH;
-	ft_exec(&p->data.d_if.condition);
-	if (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
-	{
-		exec->attrs |= EXEC_IF_BRANCH;
-		ft_exec(&p->data.d_if.content);
-	}
+	ft_exec(&p->data.d_if.content);
 	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
 }
 

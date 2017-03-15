@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:17:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 01:07:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ struct	s_data_cond
 
 struct	s_data_list
 {
-	t_ld	*list_word;
+	t_ld	*token;
 	t_btree	*content;
 };
 

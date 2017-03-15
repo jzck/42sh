@@ -6,43 +6,21 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:02:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 01:10:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int			exec_case(t_btree **ast)
-{
-	t_astnode	*node;
-	char		**av;
-	t_exec		*exec;
-
-	(void)ast;
-	exec = &data_singleton()->exec;
-	exec->attrs &= ~EXEC_CASE_BRANCH;
-
-	node = (*ast)->item;
-	av = token_to_argv(node->data.cmd.wordlist, 1);
-	exec->case_pattern = av;
-	return (0);
-}
-*/
 
 static int		do_case(t_process *p)
 {
 	t_exec	*exec;
 
+	DG("exec case");
 	exec = &data_singleton()->exec;
 	exec->attrs &= ~EXEC_CASE_BRANCH;
-	exec->case_pattern = token_to_argv(p->data.d_case.list_word, 1);
-/*	ft_exec(&p->data.d_if.condition);
-	if (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
-	{
-		exec->attrs |= EXEC_IF_BRANCH;
-		ft_exec(&p->data.d_if.content);
-	}
-	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));*/
+	exec->case_pattern = token_to_argv(p->data.d_case.token, 1);
+	ft_exec(&p->data.d_if.content);
 	return (0);
 }
 

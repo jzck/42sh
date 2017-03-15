@@ -6,29 +6,12 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 00:55:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int		exec_while(t_btree **ast)
-{
-	int ret;
-	DG("exec while condition");
-	ft_exec(&(*ast)->left);
-	DG("ret :[%s]", ft_getenv(data_singleton()->env, "?"));
-	while (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
-	{
-		DG("in the while");
-		ft_exec(&(*ast)->right);
-	ret = ft_atoi(ft_getenv(data_singleton()->env, "?"));
-		ft_exec(&(*ast)->left);
-	}
-	exit(ret);
-	return (0);
-}
-*/
+
 static int		do_while(t_process *p)
 {
 	int		ret;

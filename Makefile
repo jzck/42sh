@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/14 12:34:49 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/14 21:59:22 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ builtin/builtin_exit.c\
 builtin/builtin_export.c\
 builtin/builtin_hash.c\
 builtin/builtin_history.c\
+builtin/builtin_math.c\
 builtin/builtin_read.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
@@ -72,7 +73,6 @@ exec/exec_case_branch.c\
 exec/exec_elif.c\
 exec/exec_else.c\
 exec/exec_leaf.c\
-exec/exec_math.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
 exec/exec_reset.c\
@@ -277,7 +277,6 @@ parser/add_cmd.c\
 parser/add_condition.c\
 parser/add_func.c\
 parser/add_loop.c\
-parser/add_math.c\
 parser/add_number.c\
 parser/add_redir.c\
 parser/add_sep.c\
