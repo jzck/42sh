@@ -116,7 +116,6 @@ int		add_pattern(t_btree **ast, t_list **lst);
 int		add_subshell_cmd(t_btree **ast, t_list **lst);
 int		add_subshell_sep(t_btree **ast, t_list **lst);
 int		add_func_cmd(t_btree **ast, t_list **lst);
-int		add_func_sep(t_btree **ast, t_list **lst);
 int		add_one_func(t_btree **ast, t_list **lst);
 int		add_pipe(t_btree **ast, t_list **lst);
 int		add_null(t_btree **ast, t_list **lst);
@@ -178,10 +177,10 @@ union	u_astdata
 
 struct	s_astnode
 {
-	int		pattern;
-	int		nest;
-	int		full;
-	int		cache;
+	int			pattern;
+	int			nest;
+	int			full;
+	int			cache;
 	t_type		type;
 	t_astdata	data;
 };

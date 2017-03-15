@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 00:57:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:20:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	process_set_spec(t_process *p, t_btree *ast)
 	if (!ast)
 		return (0);
 	item = ast->item;
+	DG("process set spec");
 	while (g_setprocessmap[++i].id)
 		if (item->type == g_setprocessmap[i].id)
 		{

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:09:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 15:58:53 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:01:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_execf		*is_builtin(t_process *p)
 {
 	int		i;
 
+	DG("in builtin");
 	i = -1;
 	while (g_builtin[++i].name)
 	{

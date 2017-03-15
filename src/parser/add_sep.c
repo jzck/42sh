@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:12:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 01:41:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:57:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			add_sep(t_btree **ast, t_list **lst)
 	else if (issubshell(ast, lst))
 		return (add_subshell_sep(ast, lst));
 	else if (isfunc(ast, lst))
-		return (add_func_sep(ast, lst));
+		return (add_subshell_sep(ast, lst));
 	else if (isbang_sep(ast, lst))
 		return (add_bang_sep(ast, lst));
 	if (!*ast)
