@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plaunch_for.c                                       :+:      :+:    :+:   */
+/*   plaunch_for.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/07 17:34:43 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/13 20:28:57 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/15 01:46:48 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int		do_for(t_process *p)
 			builtin_setenv("setenv", (char*[]){var, av[i], 0},
 					data_singleton()->local_var);
 			ft_exec(&p->data.d_for.content);
-			i++;
 		}
 		temp = temp->next;
 	}

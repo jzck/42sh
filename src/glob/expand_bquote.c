@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 20:07:47 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:53:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ static void					init_expand(t_bquote *me, char *content, int esc)
 	{
 		ft_ld_pushfront(me->wk, gen_tab(ft_strjoinf(ft_strjoin(me->s1, content),
 						me->s2, 1),
-					calc_expand_esc(me->esc, ft_strlen(me->s1),
-						(int[2]){ft_strlen(content), 1},
-						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
-						ft_strlen(me->s2)}),
-					calc_expand_esc(me->esc2, ft_strlen(me->s1),
+	calc_expand_esc(me->esc, ft_strlen(me->s1), (int[2]){ft_strlen(content), 1},
+	(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid), ft_strlen(me->s2)}),
+	calc_expand_esc(me->esc2, ft_strlen(me->s1),
 						(int[2]){ft_strlen(content), 1},
 						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
 						ft_strlen(me->s2)}), 0));
@@ -75,7 +73,7 @@ static char					*get_output(char *command)
 	int		len;
 
 	if (!(output = command_getoutput(command)))
-		return (NULL);//ft_strnew(0));
+		return (NULL);
 	len = ft_strlen(output);
 	while (output[--len] == '\n')
 		output[len] = '\0';
@@ -88,7 +86,7 @@ static int					search_bquote(t_bquote *me)
 	char			*content;
 
 	sta = NULL;
-	while (*me->str)
+	while (*(++me->str))
 	{
 		sta = *me->str == '`' && !sta
 			&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str) ? me->str : sta;
@@ -99,14 +97,14 @@ static int					search_bquote(t_bquote *me)
 			me->s1 = ft_strsub(CH(*me->wk)[0], 0, sta - CH(*me->wk)[0]);
 			me->s2 = ft_strdup(me->str + 1);
 			if ((content = get_output(me->mid)))
-				init_expand(me, content, is_char_esc(me->esc, CH(*me->wk)[0], sta));
+				init_expand(me, content,
+						is_char_esc(me->esc, CH(*me->wk)[0], sta));
 			ft_strdel(&me->mid);
 			ft_strdel(&me->s1);
 			ft_strdel(&me->s2);
 			ft_strdel(&content);
 			return (1);
 		}
-		++me->str;
 	}
 	return (0);
 }
@@ -118,6 +116,7 @@ void						delete(t_ld **tmp, t_ld **src)
 	else
 		ft_ld_del(tmp, &ft_tabdel);
 }
+
 void						expand_bquote(t_glob *gl)
 {
 	t_ld		*tmp;
@@ -135,11 +134,10 @@ void						expand_bquote(t_glob *gl)
 			me.wk = &gl->m_pat;
 			me.esc = UCH(gl->m_pat)[1];
 			me.esc2 = UCH(gl->m_pat)[2];
-			me.str = CH(gl->m_pat)[0];
+			me.str = CH(gl->m_pat)[0] - 1;
 			if ((tmp = gl->m_pat) &&
 					(do_it = search_bquote(&me)) == 1)
 				delete(&tmp, &gl->m_pat);
-//				ft_ld_del(&tmp, &ft_tabdel);
 			if (!gl->m_pat || !gl->m_pat->next)
 				break ;
 			gl->m_pat = gl->m_pat->next;
