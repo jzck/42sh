@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 13:47:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:52:11 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,6 @@
 
 # define CORRUPT 1
 
-/* # define IS_QUOTES (1 << 0) */
-/* # define IS_BQUOTES (1 << 1) */
-/* # define IS_DQUOTES (1 << 2) */
-/* # define IS_BSLASH (1 << 3) */
-/* # define IS_ACCOLADE (1 << 4) */
-/* # define IS_BRACKET (1 << 5) */
-
 # define STR data_singleton()->line.input
 # define POS data_singleton()->line.pos
 
@@ -113,7 +106,8 @@ void			ft_get_next_str(char *str, size_t *pos);
 void			ft_putall_current_str(char *str, size_t *pos);
 void			ft_current_str(char *str, size_t pos);
 int				ft_strlen_next(char *str, size_t pos);
-void			ft_push_back_history(t_list_history **head, t_list_history *new);
+void			ft_push_back_history(
+		t_list_history **head, t_list_history *new);
 void			ft_prompt(void);
 char			*ft_remove_imput(char *str, size_t pos);
 char			*ft_realloc_imput(char *str, int a, size_t pos);
@@ -121,7 +115,8 @@ char			*ft_strdupi(char const *s);
 char			*ft_strndup(char const *s, int n);
 t_list_history	*ft_create_history_list(char *str);
 char			*ft_strdupi_w(char const *s);
-void			ft_realloc_str_history(char **str, size_t pos, int nb_his, int len);
+void			ft_realloc_str_history(
+		char **str, size_t pos, int nb_his, int len);
 void			ft_realloc_str_history_2(char **str, size_t pos, char *s);
 long long		ft_pow(int nbr, int power);
 void			ft_realloc_str_history_3(char **str, size_t pos, char *s);

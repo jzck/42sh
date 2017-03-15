@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 00:48:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:44:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int		builtin_env(const char *path, char *const argv[], char *const envp[]);
 int		builtin_echo(const char *path, char *const argv[], char *const envp[]);
 int		builtin_cd(const char *path, char *const argv[], char *const envp[]);
 int		builtin_exit(const char *path, char *const argv[], char *const envp[]);
-int		builtin_setenv(const char *path, char *const argv[], char *const envp[]);
-int		builtin_unsetenv(const char *path, char *const argv[], char *const envp[]);
+int		builtin_setenv(
+		const char *path, char *const argv[], char *const envp[]);
+int		builtin_unsetenv(
+		const char *path, char *const argv[], char *const envp[]);
 int		builtin_jobs(const char *path, char *const av[], char *const envp[]);
 int		builtin_fg(const char *path, char *const av[], char *const envp[]);
 int		builtin_bg(const char *path, char *const av[], char *const envp[]);

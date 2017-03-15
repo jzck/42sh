@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 19:57:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:13:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,6 @@ struct	s_read
 	char	*input;
 };
 
-struct s_readopt
-{
-	char	letter;
-	t_flag	flag;
-	int		(*get)(t_read *data, char *arg);
-};
-
-extern t_readopt	g_readtab[];
-
 int				builtin_read(const char *path, char *const av[], char *const envp[]);
 
 int				bt_read_init(t_read *data, char **av);
@@ -61,10 +52,10 @@ struct termios	bt_read_term(int init);
 int				bt_read_terminit(t_read *data);
 int				bt_read_exit(t_read *data);
 
-int				bt_read_getdelim(t_read *data, char *arg);
-int				bt_read_getnchars(t_read *data, char *arg);
-int				bt_read_getprompt(t_read *data, char *arg);
-int				bt_read_gettimeout(t_read *data, char *arg);
-int				bt_read_getfd(t_read *data, char *arg);
+int				bt_read_getdelim(char ***argv, t_read *data);
+int				bt_read_getnchars(char ***argv, t_read *data);
+int				bt_read_getprompt(char ***argv, t_read *data);
+int				bt_read_gettimeout(char ***argv, t_read *data);
+int				bt_read_getfd(char ***argv, t_read *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:02:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/06 13:56:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 21:23:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int		bt_read_terminit(t_read *data)
 
 	(void)data;
 	term = bt_read_term(1);
-	term.c_lflag &= ~(ICANON);
-	if (data->opts & READ_OPT_LS)
-		term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ~(ICANON | ECHO);
 	if (data->opts & READ_OPT_LT)
 	{
 		term.c_cc[VTIME] = data->timeout * 10;
