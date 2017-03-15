@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 02:04:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 04:18:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int				exec_leaf(t_btree **ast)
 
 	job = &data_singleton()->exec.job;
 	if (process_set(&p, *ast))
+		return (1);
+	if (p.type >= PROCESS_MAX)
 		return (1);
 	p.map = g_process_map[p.type];
 	if (!(process_launch(&p)))
