@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 23:53:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/15 23:18:56 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void					init_expand(t_bquote *me, char *content, int esc)
 	char			*ifs;
 	char			*content2;
 
-	ifs = esc ? NULL : ft_getenv(data_singleton()->env, "IFS");
+	ifs = esc ? NULL : ft_getenv(data_singleton()->local_var, "IFS");
 	content = ft_strtok(content, ifs);
 	if (!content || !(content2 = ft_strtok(NULL, ifs)))
 	{
