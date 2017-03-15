@@ -84,7 +84,6 @@ exec/ft_findexec.c\
 exec/is_function.c\
 exec/mark_process_status.c\
 exec/node_copy.c\
-exec/op_stack_free.c\
 exec/pfree_cmd.c\
 exec/pfree_cond.c\
 exec/pfree_list.c\
@@ -265,6 +264,7 @@ line-editing/print_and_del.c\
 line-editing/queue.c\
 line-editing/readline.c\
 line-editing/resize.c\
+main/content_free.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\

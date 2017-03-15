@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 16:06:24 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 16:35:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,6 @@ struct	s_exec
 	char		**case_pattern;
 	int			control_count;
 };
-
-void	op_stack_free(void *data, size_t content_size);
 
 int		exec_reset(void);
 int		process_setgroup(t_process *p, pid_t pid);

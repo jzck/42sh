@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:34:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 16:35:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	data_exit(void);
 
 int	instruction_free(t_list **token, t_parser *parser,
 	t_btree **ast);
+void		content_free(void *data, size_t content_size);
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

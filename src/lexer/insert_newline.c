@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 21:05:23 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/08 18:33:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 16:31:49 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int			insert_newline(t_list **alst)
 	token = token_init();
 	token->type = TK_NEWLINE;
 	ft_lsteadd(alst, ft_lstnew(token, sizeof(*token)));
+	free(token);
 	return (0);
-}	
+}
