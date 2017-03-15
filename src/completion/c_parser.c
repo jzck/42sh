@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 11:37:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 06:53:34 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void			c_add_to_lst(t_comp *c, t_clst *node)
 {
+	DG("\tADD %s", node->name);
 	if (c->lst == NULL)
 	{
 		c->lst = node;
@@ -41,6 +42,9 @@ void			c_add_to_lst(t_comp *c, t_clst *node)
 ** created and the function above is called to add it.
 */
 
+//TODO: The above function doesn't reject . and .. folder for abs_path. Fix needed.
+
+/*
 static int			c_storing(t_comp *c, char *value, unsigned char type)
 {
 	t_clst			*tmp;
@@ -48,6 +52,33 @@ static int			c_storing(t_comp *c, char *value, unsigned char type)
 	if (!(c->match && ft_strncmp(".", c->match, 1) == 0) &&
 			(ft_strncmp(".", value, 1) == 0 || ft_strncmp("..", value, 2) == 0))
 		return (0);
+	if (c->match && ft_strnequ(c->match, value, ft_strlen(c->match)) != 1)
+		return (0);
+	if (!(tmp = (t_clst *)malloc(sizeof(t_clst))))
+		return (-1);
+	tmp->name = ft_strdup(value);
+	tmp->len = ft_strlen(tmp->name);
+	tmp->type = (int)type;
+	tmp->cursor = 0;
+	c_add_to_lst(c, tmp);
+	return (0);
+}
+*/
+
+static int			c_storing(t_comp *c, char *value, unsigned char type)
+{
+	t_clst			*tmp;
+
+	if (c->match && c->match[0] == '.')
+	{
+		if (ft_strequ(".", value) || ft_strequ("..", value))
+			return (0);
+	}
+	else
+	{
+		if (ft_strncmp(".", value, 1) == 0 || ft_strncmp("..", value, 2) == 0)
+			return (0);
+	}
 	if (c->match && ft_strnequ(c->match, value, ft_strlen(c->match)) != 1)
 		return (0);
 	if (!(tmp = (t_clst *)malloc(sizeof(t_clst))))
