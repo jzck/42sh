@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 08:50:26 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 08:45:52 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/15 14:25:54 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				c_sizing(t_comp *c)
 	c->lst && c->lst->name ? c_max_length(c) : 0;
 	c->c_pline = c->win_x / (c->c_sx + 2);
 	c->c_line = 0;
-	while ((c->c_line * c->c_pline) < c->c_sy)
+	while (c->c_pline && (c->c_line * c->c_pline) < c->c_sy)
 		c->c_line++;
 	if ((c->win_x < c->c_sx))
 	{

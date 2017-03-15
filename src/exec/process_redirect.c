@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 14:01:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:06:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		process_redirect(t_process *p)
 	int		i;
 
 	redirs = p->redirs;
+	if (p->to_close != STDIN)
+		close(p->to_close);
 	while (redirs)
 	{
 		redir = redirs->content;
@@ -54,8 +56,6 @@ int		process_redirect(t_process *p)
 		redirs = redirs->next;
 	}
 	/* DG("redirecting [%i:%i] [%i]", p->fdin, p->fdout, p->to_close); */
-	if (p->to_close != STDIN)
-		close(p->to_close);
 	if (p->fdin != STDIN)
 		dup2_close(p->fdin, STDIN);
 	if (p->fdout != STDOUT)

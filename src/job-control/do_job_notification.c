@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_job_notification.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:01:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 12:40:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 11:24:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int		do_job_notification(void)
 			ret = 1;
 			job_notify_change(j->id);
 			if (job_is_completed(j->id))
+			{
+				jlist = jlist->next;
 				job_remove(j->id);
+				continue ;
+			}
 			else
 				j->attrs |= JOB_NOTIFIED;
 		}

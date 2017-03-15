@@ -6,100 +6,85 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 09:04:42 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 12:44:05 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/15 14:26:11 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
-static void		c_arrow_right(t_comp *c)
+/*
+**
+*/
+
+static int	c_idsolver(t_comp *c, int ids, int ids_bk)
 {
-	t_clst		*ptr;
-	int			i;
+	if (ids > c->lst->prev->id)
+	{
+		ids -= c->lst->prev->id;
+		if (ids_bk < ((c->lst->prev->id - (c->lst->prev->id % c->c_line)) + 1))
+			ids = ids + (c->lst->prev->id % c->c_line);
+		else
+			ids = ids - (c->c_line - (c->lst->prev->id % c->c_line));
+	}
+	else if (ids < c->lst->id)
+	{
+		if (ids_bk <= (c->lst->prev->id % c->c_line))
+			ids = (c->lst->prev->id - (c->lst->prev->id % c->c_line)) + ids_bk;
+		else
+			ids = c->lst->prev->id - (ids * -1) - (c->lst->prev->id % c->c_line);
+		if (ids < c->lst->id)
+		{
+			DG("Failsafe %d", ids);
+			ids = 1;
+		}
+	}
+	return (ids);
+}
+
+/*
+**
+*/
+
+static void	c_arrow_multi(t_comp *c, long int keypress)
+{
+	t_clst	*ptr;
+	int		ids;
+	int		ids_bk;
+
+	ids = 0;
 
 	ptr = c->lst;
-	i = 0;
 	while (!ptr->cursor)
 		ptr = ptr->next;
 	ptr->cursor = 0;
-	while (i < c->c_line)
-	{
+	ids = ptr->id;
+	ids_bk = ids;
+	(keypress == 4479771) ? (ids -= c->c_line) : (0);
+	(keypress == 4414235) ? (ids += c->c_line) : (0);
+	ids = c_idsolver(c, ids, ids_bk);
+	ptr = c->lst;
+	while (ptr->id != ids)
 		ptr = ptr->next;
-		if (ptr == c->lst)
-			i += c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
-		i++;
-	}
-	if (c->pos_x == (c->c_pline - 1))
-	{
-		i = c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
-		while (i < c->c_line)
-		{
-			ptr = ptr->next;
-			i++;
-		}
-	}
 	ptr->cursor = 1;
 }
 
-static void		c_arrow_left(t_comp *c)
-{
-	t_clst		*ptr;
-	int			i;
-
-	ptr = c->lst;
-	i = 0;
-	while (!ptr->cursor)
-		ptr = ptr->next;
-	ptr->cursor = 0;
-	while (i < c->c_line)
-	{
-		ptr = ptr->prev;
-		if (ptr == c->lst)
-			i += c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
-		i++;
-	}
-/*	if (c->pos_x == 1)
-	{
-		i = c->c_line - (c->c_sy - ((c->c_pline - 1) * c->c_line));
-		while (i < c->c_line)
-		{
-			ptr = ptr->prev;
-			i++;
-		}
-	}*/
-	ptr->cursor = 1;
-}
-
-static void		c_arrow_down(t_comp *c)
-{
-	t_clst		*ptr;
-
-	ptr = c->lst;
-	while (!ptr->cursor)
-		ptr = ptr->next;
-	ptr->cursor = 0;
-	ptr->next->cursor = 1;
-}
-
-static void		c_arrow_up(t_comp *c)
-{
-	t_clst		*ptr;
-
-	ptr = c->lst;
-	while (!ptr->cursor)
-		ptr = ptr->next;
-	ptr->cursor = 0;
-	ptr->prev->cursor = 1;
-}
+/*
+**
+*/
 
 void		c_arrow(t_comp *c, long int keypress)
 {
-	if (keypress == 4283163)
-		c_arrow_up(c);
-	if (keypress == 4348699)
-		c_arrow_down(c);
-	if (keypress == 4479771)
-		c_arrow_left(c);
-	if (keypress == 4414235)
-		c_arrow_right(c);
+	t_clst	*ptr;
+
+	ptr = c->lst;
+	if (keypress == 4479771 || keypress == 4414235)
+		c_arrow_multi(c, keypress);
+	else
+	{
+		while (!ptr->cursor)
+			ptr = ptr->next;
+		ptr->cursor = 0;
+		(keypress == 4283163) ? (ptr->prev->cursor = 1) : (0);
+		(keypress == 4348699) ? (ptr->next->cursor = 1) : (0);
+	}
 }

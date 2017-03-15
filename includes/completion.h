@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 12:09:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 13:47:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define COMPLETION_H
 
 # include "minishell.h"
-#define RETARDED_BEHAVIOR	0
+# define RETARDED_BEHAVIOR	0
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
@@ -178,5 +178,6 @@ int							c_seek_env(t_comp *c, char *current_word);
 void						c_seek_abs_path(t_comp *c, char *current_word);
 void						c_arrow(t_comp *c, long int keypress);
 int							c_chevron(t_comp *c);
+int							c_dispatcher(t_data *s);
 
 #endif

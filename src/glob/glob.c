@@ -6,21 +6,21 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:29:54 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/09 03:24:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:30:59 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
- ** glob return expansion of a string.
- ** pattern searched are *, ?, [a-z], [!a-z], [^a-z], {ab, ac}, **
- ** input parameters are :
- **			-char	*pat  -> pattern string to be looking for match
- **			-char	*esc  -> escape binary sequence of *pat
- **			-char	**env -> env var. could be NULL
- **				to just expanse in local directory and not in path dir
- */
+** glob return expansion of a string.
+** pattern searched are *, ?, [a-z], [!a-z], [^a-z], {ab, ac}, **
+** input parameters are :
+**			-char	*pat  -> pattern string to be looking for match
+**			-char	*esc  -> escape binary sequence of *pat
+**			-char	**env -> env var. could be NULL
+**				to just expanse in local directory and not in path dir
+*/
 
 static int		order_glob(const char *s1, const char *s2)
 {
@@ -96,9 +96,9 @@ char			**glob(char *pat, unsigned char *esc,
 			gl.cur_dir = 1;
 			gl.pat = CH(gl.m_pat)[0];
 			if ((gl.esc = UCH(gl.m_pat)[1]) && gl.pat[0] != '/')
-				dir_research(&gl, ".", gl.pat, 0, 1);
+				dir_research(&gl, ".", gl.pat, (int[]){0, 1});
 			else
-				dir_research(&gl, "/", gl.pat + 1, 0, 1);
+				dir_research(&gl, "/", gl.pat + 1, (int[]){0, 1});
 			if (!gl.found)
 				ft_ld_pushfront(&gl.match, ft_strdup(CH(gl.m_pat)[0]));
 			else

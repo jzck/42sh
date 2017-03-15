@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:19:55 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/20 20:43:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 23:11:59 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ unsigned char	*dup_char_esc(const unsigned char *esc, const int size)
 	if (!(new_esc = (unsigned char *)ft_strnew(size)))
 		return (NULL);
 	new_esc = ft_memcpy(new_esc, esc, size);
-
 	return (new_esc);
 }

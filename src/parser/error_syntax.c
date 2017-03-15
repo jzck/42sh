@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 14:41:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 04:12:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_errormatch	g_errormatch[] =
 	{TK_DLESSDASH, "<<-"},
 	{TK_AND_IF, "&&"},
 	{TK_OR_IF, "||"},
-	{TK_DSEMI, ";;"},
 	{TK_IF, "if"},
 	{TK_THEN, "then"},
 	{TK_ELSE, "else"},
@@ -66,17 +65,14 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_putstr_fd("syntax error near unexpected token `", 2);
-			ft_putstr_fd(g_errormatch[i].error, 2);
-			ft_putstr_fd("'\n", 2);
+			ft_dprintf(2, "syntax error near unexpected token « %s »\n",
+					g_errormatch[i].error);
 			instruction_free(lst, parser, ast);
 			return (0);
 		}
 		i++;
 	}
-	ft_putstr_fd("syntax error near unexpected token`", 2);
-	ft_putstr_fd(token->data, 2);
-	ft_putstr_fd("'\n", 2);
+	ft_dprintf(2, "syntax error near unexpected token « %s »\n", token->data);
 	instruction_free(lst, parser, ast);
 	return (0);
 }

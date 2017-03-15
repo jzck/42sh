@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/08 23:24:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/14 23:14:14 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void			expand_home(t_glob *gl, char *str);
 void			expand_var(t_glob *tglob);
 void			expand_home(t_glob *gl, char *str);
 int				match_pattern(t_glob *tglob, char *str, char *full_word);
-int				dir_research(t_glob *tglob, char *p, char *pat, int rec, int first);
+int				dir_research(t_glob *tglob, char *p, char *pat, int *mode);
 char			**gen_tab(const char *pat, const unsigned char *esc,
 				const unsigned char *esc2, int dup);
 char			**ft_strsplit_spe(const char *str,

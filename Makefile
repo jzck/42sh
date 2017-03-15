@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/14 21:59:22 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/15 18:11:31 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -309,6 +309,7 @@ $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 		$(LIBS) \
 		$(LIBFT_LIB) \
 		$(FLAGS) $(D_FLAGS)
+	@strip -x $@
 	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
 
 $(LIBFT_LIB):

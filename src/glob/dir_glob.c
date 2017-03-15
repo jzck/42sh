@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/09 03:24:59 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/14 23:14:19 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		dir_list_content(t_glob *gl, char **str, char *pat,
 		else
 			path = ft_strjoinf(ft_strjoin(str[0], "/"), str[1], 1);
 		if (recursive)
-			dir_research(gl, path, pat, recursive, 0);
+			dir_research(gl, path, pat, (int[]){recursive, 0});
 		gl->pat = pat;
 		if (match_pattern(gl, str[1], path))
 		{
@@ -46,7 +46,7 @@ static void		dir_list_content(t_glob *gl, char **str, char *pat,
 }
 
 int				dir_research(t_glob *gl, char *p,
-		char *pat, int recursive, int first)
+		char *pat, int *mode)
 {
 	DIR				*dir;
 	struct dirent	*in;
@@ -54,7 +54,7 @@ int				dir_research(t_glob *gl, char *p,
 	if (!*pat)
 	{
 		gl->found = 1;
-		if (!first)
+		if (!mode[1])
 			ft_ld_pushfront(&gl->match_tmp, ft_strjoin(p + gl->cur_dir * 2 *
 						(p[0] == '.' && p[1] == '/'), "/"));
 		else
@@ -66,7 +66,7 @@ int				dir_research(t_glob *gl, char *p,
 		dir = opendir(p);
 		while ((in = readdir(dir)))
 			dir_list_content(gl,
-					(char *[2]){p, in->d_name}, pat, recursive);
+					(char *[2]){p, in->d_name}, pat, mode[0]);
 		closedir(dir);
 	}
 	return (0);

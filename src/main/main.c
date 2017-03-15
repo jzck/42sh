@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 00:50:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 17:55:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ int		handle_instruction(int fd)
 			return (error_syntax(&token, &parser, &ast));
 		}
 	}
-	btree_print(STDBUG, ast, &ft_putast);
+	/* btree_print(STDBUG, ast, &ft_putast); */
 	if (ft_exec(&ast))
 		return (2);
 	instruction_free(&token, &parser, &ast);
 	if (SH_IS_INTERACTIVE(data_singleton()->opts) && *lexer.str)
 		ft_add_str_in_history(lexer.str);
 	ft_strdel(&lexer.str);
-	free(parser.new_sym);
 	return (0);
 }
 
@@ -95,22 +94,23 @@ int		get_input_fd(char **av)
 	else if (data->opts & SH_OPTS_LC)
 	{
 		pipe(fds);
-		fd = fds[PIPE_READ];
+		dup2_close(fds[PIPE_READ], 10);
+		fd = 10;
 		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
-	else if ((file = *cliopts_getdata(av)))
+	else if ((file = *cliopts_getdata(av)) && !stat(file, &buf))
 	{
-		stat(file, &buf);
 		fd = -1;
 		if (S_ISDIR(buf.st_mode))
-			ft_printf("{red}%s: %s: is a directory\n{eoc}", g_argv[0], file);
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", av[0], file);
 		else if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
-			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", g_argv[0], file);
-		return (fd);
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", av[0], file);
+		if (fd > 0 && !dup2_close(fd, 10) && (fd = 10))
+			return (fd);
 	}
 	return (STDIN);
 }
