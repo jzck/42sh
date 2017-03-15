@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 16:09:46 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 14:30:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ void		c_printer(t_comp *c)
 	//int		offset;
 
 	loop = c->c_line;
-
+	if (!c->c_line)
+		return ;
 	max_line = c->c_line - (c->m_size - 1);
 	ptr = c_rolling(c);
 	if ((c->pos_y * (c->m_size - 1)) > c->c_line)

@@ -6,12 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 10:56:08 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 12:00:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 14:25:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-int		c_dispatcher(t_data *s);
 
 void	sigwinch_resize(int sig)
 {

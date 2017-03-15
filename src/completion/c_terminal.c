@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 10:51:14 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 14:36:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			c_term_mv_down(t_comp *c)
 		value = c->m_size - 1;
 	else
 		value = c->c_line - 1;
-	while (i != value)
+	while (value >= 0 && i != value)
 	{
 		ft_putstr(tgetstr("up", NULL));
 		i++;

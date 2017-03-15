@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/05 19:38:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 14:07:20 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ char		*ft_read_stdin(void)
 	ft_is_str();
 	if (data_singleton()->comp)
 		c_clear(data_singleton());
+	signal(SIGWINCH, sigwinch_resize);
 	while (42)
 	{
 		ret = 0;
 		j = 0;
 		read(0, &ret, sizeof(int));
+		DG("key hexa value = %X", ret);
 		if (ft_completion(ret))
 			continue ;
 		while (g_key[j].value && g_key[j].value != ret)

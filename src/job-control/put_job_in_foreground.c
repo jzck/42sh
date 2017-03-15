@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 12:45:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 11:14:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		put_job_in_foreground(t_job *j, int cont)
 		tcsetpgrp(STDIN, j->pgid);
 	if (cont)
 	{
+//									j->tmodes = pas initialisé !
 		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
 		if (kill(-j->pgid, SIGCONT) < 0)
 			DG("kill(SIGCONT) failed");

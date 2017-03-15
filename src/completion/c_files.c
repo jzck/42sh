@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 12:09:36 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/15 11:47:40 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,6 @@ static char		*c_slicer(t_comp *c)
 		i--;
 	tmp[i] == '/' ? i++ : (0);
 	rt = (i == (int)ft_strlen(tmp) - 1) ? NULL : ft_strsub(tmp, 0, i);
-/*	if (c_chevron(c))
-		c->match = ft_strdup("");
-	else
-		c->match = ft_strsub(tmp, i, ft_strlen(tmp) - i);*/
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (rt);
 }
