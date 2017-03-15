@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 14:58:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/15 10:52:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				builtin_cd(const char *path,
 	if (!(target = builtin_cd_special(av + i, envp)))
 		return (1);
 	cwd = getcwd(NULL, 0);
-	builtin_setenv(path, (char*[3]){"OLDPWD", cwd, NULL}, envp);
+	builtin_setenv(path, (char*[4]){"setenv", "OLDPWD", cwd, NULL}, envp);
 	free(cwd);
 	if (chdir(target))
 	{
@@ -93,7 +93,7 @@ int				builtin_cd(const char *path,
 	else if (target != av[i])
 		ft_printf("%s\n", target);
 	cwd = getcwd(NULL, 0);
-	builtin_setenv(path, (char*[3]){"PWD", cwd, NULL}, envp);
+	builtin_setenv(path, (char*[4]){"setenv", "PWD", cwd, NULL}, envp);
 	free(cwd);
 	if (!ft_strcmp(*(av + i), "-"))
 		free(target);
