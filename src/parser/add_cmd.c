@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 02:12:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 16:46:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int					add_cmd(t_btree **ast, t_list **lst)
 	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD || token->type == TK_NAME)
 	{
 		DG("type is %s", read_state(node->type));
+		DG("data is %s", token->data);
 		ft_ld_pushback(&node->data.cmd.token,
 				gen_tab(token->data, token->esc, token->esc2, 1));
 	}

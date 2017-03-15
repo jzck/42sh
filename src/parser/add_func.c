@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 00:26:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 19:50:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		isfunc_name(t_btree **ast, t_list **lst)
 		if (node->type == CMD && token->type == TK_PAREN_OPEN)
 		{
 			node->type = FNAME;
-			node->data.str = ft_strdup(token->data);
 			return (1);
 		}
 		if (node->type == FNAME && token->type == TK_PAREN_CLOSE
@@ -81,17 +80,39 @@ int		add_func_cmd(t_btree **ast, t_list **lst)
 	return (add_cmd(&(*ast)->right, lst));
 }
 
-int		add_func_sep(t_btree **ast, t_list **lst)
+t_list		*is_already_func(t_btree **new)
 {
-	return (add_sep(&(*ast)->right, lst));
+	t_list	*tmp;
+	t_btree	**ast;
+	char	**new_name;
+	char	**old_name;
+	
+	tmp = data_singleton()->lst_func;
+	new_name = token_to_argv(((t_astnode *)(*new)->item)->data.cmd.token, 1);
+	while (tmp)
+	{
+		ast = tmp->content;
+		if (!*ast)
+			return (NULL);
+		old_name = token_to_argv(((t_astnode *)(*ast)->item)->data.cmd.token, 1);
+		if (!new_name || !new_name[0] || !old_name || !old_name[0])
+			return (NULL);
+		if (!ft_strcmp(new_name[0], old_name[0]))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 int		add_one_func(t_btree **ast, t_list **lst)
 {
 	t_btree	*func_ast;
+	t_list	*old_func;
 
 	(void)lst;
 	func_ast = btree_map(*ast, node_copy);
+	if ((old_func = is_already_func(&func_ast)))
+		ft_lst_delif(&data_singleton()->lst_func, old_func->content, &ft_addrcmp, &ast_free); 
 	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(&func_ast, sizeof(*ast)));
 	return (0);
 }

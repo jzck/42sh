@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:06:05 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 21:25:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/15 18:48:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		pset_cmd(t_process *p, t_btree *ast)
 	p->type = PROCESS_FILE;
 	if ((func = is_function(p)))
 	{
-		p->data.subshell.content = func;
+		btree_print(STDBUG, func, &ft_putast);
+		p->data.function.content = func;
 		p->type = PROCESS_FUNCTION;
 	}
 	else if ((p->data.cmd.execf = is_builtin(p)))
