@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:12:09 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:12:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 16:48:48 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static void	ft_found_prev_word_2(int i, char *str, size_t *pos)
 	(*pos) -= i;
 }
 
-void		ft_found_prev_word(void)
+int			ft_found_prev_word(void)
 {
 	int		i;
 
 	i = 0;
 	if (!POS || !STR)
-		return ;
+		return (1);
 	ft_init_prev_word(&POS, STR);
 	if (POS >= 1 && STR[POS - 1] == '\n')
 	{
@@ -69,7 +69,7 @@ void		ft_found_prev_word(void)
 		{
 			ft_puttermcaps("cd");
 			--POS;
-			return ;
+			return (1);
 		}
 		ft_puttermcaps("cd");
 		POS -= 2;
@@ -82,6 +82,7 @@ void		ft_found_prev_word(void)
 	}
 	else
 		ft_found_prev_word_2(i, STR, &POS);
+	return (1);
 }
 
 static void	ft_found_next_word_2(void)
@@ -101,13 +102,13 @@ static void	ft_found_next_word_2(void)
 	ft_get_beggin_with_curs(STR, &POS);
 }
 
-void		ft_found_next_word(void)
+int			ft_found_next_word(void)
 {
 	int		i;
 
 	i = 0;
 	if (!STR)
-		return ;
+		return (1);
 	while (STR[i + POS] && STR[i + POS] == ' ')
 	{
 		ft_putchar(STR[i + POS]);
@@ -124,4 +125,5 @@ void		ft_found_next_word(void)
 		}
 		POS += i;
 	}
+	return (1);
 }

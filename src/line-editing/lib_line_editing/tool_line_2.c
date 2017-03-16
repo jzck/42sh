@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 19:07:52 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 11:09:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:15:07 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void		ft_change_affichage(void)
 	ft_putstr("\033[37m");
 }
 
-void		ft_printall(void)
+int			ft_printall(void)
 {
 	size_t	pos_tmp;
 	int		ret;
 
 	ret = 0;
 	if (read(0, &ret, sizeof(int)) == -1 || ret != 126 || !STR)
-		return ;
+		return (1);
 	ft_clear_window();
 	ft_prompt();
 	pos_tmp = POS;
@@ -68,6 +68,7 @@ void		ft_printall(void)
 	if (POS)
 		ft_putnc('\b', POS - pos_tmp + 1);
 	POS = pos_tmp;
+	return (1);
 }
 
 void		ft_get_beggin_with_curs(char *str, size_t *pos)

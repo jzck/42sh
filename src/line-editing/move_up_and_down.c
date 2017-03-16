@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:31:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 16:49:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static void	ft_up_2(size_t *pos, char *str)
 	(*pos) -= i;
 }
 
-void		ft_up(void)
+int			ft_up(void)
 {
 	if (!STR || !POS)
-		return ;
+		return (1);
 	if (STR[POS - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
@@ -54,6 +54,7 @@ void		ft_up(void)
 	}
 	else
 		ft_up_2(&POS, STR);
+	return (1);
 }
 
 static void	ft_down_2(size_t *pos, char *str)
@@ -73,14 +74,14 @@ static void	ft_down_2(size_t *pos, char *str)
 	ft_get_beggin_with_curs(str, pos);
 }
 
-void		ft_down(void)
+int			ft_down(void)
 {
 	int		i;
 	int		len;
 
 	i = 0;
 	if (!STR)
-		return ;
+		return (1);
 	if (STR[POS] == '\n')
 		ft_down_2(&POS, STR);
 	else
@@ -93,4 +94,5 @@ void		ft_down(void)
 		}
 		POS += i;
 	}
+	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:52:57 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/18 13:58:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:15:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_read_it_3(char **str, char t[5], size_t *pos, int *j)
+static int	ft_read_it_3(char **str, char t[5], size_t *pos, int *j)
 {
 	int		i;
 
@@ -23,12 +23,14 @@ static void	ft_read_it_3(char **str, char t[5], size_t *pos, int *j)
 	{
 		if (t[i] && ft_isprint(t[i]))
 		{
-			*str = ft_realloc_imput(*str, t[i], *pos);
+			if (!(*str = ft_realloc_imput(*str, t[i], *pos)))
+				return (-1);
 			++(*pos);
 			++(*j);
 		}
 		++i;
 	}
+	return (1);
 }
 
 static void	ft_read_it_2(int input, char t[5])
@@ -48,7 +50,7 @@ static void	ft_read_it_2(int input, char t[5])
 	t[4] = '\0';
 }
 
-void		ft_read_it(int input, size_t *pos, char **str)
+int			ft_read_it(int input, size_t *pos, char **str)
 {
 	int		j;
 	char	t[5];
@@ -60,14 +62,16 @@ void		ft_read_it(int input, size_t *pos, char **str)
 	input == 126 || input == 993090331 || input == 925981467 ||
 	input == 21298 || input == 892427035 || input == 8270395 || input ==
 	942758683 || input == 993090331 || input == 18489 || input == 17977)
-		return ;
+		return (1);
 	ft_read_it_2(input, t);
-	ft_read_it_3(str, t, pos, &j);
+	if (ft_read_it_3(str, t, pos, &j) < 0)
+		return (-1);
 	if (!*str)
-		return ;
+		return (1);
 	*pos = pos_tmp;
 	ft_current_str((*str), *pos);
 	ft_get_next_str((*str), pos);
 	ft_putnc('\b', *pos - (pos_tmp + j));
 	*pos = (pos_tmp + j);
+	return (1);
 }

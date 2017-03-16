@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:38:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 16:43:35 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static int	ft_currend_dir(void)
 	ft_printf("%s ", currend_dir + 1);
 	return (ft_strlen(currend_dir + 1));
 }
+
+//Une fois nouveau prompt avec git fait -> protection des pointeurs/malloc a faire ici !
 
 void		ft_prompt(void)
 {

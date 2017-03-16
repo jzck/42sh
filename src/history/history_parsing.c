@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 12:39:45 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:09:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,7 @@ static int	ft_history_parsing_3(char *str, int *i)
 	return (1);
 }
 
-static void	ft_history_parsing_2(void)
-{
-	data_singleton()->line.pos = 0;
-	data_singleton()->line.opt = data_singleton()->line.opt | HIST;
-	ft_prompt();
-	data_singleton()->line.input = ft_read_stdin();
-	ft_putchar('\n');
-	data_singleton()->line.opt = data_singleton()->line.opt | ~HIST;
-	ft_history_parsing();
-}
-
-char		*ft_history_parsing(void)
+int			ft_history_parsing(int has_prompt, char **input)
 {
 	int		i;
 	char	boolean;
@@ -79,7 +68,7 @@ char		*ft_history_parsing(void)
 	i = 0;
 	boolean = 0;
 	if (!STR)
-		return (STR);
+		return (1);
 	while (STR && STR[i])
 	{
 		if (STR[i] == '!')
@@ -93,6 +82,6 @@ char		*ft_history_parsing(void)
 		++i;
 	}
 	if (boolean)
-		ft_history_parsing_2();
-	return (STR);
+		return (readline(has_prompt, input));
+	return (1);
 }
