@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 22:26:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 23:21:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	do_parser_routine(void)
 	if (get_reserved_words(&data->token))
 		return (1);
 	if (insert_newline(&data->token))
-		return (2);
+		return (1);
 	if (data->parser.state == SUCCESS && stack_init(&data->parser))
 		exit(1);
 	if (ft_parse(&data->ast, &data->token, &data->parser))
@@ -70,7 +70,6 @@ static int	do_parser_routine(void)
 	if (data->parser.state == ERROR)
 	{
 		error_syntax(&data->token);
-		data->parser.state = SUCCESS;
 		return (1);
 	}
 	else if (data->parser.state == SUCCESS)
