@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 15:41:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:07:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_number,
 	&lexer_less,
 	&lexer_great,
-	&lexer_lessand,
-	&lexer_greatand,
 	&lexer_quote,
 	&lexer_dquote,
 	&lexer_bquote,
@@ -57,8 +55,9 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 		return (lexer_end(alst, lexer));
 	if (!*alst)
 	{
-		token = token_init();
-		*alst = ft_lstnew(token, sizeof(*token));
+		if (!(token = token_init())
+			|| !(*alst = ft_lstnew(token, sizeof(*token))))
+			return (-1);
 	}
 	return ((*g_lexer[lexer->state])(alst, lexer));
 }

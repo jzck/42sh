@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 23:20:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 19:07:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 # include "libft.h"
 # include "types.h"
 
-//# define TK_REDIR			(0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20)
-# define TK_NON_FREEABLE	(TK_PAREN_OPEN | TK_PAREN_CLOSE | TK_BQUOTE)
 # define RW_SEP				(TK_NEWLINE | TK_AMP | TK_SEMI | TK_WHILE | TK_DONE\
 							| TK_DO | TK_IF | TK_FI | TK_THEN | TK_ELIF | TK_ELSE)
 enum	e_lexstate
 {
-	DEFAULT, //#define DEFAULT 0
+	DEFAULT,
 	PAREN,
 	HEREDOC,
 	NEWLINE,
@@ -33,8 +31,6 @@ enum	e_lexstate
 	NUMBER,
 	LESS,
 	GREAT,
-	LESSAND,
-	GREATAND,
 	QUOTE,
 	DQUOTE,
 	BQUOTE,

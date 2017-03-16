@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 13:11:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:00:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		lexer_less(t_list **alst, t_lexer *lexer)
 	{
 		token->type = TK_LESSAND;
 		lexer->pos++;
-		return (lexer_lessand(alst, lexer));
+		lexer->state = DEFAULT;
+		return (lexer_lex(&(*alst)->next, lexer));
 	}
 	if (lexer->str[lexer->pos] == '<')
 	{

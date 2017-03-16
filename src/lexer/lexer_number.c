@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 20:48:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 18:54:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,17 @@ int		lexer_number(t_list **alst, t_lexer *lexer)
 		return (lexer_lex(alst, lexer));
 	}
 	else if (ft_isdigit(lexer->str[lexer->pos])
-			&& ft_isdigit(lexer->str[lexer->pos + 1]))
+			&& (ft_isdigit(lexer->str[lexer->pos + 1])
+				|| (lexer->str[lexer->pos + 1] == '>'
+				|| lexer->str[lexer->pos + 1] == '<')))
 	{
 		token_append(token, lexer, 0, 0);
 		lexer->pos++;
 		return (lexer_number(alst, lexer));
 	}
-	else if (ft_isdigit(lexer->str[lexer->pos])
-			&& (lexer->str[lexer->pos + 1] == '>'
-				|| lexer->str[lexer->pos + 1] == '<'))
-	{
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
-		return (lexer_lex(alst, lexer));
-	}
-	else
-	{
-		token->type = TK_WORD;
-		lexer->state = DEFAULT;
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
-		return (lexer_lex(alst, lexer));
-	}
+	token->type = TK_WORD;
+	lexer->state = DEFAULT;
+	token_append(token, lexer, 0, 0);
+	lexer->pos++;
+	return (lexer_lex(alst, lexer));
 }
