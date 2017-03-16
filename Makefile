@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/15 18:11:31 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/16 23:02:12 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -223,11 +223,9 @@ lexer/lexer_delim.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
-lexer/lexer_greatand.c\
 lexer/lexer_heredoc.c\
 lexer/lexer_init.c\
 lexer/lexer_less.c\
-lexer/lexer_lessand.c\
 lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\

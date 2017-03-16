@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 16:50:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:00:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		mark_process_status(pid_t pid, int status)
 		{
 			p->attrs &= ~PROCESS_STATE_MASK;
 			p->attrs |= PROCESS_COMPLETED;
-			if (WIFSIGNALED(status))
+			if (WIFSIGNALED(status) && DEBUG_MODE)
 				ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}",
 						(int)pid, WTERMSIG(status));
 		}

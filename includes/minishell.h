@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 16:35:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 23:01:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 # include "glob.h"
 # include "completion.h"
 # include "hash.h"
+
+#ifndef DEBUG
+# define DEBUG_MODE 0
+#else
+# define DEBUG_MODE 1
+#endif
 
 struct	s_data
 {
