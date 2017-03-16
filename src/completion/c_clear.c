@@ -6,20 +6,20 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/02/17 14:57:09 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 08:27:50 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Clear the list from the memory
 */
 
-int					c_clear_lst(t_comp *c)
+int			c_clear_lst(t_comp *c)
 {
-	t_clst		*c_lst;
-	t_clst		*p_lst;
+	t_clst	*c_lst;
+	t_clst	*p_lst;
 
 	if (c->lst == NULL)
 		return (0);
@@ -46,9 +46,9 @@ int					c_clear_lst(t_comp *c)
 ** function
 */
 
-int					c_clear(t_data *s)
+int			c_clear(t_data *s)
 {
-	t_comp			*ptr;
+	t_comp	*ptr;
 
 	if (s->comp == NULL)
 		return (0);

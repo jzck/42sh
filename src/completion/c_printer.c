@@ -6,11 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 14:30:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 09:01:22 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 **  Print the name with or without an underline and colored upon file type
@@ -21,9 +21,9 @@
 ** The rest of the placeholder is filled with space to align the list.
 */
 
-static void	c_printer_node(t_clst *lst, int c_sx)
+static void		c_printer_node(t_clst *lst, int c_sx)
 {
-	int		i;
+	int			i;
 
 	i = lst->len;
 	lst->type == 4 ? ft_putstr_fd("\e[1;31m", 2) : (0);
@@ -45,9 +45,9 @@ static void	c_printer_node(t_clst *lst, int c_sx)
 ** trailing / for folder and a space in between.
 */
 
-static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
+static int		c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 {
-	t_clst	*ptr;
+	t_clst		*ptr;
 
 	ptr = lst->next;
 	c_printer_node(lst, c->c_sx);
@@ -73,6 +73,25 @@ static int	c_printer_line(t_comp *c, t_clst *lst, int loop, int i)
 }
 
 /*
+** Return the right pointer in the list from the offset value calculated below.
+*/
+
+static t_clst	*c_rolling_ptr(t_comp *c, int id)
+{
+	t_clst		*ptr;
+	int			i;
+
+	i = (id - 1) * (c->m_size - 1);
+	ptr = c->lst;
+	while (i)
+	{
+		ptr = ptr->next;
+		i--;
+	}
+	return (ptr);
+}
+
+/*
 ** Controlling the offset value for the rolling list if the space in the
 ** terminal is too small to display the whole list.
 **
@@ -90,7 +109,6 @@ static t_clst	*c_rolling(t_comp *c)
 	ptr = c->lst;
 	while (!ptr->cursor)
 		ptr = ptr->next;
-
 	x = 1;
 	while ((x * c->c_line) < ptr->id)
 		x++;
@@ -101,16 +119,7 @@ static t_clst	*c_rolling(t_comp *c)
 	c->pos_x = id;
 	c->pos_y = y;
 	if (y > 1)
-	{
-		x = (y - 1) * (c->m_size - 1);
-		ptr = c->lst;
-		while (x)
-		{
-			ptr = ptr->next;
-			x--;
-		}
-		return (ptr);
-	}
+		return (c_rolling_ptr(c, y));
 	return (c->lst);
 }
 
@@ -118,12 +127,11 @@ static t_clst	*c_rolling(t_comp *c)
 ** Control the number of time it cycle for LINE
 */
 
-void		c_printer(t_comp *c)
+void			c_printer(t_comp *c)
 {
-	t_clst	*ptr;
-	int		loop;
-	int		max_line;
-	//int		offset;
+	t_clst		*ptr;
+	int			loop;
+	int			max_line;
 
 	loop = c->c_line;
 	if (!c->c_line)
@@ -134,7 +142,6 @@ void		c_printer(t_comp *c)
 		max_line = (c->c_line % (c->m_size - 1));
 	else
 		max_line = c->m_size - 1;
-//	offset = (c->m_size - 1) - max_line;
 	while (loop && max_line)
 	{
 		c_printer_line(c, ptr, c->c_pline, 1);

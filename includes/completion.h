@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 18:46:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 09:14:30 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define COMPLETION_H
 
 # include "minishell.h"
-# define RETARDED_BEHAVIOR	0
+
+# define KP_U		4283163
+# define KP_D		4348699
+# define KP_L		4479771
+# define KP_R		4414235
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
@@ -27,16 +31,16 @@
 **     prev : Pointer to the previous item of the list.
 */
 
-typedef struct				s_clst
+typedef struct		s_clst
 {
-	int						id;
-	char					*name;
-	int						type;
-	int						len;
-	int						cursor;
-	struct s_clst			*next;
-	struct s_clst			*prev;
-}							t_clst;
+	int				id;
+	char			*name;
+	int				type;
+	int				len;
+	int				cursor;
+	struct s_clst	*next;
+	struct s_clst	*prev;
+}					t_clst;
 
 /*
 ** Autocompletion structure composed as follow:
@@ -77,65 +81,76 @@ typedef struct				s_clst
 **     (char *)start   (char *)between   (char *)rcmd   (char *)trail
 */
 
-typedef struct				s_comp
+typedef struct		s_comp
 {
-	char					*rcmd;
-	int						ircmd;
-	char					*cpath;
-	char					*match;
-	char					*home;
-	char					*pwd;
-	char					*start;
-	char					*between;
-	char					*trail;
-	int						cutpoint;
-	int						prompt;
-	int						c_sx;
-	int						c_sy;
-	int						c_pline;
-	int						c_line;
-	int						win_x;
-	int						win_y;
-	int						m_size;
-	int						pos_x;
-	int						pos_y;
-	int						key;
-	int						isfolder;
-	int						isrematch;
-	t_clst					*lst;
-}							t_comp;
+	char			*rcmd;
+	int				ircmd;
+	char			*cpath;
+	char			*match;
+	char			*home;
+	char			*pwd;
+	char			*start;
+	char			*between;
+	char			*trail;
+	int				cutpoint;
+	int				prompt;
+	int				c_sx;
+	int				c_sy;
+	int				c_pline;
+	int				c_line;
+	int				win_x;
+	int				win_y;
+	int				m_size;
+	int				pos_x;
+	int				pos_y;
+	int				key;
+	int				isfolder;
+	int				isrematch;
+	t_clst			*lst;
+}					t_comp;
 
 /*
 ** Main autocompletion engine:
 **        completion : Main function.
 **            c_init : Initialization.
 **        c_matching : Dispatcher for binary or local files.
+**         c_rematch : Restart on keypress.
+**   c_glob_matching : Call for globbing completion.
 **     c_seek_binary : Search binary using env PATH.
 **      c_seek_files : Solve path and search.
+**        c_seek_env : Search in env for $(var)
+**   c_seek_abs_path : Determiner for absolute path
 **          c_parser : Parser.
+**      c_add_to_lst : Add new node to the list.
 **          c_sizing : Determine the size of the column/line.
 */
 
-int							completion(long int key);
-void						c_init(t_data *s, long int input);
-int							c_matching(t_data *s, t_comp *c);
-int							c_seek_binary(t_data *s, t_comp *c);
-int							c_seek_files(
-		t_data *s, t_comp *c, char *current_word);
-int							c_parser(t_comp *c, char *path, char *name);
-int							c_sizing(t_comp *c);
+int					completion(long int key);
+void				c_init(t_data *s, long int input);
+int					c_matching(t_data *s, t_comp *c);
+int					c_rematch(t_comp *c, long int keypress);
+int					c_glob_matching(void);
+int					c_seek_binary(t_data *s, t_comp *c);
+int					c_seek_files(t_data *s, t_comp *c, char *current_word);
+int					c_seek_env(t_comp *c, char *current_word);
+void				c_seek_abs_path(t_comp *c, char *current_word);
+int					c_parser(t_comp *c, char *path, char *name);
+void				c_add_to_lst(t_comp *c, t_clst *node);
+int					c_sizing(t_comp *c);
 
 /*
 ** Output functions:
 **
+**      c_dispatcher : Choose between clear, print or update from to the list
 **         c_updater : Output the result to struct data.
-**            c_gtfo : Keypress handling.
-**         c_rematch : Restart on keypress.
+**        c_keypress : Keypress handling.
+**           c_arrow : Arrow support.
 */
 
-int							c_updater(t_comp *c, char *select);
-int							c_gtfo(t_comp *c, long int keypress);
-int							c_rematch(t_comp *c, long int keypress);
+int					c_dispatcher(t_data *s);
+int					c_updater(t_comp *c, char *select);
+int					c_keypress(t_comp *c, long int key);
+void				c_arrow(t_comp *c, long int keypress);
 
 /*
 ** Terminal functions:
@@ -147,11 +162,11 @@ int							c_rematch(t_comp *c, long int keypress);
 **         c_printer : Printer of the list.
 */
 
-void						c_term_mv_down(t_comp *c);
-void						c_term_mv_back(t_comp *c);
-void						c_term_clear(t_comp *c);
-int							c_term_resize(t_comp *c);
-void						c_printer(t_comp *c);
+void				c_term_mv_down(t_comp *c);
+void				c_term_mv_back(t_comp *c);
+void				c_term_clear(t_comp *c);
+int					c_term_resize(t_comp *c);
+void				c_printer(t_comp *c);
 
 /*
 ** Support functions:
@@ -159,26 +174,16 @@ void						c_printer(t_comp *c);
 **           c_clear : Memory clearing.
 **       c_clear_lst : List clearing.
 **       path_solver : Solve abstract path to absolute.
+** c_exclusion_foldr : Check for match folder.
+**        ft_sstrlen : Return size of char **.
+**      ft_sstrtostr : Create char * from char ** with char *sep between.
 */
 
-int							c_clear(t_data *s);
-int							c_clear_lst(t_comp *c);
-char						*path_solver(t_comp *c, char *cmd, char *cwd);
-int							c_spacing_escape(t_clst *node, int x, int o);
-int							c_spacing_clear(t_comp *c);
-int							ft_sstrlen(char **s);
-char						*ft_sstrtostr(char **s, char *sep);
-
-/*
-**	j'ajoute a la va vite^^
-*/
-
-int							c_glob_matching(void);
-void						c_add_to_lst(t_comp *c, t_clst *node);
-int							c_seek_env(t_comp *c, char *current_word);
-void						c_seek_abs_path(t_comp *c, char *current_word);
-void						c_arrow(t_comp *c, long int keypress);
-int							c_chevron(t_comp *c);
-int							c_dispatcher(t_data *s);
+int					c_clear(t_data *s);
+int					c_clear_lst(t_comp *c);
+char				*path_solver(t_comp *c, char *cmd, char *cwd);
+int					c_exclusion_folder(t_comp *c);
+int					ft_sstrlen(char **s);
+char				*ft_sstrtostr(char **s, char *sep);
 
 #endif

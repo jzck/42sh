@@ -6,22 +6,22 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/03/10 12:43:57 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 08:30:52 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Trim if there's many commands in a raw separed with a semi colon.
 ** The cutpoint is saved and also between char **.
 */
 
-static char				*c_trimmer(char *cmd, int st, int nd)
+static char			*c_trimmer(char *cmd, int st, int nd)
 {
-	char				*rt;
-	char				*tmp;
-	int					len;
+	char			*rt;
+	char			*tmp;
+	int				len;
 
 	rt = NULL;
 	tmp = NULL;
@@ -49,9 +49,9 @@ static char				*c_trimmer(char *cmd, int st, int nd)
 ** Norme function for c_init().
 */
 
-static void				c_init_base(t_comp *c)
+static void			c_init_base(t_comp *c)
 {
-	struct winsize		win;
+	struct winsize	win;
 
 	ioctl(0, TIOCGWINSZ, &win);
 	c->win_x = win.ws_col;
@@ -80,7 +80,7 @@ static void				c_init_base(t_comp *c)
 
 void				c_init(t_data *s, long int input)
 {
-	int					len_trail;
+	int				len_trail;
 
 	if (!(s->comp = (t_comp *)malloc((sizeof(t_comp)))))
 		return ;

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_seek_env.c                                       :+:      :+:    :+:   */
+/*   c_find_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 15:50:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 11:50:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 08:28:19 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
-static int	c_storing(t_comp *c, char *value)
+/*
+** Create a new list node and add it by calling c_add_to_lst.
+*/
+
+static int	c_addnode(t_comp *c, char *value)
 {
-	t_clst			*tmp;
+	t_clst	*tmp;
 
 	if (!(tmp = (t_clst *)malloc(sizeof(t_clst))))
 		return (-1);
@@ -25,6 +29,10 @@ static int	c_storing(t_comp *c, char *value)
 	c_add_to_lst(c, tmp);
 	return (0);
 }
+
+/*
+** Search in the env for matching element and add them to the list if matched.
+*/
 
 int			c_seek_env(t_comp *c, char *current_word)
 {
@@ -37,8 +45,8 @@ int			c_seek_env(t_comp *c, char *current_word)
 	while (env[i])
 	{
 		if (!ft_strncmp(c->match, env[i], ft_strlen(c->match)) &&
-												env[i][ft_strlen(c->match)] != '=')
-			c_storing(c, ft_strndup(env[i], ft_strchr(env[i], '=') - env[i]));
+				env[i][ft_strlen(c->match)] != '=')
+			c_addnode(c, ft_strndup(env[i], ft_strchr(env[i], '=') - env[i]));
 		++i;
 	}
 	return (0);

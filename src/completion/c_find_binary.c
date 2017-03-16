@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_binary.c                                         :+:      :+:    :+:   */
+/*   c_find_binary.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/02/27 13:17:27 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 08:28:03 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Retrieve the path from the env and create a char ** from the PATH pattern.
@@ -18,11 +18,11 @@
 ** c_parser() function.
 */
 
-int				c_seek_binary(t_data *s, t_comp *c)
+int			c_seek_binary(t_data *s, t_comp *c)
 {
-	char		*tmp;
-	char		**paths;
-	int			i;
+	char	*tmp;
+	char	**paths;
+	int		i;
 
 	i = 0;
 	tmp = NULL;

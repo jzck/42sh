@@ -6,11 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 08:50:26 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 14:25:54 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 08:09:00 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Get the max length from the list

@@ -6,11 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 14:37:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 09:17:11 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Function to select the next item in the list if it has already been created
@@ -36,7 +36,7 @@ static void		c_next_item(t_comp *c)
 ** of the cursor is restored.
 */
 
-int		c_dispatcher(t_data *s)
+int				c_dispatcher(t_data *s)
 {
 	if (s->comp && s->comp->lst == NULL)
 	{
@@ -85,10 +85,8 @@ int				completion(long int keypress)
 		return (1);
 	if (s->comp == NULL)
 	{
-		if (s->line.pos == 0)
-			return (0);
-		if (s->line.input[s->line.pos] != ' ' &&
-				s->line.input[s->line.pos] != '\0')
+		if ((s->line.pos == 0) || (s->line.input[s->line.pos] != ' ' &&
+				s->line.input[s->line.pos] != '\0'))
 			return (0);
 		c_init(s, keypress);
 		if (s->comp == NULL)
@@ -99,11 +97,8 @@ int				completion(long int keypress)
 		c_term_resize(s->comp);
 		if (keypress == TOUCHE_TAB)
 			c_next_item(s->comp);
-		else
-		{
-			if (c_gtfo(s->comp, keypress))
-				return (1);
-		}
+		else if (c_keypress(s->comp, keypress))
+			return (1);
 	}
 	return (c_dispatcher(s));
 }

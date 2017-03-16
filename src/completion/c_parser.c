@@ -6,11 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 06:53:34 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 08:49:22 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Add the matching element to the list
@@ -18,7 +18,6 @@
 
 void			c_add_to_lst(t_comp *c, t_clst *node)
 {
-	DG("\tADD %s", node->name);
 	if (c->lst == NULL)
 	{
 		c->lst = node;

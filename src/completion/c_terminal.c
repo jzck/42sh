@@ -6,20 +6,20 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 14:36:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 09:02:14 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Clear the previous list from the screen and restore the same position.
 */
 
-void			c_term_clear(t_comp *c)
+void				c_term_clear(t_comp *c)
 {
-	int		i;
-	int		lcmd;
+	int				i;
+	int				lcmd;
 
 	ft_putstr(tgetstr("do", NULL));
 	ft_putstr(tgetstr("cd", NULL));
@@ -39,11 +39,11 @@ void			c_term_clear(t_comp *c)
 ** the original position.
 */
 
-void			c_term_mv_back(t_comp *c)
+void				c_term_mv_back(t_comp *c)
 {
-	int		i;
-	int		lcmd;
-	int		value;
+	int				i;
+	int				lcmd;
+	int				value;
 
 	i = 0;
 	if (c->c_line > c->win_y)
@@ -71,10 +71,10 @@ void			c_term_mv_back(t_comp *c)
 ** the first line under the prompt
 */
 
-void			c_term_mv_down(t_comp *c)
+void				c_term_mv_down(t_comp *c)
 {
-	int		i;
-	int		value;
+	int				i;
+	int				value;
 
 	i = 0;
 	if (c->c_line > c->win_y)
@@ -104,7 +104,7 @@ void			c_term_mv_down(t_comp *c)
 ** and clear the previous print list.
 */
 
-int				c_term_resize(t_comp *c)
+int					c_term_resize(t_comp *c)
 {
 	struct winsize	win;
 

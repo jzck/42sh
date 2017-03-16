@@ -6,11 +6,11 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 18:21:54 by alao              #+#    #+#             */
-/*   Updated: 2017/02/16 22:17:53 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 08:50:38 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** Solve the tilde pattern in the path
@@ -18,10 +18,10 @@
 
 static char		*tilde(t_comp *c, char *cmd)
 {
-	char	*t_home;
-	char	*t_sub;
-	char	*rt;
-	int		l_cmd;
+	char		*t_home;
+	char		*t_sub;
+	char		*rt;
+	int			l_cmd;
 
 	t_home = NULL;
 	t_sub = NULL;
@@ -42,9 +42,9 @@ static char		*tilde(t_comp *c, char *cmd)
 
 static char		*dots_purge(char **scwd, char **scmd, int i)
 {
-	char	*tmp;
-	char	*rt;
-	int		j;
+	char		*tmp;
+	char		*rt;
+	int			j;
 
 	tmp = NULL;
 	rt = NULL;
@@ -75,9 +75,9 @@ static char		*dots_purge(char **scwd, char **scmd, int i)
 
 static char		*dots(char *cmd, char *cwd, int i)
 {
-	char	*tmp;
-	char	**scmd;
-	char	**scwd;
+	char		*tmp;
+	char		**scmd;
+	char		**scwd;
 
 	tmp = NULL;
 	if (!(ft_strcmp(cmd, ".")) || !(ft_strcmp(cmd, "./")))
@@ -107,9 +107,9 @@ static char		*dots(char *cmd, char *cwd, int i)
 
 char			*path_solver(t_comp *c, char *cmd, char *cwd)
 {
-	char	*dir;
-	char	*tmp;
-	char	*ncmd;
+	char		*dir;
+	char		*tmp;
+	char		*ncmd;
 
 	dir = NULL;
 	tmp = NULL;

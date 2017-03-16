@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_matching.c                                       :+:      :+:    :+:   */
+/*   c_match.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/14 17:22:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 09:12:40 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-**	chevron y es-tu ???
+** Failsafe by checking if the nearby char are not a < or > for aggregation.
 */
 
-int			c_chevron(t_comp *c)
+static int			c_chevron(t_comp *c)
 {
 	size_t	pos;
 
@@ -33,16 +33,7 @@ int			c_chevron(t_comp *c)
 }
 
 /*
-** Start the parsing for the autocompletion.
-** Check the first char of the c->rcmd for a . or /. to see if it's a local
-** path to search even if there's no space in the command.
-** If a space is found in the command. The function will assume it's a binary
-** completion that is needed. Else the c_seek_files() is called to search for
-** local path along with the binary part separated.
-** If any of the other part successfully created a list, the c_sizing is called
-** and 1 is returned. The last condition also check is the structure still
-** exist. It's only when the c_rematch() called it that it can be the case.
-** Else 0 is returned.
+** Seek the current word.
 */
 
 static char	*c_current_words(t_comp *c)
@@ -56,6 +47,10 @@ static char	*c_current_words(t_comp *c)
 		++pos;
 	return (c->rcmd + pos);
 }
+
+/*
+** Start the parsing for the autocompletion.
+*/
 
 int			c_matching(t_data *s, t_comp *c)
 {

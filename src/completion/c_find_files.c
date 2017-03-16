@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_files.c                                          :+:      :+:    :+:   */
+/*   c_find_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/15 11:47:40 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 08:29:21 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "completion.h"
 
 /*
 ** If the parsing for local file fail. The function is called to check if the
@@ -20,11 +20,11 @@
 ** Returning 1 if success (trigger an update) or 0.
 */
 
-static int		c_exclusion_folder(t_comp *c)
+int			c_exclusion_folder(t_comp *c)
 {
-	DIR			*rep;
-	char		*tmp;
-	char		*tmp2;
+	DIR		*rep;
+	char	*tmp;
+	char	*tmp2;
 
 	tmp = ft_strjoin(c->cpath, c->match);
 	tmp2 = NULL;
@@ -45,16 +45,17 @@ static int		c_exclusion_folder(t_comp *c)
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	return (0);
 }
+
 /*
 ** Clear the binary from c->rcmd ans save the result in c->match. Return the
 ** path part of it if exist or NULL.
 */
 
-static char		*c_slicer(t_comp *c)
+static char	*c_slicer(t_comp *c)
 {
-	char		*tmp;
-	char		*rt;
-	int			i;
+	char	*tmp;
+	char	*rt;
+	int		i;
 
 	i = 0;
 	tmp = NULL;
@@ -78,7 +79,7 @@ static char		*c_slicer(t_comp *c)
 ** Files searching
 */
 
-int				c_seek_files(t_data *s, t_comp *c, char *current_word)
+int			c_seek_files(t_data *s, t_comp *c, char *current_word)
 {
 	char	*path;
 
