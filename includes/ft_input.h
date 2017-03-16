@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 02:05:22 by sbenning          #+#    #+#             */
-/*   Updated: 2017/03/15 18:51:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:58:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * TODO Same for MACOSX
 */
 
-# ifdef LINUX
+# ifdef __linux__
 #  define RL_INSERT_CODE 0x7e325b1b
 #  define RL_CLEAR_CODE 0xc
 #  define RL_NL_CODE 0xa
@@ -49,7 +49,7 @@
 #  define RL_PASTE_CODE 0x761b
 # endif
 
-# ifdef MACOSX
+# ifdef __APPLE__
 #  define RL_INSERT_CODE 0x53323b315b1b
 #  define RL_CLEAR_CODE 0xc
 #  define RL_NL_CODE 0xa
