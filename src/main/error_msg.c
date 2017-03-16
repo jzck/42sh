@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_init.c                                       :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/21 16:14:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 17:57:47 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/16 14:14:47 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/16 14:17:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer_init(t_lexer *lexer)
+int		error_msg(char *msg)
 {
-	lexer->str = NULL;
-	lexer->pos = 0;
-	lexer->state = DEFAULT;
-	lexer->stack = NULL;
-	lexer->heredoc_stack = NULL;
+	ft_dprintf(2, "{red}%s{eoc}\n", msg);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 02:09:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 18:34:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	add_redir_type_number(t_btree **ast, t_list **lst)
 	t_list		**queue;
 	t_list		*redir_lst;
 
-	queue = &data_singleton()->heredoc_queue;
+	queue = &data_singleton()->parser.heredoc_queue;
 	token = (*lst)->content;
 	node = (*ast)->item;
 	redir_lst = ft_lstlast(node->data.cmd.redir);
@@ -116,7 +116,7 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 	t_list		*redir_lst;
 	t_list		**queue;
 
-	queue = &data_singleton()->heredoc_queue;
+	queue = &data_singleton()->parser.heredoc_queue;
 	if (!*ast)
 		gen_node(ast);
 	token = (*lst)->content;

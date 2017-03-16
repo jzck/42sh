@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 19:59:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 22:11:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 {
 	t_sym		*head;
 
-	(void)ast;
 	if (pop_heredoc(token))
 		return (0);
 	while (*token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
-//		DG("new sym %s", read_state(*parser->new_sym));
+		DG("new sym %s", read_state(*parser->new_sym));
 		if (eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		else
@@ -62,7 +61,5 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 		else
 			ft_lst_delif(token, (*token)->content, &ft_addrcmp, &token_free);
 	}
-	if (parser->state == SUCCESS)
-		DG("sucessful parsing");
 	return (0);
 }

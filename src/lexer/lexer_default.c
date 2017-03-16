@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:20:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:05:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		lexer_default(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 	char		c;
 
-	c = lexer->str[lexer->pos];
+ 	c = lexer->str[lexer->pos];
 	if ((lexer->state = get_state_global(lexer)))
 		return (lexer_lex(alst, lexer));
 	if ((lexer->state = get_state_redir(lexer)))

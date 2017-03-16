@@ -6,24 +6,24 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 03:52:15 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/16 18:40:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		readline(int fd, int prompt, char **input)
+int		readline(int has_prompt, char **input)
 {
 	int ret;
 
 	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
-		return ((ret = get_next_line(fd, input)) >= 0 ? !ret : ret);
-	readline_init(prompt);
+		return ((ret = get_next_line(STDIN, input)) >= 0 ? !ret : ret);
+	readline_init(has_prompt);
 	*input = ft_read_stdin();
 	if (STR)
 		ft_current_str(STR, POS);
 	ft_putchar('\n');
-	if (!prompt)
+	if (has_prompt)
 		*input = ft_history_parsing();
 	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
 		return (-1);

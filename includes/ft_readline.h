@@ -6,7 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/03/16 16:02:32 by jhalford         ###   ########.fr       */
+=======
+/*   Updated: 2017/03/16 15:13:25 by jhalford         ###   ########.fr       */
+>>>>>>> main_cleanup
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +78,7 @@ typedef struct	s_list_history
 typedef struct	s_line
 {
 	char					*input;
+	int						fd;
 	char					*copy_tmp;
 	size_t					pos;
 	int						prompt_size;
@@ -155,7 +160,7 @@ void			ft_c(void);
 void			ft_x(void);
 void			ft_v(void);
 void			ft_read_it(int input, size_t *pos, char **str);
-int				readline(int fd, int prompt, char **input);
+int				readline(int prompt, char **input);
 int				ft_completion(int ret);
 
 struct termios	*ft_save_termios(int save);

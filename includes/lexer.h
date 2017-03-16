@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 19:07:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:36:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			get_reserved_words(t_list **alst);
 int			insert_newline(t_list **alst);
 
 void		lexer_init(t_lexer *lexer);
-
+void		lexer_destroy(t_lexer *lexer);
 int			lexer_lex(t_list **alst, t_lexer *lexer);
 int			lexer_default(t_list **alst, t_lexer *lexer);
 int			lexer_newline(t_list **alst, t_lexer *lexer);

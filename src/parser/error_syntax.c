@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 15:52:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:24:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_errormatch	g_errormatch[] =
+static t_errormatch	g_errormatch[] =
 {
 	{TK_NEWLINE, "newline"},
 	{TK_SEMI, ";"},
@@ -51,8 +51,7 @@ t_errormatch	g_errormatch[] =
 	{0, NULL},
 };
 
-int				error_syntax(t_list **lst, t_parser *parser,
-				t_btree **ast)
+int				error_syntax(t_list **lst)
 {
 	t_token		*token;
 	int			i;
@@ -65,21 +64,18 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_dprintf(2, "syntax error near unexpected token « %s »\n",
+			ft_dprintf(2, "{red}syntax error near unexpected token « %s »{eoc}\n",
 					g_errormatch[i].error);
-			instruction_free(lst, parser, ast);
 			return (0);
 		}
 		i++;
 	}
-	ft_dprintf(2, "syntax error near unexpected token « %s »\n", token->data);
-	instruction_free(lst, parser, ast);
+	ft_dprintf(2, "{red}syntax error near unexpected token « %s »\n{eoc}", token->data);
 	return (0);
 }
 
-int				error_eof(t_list **lst, t_parser *parser, t_btree **ast)
+int				error_eof(void)
 {
-	ft_putstr_fd("syntax error near unexpected EOF", 2);
-	instruction_free(lst, parser, ast);
-	return (0);
+	ft_dprintf(2, "{red}syntax error near unexpected EOF{eoc}");
+	return (1);
 }
