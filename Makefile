@@ -267,7 +267,6 @@ main/data_init.c\
 main/data_singleton.c\
 main/error_msg.c\
 main/ft_putast.c\
-main/instruction_free.c\
 main/main.c\
 main/shell_init.c\
 parser/add_bang.c\

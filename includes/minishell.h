@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 23:01:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 00:20:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,21 @@
 
 struct	s_data
 {
-	t_flag	opts;
-	char	**env;
-	int		argc;
-	char	**argv;
-	t_line	line;
-	t_comp	*comp;
-	t_exec	exec;
-	t_jobc	jobc;
-	t_list	*heredoc_queue;
-	char	**local_var;
-	t_list	*lst_func;
+	t_flag		opts;
+	char		**env;
+	int			argc;
+	char		**argv;
+	t_line		line;
+	t_list		*token;
+	t_btree		*ast;
+	t_lexer		lexer;
+	t_parser	parser;	
+	t_comp		*comp;
+	t_exec		exec;
+	t_jobc		jobc;
+	t_list		*heredoc_queue;
+	char		**local_var;
+	t_list		*lst_func;
 };
 
 int		shell_init(int ac, char **av);
@@ -58,8 +62,6 @@ void	shell_exit(void);
 int		data_init(int ac, char **av);
 void	data_exit(void);
 
-int	instruction_free(t_list **token, t_parser *parser,
-	t_btree **ast);
 void		content_free(void *data, size_t content_size);
 
 char	*ft_putast(void *node);
