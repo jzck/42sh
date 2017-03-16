@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 08:08:11 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 10:21:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int				c_rematch(t_comp *c, long int keypress)
 		else if (c->lst == c->lst->next)
 			return (1);
 		ft_print(keypress);
-		return(1);
+		return (1);
 	}
 	else
 	{

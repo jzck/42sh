@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 09:12:40 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 10:20:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Failsafe by checking if the nearby char are not a < or > for aggregation.
 */
 
-static int			c_chevron(t_comp *c)
+static int	c_chevron(t_comp *c)
 {
 	size_t	pos;
 

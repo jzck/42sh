@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 09:04:42 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 08:17:12 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/16 10:19:54 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 ** Calculate the offset id value from the current one relative to the list size.
 ** lst_modulo is the number in element in the last column of the list that is
 ** not perfectly in the same size.
-**
 */
 
 static int	c_idsolver(t_comp *c, int ids, int ids_bk)
