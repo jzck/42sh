@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 10:58:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 23:35:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 00:02:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	init_math(char **var, char **value, char **operator, char **operand)
 
 static int	get_value(char **var, char **value)
 {
+	char	*temp;
 
 	if (!word_is_assignment(var))
 		return (error_msg(MATHERR_1));

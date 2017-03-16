@@ -224,11 +224,9 @@ lexer/lexer_destroy.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
-lexer/lexer_greatand.c\
 lexer/lexer_heredoc.c\
 lexer/lexer_init.c\
 lexer/lexer_less.c\
-lexer/lexer_lessand.c\
 lexer/lexer_lex.c\
 lexer/lexer_newline.c\
 lexer/lexer_number.c\
