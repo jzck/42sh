@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 18:14:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 10:38:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ static int	promt_git_status(int fd)
 	free(tmp);
 	len = ft_strlen(line);
 	ft_strdel(&line);
-	fflush(NULL);
 	return (len + 8);
 }
 
 static int	ft_git_status(void)
 {
+	static char	*exec[] = {"git", "status", "--porcelain", "--branch", NULL};
 	int			pip[2];
-	pid_t	soon;
-	char	*exec[] = {"git", "status", "--porcelain", "--branch", NULL};
-	int		ret;
+	pid_t		soon;
+	int			ret;
 
 	pipe(pip);
 	if ((soon = fork()))
@@ -104,7 +103,6 @@ void		ft_prompt(void)
 		ft_printf("\x1b[38;5;1m➜  ");
 	else
 		ft_printf("\x1b[38;5;10m➜  ");
-	fflush(NULL);
 	ft_putstr("\x1b[38;5;361m");
 	ret += ft_currend_dir();
 	ret += ft_git_status();

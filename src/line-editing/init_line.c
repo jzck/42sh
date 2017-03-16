@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 11:55:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 10:37:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ft_init_line(void)
+void	ft_init_line(void)
 {
 	data_singleton()->line.input = NULL;
 	data_singleton()->line.copy_tmp = NULL;

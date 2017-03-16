@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:27:03 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 14:58:41 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 10:40:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_add_in_history_file(char *str)
+void	ft_add_in_history_file(char *str)
 {
 	int		fd;
 	int		i;

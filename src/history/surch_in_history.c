@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 12:15:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 10:41:53 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void		ft_surch_in_history(void)
 
 	srch_pos = 0;
 	str_srch = NULL;
-	if (STR)
-		ft_strdel(&STR);
+	(STR) ? ft_strdel(&STR) : 0;
 	while (42)
 	{
 		ft_give_new_prompt(str_srch, srch_pos);
@@ -84,10 +83,7 @@ void		ft_surch_in_history(void)
 			--srch_pos;
 			str_srch = ft_remove_imput(str_srch, srch_pos);
 			ft_puttermcaps("le");
-			if (!*str_srch)
-				STR = NULL;
-			else
-				STR = ft_strget_history(str_srch);
+			STR = (!*str_srch) ? NULL : ft_strget_history(str_srch);
 		}
 		else if (ret != 127)
 			break ;

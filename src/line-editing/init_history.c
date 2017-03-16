@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 13:48:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 10:36:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void			ft_init_history(void)
 		return ;
 	path = ft_str3join(home, "/", ".42sh_history");
 	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return ;
 	while (get_next_line(fd, &str) > 0)
 	{
 		if (ft_str_is_print(str) && *str)
@@ -51,7 +49,7 @@ void			ft_init_history(void)
 		free(str);
 	}
 	if (corrupt)
-		ft_putendl_fd("42sh: corrupt history file /Users/gwojda/.zsh_history", 2);
+		ft_dprintf(2, "42sh: corrupt history file %s/.zsh_history", home);
 	free(path);
 	free(str);
 	close(fd);

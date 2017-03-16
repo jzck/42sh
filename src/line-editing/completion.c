@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 14:15:55 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/09 15:20:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 10:33:10 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int				ft_completion(int ret)
 		boolean = completion(ret);
 	if (boolean || ret == 10)
 	{
-		if (pos_tmp)
-			--pos_tmp;
-		else
-			ft_puttermcaps("nd");
+		(pos_tmp) ? --pos_tmp : ft_puttermcaps("nd");
 		ft_get_beggin_with_curs(STR, &pos_tmp);
 		tmp = pos_tmp;
 		ft_puttermcaps("cd");
