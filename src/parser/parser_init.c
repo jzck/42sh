@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:14:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/11 16:20:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 22:13:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void		parser_init(t_parser *parser)
 {
 	parser->state = SUCCESS;
-	parser->new_sym = ft_memalloc(sizeof(t_sym));
+	parser->new_sym = NULL;
 	parser->stack = NULL;
-	push_stack(&parser->stack, TERMINUS);
-	push_stack(&parser->stack, LINEBREAK);
+	parser->heredoc_queue = NULL;
 }

@@ -30,6 +30,7 @@ struct	s_parser
 	t_parstate	state;
 	t_list		*stack;
 	t_sym		*new_sym;
+	t_list		*heredoc_queue;
 };
 
 struct	s_aggrematch
@@ -64,6 +65,9 @@ struct	s_errormatch
 /* extern t_stackmatch g_stackmatch[]; */
 
 void	parser_init(t_parser *parser);
+void	parser_destroy(t_parser *parser);
+int		stack_init(t_parser *parser);
+
 int		ft_parse(t_btree **ast, t_list **token, t_parser *parser);
 
 int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst);
@@ -75,7 +79,7 @@ int		pop_stack(t_list **stack, t_sym erase_sym);
 
 int		pop_heredoc(t_list **lst);
 
-int		error_syntax(t_list **token, t_parser *parser, t_btree **ast);
+int		error_syntax(t_list **token);
 int		error_eof(void);
 
 int		ft_read_stack(t_sym *stack);

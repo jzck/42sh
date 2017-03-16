@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 15:34:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 17:49:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,11 @@ static t_errormatch	g_errormatch[] =
 	{0, NULL},
 };
 
-int				error_syntax(t_list **lst, t_parser *parser,
-				t_btree **ast)
+int				error_syntax(t_list **lst)
 {
 	t_token		*token;
 	int			i;
 
-	(void)parser;
-	(void)ast;
 	if (!*lst)
 		return (0);
 	token = (*lst)->content;
@@ -67,18 +64,18 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_dprintf(2, "syntax error near unexpected token « %s »\n",
+			ft_dprintf(2, "{red}syntax error near unexpected token « %s »{eoc}\n",
 					g_errormatch[i].error);
 			return (0);
 		}
 		i++;
 	}
-	ft_dprintf(2, "syntax error near unexpected token « %s »\n", token->data);
+	ft_dprintf(2, "{red}syntax error near unexpected token « %s »\n{eoc}", token->data);
 	return (0);
 }
 
 int				error_eof(void)
 {
-	ft_putstr_fd("syntax error near unexpected EOF", 2);
+	ft_dprintf(2, "{red}syntax error near unexpected EOF{eoc}");
 	return (1);
 }

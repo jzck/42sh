@@ -6,113 +6,123 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 15:45:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 22:26:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	do_lexer_routine(t_list **token, t_lexer *lexer, t_parser *parser, char *str)
-{
-	t_list		*ltoken;
-
-	if (lexer->state == HEREDOC || parser->state == UNDEFINED)
-	{
-		ft_strappend(&lexer->str, (char[]){'\n', 0});
-		lexer->pos++;
-	}
-	ft_strappend(&lexer->str, str);
-	if (get_lexer_stack(*lexer) == BACKSLASH)
-		pop(&lexer->stack);
-	ltoken = ft_lstlast(*token);
-	if (lexer_lex(token ? &ltoken : token, lexer) < 1)
-		exit(1);
-	if (get_lexer_stack(*lexer) > 2)
-		return (1);
-	lexer->state = DEFAULT;
-	return (0);
-}
-
-static int	do_parser_routine(t_list **token, t_btree **ast, t_lexer *lexer, t_parser *parser)
-{
-	if (get_reserved_words(token))
-		return (1);
-	token_print(*token);
-	if (insert_newline(token))
-		return (1);
-	ft_parse(ast, token, parser);
-	if ((lexer->state = data_singleton()->heredoc_queue ? HEREDOC : DEFAULT))
-		return (0);
-	if (parser->state == ERROR)
-	{
-		error_syntax(token, parser, ast);
-		return (1);
-	}
-	else if (parser->state == SUCCESS)
-		return (1);
-	return (0);
-}
-
-static int	do_readline_routine(t_lexer *lexer, t_parser *parser, char **str)
+static int	do_readline_routine(char **stream)
 {
 	int		ret;
 	int		has_prompt;
+	t_data	*data;
 
-	has_prompt = !(get_lexer_stack(*lexer) || parser->state == UNDEFINED || lexer->state == HEREDOC);
-	ret = readline(has_prompt, str);
+	data = data_singleton();
+	has_prompt = !(get_lexer_stack(data->lexer) 
+		|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
+	ret = readline(has_prompt, stream);
 	if (ret == -1)
 		exit(1);
-	if (ret == 1 && parser->state == UNDEFINED)
+	if (ret == 1 && data->parser.state == UNDEFINED)
 		error_eof();
 	return (ret);
 }
 
-static int		handle_instruction(t_lexer *lexer, t_parser *parser)
+static int	do_lexer_routine(char *stream)
 {
-	t_list		*token;
-	t_btree		*ast;
-	int			ret;
-	char	*str;
+	t_list		*ltoken;
+	t_data		*data;
 
-	token = NULL;
-	ast = NULL;
-	str = NULL;
-	while (1)
+	data = data_singleton();
+	if (data->lexer.state == HEREDOC || data->parser.state == UNDEFINED)
 	{
-		if ((ret = do_readline_routine(lexer, parser, &str)) > 0)
-			return (ret);
-		if (do_lexer_routine(&token, lexer, parser, str) > 0)
-			continue ;
-		if (do_parser_routine(&token, &ast, lexer, parser) > 0)
-			break ;
+		ft_strappend(&data->lexer.str, (char[]){'\n', 0});
+		data->lexer.pos++;
 	}
-	/* btree_print(STDBUG, ast, &ft_putast); */
-	if (parser->state == SUCCESS && ft_exec(&ast) < 0)
+	ft_strappend(&data->lexer.str, stream);
+	if (get_lexer_stack(data->lexer) == BACKSLASH)
+		pop(&data->lexer.stack);
+	ltoken = ft_lstlast(data->token);
+	if (lexer_lex(data->token ? &ltoken : &data->token, &data->lexer) < 0)
 		exit(1);
-	if (SH_IS_INTERACTIVE(data_singleton()->opts) && *lexer->str)
-		ft_add_str_in_history(lexer->str);
+	if (get_lexer_stack(data->lexer) > 2)
+		return (1);
+	data->lexer.state = DEFAULT;
 	return (0);
 }
 
+static int	do_parser_routine(void)
+{
+	t_data		*data;
+
+	data = data_singleton();
+	if (get_reserved_words(&data->token))
+		return (1);
+	if (insert_newline(&data->token))
+		return (2);
+	if (data->parser.state == SUCCESS && stack_init(&data->parser))
+		exit(1);
+	if (ft_parse(&data->ast, &data->token, &data->parser))
+		exit(1);
+	if ((data->lexer.state = data->parser.heredoc_queue ? HEREDOC : DEFAULT))
+		return (0);
+	if (data->parser.state == ERROR)
+	{
+		error_syntax(&data->token);
+		data->parser.state = SUCCESS;
+		return (1);
+	}
+	else if (data->parser.state == SUCCESS)
+		return (1);
+	return (0);
+}
+
+static int		handle_instruction()
+{
+	int			ret;
+	char		*stream;
+	t_data		*data;
+
+	stream = NULL;
+	data = data_singleton(); 
+	while (1)
+	{
+		if ((ret = do_readline_routine(&stream)) > 0)
+			return (ret);
+		if (do_lexer_routine(stream) > 0)
+			continue ;
+		if (do_parser_routine() > 0)
+			break ;
+	}
+	/* btree_print(STDBUG, ast, &ft_putast); */
+	if (data->parser.state == SUCCESS && ft_exec(&data->ast) < 0)
+		exit(1);
+	DG("stream [%s]", data->lexer.str);
+	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
+		ft_add_str_in_history(data->lexer.str);
+	return (0);
+}
 
 int		main(int ac, char **av)
 {
 	int			ret;
-	t_lexer		lexer;
-	t_parser	parser;
+	t_data		*data;
 
 	g_argv = av;
 	setlocale(LC_ALL, "");
 	DG("{inv}{bol}{gre}start of shell{eoc}");
 	if (shell_init(ac, av))
 		return (1);
-	lexer_init(&lexer);
-	parser_init(&parser);
 	DG("JOBC is %s", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
+	data = data_singleton();
 	while (1)
 	{
-		ret = handle_instruction(&lexer, &parser);
-		/* instruction_free(&token, &ast, &lexer, &parser); */
+		ret = handle_instruction();
+		lexer_destroy(&data->lexer);
+		parser_destroy(&data->parser);
+		ft_lstdel(&data->token, &ft_lst_cfree);
+		btree_del(&data->ast, &ft_lst_cfree);
 		if (ret == 1)
 			break ;
 	}

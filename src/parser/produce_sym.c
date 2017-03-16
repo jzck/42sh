@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 22:03:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 21:31:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,14 @@ int				produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 	t_sym		*head;
 	int			i;
 
+	if (!*stack)
+		DG("stack absente");
 	if (!*stack || !*lst)
 		return (1);
 	token = (*lst)->content;
 	head = (*stack)->content;
-//	DG("produce stack : %s && token : %s", read_state(*head),
-//	read_state(token->type));
+	DG("produce stack : %s && token : %s", read_state(*head),
+	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)

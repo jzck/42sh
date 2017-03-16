@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 16:23:18 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/16 22:15:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int		data_init(int ac, char **av)
 	data->opts = 0;
 	exec_reset();
 	data->lst_func = NULL;
-	data->heredoc_queue = NULL;
+	data->token = NULL;
+	data->ast = NULL;
+	lexer_init(&data->lexer);
+	parser_init(&data->parser);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		return (-1);
 	if (tgetent(NULL, term_name) != 1)

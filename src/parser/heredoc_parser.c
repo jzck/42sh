@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:21:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 15:02:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 17:51:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int			pop_heredoc(t_list **lst)
 	char	*tmp;
 
 	token = (*lst)->content;
-	if (token->type == HEREDOCDATA && data_singleton()->heredoc_queue != NULL)
+	if (token->type == HEREDOCDATA && data_singleton()->parser.heredoc_queue != NULL)
 	{
-		head = &data_singleton()->heredoc_queue;
+		head = &data_singleton()->parser.heredoc_queue;
 		redir = *(t_redir**)(*head)->content;
 		if (head && token)
 		{

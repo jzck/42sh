@@ -6,11 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:29:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/09 18:48:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 18:21:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 int		lexer_sep(t_list **alst, t_lexer *lexer)
 {

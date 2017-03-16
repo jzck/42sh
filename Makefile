@@ -220,6 +220,7 @@ lexer/lexer_bquote.c\
 lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
 lexer/lexer_delim.c\
+lexer/lexer_destroy.c\
 lexer/lexer_dquote.c\
 lexer/lexer_end.c\
 lexer/lexer_great.c\
@@ -287,11 +288,13 @@ parser/error_syntax.c\
 parser/eval_sym.c\
 parser/ft_parse.c\
 parser/heredoc_parser.c\
+parser/parser_destroy.c\
 parser/parser_init.c\
 parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
 parser/read_stack.c\
+parser/stack_init.c\
 parser/tree_wrapper.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
