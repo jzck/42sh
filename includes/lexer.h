@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 23:36:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 00:07:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ enum	e_lexstate
 	QUOTE,
 	DQUOTE,
 	BQUOTE,
-	DQUOTE_BQUOTE,
 	BACKSLASH,
 	CURLY_BRACKETS,
 	ASSIGNEMENT_WORD,

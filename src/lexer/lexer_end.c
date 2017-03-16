@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 16:58:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 14:44:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 23:17:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		lexer_end(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	if (lexer->str[lexer->pos] == '#')
-		while (lexer->str[++lexer->pos]);
+		while (lexer->str[++lexer->pos])
+			;
 	if (*alst && (lexer->state == QUOTE
 			|| lexer->state == DQUOTE
 			|| lexer->state == BQUOTE))

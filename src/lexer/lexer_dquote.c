@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 17:09:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 22:59:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,21 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	token->type = TK_WORD;
 	if (lexer->str[lexer->pos] == '"')
 	{
-		lexer->pos++;
-		if (!(lexer->stack && *(int*)lexer->stack->content == DQUOTE))
-		{
-			push(&lexer->stack, DQUOTE);
-			return (lexer_lex(alst, lexer));
-		}
-		lexer->state = WORD;
-		pop(&lexer->stack);
-		return (lexer_lex(alst, lexer));
-	}
-	if (lexer->str[lexer->pos] == '\\')
-	{
-		lexer->pos++;
-		if (lexer->str[lexer->pos] == 0)
-			return (0);
+		if (get_lexer_stack(*lexer) == DQUOTE && (lexer->state = WORD))
+			pop(&lexer->stack);
 		else
-			token_append(token, lexer, 1, 1);
-		lexer->pos++;
-		return (lexer_lex(alst,lexer));
+			push(&lexer->stack, DQUOTE);
 	}
-	else if (lexer->str[lexer->pos] == '`')
+	else if (lexer->str[lexer->pos] == '\\')
 	{
-		lexer->state = DQUOTE_BQUOTE;
-		return (lexer_bquote(alst, lexer));
+		if (lexer->str[lexer->pos + 1] == 0)
+			return(lexer_backslash(alst, lexer));
+		token_append(token, lexer, 1, 1);
 	}
-	token_append(token, lexer, 1, 0);
+	else if (lexer->str[lexer->pos] == '`' && (lexer->state = BQUOTE))
+		return (lexer_lex(alst, lexer));
+	else
+		token_append(token, lexer, 1, 0);
 	lexer->pos++;
 	return (lexer_lex(alst, lexer));
 }
