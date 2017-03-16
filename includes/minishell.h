@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 14:15:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:04:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct	s_data
 {
 	t_flag	opts;
 	char	**env;
+	char	**local_var;
 	int		argc;
 	char	**argv;
 	t_line	line;
@@ -43,7 +44,6 @@ struct	s_data
 	t_exec	exec;
 	t_jobc	jobc;
 	t_list	*heredoc_queue;
-	char	**local_var;
 	t_list	*lst_func;
 };
 
