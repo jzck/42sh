@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 18:52:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 12:10:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void			free_history_list(t_list_history *head);
 int				ft_nb_of_line(char *str, size_t pos);
 int				ft_get_size_prev(char *str, size_t pos);
 void			sigwinch_resize(int sig);
+size_t			ft_hist_len(void);
 
 char			*ft_read_stdin(void);
 void			ft_end(void);

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:09:39 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/19 11:55:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 11:58:10 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ft_nget_histo(size_t nb_his)
 		return (NULL);
 	if (!list->str)
 		list = list->prev;
-	while (i < nb_his && list->str)
+	while (i < nb_his && list && list->str)
 	{
 		list = list->prev;
 		++i;
@@ -63,7 +63,7 @@ static char	*ft_strget_histo(char *str)
 		return (NULL);
 	if (!list->str)
 		list = list->prev;
-	while (list->str && ft_strncmp(list->str, str, ft_strlen(str)))
+	while (list && list->str && ft_strncmp(list->str, str, ft_strlen(str)))
 		list = list->prev;
 	return (list->str);
 }

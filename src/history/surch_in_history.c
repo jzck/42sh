@@ -6,17 +6,15 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:41:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 11:53:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_clear_prompt(char *str, size_t *pos, size_t srch_pos)
+static void	ft_clear_prompt(size_t *pos, size_t srch_pos)
 {
-	if (str)
-		ft_get_beggin_with_curs(str, pos);
-	else if (*pos)
+	if (*pos)
 	{
 		ft_putnc('\b', *pos);
 		(*pos) = 0;
@@ -35,7 +33,7 @@ static void	ft_surch_and_realloc(char **str, char **str_srch,
 
 static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
 {
-	ft_clear_prompt(STR, &POS, srch_pos);
+	ft_clear_prompt(&POS, srch_pos);
 	data_singleton()->line.prompt_size = 21;
 	if (str_srch)
 		ft_printf("\033[35m(reverse-i-search)`\033[32m%s\033[35m': \033[37m",
@@ -51,7 +49,7 @@ static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
 
 static void	ft_modify_str(char *str_srch, size_t srch_pos)
 {
-	ft_clear_prompt(STR, &POS, srch_pos);
+	ft_clear_prompt(&POS, srch_pos);
 	data_singleton()->line.is_prompt ? ft_prompt() : ft_putstr("> ");
 	if (STR)
 	{
