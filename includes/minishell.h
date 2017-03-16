@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 16:35:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 14:15:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int		shell_init(int ac, char **av);
 void	shell_exit(void);
 int		data_init(int ac, char **av);
 void	data_exit(void);
+int		error_msg(char *msg);
 
-int	instruction_free(t_list **token, t_parser *parser,
-	t_btree **ast);
-void		content_free(void *data, size_t content_size);
+int		instruction_free(
+		t_list **token, t_btree **ast, t_lexer *lexer, t_parser *parser);
+/* void		content_free(void *data, size_t content_size); */
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

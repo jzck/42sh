@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 04:12:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:12:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_errormatch	g_errormatch[] =
+static t_errormatch	g_errormatch[] =
 {
 	{TK_NEWLINE, "newline"},
 	{TK_SEMI, ";"},
@@ -57,6 +57,8 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	t_token		*token;
 	int			i;
 
+	(void)parser;
+	(void)ast;
 	if (!*lst)
 		return (0);
 	token = (*lst)->content;
@@ -67,19 +69,19 @@ int				error_syntax(t_list **lst, t_parser *parser,
 		{
 			ft_dprintf(2, "syntax error near unexpected token « %s »\n",
 					g_errormatch[i].error);
-			instruction_free(lst, parser, ast);
 			return (0);
 		}
 		i++;
 	}
 	ft_dprintf(2, "syntax error near unexpected token « %s »\n", token->data);
-	instruction_free(lst, parser, ast);
 	return (0);
 }
 
 int				error_eof(t_list **lst, t_parser *parser, t_btree **ast)
 {
+	(void)lst;
+	(void)parser;
+	(void)ast;
 	ft_putstr_fd("syntax error near unexpected EOF", 2);
-	instruction_free(lst, parser, ast);
 	return (0);
 }

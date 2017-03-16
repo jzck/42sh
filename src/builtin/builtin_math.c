@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 10:58:49 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 21:02:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/16 14:18:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_value(char **var, char **value)
 	char	*temp;
 
 	if (!word_is_assignment(var))
-		return (ft_error_message(MATHERR_1));
+		return (error_msg(MATHERR_1));
 	temp = ft_sstrstr(data_singleton()->local_var, *var);
 	if (temp)
 	{
@@ -54,7 +54,7 @@ static int	do_math(char **value, char *operator, char *operand)
 	else
 		ope2 = 0;
 	if ((operator[0] == '/' || operator[0] == '%') && ope2 == 0)
-		return (ft_error_message(MATHERR_4));
+		return (error_msg(MATHERR_4));
 	else
 	{
 		ope1 = (operator[0] == '+') ? ope1 + ope2 : ope1;
@@ -78,7 +78,7 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!av || !av[1] || !av[2] || !av[3] || av[4])
-		return (ft_error_message(MATHERR_0));
+		return (error_msg(MATHERR_0));
 	init_math(&var, &value, &operator, &operand);
 	var = av[1];
 	if (get_value(&var, &value) == -1)
@@ -86,10 +86,10 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 	operator = av[2];
 	if (!(ft_strlen(operator) == 1 && (operator[0] == '+' || operator[0] == '-'
 		|| operator[0] == '/' || operator[0] == '*' || operator[0] == '%')))
-		return (ft_error_message(MATHERR_2));
+		return (error_msg(MATHERR_2));
 	operand = av[3];
 	if (!ft_stris(operand, &ft_isdigit))
-		return (ft_error_message(MATHERR_3));
+		return (error_msg(MATHERR_3));
 	if (do_math(&value, operator, operand) == -1)
 		return (-1);
 	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, data_singleton()->local_var);
