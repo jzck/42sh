@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 12:51:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 14:40:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 18:29:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 void	job_remove(int id)
 {
 	t_jobc		*jobc;
-	t_job		*j;
+	t_job	 	*j;
+	t_list	 	*jlist;
 	t_process	*p;
 
 	jobc = &data_singleton()->jobc;
-	j = ft_lst_find(jobc->first_job, &id, job_cmp_id)->content;
+	if (!(jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
+		return ;
+	j = jlist->content;
 	if (job_is_completed(id))
 	{
 		p = ft_lstlast(j->first_process)->content;
-		/* DG("remove, status=%i", p->status); */
 		set_exitstatus(p->status, 0);
 		if (id < data_singleton()->jobc.current_id)
 			data_singleton()->jobc.current_id = id;

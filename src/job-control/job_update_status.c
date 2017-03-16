@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 12:56:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 23:43:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 18:32:15 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	job_update_status(void)
 	int		status;
 	pid_t	pid;
 
-	do
+	while (1)
 	{
 		if ((pid = waitpid(WAIT_ANY, &status, WUNTRACED | WNOHANG)) == -1
 				&& errno != ECHILD)
-			ft_dprintf(2, "{red}%s: waitpid error errno=%i{eoc}\n", SHELL_NAME, errno);
-		DG("pid=[%d]", pid);
+			ft_dprintf(2, "{red}%s: waitpid error errno=%i{eoc}\n",
+					SHELL_NAME, errno);
+		if (pid <= 1 || mark_process_status(pid, status))
+			break ;
 	}
-	while (pid > 1 && !mark_process_status(pid, status));
 }

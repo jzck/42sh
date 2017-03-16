@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 13:55:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 16:47:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int			interactive_settings(void)
 	t_data	*data;
 
 	data = data_singleton();
-	DG("interactive shell settings");
 	shell_pgid = &data->jobc.shell_pgid;
 	while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 		kill(-*shell_pgid, SIGTTIN);
@@ -54,17 +53,12 @@ int					shell_init(int ac, char **av)
 	data_init(ac, av);
 	if (isatty(STDIN) && !*cliopts_getdata(av))
 	{
-		DG("interactive");
 		data->opts |= SH_INTERACTIVE;
 		data->opts |= SH_OPTS_JOBC;
 	}
-	else
-		DG("non interactive");
 	if (cliopts_get(av, g_opts, data))
 		return (ft_perror());
 	if (SH_IS_INTERACTIVE(data->opts))
 		interactive_settings();
-	else
-		DG("not interactive");
 	return (0);
 }

@@ -6,27 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 23:52:30 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/16 18:45:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* t_itof	g_launchmap[] = */
-/* { */
-/* 	{PROCESS_FUNCTION, launch_function}, */
-/* 	{PROCESS_BUILTIN, launch_builtin}, */
-/* 	{PROCESS_FILE, launch_file}, */
-/* 	{PROCESS_SUBSHELL, launch_subshell}, */
-/* 	{PROCESS_BRACE, launch_brace}, */
-/* 	{PROCESS_WHILE, launch_while}, */
-/* 	{PROCESS_UNTIL, launch_until}, */
-/* 	{PROCESS_IF, launch_if}, */
-/* 	{PROCESS_FOR, launch_for}, */
-/* 	{PROCESS_CASE, launch_case}, */
-/* 	{PROCESS_EMPTY, launch_empty}, */
-/* }; */
-
 
 int		check_pipe(t_process *p)
 {
@@ -61,24 +45,20 @@ int		check_pipe(t_process *p)
 int		process_launch(t_process *p)
 {
 	pid_t		pid;
-	pid_t		manage_pid;
+	/* pid_t		manage_pid; */
 
 	DG("p->type=%i", p->type);
-	/* if (p->type >= PROCESS_MAX) */
-	/* 	return (-1); */
-	/* if (!g_launch_map[p->type].f) */
-	/* 	return (-1); */
 	p->attrs &= ~PROCESS_STATE_MASK;
 	p->attrs |= PROCESS_RUNNING;
-	if (!(manage_pid = check_pipe(p)))
+	/* if (!(manage_pid = check_pipe(p))) */
 		if (!(pid = (*p->map.launch)(p)))
 		{
 			DG("launcher did not fork!");
 			process_resetfds(p);
 			return (1);
 		}
-	if (manage_pid)
-		pid = manage_pid;
+	/* if (manage_pid) */
+	/* 	pid = manage_pid; */
 	DG("launcher forked!");
 	p->pid = pid;
 	process_setgroup(p, pid);

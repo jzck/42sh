@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:54:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 18:22:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 18:24:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int		job_addprocess(t_process *p)
 	{
 		job_update_id();
 		job->id = jobc->current_id;
-		job->pgid = SH_IS_INTERACTIVE(data_singleton()->opts) ? p->pid : getpgid(0);
-		/* job->pgid = p->pid; */
+		job->pgid = SH_IS_INTERACTIVE(data_singleton()->opts) ?
+			p->pid : getpgid(0);
 		ft_lstadd(&jobc->first_job, ft_lstnew(job, sizeof(*job)));
 	}
-	DG("adding pid=[%i] to pgid=[%i]", p->pid, job->pgid);
 	job = jobc->first_job->content;
 	ft_lsteadd(&job->first_process, ft_lstnew(p, sizeof(*p)));
-	/* DG("[BG:%i]", JOB_IS_BG(job->attrs)); */
 	if (JOB_IS_BG(job->attrs) && IS_PIPEEND(*p))
 		job_notify_new(job);
 	return (0);
