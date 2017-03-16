@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 15:04:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:41:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 struct	s_data
 {
 	t_flag	opts;
+	int		fd;
 	char	**env;
 	char	**local_var;
 	int		argc;

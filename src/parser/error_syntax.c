@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 14:12:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:34:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ int				error_syntax(t_list **lst, t_parser *parser,
 	return (0);
 }
 
-int				error_eof(t_list **lst, t_parser *parser, t_btree **ast)
+int				error_eof(void)
 {
-	(void)lst;
-	(void)parser;
-	(void)ast;
 	ft_putstr_fd("syntax error near unexpected EOF", 2);
-	return (0);
+	return (1);
 }

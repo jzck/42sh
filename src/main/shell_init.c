@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 13:55:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/16 15:31:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,41 @@ static t_cliopts	g_opts[] =
 	{-1, "no-jobcontrol", 0, SH_OPTS_JOBC, NULL},
 	{0, 0, 0, 0, 0},
 };
+
+int		get_input_fd(char **av)
+{
+	t_data		*data;
+	char		*file;
+	int			fds[2];
+	int			fd;
+	struct stat	buf;
+
+	data = data_singleton();
+	if (SH_IS_INTERACTIVE(data->opts))
+		return (STDIN);
+	else if (data->opts & SH_OPTS_LC)
+	{
+		pipe(fds);
+		dup2_close(fds[PIPE_READ], 10);
+		fd = 10;
+		file = *cliopts_getdata(av);
+		write(fds[PIPE_WRITE], file, ft_strlen(file));
+		close(fds[PIPE_WRITE]);
+		fcntl(fd, F_SETFD, FD_CLOEXEC);
+		return (fd);
+	}
+	else if ((file = *cliopts_getdata(av)) && !stat(file, &buf))
+	{
+		fd = -1;
+		if (S_ISDIR(buf.st_mode))
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", av[0], file);
+		else if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", av[0], file);
+		if (fd > 0 && !dup2_close(fd, 10) && (fd = 10))
+			return (fd);
+	}
+	return (STDIN);
+}
 
 static int			interactive_settings(void)
 {
@@ -64,7 +99,7 @@ int					shell_init(int ac, char **av)
 		return (ft_perror());
 	if (SH_IS_INTERACTIVE(data->opts))
 		interactive_settings();
-	else
-		DG("not interactive");
+	if ((data->fd = get_input_fd(av)) < 0)
+		return (1);
 	return (0);
 }
