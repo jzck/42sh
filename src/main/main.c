@@ -88,8 +88,12 @@ static int		handle_instruction()
 	{
 		if ((ret = do_readline_routine(&stream)) > 0)
 			return (ret);
+		sleep(10);
+		return (1);
 		if (do_lexer_routine(stream) > 0)
 			continue ;
+		sleep(10);
+		return (1);
 		token_print(data->token);
 		if (do_parser_routine() > 0)
 			break ;

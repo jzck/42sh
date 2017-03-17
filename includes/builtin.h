@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 14:19:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:59:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include "builtin_read.h"
 
 # define BT_EXPORT_LP	(1 << 0)
-
-# define MATHERR_0	"math : invalid number of arguments\n"	
-# define MATHERR_1	"math : invalid variable name\n"
-# define MATHERR_2	"math : invalid operator\n"
-# define MATHERR_3	"math : invalid operand\n"
-# define MATHERR_4	"math : division by 0\n"  
 
 t_execf	*is_builtin(t_process *p);
 int		builtin_export(const char *path, char *const av[], char *const envp[]);
