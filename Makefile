@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/16 23:02:12 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/17 15:13:37 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -291,6 +291,7 @@ parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
 parser/read_stack.c\
+parser/redir_init.c\
 parser/stack_init.c\
 parser/tree_wrapper.c
 

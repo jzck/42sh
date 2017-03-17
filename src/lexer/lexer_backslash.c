@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 22:36:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:17:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		lexer_backslash(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	token = (*alst)->content;
-	token->type = TK_WORD;
+	token->type = token->type ? token->type : TK_WORD;
 	lexer->pos++;
 	lexer->state = WORD;
 	if (lexer->str[lexer->pos] == 0)

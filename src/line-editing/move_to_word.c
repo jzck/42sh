@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:12:09 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 11:49:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:33:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int			ft_found_prev_word(char **str, size_t *pos)
 		ft_puttermcaps("cd");
 		*pos -= 2;
 		ft_get_beggin(*str, pos);
-		if (!*pos && (*str)[*pos] == '\n')
-			++(*pos);
+		(!*pos && (*str)[*pos] == '\n') ? ++(*pos) : 0;
 		ft_current_str(*str, *pos);
 		ft_get_next_str(*str, pos);
 		++(*pos);

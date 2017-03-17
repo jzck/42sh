@@ -60,14 +60,10 @@ struct	s_errormatch
 	char	*error;
 };
 
-/* extern t_aggrematch g_aggrematch[]; */
-/* extern t_prodmatch g_prodmatch[]; */
-/* extern t_stackmatch g_stackmatch[]; */
-
 void	parser_init(t_parser *parser);
 void	parser_destroy(t_parser *parser);
 int		stack_init(t_parser *parser);
-
+int		redir_init(t_type type, t_redir *redir);   
 int		ft_parse(t_btree **ast, t_list **token, t_parser *parser);
 
 int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst);

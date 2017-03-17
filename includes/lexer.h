@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 00:07:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 20:19:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ enum	e_lexstate
 	BQUOTE,
 	BACKSLASH,
 	CURLY_BRACKETS,
-	ASSIGNEMENT_WORD,
 	END,
 };
 
@@ -92,7 +91,7 @@ char		*stack_to_prompt(t_list	*stack);
 t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
-int			get_reserved_words(t_list **alst);
+int			get_reserved_words(t_list *temp);
 int			insert_newline(t_list **alst);
 
 void		lexer_init(t_lexer *lexer);

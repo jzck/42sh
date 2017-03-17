@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 21:24:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 18:12:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_IF, TK_BANG},
 	{TK_IF, TK_PAREN_OPEN},
 	{TK_IF, TK_LBRACE},
+	{TK_IF, FUNC_NAME},
 	{TK_IF, COMPLETE_COMMANDS},
 	{TK_IF, SEPARATOR_OP},
 	{TK_IF, NEWLINE_LIST},
@@ -297,6 +298,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_CASE, TK_BANG},
 	{TK_CASE, TK_PAREN_OPEN},
 	{TK_CASE, TK_LBRACE},
+	{TK_CASE, FUNC_NAME},
 	{TK_CASE, COMPLETE_COMMANDS},
 	{TK_CASE, TK_DO},
 	{TK_CASE, TK_THEN},
@@ -322,6 +324,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_WHILE, LINEBREAK},
 	{TK_WHILE, TK_PAREN_OPEN},
 	{TK_WHILE, TK_LBRACE},
+	{TK_WHILE, FUNC_NAME},
 	{TK_WHILE, COMPLETE_COMMANDS},
 	{TK_WHILE, TK_BANG},
 	{TK_WHILE, SEPARATOR_OP},
@@ -343,6 +346,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_UNTIL, LINEBREAK},
 	{TK_UNTIL, TK_PAREN_OPEN},
 	{TK_UNTIL, TK_LBRACE},
+	{TK_UNTIL, FUNC_NAME},
 	{TK_UNTIL, COMPLETE_COMMANDS},
 	{TK_UNTIL, TK_BANG},
 	{TK_UNTIL, SEPARATOR_OP},
@@ -361,10 +365,33 @@ t_stackmatch	g_stackmatch[] =
 	{TK_UNTIL, TK_PAREN_CLOSE},
 	{TK_UNTIL, COMPLETE_CONDITION},
 	{TK_UNTIL, CONDITION},
+	{FUNC_NAME, LINEBREAK},
+	{FUNC_NAME, TK_BANG},
+	{FUNC_NAME, TK_PAREN_OPEN},
+	{FUNC_NAME, TK_LBRACE},
+	{FUNC_NAME, FUNC_NAME},
+	{FUNC_NAME, COMPLETE_COMMANDS},
+	{FUNC_NAME, SEPARATOR_OP},
+	{FUNC_NAME, NEWLINE_LIST},
+	{FUNC_NAME, SEQUENCE},
+	{FUNC_NAME, TK_WHILE},
+	{FUNC_NAME, FUNC_NAME},
+	{FUNC_NAME, TK_UNTIL},
+	{FUNC_NAME, FUNC_NAME},
+	{FUNC_NAME, TK_DO},
+	{FUNC_NAME, TK_ELIF},
+	{FUNC_NAME, TK_ELSE},
+	{FUNC_NAME, TK_THEN},
+	{FUNC_NAME, TK_PAREN_CLOSE},
+	{FUNC_NAME, COMPLETE_CONDITION},
+	{FUNC_NAME, CONDITION},
+	{FUNC_NAME, COMPOUND_LIST},
+	{FUNC_NAME, CASE_LIST_NS},
 	{TK_FOR, LINEBREAK},
 	{TK_FOR, TK_BANG},
 	{TK_FOR, TK_PAREN_OPEN},
 	{TK_FOR, TK_LBRACE},
+	{TK_FOR, FUNC_NAME},
 	{TK_FOR, COMPLETE_COMMANDS},
 	{TK_FOR, SEPARATOR_OP},
 	{TK_FOR, NEWLINE_LIST},
@@ -395,7 +422,6 @@ t_stackmatch	g_stackmatch[] =
 	{TK_LBRACE, TK_UNTIL},
 	{TK_LBRACE, TK_DO},
 	{TK_LBRACE, TK_PAREN_CLOSE},
-	{TK_LBRACE, TK_LBRACE},
 	{TK_LBRACE, TK_IF},
 	{TK_LBRACE, TK_ELIF},
 	{TK_LBRACE, TK_THEN},
@@ -599,6 +625,7 @@ t_stackmatch	g_stackmatch[] =
 	{NEWLINE_LIST, TK_PAREN_OPEN},
 	{NEWLINE_LIST, TK_LBRACE},
 	{NEWLINE_LIST, PROGRAM},
+	{NEWLINE_LIST, SEQUENCE},
 	{HERE_END, TK_DLESS},
 	{HERE_END, TK_DLESS},
 	{HERE_END, TK_DLESSDASH},
@@ -813,14 +840,6 @@ t_stackmatch	g_stackmatch[] =
 	{COMPLETE_CONDITION, COMPLETE_COMMANDS},
 	{COMPLETE_CONDITION, COMPLETE_CONDITION},
 	{COMPLETE_CONDITION, SEQUENCE},
-	{BRACE_GROUP, LINEBREAK},
-	{BRACE_GROUP, TK_PAREN_OPEN},
-	{BRACE_GROUP, TK_LBRACE},
-	{BRACE_GROUP, COMPLETE_COMMANDS},
-	{BRACE_GROUP, TK_BANG},
-	{BRACE_GROUP, SEPARATOR_OP},
-	{BRACE_GROUP, NEWLINE_LIST},
-	{BRACE_GROUP, SEQUENCE},
 	{FNAME, LINEBREAK},
 	{FNAME, TK_PAREN_OPEN},
 	{FNAME, TK_LBRACE},
@@ -833,6 +852,7 @@ t_stackmatch	g_stackmatch[] =
 	{FUNCTION_DEFINITION, LINEBREAK},
 	{FUNCTION_DEFINITION, TK_PAREN_OPEN},
 	{FUNCTION_DEFINITION, TK_LBRACE},
+	{FUNCTION_DEFINITION, FUNC_NAME},
 	{FUNCTION_DEFINITION, COMPLETE_COMMANDS},
 	{FUNCTION_DEFINITION, TK_BANG},
 	{FUNCTION_DEFINITION, SEPARATOR_OP},
@@ -841,6 +861,7 @@ t_stackmatch	g_stackmatch[] =
 	{UNTIL_CLAUSE, LINEBREAK},
 	{UNTIL_CLAUSE, TK_PAREN_OPEN},
 	{UNTIL_CLAUSE, TK_LBRACE},
+	{UNTIL_CLAUSE, FUNC_NAME},
 	{UNTIL_CLAUSE, COMPLETE_COMMANDS},
 	{UNTIL_CLAUSE, TK_BANG},
 	{UNTIL_CLAUSE, SEPARATOR_OP},
@@ -885,6 +906,7 @@ t_stackmatch	g_stackmatch[] =
 	{IF_CLAUSE, TK_BANG},
 	{IF_CLAUSE, TK_PAREN_OPEN},
 	{IF_CLAUSE, TK_LBRACE},
+	{IF_CLAUSE, FUNC_NAME},
 	{IF_CLAUSE, COMPLETE_COMMANDS},
 	{IF_CLAUSE, SEPARATOR_OP},
 	{IF_CLAUSE, NEWLINE_LIST},
@@ -907,6 +929,7 @@ t_stackmatch	g_stackmatch[] =
 	{BRACE_CLAUSE, LINEBREAK},
 	{BRACE_CLAUSE, TK_PAREN_OPEN},
 	{BRACE_CLAUSE, TK_LBRACE},
+	{BRACE_CLAUSE, FUNC_NAME},
 	{BRACE_CLAUSE, COMPLETE_COMMANDS},
 	{BRACE_CLAUSE, TK_BANG},
 	{BRACE_CLAUSE, SEPARATOR_OP},
@@ -936,6 +959,7 @@ t_stackmatch	g_stackmatch[] =
 	{CASE_CLAUSE, TK_BANG},
 	{CASE_CLAUSE, TK_PAREN_OPEN},
 	{CASE_CLAUSE, TK_LBRACE},
+	{CASE_CLAUSE, FUNC_NAME},
 	{CASE_CLAUSE, COMPLETE_COMMANDS},
 	{CASE_CLAUSE, SEPARATOR_OP},
 	{CASE_CLAUSE, NEWLINE_LIST},
@@ -963,6 +987,7 @@ t_stackmatch	g_stackmatch[] =
 	{FOR_CLAUSE, TK_BANG},
 	{FOR_CLAUSE, TK_PAREN_OPEN},
 	{FOR_CLAUSE, TK_LBRACE},
+	{FOR_CLAUSE, FUNC_NAME},
 	{FOR_CLAUSE, COMPLETE_COMMANDS},
 	{FOR_CLAUSE, SEPARATOR_OP},
 	{FOR_CLAUSE, NEWLINE_LIST},
@@ -1004,6 +1029,7 @@ t_stackmatch	g_stackmatch[] =
 	{SUBSHELL, NEWLINE_LIST},
 	{SUBSHELL, SEQUENCE},
 	{SUBSHELL, TK_LBRACE},
+	{SUBSHELL, TK_PAREN_OPEN},
 	{SUBSHELL, SEPARATOR_OP},
 	{SUBSHELL, NEWLINE_LIST},
 	{SUBSHELL, TK_DO},
@@ -1243,7 +1269,6 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	if (!*stack)
 		return (1);
 	head = (*stack)->content;
-	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	i = 0;
 	while (g_stackmatch[i].top)
 	{
@@ -1253,3 +1278,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	}
 	return (1);
 }
+
+/*
+** DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
+*/

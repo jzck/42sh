@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:17:52 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 17:24:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			ft_putall_current_str(char *str, size_t *pos);
 void			ft_current_str(char *str, size_t pos);
 int				ft_strlen_next(char *str, size_t pos);
 void			ft_push_back_history(
-		t_list_history **head, t_list_history *new);
+				t_list_history **head, t_list_history *new);
 void			ft_prompt(void);
 char			*ft_remove_imput(char *str, size_t pos);
 char			*ft_realloc_imput(char *str, int a, size_t pos);

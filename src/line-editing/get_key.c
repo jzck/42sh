@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:15:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 15:54:45 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,52 +38,61 @@ t_key	g_key[] =
 	{0					, 0						},
 };
 
-static void	init_read_stdin(char **str, size_t *pos)
+static void	init_read_stdin(char ***str, size_t **pos)
 {
-	if (*str)
+	*pos = &data_singleton()->line.pos;
+	*str = &data_singleton()->line.input;
+	if (**str)
 	{
-		ft_current_str(*str, *pos);
-		ft_get_next_str(*str, pos);
-		if ((*str)[*pos])
-			++(*pos);
+		ft_current_str(**str, **pos);
+		ft_get_next_str(**str, *pos);
+		if ((**str)[**pos])
+			++(**pos);
 	}
 	if (data_singleton()->comp)
 		c_clear(data_singleton());
 	signal(SIGWINCH, sigwinch_resize);
 }
 
+static int	read_stdin(int *ret, int *j)
+{
+	*j = 0;
+	*ret = 0;
+	if (read(0, ret, sizeof(int)) < 0)
+		return (-1);
+	return (1);
+}
+
+static int	press_enter(char **input, char **str)
+{
+	*input = *str;
+	return (0);
+}
+
 int			ft_read_stdin(char **input)
 {
-	int	ret;
-	int	j;
+	int		ret;
+	int		j;
+	char	**str;
+	size_t	*pos;
 
-	init_read_stdin(&data_singleton()->line.input, &data_singleton()->line.pos);
+	init_read_stdin(&str, &pos);
 	while (42)
 	{
-		ret = 0;
-		j = 0;
-		read(0, &ret, sizeof(int));
-		if (ft_completion(ret, &data_singleton()->line.input,
-											&data_singleton()->line.pos))
+		if (read_stdin(&ret, &j) < 0)
+			return (-1);
+		DG("key value hex = %x", ret);
+		if (ft_completion(ret, str, pos))
 			continue ;
 		while (g_key[j].value && g_key[j].value != ret)
 			++j;
-		if (g_key[j].value)
-		{
-			if ((ret = g_key[j].f(&data_singleton()->line.input,
-												&data_singleton()->line.pos)))
-				return (ret);
-		}
-		else if (ft_isprint(ret))
-			ft_print(ret, &data_singleton()->line.input,
-												&data_singleton()->line.pos);
-		else if (ret == 10)
-		{
-			*input = data_singleton()->line.input;
-			return (0);
-		}
-		else if (ft_isascii(ret) == 0)
-			ft_read_it(ret, &data_singleton()->line.pos,
-												&data_singleton()->line.input);
+		if (g_key[j].value && (ret = g_key[j].f(str, pos)))
+			return (ret);
+		else if (!g_key[j].value && ft_isprint(ret))
+			ft_print(ret, str, pos);
+		else if (!g_key[j].value && ret == 10)
+			return (press_enter(input, str));
+		else if (!g_key[j].value && ft_isascii(ret) == 0)
+			ft_read_it(ret, pos, str);
 	}
 }

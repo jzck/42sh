@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 10:44:40 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 09:02:14 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/17 17:07:20 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ void				c_term_clear(t_comp *c)
 	}
 }
 
+static size_t		c_virtual_position(t_comp *c)
+{
+	char	*str;
+	size_t	pos;
+	size_t	virtual_pos;
+
+	pos = c->ircmd;
+	virtual_pos = pos;
+	str = data_singleton()->line.input;
+	while (pos && str[pos] != '\n')
+		--pos;
+	if (str[pos] == '\n')
+		++pos;
+	return (virtual_pos - pos);
+}
+
 /*
 ** Move the terminal up by the number of line needed and move it back up to
 ** the original position.
@@ -58,7 +74,7 @@ void				c_term_mv_back(t_comp *c)
 	ft_putstr(tgetstr("cr", NULL));
 	i = 0;
 	lcmd = 0;
-	c->rcmd ? lcmd += c->ircmd + c->prompt + 1 : 0;
+	c->rcmd ? lcmd += c_virtual_position(c) + c->prompt + 1 : 0;
 	while (i < lcmd)
 	{
 		ft_putstr(tgetstr("nd", NULL));

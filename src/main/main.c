@@ -56,7 +56,7 @@ static int	do_parser_routine(void)
 	t_data		*data;
 
 	data = data_singleton();
-	if (get_reserved_words(&data->token))
+	if (get_reserved_words(data->token))
 		return (1);
 	if (insert_newline(&data->token))
 		return (1);
@@ -90,6 +90,7 @@ static int		handle_instruction()
 			return (ret);
 		if (do_lexer_routine(stream) > 0)
 			continue ;
+		token_print(data->token);
 		if (do_parser_routine() > 0)
 			break ;
 	}

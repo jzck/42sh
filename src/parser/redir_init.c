@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_init.c                                       :+:      :+:    :+:   */
+/*   redir_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 20:31:32 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/17 18:24:46 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/17 17:46:50 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/17 17:49:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		stack_init(t_parser *parser)
+int		redir_init(t_type type, t_redir *redir)
 {
-	ft_lstdel(&parser->stack, NULL);
-	push_stack(&parser->stack, TERMINUS);
-	push_stack(&parser->stack, LINEBREAK);
-	if (!parser->new_sym && !(parser->new_sym = ft_memalloc(sizeof(t_sym))))
-		return (-1);
+	redir->n = (type == TK_LESS || type == TK_DLESS
+	|| type == TK_LESSAND) ? STDIN : STDOUT;
+	redir->type = type;
+	redir->heredoc_data = NULL;
+	redir->word = NULL;
 	return (0);
 }

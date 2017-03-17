@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:12:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 16:06:09 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
 }
 
 static void	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
-	 																size_t *pos)
+			size_t *pos)
 {
 	ft_clear_prompt(pos, srch_pos);
 	data_singleton()->line.is_prompt ? ft_prompt() : ft_putstr("> ");
