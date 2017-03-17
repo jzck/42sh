@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:20:31 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:32:16 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_control_d(char **str, size_t *pos)
 
 int		ft_control_c(char **str, size_t *pos)
 {
+	set_exitstatus(1, 1);
 	if (*str)
 		ft_current_str(*str, *pos);
 	ft_strdel(str);
