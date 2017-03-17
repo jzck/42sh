@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 20:02:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 23:19:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		readline(int has_prompt, char **input)
  	if (!has_prompt)
 		data_singleton()->line.prompt_size = 1;
 	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
-		return ((ret = get_next_line(STDIN, input)) >= 0 ? !ret : ret);
+		return ((ret = get_next_line(data_singleton()->fd, input)) >= 0 ? !ret : ret);
 	readline_init(has_prompt);
 	ret = ft_read_stdin(input);
 	if (ret < 0)

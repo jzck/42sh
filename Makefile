@@ -214,7 +214,6 @@ lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\
 lexer/insert_newline.c\
-lexer/lexer_assignement_word.c\
 lexer/lexer_backslash.c\
 lexer/lexer_bquote.c\
 lexer/lexer_curly_braces.c\

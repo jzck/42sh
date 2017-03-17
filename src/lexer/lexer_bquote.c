@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 22:03:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 22:30:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:01:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 	int			back;
 
 	token = (*alst)->content;
-	token->type = TK_WORD;
+	token->type = token->type ? token->type : TK_WORD;
 	back = 0;
 	if (lexer->str[lexer->pos] == '`')
 	{

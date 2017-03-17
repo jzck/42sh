@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/17 17:21:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 20:19:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ t_rvwords		g_rvwords[] =
 
 static int		recognization_rvwords(t_token *pv_tk, t_token *at_tk)
 {
-	if (!pv_tk || (pv_tk->type == TK_NEWLINE || pv_tk->type == TK_AMP
+	return (!pv_tk || (pv_tk->type == TK_NEWLINE || pv_tk->type == TK_AMP
 		|| pv_tk->type == TK_SEMI || pv_tk->type == TK_PIPE
 		|| pv_tk->type == TK_WHILE || pv_tk->type == TK_DONE
 		|| pv_tk->type == TK_DO || pv_tk->type == TK_IF
 		|| pv_tk->type == TK_FI || pv_tk->type == TK_THEN
 		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE
 		|| pv_tk->type == TK_DSEMI) || (pv_tk->type == TK_PAREN_CLOSE
-		&& at_tk->type == TK_PAREN_OPEN))
-		return (1);
-	return (0);
+		&& at_tk->type == TK_PAREN_OPEN));
 }
 
 static int		match_words(t_token *token)
@@ -60,14 +58,12 @@ static int		match_words(t_token *token)
 	return (0);
 }
 
-int				get_reserved_words(t_list **alst)
+int				get_reserved_words(t_list *temp)
 {
 	t_token		*token;
 	t_token		*pv_tk;
 	t_token		*ante_token;
-	t_list		*temp;
 
-	temp = *alst;
 	pv_tk = NULL;
 	ante_token = NULL;
 	while (temp)
