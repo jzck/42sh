@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 20:07:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 17:42:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		isfunc_name(t_btree **ast, t_list **lst)
+int			isfunc_name(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -33,7 +33,7 @@ int		isfunc_name(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-int		isfunc(t_btree **ast, t_list **lst)
+int			isfunc(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 
@@ -52,7 +52,7 @@ int		isfunc(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-int		add_func_cmd(t_btree **ast, t_list **lst)
+int			add_func_cmd(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -86,7 +86,7 @@ t_list		*is_already_func(t_btree **new)
 	t_btree	**ast;
 	char	**new_name;
 	char	**old_name;
-	
+
 	tmp = data_singleton()->lst_func;
 	new_name = token_to_argv(((t_astnode *)(*new)->item)->data.cmd.token, 1);
 	while (tmp)
@@ -94,7 +94,8 @@ t_list		*is_already_func(t_btree **new)
 		ast = tmp->content;
 		if (!*ast)
 			return (NULL);
-		old_name = token_to_argv(((t_astnode *)(*ast)->item)->data.cmd.token, 1);
+		old_name = token_to_argv(((t_astnode *)
+					(*ast)->item)->data.cmd.token, 1);
 		if (!new_name || !new_name[0] || !old_name || !old_name[0])
 			return (NULL);
 		if (!ft_strcmp(new_name[0], old_name[0]))
@@ -104,7 +105,7 @@ t_list		*is_already_func(t_btree **new)
 	return (NULL);
 }
 
-int		add_one_func(t_btree **ast, t_list **lst)
+int			add_one_func(t_btree **ast, t_list **lst)
 {
 	t_btree	*func_ast;
 	t_list	*old_func;
@@ -112,7 +113,8 @@ int		add_one_func(t_btree **ast, t_list **lst)
 	(void)lst;
 	func_ast = btree_map(*ast, node_copy);
 	if ((old_func = is_already_func(&func_ast)))
-		ft_lst_delif(&data_singleton()->lst_func, old_func->content, &ft_addrcmp, &ast_free); 
+		ft_lst_delif(&data_singleton()->lst_func,
+			old_func->content, &ft_addrcmp, &ast_free);
 	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(&func_ast, sizeof(*ast)));
 	return (0);
 }

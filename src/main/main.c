@@ -90,6 +90,7 @@ static int		handle_instruction()
 			return (ret);
 		if (do_lexer_routine(stream) > 0)
 			continue ;
+		token_print(data->token);
 		if (do_parser_routine() > 0)
 			break ;
 	}

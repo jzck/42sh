@@ -6,12 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 14:41:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 17:21:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_rvwords		g_rvwords[] =
 {
@@ -30,8 +29,7 @@ t_rvwords		g_rvwords[] =
 	{"null", 0},
 };
 
-
-static int		recognization_rvwords(t_token *pv_tk)
+static int		recognization_rvwords(t_token *pv_tk, t_token *at_tk)
 {
 	if (!pv_tk || (pv_tk->type == TK_NEWLINE || pv_tk->type == TK_AMP
 		|| pv_tk->type == TK_SEMI || pv_tk->type == TK_PIPE
@@ -39,8 +37,26 @@ static int		recognization_rvwords(t_token *pv_tk)
 		|| pv_tk->type == TK_DO || pv_tk->type == TK_IF
 		|| pv_tk->type == TK_FI || pv_tk->type == TK_THEN
 		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE
-		|| pv_tk->type == TK_DSEMI))
+		|| pv_tk->type == TK_DSEMI) || (pv_tk->type == TK_PAREN_CLOSE
+		&& at_tk->type == TK_PAREN_OPEN))
 		return (1);
+	return (0);
+}
+
+static int		match_words(t_token *token)
+{
+	int			i;
+
+	if (token->type == TK_WORD)
+	{
+		i = 0;
+		while (g_rvwords[i].type)
+		{
+			if (ft_strcmp(token->data, g_rvwords[i].word) == 0)
+				token->type = g_rvwords[i].type;
+			i++;
+		}
+	}
 	return (0);
 }
 
@@ -50,7 +66,6 @@ int				get_reserved_words(t_list **alst)
 	t_token		*pv_tk;
 	t_token		*ante_token;
 	t_list		*temp;
-	int			i;
 
 	temp = *alst;
 	pv_tk = NULL;
@@ -58,26 +73,15 @@ int				get_reserved_words(t_list **alst)
 	while (temp)
 	{
 		token = temp->content;
-		//no more comp &
-		if (recognization_rvwords(pv_tk))
-		{
-			if (token->type == TK_WORD)
-			{
-				i = 0;
-				while (g_rvwords[i].type)
-				{
-					if (ft_strcmp(token->data, g_rvwords[i].word) == 0)
-						token->type = g_rvwords[i].type;
-					i++;
-				}
-			}
-		}
-		if (ante_token && (ante_token->type == TK_CASE || ante_token->type == TK_FOR)
+		if (recognization_rvwords(pv_tk, ante_token))
+			match_words(token);
+		if (ante_token && (ante_token->type == TK_CASE
+			|| ante_token->type == TK_FOR)
 			&& ft_strncmp(token->data, "in", 2) == 0)
 			token->type = TK_IN;
 		if (pv_tk && pv_tk->type == TK_FOR && token->type == TK_WORD)
 			token->type = TK_NAME;
-		ante_token = pv_tk;	
+		ante_token = pv_tk;
 		pv_tk = token;
 		temp = temp->next;
 	}

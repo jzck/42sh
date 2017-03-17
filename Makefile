@@ -291,6 +291,7 @@ parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
 parser/read_stack.c\
+parser/redir_init.c\
 parser/stack_init.c\
 parser/tree_wrapper.c
 

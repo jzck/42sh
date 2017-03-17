@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 21:31:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 18:09:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ t_prodmatch			g_prodmatch[] =
 	{TK_ASSIGNMENT_WORD, SEPARATOR_OP, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_WHILE, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_UNTIL, CMD_PREFIX},
+	{TK_ASSIGNMENT_WORD, TK_DO, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_FOR, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_IF, CMD_PREFIX},
-	{TK_ASSIGNMENT_WORD, TK_FI, CMD_PREFIX},
+	{TK_ASSIGNMENT_WORD, TK_THEN, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_ELIF, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_ELSE, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
@@ -93,6 +94,7 @@ t_prodmatch			g_prodmatch[] =
 	{TK_NEWLINE, TK_ELIF, NEWLINE_LIST},
 	{TK_NEWLINE, TK_ELSE, NEWLINE_LIST},
 	{TK_NEWLINE, TK_THEN, NEWLINE_LIST},
+	{TK_NEWLINE, FUNC_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, CMD_NAME, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_COMMANDS, NEWLINE_LIST},
 	{TK_NEWLINE, LINEBREAK, NEWLINE_LIST},
@@ -102,7 +104,7 @@ t_prodmatch			g_prodmatch[] =
 	{TK_NEWLINE, CMD_SUPERIOR, LINEBREAK},
 	{TK_NEWLINE, PIPE_SEMI_SEQUENCE, LINEBREAK},
 	{TK_NEWLINE, PIPE_CLOSE_SEQUENCE, LINEBREAK},
-	{TK_NEWLINE, SEQUENCE, LINEBREAK},
+	{TK_NEWLINE, SEQUENCE, NEWLINE_LIST},
 	{TK_NEWLINE, CASE_LIST_NS, NEWLINE_LIST},
 	{TK_NEWLINE, COMPOUND_LIST, NEWLINE_LIST},
 	{TK_NEWLINE, COMPLETE_CONDITION, NEWLINE_LIST},
@@ -127,24 +129,17 @@ int				produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 	t_sym		*head;
 	int			i;
 
-	if (!*stack)
-		DG("stack absente");
 	if (!*stack || !*lst)
 		return (1);
 	token = (*lst)->content;
 	head = (*stack)->content;
-	DG("produce stack : %s && token : %s", read_state(*head),
-	read_state(token->type));
 	i = 0;
 	*new_sym = 0;
 	while (g_prodmatch[i].new_sym)
 	{
 		if (token->type == g_prodmatch[i].token
 			&& *head == g_prodmatch[i].stack)
-		{
-//			DG("MATCH : %s", read_state(g_prodmatch[i].new_sym));
 			*new_sym = g_prodmatch[i].new_sym;
-		}
 		i++;
 	}
 	if (!*new_sym)

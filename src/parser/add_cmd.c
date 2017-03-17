@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 16:46:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 17:29:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int					superflous_token(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-static int			no_del_token(t_btree **ast, t_list **lst)
+static int			emblematic_token(t_btree **ast, t_list **lst)
 {
 	t_astnode	*node;
 	t_token		*token;
@@ -65,42 +65,43 @@ static int			no_del_token(t_btree **ast, t_list **lst)
 	return (0);
 }
 
-int					add_cmd(t_btree **ast, t_list **lst)
+static int			add_data_node(t_btree **ast, t_list **lst)
 {
 	t_token		*token;
 	t_astnode	*node;
-	int			i;
 
-	i = -1;
-	while (++i < 14)
-	{
-		if (g_distrostree[i].test(ast, lst) == 1)
-		{
-			DG("add to %d", i);
-			return (g_distrostree[i].add(ast, lst));
-		}
-	}
-	if (!*ast)
-		gen_node(ast);
-	else if (no_del_token(ast, lst))
-		return (add_cmd(&(*ast)->right, lst));
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if (token->type == TK_IF)
 		add_if(ast, lst);
 	else if (token->type != TK_WORD && token->type != TK_NAME)
 		node->type = token->type;
-	else if (node->type != TK_CASE && node->type != TK_PAREN_OPEN && node->type != TK_FOR)
+	else if (node->type != TK_CASE && node->type != TK_PAREN_OPEN
+		&& node->type != TK_FOR)
 		node->type = CMD;
-	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD || token->type == TK_NAME)
-	{
-		DG("type is %s", read_state(node->type));
-		DG("data is %s", token->data);
+	if (token->type == TK_WORD || token->type == TK_ASSIGNMENT_WORD
+		|| token->type == TK_NAME)
 		ft_ld_pushback(&node->data.cmd.token,
 				gen_tab(token->data, token->esc, token->esc2, 1));
-	}
-	if ((token->type == TK_WORD || token->type == TK_NAME) 
+	if ((token->type == TK_WORD || token->type == TK_NAME)
 		&& (node->type == TK_CASE || node->type == TK_PAREN_OPEN))
 		node->pattern = 1;
 	return (0);
+}
+
+int					add_cmd(t_btree **ast, t_list **lst)
+{
+	int			i;
+
+	i = -1;
+	while (++i < 14)
+	{
+		if (g_distrostree[i].test(ast, lst) == 1)
+			return (g_distrostree[i].add(ast, lst));
+	}
+	if (!*ast)
+		gen_node(ast);
+	else if (emblematic_token(ast, lst))
+		return (add_cmd(&(*ast)->right, lst));
+	return (add_data_node(ast, lst));
 }

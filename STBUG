@@ -1,0 +1,78 @@
+[7m[36m95003[33m               main.c [1m[34m111[0m[7m[1m[32mstart of shell[0m[0m
+[7m[36m95003[33m               main.c [1m[34m114[0mJOBC is ON[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : LINEBREAK && token : TK_NEWLINE[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym NEWLINE_LIST[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym NEWLINE_LIST[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head TERMINUS && sym PROGRAM[0m
+[7m[36m95003[33m         build_tree.c [1m[34m91 [0mbuild TK_NEWLINE[0m
+[7m[36m95003[33m      lexer_default.c [1m[34m28 [0mno special state, l[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : LINEBREAK && token : TK_WORD[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym CMD_NAME[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym CMD_NAME[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym CMD_SUPERIOR[0m
+[7m[36m95003[33m         build_tree.c [1m[34m91 [0mbuild TK_WORD[0m
+[7m[36m95003[33m            add_cmd.c [1m[34m97 [0mtype is CMD[0m
+[7m[36m95003[33m            add_cmd.c [1m[34m98 [0mdata is ls[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : CMD_SUPERIOR && token : TK_NEWLINE[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym SEPARATOR_OP[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym SEPARATOR[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym END_COMMAND[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym PIPE_SEQUENCE[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym PIPELINE[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym AND_OR[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym LIST[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym COMPLETE_COMMAND[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym COMPLETE_COMMANDS[0m
+[7m[36m95003[33m         build_tree.c [1m[34m91 [0mbuild TK_NEWLINE[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : COMPLETE_COMMANDS && token : LINEBREAK[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head COMPLETE_COMMANDS && sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head TERMINUS && sym PROGRAM[0m
+[7m[36m95003[33m         is_builtin.c [1m[34m40 [0min builtin[0m
+[7m[36m95003[33m     process_launch.c [1m[34m50 [0mp->type=2[0m
+[7m[36m95003[33m       plaunch_file.c [1m[34m25 [0mplaunch_file[0m
+[7m[36m95003[33m     process_launch.c [1m[34m62 [0mlauncher forked![0m
+[7m[36m95003[33m   process_setgroup.c [1m[34m26 [0msetpgid(95012, 0)[0m
+[7m[33m95012[33m       plaunch_file.c [1m[34m31 [0mfork! [ls][0m
+[7m[33m95012[33m   process_setgroup.c [1m[34m26 [0msetpgid(0, 0)[0m
+[7m[33m95012[33m   process_setgroup.c [1m[34m31 [0mtcsetpgrp[0][0m
+[7m[33m95012[33m   process_setgroup.c [1m[34m33 [0mafter tcsetpgrp[0m
+[7m[36m95003[33m          exec_leaf.c [1m[34m50 [0mcheck[0m
+[7m[36m95003[33m      lexer_default.c [1m[34m28 [0mno special state, b[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : LINEBREAK && token : TK_WORD[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym CMD_NAME[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym CMD_NAME[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym CMD_SUPERIOR[0m
+[7m[36m95003[33m         build_tree.c [1m[34m91 [0mbuild TK_WORD[0m
+[7m[36m95003[33m            add_cmd.c [1m[34m97 [0mtype is CMD[0m
+[7m[36m95003[33m            add_cmd.c [1m[34m98 [0mdata is bash[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : CMD_SUPERIOR && token : TK_NEWLINE[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym SEPARATOR_OP[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head CMD_SUPERIOR && sym SEPARATOR[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym END_COMMAND[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym PIPE_SEQUENCE[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym PIPELINE[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym AND_OR[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym LIST[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym COMPLETE_COMMAND[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head LINEBREAK && sym COMPLETE_COMMANDS[0m
+[7m[36m95003[33m         build_tree.c [1m[34m91 [0mbuild TK_NEWLINE[0m
+[7m[36m95003[33m        produce_sym.c [1m[34m137[0mproduce stack : COMPLETE_COMMANDS && token : LINEBREAK[0m
+[7m[36m95003[33m           ft_parse.c [1m[34m43 [0mnew sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head COMPLETE_COMMANDS && sym LINEBREAK[0m
+[7m[36m95003[33m           eval_sym.c [1m[34m1246[0meval head TERMINUS && sym PROGRAM[0m
+[7m[36m95003[33m         is_builtin.c [1m[34m40 [0min builtin[0m
+[7m[36m95003[33m     process_launch.c [1m[34m50 [0mp->type=2[0m
+[7m[36m95003[33m       plaunch_file.c [1m[34m25 [0mplaunch_file[0m
+[7m[36m95003[33m     process_launch.c [1m[34m62 [0mlauncher forked![0m
+[7m[36m95003[33m   process_setgroup.c [1m[34m26 [0msetpgid(95180, 0)[0m
+[7m[33m95180[33m       plaunch_file.c [1m[34m31 [0mfork! [bash][0m
+[7m[33m95180[33m   process_setgroup.c [1m[34m26 [0msetpgid(0, 0)[0m
+[7m[33m95180[33m   process_setgroup.c [1m[34m31 [0mtcsetpgrp[0][0m
+[7m[33m95180[33m   process_setgroup.c [1m[34m33 [0mafter tcsetpgrp[0m
+[7m[36m95003[33m          exec_leaf.c [1m[34m50 [0mcheck[0m
+[7m[36m95003[33m         list_toolz.c [1m[34m21 [0mfree hist[0m

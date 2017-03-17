@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 22:11:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 18:00:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,16 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	while (*token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
-		DG("new sym %s", read_state(*parser->new_sym));
 		if (eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
-		else
-		{
-			if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
-				return (0);
-			push_stack(&parser->stack, *parser->new_sym);
-		}
-//		ft_read_stack(parser->stack);
+		if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
+			return (0);
+		push_stack(&parser->stack, *parser->new_sym);
 		if (*(head = (parser->stack)->content) == PROGRAM)
 			parser->state = SUCCESS;
 		else
 			parser->state = UNDEFINED;
 		build_tree(ast, token);
-		/* btree_print(STDBUG, *ast, &ft_putast); */
 		if ((end_instruction(&parser->stack) && !(*token)->next))
 			insert_linebreak(token);
 		else

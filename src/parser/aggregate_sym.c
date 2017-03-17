@@ -6,15 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 22:02:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 18:23:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
- * In case of grammar error, manange it
-*/
 
 t_aggrematch		g_aggrematch[] =
 {
@@ -23,9 +19,9 @@ t_aggrematch		g_aggrematch[] =
 	{TK_WORD, TK_IN, FOR_WORDLIST, TK_IN},
 	{TK_WORD, FOR_WORDLIST, FOR_WORDLIST, FOR_WORDLIST},
 	{TK_SEMI, FOR_WORDLIST, SEQUENTIAL_SEP, 0},
-	{TK_DSEMI, CMD_SUPERIOR, PIPE_SEQUENCE, CMD_SUPERIOR},
-	{TK_DSEMI, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
-	{TK_DSEMI, PIPE_CLOSE_SEQUENCE, PIPE_SEQUENCE, PIPE_CLOSE_SEQUENCE},
+	{TK_DSEMI, CMD_SUPERIOR, CLOSE_LIST, TK_PAREN_CLOSE},
+	{TK_DSEMI, PIPE_SEMI_SEQUENCE, CLOSE_LIST, TK_PAREN_CLOSE},
+	{TK_DSEMI, PIPE_CLOSE_SEQUENCE, CLOSE_LIST, TK_PAREN_CLOSE},
 	{TK_PAREN_OPEN, TK_IN, PATTERN_CASE, 0},
 	{TK_PAREN_OPEN, CASE_LIST_NS, PATTERN_CASE, 0},
 	{TK_PAREN_OPEN, CMD_SUPERIOR, OPEN_FUNC, 0},
@@ -42,7 +38,6 @@ t_aggrematch		g_aggrematch[] =
 	{TK_DONE, COMPOUND_LIST, DO_GROUP, TK_DO},
 	{TK_ESAC, TK_IN, CASE_CLAUSE, TK_CASE},
 	{TK_ESAC, CASE_LIST_NS, CASE_CLAUSE, TK_CASE},
-	{TK_RBRACE, COMPOUND_LIST, BRACE_GROUP, TK_LBRACE},
 	{TK_PAREN_CLOSE, COMPOUND_LIST, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, CMD_SUPERIOR, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, PIPE_SEMI_SEQUENCE, SUBSHELL, TK_PAREN_OPEN},
@@ -56,11 +51,11 @@ t_aggrematch		g_aggrematch[] =
 	{TK_RBRACE, COMPOUND_LIST, BRACE_CLAUSE, TK_LBRACE},
 	{TK_RBRACE, CMD_SUPERIOR, BRACE_CLAUSE, TK_LBRACE},
 	{TK_AND_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
-	{TK_AND_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE}, 
+	{TK_AND_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE},
 	{TK_AND_IF, PIPE_SEMI_SEQUENCE, AND_OR_MINOR, PIPE_SEMI_SEQUENCE},
 	{TK_OR_IF, PIPE_SEMI_SEQUENCE, AND_OR_MINOR, PIPE_SEMI_SEQUENCE},
 	{TK_OR_IF, CMD_SUPERIOR, AND_OR_MINOR, CMD_SUPERIOR},
-	{TK_OR_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE}, 
+	{TK_OR_IF, PIPE_CLOSE_SEQUENCE, AND_OR_MINOR, PIPE_CLOSE_SEQUENCE},
 	{SEPARATOR_OP, CMD_SUPERIOR, SEPARATOR, 0},
 	{SEPARATOR_OP, COMPOUND_LIST, SEPARATOR, 0},
 	{SEPARATOR_OP, CASE_LIST_NS, SEPARATOR, 0},
@@ -100,7 +95,9 @@ t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, NAME, SEQUENTIAL_SEP, 0},
 	{NEWLINE_LIST, IN, SEQUENTIAL_SEP, 0},
 	{NEWLINE_LIST, TERM, SEPARATOR, 0},
+	{NEWLINE_LIST, SEQUENCE, SEQUENCE, SEQUENCE},
 	{NEWLINE_LIST, COMPOUND_LIST, SEPARATOR, 0},
+	{NEWLINE_LIST, FUNC_NAME, FUNC_NAME, FUNC_NAME},
 	{NEWLINE_LIST, CASE_LIST_NS, SEPARATOR, 0},
 	{NEWLINE_LIST, COMPLETE_CONDITION, COMPLETE_CONDITION, COMPLETE_CONDITION},
 	{NEWLINE_LIST, CONDITION, CONDITION, CONDITION},
@@ -226,7 +223,6 @@ t_aggrematch		g_aggrematch[] =
 	{SUBSHELL, ALL, COMPOUND_COMMAND, 0},
 	{BRACE_CLAUSE, ALL, COMPOUND_COMMAND, 0},
 	{COMPOUND_COMMAND, FUNC_NAME, COMMAND, FUNC_NAME},
-//	{COMPOUND_COMMAND, ALL, COMMAND, 0},	
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE},
 	{AND_OR_MINOR, PIPE_CLOSE_SEQUENCE, AND_OR_MAJOR, PIPE_CLOSE_SEQUENCE},
 	{AND_OR_MINOR, LINEBREAK, AND_OR_MAJOR, 0},
@@ -381,32 +377,35 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 
 	if (!*stack || !*new_sym || !*state)
 		return (1);
-	i = 0;
+	i = -1;
 	head = (*stack)->content;
-//	DG("aggregate head %s && sym %s",
-//	read_state(*head), read_state(*new_sym));
-	while (g_aggrematch[i].top)
-	{
+	while (g_aggrematch[++i].top)
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(*head, g_aggrematch[i].under))
 		{
-//			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
-//				DG("stack after pop: %s", read_state(*head));
 			}
-			if (eval_sym(stack, *new_sym))
-			{
-				*state = ERROR;
+			if (eval_sym(stack, *new_sym) && !(*state = ERROR))
 				return (1);
-			}
 			aggregate_sym(stack, new_sym, state);
 			return (0);
 		}
-		i++;
-	}
 	return (0);
 }
+
+/*
+** DG("aggregate head %s && sym %s",
+** read_state(*head), read_state(*new_sym));
+*/
+
+/*
+** DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
+*/
+
+/*
+** DG("stack after pop: %s", read_state(*head));
+*/

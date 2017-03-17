@@ -6,11 +6,14 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:15:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 23:24:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 18:08:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#define SYNTERR_0 "{red}syntax error near unexpected token `%s'{eoc}\n"
+#define SYNTERR_1 "{red}syntax error near unexpected EOF{eoc}"
 
 static t_errormatch	g_errormatch[] =
 {
@@ -64,18 +67,18 @@ int				error_syntax(t_list **lst)
 	{
 		if (g_errormatch[i].token == token->type)
 		{
-			ft_dprintf(2, "{red}syntax error near unexpected token « %s »{eoc}\n",
-					g_errormatch[i].error);
+			ft_dprintf(2, SYNTERR_0, g_errormatch[i].error);
 			return (0);
 		}
 		i++;
 	}
-	ft_dprintf(2, "{red}syntax error near unexpected token « %s »\n{eoc}", token->data);
+	ft_dprintf(2, SYNTERR_0,
+		token->data);
 	return (0);
 }
 
 int				error_eof(void)
 {
-	ft_dprintf(2, "{red}syntax error near unexpected EOF{eoc}");
+	ft_dprintf(2, SYNTERR_1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 18:34:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 17:54:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,6 @@ static int	add_redir_type_number(t_btree **ast, t_list **lst)
 	redir->type = token->type;
 	if (token->type == TK_DLESS)
 		ft_lsteadd(queue, ft_lstnew(&redir_lst->content, sizeof(t_redir*)));
-	return (0);
-}
-
-int		redir_init(t_type type, t_redir *redir)
-{
-	redir->n = (type == TK_LESS || type == TK_DLESS
-	|| type == TK_LESSAND) ? STDIN : STDOUT;
-	redir->type = type;
-	redir->heredoc_data = NULL;
-	redir->word = NULL;
 	return (0);
 }
 
