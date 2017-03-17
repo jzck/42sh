@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 19:33:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:17:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,21 @@ int			lexer_word(t_list **alst, t_lexer *lexer)
 	t_lexstate	state;
 
 	token = (*alst)->content;
-	token->type = TK_WORD;
+	token->type = token->type ? token->type : TK_WORD;
 	if ((state = get_state_global(lexer))
 		|| (state = get_state_redir(lexer)))
-	{
 		lexer->state = state;
-		return (lexer_lex(alst, lexer));
-	}
-	if (lexer->str[lexer->pos] == '='
+	else if (lexer->str[lexer->pos] == '='
 			&& word_is_assignment((char *[]){token->data, (char *)token->esc}))
 	{
-		lexer->state = ASSIGNEMENT_WORD;
-		return (lexer_lex(alst, lexer));
+		token->type = TK_ASSIGNMENT_WORD;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
 	}
 	else
 	{
-	token_append(token, lexer, 0, 0);
-	lexer->pos++;
+		token_append(token, lexer, 0, 0);
+		lexer->pos++;
 	}
 	return (lexer_lex(alst, lexer));
 }

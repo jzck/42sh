@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 19:27:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:08:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	t_token		*token;
 
 	token = (*alst)->content;
-	token->type = TK_WORD;
+	token->type = token->type ? token->type : TK_WORD;
 	if (lexer->str[lexer->pos] == '"')
 	{
 		if (get_lexer_stack(*lexer) == DQUOTE && (lexer->state = WORD))
