@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 11:32:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 13:52:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ void			ft_init_history(void)
 	if (!(home = ft_getenv(data_singleton()->env, "HOME")))
 		return ;
 	path = ft_str3join(home, "/", ".42sh_history");
-	fd = open(path, O_RDONLY);
+	if ((fd = open(path, O_RDONLY)) < 0)
+	{
+		free(path);
+		return ;
+	}
 	while (get_next_line(fd, &str) > 0)
 	{
 		if (ft_str_is_print(str) && *str)
