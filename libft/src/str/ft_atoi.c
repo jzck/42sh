@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/03 16:17:21 by jhalford          #+#    #+#             */
-/*   Updated: 2016/11/03 15:13:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:36:22 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int			ft_atoi(const char *str)
 	int	res;
 	int sign;
 
+	if (!str || !*str)
+		return (0);
 	i = 0;
 	res = 0;
 	sign = 1;
