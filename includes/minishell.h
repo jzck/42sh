@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 00:20:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 21:13:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@
 struct	s_data
 {
 	t_flag		opts;
+	int			fd;
 	char		**env;
 	int			argc;
 	char		**argv;
 	t_line		line;
-	t_list		*token;
-	t_btree		*ast;
 	t_lexer		lexer;
-	t_parser	parser;	
+	t_parser	parser;
 	t_comp		*comp;
 	t_exec		exec;
 	t_jobc		jobc;
