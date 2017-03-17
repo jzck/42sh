@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:27:03 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:40:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 11:05:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_add_in_history_file(char *str)
 
 void	ft_add_str_in_history(char *str)
 {
-	if (str && (!data_singleton()->line.list_beg ||
+	if (str && *str && (!data_singleton()->line.list_beg ||
 	ft_strcmp(data_singleton()->line.list_beg->prev->str, str)))
 	{
 		ft_push_back_history(&data_singleton()->line.list_beg,
