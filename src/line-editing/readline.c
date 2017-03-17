@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:08:28 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:51:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		readline(int has_prompt, char **input)
 		return ((ret = get_next_line(STDIN, input)) >= 0 ? !ret : ret);
 	readline_init(has_prompt);
 	ret = ft_read_stdin(input);
-	if (ret <= 0)
+	if (ret < 0)
 		return (ret);
 	if (STR)
 		ft_current_str(STR, POS);

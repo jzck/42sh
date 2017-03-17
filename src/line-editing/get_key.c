@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:13:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:49:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			ft_read_stdin(char **input)
 			++j;
 		if (g_key[j].value)
 		{
-			if ((ret = g_key[j].f()) != 1)
+			if ((ret = g_key[j].f()))
 				return (ret);
 		}
 		else if (ft_isprint(ret))
@@ -77,7 +77,7 @@ int			ft_read_stdin(char **input)
 		else if (ret == 10)
 		{
 			*input = STR;
-			return (1);
+			return (0);
 		}
 		else if (ft_isascii(ret) == 0)
 			ft_read_it(ret, &POS, &STR);

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:12:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:48:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int			ft_surch_in_history(void)
 			break ;
 	}
 	ft_modify_str(str_srch, srch_pos);
-	return (1);
+	return (0);
 }

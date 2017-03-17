@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:12:09 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 16:48:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:46:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			ft_found_prev_word(void)
 
 	i = 0;
 	if (!POS || !STR)
-		return (1);
+		return (0);
 	ft_init_prev_word(&POS, STR);
 	if (POS >= 1 && STR[POS - 1] == '\n')
 	{
@@ -69,7 +69,7 @@ int			ft_found_prev_word(void)
 		{
 			ft_puttermcaps("cd");
 			--POS;
-			return (1);
+			return (0);
 		}
 		ft_puttermcaps("cd");
 		POS -= 2;
@@ -82,7 +82,7 @@ int			ft_found_prev_word(void)
 	}
 	else
 		ft_found_prev_word_2(i, STR, &POS);
-	return (1);
+	return (0);
 }
 
 static void	ft_found_next_word_2(void)
@@ -108,7 +108,7 @@ int			ft_found_next_word(void)
 
 	i = 0;
 	if (!STR)
-		return (1);
+		return (0);
 	while (STR[i + POS] && STR[i + POS] == ' ')
 	{
 		ft_putchar(STR[i + POS]);
@@ -125,5 +125,5 @@ int			ft_found_next_word(void)
 		}
 		POS += i;
 	}
-	return (1);
+	return (0);
 }

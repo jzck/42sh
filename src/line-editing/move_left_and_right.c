@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:15:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:46:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_move_right(void)
 	size_t	tmp;
 
 	if (ft_strlen(STR) <= POS)
-		return (1);
+		return (0);
 	if (STR[POS] == '\n')
 	{
 		if (POS)
@@ -37,20 +37,20 @@ int			ft_move_right(void)
 		ft_putchar(STR[POS]);
 		++POS;
 	}
-	return (1);
+	return (0);
 }
 
 int			ft_move_left(void)
 {
 	if (!POS)
-		return (1);
+		return (0);
 	if (STR[POS - 1] == '\n')
 	{
 		if (POS - 1 == 0)
 		{
 			ft_puttermcaps("cd");
 			--POS;
-			return (1);
+			return (0);
 		}
 		ft_puttermcaps("cd");
 		POS -= 2;
@@ -66,5 +66,5 @@ int			ft_move_left(void)
 		ft_puttermcaps("le");
 		--POS;
 	}
-	return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:15:41 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:47:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_print(int ret)
 	ft_check_end_of_line(STR, POS + j);
 	ft_putnc('\b', j - 1);
 	++POS;
-	return (1);
+	return (0);
 }
 
 static void	ft_suppr_2(char **str, size_t *i, size_t tmp)
@@ -61,7 +61,7 @@ int		ft_suppr(void)
 
 	boolean = 0;
 	if (POS <= 0)
-		return (1);
+		return (0);
 	if (STR[POS - 1] != '\n')
 		boolean = 1;
 	--POS;
@@ -79,7 +79,7 @@ int		ft_suppr(void)
 		ft_get_beggin(STR, &POS);
 	}
 	ft_suppr_2(&STR, &POS, tmp);
-	return (1);
+	return (0);
 }
 
 int		ft_del(void)
@@ -90,7 +90,7 @@ int		ft_del(void)
 	if (!(STR = ft_remove_imput(STR, tmp)))
 		return (-1);
 	if (!(STR && POS < ft_strlen(STR) + 1))
-		return (1);
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -103,5 +103,5 @@ int		ft_del(void)
 		++POS;
 	ft_putnc('\b', POS - tmp);
 	POS = tmp;
-	return (1);
+	return (0);
 }

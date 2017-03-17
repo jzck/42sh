@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:09:02 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:48:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			ft_history_parsing(int has_prompt, char **input)
 	i = 0;
 	boolean = 0;
 	if (!STR)
-		return (1);
+		return (0);
 	while (STR && STR[i])
 	{
 		if (STR[i] == '!')
@@ -83,5 +83,5 @@ int			ft_history_parsing(int has_prompt, char **input)
 	}
 	if (boolean)
 		return (readline(has_prompt, input));
-	return (1);
+	return (0);
 }

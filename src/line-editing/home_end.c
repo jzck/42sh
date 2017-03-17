@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:13:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:14:07 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:46:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			ft_end(void)
 {
 	if (!STR)
-		return (1);
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -27,13 +27,13 @@ int			ft_end(void)
 	ft_get_beggin(STR, &POS);
 	ft_current_str(STR, POS);
 	ft_get_next_str(STR, &POS);
-	return (1);
+	return (0);
 }
 
 int			ft_home(void)
 {
 	if (!STR)
-		return (1);
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -49,5 +49,5 @@ int			ft_home(void)
 	if (!STR[POS])
 		--POS;
 	ft_get_beggin_with_curs(STR, &POS);
-	return (1);
+	return (0);
 }

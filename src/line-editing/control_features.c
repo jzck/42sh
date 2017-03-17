@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:17:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 16:45:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:45:20 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_buff_f6(void)
 	ret = 0;
 	if (read(0, &ret, sizeof(int)) < 0)
 		return (-1);
-	return (1);
+	return (0);
 }
 
 int		ft_control_d(void)
@@ -34,7 +34,7 @@ int		ft_control_d(void)
 		ft_del();
 	else
 		ft_puttermcaps("bl");
-	return (1);
+	return (0);
 }
 
 int		ft_control_c(void)
@@ -55,5 +55,5 @@ int		ft_control_l(void)
 	ft_prompt();
 	ft_strdel(&STR);
 	POS = 0;
-	return (1);
+	return (0);
 }

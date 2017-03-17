@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:22:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:00:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:48:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			ft_history_down(void)
 
 	head = data_singleton()->line.list_cur;
 	if (!head)
-		return (1);
+		return (0);
 	ft_clear_before_history(&STR);
 	if (head->next)
 		head = head->next;
@@ -49,7 +49,7 @@ int			ft_history_down(void)
 	else
 		POS = 0;
 	data_singleton()->line.list_cur = head;
-	return (1);
+	return (0);
 }
 
 int			ft_history_up(void)
@@ -58,7 +58,7 @@ int			ft_history_up(void)
 
 	head = data_singleton()->line.list_cur;
 	if (!head)
-		return (1);
+		return (0);
 	ft_clear_before_history(&STR);
 	if (head->prev)
 		head = head->prev;
@@ -74,5 +74,5 @@ int			ft_history_up(void)
 	else
 		POS = 0;
 	data_singleton()->line.list_cur = head;
-	return (1);
+	return (0);
 }

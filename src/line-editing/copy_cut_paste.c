@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:12:40 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:45:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_v(void)
 	i = -1;
 	tmp_pos = POS;
 	if (!STR || !tmp)
-		return (1);
+		return (0);
 	while (tmp[++i])
 		if (!(STR = ft_realloc_imput(STR, tmp[i], POS + i)))
 			return (-1);
@@ -60,7 +60,7 @@ int			ft_v(void)
 	ft_get_next_str(STR, &POS);
 	ft_putnc('\b', POS - tmp_pos);
 	POS = tmp_pos;
-	return (1);
+	return (0);
 }
 
 int			ft_x(void)
@@ -70,7 +70,7 @@ int			ft_x(void)
 
 	tmp = &data_singleton()->line.copy_tmp;
 	if (!STR)
-		return (1);
+		return (0);
 	if (*tmp)
 		ft_strdel(tmp);
 	if (!(*tmp = ft_strdupi_space(&STR[POS])))
@@ -83,7 +83,7 @@ int			ft_x(void)
 		--i;
 	}
 	ft_puttermcaps("cd");
-	return (1);
+	return (0);
 }
 
 int			ft_c(void)
@@ -97,5 +97,5 @@ int			ft_c(void)
 		ft_strdel(tmp);
 	if (!(*tmp = ft_strdupi_space(STR + POS)))
 		return (-1);
-	return (1);
+	return (0);
 }

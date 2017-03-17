@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:52:57 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 17:15:56 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:47:31 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_read_it_3(char **str, char t[5], size_t *pos, int *j)
 		}
 		++i;
 	}
-	return (1);
+	return (0);
 }
 
 static void	ft_read_it_2(int input, char t[5])
@@ -62,16 +62,16 @@ int			ft_read_it(int input, size_t *pos, char **str)
 	input == 126 || input == 993090331 || input == 925981467 ||
 	input == 21298 || input == 892427035 || input == 8270395 || input ==
 	942758683 || input == 993090331 || input == 18489 || input == 17977)
-		return (1);
+		return (0);
 	ft_read_it_2(input, t);
 	if (ft_read_it_3(str, t, pos, &j) < 0)
 		return (-1);
 	if (!*str)
-		return (1);
+		return (0);
 	*pos = pos_tmp;
 	ft_current_str((*str), *pos);
 	ft_get_next_str((*str), pos);
 	ft_putnc('\b', *pos - (pos_tmp + j));
 	*pos = (pos_tmp + j);
-	return (1);
+	return (0);
 }
