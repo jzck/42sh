@@ -88,8 +88,6 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 	{
 		if ((ret = do_readline_routine(&stream)) > 0)
 			return (ret);
-		if (do_lexer_routine(stream) > 0)
-			continue ;
 		if (do_lexer_routine(token, stream) > 0)
 			continue ;
 		if (do_parser_routine(token, ast) > 0)
