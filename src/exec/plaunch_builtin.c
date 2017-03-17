@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:48:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 22:34:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:22:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,8 @@
 
 int		plaunch_builtin(t_process *p)
 {
-	pid_t	pid;
-
-	if (IS_PIPESINGLE(*p))
-	{
-		if (process_redirect(p))
-		{
-			set_exitstatus(1, 1);
-			return (0);
-		}
-		set_exitstatus((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env), 1);
-		return (0);
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		if (process_redirect(p))
-			exit (1);
-		process_setgroup(p, 0);
-		process_setsig();
-		exec_reset();///A FAIRE POUR LES BUILTIN OU PAS ? -> Q de William
-		// je pense ca ne change rien si on l'enleve car on excve apres
-		exit((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env));
-	}
-	else if (pid > 0)
-		return (pid);
-	else if (pid == -1)
-		ft_dprintf(2, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
-	return (0);
+	return ((*p->data.cmd.execf)(
+				p->data.cmd.path,
+				p->data.cmd.av,
+				data_singleton()->env));
 }

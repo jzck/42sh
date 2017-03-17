@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 21:18:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/18 00:04:33 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static int			interactive_settings(void)
 	shell_pgid = &data->jobc.shell_pgid;
 	while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 		kill(-*shell_pgid, SIGTTIN);
-	signal(SIGINT, sigint_handler);
+	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, sigtstp_handler);
+	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, SIG_DFL);
+	signal(SIGCHLD, SIG_DFL);//sigchld_handler); TBC IF dynamic notification are wanted
 	*shell_pgid = getpid();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{

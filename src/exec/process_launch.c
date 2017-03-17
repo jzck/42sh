@@ -6,60 +6,59 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 20:08:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 23:49:43 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_pipe(t_process *p)
+
+int		do_the_muther_forker(t_process *p)
 {
 	pid_t		pid;
 
-	if (p->map.launch == plaunch_file)
-		return (0);
-	if (IS_PIPESINGLE(*p))
+	if (IS_PIPESINGLE(*p) && p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
 	{
-/*		if (process_redirect(p))
+		if (process_redirect(p))
 		{
 			set_exitstatus(1, 1);
 			return (0);
 		}
-		set_exitstatus((*p->data.cmd.execf)(p->data.cmd.path, p->data.cmd.av, data_singleton()->env), 1);*/
+		set_exitstatus(p->map.launch(p), 1);
 		return (0);
 	}
-	pid = fork();
-	if (!pid)
+	if ((pid = fork()) == -1)
 	{
-		data_singleton()->opts &= ~SH_INTERACTIVE;
-		data_singleton()->opts &= ~SH_OPTS_JOBC;
-		if (process_redirect(p))
-			exit (1);
-		process_setgroup(p, 0);
-		process_setsig();
-		exec_reset();
+		ft_dprintf(3, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
+		exit(1);
 	}
-	return (pid); 
+	else if (pid)
+		return (pid);
+	DG("START OF FORK");
+	if (process_redirect(p))
+		exit (1);
+	process_setgroup(p, 0);
+	process_setsig();
+	exec_reset();
+	data_singleton()->opts &= ~SH_INTERACTIVE;
+	data_singleton()->opts &= ~SH_OPTS_JOBC;
+	exit(p->map.launch(p));
 }
 
 int		process_launch(t_process *p)
 {
 	pid_t		pid;
-	/* pid_t		manage_pid; */
 
 	DG("p->type=%i", p->type);
 	p->attrs &= ~PROCESS_STATE_MASK;
 	p->attrs |= PROCESS_RUNNING;
-	/* if (!(manage_pid = check_pipe(p))) */
-		if (!(pid = (*p->map.launch)(p)))
-		{
-			DG("launcher did not fork!");
-			process_resetfds(p);
-			return (1);
-		}
-	/* if (manage_pid) */
-	/* 	pid = manage_pid; */
-	DG("launcher forked!");
+	if (!(pid = do_the_muther_forker(p)))
+	{
+		DG("launcher did not fork!");
+		process_resetfds(p);
+		return (1);
+	}
+	DG("launcher forked! with : %d ", pid);
 	p->pid = pid;
 	process_setgroup(p, pid);
 	if (p->fdin != STDIN)

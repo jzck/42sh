@@ -6,19 +6,25 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:27:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 15:36:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 23:10:47 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	job_notify_new(t_job *job)
+void	job_notify_new(int id)
 {
 	t_list		*plist;
 	t_process	*p;
+	t_jobc		*jobc;
+	t_job		*job;
 
-	ft_printf("{mag}[%i]", job->id);
+	jobc = &data_singleton()->jobc;
+	if (!(plist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
+		return ;
+	job = plist->content;
 	plist = job->first_process;
+	ft_printf("{mag}[%i]", job->id);
 	while (plist)
 	{
 		p = plist->content;
