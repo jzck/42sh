@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 20:31:20 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/17 22:49:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ int		do_the_muther_forker(t_process *p)
 	}
 	else if (pid)
 		return (pid);
+	DG("START OF FORK");
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
 	signal(SIGCHLD, SIG_DFL);
-	data_singleton()->opts &= ~SH_INTERACTIVE;
-	data_singleton()->opts &= ~SH_OPTS_JOBC;
 	if (process_redirect(p))
 		exit (1);
 	process_setgroup(p, 0);
 	process_setsig();
 	exec_reset();
+	data_singleton()->opts &= ~SH_INTERACTIVE;
+	data_singleton()->opts &= ~SH_OPTS_JOBC;
 	exit(p->map.launch(p));
 }
 
@@ -63,7 +64,7 @@ int		process_launch(t_process *p)
 		process_resetfds(p);
 		return (1);
 	}
-	DG("launcher forked!");
+	DG("launcher forked! with : %d ", pid);
 	p->pid = pid;
 	process_setgroup(p, pid);
 	if (p->fdin != STDIN)

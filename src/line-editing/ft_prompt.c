@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 16:43:35 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 22:41:13 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ void		ft_prompt(void)
 		ft_printf("\x1b[38;5;10m➜  ");
 	ft_putstr("\x1b[38;5;361m");
 	ret += ft_currend_dir();
+	signal(SIGCHLD, SIG_DFL);
 	ret += ft_git_status();
+	signal(SIGCHLD, sigchld_handler);
 	ft_putstr("\033[22;37m");
 	data_singleton()->line.prompt_size = ret + 4;
 }
