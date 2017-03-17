@@ -6,18 +6,18 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:15:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:46:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ft_move_right(void)
+int			ft_move_right(void)
 {
 	size_t	tmp;
 
 	if (ft_strlen(STR) <= POS)
-		return ;
+		return (0);
 	if (STR[POS] == '\n')
 	{
 		if (POS)
@@ -37,19 +37,20 @@ void			ft_move_right(void)
 		ft_putchar(STR[POS]);
 		++POS;
 	}
+	return (0);
 }
 
-void			ft_move_left(void)
+int			ft_move_left(void)
 {
 	if (!POS)
-		return ;
+		return (0);
 	if (STR[POS - 1] == '\n')
 	{
 		if (POS - 1 == 0)
 		{
 			ft_puttermcaps("cd");
 			--POS;
-			return ;
+			return (0);
 		}
 		ft_puttermcaps("cd");
 		POS -= 2;
@@ -65,4 +66,5 @@ void			ft_move_left(void)
 		ft_puttermcaps("le");
 		--POS;
 	}
+	return (0);
 }

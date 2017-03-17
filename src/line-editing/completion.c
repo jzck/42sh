@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 14:15:55 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:33:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:45:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int				ft_completion(int ret)
 		ft_putnc('\b', right);
 		POS = ft_strleni_w(STR, pos_tmp, '\n') - right;
 	}
-	return (1);
+	return (0);
 }

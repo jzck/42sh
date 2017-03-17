@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 10:34:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:49:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_key	g_key[] =
 	{0					, 0						},
 };
 
-static void	ft_is_str(void)
+static void	init_read_stdin(void)
 {
 	if (STR)
 	{
@@ -47,17 +47,17 @@ static void	ft_is_str(void)
 		if (STR[POS])
 			++(POS);
 	}
+	if (data_singleton()->comp)
+		c_clear(data_singleton());
+	signal(SIGWINCH, sigwinch_resize);
 }
 
-char		*ft_read_stdin(void)
+int			ft_read_stdin(char **input)
 {
 	int	ret;
 	int	j;
 
-	ft_is_str();
-	if (data_singleton()->comp)
-		c_clear(data_singleton());
-	signal(SIGWINCH, sigwinch_resize);
+	init_read_stdin();
 	while (42)
 	{
 		ret = 0;
@@ -68,11 +68,17 @@ char		*ft_read_stdin(void)
 		while (g_key[j].value && g_key[j].value != ret)
 			++j;
 		if (g_key[j].value)
-			g_key[j].f();
+		{
+			if ((ret = g_key[j].f()))
+				return (ret);
+		}
 		else if (ft_isprint(ret))
 			ft_print(ret);
 		else if (ret == 10)
-			return (STR);
+		{
+			*input = STR;
+			return (0);
+		}
 		else if (ft_isascii(ret) == 0)
 			ft_read_it(ret, &POS, &STR);
 	}

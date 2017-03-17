@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 11:53:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:48:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ static void	ft_clear_prompt(size_t *pos, size_t srch_pos)
 	ft_puttermcaps("cd");
 }
 
-static void	ft_surch_and_realloc(char **str, char **str_srch,
+static int	ft_surch_and_realloc(char **str, char **str_srch,
 			int ret, size_t *srch_pos)
 {
-	*str_srch = ft_realloc_imput(*str_srch, ret, *srch_pos);
+	if (!(*str_srch = ft_realloc_imput(*str_srch, ret, *srch_pos)))
+		return (-1);
 	++(*srch_pos);
 	*str = ft_strget_history(*str_srch);
+	return (1);
 }
 
 static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
@@ -60,7 +62,7 @@ static void	ft_modify_str(char *str_srch, size_t srch_pos)
 	free(str_srch);
 }
 
-void		ft_surch_in_history(void)
+int			ft_surch_in_history(void)
 {
 	char	*str_srch;
 	int		ret;
@@ -75,7 +77,10 @@ void		ft_surch_in_history(void)
 		ret = 0;
 		read(0, &ret, sizeof(int));
 		if (ft_isprint(ret))
-			ft_surch_and_realloc(&STR, &str_srch, ret, &srch_pos);
+		{
+			if (ft_surch_and_realloc(&STR, &str_srch, ret, &srch_pos) < 0)
+				return (-1);
+		}
 		else if (ret == 127 && srch_pos)
 		{
 			--srch_pos;
@@ -87,4 +92,5 @@ void		ft_surch_in_history(void)
 			break ;
 	}
 	ft_modify_str(str_srch, srch_pos);
+	return (0);
 }

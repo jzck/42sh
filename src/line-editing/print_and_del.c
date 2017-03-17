@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/07 15:27:48 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:47:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_found_next_char(char *str, size_t i)
+int			ft_found_next_char(char *str, size_t i)
 {
 	while (str[i])
 	{
@@ -23,12 +23,13 @@ int		ft_found_next_char(char *str, size_t i)
 	return (0);
 }
 
-void	ft_print(int ret)
+int			ft_print(int ret)
 {
 	int		j;
 
 	j = 0;
-	STR = ft_realloc_imput(STR, ret, POS);
+	if (!(STR = ft_realloc_imput(STR, ret, POS)))
+		return (-1);
 	while (*(STR + POS + j) && *(STR + POS + j) != '\n')
 	{
 		ft_putchar(*(STR + POS + j));
@@ -37,9 +38,10 @@ void	ft_print(int ret)
 	ft_check_end_of_line(STR, POS + j);
 	ft_putnc('\b', j - 1);
 	++POS;
+	return (0);
 }
 
-void	ft_suppr_2(char **str, size_t *i, size_t tmp)
+static void	ft_suppr_2(char **str, size_t *i, size_t tmp)
 {
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *i);
@@ -52,14 +54,14 @@ void	ft_suppr_2(char **str, size_t *i, size_t tmp)
 		ft_strdel(str);
 }
 
-void	ft_suppr(void)
+int		ft_suppr(void)
 {
 	size_t	tmp;
 	char	boolean;
 
 	boolean = 0;
 	if (POS <= 0)
-		return ;
+		return (0);
 	if (STR[POS - 1] != '\n')
 		boolean = 1;
 	--POS;
@@ -67,24 +69,28 @@ void	ft_suppr(void)
 	if (boolean)
 	{
 		ft_get_beggin_with_curs(STR, &POS);
-		STR = ft_remove_imput(STR, tmp);
+		if (!(STR = ft_remove_imput(STR, tmp)))
+			return (-1);
 	}
 	else
 	{
-		STR = ft_remove_imput(STR, tmp);
+		if (!(STR = ft_remove_imput(STR, tmp)))
+			return (-1);
 		ft_get_beggin(STR, &POS);
 	}
 	ft_suppr_2(&STR, &POS, tmp);
+	return (0);
 }
 
-void	ft_del(void)
+int		ft_del(void)
 {
 	size_t	tmp;
 
 	tmp = POS;
-	STR = ft_remove_imput(STR, tmp);
+	if (!(STR = ft_remove_imput(STR, tmp)))
+		return (-1);
 	if (!(STR && POS < ft_strlen(STR) + 1))
-		return ;
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -97,4 +103,5 @@ void	ft_del(void)
 		++POS;
 	ft_putnc('\b', POS - tmp);
 	POS = tmp;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:22:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/16 16:12:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:48:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,21 @@ static void	ft_clear_before_history(char **str)
 	}
 }
 
-void		ft_history_down(void)
+int			ft_history_down(void)
 {
 	t_list_history	*head;
 
 	head = data_singleton()->line.list_cur;
 	if (!head)
-		return ;
+		return (0);
 	ft_clear_before_history(&STR);
 	if (head->next)
 		head = head->next;
 	if (!head->str)
 		STR = NULL;
 	else
-		STR = ft_strdup(head->str);
+		if (!(STR = ft_strdup(head->str)))
+			return (-1);
 	if (STR)
 		ft_current_str(STR, POS);
 	if (STR)
@@ -48,22 +49,24 @@ void		ft_history_down(void)
 	else
 		POS = 0;
 	data_singleton()->line.list_cur = head;
+	return (0);
 }
 
-void		ft_history_up(void)
+int			ft_history_up(void)
 {
 	t_list_history	*head;
 
 	head = data_singleton()->line.list_cur;
 	if (!head)
-		return ;
+		return (0);
 	ft_clear_before_history(&STR);
 	if (head->prev)
 		head = head->prev;
 	if (!head->str)
 		STR = NULL;
 	else
-		STR = ft_strdup(head->str);
+		if (!(STR = ft_strdup(head->str)))
+			return (-1);
 	if (STR)
 		ft_current_str(STR, POS);
 	if (STR)
@@ -71,4 +74,5 @@ void		ft_history_up(void)
 	else
 		POS = 0;
 	data_singleton()->line.list_cur = head;
+	return (0);
 }

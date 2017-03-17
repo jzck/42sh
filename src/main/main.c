@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 18:40:58 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/17 10:51:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	do_readline_routine(char **stream)
 	t_data	*data;
 
 	data = data_singleton();
-	has_prompt = !(get_lexer_stack(data->lexer) 
+	has_prompt = !(get_lexer_stack(data->lexer)
 		|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
 	ret = readline(has_prompt, stream);
 	if (ret == -1)
@@ -83,7 +83,7 @@ static int		handle_instruction()
 	t_data		*data;
 
 	stream = NULL;
-	data = data_singleton(); 
+	data = data_singleton();
 	while (1)
 	{
 		if ((ret = do_readline_routine(&stream)) > 0)

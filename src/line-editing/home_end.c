@@ -6,16 +6,16 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:13:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/14 11:13:47 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 10:46:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ft_end(void)
+int			ft_end(void)
 {
 	if (!STR)
-		return ;
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -27,12 +27,13 @@ void			ft_end(void)
 	ft_get_beggin(STR, &POS);
 	ft_current_str(STR, POS);
 	ft_get_next_str(STR, &POS);
+	return (0);
 }
 
-void			ft_home(void)
+int			ft_home(void)
 {
 	if (!STR)
-		return ;
+		return (0);
 	if (POS)
 	{
 		--POS;
@@ -48,4 +49,5 @@ void			ft_home(void)
 	if (!STR[POS])
 		--POS;
 	ft_get_beggin_with_curs(STR, &POS);
+	return (0);
 }
