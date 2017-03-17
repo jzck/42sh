@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 10:21:03 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:03:26 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int				c_rematch(t_comp *c, long int keypress)
 			c_clear(data_singleton());
 		else if (c->lst == c->lst->next)
 			return (1);
-		ft_print(keypress);
+		ft_print(keypress, &data_singleton()->line.input,
+												&data_singleton()->line.pos);
 		return (1);
 	}
 	else

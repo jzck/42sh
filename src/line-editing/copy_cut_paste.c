@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:58:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 11:56:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_strdupi_space(char const *s)
 	return (str);
 }
 
-int			ft_v(void)
+int			ft_v(char **str, size_t *pos)
 {
 	size_t	tmp_pos;
 	int		i;
@@ -45,40 +45,40 @@ int			ft_v(void)
 
 	tmp = data_singleton()->line.copy_tmp;
 	i = -1;
-	tmp_pos = POS;
-	if (!STR || !tmp)
+	tmp_pos = *pos;
+	if (!*str || !tmp)
 		return (0);
 	while (tmp[++i])
-		if (!(STR = ft_realloc_imput(STR, tmp[i], POS + i)))
+		if (!(*str = ft_realloc_imput(*str, tmp[i], *pos + i)))
 			return (-1);
-	if (POS)
+	if (*pos)
 	{
-		--POS;
-		ft_get_beggin_with_curs(STR, &POS);
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
 	}
-	ft_current_str(STR, POS);
-	ft_get_next_str(STR, &POS);
-	ft_putnc('\b', POS - tmp_pos);
-	POS = tmp_pos;
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_putnc('\b', *pos - tmp_pos);
+	*pos = tmp_pos;
 	return (0);
 }
 
-int			ft_x(void)
+int			ft_x(char **str, size_t *pos)
 {
 	int		i;
 	char	**tmp;
 
 	tmp = &data_singleton()->line.copy_tmp;
-	if (!STR)
+	if (!*str)
 		return (0);
 	if (*tmp)
 		ft_strdel(tmp);
-	if (!(*tmp = ft_strdupi_space(&STR[POS])))
+	if (!(*tmp = ft_strdupi_space(&(*str)[*pos])))
 		return (-1);
 	i = ft_strlen(*tmp);
 	while (i >= 0)
 	{
-		if (!(STR = ft_remove_imput(STR, POS + i)))
+		if (!(*str = ft_remove_imput(*str, *pos + i)))
 			return (-1);
 		--i;
 	}
@@ -86,16 +86,16 @@ int			ft_x(void)
 	return (0);
 }
 
-int			ft_c(void)
+int			ft_c(char **str, size_t *pos)
 {
 	char	**tmp;
 
-	if (!STR)
+	if (!*str)
 		return (0);
 	tmp = &data_singleton()->line.copy_tmp;
 	if (*tmp)
 		ft_strdel(tmp);
-	if (!(*tmp = ft_strdupi_space(STR + POS)))
+	if (!(*tmp = ft_strdupi_space(*str + *pos)))
 		return (-1);
 	return (0);
 }

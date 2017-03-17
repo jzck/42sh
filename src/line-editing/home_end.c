@@ -6,48 +6,48 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:13:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:46:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 11:54:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_end(void)
+int			ft_end(char **str, size_t *pos)
 {
-	if (!STR)
+	if (!*str)
 		return (0);
-	if (POS)
+	if (*pos)
 	{
-		--POS;
-		ft_get_beggin_with_curs(STR, &POS);
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
 	}
 	ft_puttermcaps("cd");
-	while (STR[POS])
-		++POS;
-	ft_get_beggin(STR, &POS);
-	ft_current_str(STR, POS);
-	ft_get_next_str(STR, &POS);
+	while ((*str)[*pos])
+		++(*pos);
+	ft_get_beggin(*str, pos);
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
 	return (0);
 }
 
-int			ft_home(void)
+int			ft_home(char **str, size_t *pos)
 {
-	if (!STR)
+	if (!*str)
 		return (0);
-	if (POS)
+	if (*pos)
 	{
-		--POS;
-		ft_get_beggin_with_curs(STR, &POS);
-		if (STR[POS + 1] == '\n')
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
+		if ((*str)[*pos + 1] == '\n')
 			ft_puttermcaps("nd");
 	}
 	ft_puttermcaps("cd");
-	POS = 0;
-	ft_current_str(STR, POS);
-	ft_get_next_str(STR, &POS);
-	ft_check_end_of_line(STR, POS);
-	if (!STR[POS])
-		--POS;
-	ft_get_beggin_with_curs(STR, &POS);
+	*pos = 0;
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_check_end_of_line(*str, *pos);
+	if (!(*str)[*pos])
+		--(*pos);
+	ft_get_beggin_with_curs(*str, pos);
 	return (0);
 }

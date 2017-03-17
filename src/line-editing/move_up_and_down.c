@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:21:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:46:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 11:44:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ static void	ft_up_2(size_t *pos, char *str)
 	(*pos) -= i;
 }
 
-int			ft_up(void)
+int			ft_up(char **str, size_t *pos)
 {
-	if (!STR || !POS)
+	if (!*str || !*pos)
 		return (0);
-	if (STR[POS - 1] == '\n')
+	if ((*str)[*pos - 1] == '\n')
 	{
 		ft_puttermcaps("cd");
-		if (POS >= 2)
-			POS -= 2;
-		ft_get_beggin(STR, &POS);
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
-		++POS;
+		if (*pos >= 2)
+			*pos -= 2;
+		ft_get_beggin(*str, pos);
+		ft_current_str(*str, *pos);
+		ft_get_next_str(*str, pos);
+		++(*pos);
 	}
 	else
-		ft_up_2(&POS, STR);
+		ft_up_2(pos, *str);
 	return (0);
 }
 
@@ -74,25 +74,25 @@ static void	ft_down_2(size_t *pos, char *str)
 	ft_get_beggin_with_curs(str, pos);
 }
 
-int			ft_down(void)
+int			ft_down(char **str, size_t *pos)
 {
 	int		i;
 	int		len;
 
 	i = 0;
-	if (!STR)
+	if (!*str)
 		return (0);
-	if (STR[POS] == '\n')
-		ft_down_2(&POS, STR);
+	if ((*str)[*pos] == '\n')
+		ft_down_2(pos, *str);
 	else
 	{
 		len = ft_size_term();
-		while (STR[i + POS] && STR[i + POS] != '\n' && --len + 1)
+		while ((*str)[i + *pos] && (*str)[i + *pos] != '\n' && --len + 1)
 		{
-			ft_putchar(STR[i + POS]);
+			ft_putchar((*str)[i + *pos]);
 			++i;
 		}
-		POS += i;
+		*pos += i;
 	}
 	return (0);
 }

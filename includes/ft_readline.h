@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:54:02 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:17:52 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@
 
 # define CORRUPT 1
 
-# define STR data_singleton()->line.input
-# define POS data_singleton()->line.pos
+//# define STR data_singleton()->line.input
+//# define POS data_singleton()->line.pos
 
 # define ERROR_CNTL_R 1
 
@@ -87,7 +87,7 @@ typedef struct	s_line
 typedef struct	s_key
 {
 	int		value;
-	int		(*f)(void);
+	int		(*f)(char **str, size_t *pos);
 }				t_key;
 
 extern t_key			g_keys[];
@@ -132,32 +132,32 @@ size_t			ft_hist_len(void);
 
 int				ft_read_stdin(char **input);
 
-int				ft_end(void);
-int				ft_home(void);
-int				ft_move_right(void);
-int				ft_move_left(void);
-int				ft_up(void);
-int				ft_down(void);
-int				ft_buff_f6(void);
-int				ft_control_d(void);
-int				ft_control_c(void);
-int				ft_control_l(void);
-int				ft_del(void);
-int				ft_suppr(void);
-int				ft_print(int ret);
-int				ft_surch_in_history(void);
-int				ft_printall(void);
-int				ft_history_down(void);
-int				ft_history_up(void);
-int				ft_found_next_word(void);
-int				ft_found_prev_word(void);
-int				ft_c(void);
-int				ft_x(void);
-int				ft_v(void);
+int				ft_end(char **str, size_t *pos);
+int				ft_home(char **str, size_t *pos);
+int				ft_move_right(char **str, size_t *pos);
+int				ft_move_left(char **str, size_t *pos);
+int				ft_up(char **str, size_t *pos);
+int				ft_down(char **str, size_t *pos);
+int				ft_buff_f6(char **str, size_t *pos);
+int				ft_control_d(char **str, size_t *pos);
+int				ft_control_c(char **str, size_t *pos);
+int				ft_control_l(char **str, size_t *pos);
+int				ft_del(char **str, size_t *pos);
+int				ft_suppr(char **str, size_t *pos);
+int				ft_surch_in_history(char **str, size_t *pos);
+int				ft_printall(char **str, size_t *pos);
+int				ft_history_down(char **str, size_t *pos);
+int				ft_history_up(char **str, size_t *pos);
+int				ft_found_next_word(char **str, size_t *pos);
+int				ft_found_prev_word(char **str, size_t *pos);
+int				ft_c(char **str, size_t *pos);
+int				ft_x(char **str, size_t *pos);
+int				ft_v(char **str, size_t *pos);
 int				ft_read_it(int input, size_t *pos, char **str);
+int				ft_print(int ret, char **str, size_t *pos);
 
 int				readline(int prompt, char **input);
-int				ft_completion(int ret);
+int				ft_completion(int ret, char **str, size_t *pos);
 
 struct termios	*ft_save_termios(int save);
 

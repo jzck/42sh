@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:49:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:15:58 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ t_key	g_key[] =
 	{0					, 0						},
 };
 
-static void	init_read_stdin(void)
+static void	init_read_stdin(char **str, size_t *pos)
 {
-	if (STR)
+	if (*str)
 	{
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
-		if (STR[POS])
-			++(POS);
+		ft_current_str(*str, *pos);
+		ft_get_next_str(*str, pos);
+		if ((*str)[*pos])
+			++(*pos);
 	}
 	if (data_singleton()->comp)
 		c_clear(data_singleton());
@@ -57,29 +57,33 @@ int			ft_read_stdin(char **input)
 	int	ret;
 	int	j;
 
-	init_read_stdin();
+	init_read_stdin(&data_singleton()->line.input, &data_singleton()->line.pos);
 	while (42)
 	{
 		ret = 0;
 		j = 0;
 		read(0, &ret, sizeof(int));
-		if (ft_completion(ret))
+		if (ft_completion(ret, &data_singleton()->line.input,
+											&data_singleton()->line.pos))
 			continue ;
 		while (g_key[j].value && g_key[j].value != ret)
 			++j;
 		if (g_key[j].value)
 		{
-			if ((ret = g_key[j].f()))
+			if ((ret = g_key[j].f(&data_singleton()->line.input,
+												&data_singleton()->line.pos)))
 				return (ret);
 		}
 		else if (ft_isprint(ret))
-			ft_print(ret);
+			ft_print(ret, &data_singleton()->line.input,
+												&data_singleton()->line.pos);
 		else if (ret == 10)
 		{
-			*input = STR;
+			*input = data_singleton()->line.input;
 			return (0);
 		}
 		else if (ft_isascii(ret) == 0)
-			ft_read_it(ret, &POS, &STR);
+			ft_read_it(ret, &data_singleton()->line.pos,
+												&data_singleton()->line.input);
 	}
 }

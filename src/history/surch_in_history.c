@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:48:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:12:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,34 +35,37 @@ static int	ft_surch_and_realloc(char **str, char **str_srch,
 
 static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
 {
-	ft_clear_prompt(&POS, srch_pos);
+	ft_clear_prompt(&data_singleton()->line.pos, srch_pos);
 	data_singleton()->line.prompt_size = 21;
 	if (str_srch)
 		ft_printf("\033[35m(reverse-i-search)`\033[32m%s\033[35m': \033[37m",
 		str_srch);
 	else
 		ft_putstr("\033[35m(reverse-i-search)`': \033[37m");
-	if (STR)
+	if (data_singleton()->line.input)
 	{
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
+		ft_current_str(data_singleton()->line.input,
+												data_singleton()->line.pos);
+		ft_get_next_str(data_singleton()->line.input,
+												&data_singleton()->line.pos);
 	}
 }
 
-static void	ft_modify_str(char *str_srch, size_t srch_pos)
+static void	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
+	 																size_t *pos)
 {
-	ft_clear_prompt(&POS, srch_pos);
+	ft_clear_prompt(pos, srch_pos);
 	data_singleton()->line.is_prompt ? ft_prompt() : ft_putstr("> ");
-	if (STR)
+	if (*str)
 	{
-		STR = ft_strdup(STR);
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
+		*str = ft_strdup(*str);
+		ft_current_str(*str, *pos);
+		ft_get_next_str(*str, pos);
 	}
 	free(str_srch);
 }
 
-int			ft_surch_in_history(void)
+int			ft_surch_in_history(char **str, size_t *pos)
 {
 	char	*str_srch;
 	int		ret;
@@ -70,7 +73,7 @@ int			ft_surch_in_history(void)
 
 	srch_pos = 0;
 	str_srch = NULL;
-	(STR) ? ft_strdel(&STR) : 0;
+	(*str) ? ft_strdel(str) : 0;
 	while (42)
 	{
 		ft_give_new_prompt(str_srch, srch_pos);
@@ -78,7 +81,7 @@ int			ft_surch_in_history(void)
 		read(0, &ret, sizeof(int));
 		if (ft_isprint(ret))
 		{
-			if (ft_surch_and_realloc(&STR, &str_srch, ret, &srch_pos) < 0)
+			if (ft_surch_and_realloc(str, &str_srch, ret, &srch_pos) < 0)
 				return (-1);
 		}
 		else if (ret == 127 && srch_pos)
@@ -86,11 +89,11 @@ int			ft_surch_in_history(void)
 			--srch_pos;
 			str_srch = ft_remove_imput(str_srch, srch_pos);
 			ft_puttermcaps("le");
-			STR = (!*str_srch) ? NULL : ft_strget_history(str_srch);
+			*str = (!*str_srch) ? NULL : ft_strget_history(str_srch);
 		}
 		else if (ret != 127)
 			break ;
 	}
-	ft_modify_str(str_srch, srch_pos);
+	ft_modify_str(str_srch, srch_pos, str, pos);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:48:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:10:17 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int			ft_history_parsing(int has_prompt, char **input)
 
 	i = 0;
 	boolean = 0;
-	if (!STR)
+	if (!data_singleton()->line.input)
 		return (0);
-	while (STR && STR[i])
+	while (data_singleton()->line.input && data_singleton()->line.input[i])
 	{
-		if (STR[i] == '!')
+		if (data_singleton()->line.input[i] == '!')
 		{
 			boolean = 1;
-			if (!ft_history_parsing_3(STR, &i))
+			if (!ft_history_parsing_3(data_singleton()->line.input, &i))
 				boolean = 0;
 			else
 				break ;

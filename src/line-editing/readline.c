@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:54:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 12:20:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int		readline(int has_prompt, char **input)
 	ret = ft_read_stdin(input);
 	if (ret < 0)
 		return (ret);
-	if (STR)
-		ft_current_str(STR, POS);
+	if (data_singleton()->line.input)
+		ft_current_str(data_singleton()->line.input,
+													data_singleton()->line.pos);
 	ft_putchar('\n');
 	if (has_prompt)
 		ret = ft_history_parsing(has_prompt, input);

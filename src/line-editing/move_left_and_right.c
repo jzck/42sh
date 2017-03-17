@@ -6,65 +6,65 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 10:46:27 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 11:51:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_move_right(void)
+int			ft_move_right(char **str, size_t *pos)
 {
 	size_t	tmp;
 
-	if (ft_strlen(STR) <= POS)
+	if (ft_strlen(*str) <= *pos)
 		return (0);
-	if (STR[POS] == '\n')
+	if ((*str)[*pos] == '\n')
 	{
-		if (POS)
+		if (*pos)
 		{
-			tmp = POS - 1;
-			ft_get_beggin_with_curs(STR, &tmp);
+			tmp = *pos - 1;
+			ft_get_beggin_with_curs(*str, &tmp);
 		}
 		ft_puttermcaps("cd");
-		++POS;
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
-		POS = (!STR[POS]) ? POS - 1 : POS;
-		ft_get_beggin_with_curs(STR, &POS);
+		++(*pos);
+		ft_current_str(*str, *pos);
+		ft_get_next_str(*str, pos);
+		*pos = (!(*str)[*pos]) ? *pos - 1 : *pos;
+		ft_get_beggin_with_curs(*str, pos);
 	}
 	else
 	{
-		ft_putchar(STR[POS]);
-		++POS;
+		ft_putchar((*str)[*pos]);
+		++(*pos);
 	}
 	return (0);
 }
 
-int			ft_move_left(void)
+int			ft_move_left(char **str, size_t *pos)
 {
-	if (!POS)
+	if (!*pos)
 		return (0);
-	if (STR[POS - 1] == '\n')
+	if ((*str)[*pos - 1] == '\n')
 	{
-		if (POS - 1 == 0)
+		if (*pos - 1 == 0)
 		{
 			ft_puttermcaps("cd");
-			--POS;
+			--(*pos);
 			return (0);
 		}
 		ft_puttermcaps("cd");
-		POS -= 2;
-		ft_get_beggin(STR, &POS);
-		if (!POS && STR[POS] == '\n')
-			++POS;
-		ft_current_str(STR, POS);
-		ft_get_next_str(STR, &POS);
-		++POS;
+		*pos -= 2;
+		ft_get_beggin(*str, pos);
+		if (!*pos && (*str)[*pos] == '\n')
+			++(*pos);
+		ft_current_str(*str, *pos);
+		ft_get_next_str(*str, pos);
+		++(*pos);
 	}
 	else
 	{
 		ft_puttermcaps("le");
-		--POS;
+		--(*pos);
 	}
 	return (0);
 }
