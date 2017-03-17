@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 15:22:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:09:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 16:05:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int			ft_history_down(char **str, size_t *pos)
 		head = head->next;
 	if (!head->str)
 		*str = NULL;
-	else
-		if (!(*str = ft_strdup(head->str)))
-			return (-1);
+	else if (!(*str = ft_strdup(head->str)))
+		return (-1);
 	if (*str)
 		ft_current_str(*str, *pos);
 	if (*str)
@@ -64,9 +63,8 @@ int			ft_history_up(char **str, size_t *pos)
 		head = head->prev;
 	if (!head->str)
 		*str = NULL;
-	else
-		if (!(*str = ft_strdup(head->str)))
-			return (-1);
+	else if (!(*str = ft_strdup(head->str)))
+		return (-1);
 	if (*str)
 		ft_current_str(*str, *pos);
 	if (*str)
