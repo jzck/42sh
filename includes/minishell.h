@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 00:20:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 20:52:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ struct	s_data
 	int			argc;
 	char		**argv;
 	t_line		line;
-	t_list		*token;
-	t_btree		*ast;
 	t_lexer		lexer;
 	t_parser	parser;	
 	t_comp		*comp;

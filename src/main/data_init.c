@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 17:41:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/17 20:51:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int		data_init(int ac, char **av)
 	data->opts = 0;
 	exec_reset();
 	data->lst_func = NULL;
-	data->token = NULL;
-	data->ast = NULL;
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
