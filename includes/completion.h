@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 09:14:30 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/17 16:40:10 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,7 @@ char				*path_solver(t_comp *c, char *cmd, char *cwd);
 int					c_exclusion_folder(t_comp *c);
 int					ft_sstrlen(char **s);
 char				*ft_sstrtostr(char **s, char *sep);
+size_t				ft_strlenw_i(char *str, size_t pos, char c);
+size_t				ft_strpos_i(char *str, size_t pos, char c);
 
 #endif
