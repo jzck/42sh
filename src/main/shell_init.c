@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 22:38:39 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/18 00:04:33 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int			interactive_settings(void)
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, sigchld_handler);
+	signal(SIGCHLD, SIG_DFL);//sigchld_handler); TBC IF dynamic notification are wanted
 	*shell_pgid = getpid();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{

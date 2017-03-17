@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 17:37:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 22:39:21 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/18 00:05:39 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	sigchld_handler(int signo)
 {
-	DG("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-	do_job_notification();
+	//do_job_notification();dynamic notif ???
 	(void)signo;
 }

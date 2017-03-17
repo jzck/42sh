@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 20:31:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 23:10:35 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		job_update_id(void);
 void		job_update_rank(void);
 
 int			do_job_notification(void);
-void		job_notify_new(t_job *job);
+void		job_notify_new(int id);
 void		job_notify_change(int id);
 void		job_format(t_job *j, int opts);
 void		job_format_head(t_job *j);

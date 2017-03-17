@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 16:41:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:35:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,32 @@ static int	redirection_print(t_redir *redir)
 
 static void	process_format_state(t_process *p)
 {
-	int			state;
+	int		state;
+	char	*statestr;
 
 	state = p->attrs & PROCESS_STATE_MASK;
+	statestr = NULL;
 	if (state == PROCESS_RUNNING)
-		ft_putstr("running  ");
+		ft_asprintf(&statestr, "running");
 	else if (state == PROCESS_SUSPENDED)
-		ft_putstr("suspended");
+		ft_asprintf(&statestr, "suspended");
 	else if (state == PROCESS_CONTINUED)
 	{
-		ft_putstr("continued");
+		ft_asprintf(&statestr, "continued");
 		p->attrs &= ~PROCESS_STATE_MASK;
 		p->attrs |= PROCESS_RUNNING;
 	}
 	else if (state == PROCESS_COMPLETED)
 	{
-		if (p->status == 0)
-			ft_putstr("done     ");
+		if (WIFSIGNALED(p->status))
+			ft_asprintf(&statestr, strsignal(WTERMSIG(p->status)));
+		else if (p->status == 0)
+			ft_asprintf(&statestr, "done");
 		else
-			ft_printf("exit %i  ", p->status);
+			ft_asprintf(&statestr, "%s %i", "exit", WEXITSTATUS(p->status));
 	}
-	ft_putchar('\t');
+	ft_printf("%-*s\t", 12, statestr);
+	ft_strdel(&statestr);
 }
 
 static void	process_format_com_long(t_list **plist)
