@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:28:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 00:50:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 19:33:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int			lexer_assignement_word(t_list **alst, t_lexer *lexer)
 	char		c;
 
 	token = (*alst)->content;
-	if (token->type != TK_WORD && token->type != TK_ASSIGNMENT_WORD)
-	{
-		token_append(token, lexer, 0, 0);
-		lexer->pos++;
-		return (lexer_lex(alst, lexer));
-	}
+	/* if (token->type != TK_WORD && token->type != TK_ASSIGNMENT_WORD) */
+	/* { */
+	/* 	token_append(token, lexer, 0, 0); */
+	/* 	lexer->pos++; */
+	/* 	return (lexer_lex(alst, lexer)); */
+	/* } */
 	token->type = TK_ASSIGNMENT_WORD;
 	token_append(token, lexer, 0, 0);
 	lexer->pos++;

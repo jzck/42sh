@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 14:44:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:33:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int			lexer_word(t_list **alst, t_lexer *lexer)
 		lexer->state = ASSIGNEMENT_WORD;
 		return (lexer_lex(alst, lexer));
 	}
+	else
+	{
 	token_append(token, lexer, 0, 0);
 	lexer->pos++;
+	}
 	return (lexer_lex(alst, lexer));
 }

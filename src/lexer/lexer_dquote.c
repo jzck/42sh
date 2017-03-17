@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 22:59:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:27:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	else if (lexer->str[lexer->pos] == '\\')
 	{
 		if (lexer->str[lexer->pos + 1] == 0)
-			return(lexer_backslash(alst, lexer));
+			return (lexer_backslash(alst, lexer));
 		token_append(token, lexer, 1, 1);
 	}
 	else if (lexer->str[lexer->pos] == '`' && (lexer->state = BQUOTE))
