@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 23:25:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/17 21:16:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ int		get_input_fd(char **av)
 	else if (data->opts & SH_OPTS_LC)
 	{
 		pipe(fds);
-		dup2_close(fds[PIPE_READ], 10);
-		fd = 10;
 		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
+		dup2_close(fds[PIPE_READ], (fd = 10));
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
@@ -93,6 +92,7 @@ int					shell_init(int ac, char **av)
 	}
 	if (cliopts_get(av, g_opts, data))
 		return (ft_perror());
+	data->fd = get_input_fd(av);
 	if (SH_IS_INTERACTIVE(data->opts))
 		interactive_settings();
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 20:51:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:16:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		data_init(int ac, char **av)
 {
 	t_data	*data;
 	char	*term_name;
-	char*	shlvl;
+	char	*shlvl;
 
 	data = data_singleton();
 	data->argc = ac;
