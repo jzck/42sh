@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:10:17 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/18 15:04:16 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ static int	ft_history_parsing_3(char *str, int *i)
 	return (1);
 }
 
+static int	ft_history_parsing_2(int has_prompt, char **input)
+{
+	data_singleton()->line.pos = 0;
+	has_prompt ? ft_prompt() : ft_putstr("> ");
+	if (ft_read_stdin(input) < 0)
+		return (-1);
+	if (data_singleton()->line.input)
+		ft_current_str(data_singleton()->line.input,
+													data_singleton()->line.pos);
+	ft_putchar('\n');
+	ft_history_parsing(has_prompt, input);
+	return (0);
+}
+
 int			ft_history_parsing(int has_prompt, char **input)
 {
 	int		i;
@@ -81,7 +95,7 @@ int			ft_history_parsing(int has_prompt, char **input)
 		}
 		++i;
 	}
-	if (boolean)
-		return (readline(has_prompt, input));
+	if (boolean && ft_history_parsing_2(has_prompt, input))
+		return (-1);
 	return (0);
 }
