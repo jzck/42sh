@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 23:18:56 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/18 02:59:06 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char					*get_output(char *command)
 	char	*output;
 	int		len;
 
-	if (!(output = command_getoutput(command)))
+	if (!(output = command_getoutput(command, NULL, data_singleton()->env)))
 		return (NULL);
 	len = ft_strlen(output);
 	while (output[--len] == '\n')

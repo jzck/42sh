@@ -6,98 +6,82 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 11:29:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 04:13:57 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-**	a ajouter dans la lib ?
-*/
-
-int		ft_sstr_found(char **sstr, char *name)
+static int		env_usage(int arg_miss, char c)
 {
-	int		size;
-
-	size = 0;
-	if (sstr)
-		while (sstr[size] && ft_strncmp(name, sstr[size], ft_strlen(name)))
-			++size;
-	return (size);
+	if (arg_miss)
+		ft_dprintf(2, "{red}env: option requires an argument -- u{eoc}\n");
+	else if (c)
+		ft_dprintf(2, "{red}env: illegal option -- %c{eoc}\n", c);
+	ft_dprintf(2, "usage: env [-i] [-u name] ... [name=value] ... cmd\n");
+	return (1);
 }
 
-void	ft_sstr_freeone(char **sstr, int index)
+static void		env_freeone(char **env, char *arg)
 {
+	int		i;
 	char	*tmp;
 
-	if (!sstr || !sstr[index])
-		return ;
-	tmp = sstr[index];
-	while (sstr[index])
+	while (env && *env && (i = -1))
 	{
-		sstr[index] = sstr[index + 1];
-		index++;
-	}
-	free(tmp);
-}
-
-/*
-**
-*/
-
-static void	ft_env_execute(char *const argv[], char **env)
-{
-	pid_t	soon;
-	char	*path;
-	char	*path_exe;
-
-	path = ft_getenv(env, "PATH");
-	path_exe = ft_findexec(path, *argv);
-	if (!path || !path_exe)
-	{
-		ft_dprintf(2, "{red}%s: no such file or directory: %s{eoc}\n",
-				SHELL_NAME, *argv);
-		return ;
-	}
-	if ((soon = fork()))
-		wait(&soon);
-	else
-		set_exitstatus(execve(path_exe, argv, env), 1);
-	free(path_exe);
-}
-
-static void	ft_illegal_opt_env(char c)
-{
-	ft_dprintf(2, "{red}env: option requires an argument -- %c\n", c);
-	ft_dprintf(2, "usage: env\t[-iv] [-P utilpath] [-S string]");
-	ft_dprintf(2, " [-u name]\n\t\t[name=value ...] ");
-	ft_dprintf(2, "[utility [argument ...]]{eoc}\n");
-}
-
-static int	ft_check_env_opt(char ***argv, char ***env)
-{
-	if (!ft_strcmp(**argv, "-i"))
-	{
-		ft_sstrfree(*env);
-		*env = NULL;
-		++(*argv);
-	}
-	else if (!ft_strcmp(**argv, "-u"))
-	{
-		++(*argv);
-		if (!**argv)
+		if (ft_strcmp(*env, arg) == '='
+				&& ft_strlen(arg) == ft_strlenchr(*env, '='))
 		{
-			ft_illegal_opt_env('u');
-			return (1);
+			tmp = *env;
+			while (*env)
+			{
+				*env = *(env + 1);
+				++env;
+			}
+			ft_strdel(&tmp);
+			return ;
 		}
-		ft_sstr_freeone(*env, ft_sstr_found(*env, **argv));
-		++(*argv);
+		++env;
 	}
-	else if (***argv == '-')
+}
+
+static void		env_replace(char ***custom_env, char *arg)
+{
+	char	**arg_split;
+
+	if ((arg_split = ft_strsplit(arg, '=')))
 	{
-		ft_illegal_opt_env(*(**argv + 1));
-		return (1);
+		env_freeone(*custom_env, *arg_split);
+		ft_tabdel(&arg_split);
+	}
+	*custom_env = ft_sstradd(*custom_env, arg);
+}
+
+static int		env_treat_flag(char ***custom_env, char *const *arg[])
+{
+	while (*(++*arg))
+	{
+		if (!ft_strcmp(**arg, "-i"))
+			ft_tabdel(custom_env);
+		else if (!ft_strcmp(**arg, "-u"))
+		{
+			++*arg;
+			if (**arg)
+				env_freeone(*custom_env, **arg);
+			else
+				return (env_usage(1, 0));
+		}
+		else if (ft_strchr(**arg, '='))
+			env_replace(custom_env, **arg);
+		else if (!ft_strcmp(**arg, "--"))
+		{
+			++*arg;
+			return (0);
+		}
+		else if ((**arg)[0] == '-')
+			return (env_usage(0, (**arg)[1]));
+		else
+			return (0);
 	}
 	return (0);
 }
@@ -107,30 +91,22 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 	char	**env;
 
 	(void)path;
+	if (!argv || ft_strcmp(*argv, "env"))
+		return (env_usage(0, 0));
 	env = ft_sstrdup((char **)envp);
-	while (*argv)
+	if (env_treat_flag(&env, &argv))
 	{
-		if (ft_check_env_opt((char ***)&argv, (char ***)&env))
-			break ;
-		while (*argv && ft_strrchr(*argv, '='))
-		{
-			env = ft_sstradd(env, *argv);
-			++argv;
-		}
-		if (env && (!*argv || (!ft_strcmp(*argv, "env") && !*(argv + 1))))
-		{
-			ft_sstrprint(env, '\n');
-			ft_putchar('\n');
-			break ;
-		}
-		if (*argv && ft_strcmp(*argv, "env"))
-		{
-			ft_env_execute(argv, env);
-			break ;
-		}
-		if (*argv)
-			++argv;
+		ft_sstrfree(env);
+		return (1);
 	}
-	ft_sstrfree(env);
+	if (!*argv)
+	{
+		ft_sstrprint(env, '\n');
+		if (env)
+			ft_putchar('\n');
+	}
+	else
+		ft_putstr(command_getoutput(NULL, argv, env));
+	ft_tabdel(&env);
 	return (0);
 }

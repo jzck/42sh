@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/15 23:17:21 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/18 04:11:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,21 @@ static char		*manage_output(int *fds)
 	return (output);
 }
 
-char			*command_getoutput(char *command)
+static char		*manage_command(char *const av_cmd[])
+{
+	char	*command;
+	int		i;
+
+	if (!av_cmd)
+		return (NULL);
+	i = -1;
+	command = ft_strdup(av_cmd[++i]);
+	while (av_cmd[++i])
+		ft_strjoin(command, av_cmd[i]);
+	return (command);
+}
+
+char			*command_getoutput(char *command, char *const av_cmd[], char **env)
 {
 	char		*output;
 	int			ret;
@@ -38,8 +52,6 @@ char			*command_getoutput(char *command)
 	int			fds[2];
 	char		**av;
 
-	if (!command)
-		return (NULL);
 	pipe(fds);
 	if (!(pid = fork()))
 	{
@@ -47,8 +59,11 @@ char			*command_getoutput(char *command)
 		dup2_close(fds[PIPE_WRITE], STDOUT);
 		av = ft_sstradd(NULL, data_singleton()->argv[0]);
 		av = ft_sstradd(av, "-c");
+		if (!(command = command ? command : manage_command(av_cmd)))
+			exit(1);
+		DG("command is %s", command);
 		av = ft_sstradd(av, command);
-		execve(data_singleton()->argv[0], av, data_singleton()->env);
+		execve(data_singleton()->argv[0], av, env);
 		exit(1);
 	}
 	waitpid(pid, &ret, WUNTRACED);
