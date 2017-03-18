@@ -144,6 +144,7 @@ int		isbang_sep(t_btree **ast, t_list **lst);
 int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
 int		superflous_token(t_btree **ast, t_list **list);
+void	sym_free(void *data, size_t size);
 
 struct s_distrostree
 {
@@ -170,8 +171,6 @@ struct	s_cmd
 union	u_astdata
 {
 	t_cmd	cmd;
-	char	**sstr;
-	char	*str;
 };
 
 struct	s_astnode

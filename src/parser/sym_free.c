@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_free.c                                       :+:      :+:    :+:   */
+/*   sym_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 18:12:57 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 17:27:56 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/18 17:13:31 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/18 17:15:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		redir_free(void *data, size_t content_size)
+void	sym_free(void *data, size_t size)
 {
-	t_redir *redir;
+	t_sym	*sym;
 
-	(void)content_size;
-	redir = data;
-	if (redir->type == TK_GREAT || redir->type == TK_LESS || redir->type == TK_DGREAT)
-	{
-		ft_strdel(&redir->word);
-	}
-	free(redir);
-}
+	(void)size;
+	sym = data;
+	free(sym);
+}	

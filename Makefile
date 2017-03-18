@@ -291,6 +291,7 @@ parser/push_stack.c\
 parser/read_stack.c\
 parser/redir_init.c\
 parser/stack_init.c\
+parser/sym_free.c\
 parser/tree_wrapper.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))
