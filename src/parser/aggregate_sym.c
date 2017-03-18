@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 17:28:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 19:18:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,7 +375,7 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 	t_sym		*head;
 	int			i;
 
-	if (!*stack || !*new_sym || !*state)
+	if (!*stack || !new_sym || !*new_sym || !*state)
 		return (1);
 	i = -1;
 	head = (*stack)->content;

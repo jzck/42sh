@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 17:08:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 19:18:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 
 	if (pop_heredoc(token))
 		return (0);
-	while (*token)
+	while (parser && token && *token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
-		if (eval_sym(&parser->stack, *parser->new_sym))
+		if (parser->new_sym && eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
 			return (0);
