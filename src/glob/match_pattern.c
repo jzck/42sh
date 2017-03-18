@@ -53,8 +53,8 @@ static int		match_bracket(t_glob *gl, char c)
 	}
 	neg = 0;
 	if ((*cmp == '^' || *cmp == '!')
-		&& !is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], cmp)
-		&& ++neg)
+			&& !is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], cmp)
+			&& ++neg)
 		++cmp;
 	while (cmp < gl->pat)
 	{
@@ -72,10 +72,10 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 	char	*pat;
 
 	if (gl->pat[1] == '*' &&
-		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
+			!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
 	{
-	while (gl->pat[1] == '*')
-		++gl->pat;
+		while (gl->pat[1] == '*')
+			++gl->pat;
 		dir_research(gl, full_word, gl->pat, (int[]){1, 0});
 	}
 	if (!*gl->pat || (*gl->pat == '*' && !*++gl->pat))
