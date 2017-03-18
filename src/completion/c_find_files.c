@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 08:29:21 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/18 09:18:04 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*c_slicer(t_comp *c)
 	i = 0;
 	tmp = NULL;
 	rt = NULL;
-	while (c->rcmd[i] != ' ')
+	while (c->rcmd[i] && c->rcmd[i] != ' ')
 		i++;
 	c->rcmd[i] == ' ' ? i++ : (0);
 	if (i == (int)ft_strlen(c->rcmd))
