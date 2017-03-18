@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/14 21:39:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/18 11:46:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int					bt_export_print(void)
 	char	*equal;
 
 	env = data_singleton()->env;
-	while (*env)	
+	while (*env)
 	{
 		if ((equal = ft_strchr(*env, '=')))
 			ft_printf("export %s\n", *env);
@@ -63,7 +63,7 @@ int					builtin_export(
 			equal = ft_getenv(data_singleton()->local_var, *av);
 			builtin_setenv("internal", (char*[]){"global", *av, equal}, NULL);
 		}
-		builtin_unsetenv("internal", (char*[]){"local", *av}, NULL);
+		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}
 	return (0);

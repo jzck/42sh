@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:28:49 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 23:21:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 11:19:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int			ft_read_stdin(char **input)
 	{
 		if (read_stdin(&ret, &j) < 0)
 			return (-1);
-		DG("key value hex = %x", ret);
 		if (ft_completion(ret, str, pos))
 			continue ;
 		while (g_key[j].value && g_key[j].value != ret)

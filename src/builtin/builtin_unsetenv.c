@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:29:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:13:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/18 11:47:53 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 	while (av[i])
 	{
 		j = 0;
-		while ((*env)[j])
+		while (*env && (*env)[j])
 		{
 			if (ft_strcmp((*env)[j], av[i]) == '=')
 				ft_sstrdel(*env, j);
