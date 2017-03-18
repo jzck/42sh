@@ -92,7 +92,7 @@ int					c_glob_matching(void)
 	char			**ss_glob;
 	unsigned char	*glob_echap;
 	char			*str;
-	size_t			pos;
+	long			pos;
 
 	str = data_singleton()->line.input;
 	if ((pos = c_glob_pos(NULL, 0)) == -1)

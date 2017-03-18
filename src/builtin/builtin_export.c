@@ -40,9 +40,7 @@ int					builtin_export(
 {
 	char		*equal;
 	t_btexport	data;
-	int			i;
 
-	i = 0;
 	(void)envp;
 	(void)path;
 	data.flag = 0;
