@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/17 18:12:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 15:51:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,6 +413,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_LBRACE, LINEBREAK},
 	{TK_LBRACE, TK_BANG},
 	{TK_LBRACE, TK_LBRACE},
+	{TK_LBRACE, TK_PAREN_OPEN},
 	{TK_LBRACE, SEPARATOR_OP},
 	{TK_LBRACE, NEWLINE_LIST},
 	{TK_LBRACE, SEQUENCE},
