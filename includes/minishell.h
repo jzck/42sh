@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 23:20:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 18:42:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ struct	s_data
 	t_comp		*comp;
 	t_exec		exec;
 	t_jobc		jobc;
-	t_list		*heredoc_queue;
 	char		**local_var;
 	t_list		*lst_func;
 };

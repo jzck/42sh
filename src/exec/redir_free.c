@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 18:12:57 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 17:27:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 18:59:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void		redir_free(void *data, size_t content_size)
 
 	(void)content_size;
 	redir = data;
-	if (redir->type == TK_GREAT || redir->type == TK_LESS || redir->type == TK_DGREAT)
-	{
-		ft_strdel(&redir->word);
-	}
+	ft_strdel(&redir->word);
+	if (redir->type == TK_DLESS)
+		ft_strdel(&redir->heredoc_data);
+	redir->type = 0;
+	redir->n = 0;	
 	free(redir);
 }

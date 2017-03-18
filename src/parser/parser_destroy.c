@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 19:30:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/17 17:55:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/18 18:45:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parser_destroy(t_parser *parser)
 {
 	parser->state = SUCCESS;
 	ft_lstdel(&parser->stack, &ft_lst_cfree);
-	ft_lstdel(&data_singleton()->parser.heredoc_queue, &ft_lst_cfree);
+	ft_lstdel(&parser->heredoc_queue, &ft_lst_cfree);
 	free(parser->new_sym);
 	parser->new_sym = NULL;
 }
