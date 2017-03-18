@@ -73,7 +73,11 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 
 	if (gl->pat[1] == '*' &&
 		!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
-		dir_research(gl, full_word, gl->pat + 1, (int[]){1, 0});
+	{
+	while (gl->pat[1] == '*')
+		++gl->pat;
+		dir_research(gl, full_word, gl->pat, (int[]){1, 0});
+	}
 	if (!*gl->pat || (*gl->pat == '*' && !*++gl->pat))
 		return (1);
 	pat = gl->pat;
