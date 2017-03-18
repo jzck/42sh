@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 16:54:59 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 08:27:55 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/18 14:04:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		c_seek_abs_path(t_comp *c, char *current_word)
 	int		len;
 
 	len = ft_strrchr(c->rcmd, '/') - current_word + 1;
+	if (len < 0)
+		return ;
 	c->cpath = ft_strndup(current_word, len);
 	if (current_word[0] == '~')
 	{

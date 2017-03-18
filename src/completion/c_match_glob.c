@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 11:20:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/18 12:23:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void			c_replace_globbing(char **glob, size_t start)
 	free(ref_mid);
 	free(ref_next);
 	free(str);
+	ft_sstrfree(glob);
 }
 
 /*
@@ -57,6 +58,28 @@ static int			c_glob_pos(char *str, size_t pos)
 	if (str[pos] == ' ')
 		++pos;
 	return (pos);
+}
+
+/*
+** check glob return and free
+*/
+
+static int			c_check_glob(char **ss_glob, char *current_word,
+					unsigned char *glob_echap, size_t pos)
+{
+	char			*str;
+
+	str = data_singleton()->line.input;
+	free(current_word);
+	free(glob_echap);
+	if (!*ss_glob || !**ss_glob)
+		return (1);
+	if (!ft_strncmp(str + pos, *ss_glob, ft_strlen(*ss_glob)))
+	{
+		ft_sstrfree(ss_glob);
+		return (1);
+	}
+	return (0);
 }
 
 /*
@@ -83,9 +106,7 @@ int					c_glob_matching(void)
 	glob_echap = (unsigned char *)ft_strnew(ft_strlen(str) >> 3);
 	ft_bzero(glob_echap, ft_strlen(str) >> 3);
 	ss_glob = glob(current_word, glob_echap, glob_echap, 1);
-	free(current_word);
-	if (!*ss_glob || !**ss_glob ||
-			!ft_strncmp(str + pos, *ss_glob, ft_strlen(*ss_glob)))
+	if (c_check_glob(ss_glob, current_word, glob_echap, pos))
 		return (0);
 	c_replace_globbing(ss_glob, pos);
 	return (1);
