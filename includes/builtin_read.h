@@ -13,10 +13,6 @@
 #ifndef BUILTIN_READ_H
 # define BUILTIN_READ_H
 
-/* # include "types.h" */
-/* # include "builtin.h" */
-/* # include "minishell.h" */
-
 # define READ_OPT_LA	(1 << 0)
 # define READ_OPT_LD	(1 << 1)
 # define READ_OPT_LE	(1 << 2)
@@ -35,12 +31,12 @@ typedef	struct s_readopt	t_readopt;
 struct	s_read
 {
 	t_flag	opts;
+	char	**names;
 	char	delim;
 	int		nchars;
 	char	*prompt;
 	int		timeout;
 	int		fd;
-	char	**names;
 	char	*input;
 };
 

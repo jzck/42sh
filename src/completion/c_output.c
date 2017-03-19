@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/03/17 16:48:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/19 15:18:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,6 @@ int				c_keypress(t_comp *c, long int key)
 {
 	t_clst		*ptr;
 
-	if (key == 27 || key == 127 || key == 2117294875)
-	{
-		c_term_clear(c);
-		c_clear(data_singleton());
-		return (0);
-	}
 	if (key == 10 || key == 32)
 	{
 		ptr = c->lst;
@@ -119,9 +113,15 @@ int				c_keypress(t_comp *c, long int key)
 		c_updater(c, ptr->name);
 		return (1);
 	}
-	if (key == KP_U || key == KP_D || key == KP_L || key == KP_R)
+	else if (key == KP_U || key == KP_D || key == KP_L || key == KP_R)
 	{
 		c_arrow(c, key);
+		return (0);
+	}
+	else if (!ft_isprint(key))
+	{
+		c_term_clear(c);
+		c_clear(data_singleton());
 		return (0);
 	}
 	return ((c_rematch(c, key)) ? (0) : (1));

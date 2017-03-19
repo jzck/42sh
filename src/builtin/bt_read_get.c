@@ -16,7 +16,8 @@ int		bt_read_getdelim(char ***av, t_read *data)
 {
 	if (!av || !*av)
 		return (1);
-	data->delim = ***av;
+	if (data)
+		data->delim = ***av;
 	return (0);
 }
 
@@ -24,17 +25,17 @@ int		bt_read_getnchars(char ***av, t_read *data)
 {
 	if (!av || !*av)
 		return (1);
-	data->nchars = ft_atoi(**av);
+	if (data)
+		data->nchars = ft_atoi(**av);
 	return (0);
 }
 
 int		bt_read_getprompt(char ***av, t_read *data)
 {
-	DG("getting prompt");
 	if (!av || !*av || !**av)
 		return (1);
-	data->prompt = **av;
-	DG("got prompt [%s]", data->prompt);
+	if (data)
+		data->prompt = **av;
 	return (0);
 }
 
@@ -42,7 +43,8 @@ int		bt_read_gettimeout(char ***av, t_read *data)
 {
 	if (!av || !*av)
 		return (1);
-	data->timeout = ft_atoi(**av);
+	if (data)
+		data->timeout = ft_atoi(**av);
 	return (0);
 }
 
@@ -50,6 +52,7 @@ int		bt_read_getfd(char ***av, t_read *data)
 {
 	if (!av || !*av)
 		return (1);
-	data->fd = ft_atoi(**av);
+	if (data)
+		data->fd = ft_atoi(**av);
 	return (0);
 }

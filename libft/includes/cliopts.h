@@ -32,10 +32,10 @@ struct	s_cliopts
 struct	s_data_template
 {
 	t_flag	flag;
+	char	**av_data;
 };
 
 int		cliopts_get(char **av, t_cliopts opt_map[], void *data);
-char	**cliopts_getdata(char **av);
 int		cliopts_has(char **av, char c);
 
 #endif

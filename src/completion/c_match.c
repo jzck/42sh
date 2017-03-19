@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 10:20:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/19 15:34:38 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	c_chevron(t_comp *c)
 	size_t	pos;
 
 	pos = c->ircmd;
+	if (pos >= ft_strlen(c->rcmd))
+		pos = ft_strlen(c->rcmd) - (ft_strlen(data_singleton()->line.input) - pos);
 	while (pos)
 	{
 		if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
@@ -38,9 +40,12 @@ static int	c_chevron(t_comp *c)
 
 static char	*c_current_words(t_comp *c)
 {
-	int	pos;
+	size_t	pos;
 
 	pos = c->ircmd;
+	if (pos >= ft_strlen(c->rcmd))
+		pos = ft_strlen(c->rcmd) -
+					(ft_strlen(data_singleton()->line.input) - pos + 1);
 	while (pos && c->rcmd[pos] != ' ')
 		--pos;
 	if (c->rcmd[pos] == ' ')
@@ -57,6 +62,7 @@ int			c_matching(t_data *s, t_comp *c)
 	char	*current_word;
 
 	current_word = c_current_words(c);
+	DG("current_word = %s", current_word);
 	if (ft_strchr(c->rcmd, '/'))
 		c_seek_abs_path(c, current_word);
 	else if (ft_strchr(c->rcmd, '$'))

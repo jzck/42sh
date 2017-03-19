@@ -27,17 +27,13 @@ int		bt_read_terminit(t_read *data)
 
 	(void)data;
 	term = bt_read_term(1);
-	term.c_lflag &= ~(ICANON | ECHO);
-	if (data->opts & READ_OPT_LT)
-	{
-		term.c_cc[VTIME] = data->timeout * 10;
-		term.c_cc[VMIN] = 0;
-	}
-	else
-	{
-		term.c_cc[VTIME] = 0;
-		term.c_cc[VMIN] = 1;
-	}
+	term.c_lflag = ECHO | ECHOE | ECHOK | ICANON;
+	term.c_lflag &= data->timeout ? ~ICANON : ~0;
+	if (data->opts & READ_OPT_LS)
+		term.c_lflag &= ~ECHO;
+	term.c_cc[VTIME] = data->timeout * 10;
+	term.c_cc[VMIN] = !data->timeout;
+	term.c_cc[VEOL] = data->delim;
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		return (-1);
 	return (0);

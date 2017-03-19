@@ -48,7 +48,7 @@ int					builtin_export(
 		ft_perror();
 	if (data.flag & BT_EXPORT_LP)
 		return (bt_export_print());
-	av = cliopts_getdata((char**)av);
+	av = data.av_data;
 	while (*av)
 	{
 		if ((equal = ft_strchr(*av, '=')))
