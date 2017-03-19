@@ -28,19 +28,19 @@ int		get_input_fd(char **av)
 	struct stat	buf;
 
 	data = data_singleton();
+	file = *data->av_data;
 	if (SH_IS_INTERACTIVE(data->opts))
 		return (STDIN);
 	else if (data->opts & SH_OPTS_LC)
 	{
 		pipe(fds);
-		file = *cliopts_getdata(av);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 		dup2_close(fds[PIPE_READ], (fd = 10));
 		fcntl(fd, F_SETFD, FD_CLOEXEC);
 		return (fd);
 	}
-	else if ((file = *cliopts_getdata(av)) && !stat(file, &buf))
+	else if (file && !stat(file, &buf))
 	{
 		fd = -1;
 		if (S_ISDIR(buf.st_mode))
@@ -85,13 +85,10 @@ int					shell_init(int ac, char **av)
 
 	data = data_singleton();
 	data_init(ac, av);
-	if (isatty(STDIN) && !*cliopts_getdata(av))
-	{
-		data->opts |= SH_INTERACTIVE;
-		data->opts |= SH_OPTS_JOBC;
-	}
 	if (cliopts_get(av, g_opts, data))
 		return (ft_perror());
+	if (!isatty(STDIN) || *data->av_data)
+		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
 	data->fd = get_input_fd(av);
 	if (SH_IS_INTERACTIVE(data->opts))
 		interactive_settings();

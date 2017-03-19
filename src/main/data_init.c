@@ -35,7 +35,7 @@ int		data_init(int ac, char **av)
 		ft_strdel(&shlvl);
 	}
 	data->comp = NULL;
-	data->opts = 0;
+	data->opts = SH_INTERACTIVE | SH_OPTS_JOBC;
 	exec_reset();
 	data->lst_func = NULL;
 	lexer_init(&data->lexer);

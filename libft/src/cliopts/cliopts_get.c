@@ -58,7 +58,6 @@ static int			cliopts_parse_short(char ***av, t_cliopts opt_map[], void *data)
 			++(*av);
 			if ((map->get)(av, data))
 				return (ERR_SET(E_CO_MISS, *arg));
-			break;
 		}
 		((t_data_template*)data)->flag |= map->flag_on;
 		((t_data_template*)data)->flag &= ~map->flag_off;
@@ -66,7 +65,6 @@ static int			cliopts_parse_short(char ***av, t_cliopts opt_map[], void *data)
 	}
 	++(*av);
 	return (0);
-
 }
 
 static int			cliopts_parse_long(char ***av, t_cliopts opt_map[], void *data)
@@ -109,7 +107,8 @@ int					cliopts_get(char **av, t_cliopts opt_map[], void *data)
 				return (1);
 		}
 		else
-			return (0);
+			break ;
 	}
+	((t_data_template*)data)->av_data = av;
 	return (0);
 }

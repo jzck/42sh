@@ -41,6 +41,7 @@
 struct	s_data
 {
 	t_flag		opts;
+	char		**av_data;
 	int			fd;
 	char		**env;
 	int			argc;
