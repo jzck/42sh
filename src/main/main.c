@@ -93,7 +93,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 		if (do_parser_routine(token, ast) > 0)
 			break ;
 	}
-	/* btree_print(STDBUG, ast, &ft_putast); */
+	btree_print(STDBUG, *ast, &ft_putast);
 	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
 		exit(1);
 	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
