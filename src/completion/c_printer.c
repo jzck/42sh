@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 12:55:39 by alao              #+#    #+#             */
-/*   Updated: 2017/03/16 09:01:22 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/19 12:14:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static void		c_printer_node(t_clst *lst, int c_sx)
 	int			i;
 
 	i = lst->len;
-	lst->type == 4 ? ft_putstr_fd("\e[1;31m", 2) : (0);
-	lst->type == 10 ? ft_putstr_fd("\e[1;96m", 2) : (0);
-	lst->cursor ? ft_putstr_fd("\e[0;7m", 2) : (0);
-	ft_putstr_fd(lst->name, 2);
-	lst->type == 4 ? ft_putstr_fd("/", 2) : (0);
-	lst->type == 10 ? ft_putstr_fd("@", 2) : (0);
-	lst->type != 4 && lst->type != 10 ? ft_putstr_fd(" ", 2) : (0);
+	lst->type == 4 ? ft_putstr_fd("\e[1;31m", 1) : (0);
+	lst->type == 10 ? ft_putstr_fd("\e[1;96m", 1) : (0);
+	lst->cursor ? ft_putstr_fd("\e[0;7m", 1) : (0);
+	ft_putstr_fd(lst->name, 1);
+	lst->type == 4 ? ft_putstr_fd("/", 1) : (0);
+	lst->type == 10 ? ft_putstr_fd("@", 1) : (0);
+	lst->type != 4 && lst->type != 10 ? ft_putstr_fd(" ", 1) : (0);
 	while (i++ < (c_sx))
 		ft_putstr(" ");
-	ft_putstr_fd("\e[00m", 2);
+	ft_putstr_fd("\e[00m", 1);
 	ft_putstr(" ");
 }
 

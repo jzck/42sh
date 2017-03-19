@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 20:21:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/19 12:13:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		lexer_lex(t_list **alst, t_lexer *lexer)
 		if (!(token = token_init())
 			|| !(*alst = ft_lstnew(token, sizeof(*token))))
 			return (-1);
+		if (token)
+			free(token);
 	}
 	return ((*g_lexer[lexer->state])(alst, lexer));
 }
