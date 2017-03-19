@@ -26,7 +26,8 @@ t_cliopts	g_read_opts[] =
 
 void		bt_read_usage(void)
 {
-	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]{eoc}\n");
+	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout]
+			[-p prompt] [-n nchars] [-d delim] [name ...]{eoc}\n");
 }
 
 int			bt_read_init(t_read *data, char **av)
@@ -39,9 +40,9 @@ int			bt_read_init(t_read *data, char **av)
 	data->timeout = 0;
 	data->input = NULL;
 	if ((cliopts_get(av, g_read_opts, data)))
-		return(ft_perror());
-	DG("opts=%b", data->opts);
-	bt_read_terminit(data);
+		return(ft_perror() ? 2 : 2);
+	if (bt_read_terminit(data) < 0)
+		return (-1);
 	return (0);
 }
 
@@ -61,7 +62,6 @@ int		bt_read_loop(t_read *data)
 		if ((ret = read(data->fd, buf, 1)) <= 0)
 			return (ret);
 		buf[ret] = 0;
-		DG("read [%c]", *buf);
 		if (!esc && *buf == data->delim)
 			break ;
 		esc = esc ? 0 : !(data->opts & READ_OPT_LR) && (*buf == '\\');
@@ -81,7 +81,6 @@ int		bt_read_assign(t_read *data)
 	char	*ifs;
 	char	*tok;
 
-	DG("assigning");
 	input = data->input;
 	names = *data->names ? data->names : (char*[]){"REPLY", NULL};
 	ifs = ft_getenv(data_singleton()->local_var, "IFS");
@@ -90,8 +89,6 @@ int		bt_read_assign(t_read *data)
 	tok = ft_strtok(input, ifs);
 	while (*names)
 	{
-		DG("tok=%s", tok);
-		DG("name=%s", *names);
 		builtin_setenv("setenv", (char*[]){"setenv", *names, tok}, NULL);
 		ifs = names[1] ? ifs : NULL;
 		tok = ft_strtok(NULL, ifs);
@@ -108,8 +105,8 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	ret = 0;
-	if (bt_read_init(&data, (char **)av))
-		ret = 2;
+	if ((ret = bt_read_init(&data, (char **)av)) != 0)
+		;
 	else if ((ret = bt_read_loop(&data)))
 		;
 	else if (bt_read_assign(&data))

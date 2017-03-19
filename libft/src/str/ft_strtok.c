@@ -19,10 +19,11 @@ char	*ft_strtok(char *s, const char *delim)
 
 	if (s == 0)
 		s = lasts;
-	do {
-		if ((ch = *s++) == 0)
+	if ((ch = *s++) == 0)
+		return (0);
+	while (ft_strchr(delim, ch))
+		if ((ch = *s) == 0)
 			return (0);
-	} while (ft_strchr(delim, ch));
 	--s;
 	lasts = s + ft_strcspn(s, delim);
 	if (*lasts != 0)
