@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:10:14 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/15 18:54:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:37:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct	s_hash
 	char	*path;
 }				t_hash;
 
-int				ft_add_hash(t_process *p);
-int				ft_hash(t_process *p);
-int				ft_is_hash(t_process *p);
+char			*ft_add_hash(char *cmd);
+char			*ft_hash(char *cmd);
+char			*ft_is_hash(char *cmd);
 int				ft_hash_str(char *str);
 
 void			ft_hash_free(void *ptr, size_t size);

@@ -60,6 +60,7 @@ struct	s_errormatch
 	char	*error;
 };
 
+int		do_parser_routine(t_list **token, t_btree **ast);
 void	parser_init(t_parser *parser);
 void	parser_destroy(t_parser *parser);
 int		stack_init(t_parser *parser);

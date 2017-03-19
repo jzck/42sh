@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 00:04:33 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:50:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int			interactive_settings(void)
 	*shell_pgid = getpid();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
-		ft_dprintf(2, "Couldnt put the shell in it's own process group");
+		ft_dprintf(2,
+				"{red}Couldnt put the shell in it's own process group{eoc}\n");
 		exit(1);
 	}
 	tcsetpgrp(STDIN, *shell_pgid);

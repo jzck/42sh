@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 21:18:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:49:29 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int		data_init(int ac, char **av)
 	set_exitstatus(0, 1);
 	shlvl = ft_getenv(data->env, "SHLVL");
 	if (shlvl)
-	{
 		shlvl = ft_itoa(ft_atoi(shlvl) + 1);
-		builtin_setenv(NULL, (char *[]){"setenv", "SHLVL", shlvl, 0}, NULL);
-		ft_strdel(&shlvl);
-	}
+	else
+		shlvl = ft_strdup("1");
+	builtin_setenv(NULL, (char *[]){"setenv", "SHLVL", shlvl, 0}, NULL);
+	ft_strdel(&shlvl);
 	data->comp = NULL;
 	data->opts = 0;
 	exec_reset();

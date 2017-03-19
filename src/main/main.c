@@ -28,54 +28,6 @@ static int	do_readline_routine(char **stream)
 	return (ret);
 }
 
-static int	do_lexer_routine(t_list **token, char *stream)
-{
-	t_list		*ltoken;
-	t_data		*data;
-
-	data = data_singleton();
-	if (data->lexer.state == HEREDOC || data->parser.state == UNDEFINED)
-	{
-		ft_strappend(&data->lexer.str, (char[]){'\n', 0});
-		data->lexer.pos++;
-	}
-	ft_strappend(&data->lexer.str, stream);
-	if (get_lexer_stack(data->lexer) == BACKSLASH)
-		pop(&data->lexer.stack);
-	ltoken = ft_lstlast(*token);
-	if (lexer_lex(*token ? &ltoken : token, &data->lexer) < 0)
-		exit(1);
-	if (get_lexer_stack(data->lexer) > 2)
-		return (1);
-	data->lexer.state = DEFAULT;
-	return (0);
-}
-
-static int	do_parser_routine(t_list **token, t_btree **ast)
-{
-	t_data		*data;
-
-	data = data_singleton();
-	if (get_reserved_words(*token))
-		return (1);
-	if (insert_newline(token))
-		return (1);
-	if (data->parser.state == SUCCESS && stack_init(&data->parser))
-		exit(1);
-	if (ft_parse(ast, token, &data->parser))
-		exit(1);
-	if ((data->lexer.state = data->parser.heredoc_queue ? HEREDOC : DEFAULT))
-		return (0);
-	if (data->parser.state == ERROR)
-	{
-		error_syntax(token);
-		return (1);
-	}
-	else if (data->parser.state == SUCCESS)
-		return (1);
-	return (0);
-}
-
 static int		handle_instruction(t_list **token, t_btree **ast)
 {
 	int			ret;

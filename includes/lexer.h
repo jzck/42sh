@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 02:58:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/19 17:13:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		token_print(t_list *lst);
 
 int			reduce_parens(t_list **alst, char *str);
 int			bquotes_expand(t_list **alst);
-char		*command_getoutput(char *command, char *const av_cmd[], char **env);
+char		*command_getoutput(char *command, char *const av[], char **env, int pipe_mode);
 
 int			ft_is_delim(char c);
 int			ft_is_delim_list(char c);
@@ -94,6 +94,7 @@ int			get_lexer_stack(t_lexer lexer);
 int			get_reserved_words(t_list *temp);
 int			insert_newline(t_list **alst);
 
+int			do_lexer_routine(t_list **token, char *stream);
 void		lexer_init(t_lexer *lexer);
 void		lexer_destroy(t_lexer *lexer);
 int			lexer_lex(t_list **alst, t_lexer *lexer);

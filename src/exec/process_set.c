@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 21:42:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:00:16 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			process_set(t_process *p, t_btree *ast)
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];
 	exec->fdin = fds[PIPE_READ];
+	if (!ast)
+		return (0);
 	p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir, &redir_copy);
 	return (process_set_spec(p, ast));
 }

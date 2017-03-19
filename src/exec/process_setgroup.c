@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 00:23:57 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/19 14:04:57 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		process_setgroup(t_process *p, pid_t pid)
 	if (setpgid(pid, j->pgid) == -1)
 		ft_dprintf(2, "{red}%s: internal setpgid() errno=%i{eoc}\n", SHELL_NAME, errno);
 	/* if (JOB_IS_FG(j->attrs)) */
-	if (pid ==0 && JOB_IS_FG(j->attrs))
+	if (pid == 0 && JOB_IS_FG(j->attrs))
 	{
 		DG("tcsetpgrp[%i]", j->pgid);
 		tcsetpgrp(STDIN, j->pgid);

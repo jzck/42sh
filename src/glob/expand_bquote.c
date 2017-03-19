@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/18 02:59:06 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/19 17:33:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,24 @@ static char					*get_output(char *command)
 	char	*output;
 	int		len;
 
-	if (!(output = command_getoutput(command, NULL, data_singleton()->env)))
+	if (!(output = command_getoutput(command, NULL, data_singleton()->env, 1)))
 		return (NULL);
 	len = ft_strlen(output);
 	while (output[--len] == '\n')
 		output[len] = '\0';
 	return (output);
+}
+
+static char					*treat_str(t_bquote *me, char *sta)
+{
+	if (sta && *me->str == '\n'
+			&& !is_char_esc(me->esc, CH(*me->wk)[0], me->str))
+		*me->str = ';';
+	if (sta && *me->str == '\n'
+			&& is_char_esc(me->esc, CH(*me->wk)[0], me->str))
+		*me->str = ' ';
+	return (*me->str == '`' && !sta
+		&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str) ? me->str : sta);
 }
 
 static int					search_bquote(t_bquote *me)
@@ -88,8 +100,7 @@ static int					search_bquote(t_bquote *me)
 	sta = NULL;
 	while (*(++me->str))
 	{
-		sta = *me->str == '`' && !sta
-			&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str) ? me->str : sta;
+		sta = treat_str(me, sta);
 		if (sta && *me->str == '`' && me->str != sta
 				&& !is_char_esc(me->esc2, CH(*me->wk)[0], me->str))
 		{

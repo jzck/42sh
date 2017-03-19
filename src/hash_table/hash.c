@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:06:19 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 16:02:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:38:12 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 t_list	*g_hash[MAX_HASH] = {NULL};
 
-int		ft_hash(t_process *p)
+char	*ft_hash(char *cmd)
 {
-	if (!ft_is_hash(p))
-		if (!ft_add_hash(p))
-			return (0);
-	return (1);
+	char *path;
+
+	if (!(path = ft_is_hash(cmd)))
+		path = ft_add_hash(cmd);
+	return (path);
 }

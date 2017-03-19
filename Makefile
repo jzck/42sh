@@ -209,6 +209,7 @@ job_control/sigint_handler.c\
 job_control/sigtstp_handler.c\
 job_control/sigttin_handler.c\
 job_control/sigttou_handler.c\
+lexer/do_lexer_routine.c\
 lexer/get_lexer_stack.c\
 lexer/get_reserved_words.c\
 lexer/get_state_global.c\
@@ -279,6 +280,7 @@ parser/add_sep.c\
 parser/add_subshell.c\
 parser/aggregate_sym.c\
 parser/build_tree.c\
+parser/do_parser_routine.c\
 parser/error_syntax.c\
 parser/eval_sym.c\
 parser/ft_parse.c\
