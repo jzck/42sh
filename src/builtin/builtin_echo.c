@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:21:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/20 00:10:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:40:00 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int		builtin_echo(const char *path, char *const av[], char *const envp[])
 			ft_putchar(' ');
 	}
 	ft_putchar('\n');
-	return (0);
+	return (builtin_return_status(0, 0));
 }

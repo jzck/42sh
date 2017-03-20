@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_read.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:41:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:34:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define US_READ "read [-ers] [-u fd] [-t timeout] [-p prompt]"
+#define US_READ_1 "[-n nchars] [-d delim] [name ...]"
 
 t_cliopts	g_read_opts[] =
 {
@@ -26,8 +28,7 @@ t_cliopts	g_read_opts[] =
 
 void		bt_read_usage(void)
 {
-	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout]");
-	ft_dprintf(2, " [-p prompt] [-n nchars] [-d delim] [name ...]{eoc}\n");
+	ft_dprintf(2, "usage: read %s %s\n", US_READ, US_READ_1);
 }
 
 int			bt_read_init(t_read *data, char **av)
@@ -40,13 +41,13 @@ int			bt_read_init(t_read *data, char **av)
 	data->timeout = 0;
 	data->input = NULL;
 	if ((cliopts_get(av, g_read_opts, data)))
-		return(ft_perror() ? 2 : 2);
+		return (ft_perror() ? 2 : 2);
 	if (bt_read_terminit(data) < 0)
 		return (-1);
 	return (0);
 }
 
-int		bt_read_loop(t_read *data)
+int			bt_read_loop(t_read *data)
 {
 	int		i;
 	int		esc;
@@ -74,7 +75,7 @@ int		bt_read_loop(t_read *data)
 	return (0);
 }
 
-int		bt_read_assign(t_read *data)
+int			bt_read_assign(t_read *data)
 {
 	char	*input;
 	char	**names;
@@ -97,7 +98,7 @@ int		bt_read_assign(t_read *data)
 	return (0);
 }
 
-int		builtin_read(const char *path, char *const av[], char *const envp[])
+int			builtin_read(const char *path, char *const av[], char *const envp[])
 {
 	t_read	data;
 	int		ret;
@@ -117,5 +118,5 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 		bt_read_usage();
 	if (ret != 2)
 		bt_read_exit(&data);
-	return (ret);
+	return (builtin_return_status(0, ret));
 }

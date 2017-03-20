@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:30:07 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:12:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:42:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 		return (-1);
 	}
 	jobc = &data_singleton()->jobc;
-		job_getrank(&rank);
+	job_getrank(&rank);
 	if (av[1] ? (id = *av[1]) : 0)
 	{
 		if ((jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))

@@ -6,7 +6,7 @@
 #    By: jhalford <jack@crans.org>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 16:09:36 by jhalford          #+#    #+#              #
-#    Updated: 2017/03/18 14:15:35 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/20 12:05:06 by wescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,7 +207,7 @@ all:
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@strip -x $(NAME)
+	@# @strip -x $(NAME)
 	@printf "\r\033[48;5;15;38;5;25m✅ MAKE $(NAME)\033[0m\033[K\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)

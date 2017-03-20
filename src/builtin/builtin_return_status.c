@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_singleton.c                                   :+:      :+:    :+:   */
+/*   builtin_return_status.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/10 11:36:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:45:01 by gwojda           ###   ########.fr       */
+/*   Created: 2017/03/20 12:48:04 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/20 12:49:18 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data		*data_singleton(void)
+int		builtin_return_status(int ret, int status)
 {
-	static t_data	*data = NULL;
-
-	if (data == NULL)
-		data = malloc(sizeof(t_data));
-	return (data);
+	set_exitstatus(status, 1);
+	return (ret);
 }

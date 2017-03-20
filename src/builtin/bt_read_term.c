@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bt_read_term.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:02:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 21:23:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:23:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ struct termios	bt_read_term(int init)
 	return (term);
 }
 
-int		bt_read_terminit(t_read *data)
+int				bt_read_terminit(t_read *data)
 {
 	struct termios	term;
 
@@ -39,7 +39,7 @@ int		bt_read_terminit(t_read *data)
 	return (0);
 }
 
-int		bt_read_exit(t_read *data)
+int				bt_read_exit(t_read *data)
 {
 	struct termios	term;
 

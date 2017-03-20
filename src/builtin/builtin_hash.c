@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 16:37:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/18 16:51:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:03:30 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int			builtin_hash(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
-	if (ft_hash_opt(av))
-		return (0);
+	if (!av || ft_hash_opt(av))
+		return (builtin_return_status(0, 1));
 	i = 0;
 	while (i < MAX_HASH)
 	{
@@ -52,5 +52,5 @@ int			builtin_hash(const char *path, char *const av[], char *const envp[])
 			ft_hash_lst_print(g_hash[i]);
 		++i;
 	}
-	return (0);
+	return (builtin_return_status(0, 0));
 }

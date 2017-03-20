@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/19 15:14:11 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/20 12:04:31 by wescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -40,6 +40,7 @@ builtin/builtin_hash.c\
 builtin/builtin_history.c\
 builtin/builtin_math.c\
 builtin/builtin_read.c\
+builtin/builtin_return_status.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
@@ -302,7 +303,8 @@ NB			=	$(words $(SRC_BASE))
 INDEX		=	0
 
 all :
-	@make $(NAME)
+	@make -C $(LIBFT_DIR)
+	@make -j $(NAME)
 
 $(NAME):		$(LIBFT_LIB) $(OBJ_DIR) $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) \

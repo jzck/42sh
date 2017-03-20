@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 16:33:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:59:23 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char			*read_state(t_sym current)
+char		*read_state(t_sym current)
 {
 	if (current == FNAME)
 		return ("FNAME");
@@ -131,7 +131,7 @@ char			*read_state(t_sym current)
 	if (current == TK_DONE)
 		return ("TK_DONE");
 	if (current == AND_OR_MINOR)
-		return("AND_OR_MINOR");
+		return ("AND_OR_MINOR");
 	if (current == AND_OR_MAJOR)
 		return ("AND_OR_MAJOR");
 	if (current == TK_COMMAND)
@@ -226,7 +226,6 @@ int			ft_read_stack(t_sym *stack)
 		DG("%s", read_state(*stack--));
 	return (0);
 }
-
 
 int			ft_show_heredoc_data(t_astnode *node)
 {

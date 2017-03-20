@@ -6,23 +6,24 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 17:43:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:02:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define US_ENV "env [-i] [-u name] [name=value]... [utility [argument...]]"
 
-static int		env_usage(int arg_miss, char c)
+static int	env_usage(int arg_miss, char c)
 {
 	if (arg_miss)
 		ft_dprintf(2, "{red}env: option requires an argument -- u{eoc}\n");
 	else if (c)
 		ft_dprintf(2, "{red}env: illegal option -- %c{eoc}\n", c);
-	ft_dprintf(2, "usage: env [-i] [-u name] ... [name=value] ... cmd\n");
+	ft_dprintf(2, "usage: %s\n", US_ENV);
 	return (1);
 }
 
-static void		env_freeone(char **env, char *arg)
+static void	env_freeone(char **env, char *arg)
 {
 	int		i;
 	char	*tmp;
@@ -45,7 +46,7 @@ static void		env_freeone(char **env, char *arg)
 	}
 }
 
-static void		env_replace(char ***custom_env, char *arg)
+static void	env_replace(char ***custom_env, char *arg)
 {
 	char	**arg_split;
 
@@ -57,7 +58,7 @@ static void		env_replace(char ***custom_env, char *arg)
 	*custom_env = ft_sstradd(*custom_env, arg);
 }
 
-static int		env_treat_flag(char ***custom_env, char *const *arg[])
+static int	env_treat_flag(char ***custom_env, char *const *arg[])
 {
 	while (*(++*arg))
 	{
@@ -86,18 +87,21 @@ static int		env_treat_flag(char ***custom_env, char *const *arg[])
 	return (0);
 }
 
-int			builtin_env(const char *path, char *const argv[], char *const envp[])
+int				builtin_env(const char *path,
+							char *const argv[], char *const envp[])
 {
 	char	**env;
+	pid_t	pid;
 
 	(void)path;
+	pid = 0;
 	if (!argv || ft_strcmp(*argv, "env"))
-		return (env_usage(0, 0));
+		return (builtin_return_status(0, env_usage(0, 0)));
 	env = ft_sstrdup((char **)envp);
 	if (env_treat_flag(&env, &argv))
 	{
 		ft_sstrfree(env);
-		return (1);
+		return (builtin_return_status(0, 1));
 	}
 	if (!*argv)
 	{
@@ -106,7 +110,7 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 			ft_putchar('\n');
 	}
 	else
-		command_getoutput(NULL, argv, env, 0);
+		pid = command_setoutput(argv, env);
 	ft_tabdel(&env);
-	return (0);
+	return (builtin_return_status(pid, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:10:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:34:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ struct	s_rvwords
 	int		type;
 };
 
-/* extern t_rvwords g_rvwords[]; */
-/* extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer); */
-
 int			ft_post_tokenize(t_list **alst, char **str);
 
 t_token		*token_init();
@@ -79,7 +76,8 @@ void		token_print(t_list *lst);
 
 int			reduce_parens(t_list **alst, char *str);
 int			bquotes_expand(t_list **alst);
-char		*command_getoutput(char *command, char *const av[], char **env, int pipe_mode);
+char		*command_getoutput(char *command);
+int			command_setoutput(char *const av[], char **env);
 
 int			ft_is_delim(char c);
 int			ft_is_delim_list(char c);

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:57:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:35:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ int			builtin_setenv(const char *path,
 {
 	char	***env;
 
-	(void)envp;
 	(void)path;
 	if (!av || !av[0])
-		return (1);
+		return (builtin_return_status(0, 1));
 	if (ft_strcmp(av[0], "local") == 0)
 		env = &data_singleton()->local_var;
 	else
@@ -53,6 +52,6 @@ int			builtin_setenv(const char *path,
 		ft_putchar('\n');
 	}
 	else
-		return (assign_var(av, env));
-	return (0);
+		assign_var(av, env);
+	return (envp ? builtin_return_status(0, 0) : 0);
 }

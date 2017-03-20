@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 17:13:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 17:15:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:57:58 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,4 @@ void	sym_free(void *data, size_t size)
 	(void)size;
 	sym = data;
 	free(sym);
-}	
+}
