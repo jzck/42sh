@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/18 14:29:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:09:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_clear_prompt(size_t *pos, size_t srch_pos)
 	ft_puttermcaps("cd");
 }
 
-static int	ft_surch_and_realloc(char **str, char **str_srch,
+static int	search(char **str, char **str_srch,
 			int ret, size_t *srch_pos)
 {
 	if (!(*str_srch = ft_realloc_imput(*str_srch, ret, *srch_pos)))
@@ -51,7 +51,7 @@ static void	ft_give_new_prompt(char *str_srch, size_t srch_pos)
 	}
 }
 
-static void	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
+static int	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
 			size_t *pos)
 {
 	ft_clear_prompt(pos, srch_pos);
@@ -63,6 +63,7 @@ static void	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
 		ft_get_next_str(*str, pos);
 	}
 	free(str_srch);
+	return (0);
 }
 
 int			ft_surch_in_history(char **str, size_t *pos)
@@ -79,9 +80,8 @@ int			ft_surch_in_history(char **str, size_t *pos)
 		ft_give_new_prompt(str_srch, srch_pos);
 		ret = 0;
 		read(0, &ret, sizeof(int));
-		if (ft_isprint(ret) &&
-					ft_surch_and_realloc(str, &str_srch, ret, &srch_pos) < 0)
-				return (-1);
+		if (ft_isprint(ret) && search(str, &str_srch, ret, &srch_pos) < 0)
+			return (-1);
 		else if (!ft_isprint(ret) && ret == 127 && srch_pos)
 		{
 			--srch_pos;
@@ -92,6 +92,5 @@ int			ft_surch_in_history(char **str, size_t *pos)
 		else if (ret != 127 && !ft_isprint(ret))
 			break ;
 	}
-	ft_modify_str(str_srch, srch_pos, str, pos);
-	return (0);
+	return (ft_modify_str(str_srch, srch_pos, str, pos));
 }

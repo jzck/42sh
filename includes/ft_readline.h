@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 17:24:03 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 12:32:15 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@
 # define TOUCHE_F6 925981467
 
 # define CORRUPT 1
-
-//# define STR data_singleton()->line.input
-//# define POS data_singleton()->line.pos
 
 # define ERROR_CNTL_R 1
 

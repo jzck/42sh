@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 16:34:51 by sbenning          #+#    #+#             */
-/*   Updated: 2017/03/15 18:47:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:33:06 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_curs	t_curs;
 ** Cursor data : cursor's coordonate and windows size
 */
 
-struct s_curs
+struct	s_curs
 {
 	int					co;
 	int					li;
@@ -79,6 +79,6 @@ void					curs_write(t_curs *curs, char *str, size_t len);
 void					curs_write_static(t_curs *curs, char *str, size_t len);
 void					curs_video_write(t_curs *curs, char *str, size_t len);
 void					curs_video_write_static(
-		t_curs *curs, char *str, size_t len);
+						t_curs *curs, char *str, size_t len);
 
 #endif

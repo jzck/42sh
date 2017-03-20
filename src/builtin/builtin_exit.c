@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:37:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:17:40 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 				data_singleton()->argv[0]);
 		return (0);
 	}
-	if (av && av[1])
-		status = ft_atoi(av[1]);
-	else
-		status = ft_atoi(ft_getenv(data_singleton()->env, "?"));
+	status = (av && av[1]) ?
+			ft_atoi(av[1]) : ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 	job_hup_all();
