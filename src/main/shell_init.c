@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:54:28 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:12:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,22 +100,17 @@ int					shell_init(int ac, char **av)
 	t_data	*data;
 
 	data = data_singleton();
-	DG();
 	if (data_init(ac, av) < 0)
 		return (-1);
-	DG();
 	if (cliopts_get(av, g_opts, data))
 	{
 		usage();
 		return (ft_perror());
 	}
-	DG();
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
-	DG();
 	if ((data->fd = get_input_fd(data)) < 0)
 		return (-1);
-	DG();
 	if (SH_IS_INTERACTIVE(data->opts) && interactive_settings() < 0)
 		return (-1);
 	return (0);

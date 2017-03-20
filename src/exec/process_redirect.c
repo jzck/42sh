@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:57:02 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:38:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_itof		g_redirmap[] =
 static void	process_close(int fd1, int fd2)
 {
 	if (fd1 != fd2)
-		close(fd1);
+		dup2_close(fd1, fd2);
 }
 
 int			process_redirect(t_process *p)
@@ -36,7 +36,8 @@ int			process_redirect(t_process *p)
 	int		i;
 
 	redirs = p->redirs;
-	process_close(p->to_close, STDIN);
+	if (p->to_close != STDIN)
+		close(p->to_close);
 	while (redirs)
 	{
 		redir = redirs->content;

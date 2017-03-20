@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:55:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:58:03 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	process_free(void *content, size_t content_size)
 	if (p->map.free)
 		(p->map.free)(p);
 	ft_lstdel(&p->redirs, redir_free);
-	free(p);
+	if (content_size)
+		free(p);
 }

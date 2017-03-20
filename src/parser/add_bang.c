@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 14:57:45 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/13 20:36:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:11:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		add_bang(t_btree **ast, t_list **lst)
 	t_astnode	*node;
 	t_token		*token;
 
-	DG("add bang");
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if ((token->type == TK_CASE || token->type == TK_WHILE
