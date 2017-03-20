@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:01:01 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:24:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ struct	s_rvwords
 	int		type;
 };
 
-/* extern t_rvwords g_rvwords[]; */
-/* extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer); */
-
 int			ft_post_tokenize(t_list **alst, char **str);
 
 t_token		*token_init();
@@ -92,6 +89,8 @@ t_lexstate	get_state_global(t_lexer *lexer);
 t_lexstate	get_state_redir(t_lexer *lexer);
 int			get_lexer_stack(t_lexer lexer);
 int			get_reserved_words(t_list *temp);
+int			isrw_delim(t_type type);
+int			keep_last_type(t_type *type, t_list *token);
 int			insert_newline(t_list **alst);
 
 int			do_lexer_routine(t_list **token, char *stream);

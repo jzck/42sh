@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/17 20:19:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:01:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_rvwords		g_rvwords[] =
+static t_rvwords		g_rvwords[] =
 {
 	{"while", TK_WHILE},
 	{"done", TK_DONE},
@@ -37,8 +37,9 @@ static int		recognization_rvwords(t_token *pv_tk, t_token *at_tk)
 		|| pv_tk->type == TK_DO || pv_tk->type == TK_IF
 		|| pv_tk->type == TK_FI || pv_tk->type == TK_THEN
 		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE
-		|| pv_tk->type == TK_DSEMI) || (pv_tk->type == TK_PAREN_CLOSE
-		&& at_tk->type == TK_PAREN_OPEN));
+		|| pv_tk->type == TK_DSEMI || pv_tk->type == TK_PAREN_OPEN
+		|| pv_tk->type == TK_LBRACE || pv_tk->type == TK_UNTIL) 
+		|| (pv_tk->type == TK_PAREN_CLOSE && at_tk->type == TK_PAREN_OPEN));
 }
 
 static int		match_words(t_token *token)

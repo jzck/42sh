@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/19 14:24:22 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:47:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int		do_parser_routine(t_list **token, t_btree **ast)
 	t_data		*data;
 
 	data = data_singleton();
-	if (get_reserved_words(*token))
-		return (1);
 	if (insert_newline(token))
 		return (1);
 	if (data->parser.state == SUCCESS && stack_init(&data->parser))
