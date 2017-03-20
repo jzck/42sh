@@ -48,6 +48,8 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 	btree_print(STDBUG, *ast, &ft_putast);
 	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
 		exit(1);
+	else if (data->parser.state != SUCCESS)
+		set_exitstatus(1, 1);
 	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
 		ft_add_str_in_history(data->lexer.str);
 	return (0);
