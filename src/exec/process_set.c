@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 16:02:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 17:07:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,14 @@ int			process_set(t_process *p, t_btree *ast)
 	exec = &data_singleton()->exec;
 	op = pop(&exec->op_stack);
 	if ((EXEC_IS_AND_IF(exec->attrs)
-		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") != 0)
+	&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") != 0)
 	|| (EXEC_IS_OR_IF(exec->attrs)
-		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
+	&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
 		return (1);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
-	if (op == TK_PIPE)
-		pipe(fds);
-	else if (op == TK_AMP)
-		exec->job.attrs |= JOB_BG;
+	(op == TK_PIPE) ? pipe(fds) : (0);
+	exec->job.attrs |= (op == TK_AMP ? JOB_BG : 0);
 	p->fdin = exec->fdin;
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];

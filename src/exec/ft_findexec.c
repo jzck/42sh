@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib_path.c                                         :+:      :+:    :+:   */
+/*   ft_findexec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:37:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/10 13:18:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:52:10 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_findexec(char *path, char *file)
+static char	*create_path(char *path, char *name, char **spath)
+{
+	char			*execpath;
+
+	if (path[ft_strlen(path)] != '/')
+		execpath = ft_str3join(path, "/", name);
+	else
+		execpath = ft_strjoin(path, name);
+	ft_sstrfree(spath);
+	return (execpath);
+}
+
+char		*ft_findexec(char *path, char *file)
 {
 	int				i;
 	DIR				*dir;
-	char			*execpath;
 	char			**spath;
 	struct dirent	*dirent;
 
@@ -30,13 +41,8 @@ char	*ft_findexec(char *path, char *file)
 		{
 			if (ft_strcmp(dirent->d_name, file))
 				continue ;
-			if (spath[i][ft_strlen(spath[i])] != '/')
-				execpath = ft_str3join(spath[i], "/", dirent->d_name);
-			else
-				execpath = ft_strjoin(spath[i], dirent->d_name);
-			ft_sstrfree(spath);
 			closedir(dir);
-			return (execpath);
+			return (create_path(spath[i], dirent->d_name, spath));
 		}
 		closedir(dir);
 	}
