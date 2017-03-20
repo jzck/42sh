@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 18:12:57 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 12:21:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:38:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void		redir_free(void *data, size_t content_size)
 	if (redir->type == TK_DLESS)
 		ft_strdel(&redir->heredoc_data);
 	redir->type = 0;
-	redir->n = 0;	
+	redir->n = 0;
 	free(redir);
 }

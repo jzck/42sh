@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 12:13:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 15:02:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 int		ft_is_delim(char c)
 {
 	return (c == ' ' || c == '\t');
-}
-
-int		ft_is_delim_list(char c)
-{
-	return (c == ';' || c == '\n' || c == '&');
 }
 
 int		lexer_lex(t_list **alst, t_lexer *lexer)

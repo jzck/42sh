@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:33:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:17:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:55:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,3 @@ t_fmt		*ft_printf_parse(char **format, va_list ap)
 	fmt->valid = ft_fmt_validate_conv(fmt) ? 0 : 1;
 	return (fmt);
 }
-

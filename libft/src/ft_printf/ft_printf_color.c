@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:07:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 14:00:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:51:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ void	ft_printf_color(char **final, char **str, va_list ap)
 		*str += 5;
 		return ;
 	}
-	while(g_colors[i].key)
+	while (g_colors[i].key)
 	{
 		if (ft_strncmp(*str, g_colors[i].key, 5) == 0)
 		{
-			/* if (isatty(fd)) */
 			*final = ft_strjoin(*final, g_colors[i].val);
 			*str += 5;
 			return ;

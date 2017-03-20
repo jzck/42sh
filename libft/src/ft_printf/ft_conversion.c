@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:31:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 13:14:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:50:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_signed_conversion(t_fmt *fmt, va_list ap)
 {
-	char		base10[] = "0123456789";
+	static char	base10[] = "0123456789";
 	long long	arg;
 
 	arg = va_arg(ap, int);
@@ -61,7 +61,7 @@ char	*ft_str_conversion(t_fmt *fmt, va_list ap)
 	(void)fmt;
 	ret = va_arg(ap, char *);
 	if (ret == NULL)
-		return(ft_strdup("NULL"));
+		return (ft_strdup("NULL"));
 	ret = ft_strdup(ret);
 	if (fmt->precision && fmt->precision < (int)ft_strlen(ret))
 		ret[fmt->precision] = '\0';

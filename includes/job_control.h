@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:38:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:39:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <termios.h>
-/* # include "libft.h" */
 # include "types.h"
 # include "exec.h"
 
@@ -43,15 +42,14 @@ void		job_update_rank(void);
 
 int			do_job_notification(void);
 void		job_notify_new(int id);
-void		job_notify_change(int id);
 void		job_format(t_job *j, int opts);
 void		job_format_head(t_job *j);
 
 void		job_update_status(void);
 void		mark_job_as_running (t_job *j);
 int			mark_process_status(pid_t pid, int status);
-int			job_is_stopped(int id);
-int			job_is_completed(int id);
+int			job_is_stopped(t_job *job);
+int			job_is_completed(t_job *job);
 
 void		job_new(char **av, pid_t pid);
 void		job_run(t_job *job, int foreground);

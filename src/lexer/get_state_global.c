@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 20:39:06 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 10:02:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:00:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_lexstate		get_state_global(t_lexer *lexer)
 	if ((ft_is_delim(c) && (ret = DELIM))
 		|| ((c == '&' || c == ';' || c == '|' || c == '!') && (ret = SEP))
 		|| ((c == '\\') && (ret = BACKSLASH))
+		|| ((c == '\n') && (ret = NEWLINE))
 		|| ((c == '\'') && (ret = QUOTE))
 		|| ((c == '\"') && (ret = DQUOTE))
 		|| ((c == '`') && (ret = BQUOTE))
