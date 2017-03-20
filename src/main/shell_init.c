@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 16:50:42 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:54:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,47 @@
 
 static t_cliopts	g_opts[] =
 {
-	{'c', NULL, SH_OPTS_LC, SH_OPTS_JOBC | SH_INTERACTIVE, NULL},
+	{'c', NULL, SH_OPTS_LC, SH_OPTS_JOBC | SH_INTERACTIVE, get_c_arg},
 	{-1, "no-jobcontrol", 0, SH_OPTS_JOBC, NULL},
 	{0, 0, 0, 0, 0},
 };
 
-int		get_input_fd(char **av)
+int				get_c_arg(char ***av, t_data *data)
 {
-	t_data		*data;
+	if (!av || !*av)
+		return (1);
+	if (data)
+		data->c_arg = **av;
+	return (0);
+}
+
+static int		get_input_fd(t_data *data)
+{
+	static int	fds[2] = {-1, STDIN};
 	char		*file;
-	int			fds[2];
-	int			fd;
 	struct stat	buf;
 
-	data = data_singleton();
-	file = *data->av_data;
-	if (SH_IS_INTERACTIVE(data->opts))
-		return (STDIN);
-	else if (data->opts & SH_OPTS_LC)
+	/* fds = (int[2]){-1, STDIN}; */
+	if (data->opts & SH_OPTS_LC)
 	{
+		DG("-c");
+		file = data->c_arg;
 		pipe(fds);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
-		dup2_close(fds[PIPE_READ], (fd = 10));
-		fcntl(fd, F_SETFD, FD_CLOEXEC);
-		return (fd);
 	}
-	else if (file && !stat(file, &buf))
+	else if ((file = *data->av_data) && !stat(file, &buf))
 	{
-		fd = -1;
 		if (S_ISDIR(buf.st_mode))
-			ft_printf("{red}%s: %s: is a directory\n{eoc}", av[0], file);
-		else if ((fd = open(file, O_RDONLY | O_CLOEXEC)) < 0)
-			ft_printf("{red}%s: %s: No such file or directory\n{eoc}", av[0], file);
-		if (fd > 0 && !dup2_close(fd, 10) && (fd = 10))
-			return (fd);
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", data->argv[0], file);
+		else if ((fds[PIPE_READ] = open(file, O_RDONLY | O_CLOEXEC)) < 0)
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
+					data->argv[0], file);
 	}
-	return (STDIN);
+	fds[PIPE_WRITE] = fds[PIPE_READ] != -1 ?
+		fcntl(fds[PIPE_READ], F_DUPFD_CLOEXEC, 10) : STDIN;
+	close(fds[PIPE_READ]);
+	return (fds[PIPE_WRITE]);
 }
 
 static int			interactive_settings(void)
@@ -73,10 +77,16 @@ static int			interactive_settings(void)
 	{
 		ft_dprintf(2,
 				"{red}Couldnt put the shell in it's own process group{eoc}\n");
-		exit(1);
+		return (-1);
 	}
 	tcsetpgrp(STDIN, *shell_pgid);
 	tcgetattr(STDIN, &data->jobc.shell_tmodes);
+	return (0);
+}
+
+static int			usage(void)
+{
+	ft_dprintf(2, "usage: 42sh [-c command | [<]script] [--no-jobcontrol]\n");
 	return (0);
 }
 
@@ -85,13 +95,21 @@ int					shell_init(int ac, char **av)
 	t_data	*data;
 
 	data = data_singleton();
-	data_init(ac, av);
+	DG();
+	if (data_init(ac, av) < 0)
+		return (-1);
+	DG();
 	if (cliopts_get(av, g_opts, data))
+	{
+		usage();
 		return (ft_perror());
+	}
+	DG();
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
-	data->fd = get_input_fd(av);
-	if (SH_IS_INTERACTIVE(data->opts))
-		interactive_settings();
+	if ((data->fd = get_input_fd(data)) < 0)
+		return (-1);
+	if (SH_IS_INTERACTIVE(data->opts) &&  interactive_settings() < 0)
+		return (-1);
 	return (0);
 }

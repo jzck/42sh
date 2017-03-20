@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:22:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 18:07:10 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:23:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct	s_fmt
 	char	conversion;
 	int		valid;
 	t_conv	conv;
+
 };
 
 int		ft_vdprintf(int fd, const char *format, va_list ap);

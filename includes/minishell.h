@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 19:05:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 09:37:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct	s_data
 {
 	t_flag		opts;
 	char		**av_data;
+	char		*c_arg;
 	int			fd;
 	char		**env;
 	int			argc;
@@ -60,6 +61,7 @@ int		shell_init(int ac, char **av);
 void	shell_exit(void);
 int		data_init(int ac, char **av);
 void	data_exit(void);
+int		get_c_arg(char ***av, t_data *data);
 
 void		content_free(void *data, size_t content_size);
 

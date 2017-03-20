@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:24:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 17:24:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:38:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # define STDOUT			STDOUT_FILENO
 # define STDERR			STDERR_FILENO
 # define STDBUG			3
+
+# define PIPE_READ		0
+# define PIPE_WRITE		1
 
 # include <sys/types.h>
 # include <sys/xattr.h>

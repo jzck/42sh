@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 08:08:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 08:31:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		builtin_read(const char *path, char *const av[], char *const envp[])
 		;
 	else if ((ret = bt_read_loop(&data)))
 		;
-	else if (bt_read_assign(&data))
+	else if (data.input && bt_read_assign(&data))
 		ret = 1;
 	if (ret == -1)
 		exit(1);

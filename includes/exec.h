@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 20:24:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:46:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "types.h"
 # include "job_control.h"
 # include <sys/stat.h>
-
-# define PIPE_READ		0
-# define PIPE_WRITE		1
 
 # define PROCESS_COMPLETED	(1 << 0)
 # define PROCESS_SUSPENDED	(1 << 1)

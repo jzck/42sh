@@ -65,7 +65,7 @@ int		main(int ac, char **av)
 	g_argv = av;
 	setlocale(LC_ALL, "");
 	DG("{inv}{bol}{gre}start of shell{eoc}");
-	if (shell_init(ac, av))
+	if (shell_init(ac, av) != 0)
 		return (1);
 	DG("JOBC is %s", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
 	token = NULL;
