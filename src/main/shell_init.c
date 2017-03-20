@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:30:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:54:28 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_cliopts	g_opts[] =
 	{0, 0, 0, 0, 0},
 };
 
-int				get_c_arg(char ***av, t_data *data)
+int					get_c_arg(char ***av, t_data *data)
 {
 	if (!av || !*av)
 		return (1);
@@ -28,7 +28,7 @@ int				get_c_arg(char ***av, t_data *data)
 	return (0);
 }
 
-static int		get_input_fd(t_data *data)
+static int			get_input_fd(t_data *data)
 {
 	static int	fds[2] = {-1, STDIN};
 	char		*file;
@@ -47,7 +47,8 @@ static int		get_input_fd(t_data *data)
 			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
 					data->argv[0], file);
 		else if (S_ISDIR(buf.st_mode))
-			ft_printf("{red}%s: %s: is a directory\n{eoc}", data->argv[0], file);
+			ft_printf("{red}%s: %s: is a directory\n{eoc}", data->argv[0],
+					file);
 		else if ((fds[PIPE_READ] = open(file, O_RDONLY | O_CLOEXEC)) < 0)
 			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
 					data->argv[0], file);
@@ -115,7 +116,7 @@ int					shell_init(int ac, char **av)
 	if ((data->fd = get_input_fd(data)) < 0)
 		return (-1);
 	DG();
-	if (SH_IS_INTERACTIVE(data->opts) &&  interactive_settings() < 0)
+	if (SH_IS_INTERACTIVE(data->opts) && interactive_settings() < 0)
 		return (-1);
 	return (0);
 }
