@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 17:07:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:50:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			process_set(t_process *p, t_btree *ast)
 	int			op;
 	int			fds[2];
 
+	ft_bzero(p, sizeof(t_process));
 	exec = &data_singleton()->exec;
 	op = pop(&exec->op_stack);
 	if ((EXEC_IS_AND_IF(exec->attrs)

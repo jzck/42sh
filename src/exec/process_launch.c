@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:58:12 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:41:25 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int				process_launch(t_process *p)
 	if (!(pid = do_the_fork_if_i_have_to(p)))
 	{
 		process_resetfds(p);
+		process_free(p, 0);
 		return (1);
 	}
 	p->pid = pid;
