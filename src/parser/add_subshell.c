@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 15:50:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:57:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int			add_subshell_cmd(t_btree **ast, t_list **lst)
 	token = (*lst)->content;
 	node = (*ast)->item;
 	if ((token->type == SUBSHELL && node->type == SUBSHELL)
-		|| (token->type == TK_LBRACE && node->type == TK_LBRACE)) 
-	  	node->nest++;
+	|| (token->type == TK_LBRACE && node->type == TK_LBRACE))
+		node->nest++;
 	if (((token->type == TK_PAREN_CLOSE && node->type == SUBSHELL)
-		|| (token->type == TK_RBRACE && node->type == TK_LBRACE)) && node->nest > 0)
+	|| (token->type == TK_RBRACE && node->type == TK_LBRACE)) && node->nest > 0)
 		node->nest--;
 	else if (token->type == TK_PAREN_CLOSE && node->type == SUBSHELL
-		&& node->nest == 0)
+	&& node->nest == 0)
 		return ((node->full = 1));
 	else if (token->type == TK_RBRACE && node->type == TK_LBRACE
-		&& node->nest == 0)
+	&& node->nest == 0)
 		return ((node->full = 1));
 	return (add_cmd(&(*ast)->right, lst));
 }

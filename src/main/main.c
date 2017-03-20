@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2017/03/17 10:51:23 by gwojda           ###   ########.fr       */
+/*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
+/*   Updated: 2017/03/20 14:46:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	do_readline_routine(char **stream)
+static int		do_readline_routine(char **stream)
 {
 	int		ret;
 	int		has_prompt;
@@ -55,7 +56,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 	return (0);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	int			ret;
 	t_data		*data;
@@ -67,7 +68,7 @@ int		main(int ac, char **av)
 	DG("{inv}{bol}{gre}start of shell{eoc}");
 	if (shell_init(ac, av) != 0)
 		return (1);
-	DG("JOBC is %s", SH_HAS_JOBC(data_singleton()->opts)?"ON":"OFF");
+	DG("JOBC is %s", SH_HAS_JOBC(data_singleton()->opts) ? "ON" : "OFF");
 	token = NULL;
 	ast = NULL;
 	data = data_singleton();

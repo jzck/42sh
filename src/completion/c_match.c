@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/19 15:34:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:41:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	c_chevron(t_comp *c)
 
 	pos = c->ircmd;
 	if (pos >= ft_strlen(c->rcmd))
-		pos = ft_strlen(c->rcmd) - (ft_strlen(data_singleton()->line.input) - pos);
+		pos = ft_strlen(c->rcmd) - (ft_strlen(data_singleton()->line.input)
+																		- pos);
 	while (pos)
 	{
 		if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
