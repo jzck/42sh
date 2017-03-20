@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:02:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:51:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	env_treat_flag(char ***custom_env, char *const *arg[])
 	return (0);
 }
 
-int				builtin_env(const char *path,
+int			builtin_env(const char *path,
 							char *const argv[], char *const envp[])
 {
 	char	**env;

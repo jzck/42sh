@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:51:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 19:36:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:25:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	process_resetfds(t_process *p)
 		/* else */
 		/* 	i++; */
 	}
-	dup2(exec->fd_save[0], STDIN);
-	dup2(exec->fd_save[1], STDOUT);
-	dup2(exec->fd_save[2], STDERR);
+	if (exec->fd_save[0] != -1)
+		dup2(exec->fd_save[0], STDIN);
+	if (exec->fd_save[1] != -1)
+		dup2(exec->fd_save[1], STDOUT);
+	if (exec->fd_save[2] != -1)
+		dup2(exec->fd_save[2], STDERR);
 }

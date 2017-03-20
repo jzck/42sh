@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 18:50:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:41:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			process_set(t_process *p, t_btree *ast)
 	p->fdin = exec->fdin;
 	p->to_close = fds[PIPE_READ];
 	p->fdout = fds[PIPE_WRITE];
+	p->pid = 0;
 	exec->fdin = fds[PIPE_READ];
 	if (!ast)
 		return (0);
