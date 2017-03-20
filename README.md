@@ -1,5 +1,4 @@
-# **42zsh**
----
+# 42sh
 
 42sh school project.
 
@@ -27,9 +26,9 @@ Optional feature highly appreciated:
 - Job Control and builtins `job`, `fg`, `bg`and operand `&`.
 - Shell Scripting.
 
-<p align="center"><strong>Shell / Subshell</strong></p>
+## shell / subshell
 
-<p align="center"><strong>Line Edition</strong></p>
+## line editing
 
 Keys|Functions|
 :-:|:--
@@ -40,7 +39,7 @@ Keys|Functions|
 <kbd>Ctrl</kbd>+<kbd>C</kbd>|Terminate/Kill current foreground process.
 <kbd>Ctrl</kbd>+<kbd>Z</kbd>|Suspend/Stop current foreground process.
 
-<p align="center"><strong>History</strong></p>
+## history
 
 Keys|Functions|
 :-:|:--
@@ -52,14 +51,8 @@ Keys|Functions|
 `!name`|Search for a command beginning with `name`.
 `!?name`|Search for a command which contain `name`.
 
-<p align="center"><strong>Autocompletion</strong></p>
-
-<p align="center"><strong>Globbing</strong></p>
-
-<p align="center"><strong>Hash Table</strong></p>
-
-<p align="center"><strong>Builtin Read</strong></p>
-
-<p align="center"><strong>Job Control</strong></p>
-
-<p align="center"><strong>Scripting</strong></p>
+## autocompletion
+## globbing
+## hash table
+## job control
+## scripting
