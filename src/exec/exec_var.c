@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/14 23:55:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 15:43:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ static int	set_var(char *stream, char **var, char **value)
 	return (0);
 }
 
-int		exec_var(t_btree **ast)
+int			exec_var(t_btree **ast)
 {
 	t_astnode	*node;
-	char		**av;	
+	char		**av;
 	char		*var;
 	char		*value;
-	
+
 	node = (*ast)->item;
 	av = token_to_argv(node->data.cmd.token, 1);
-	set_var(av[0], &var, &value);	
+	set_var(av[0], &var, &value);
 	if (ft_getenv(data_singleton()->env, var))
 		return (0);
 	builtin_setenv("internal", (char*[]){"local", var, value, 0}, NULL);

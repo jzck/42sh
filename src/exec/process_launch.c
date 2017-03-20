@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process_launch.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:57:26 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:58:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		do_the_muther_forker(t_process *p)
+int				do_the_muther_forker(t_process *p)
 {
 	pid_t		pid;
 
@@ -25,9 +25,8 @@ int		do_the_muther_forker(t_process *p)
 		return (pid);
 	if (!p)
 		return (pid);
-	DG("START OF FORK");
 	if (process_redirect(p))
-		exit (1);
+		exit(1);
 	process_setgroup(p, 0);
 	process_setsig();
 	exec_reset();
@@ -51,19 +50,16 @@ static int		do_the_fork_if_i_have_to(t_process *p)
 	return (do_the_muther_forker(p));
 }
 
-int		process_launch(t_process *p)
+int				process_launch(t_process *p)
 {
 	pid_t		pid;
 
-	DG("p->type=%i", p->type);
 	p->state = PROCESS_RUNNING;
 	if (!(pid = do_the_fork_if_i_have_to(p)))
 	{
-		DG("launcher did not fork!");
 		process_resetfds(p);
 		return (1);
 	}
-	DG("launcher forked! with : %d ", pid);
 	p->pid = pid;
 	process_setgroup(p, pid);
 	if (p->fdin != STDIN)

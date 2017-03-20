@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_process.c                                      :+:      :+:    :+:   */
+/*   process_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:51:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:02:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			process_set(t_process *p, t_btree *ast)
 		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") != 0)
 	|| (EXEC_IS_OR_IF(exec->attrs)
 		&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
-			return (1);
+		return (1);
 	fds[PIPE_WRITE] = STDOUT;
 	fds[PIPE_READ] = STDIN;
 	if (op == TK_PIPE)
@@ -69,6 +69,7 @@ int			process_set(t_process *p, t_btree *ast)
 	exec->fdin = fds[PIPE_READ];
 	if (!ast)
 		return (0);
-	p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir, &redir_copy);
+	p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir,
+																&redir_copy);
 	return (process_set_spec(p, ast));
 }
