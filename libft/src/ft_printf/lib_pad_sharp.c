@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:33:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 15:19:49 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:54:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	ft_pad_sharp_o(char *str, t_fmt *fmt)
 
 void	ft_pad_sharp_xb(char *str, t_fmt *fmt)
 {
-	char	start[3] = {'0',fmt->conversion, 0};
+	char	start[3];
 
+	start[0] = '0';
+	start[1] = fmt->conversion;
+	start[2] = 0;
 	if (str[0] == '0')
 	{
 		if (str[1] == '0')

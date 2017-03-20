@@ -72,6 +72,7 @@ ft_printf/ft_printf.c\
 ft_printf/ft_printf_color.c\
 ft_printf/ft_printf_parse.c\
 ft_printf/ft_transform.c\
+ft_printf/ft_vprintf.c\
 ft_printf/lib_fmt.c\
 ft_printf/lib_fmt_error.c\
 ft_printf/lib_pad.c\
