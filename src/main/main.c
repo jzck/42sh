@@ -76,6 +76,7 @@ int		main(int ac, char **av)
 		ret = handle_instruction(&token, &ast);
 		lexer_destroy(&data->lexer);
 		parser_destroy(&data->parser);
+		ft_lstdel(&data_singleton()->exec.op_stack, &ft_lst_cfree);
 		ft_lstdel(&token, &token_free);
 		btree_del(&ast, &ast_free);
 		if (ret == 1)
