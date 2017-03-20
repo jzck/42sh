@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 15:54:23 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 16:38:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 19:11:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int			isrw_delim(t_type type)
 		|| type == TK_ELIF || type == TK_ELSE
 		|| type == TK_DSEMI || type == TK_PAREN_CLOSE
 		|| type == TK_PAREN_OPEN || type == TK_LBRACE
-		|| type == 0);
+		|| type == TK_IN || type == 0);
 }
