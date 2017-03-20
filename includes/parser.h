@@ -94,8 +94,6 @@ struct	s_treematch
 	int	(*add)(t_btree **ast, t_list **lst);
 };
 
-extern t_treematch g_treematch[];
-
 int		build_tree(t_btree **ast, t_list **lst);
 
 int		add_sep(t_btree **ast, t_list **lst);
@@ -153,7 +151,8 @@ struct s_distrostree
 	int	(*add)(t_btree **ast, t_list **lst);
 };
 
-extern t_distrostree g_distrostree[];
+/* extern t_distrostree g_distrostree[]; */
+/* extern t_treematch g_treematch[]; */
 
 struct	s_redir
 {
