@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*   builtin_return_status.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:21:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:40:00 by wescande         ###   ########.fr       */
+/*   Created: 2017/03/20 12:48:04 by wescande          #+#    #+#             */
+/*   Updated: 2017/03/20 12:49:18 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		builtin_echo(const char *path, char *const av[], char *const envp[])
+int		builtin_return_status(int ret, int status)
 {
-	(void)envp;
-	(void)path;
-	av++;
-	while (*av)
-	{
-		ft_printf("%s", *av);
-		av++;
-		if (*av)
-			ft_putchar(' ');
-	}
-	ft_putchar('\n');
-	return (builtin_return_status(0, 0));
+	set_exitstatus(status, 1);
+	return (ret);
 }

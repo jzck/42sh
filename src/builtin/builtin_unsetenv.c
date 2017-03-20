@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:29:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 11:47:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:40:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 		}
 		i++;
 	}
-	return (0);
+	return (builtin_return_status(0, 0));
 }

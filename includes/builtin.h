@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 18:59:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 12:51:23 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define BT_EXPORT_LP	(1 << 0)
 
 t_execf	*is_builtin(t_process *p);
+int		builtin_return_status(int ret, int status);
 int		builtin_export(const char *path, char *const av[], char *const envp[]);
 int		builtin_unset(const char *path, char *const av[], char *const envp[]);
 int		builtin_env(const char *path, char *const argv[], char *const envp[]);

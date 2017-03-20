@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 00:54:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:38:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	set_exitstatus(int status, int override)
 		}
 	}
 	astatus = ft_itoa(exitval);
-	builtin_setenv("setenv", (char*[]){"setenv", "?", astatus, 0},
-			data_singleton()->env);
+	builtin_setenv("setenv", (char*[]){"setenv", "?", astatus, 0}, NULL);
 	ft_strdel(&astatus);
 }

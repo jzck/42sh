@@ -6,11 +6,12 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:29:17 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:52:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define US_ENV "env [-i] [-u name] [name=value]... [utility [argument...]]"
 
 static int		env_usage(int arg_miss, char c)
 {
@@ -18,9 +19,8 @@ static int		env_usage(int arg_miss, char c)
 		ft_dprintf(2, "{red}env: option requires an argument -- u{eoc}\n");
 	else if (c)
 		ft_dprintf(2, "{red}env: illegal option -- %c{eoc}\n", c);
-	ft_dprintf(2, "usage: env [-i] [-u name] ... [name=value] ... cmd\n");
-	set_exitstatus(1, 1);
-	return (0);
+	ft_dprintf(2, "usage: %s\n", US_ENV);
+	return (1);
 }
 
 static void		env_freeone(char **env, char *arg)
@@ -87,7 +87,8 @@ static int		env_treat_flag(char ***custom_env, char *const *arg[])
 	return (0);
 }
 
-int			builtin_env(const char *path, char *const argv[], char *const envp[])
+int				builtin_env(const char *path,
+							char *const argv[], char *const envp[])
 {
 	char	**env;
 	pid_t	pid;
@@ -95,12 +96,12 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 	(void)path;
 	pid = 0;
 	if (!argv || ft_strcmp(*argv, "env"))
-		return (env_usage(0, 0));
+		return (builtin_return_status(0, env_usage(0, 0)));
 	env = ft_sstrdup((char **)envp);
 	if (env_treat_flag(&env, &argv))
 	{
 		ft_sstrfree(env);
-		return (0);
+		return (builtin_return_status(0, 1));
 	}
 	if (!*argv)
 	{
@@ -111,6 +112,5 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 	else
 		pid = command_setoutput(NULL, argv, env, 0);
 	ft_tabdel(&env);
-	set_exitstatus(0, 1);
-	return (pid);
+	return (builtin_return_status(pid, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/18 11:46:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:01:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int					builtin_export(
 	if (cliopts_get((char**)av, export_opts, &data))
 		ft_perror();
 	if (data.flag & BT_EXPORT_LP)
-		return (bt_export_print());
+		return (builtin_return_status(0, bt_export_print()));
 	av = data.av_data;
 	while (*av)
 	{
@@ -64,5 +64,5 @@ int					builtin_export(
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}
-	return (0);
+	return (builtin_return_status(0, 0));
 }

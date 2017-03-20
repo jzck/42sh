@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:54:53 by gwojda            #+#    #+#             */
-/*   Updated: 2017/02/20 20:30:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:04:02 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		builtin_history(const char *path, char *const av[], char *const envp[])
 	head = data_singleton()->line.list_end;
 	len = 1;
 	if (!head)
-		return (0);
+		return (builtin_return_status(0, 0));
 	if (head && !head->str)
 		head = head->next;
 	while (head && head->str)
@@ -34,5 +34,5 @@ int		builtin_history(const char *path, char *const av[], char *const envp[])
 		++len;
 		head = head->next;
 	}
-	return (0);
+	return (builtin_return_status(0, 0));
 }
