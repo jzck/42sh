@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/20 14:41:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:14:35 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int			c_matching(t_data *s, t_comp *c)
 	char	*current_word;
 
 	current_word = c_current_words(c);
-	DG("current_word = %s", current_word);
 	if (ft_strchr(c->rcmd, '/'))
 		c_seek_abs_path(c, current_word);
 	else if (ft_strchr(c->rcmd, '$'))

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 14:46:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:12:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ int				main(int ac, char **av)
 
 	g_argv = av;
 	setlocale(LC_ALL, "");
-	DG("{inv}{bol}{gre}start of shell{eoc}");
 	if (shell_init(ac, av) != 0)
 		return (1);
-	DG("JOBC is %s", SH_HAS_JOBC(data_singleton()->opts) ? "ON" : "OFF");
 	token = NULL;
 	ast = NULL;
 	data = data_singleton();

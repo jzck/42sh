@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_great.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:38:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:15:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int		redirect_great(t_redir *redir)
 	fdnew = redir->n;
 	if ((fdold = open(redir->word,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
-	{
-		DG("open errno=%i", errno);
 		exit(1);
-	}
 	dup2(fdold, fdnew);
 	return (0);
 }
