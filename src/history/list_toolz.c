@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 18:16:45 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 21:25:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void			free_history_list(t_list_history *head)
 {
 	t_list_history	*prev;
 
-	if (!head)
+	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
 		return ;
-	if (head->next)
+	if (head && head->next)
 		free(head->next);
 	while (head)
 	{
