@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 11:36:03 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:10:40 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ static char		*manage_command(char *const av_cmd[])
 	return (command);
 }
 
-static void		execute_command(char *command, char *const av[], char **env)
+static void		execute_command(char *const av[], char **env)
 {
 	t_list		*token;
 	t_btree		*ast;
 	t_data		*data;
+	char		*command;
 
 	token = NULL;
 	ast = NULL;
@@ -61,7 +62,7 @@ static void		execute_command(char *command, char *const av[], char **env)
 	data->env = env;
 	data->opts &= ~SH_INTERACTIVE;
 	data->opts &= ~SH_OPTS_JOBC;
-	command = command ? command : manage_command(av);
+	command = manage_command(av);
 	DG("command is %s", command);
 	if (do_lexer_routine(&token, command))
 	{
@@ -78,43 +79,37 @@ static void		execute_command(char *command, char *const av[], char **env)
 	exit(data_singleton()->parser.state == SUCCESS && ft_exec(&ast) < 0);
 }
 
-char			*command_getoutput(char *command, char *const av[], char **env, int pipe_mode)
+char			*command_getoutput(char *command)
 {
 	int			ret;
 	int			pid;
 	int			fds[2];
+	char		**av;
 
-	if (!command && !av)
+	if (!command)
 		return (NULL);
-	if (pipe_mode)
-		pipe(fds);
-	if (!(pid = fork()))
+	pipe(fds);
+	if (!(pid = do_the_muther_forker(NULL)))
 	{
-		if (pipe_mode)
-		{
-			close(fds[PIPE_READ]);
-			dup2_close(fds[PIPE_WRITE], STDOUT);
-		}
-		execute_command(command, av, env);
+		close(fds[PIPE_READ]);
+		dup2_close(fds[PIPE_WRITE], STDOUT);
+		av = ft_sstradd(NULL, data_singleton()->argv[0]);
+		av = ft_sstradd(av, "-c");
+		av = ft_sstradd(av, command);
+		execve(data_singleton()->argv[0], av, data_singleton()->env);
+		exit(1);
 	}
 	waitpid(pid, &ret, WUNTRACED);
-	if (pipe_mode)
-		return (manage_output(fds));
-	return (NULL);
+	return (manage_output(fds));
 }
 
-int			command_setoutput(char *command, char *const av[], char **env, int pipe_mode)
+int			command_setoutput(char *const av[], char **env)
 {
-	/* int			ret; */
 	int			pid;
-(void)pipe_mode;
-	if (!command && !av)
+
+	if (!av)
 		return (0);
 	if (!(pid = do_the_muther_forker(NULL)))
-		execute_command(command, av, env);
+		execute_command(av, env);
 	return (pid);
-	/* waitpid(pid, &ret, WUNTRACED); */
-	/* if (pipe_mode) */
-	/* 	return (manage_output(fds)); */
-	/* return (NULL); */
 }

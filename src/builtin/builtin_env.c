@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:43:49 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:02:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int				builtin_env(const char *path,
 			ft_putchar('\n');
 	}
 	else
-		pid = command_setoutput(NULL, argv, env, 0);
+		pid = command_setoutput(argv, env);
 	ft_tabdel(&env);
 	return (builtin_return_status(pid, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:38:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:57:26 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int		do_the_muther_forker(t_process *p)
 	exit(p->map.launch(p));
 }
 
-static int		should_i_fork(t_process *p)
+static int		do_the_fork_if_i_have_to(t_process *p)
 {
-	if (IS_PIPESINGLE(*p) && p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
+	if (IS_PIPESINGLE(*p)
+			&& p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
 	{
 		if (process_redirect(p))
 		{
@@ -46,8 +47,6 @@ static int		should_i_fork(t_process *p)
 			return (0);
 		}
 		return (p->map.launch(p));
-		/* set_exitstatus(p->map.launch(p), 1); */
-		/* return (0); */
 	}
 	return (do_the_muther_forker(p));
 }
@@ -58,7 +57,7 @@ int		process_launch(t_process *p)
 
 	DG("p->type=%i", p->type);
 	p->state = PROCESS_RUNNING;
-	if (!(pid = should_i_fork(p)))
+	if (!(pid = do_the_fork_if_i_have_to(p)))
 	{
 		DG("launcher did not fork!");
 		process_resetfds(p);
