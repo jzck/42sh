@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 12:41:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:39:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:28:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,13 @@ int			pset_cmd(t_process *p, t_btree *ast)
 		p->type = PROCESS_BUILTIN;
 	else if ((p->type = PROCESS_FILE))
 	{
-		DG();
 		p->data.cmd.stat = ft_memalloc(sizeof(struct stat));
 		p->data.cmd.execf = &execve;
 		p->data.cmd.path = ft_strchr(p->data.cmd.av[0], '/') ?
 			ft_strdup(p->data.cmd.av[0]) : ft_hash(p->data.cmd.av[0]);
-		if (stat(p->data.cmd.path, p->data.cmd.stat) == -1)
-		{
-			ft_memdel((void**)&p->data.cmd.stat);
-			ft_dprintf(2, "{red}%s: %s: unexpected stat (2) failure\n",
-					SHELL_NAME, p->data.cmd.path);
+		if (p->data.cmd.path && !access(p->data.cmd.path, F_OK)
+				&& stat(p->data.cmd.path, p->data.cmd.stat) == -1)
 			return (-1);
-		}
 	}
-	DG();
 	return (0);
 }
