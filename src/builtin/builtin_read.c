@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_read.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 08:31:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:24:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int			bt_read_init(t_read *data, char **av)
 	data->timeout = 0;
 	data->input = NULL;
 	if ((cliopts_get(av, g_read_opts, data)))
-		return(ft_perror() ? 2 : 2);
+		return (ft_perror() ? 2 : 2);
 	if (bt_read_terminit(data) < 0)
 		return (-1);
 	return (0);
 }
 
-int		bt_read_loop(t_read *data)
+int			bt_read_loop(t_read *data)
 {
 	int		i;
 	int		esc;
@@ -74,7 +74,7 @@ int		bt_read_loop(t_read *data)
 	return (0);
 }
 
-int		bt_read_assign(t_read *data)
+int			bt_read_assign(t_read *data)
 {
 	char	*input;
 	char	**names;
@@ -97,7 +97,7 @@ int		bt_read_assign(t_read *data)
 	return (0);
 }
 
-int		builtin_read(const char *path, char *const av[], char *const envp[])
+int			builtin_read(const char *path, char *const av[], char *const envp[])
 {
 	t_read	data;
 	int		ret;
