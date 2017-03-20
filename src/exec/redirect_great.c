@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 17:40:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:38:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		redirect_great(t_redir* redir)
+int		redirect_great(t_redir *redir)
 {
 	int		fdold;
 	int		fdnew;
