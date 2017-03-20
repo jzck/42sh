@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 20:31:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 23:12:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 		set_exitstatus(1, 1);
 	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
 		ft_add_str_in_history(data->lexer.str);
+	/* exit(0); */
 	return (0);
 }
 

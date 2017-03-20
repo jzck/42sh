@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 12:47:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:41:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				exec_leaf(t_btree **ast)
 	p.map = g_process_map[p.type];
 	if (!(process_launch(&p)))
 	{
+		DG("check");
 		job_addprocess(&p);
 		if (IS_PIPEEND(p))
 		{

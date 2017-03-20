@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:37:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:37:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:51:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	job_hup_all(void)
 	while (jlist)
 	{
 		job = jlist->content;
-		kill(-job->pgid, SIGHUP);
+		if (job->pgid != 1)
+			kill(-job->pgid, SIGHUP);
 		jlist = jlist->next;
 	}
 }

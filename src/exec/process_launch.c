@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 18:41:25 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:52:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int		do_the_fork_if_i_have_to(t_process *p)
 			set_exitstatus(1, 1);
 			return (0);
 		}
-		return (p->map.launch(p));
+		set_exitstatus(p->map.launch(p), 1);
+		return (0);
 	}
 	return (do_the_muther_forker(p));
 }
