@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 08:07:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 08:08:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_cliopts	g_read_opts[] =
 
 void		bt_read_usage(void)
 {
-	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout]\
-			[-p prompt] [-n nchars] [-d delim] [name ...]{eoc}\n");
+	ft_dprintf(2, "{red}read: usage: read [-ers] [-u fd] [-t timeout]");
+	ft_dprintf(2, " [-p prompt] [-n nchars] [-d delim] [name ...]{eoc}\n");
 }
 
 int			bt_read_init(t_read *data, char **av)
