@@ -179,9 +179,9 @@ job_control/job_format_head.c\
 job_control/job_free.c\
 job_control/job_getprocess.c\
 job_control/job_getrank.c\
+job_control/job_hup_all.c\
 job_control/job_is_completed.c\
 job_control/job_is_stopped.c\
-job_control/job_kill_all.c\
 job_control/job_notify_change.c\
 job_control/job_notify_new.c\
 job_control/job_remove.c\
