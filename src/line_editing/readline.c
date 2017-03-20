@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 09:57:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:56:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		readline(int has_prompt, char **input)
 	ft_putchar('\n');
 	if (has_prompt)
 		ret = ft_history_parsing(has_prompt, input);
+	ft_strdel(&data_singleton()->line.copy_tmp);
 	if (tcsetattr(0, TCSANOW, ft_save_termios(0)) == -1)
 		return (-1);
 	return (ret);
