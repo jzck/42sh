@@ -6,16 +6,16 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:04:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:28:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:50:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
- **	void *data must be a structure starting with `int flag`
- **	to do polymorphism with t_data_template !
- */
+**	void *data must be a structure starting with `int flag`
+**	to do polymorphism with t_data_template !
+*/
 
-# include "cliopts.h"
+#include "cliopts.h"
 
 static t_cliopts	*get_map_long(t_cliopts opt_map[], char *arg)
 {
@@ -39,7 +39,8 @@ static t_cliopts	*get_map_short(t_cliopts opt_map[], char arg)
 	return (NULL);
 }
 
-static int			cliopts_parse_short(char ***av, t_cliopts opt_map[], void *data)
+static int			cliopts_parse_short(
+		char ***av, t_cliopts opt_map[], void *data)
 {
 	t_cliopts	*map;
 	char		*arg;
@@ -67,7 +68,8 @@ static int			cliopts_parse_short(char ***av, t_cliopts opt_map[], void *data)
 	return (0);
 }
 
-static int			cliopts_parse_long(char ***av, t_cliopts opt_map[], void *data)
+static int			cliopts_parse_long(
+		char ***av, t_cliopts opt_map[], void *data)
 {
 	t_cliopts	*map;
 	char		*arg;
