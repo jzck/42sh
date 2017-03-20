@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 00:04:46 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:40:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,12 @@ int		mark_process_status(pid_t pid, int status)
 		p = plist->content;
 		p->status = status;
 		if (WIFSTOPPED(status))
-		{
-			p->attrs &= ~PROCESS_STATE_MASK;
-			p->attrs |= PROCESS_SUSPENDED;
-		}
+			p->state = PROCESS_SUSPENDED;
 		else
 		{
-			p->attrs &= ~PROCESS_STATE_MASK;
-			p->attrs |= PROCESS_COMPLETED;
+			p->state = PROCESS_COMPLETED;
 			if (WIFSIGNALED(status))
-				psignal(WTERMSIG(status), NULL);
-				/* ft_printf("{mag}%d: Terminated by signal %d.\n{eoc}", */
-				/* 		(int)pid, WTERMSIG(status)); */
+				ft_dprintf(2, "%s\n", strsignal((WTERMSIG(status))));
 		}
 		return (0);
 	}

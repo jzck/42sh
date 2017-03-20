@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:54:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:30:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,29 @@ static int		get_input_fd(t_data *data)
 	char		*file;
 	struct stat	buf;
 
-	/* fds = (int[2]){-1, STDIN}; */
-	if (data->opts & SH_OPTS_LC)
+	if (data->opts & SH_OPTS_LC && (file = data->c_arg))
 	{
-		DG("-c");
-		file = data->c_arg;
 		pipe(fds);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
 	}
-	else if ((file = *data->av_data) && !stat(file, &buf))
+	else if ((file = *data->av_data))
 	{
-		if (S_ISDIR(buf.st_mode))
+		DG("file=%s", file);
+		if (stat(file, &buf) < 0)
+			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
+					data->argv[0], file);
+		else if (S_ISDIR(buf.st_mode))
 			ft_printf("{red}%s: %s: is a directory\n{eoc}", data->argv[0], file);
 		else if ((fds[PIPE_READ] = open(file, O_RDONLY | O_CLOEXEC)) < 0)
 			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
 					data->argv[0], file);
 	}
-	fds[PIPE_WRITE] = fds[PIPE_READ] != -1 ?
-		fcntl(fds[PIPE_READ], F_DUPFD_CLOEXEC, 10) : STDIN;
+	else
+		return (STDIN);
+	if (fds[PIPE_READ] < 0)
+		return (-1);
+	fds[PIPE_WRITE] = fcntl(fds[PIPE_READ], F_DUPFD_CLOEXEC, 10);
 	close(fds[PIPE_READ]);
 	return (fds[PIPE_WRITE]);
 }
@@ -71,7 +75,7 @@ static int			interactive_settings(void)
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, SIG_DFL);//sigchld_handler); TBC IF dynamic notification are wanted
+	signal(SIGCHLD, SIG_DFL);
 	*shell_pgid = getpid();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
@@ -107,8 +111,10 @@ int					shell_init(int ac, char **av)
 	DG();
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
+	DG();
 	if ((data->fd = get_input_fd(data)) < 0)
 		return (-1);
+	DG();
 	if (SH_IS_INTERACTIVE(data->opts) &&  interactive_settings() < 0)
 		return (-1);
 	return (0);

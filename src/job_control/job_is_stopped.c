@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:06:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 18:26:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:10:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		job_is_stopped(int id)
 	while (lst)
 	{
 		p = lst->content;
-		if (!(p->attrs & (PROCESS_COMPLETED | PROCESS_SUSPENDED)))
+		if (!(p->state == PROCESS_COMPLETED)
+			|| !(p->state == PROCESS_SUSPENDED))
 			return (0);
 		lst = lst->next;
 	}

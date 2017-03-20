@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:30:07 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:27:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:00:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,23 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 		return (-1);
 	}
 	jobc = &data_singleton()->jobc;
-	job_getrank(&rank);
-	id = av[1] ? ft_atoi(av[1]) : rank[0];
-	if ((jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
+		job_getrank(&rank);
+	if (av[1] ? (id = *av[1]) : 0)
 	{
-		job_run(jlist->content, 1);
-		return (0);
+		if ((jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
+			job_run(jlist->content, 1);
+		else
+			ft_dprintf(2, "{red}fg: job not found: [%i]{eoc}\n", id);
 	}
-	else if (av[1])
-		ft_dprintf(2, "{red}fg: job not found: [%i]{eoc}\n", id);
 	else
-		ft_dprintf(2, "{red}fg: no current job{eoc}\n");
-	return (1);
+	{
+		DG("rank:%i:%i", rank[0], rank[1]);
+		if ((jlist = ft_lst_find(jobc->first_job, &rank[0], job_cmp_id)))
+			job_run(jlist->content, 1);
+		else if ((jlist = ft_lst_find(jobc->first_job, &rank[1], job_cmp_id)))
+			job_run(jlist->content, 1);
+		else
+			ft_dprintf(2, "{red}fg: no current job{eoc}\n");
+	}
+	return (0);
 }

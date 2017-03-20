@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 21:35:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:54:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,19 @@ static int	redirection_print(t_redir *redir)
 
 static void	process_format_state(t_process *p)
 {
-	int		state;
 	char	*statestr;
 
-	state = p->attrs & PROCESS_STATE_MASK;
 	statestr = NULL;
-	if (state == PROCESS_RUNNING)
+	if (p->state == PROCESS_RUNNING)
 		ft_asprintf(&statestr, "running");
-	else if (state == PROCESS_SUSPENDED)
+	else if (p->state == PROCESS_SUSPENDED)
 		ft_asprintf(&statestr, "suspended");
-	else if (state == PROCESS_CONTINUED)
+	else if (p->state == PROCESS_CONTINUED)
 	{
 		ft_asprintf(&statestr, "continued");
-		p->attrs &= ~PROCESS_STATE_MASK;
-		p->attrs |= PROCESS_RUNNING;
+		p->state = PROCESS_RUNNING;
 	}
-	else if (state == PROCESS_COMPLETED)
+	else if (p->state == PROCESS_COMPLETED)
 	{
 		if (WIFSIGNALED(p->status))
 			ft_asprintf(&statestr, strsignal(WTERMSIG(p->status)));
@@ -82,14 +79,10 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 	while (*plist)
 	{
 		p = (*plist)->content;
-		if (!(p->attrs & state) ||
-				(state == PROCESS_COMPLETED && p->status != 0))
+		if (p->state != state)
 			break ;
-		if (p->attrs & PROCESS_CONTINUED)
-		{
-			p->attrs &= ~PROCESS_STATE_MASK;
-			p->attrs &= ~PROCESS_RUNNING;
-		}
+		if (p->state == PROCESS_CONTINUED)
+			p->state = PROCESS_RUNNING;
 		if (p->map.print)
 			(p->map.print)(p);
 		ft_lstiter(p->redirs, redirection_print);
@@ -102,10 +95,8 @@ static void	process_format_com_short(t_list **plist, t_flag state)
 void		process_format(t_list **plist, int firstp, int opts)
 {
 	t_process	*p;
-	t_flag		state;
 
 	p = (*plist)->content;
-	state = p->attrs & PROCESS_STATE_MASK;
 	if (!firstp)
 		ft_printf("       ");
 	if (opts & JOBS_OPTS_L)
@@ -114,6 +105,6 @@ void		process_format(t_list **plist, int firstp, int opts)
 	if (opts & JOBS_OPTS_L)
 		process_format_com_long(plist);
 	else
-		process_format_com_short(plist, state);
+		process_format_com_short(plist, p->state);
 	ft_putchar('\n');
 }

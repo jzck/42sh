@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/17 23:10:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:54:59 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int				exec_leaf(t_btree **ast)
 				job_notify_new(job->id);
 			job->pgid = 0;
 		}
-		DG("check");
 	}
 	return (0);
 }
