@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/13 19:22:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:36:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		redirect_less(t_redir *redir)
 	{
 		ft_dprintf(2, "{red}%s: %s: no such file or directory\n",
 				SHELL_NAME, redir->word);
-		exit (1);
+		return (1);
 	}
 	dup2(fdold, fdnew);
 	return (0);

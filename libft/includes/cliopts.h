@@ -6,12 +6,12 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:22:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 19:00:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:48:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_OPTS_H
-# define CLI_OPTS_H
+#ifndef CLIOPTS_H
+# define CLIOPTS_H
 
 # include "libft.h"
 # include "error.h"

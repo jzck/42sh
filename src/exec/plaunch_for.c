@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/17 20:16:46 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:51:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				plaunch_for(t_process *p)
 		av = token_to_argv(temp, 1);
 		while (av[++i])
 		{
-			builtin_setenv("setenv", (char*[]){"local" ,var, av[i], 0},
+			builtin_setenv("setenv", (char*[]){"local", var, av[i], 0},
 					NULL);
 			ft_exec(&p->data.d_for.content);
 		}

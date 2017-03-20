@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 23:28:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 15:57:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,36 @@ t_itof		g_redirmap[] =
 	{0, NULL},
 };
 
-int		process_redirect(t_process *p)
+static void	process_close(int fd1, int fd2)
+{
+	if (fd1 != fd2)
+		close(fd1);
+}
+
+int			process_redirect(t_process *p)
 {
 	t_list	*redirs;
 	t_redir	*redir;
 	int		i;
 
 	redirs = p->redirs;
-	if (p->to_close != STDIN)
-		close(p->to_close);
+	process_close(p->to_close, STDIN);
 	while (redirs)
 	{
 		redir = redirs->content;
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
-		i = 0;
-		while (g_redirmap[i].id)
-		{
+		i = -1;
+		while (g_redirmap[++i].id)
 			if (g_redirmap[i].id == redir->type)
 			{
 				if ((g_redirmap[i].f)(redir))
 					return (1);
 				break ;
 			}
-			i++;
-		}
 		redirs = redirs->next;
 	}
-	if (p->fdin != STDIN)
-		dup2_close(p->fdin, STDIN);
-	if (p->fdout != STDOUT)
-		dup2_close(p->fdout, STDOUT);
+	process_close(p->fdin, STDIN);
+	process_close(p->fdout, STDOUT);
 	return (0);
 }

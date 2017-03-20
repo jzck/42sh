@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_setgroup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 14:04:57 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:58:33 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,10 @@ int		process_setgroup(t_process *p, pid_t pid)
 	j = &data->exec.job;
 	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
 		return (0);
-	DG("setpgid(%i, %i)", pid, j->pgid);
 	if (setpgid(pid, j->pgid) == -1)
-		ft_dprintf(2, "{red}%s: internal setpgid() errno=%i{eoc}\n", SHELL_NAME, errno);
-	/* if (JOB_IS_FG(j->attrs)) */
+		ft_dprintf(2, "{red}%s: internal setpgid() errno=%i{eoc}\n",
+									SHELL_NAME, errno);
 	if (pid == 0 && JOB_IS_FG(j->attrs))
-	{
-		DG("tcsetpgrp[%i]", j->pgid);
 		tcsetpgrp(STDIN, j->pgid);
-		DG("after tcsetpgrp");
-	}
 	return (0);
 }

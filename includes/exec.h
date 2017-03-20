@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:39:13 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:07:29 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # define IS_PIPEEND(p)		((p).fdout == STDOUT)
 # define IS_PIPESINGLE(p)	(IS_PIPESTART(p) && IS_PIPEEND(p))
 
-# define EXEC_AND_IF			(1 << 2)
-# define EXEC_OR_IF				(1 << 3)
-# define EXEC_IF_BRANCH			(1 << 4)
-# define EXEC_CASE_BRANCH		(1 << 5)
+# define EXEC_AND_IF			(1 << 0)
+# define EXEC_OR_IF				(1 << 1)
+# define EXEC_IF_BRANCH			(1 << 2)
+# define EXEC_CASE_BRANCH		(1 << 3)
 
 # define EXEC_AOL_MASK			(EXEC_AND_IF | EXEC_OR_IF)
 

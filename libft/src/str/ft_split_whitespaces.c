@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:07:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/03 16:12:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:55:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdupi_w(char const *s)
+char		*ft_strdupi_w(char const *s)
 {
 	int		i;
 	char	*str;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plaunch_file.c                                      :+:      :+:    :+:   */
+/*   plaunch_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 20:22:38 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:29:20 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				plaunch_file(t_process *p)
 {
 	if (!p->data.cmd.path)
 		error_launch("command not found: ", p->data.cmd.av[0], 127);
-	else if (!p->data.cmd.stat)
+	else if (access(p->data.cmd.path, F_OK) == -1)
 		error_launch(p->data.cmd.av[0], ": no such file or directory", 127);
 	else if (S_ISDIR(p->data.cmd.stat->st_mode))
 		error_launch(p->data.cmd.av[0], ": is a directory", 126);
