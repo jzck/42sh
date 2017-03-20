@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 08:51:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:35:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		exec_reset(void)
 	exec->attrs = 0;
 	exec->job.id = 0;
 	exec->job.pgid = 0;
-	exec->job.attrs = 0;
+	exec->job.attrs = JOB_NOTIFIED;
 	exec->job.first_process = NULL;
 	tcgetattr(STDIN, &exec->job.tmodes);
 	jobc->first_job = NULL;

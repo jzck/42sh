@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 23:10:35 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:38:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		job_run(t_job *job, int foreground);
 int			job_wait(int id);
 void		job_remove(int id);
 void		job_free(void *content, size_t content_size);
-void		job_kill_all(void);
+void		job_hup_all(void);
 
 int			put_job_in_foreground(t_job *job, int cont);
 int			put_job_in_background(t_job *job, int cont);
@@ -79,7 +79,7 @@ void		process_format(t_list **p, int firstp, int opts);
 ** Mapping pour afficher les process
 */
 void		pprint(t_process *p);
-int			pprint_subshell(t_process *p);
+int			pprint_subshell(t_process *p);;
 int			pprint_brace(t_process *p);
 int			pprint_while(t_process *p);
 int			pprint_if(t_process *p);

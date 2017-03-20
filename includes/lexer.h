@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:22:08 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:43:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ struct	s_rvwords
 	int		type;
 };
 
-extern t_rvwords g_rvwords[];
-
-extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer);
+/* extern t_rvwords g_rvwords[]; */
+/* extern int	(*g_lexer[])(t_list **alst, t_lexer *lexer); */
 
 int			ft_post_tokenize(t_list **alst, char **str);
 

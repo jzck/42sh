@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_read.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 19:13:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:36:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,18 @@ typedef	struct s_readopt	t_readopt;
 
 struct	s_read
 {
-	t_flag	opts;
-	char	**names;
-	char	delim;
-	int		nchars;
-	char	*prompt;
-	int		timeout;
-	int		fd;
-	char	*input;
+	t_flag		opts;
+	char		**names;
+	char		delim;
+	int			nchars;
+	char		*prompt;
+	int			timeout;
+	int			fd;
+	char		*input;
 };
 
-int				builtin_read(const char *path, char *const av[], char *const envp[]);
+int				builtin_read(const char *path, char *const av[],
+				char *const envp[]);
 
 int				bt_read_init(t_read *data, char **av);
 

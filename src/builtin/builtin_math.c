@@ -6,17 +6,17 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 14:14:59 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:45:09 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-# define MATHERR_0	"math : invalid number of arguments\n"
-# define MATHERR_1	"math : invalid variable name\n"
-# define MATHERR_2	"math : invalid operator\n"
-# define MATHERR_3	"math : invalid operand\n"
-# define MATHERR_4	"math : division by 0\n"
+#define MATHERR_0	"math : invalid number of arguments\n"
+#define MATHERR_1	"math : invalid variable name\n"
+#define MATHERR_2	"math : invalid operator\n"
+#define MATHERR_3	"math : invalid operand\n"
+#define MATHERR_4	"math : division by 0\n"
 
 static int	error_msg(char *msg)
 {
@@ -38,7 +38,7 @@ static int	get_value(char *var, char **value)
 {
 	char	*temp;
 	char	*esc;
-	int		ret; 
+	int		ret;
 
 	esc = ft_strnew((ft_strlen(var) >> 3) + 1);
 	ret = word_is_assignment((char *[]) {var, (esc + 1)});
@@ -109,6 +109,6 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 		return (builtin_return_status(0, error_msg(MATHERR_3)));
 	if (do_math(&value, operator, operand))
 		return (builtin_return_status(0, 1));
-	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, data_singleton()->local_var);
+	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, NULL);
 	return (builtin_return_status(0, 0));
 }

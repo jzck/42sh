@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 14:01:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:44:02 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_cliopts	export_opts[] =
+static t_cliopts	g_export_opts[] =
 {
 	{'p', NULL, BT_EXPORT_LP, 0, NULL},
 	{0, NULL, 0, 0, NULL},
@@ -44,23 +44,20 @@ int					builtin_export(
 	(void)envp;
 	(void)path;
 	data.flag = 0;
-	if (cliopts_get((char**)av, export_opts, &data))
+	if (cliopts_get((char**)av, g_export_opts, &data))
 		ft_perror();
 	if (data.flag & BT_EXPORT_LP)
 		return (builtin_return_status(0, bt_export_print()));
 	av = data.av_data;
 	while (*av)
 	{
-		if ((equal = ft_strchr(*av, '=')))
-		{
+		equal = ft_strchr(*av, '=');
+		if (equal)
 			*equal = 0;
-			builtin_setenv("internal", (char*[]){"global", *av, equal + 1}, NULL);
-		}
 		else
-		{
 			equal = ft_getenv(data_singleton()->local_var, *av);
-			builtin_setenv("internal", (char*[]){"global", *av, equal}, NULL);
-		}
+		equal ? equal++ : equal;
+		builtin_setenv("internal", (char*[]){"global", *av, equal}, NULL);
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}

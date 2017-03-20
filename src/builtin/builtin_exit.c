@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 15:41:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 14:17:40 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 	if (SH_HAS_JOBC(data_singleton()->opts) && jlist && !notified)
 	{
 		notified = 1;
-		ft_dprintf(2, "{red}%s: you have live jobs (running or suspended).{eoc}\n", SHELL_NAME);
+		ft_dprintf(2, "%s: you have live jobs (running or suspended)\n",
+				data_singleton()->argv[0]);
 		return (0);
 	}
-	if (av && av[1])
-		status = ft_atoi(av[1]);
-	else
-		status = ft_atoi(ft_getenv(data_singleton()->env, "?"));
+	status = (av && av[1]) ?
+			ft_atoi(av[1]) : ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))
 		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
+	job_hup_all();
 	data_exit();
 	exit(status);
 	return (0);

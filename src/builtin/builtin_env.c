@@ -6,14 +6,14 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:52:05 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 14:43:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define US_ENV "env [-i] [-u name] [name=value]... [utility [argument...]]"
 
-static int		env_usage(int arg_miss, char c)
+static int	env_usage(int arg_miss, char c)
 {
 	if (arg_miss)
 		ft_dprintf(2, "{red}env: option requires an argument -- u{eoc}\n");
@@ -23,7 +23,7 @@ static int		env_usage(int arg_miss, char c)
 	return (1);
 }
 
-static void		env_freeone(char **env, char *arg)
+static void	env_freeone(char **env, char *arg)
 {
 	int		i;
 	char	*tmp;
@@ -46,7 +46,7 @@ static void		env_freeone(char **env, char *arg)
 	}
 }
 
-static void		env_replace(char ***custom_env, char *arg)
+static void	env_replace(char ***custom_env, char *arg)
 {
 	char	**arg_split;
 
@@ -58,7 +58,7 @@ static void		env_replace(char ***custom_env, char *arg)
 	*custom_env = ft_sstradd(*custom_env, arg);
 }
 
-static int		env_treat_flag(char ***custom_env, char *const *arg[])
+static int	env_treat_flag(char ***custom_env, char *const *arg[])
 {
 	while (*(++*arg))
 	{

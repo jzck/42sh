@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:01:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/18 00:07:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 12:15:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int		do_job_notification(void)
 	{
 		j = jlist->content;
 		jlist = jlist->next;
-		if (job_is_completed(j->id)
-			|| (job_is_stopped(j->id) && !(j->attrs & JOB_NOTIFIED)))
+		if ((job_is_stopped(j->id) && !(j->attrs & JOB_NOTIFIED)))
 		{
 			ret = 1;
 			job_notify_change(j->id);
