@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 00:06:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/20 10:38:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef int						(t_execf)(const char *path,
 		char *const argv[],
 		char *const envp[]);
 typedef enum e_process_type		t_process_type;
+typedef enum e_process_state	t_process_state;
 typedef union u_process_data	t_process_data;
 typedef	struct s_process_map	t_process_map;
 typedef struct s_data_cond		t_data_while;

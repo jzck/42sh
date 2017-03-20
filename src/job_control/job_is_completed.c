@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 15:10:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 18:26:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:10:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		job_is_completed(int id)
 	while (lst)
 	{
 		p = lst->content;
-		if (!(p->attrs & PROCESS_COMPLETED))
+		if (!(p->state == PROCESS_COMPLETED))
 			return (0);
 		lst = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:40:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/06 12:30:50 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:56:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ void	mark_job_as_running(t_job *j)
 	while (plist)
 	{
 		p = plist->content;
-		if (p->attrs & PROCESS_SUSPENDED)
-		{
-			p->attrs &= ~PROCESS_STATE_MASK;
-			p->attrs |= PROCESS_CONTINUED;
-		}
+		if (p->state == PROCESS_SUSPENDED)
+			p->state = PROCESS_CONTINUED;
 		plist = plist->next;
 	}
 	j->attrs &= ~JOB_NOTIFIED;

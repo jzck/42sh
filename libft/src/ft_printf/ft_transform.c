@@ -6,24 +6,11 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:33:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:23:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:26:37 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-enum e_conversion =
-{
-	CONV_D,
-	CONV_I,
-	CONV_U,
-	CONV_O,
-	CONV_x,
-	CONV_X,
-	CONV_B,
-	CONV_S,
-	CONV_C,
-};
 
 char	*ft_transform(t_fmt *fmt, va_list ap)
 {

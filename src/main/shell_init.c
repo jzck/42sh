@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:54:18 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:21:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ static int		get_input_fd(t_data *data)
 	char		*file;
 	struct stat	buf;
 
-	/* fds = (int[2]){-1, STDIN}; */
-	if (data->opts & SH_OPTS_LC)
+	if (data->opts & SH_OPTS_LC && (file = data->c_arg))
 	{
-		DG("-c");
-		file = data->c_arg;
 		pipe(fds);
 		write(fds[PIPE_WRITE], file, ft_strlen(file));
 		close(fds[PIPE_WRITE]);
@@ -51,8 +48,11 @@ static int		get_input_fd(t_data *data)
 			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
 					data->argv[0], file);
 	}
-	fds[PIPE_WRITE] = fds[PIPE_READ] != -1 ?
-		fcntl(fds[PIPE_READ], F_DUPFD_CLOEXEC, 10) : STDIN;
+	else
+		return (STDIN);
+	if (fds[PIPE_READ] < 0)
+		return (-1);
+	fds[PIPE_WRITE] = fcntl(fds[PIPE_READ], F_DUPFD_CLOEXEC, 10);
 	close(fds[PIPE_READ]);
 	return (fds[PIPE_WRITE]);
 }

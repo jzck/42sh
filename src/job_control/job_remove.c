@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 12:51:08 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 18:29:43 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:20:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	job_remove(int id)
 {
 	t_jobc		*jobc;
-	t_job	 	*j;
-	t_list	 	*jlist;
+	t_job		*j;
+	t_list		*jlist;
 	t_process	*p;
 
 	jobc = &data_singleton()->jobc;

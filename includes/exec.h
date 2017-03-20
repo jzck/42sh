@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:46:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:35:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 # include "types.h"
 # include "job_control.h"
 # include <sys/stat.h>
-
-# define PROCESS_COMPLETED	(1 << 0)
-# define PROCESS_SUSPENDED	(1 << 1)
-# define PROCESS_RUNNING	(1 << 2)
-# define PROCESS_CONTINUED	(1 << 3)
-
-# define PROCESS_STATE_MASK	((1 << 4) -  (1 << 0))
 
 # define IS_PIPESTART(p)	((p).fdin == STDIN)
 # define IS_PIPEEND(p)		((p).fdout == STDOUT)
@@ -80,6 +73,14 @@ union	u_process_data
 	struct s_data_list		d_case;
 };
 
+enum	e_process_state
+{
+	PROCESS_COMPLETED,
+	PROCESS_SUSPENDED,
+	PROCESS_RUNNING,
+	PROCESS_CONTINUED,
+};
+
 enum	e_process_type
 {
 	PROCESS_FUNCTION,
@@ -109,13 +110,13 @@ struct	s_process
 	t_process_type	type;
 	t_process_data	data;
 	t_process_map	map;
+	t_process_state	state;
 	pid_t			pid;
 	int				fdin;
 	int				fdout;
 	int				to_close;
 	t_list			*redirs;
 	int				status;
-	t_flag			attrs;
 };
 
 struct	s_job

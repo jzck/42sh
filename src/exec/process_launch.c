@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 23:49:43 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 10:35:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int		process_launch(t_process *p)
 	pid_t		pid;
 
 	DG("p->type=%i", p->type);
-	p->attrs &= ~PROCESS_STATE_MASK;
-	p->attrs |= PROCESS_RUNNING;
+	p->state = PROCESS_RUNNING;
 	if (!(pid = do_the_muther_forker(p)))
 	{
 		DG("launcher did not fork!");
