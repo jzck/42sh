@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/19 17:43:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:29:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int		env_usage(int arg_miss, char c)
 	else if (c)
 		ft_dprintf(2, "{red}env: illegal option -- %c{eoc}\n", c);
 	ft_dprintf(2, "usage: env [-i] [-u name] ... [name=value] ... cmd\n");
-	return (1);
+	set_exitstatus(1, 1);
+	return (0);
 }
 
 static void		env_freeone(char **env, char *arg)
@@ -89,15 +90,17 @@ static int		env_treat_flag(char ***custom_env, char *const *arg[])
 int			builtin_env(const char *path, char *const argv[], char *const envp[])
 {
 	char	**env;
+	pid_t	pid;
 
 	(void)path;
+	pid = 0;
 	if (!argv || ft_strcmp(*argv, "env"))
 		return (env_usage(0, 0));
 	env = ft_sstrdup((char **)envp);
 	if (env_treat_flag(&env, &argv))
 	{
 		ft_sstrfree(env);
-		return (1);
+		return (0);
 	}
 	if (!*argv)
 	{
@@ -106,7 +109,8 @@ int			builtin_env(const char *path, char *const argv[], char *const envp[])
 			ft_putchar('\n');
 	}
 	else
-		command_getoutput(NULL, argv, env, 0);
+		pid = command_setoutput(NULL, argv, env, 0);
 	ft_tabdel(&env);
-	return (0);
+	set_exitstatus(0, 1);
+	return (pid);
 }

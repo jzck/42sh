@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/19 17:42:45 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:36:03 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,20 @@ char			*command_getoutput(char *command, char *const av[], char **env, int pipe_
 	if (pipe_mode)
 		return (manage_output(fds));
 	return (NULL);
+}
+
+int			command_setoutput(char *command, char *const av[], char **env, int pipe_mode)
+{
+	/* int			ret; */
+	int			pid;
+(void)pipe_mode;
+	if (!command && !av)
+		return (0);
+	if (!(pid = do_the_muther_forker(NULL)))
+		execute_command(command, av, env);
+	return (pid);
+	/* waitpid(pid, &ret, WUNTRACED); */
+	/* if (pipe_mode) */
+	/* 	return (manage_output(fds)); */
+	/* return (NULL); */
 }

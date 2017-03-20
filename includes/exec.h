@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:46:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/20 11:34:35 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ struct	s_exec
 };
 
 int		exec_reset(void);
+int		do_the_muther_forker(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);
