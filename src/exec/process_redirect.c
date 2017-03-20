@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 18:27:40 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:38:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			process_redirect(t_process *p)
 
 	redirs = p->redirs;
 	if (p->to_close != STDIN)
-		dup2_close(p->fdout, STDOUT);
+		close(p->to_close);
 	while (redirs)
 	{
 		redir = redirs->content;
