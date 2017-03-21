@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:17:00 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:20:05 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:13:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_ld_to_tab(t_ld *ld)
 	if (!ld)
 		return (NULL);
 	nb_item = ft_ld_size(ld);
-	if (!(my_tab = (char **)malloc(sizeof(char *) * (nb_item + 1))))
+	if (!(my_tab = (char **)ft_malloc(sizeof(char *) * (nb_item + 1))))
 		return (NULL);
 	index = 0;
 	while (ld)

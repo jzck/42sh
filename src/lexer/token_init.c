@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:30:25 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 19:07:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:11:43 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token		*token_init(void)
 {
 	t_token	*token;
 
-	if (!(token = (t_token *)malloc(sizeof(t_token))))
+	if (!(token = (t_token *)ft_malloc(sizeof(t_token))))
 		return (NULL);
 	token->type = 0;
 	token->size = 8;

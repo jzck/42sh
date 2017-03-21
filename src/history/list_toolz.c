@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 11:37:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 13:37:25 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:12:27 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list_history	*ft_create_history_list(char *str)
 {
 	t_list_history	*list;
 
-	list = (t_list_history *)malloc(sizeof(t_list_history));
+	list = (t_list_history *)ft_malloc(sizeof(t_list_history));
 	if (!list)
 		return (NULL);
 	if (!str)

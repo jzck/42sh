@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:00:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:32:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:10:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char		*ft_strdupi_w(char const *s)
 	i = 0;
 	while (s[i] && s[i] != ' ' && s[i] != '\t')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = (char *)ft_malloc(sizeof(char) * (i + 1));
 	if (str)
 	{
 		str[i--] = '\0';
