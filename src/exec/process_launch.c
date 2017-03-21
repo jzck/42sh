@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 18:52:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 20:53:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int				process_launch(t_process *p)
 	p->state = PROCESS_RUNNING;
 	if (!(pid = do_the_fork_if_i_have_to(p)))
 	{
-		DG("NO_FORK");
 		process_resetfds(p);
 		process_free(p, 0);
 		return (1);

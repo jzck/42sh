@@ -82,7 +82,6 @@ int		error_eof(void);
 int		ft_read_stack(t_sym *stack);
 char	*read_state(t_sym current);
 
-
 /*
  * Build AST - rewriting
  *
@@ -151,9 +150,6 @@ struct s_distrostree
 	int	(*test)(t_btree **ast, t_list **lst);
 	int	(*add)(t_btree **ast, t_list **lst);
 };
-
-/* extern t_distrostree g_distrostree[]; */
-/* extern t_treematch g_treematch[]; */
 
 struct	s_redir
 {

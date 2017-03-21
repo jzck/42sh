@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pfree_subshell.c                                   :+:      :+:    :+:   */
+/*   pfree_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 02:38:12 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 20:03:21 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/21 20:18:34 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/21 20:53:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		pfree_subshell(t_process *p)
+int		pfree_func(t_process *p)
 {
-	btree_del(&p->data.subshell.content, &ast_free);
+	ft_putstr("hello");
+	btree_del(&p->data.function.content, &ast_free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 00:45:28 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:17:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int		pfree_cmd(t_process *p);
 int		pfree_cond(t_process *p);
 int		pfree_list(t_process *p);
 int		pfree_subshell(t_process *p);
+int		pfree_func(t_process *p);
 
 /*
 ** Mapping pour launch les process

@@ -87,6 +87,7 @@ exec/mark_process_status.c\
 exec/node_copy.c\
 exec/pfree_cmd.c\
 exec/pfree_cond.c\
+exec/pfree_func.c\
 exec/pfree_list.c\
 exec/pfree_subshell.c\
 exec/plaunch_brace.c\

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/21 19:36:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 20:01:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,8 @@ int			add_one_func(t_btree **ast, t_list **lst)
 	(void)lst;
 	func_ast = btree_map(*ast, &node_copy);
 	if ((old_func = is_already_func(&func_ast)))
-	{
 		ft_lst_delif(&data_singleton()->lst_func,
 	 		old_func->content, &ft_addrcmp, &tree_func_free);
-	}
 	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(&func_ast, sizeof(*ast)));
 	return (0);
 }

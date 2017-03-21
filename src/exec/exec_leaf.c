@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 18:52:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 20:15:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_process_map	g_process_map[] =
 {
-	{PROCESS_FUNCTION, plaunch_function, pprint_function, pfree_subshell},
+	{PROCESS_FUNCTION, plaunch_function, pprint_function, pfree_func},
 	{PROCESS_BUILTIN, plaunch_builtin, pprint_cmd, pfree_cmd},
 	{PROCESS_FILE, plaunch_file, pprint_cmd, pfree_cmd},
 	{PROCESS_SUBSHELL, plaunch_subshell, pprint_subshell, pfree_subshell},
