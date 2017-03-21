@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 01:26:45 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:11:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				process_launch(t_process *p)
 		process_free(p, 0);
 		return (1);
 	}
-		DG("FORK");
+	DG("FORK");
 	p->pid = pid;
 	process_setgroup(p, pid);
 	if (p->fdin != STDIN)

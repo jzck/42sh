@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 01:14:41 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:41:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 static int	env_usage(int arg_miss, char c)
 {
 	if (arg_miss)
-		ft_dprintf(2, "{red}env: option requires an argument -- u{eoc}\n");
+		SH_ERR("env: option requires an argument -- u");
 	else if (c)
-		ft_dprintf(2, "{red}env: illegal option -- %c{eoc}\n", c);
-	ft_dprintf(2, "usage: %s\n", US_ENV);
+		SH_ERR("env: illegal option -- %c", c);
+	SH_ERR("usage: %s", US_ENV);
 	return (1);
 }
 
