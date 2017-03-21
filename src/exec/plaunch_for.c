@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 15:51:47 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 00:51:01 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int				plaunch_for(t_process *p)
 		}
 		temp = temp->next;
 	}
-	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
+	return (0);
 }

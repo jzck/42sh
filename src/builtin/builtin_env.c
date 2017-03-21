@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:14:20 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 20:51:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 01:14:41 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,17 @@ static void	env_replace(char ***custom_env, char *arg)
 
 static int	env_treat_flag(char ***custom_env, char *const *arg[])
 {
+	char	*tmp;
+
 	while (*(++*arg))
 	{
 		if (!ft_strcmp(**arg, "-i"))
+		{
+			tmp = ft_strjoin("PATH=", ft_getenv(*custom_env, "PATH"));
 			ft_tabdel(custom_env);
+			*custom_env = ft_sstradd(NULL, tmp);
+			ft_strdel(&tmp);
+		}
 		else if (!ft_strcmp(**arg, "-u"))
 		{
 			++*arg;
@@ -112,5 +119,6 @@ int			builtin_env(const char *path,
 	else
 		pid = command_setoutput(argv, env);
 	ft_tabdel(&env);
+	DG("%d", pid);
 	return (builtin_return_status(pid, 0));
 }

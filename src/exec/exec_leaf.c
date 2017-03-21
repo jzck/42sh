@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 20:41:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 01:21:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_process_map	g_process_map[] =
 	{PROCESS_BRACE, plaunch_brace, pprint_brace, pfree_subshell},
 	{PROCESS_WHILE, plaunch_while, pprint_while, pfree_cond},
 	{PROCESS_UNTIL, plaunch_until, pprint_until, pfree_cond},
-	{PROCESS_IF, plaunch_if, pprint_if, pfree_cond},
+	{PROCESS_IF, plaunch_if, pprint_if, pfree_subshell},
 	{PROCESS_FOR, plaunch_for, pprint_for, pfree_list},
 	{PROCESS_CASE, plaunch_case, pprint_case, pfree_list},
 	{PROCESS_EMPTY, plaunch_empty, NULL, NULL},
@@ -51,5 +51,7 @@ int				exec_leaf(t_btree **ast)
 			job->pgid = 0;
 		}
 	}
+	else
+DG("WHY HERE?");
 	return (0);
 }

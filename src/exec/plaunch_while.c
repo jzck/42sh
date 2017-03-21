@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 15:50:29 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 00:48:16 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int				plaunch_while(t_process *p)
 		ret = ft_atoi(ft_getenv(data_singleton()->env, "?"));
 		ft_exec(&p->data.d_while.condition);
 	}
-	return (ret);
+	set_exitstatus(ret, 1);
+	return (0);
 }

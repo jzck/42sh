@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 10:35:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 02:11:31 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "glob.h"
 # include "completion.h"
 # include "hash.h"
+/* # define malloc(x) NULL */
 
 #ifndef DEBUG
 # define DEBUG_MODE 0

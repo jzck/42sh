@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:57:11 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 01:50:24 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,15 @@ int				data_init(int ac, char **av)
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
-		return (-1);
+	{
+		/* ft_dprintf(2, "{red}TERM not set\n{eoc}"); */
+		term_name = "dumb";
+		/* return (-1); */
+	}
 	if (tgetent(NULL, term_name) != 1)
+	{
+		ft_dprintf(2, "{red}TERM name is not a tty\n{eoc}");
 		return (-1);
+	}
 	return (0);
 }

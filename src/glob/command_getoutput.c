@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 18:16:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 01:21:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void		execute_command(char *const av[], char **env)
 	data->opts &= ~SH_INTERACTIVE;
 	data->opts &= ~SH_OPTS_JOBC;
 	command = manage_command(av);
+	DG("DO THE EXEC");
 	if (do_lexer_routine(&token, command))
 	{
 		ft_dprintf(2, "{red}%s: syntax error in command substitution{eoc}\n",
@@ -108,6 +109,7 @@ int			command_setoutput(char *const av[], char **env)
 
 	if (!av)
 		return (0);
+	pid = 0;
 	if (!(pid = do_the_muther_forker(NULL)))
 		execute_command(av, env);
 	return (pid);

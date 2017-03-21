@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 13:12:06 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 21:18:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 01:17:07 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int		ft_loop_read(int fd, char **line, char *save)
 
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		DG("boucle");
 		buf[ret] = 0;
 		tmp = *line;
 		if ((pos = ft_strchr(buf, '\n')))
@@ -59,7 +58,6 @@ static int		ft_loop_read(int fd, char **line, char *save)
 	}
 	if (ret < 0)
 		return (-1);
-	DG("GNL ret %i, fd=%i", **line ? 1 : 0, fd);
 	return (**line ? 1 : 0);
 }
 

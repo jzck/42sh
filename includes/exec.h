@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 16:07:29 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 00:45:28 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ union	u_process_data
 	struct s_data_tree		function;
 	struct s_data_cond		d_while;
 	struct s_data_cond		d_until;
-	struct s_data_cond		d_if;
+	struct s_data_tree		d_if;
 	struct s_data_list		d_for;
 	struct s_data_list		d_case;
 };
