@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:21:16 by alao              #+#    #+#             */
-/*   Updated: 2017/03/17 16:51:46 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 11:39:22 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char			*c_trimmer(char *cmd, int st, int nd)
 	st = 0;
 	while (rt[st] == ' ')
 		st++;
-	tmp = ft_strsub(rt, st, ft_strlen(rt));
+	tmp = ft_strsub(rt, st, ft_strlen(rt) - st);
 	if (st)
 		data_singleton()->comp->between = ft_strsub(rt, 0, st);
 	rt ? ft_memdel((void *)&rt) : (0);
