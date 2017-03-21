@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_free.c                                         :+:      :+:    :+:   */
+/*   has_running_job.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 11:50:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:22:58 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/21 14:27:52 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/21 14:36:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ast_free(void *data, size_t content_size)
+int		has_running_job(void)
 {
-	t_astnode	*node;
+	t_jobc		*jobc;
+	t_list		*jlist;
+	t_job		*j;
 
-	(void)content_size;
-	node = data;
-	ft_ld_clear(&node->data.cmd.token, &ft_tabdel);
-	ft_lstdel(&node->data.cmd.redir, &redir_free);
-	free(node);
+	jobc = &data_singleton()->jobc;
+	jlist = jobc->first_job;
+	while (jlist)
+	{
+		j = jlist->content;
+		if (!job_is_stopped(j))
+			return (1);
+		jlist = jlist->next;
+	}
+	return (0);
 }

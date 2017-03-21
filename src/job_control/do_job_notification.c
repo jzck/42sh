@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:01:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:23:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:14:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		do_job_notification(void)
 			|| (job_is_stopped(j) && !(j->attrs & JOB_NOTIFIED)))
 		{
 			ret = 1;
-			job_format(j, JOBS_OPTS_L);
+			job_format(j, JOBS_OPT_L);
 			j->attrs |= JOB_NOTIFIED;
 			job_remove(j->id);
 		}

@@ -174,6 +174,8 @@ job_control/builtin_bg.c\
 job_control/builtin_fg.c\
 job_control/builtin_jobs.c\
 job_control/do_job_notification.c\
+job_control/has_running_job.c\
+job_control/has_stopped_job.c\
 job_control/job_addprocess.c\
 job_control/job_cmp_id.c\
 job_control/job_format.c\

@@ -6,40 +6,17 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 11:47:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:48:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	bt_jobs_parse(char **av, int *i)
+t_cliopts	g_jobs_opts[] =
 {
-	int		opts;
-	int		j;
-
-	opts = 0;
-	*i = 1;
-	while (av[*i])
-	{
-		j = 0;
-		if (av[*i][j++] != '-')
-			break ;
-		while (av[*i][j])
-		{
-			if (av[*i][j] == 'l')
-				opts |= JOBS_OPTS_L;
-			else
-			{
-				ft_dprintf(2, "{red}%s: bad option: -%c{eoc}\n",
-						SHELL_NAME, av[*i][j]);
-				return (-1);
-			}
-			j++;
-		}
-		(*i)++;
-	}
-	return (opts);
-}
+	{'l', NULL, JOBS_OPT_L, 0, NULL},
+	{0, 0, 0, 0, 0},
+};
 
 static void	bt_jobs_all(int opts)
 {
@@ -74,7 +51,7 @@ static int	bt_jobs_spec(char **av, int opts)
 		id = ft_atoi(*av);
 		if (!(lst = ft_lst_find(jlist, &id, job_cmp_id)))
 		{
-			ft_dprintf(2, "{red}jobs: %s: no such job{eoc}\n", *av);
+			SH_ERR("jobs: %s: no such job", *av);
 			return (1);
 		}
 		job_format(lst->content, opts);
@@ -85,21 +62,20 @@ static int	bt_jobs_spec(char **av, int opts)
 
 int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 {
-	int		opts;
-	int		i;
+	t_data_template		data;
 
 	(void)path;
 	(void)envp;
 	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
-		ft_dprintf(2, "{red}jobs: %s{eoc}\n", SH_MSG_NOJOBC);
+		SH_ERR("jobs: %s", SH_MSG_NOJOBC);
 		return (1);
 	}
-	if ((opts = bt_jobs_parse((char**)av, &i)) < 0)
-		return (1);
-	if (!av[i])
-		bt_jobs_all(opts);
-	else if (bt_jobs_spec((char **)av + i, opts))
+	if (cliopts_get((char**)av, g_jobs_opts, &data))
+		return (ft_perror());
+	if (!*data.av_data)
+		bt_jobs_all(data.flag);
+	else if (bt_jobs_spec(data.av_data, data.flag))
 		return (1);
 	return (0);
 }

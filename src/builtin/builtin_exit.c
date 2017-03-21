@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:01:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:48:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,14 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 {
 	int			status;
 	static int	notified = 0;
-	t_jobc		*jobc;
-	t_list		*jlist;
 
 	(void)envp;
 	(void)path;
-	jobc = &data_singleton()->jobc;
-	jlist = jobc->first_job;
-	if (SH_HAS_JOBC(data_singleton()->opts) && jlist && !notified)
+	if (SH_HAS_JOBC(data_singleton()->opts) && !notified)
 	{
 		notified = 1;
-		ft_dprintf(2, "%s: you have live jobs (running or suspended)\n",
-				data_singleton()->argv[0]);
+		if (has_stopped_job() || has_running_job())
+			SH_ERR("There are running and/or stopped jobs");
 		return (0);
 	}
 	if (av && av[1] && !ft_stris(av[1], ft_isdigit))

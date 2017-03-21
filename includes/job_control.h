@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:39:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:40:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define JOB_IS_BG(j)		(j & JOB_BG)
 # define JOB_IS_FG(j)		(!JOB_IS_BG(j))
 
-# define JOBS_OPTS_L		(1 << 0)
+# define JOBS_OPT_L		(1 << 0)
 
 struct	s_jobc
 {
@@ -50,6 +50,8 @@ void		mark_job_as_running (t_job *j);
 int			mark_process_status(pid_t pid, int status);
 int			job_is_stopped(t_job *job);
 int			job_is_completed(t_job *job);
+int			has_running_job(void);
+int			has_stopped_job(void);
 
 void		job_new(char **av, pid_t pid);
 void		job_run(t_job *job, int foreground);
