@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/20 21:11:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:09:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		do_parser_routine(t_list **token, t_btree **ast)
 		return (1);
 	}
 	else if (data->parser.state == SUCCESS)
-		return (1);
+		return (2);
 	return (0);
 }
