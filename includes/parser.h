@@ -144,6 +144,7 @@ int		join_ast(t_btree **ast, t_btree **new_node);
 int		gen_node(t_btree **ast);
 int		superflous_token(t_btree **ast, t_list **list);
 void	sym_free(void *data, size_t size);
+void	tree_func_free(void *data, size_t content_size);
 
 struct s_distrostree
 {

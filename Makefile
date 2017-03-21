@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/21 15:47:55 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/21 17:18:57 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden #-fsanitize=address
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -300,6 +300,7 @@ parser/read_stack.c\
 parser/redir_init.c\
 parser/stack_init.c\
 parser/sym_free.c\
+parser/tree_func_free.c\
 parser/tree_wrapper.c
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_BASE))

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:29:54 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/07 12:44:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:14:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ char		*ft_sstrstr(char **sstr, char *find)
 	size = ft_strlen(find);
 	while ((*sstr))
 	{
-		DG("size : %d", size);
-		DG("sstr : %s", *sstr);
-		DG("find : %s", find);
 		if (ft_strncmp(*sstr, find, size) == 0)
 			return (*sstr);
 		sstr++;

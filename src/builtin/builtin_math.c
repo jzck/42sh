@@ -6,17 +6,17 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 23:21:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:08:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define MATHERR_0	"math : invalid number of arguments\n"
-#define MATHERR_1	"math : invalid variable name\n"
-#define MATHERR_2	"math : invalid operator\n"
-#define MATHERR_3	"math : invalid operand\n"
-#define MATHERR_4	"math : division by 0\n"
+#define MATHERR_0	"math : invalid number of arguments"
+#define MATHERR_1	"math : invalid variable name"
+#define MATHERR_2	"math : invalid operator"
+#define MATHERR_3	"math : invalid operand"
+#define MATHERR_4	"math : division by 0"
 
 static int	init_math(char **var, char **value, char **operator,
 		char **operand)
@@ -38,7 +38,7 @@ static int	get_value(char *var, char **value)
 	ret = word_is_assignment((char *[]) {var, (esc + 1)});
 	ft_strdel(&esc);
 	if (!ret)
-		return (error_msg(MATHERR_1));
+		return (SH_ERR(MATHERR_1));
 	temp = ft_sstrstr(data_singleton()->local_var, var);
 	if (temp)
 	{
@@ -66,7 +66,7 @@ static int	do_math(char **value, char *operator, char *operand)
 	else
 		ope2 = 0;
 	if ((operator[0] == '/' || operator[0] == '%') && ope2 == 0)
-		return (error_msg(MATHERR_4));
+		return (SH_ERR(MATHERR_4));
 	else
 	{
 		ope1 = (operator[0] == '+') ? ope1 + ope2 : ope1;
@@ -90,17 +90,17 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!av || !av[1] || !av[2] || !av[3] || av[4])
-		return (builtin_return_status(0, error_msg(MATHERR_0)));
+		return (builtin_return_status(0, SH_ERR(MATHERR_0)));
 	init_math(&var, &value, &operator, &operand);
 	var = av[1];
 	if (get_value(var, &value))
 		return (builtin_return_status(0, 1));
 	operator = av[2];
 	if (ft_strlen(operator) != 1 || !(ft_strchr("+-/*%", operator[0])))
-		return (builtin_return_status(0, error_msg(MATHERR_2)));
+		return (builtin_return_status(0, SH_ERR(MATHERR_2)));
 	operand = av[3];
 	if (!ft_stris(operand, &ft_isdigit))
-		return (builtin_return_status(0, error_msg(MATHERR_3)));
+		return (builtin_return_status(0, SH_ERR(MATHERR_3)));
 	if (do_math(&value, operator, operand))
 		return (builtin_return_status(0, 1));
 	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, NULL);
