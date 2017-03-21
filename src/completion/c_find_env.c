@@ -20,7 +20,7 @@ static int	c_addnode(t_comp *c, char *value)
 {
 	t_clst	*tmp;
 
-	if (!(tmp = (t_clst *)malloc(sizeof(t_clst))))
+	if (!(tmp = (t_clst *)ft_malloc(sizeof(t_clst))))
 		return (-1);
 	tmp->name = value;
 	tmp->len = ft_strlen(tmp->name);
