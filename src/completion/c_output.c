@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/03/19 15:18:55 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 14:37:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		c_updater_rcmd(t_comp *c)
 		ft_memdel((void *)&data_singleton()->line.input);
 		data_singleton()->line.input = ft_strdup(c->rcmd);
 	}
-	new_pos = ft_strlen(c->start) + ft_strlen(c->between) + ft_strlen(c->rcmd);
+	new_pos = ft_strlen(c->rcmd);
 	data_singleton()->line.pos = new_pos;
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	tmp2 ? ft_memdel((void *)&tmp2) : (0);

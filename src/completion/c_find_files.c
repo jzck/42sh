@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/18 09:18:04 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/21 14:53:21 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int			c_exclusion_folder(t_comp *c)
 	if ((rep = opendir(tmp)) && (!closedir(rep)))
 	{
 		tmp ? ft_memdel((void *)&tmp) : (0);
-		if (c->rcmd[ft_strlen(c->rcmd) - 1] == '/')
+		if (c->rcmd[ft_strlen(c->rcmd) - 1] == '/'
+		|| c->rcmd[ft_strlen(c->rcmd) - 1] == '.')
 		{
 			c_clear(data_singleton());
 			return (0);
