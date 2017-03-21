@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:37:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 16:52:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 15:11:09 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char		*ft_findexec(char *path, char *file)
 	DIR				*dir;
 	char			**spath;
 	struct dirent	*dirent;
+	char			*execpath;
 
 	i = -1;
 	spath = ft_strsplit(path, ':');
@@ -41,8 +42,9 @@ char		*ft_findexec(char *path, char *file)
 		{
 			if (ft_strcmp(dirent->d_name, file))
 				continue ;
+			execpath = create_path(spath[i], dirent->d_name, spath);
 			closedir(dir);
-			return (create_path(spath[i], dirent->d_name, spath));
+			return (execpath);
 		}
 		closedir(dir);
 	}

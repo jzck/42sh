@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/21 14:23:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 15:03:37 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,17 @@ int				c_rematch(t_comp *c, long int keypress)
 {
 	if (ft_isascii(keypress))
 	{
-		DG("before rematch = \"%s\"", data_singleton()->line.input);
 		c->isrematch = 1;
 		c_term_clear(c);
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
 		c_matching(data_singleton(), c);
-		DG("after matching = \"%s\"", data_singleton()->line.input);
 		if (data_singleton()->comp && c->lst == NULL)
 			c_clear(data_singleton());
 		else if (data_singleton()->comp && c->lst == c->lst->next)
 			return (1);
 		ft_print(keypress, &data_singleton()->line.input,
 												&data_singleton()->line.pos);
-		DG("after rematch = \"%s\"", data_singleton()->line.input);
 		return (1);
 	}
 	else
