@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 11:37:43 by alao              #+#    #+#             */
-/*   Updated: 2017/03/21 12:01:02 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 14:02:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int			c_clear(t_data *s)
 		c_clear_lst(ptr);
 	s->comp ? ft_memdel((void *)&s->comp) : (0);
 	s->comp = NULL;
+	data_singleton()->comp = NULL;
 	return (0);
 }
