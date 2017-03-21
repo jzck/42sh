@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 00:21:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 01:43:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			builtin_setenv(const char *path,
 		esc = ft_strnew((ft_strlen(av[1]) >> 3) + 1);
 		ret = word_is_assignment((char *[]){av[1], (esc + 1)});	
 		ft_strdel(&esc);
-		if (!ret && av[1][0] != '?')
+		if (!ret && ft_strcmp(av[1], "?"))
 			return (error_msg(SETERR_0));
 		assign_var(av, env);
 	}
