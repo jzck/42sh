@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:32:43 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 10:24:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:24:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		bad_fd(int fd)
 {
-	ft_dprintf(2, "{red}%s: %i: Bad file descriptor{eoc}\n",
-			SHELL_NAME, fd);
+	SH_ERR("%i: Bad file descriptor", fd);
 	return (1);
 }

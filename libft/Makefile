@@ -191,6 +191,7 @@ str/ft_strsub.c\
 str/ft_strtok.c\
 str/ft_strtrim.c\
 sys/dup2_close.c\
+sys/fd_replace.c\
 sys/ft_getenv.c\
 sys/ft_xattr_count.c\
 sys/ft_xattr_print.c\
