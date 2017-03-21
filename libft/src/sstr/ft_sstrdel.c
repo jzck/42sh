@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 18:04:07 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 21:09:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:52:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_sstrdel(char **sstr, int index)
 		sstr[i] = sstr[i + 1];
 		i++;
 	}
+	ft_strdel(sstr + index);
 }
