@@ -21,8 +21,7 @@ static char		*manage_output(int *fds)
 
 	output = NULL;
 	close(fds[PIPE_WRITE]);
-	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)) > 0)
-	{
+	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)) > 0) {
 		buf[ret] = 0;
 		ft_strappend(&output, buf);
 	}
@@ -89,7 +88,7 @@ char			*command_getoutput(char *command)
 	if (!command)
 		return (NULL);
 	pipe(fds);
-	if (!(pid = do_the_muther_forker(NULL)))
+	if (!(pid = process_fork(NULL)))
 	{
 		close(fds[PIPE_READ]);
 		dup2_close(fds[PIPE_WRITE], STDOUT);
@@ -110,7 +109,7 @@ int			command_setoutput(char *const av[], char **env)
 	if (!av)
 		return (0);
 	pid = 0;
-	if (!(pid = do_the_muther_forker(NULL)))
+	if (!(pid = process_fork(NULL)))
 		execute_command(av, env);
 	return (pid);
 }

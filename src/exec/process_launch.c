@@ -51,7 +51,7 @@ int		process_launch(t_process *p)
 		process_free(p, 0);
 		return (1);
 	}
-	p->pid = process_fork(p):
+	p->pid = process_fork(p);
 	process_setgroup(p, p->pid);
 	if (p->fdin != STDIN)
 		close(p->fdin);

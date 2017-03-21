@@ -140,7 +140,7 @@ struct	s_exec
 };
 
 int		exec_reset(void);
-int		do_the_muther_forker(t_process *p);
+int		process_fork(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);
