@@ -6,13 +6,13 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 01:43:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 15:20:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define	SETERR_0	"invalid variable name\n"
+#define	SETERR_0	"setenv: invalid variable name"
 
 static int	assign_var(char *const av[], char ***env)
 {
@@ -56,10 +56,10 @@ int			builtin_setenv(const char *path,
 	else
 	{
 		esc = ft_strnew((ft_strlen(av[1]) >> 3) + 1);
-		ret = word_is_assignment((char *[]){av[1], (esc + 1)});	
+		ret = word_is_assignment((char *[]){av[1], (esc + 1)});
 		ft_strdel(&esc);
 		if (!ret && ft_strcmp(av[1], "?"))
-			return (error_msg(SETERR_0));
+			return (SH_ERR(SETERR_0));
 		assign_var(av, env);
 	}
 	return (envp ? builtin_return_status(0, 0) : 0);

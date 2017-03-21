@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:54:02 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:23:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #define CDOPT_P	(1 << 1)
 #define HAS_CDOPT_P(x) (x & CD_OPT_P)
 #define HAS_CDOPT_L(x) (x & CD_OPT_L)
-#define CDERR_1 "{red}cd: no such file or directory: %s{eoc}\n"
-#define CDERR_2 "{red}cd: HOME not set{eoc}\n"
-#define CDERR_3 "{red}cd: too many arguments{eoc}\n"
+#define CDERR_1 "cd: no such file or directory: %s"
+#define CDERR_2 "cd: HOME not set"
+#define CDERR_3 "cd: too many arguments{eoc}"
 
 static char		*builtin_cd_special(char *const av[], char *const env[])
 {
@@ -28,13 +28,13 @@ static char		*builtin_cd_special(char *const av[], char *const env[])
 	{
 		if (!(target = ft_getenv((char**)env, "HOME")))
 		{
-			ft_dprintf(2, CDERR_2);
+			SH_ERR(CDERR_2);
 			return (NULL);
 		}
 	}
 	else if (*av && *(av + 1))
 	{
-		ft_dprintf(2, CDERR_3);
+		SH_ERR(CDERR_3);
 		return (NULL);
 	}
 	else if (ft_strcmp(*av, "-") == 0)
@@ -87,7 +87,7 @@ int				builtin_cd(const char *path,
 	free(cwd);
 	if (chdir(target))
 	{
-		ft_dprintf(2, CDERR_1, target);
+		SH_ERR(CDERR_1, target);
 		return (builtin_return_status(0, 1));
 	}
 	else if (target != av[i])

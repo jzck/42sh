@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 15:52:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:53:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:19:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ t_conv	g_convs[] =
 int	ft_vdprintf(int fd, const char *format, va_list ap)
 {
 	char	*ret;
+	char	size;
 
 	ret = NULL;
-	if (ft_vasprintf(&ret, format, ap))
-		return (1);
-	ft_putstr_fd(ret, fd);
+	size = ft_vasprintf(&ret, format, ap);
+	if (size != -1)
+		ft_putstr_fd(ret, fd);
 	ft_strdel(&ret);
-	return (0);
+	return (size);
 }
 
 int	ft_vasprintf(char **ret, const char *format, va_list ap)
@@ -53,14 +54,14 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 		else if (*str == '%')
 		{
 			if (ft_fmtcalc(&final, &str, ap))
-				return (1);
+				return (-1);
 		}
 		else
 			final = ft_strjoin(final, (char[]){*str++, 0});
 		ft_strdel(&tmp);
 	}
 	*ret = final;
-	return (0);
+	return (ft_strlen(final));
 }
 
 int	ft_fmtcalc(char **final, char **str, va_list ap)

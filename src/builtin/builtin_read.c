@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:10:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:16:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cliopts	g_read_opts[] =
 
 void		bt_read_usage(void)
 {
-	ft_dprintf(2, "usage: read %s %s\n", US_READ, US_READ_1);
+	SH_ERR("usage: read %s %s\n", US_READ, US_READ_1);
 }
 
 int			bt_read_init(t_read *data, char **av)
