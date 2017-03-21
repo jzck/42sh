@@ -1,0 +1,5 @@
+until [ -f ${GLOBAL_TOKEN}_FILE ]
+do
+	./write_on_stdout ${GLOBAL_TOKEN}_stdout			
+	./create-file ${GLOBAL_TOKEN}
+done

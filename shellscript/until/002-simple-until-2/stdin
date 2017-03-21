@@ -1,0 +1,6 @@
+until [ -f ${GLOBAL_TOKEN}_FILE ]
+do
+	echo "HELLO"
+	./write_on_stdout_and_stderr ${GLOBAL_TOKEN}_stdout ${GLOBAL_TOKEN}_stderr | ./read_on_stdin
+	./create-file ${GLOBAL_TOKEN}
+done

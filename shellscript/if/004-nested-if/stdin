@@ -1,0 +1,14 @@
+if [ -f ${GLOBAL_TOKEN}_FILE ]
+then
+	if [ -f ${GLOBAL_TOKEN}_FILE ]
+	then
+		./write_on_stdout ${GLOBAL_TOKEN}_stdout
+		./delete-file ${GLOBAL_TOKEN}_FILE
+	elif [ -f ${GLOBAL_TOKEN}_FILE ]
+	then
+		./write_on_stdout ${GLOBAL_TOKEN}_error
+	fi
+elif [ 1 ]
+then	
+	./write_on_stdout ${GLOBAL_TOKEN}_error
+fi

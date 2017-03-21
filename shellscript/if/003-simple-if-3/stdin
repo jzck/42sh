@@ -1,0 +1,9 @@
+if [ -f no_${GLOBAL_TOKEN}_FILE ]
+then
+	./write_on_stdout ${GLOBAL_TOKEN}_error > ${GLOBAL_TOKEN}_file
+elif [ -f no_${GLOBAL_TOKEN}_FILE ]
+then
+	./write_on_stdout ${GLOBAL_TOKEN}_error > ${GLOBAL_TOKEN}_file
+else
+	./write_on_stdout ${GLOBAL_TOKEN}_stdout > ${GLOBAL_TOKEN}_file
+fi
