@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 01:44:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 13:50:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 				data_singleton()->argv[0]);
 		return (0);
 	}
-	if (av[1] && !ft_stris(av[1], ft_isdigit))
+	if (av && av[1] && !ft_stris(av[1], ft_isdigit))
 		error_msg(EXITERR_0);
 	status = (av && av[1]) ?
 			ft_atoi(av[1]) : ft_atoi(ft_getenv(data_singleton()->env, "?"));

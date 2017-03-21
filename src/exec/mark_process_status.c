@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:33:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 13:41:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		mark_process_status(pid_t pid, int status)
 		else
 		{
 			p->state = PROCESS_COMPLETED;
-			if (WIFSIGNALED(status))
+			if (WIFSIGNALED(status) && WTERMSIG(status) != SIGPIPE)
 				ft_dprintf(2, "%s\n", strsignal((WTERMSIG(status))));
 		}
 		return (0);
