@@ -52,7 +52,7 @@ static int	c_storing(t_comp *c, char *value, unsigned char type)
 		return (0);
 	if (c->match && ft_strnequ(c->match, value, ft_strlen(c->match)) != 1)
 		return (0);
-	if (!(tmp = (t_clst *)malloc(sizeof(t_clst))))
+	if (!(tmp = (t_clst *)ft_malloc(sizeof(t_clst))))
 		return (-1);
 	tmp->name = ft_strdup(value);
 	tmp->len = ft_strlen(tmp->name);
