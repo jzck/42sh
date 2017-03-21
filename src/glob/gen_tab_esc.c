@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 20:04:40 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:14:55 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:13:39 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char						**gen_tab(const char *pat,
 	char	**my_tab;
 	int		len;
 
-	if (!(my_tab = (char **)malloc(sizeof(char *) * (esc2 ? 4 : 3))))
+	if (!(my_tab = (char **)ft_malloc(sizeof(char *) * (esc2 ? 4 : 3))))
 		return (NULL);
 	if (dup)
 	{

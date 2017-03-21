@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 20:49:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/02/24 22:03:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:13:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char			**ft_strsplit_spe(const char *str,
 	int			len;
 
 	if (!str || !(s1 =
-				(char**)malloc(sizeof(*s1) * (ft_nbstr_c(str, esc, c) + 1))))
+				(char**)ft_malloc(sizeof(*s1) * (ft_nbstr_c(str, esc, c) + 1))))
 		return (NULL);
 	i = 0;
 	fix = str;
@@ -72,7 +72,7 @@ char			**ft_strsplit_spe(const char *str,
 		++str;
 	while (*str && (len = ft_strlen_c(str, fix, esc, c)))
 	{
-		if (!(s1[i] = (char*)malloc(sizeof(**s1) * (len + 1))))
+		if (!(s1[i] = (char*)ft_malloc(sizeof(**s1) * (len + 1))))
 			return (NULL);
 		ft_strncpy(s1[i], str, len);
 		s1[i][len] = '\0';

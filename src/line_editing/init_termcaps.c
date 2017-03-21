@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:33:41 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/07 17:36:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:11:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ struct termios	*ft_save_termios(int save)
 	}
 	if (save > 0)
 	{
-		term_save = (struct termios *)malloc(sizeof(struct termios));
+		term_save = (struct termios *)ft_malloc(sizeof(struct termios));
 		tcgetattr(0, term_save);
 	}
 	return (term_save);

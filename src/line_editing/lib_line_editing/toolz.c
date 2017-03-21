@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 17:06:30 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 16:37:39 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:10:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		*ft_strndup(char const *s, int n)
 	char	*str;
 
 	i = 0;
-	if (!(str = (char *)malloc(sizeof(char) * (n + 1))))
+	if (!(str = (char *)ft_malloc(sizeof(char) * (n + 1))))
 		return (NULL);
 	if (str)
 	{

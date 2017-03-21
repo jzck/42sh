@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 10:32:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 18:11:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_strdupi_space(char const *s)
 		++i;
 	if (s[i] == '\n')
 		++i;
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+	if (!(str = (char *)ft_malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	if (str)
 	{

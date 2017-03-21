@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 18:32:40 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/07 21:15:42 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:13:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_ld_pushfront(t_ld **alst, void *content)
 
 	if (!alst || !*alst)
 		return (ft_ld_new(alst, content));
-	if ((new = (t_ld *)malloc(sizeof(t_ld))))
+	if ((new = (t_ld *)ft_malloc(sizeof(t_ld))))
 	{
 		front = ft_ld_front(*alst);
 		new->next = front;
