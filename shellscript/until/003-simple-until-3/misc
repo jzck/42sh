@@ -1,0 +1,1 @@
+expected_to create_file "${GLOBAL_TOKEN}_OUTPUT" matching_regex "${GLOBAL_TOKEN}_stdout"

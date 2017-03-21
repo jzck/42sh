@@ -1,0 +1,3 @@
+expected_to match_regex "${GLOBAL_TOKEN}_stdout1"
+expected_to match_regex "${GLOBAL_TOKEN}_stdout2"
+expected_to match_regex "${GLOBAL_TOKEN}_stdout3"

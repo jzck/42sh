@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:51:23 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 23:22:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		builtin_bg(const char *path, char *const av[], char *const envp[]);
 int		builtin_history(const char *path, char *const av[], char *const envp[]);
 int		builtin_hash(const char *path, char *const av[], char *const envp[]);
 int		builtin_math(const char *path, char *const av[], char *const envp[]);
+
+int		error_msg(char *msg);
 
 #endif

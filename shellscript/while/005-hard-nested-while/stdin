@@ -1,0 +1,47 @@
+while [ -f ${GLOBAL_TOKEN}_FILE ]
+do
+	while [ -f ${GLOBAL_TOKEN}_FILE ]
+	do
+		while [ -f ${GLOBAL_TOKEN}_FILE ]
+		do
+			while [ -f ${GLOBAL_TOKEN}_FILE ]
+			do
+				while [ -f ${GLOBAL_TOKEN}_FILE ]
+				do
+				./write_on_stdout ${GLOBAL_TOKEN}_stdout1
+				./delete-file ${GLOBAL_TOKEN}_FILE
+				done
+			done
+		done
+	done
+	./create-file ${GLOBAL_TOKEN}
+	while [ -f ${GLOBAL_TOKEN}_FILE ]
+	do
+		while [ -f ${GLOBAL_TOKEN}_FILE ]
+		do
+			while [ -f ${GLOBAL_TOKEN}_FILE ]
+			do
+				while [ -f ${GLOBAL_TOKEN}_FILE ]
+				do
+				./write_on_stdout ${GLOBAL_TOKEN}_stdout2
+				./delete-file ${GLOBAL_TOKEN}_FILE
+				done
+			done
+		done
+	done
+	./create-file ${GLOBAL_TOKEN}	
+	while [ -f ${GLOBAL_TOKEN}_FILE ]
+	do
+		while [ -f ${GLOBAL_TOKEN}_FILE ]
+		do
+			while [ -f ${GLOBAL_TOKEN}_FILE ]
+			do
+				while [ -f ${GLOBAL_TOKEN}_FILE ]
+				do
+				./write_on_stdout ${GLOBAL_TOKEN}_stdout3
+				./delete-file ${GLOBAL_TOKEN}_FILE
+				done
+			done
+		done
+	done
+done

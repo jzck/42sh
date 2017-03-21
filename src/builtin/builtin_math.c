@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 14:45:09 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/20 23:21:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 #define MATHERR_2	"math : invalid operator\n"
 #define MATHERR_3	"math : invalid operand\n"
 #define MATHERR_4	"math : division by 0\n"
-
-static int	error_msg(char *msg)
-{
-	ft_dprintf(2, "{red}%s{eoc}", msg);
-	return (1);
-}
 
 static int	init_math(char **var, char **value, char **operator,
 		char **operand)

@@ -1,0 +1,5 @@
+./write_on_stdout_and_stderr ${GLOBAL_TOKEN}_stdout ${GLOBAL_TOKEN}_stderr | while [ -f ${GLOBAL_TOKEN}_FILE ]
+do
+	./read_on_stdin_once
+	./delete-file ${GLOBAL_TOKEN}_FILE
+done
