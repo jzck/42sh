@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:24:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:38:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:33:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		ft_xattr_print(char *path);
 int		ft_xattr_count(char *path);
 char	*ft_getenv(char **env, char *key);
 int		dup2_close(int fd1, int fd2);
+int		fd_replace(int fd1, int fd2);
 
 #endif

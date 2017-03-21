@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 14:25:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/07 19:58:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_sstrdup(char **list)
 	size = 0;
 	while (list[size])
 		size++;
-	cpy = (char **)malloc(sizeof(char *) * (size + 1));
+	cpy = (char **)ft_malloc(sizeof(char *) * (size + 1));
 	while (*list)
 	{
 		cpy[i++] = ft_strdup(*list);

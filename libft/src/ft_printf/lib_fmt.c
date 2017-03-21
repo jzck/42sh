@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:33:35 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/10 16:54:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_fmt	*ft_fmt_init(void)
 {
 	t_fmt	*fmt;
 
-	fmt = (t_fmt *)malloc(sizeof(t_fmt) + 1);
+	fmt = (t_fmt *)ft_malloc(sizeof(t_fmt) + 1);
 	ft_bzero(fmt->flags, 6);
 	ft_bzero(fmt->modifier, 3);
 	fmt->conversion = '\0';

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:57:38 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:23:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:43:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list	*new;
 
-	if (!(new = (t_list *)malloc(sizeof(*new))))
+	if (!(new = (t_list *)ft_malloc(sizeof(*new))))
 		return (NULL);
 	new->next = NULL;
 	new->content_size = content_size;

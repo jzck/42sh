@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:12:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 12:36:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:35:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,15 @@ int		redirect_greatand(t_redir *redir)
 	}
 	if (!ft_stris(redir->word, ft_isdigit))
 	{
-		ft_dprintf(2, "{red}%s: %s: can only be digits{eoc}\n",
-				data_singleton()->argv[0], redir->word);
+		SH_ERR("%s: can only be digits{eoc}\n", redir->word);
 		return (1);
 	}
 	fdold = ft_atoi(redir->word);
 	fdnew = redir->n;
-	if (fdold == fdnew)
-		return (0);
 	if (fdold > 9)
 		return (bad_fd(fdold));
 	if (fd_is_valid(fdold, O_WRONLY | O_RDWR))
-		dup2_close(fdold, fdnew);
+		fd_replace(fdold, fdnew);
 	else
 		return (bad_fd(fdold));
 	return (0);

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   fd_replace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 14:58:43 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/21 16:32:26 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/21 16:40:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+int			fd_replace(int fd1, int fd2)
 {
-	char	*out;
-	size_t	i;
-
-	if (!(out = (char *)ft_malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = -1;
-	while (++i < len)
-		out[i] = s[i + start];
-	out[i] = '\0';
-	return (out);
+	if (fd1 != fd2)
+		return(dup2_close(fd1, fd2));
+	return (0);
 }

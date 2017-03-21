@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:07:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:55:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*ft_strdupi_w(char const *s)
 	i = 0;
 	while (s[i] && s[i] != ' ' && s[i] != '\t')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = (char *)ft_malloc(sizeof(char) * (i + 1));
 	if (str)
 	{
 		str[i--] = '\0';
@@ -59,7 +59,7 @@ char		**ft_split_whitespaces(char const *s)
 	str = NULL;
 	if (!(s))
 		return (str);
-	str = (char **)malloc(sizeof(char *) * (ft_len_words(s) + 1));
+	str = (char **)ft_malloc(sizeof(char *) * (ft_len_words(s) + 1));
 	i = 0;
 	j = 0;
 	if (!(str))

@@ -82,7 +82,7 @@ void				c_init(t_data *s, long int input)
 {
 	int				len_trail;
 
-	if (!(s->comp = (t_comp *)malloc((sizeof(t_comp)))))
+	if (!(s->comp = (t_comp *)ft_malloc((sizeof(t_comp)))))
 		return ;
 	c_init_base(s->comp);
 	s->comp->rcmd = c_trimmer(s->line.input, s->line.pos, s->line.pos);

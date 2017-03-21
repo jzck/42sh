@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 18:38:13 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 16:40:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ t_itof		g_redirmap[] =
 	{0, NULL},
 };
 
-static void	process_close(int fd1, int fd2)
-{
-	if (fd1 != fd2)
-		dup2_close(fd1, fd2);
-}
-
 int			process_redirect(t_process *p)
 {
 	t_list	*redirs;
@@ -38,6 +32,8 @@ int			process_redirect(t_process *p)
 	redirs = p->redirs;
 	if (p->to_close != STDIN)
 		close(p->to_close);
+	fd_replace(p->fdin, STDIN);
+	fd_replace(p->fdout, STDOUT);
 	while (redirs)
 	{
 		redir = redirs->content;
@@ -53,7 +49,5 @@ int			process_redirect(t_process *p)
 			}
 		redirs = redirs->next;
 	}
-	process_close(p->fdin, STDIN);
-	process_close(p->fdout, STDOUT);
 	return (0);
 }

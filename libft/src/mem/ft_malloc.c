@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 14:58:43 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/21 15:45:00 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/21 16:34:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+void	*ft_malloc(size_t size)
 {
-	char	*out;
-	size_t	i;
+	void	*ptr;
 
-	if (!(out = (char *)ft_malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = -1;
-	while (++i < len)
-		out[i] = s[i + start];
-	out[i] = '\0';
-	return (out);
+	ptr = malloc(size);
+	if (!ptr)
+	{
+		ft_dprintf(2, "{red}%s{eoc}", strerror(errno));
+		exit(errno);
+	}
+	return (ptr);
 }
