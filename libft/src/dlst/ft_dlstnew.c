@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:27:20 by jhalford          #+#    #+#             */
-/*   Updated: 2016/12/07 17:35:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:43:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_dlist	*ft_dlstnew(void const *content, size_t content_size)
 
 	if (!content)
 	{
-		new = malloc(sizeof(*new));
+		new = ft_malloc(sizeof(*new));
 		if (!new)
 			return (NULL);
 		new->content_size = 0;
@@ -26,7 +26,7 @@ t_dlist	*ft_dlstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		new = (t_dlist *)malloc(sizeof(*new));
+		new = (t_dlist *)ft_malloc(sizeof(*new));
 		if (!new)
 			return (NULL);
 		new->content_size = content_size;

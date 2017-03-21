@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:31:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:50:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_char_conversion(t_fmt *fmt, va_list ap)
 	char	*ret;
 
 	(void)fmt;
-	ret = (char *)malloc(sizeof(char) + 1);
+	ret = (char *)ft_malloc(sizeof(char) + 1);
 	ret[0] = (char)va_arg(ap, int);
 	ret[1] = '\0';
 	return (ret);

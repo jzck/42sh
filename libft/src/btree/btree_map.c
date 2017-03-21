@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 11:50:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:09:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:18 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_btree		*btree_map(t_btree *root, void *(*f)(void *))
 
 	if (!root)
 		return (NULL);
-	if (!(new = (t_btree *)malloc(sizeof(*new))))
+	if (!(new = (t_btree *)ft_malloc(sizeof(*new))))
 		return (NULL);
 	new->item = (*f)(root->item);
 	new->left = btree_map(root->left, f);

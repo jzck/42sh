@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:58:34 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/11 16:37:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:42:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strnew(size_t size)
 	char	*addr;
 	size_t	i;
 
-	addr = (char *)malloc(size + 1);
+	addr = (char *)ft_malloc(size + 1);
 	if (addr == NULL)
 		return (NULL);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:48:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:49:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 	{
 		notified = 1;
 		if (has_stopped_job() || has_running_job())
-			SH_ERR("There are running and/or stopped jobs");
-		return (0);
+			return (SH_ERR("There are running and/or stopped jobs"));
 	}
 	if (av && av[1] && !ft_stris(av[1], ft_isdigit))
 		SH_ERR(EXITERR_0);

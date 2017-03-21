@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:49:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 09:37:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:44:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <errno.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -64,6 +65,7 @@ int		ft_vdprintf(int fd, const char *format, va_list ap);
 int		ft_asprintf(char **ret, const char *format, ...);
 int		ft_vasprintf(char **ret, const char *format, va_list ap);
 
+void	*ft_malloc(size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/16 13:43:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 00:35:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/21 15:43:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_btree	*btree_create_node(void const *item, size_t content_size)
 {
 	t_btree	*new;
 
-	if (!(new = (t_btree *)malloc(sizeof(t_btree))))
+	if (!(new = (t_btree *)ft_malloc(sizeof(t_btree))))
 		return (NULL);
 	new->left = 0;
 	new->right = 0;

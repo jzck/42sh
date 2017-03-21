@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 15:52:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:19:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:29:36 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 			if (ft_fmtcalc(&final, &str, ap))
 				return (-1);
 		}
-		else
-			final = ft_strjoin(final, (char[]){*str++, 0});
+		else if (!(final = ft_strjoin(final, (char[]){*str++, 0})))
+				return (-1);
 		ft_strdel(&tmp);
 	}
 	*ret = final;
