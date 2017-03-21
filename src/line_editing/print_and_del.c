@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:02:43 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:32:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 10:14:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			ft_print(int ret, char **str, size_t *pos)
 	int		j;
 
 	j = 0;
+	if (ft_strlen(*str) > SIZE_LINE)
+		return (0);
 	if (!(*str = ft_realloc_imput(*str, ret, *pos)))
 		return (-1);
 	while (*(*str + *pos + j) && *(*str + *pos + j) != '\n')

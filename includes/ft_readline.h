@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 12:32:15 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 10:02:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 # define TOUCHE_OPT_X 8948194
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
+
+# define SIZE_LINE 512
 
 # define CORRUPT 1
 

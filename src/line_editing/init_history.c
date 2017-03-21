@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:34:23 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 16:01:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 10:39:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		ft_str_is_print(char *str)
 static void		corrupt_history(int corrupt, char *home)
 {
 	if (corrupt)
-		ft_dprintf(2, "42sh: corrupt history file %s/.zsh_history\n", home);
+		ft_dprintf(2, "42sh: corrupt history file %s/.42sh_history\n", home);
 }
 
 void			ft_init_history(void)

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 11:56:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 10:32:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ int			ft_v(char **str, size_t *pos)
 	if (!*str || !tmp)
 		return (0);
 	while (tmp[++i])
+	{
+		if (ft_strlen(*str) > SIZE_LINE)
+			break ;
 		if (!(*str = ft_realloc_imput(*str, tmp[i], *pos + i)))
 			return (-1);
+	}
 	if (*pos)
 	{
 		--(*pos);
@@ -75,7 +79,7 @@ int			ft_x(char **str, size_t *pos)
 		ft_strdel(tmp);
 	if (!(*tmp = ft_strdupi_space(&(*str)[*pos])))
 		return (-1);
-	i = ft_strlen(*tmp);
+	i = ft_strlen(*tmp) - 1;
 	while (i >= 0)
 	{
 		if (!(*str = ft_remove_imput(*str, *pos + i)))

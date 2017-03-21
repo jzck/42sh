@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/18 12:23:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/21 10:09:42 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@ static void			c_replace_globbing(char **glob, size_t start)
 	ref_mid = ft_sstrtostr(glob, " ");
 	ref_next = ft_strdup(str + pos);
 	data_singleton()->line.input = ft_str3join(ref_prev, ref_mid, ref_next);
-	free(ref_prev);
-	free(ref_mid);
-	free(ref_next);
-	free(str);
+	if (ft_strlen(data_singleton()->line.input) > SIZE_LINE)
+	{
+		ft_strdel(&data_singleton()->line.input);
+		data_singleton()->line.input = str;
+	}
+	else
+		ft_strdel(&str);
+	ft_strdel(&ref_prev);
+	ft_strdel(&ref_mid);
+	ft_strdel(&ref_next);
 	ft_sstrfree(glob);
 }
 
