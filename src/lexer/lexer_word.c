@@ -19,8 +19,9 @@ int			lexer_word(t_list **alst, t_lexer *lexer)
 
 	token = (*alst)->content;
 	token->type = token->type ? token->type : TK_WORD;
-	if ((state = get_state_global(lexer))
-		|| (state = get_state_redir(lexer)))
+	if (lexer->str[lexer->pos] != '!'
+		&& ((state = get_state_global(lexer))
+		|| (state = get_state_redir(lexer))))
 		lexer->state = state;
 	else if (lexer->str[lexer->pos] == '='
 			&& word_is_assignment((char *[]){token->data, (char *)token->esc}))

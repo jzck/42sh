@@ -131,7 +131,7 @@ struct	s_job
 struct	s_exec
 {
 	t_job		job;
-	int			fd_save[3];
+	int			fd_save[10];
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;

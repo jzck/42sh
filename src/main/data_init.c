@@ -17,11 +17,14 @@ extern char	**environ;
 static int		localenv_init(void)
 {
 	t_data	*data;
+	char	*pid;
 
+	pid = ft_itoa(getpid());
 	data = data_singleton();
 	data->local_var = NULL;
 	builtin_setenv(NULL, (char *[]){"local", "IFS", " \t\n", 0}, NULL);
 	builtin_setenv(NULL, (char *[]){"local", "PS2", " >", 0}, NULL);
+	ft_strdel(&pid);
 	return (0);
 }
 

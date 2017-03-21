@@ -58,8 +58,11 @@ static int	read_stdin(int *ret, int *j)
 {
 	*j = 0;
 	*ret = 0;
-	if (read(0, ret, sizeof(int)) < 0)
+	if (read(STDIN, ret, sizeof(int)) < 0)
+	{
+		DG("read problem: %s", strerror(errno));
 		return (-1);
+	}
 	return (1);
 }
 

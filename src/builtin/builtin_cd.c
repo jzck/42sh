@@ -81,14 +81,14 @@ int				builtin_cd(const char *path,
 	opts = CDOPT_L;
 	i = builtin_cd_opts(av, &opts);
 	if (!(target = builtin_cd_special(av + i, envp)))
-		return (builtin_return_status(0, 1));
+		return (1);
 	cwd = getcwd(NULL, 0);
 	builtin_setenv(path, (char*[4]){"setenv", "OLDPWD", cwd, NULL}, envp);
 	free(cwd);
 	if (chdir(target))
 	{
 		SH_ERR(CDERR_1, target);
-		return (builtin_return_status(0, 1));
+		return (1);
 	}
 	else if (target != av[i])
 		ft_printf("%s\n", target);
@@ -97,5 +97,5 @@ int				builtin_cd(const char *path,
 	free(cwd);
 	if (!ft_strcmp(*(av + i), "-"))
 		free(target);
-	return (builtin_return_status(0, 0));
+	return (0);
 }

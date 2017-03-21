@@ -52,6 +52,6 @@ int				exec_leaf(t_btree **ast)
 		}
 	}
 	else
-DG("WHY HERE?");
+DG("WHY HERE? --> because no fork means no job control");
 	return (0);
 }

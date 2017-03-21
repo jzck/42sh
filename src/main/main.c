@@ -43,6 +43,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 			return (ret);
 		if (do_lexer_routine(token, stream) > 0)
 			continue ;
+		/* token_print(*token); */
 		if ((ret = do_parser_routine(token, ast)) == 1
 			&& SH_NO_INTERACTIVE(data->opts))
 			return (ret);

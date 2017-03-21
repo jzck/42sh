@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int				do_the_muther_forker(t_process *p)
+int		process_fork(t_process *p)
 {
 	pid_t		pid;
 
@@ -35,8 +35,9 @@ int				do_the_muther_forker(t_process *p)
 	exit(p->map.launch(p));
 }
 
-static int		do_the_fork_if_i_have_to(t_process *p)
+int		process_launch(t_process *p)
 {
+	p->state = PROCESS_RUNNING;
 	if (IS_PIPESINGLE(*p)
 			&& p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
 	{
@@ -45,27 +46,13 @@ static int		do_the_fork_if_i_have_to(t_process *p)
 			set_exitstatus(1, 1);
 			return (0);
 		}
-		return (p->map.launch(p));
-		/* set_exitstatus(p->map.launch(p), 1); */
-		/* return (0); */
-	}
-	return (do_the_muther_forker(p));
-}
-
-int				process_launch(t_process *p)
-{
-	pid_t		pid;
-
-	p->state = PROCESS_RUNNING;
-	if (!(pid = do_the_fork_if_i_have_to(p)))
-	{
+		set_exitstatus(p->map.launch(p), 1);
 		process_resetfds(p);
 		process_free(p, 0);
 		return (1);
 	}
-	DG("FORK");
-	p->pid = pid;
-	process_setgroup(p, pid);
+	p->pid = process_fork(p):
+	process_setgroup(p, p->pid);
 	if (p->fdin != STDIN)
 		close(p->fdin);
 	if (p->fdout != STDOUT)

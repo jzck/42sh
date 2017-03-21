@@ -35,6 +35,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		tcsetattr(STDIN, TCSANOW, &data_singleton()->jobc.shell_tmodes);
 	job_hup_all();
 	data_exit();
+	DG("EXITING NOW");
 	exit(status);
 	return (0);
 }
