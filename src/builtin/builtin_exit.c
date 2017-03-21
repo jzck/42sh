@@ -6,13 +6,13 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:28:41 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 13:50:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:01:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define EXITERR_0 SHELL_NAME ": numeric argument required\n"
+#define EXITERR_0 "exit: numeric argument required"
 
 int		builtin_exit(const char *path, char *const av[], char *const envp[])
 {
@@ -33,7 +33,7 @@ int		builtin_exit(const char *path, char *const av[], char *const envp[])
 		return (0);
 	}
 	if (av && av[1] && !ft_stris(av[1], ft_isdigit))
-		error_msg(EXITERR_0);
+		SH_ERR(EXITERR_0);
 	status = (av && av[1]) ?
 			ft_atoi(av[1]) : ft_atoi(ft_getenv(data_singleton()->env, "?"));
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))

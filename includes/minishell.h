@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 02:11:31 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:03:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # include "completion.h"
 # include "hash.h"
 /* # define malloc(x) NULL */
+
+# define SH_MSG(s, ...)	"{red}%s: " s "{eoc}\n", g_argv[0], ##__VA_ARGS__
+# define SH_ERR(s, ...)		ft_dprintf(STDERR, SH_MSG(s, ##__VA_ARGS__))
 
 #ifndef DEBUG
 # define DEBUG_MODE 0
