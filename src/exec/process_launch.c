@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 16:34:15 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:26:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ int		process_fork(t_process *p)
 	pid_t		pid;
 
 	if ((pid = fork()) == -1)
-	{
-		ft_dprintf(3, "{red}%s: internal fork error{eoc}\n", SHELL_NAME);
-		exit(1);
-	}
+		exit(SH_ERR("fork(): %s", strerror(errno)));
 	else if (pid)
 		return (pid);
 	if (!p)

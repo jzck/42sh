@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:54:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/16 16:49:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:29:32 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		builtin_bg(const char *path, char *const av[], char *const envp[])
 	(void)envp;
 	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
-		ft_dprintf(2, "{red}bg: %s{eoc}\n", SH_MSG_NOJOBC);
+		SH_ERR("bg: %s", SH_MSG_NOJOBC);
 		return (-1);
 	}
 	jobc = &data_singleton()->jobc;
@@ -35,8 +35,8 @@ int		builtin_bg(const char *path, char *const av[], char *const envp[])
 		return (0);
 	}
 	else if (av[1])
-		ft_dprintf(2, "{red}bg: job not found: %i{eoc}\n", id);
+		SH_ERR("bg: job not found: [%i]", id);
 	else
-		ft_dprintf(2, "{red}bg: no current job{eoc}\n");
+		SH_ERR("bg: no current job");
 	return (1);
 }

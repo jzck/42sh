@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 16:29:35 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/05 16:29:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:15:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int			lexer_curly_braces(t_list **alst, t_lexer *lexer)
 	if (lexer->str[lexer->pos] == '{')
 	{
 		token->type = TK_LBRACE;
-		push(&lexer->stack, PAREN);
+		push(&lexer->stack, CURLY_BRACKETS);
 	}
-	else if (get_lexer_stack(*lexer))
+	else
 	{
 		token->type = TK_RBRACE;
-		pop(&lexer->stack);
+		if (get_lexer_stack(*lexer) == CURLY_BRACKETS)
+			pop(&lexer->stack);
 	}
 	lexer->pos++;
 	lexer->state = DEFAULT;

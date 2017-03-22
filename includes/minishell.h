@@ -6,12 +6,13 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 17:23:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:29:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # define SHELL_NAME		"minishell"
 
 # include <dirent.h>

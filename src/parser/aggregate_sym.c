@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 19:18:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:00:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_aggrematch		g_aggrematch[] =
 	{TK_DONE, COMPOUND_LIST, DO_GROUP, TK_DO},
 	{TK_ESAC, TK_IN, CASE_CLAUSE, TK_CASE},
 	{TK_ESAC, CASE_LIST_NS, CASE_CLAUSE, TK_CASE},
+	{TK_PAREN_CLOSE, SUBSHELL, SUBSHELL, TK_PAREN_OPEN},
+//	{TK_PAREN_CLOSE, SEMI_SUBSHELL, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, COMPOUND_LIST, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, CMD_SUPERIOR, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, PIPE_SEMI_SEQUENCE, SUBSHELL, TK_PAREN_OPEN},

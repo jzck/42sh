@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 22:18:46 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 18:13:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:24:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ unsigned char	**ft_strsplit_esc(const char *str,
 
 	if ((pos = -1) && !str)
 		return (NULL);
-	if (!(s1 = (unsigned char **)ft_malloc(sizeof(*s1) * (nb_c(str, esc, c) + 1))))
+	if (!(s1 = ft_malloc(sizeof(*s1) * (nb_c(str, esc, c) + 1))))
 		return (NULL);
 	i = 0;
 	fix = str;

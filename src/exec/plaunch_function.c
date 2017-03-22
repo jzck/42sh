@@ -6,13 +6,13 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 16:22:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:37:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define FUNCERR_0	SHELL_NAME ":maximum nested function level reached\n"
+#define FUNCERR_0	SHELL_NAME ":maximum nested function level reached"
 
 int				plaunch_function(t_process *p)
 {
@@ -36,6 +36,6 @@ int				plaunch_function(t_process *p)
 	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL",
 		ft_itoa(value), 0}, NULL);
 	ft_exec(&p->data.function.content);
-	DG();
+	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL", "0", 0}, NULL);
 	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
 }

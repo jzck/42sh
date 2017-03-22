@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 23:22:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 17:28:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define BT_ENV_LI		(1 << 0)
 # define BT_ENV_LU		(1 << 1)
 
-struct s_env_data
+struct	s_env_data
 {
 	t_flag		flag;
 	char		**av_data;
