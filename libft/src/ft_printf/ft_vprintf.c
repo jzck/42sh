@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 15:52:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 16:34:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:22:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 				return (-1);
 		}
 		else if (!(final = ft_strjoin(final, (char[]){*str++, 0})))
-				return (-1);
+			return (-1);
 		ft_strdel(&tmp);
 	}
 	*ret = final;
