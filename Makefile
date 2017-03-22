@@ -102,7 +102,6 @@ exec/plaunch_until.c\
 exec/plaunch_while.c\
 exec/process_launch.c\
 exec/process_redirect.c\
-exec/process_resetfds.c\
 exec/process_set.c\
 exec/process_setgroup.c\
 exec/process_setsig.c\
@@ -274,6 +273,7 @@ main/data_singleton.c\
 main/ft_putast.c\
 main/main.c\
 main/shell_init.c\
+main/shell_reset.c\
 parser/add_bang.c\
 parser/add_case.c\
 parser/add_cmd.c\

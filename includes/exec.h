@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 20:17:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:35:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ int		process_fork(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);
-void	process_resetfds(t_process *p);
 
 int		fd_is_valid(int fd, int flag);
 int		bad_fd(int fd);

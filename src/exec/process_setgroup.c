@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:58:33 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:45:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int		process_setgroup(t_process *p, pid_t pid)
 	if (!SH_IS_INTERACTIVE(data_singleton()->opts))
 		return (0);
 	if (setpgid(pid, j->pgid) == -1)
-		ft_dprintf(2, "{red}%s: internal setpgid() errno=%i{eoc}\n",
-									SHELL_NAME, errno);
+		SH_ERR("setpgid(): %s", strerror(errno));
 	if (pid == 0 && JOB_IS_FG(j->attrs))
 		tcsetpgrp(STDIN, j->pgid);
 	return (0);
