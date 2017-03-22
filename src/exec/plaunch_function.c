@@ -6,13 +6,13 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 20:59:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:22:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define FUNCERR_0	SHELL_NAME ":maximum nested function level reached\n"	 
+#define FUNCERR_0	SHELL_NAME ":maximum nested function level reached\n"
 
 int				plaunch_function(t_process *p)
 {
@@ -26,7 +26,7 @@ int				plaunch_function(t_process *p)
 		func_lvl += ft_strlenchr(func_lvl, '=') + 1;
 		if ((value = ft_atoi(func_lvl)) >= 199)
 		{
-			ft_strdel(&temp);	
+			ft_strdel(&temp);
 			return (SH_ERR(FUNCERR_0));
 		}
 		value += 1;

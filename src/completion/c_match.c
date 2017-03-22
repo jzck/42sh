@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 16:02:25 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:20:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char	*c_strdupi(char *s, int (*f)(char))
 	}
 	return (str);
 }
-
 
 /*
 ** Seek the current word.

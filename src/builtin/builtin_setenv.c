@@ -6,13 +6,13 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:25:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 18:11:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:21:49 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define	SETERR_0	"%s: %s: invalid variable name"
+#define SETERR_0 "%s: %s: invalid variable name"
 
 static int	assign_var(char *const av[], char ***env)
 {
