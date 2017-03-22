@@ -1,313 +1,462 @@
-Norme: ./src/builtin/bt_read_get.c
-Norme: ./src/builtin/builtin_echo.c
-Norme: ./src/builtin/bt_read_term.c
-Norme: ./src/builtin/builtin_exit.c
-Norme: ./src/builtin/builtin_hash.c
-Norme: ./src/builtin/builtin_history.c
-Norme: ./src/builtin/builtin_export.c
-Norme: ./src/builtin/builtin_cd.c
-Norme: ./src/builtin/builtin_return_status.c
-Norme: ./src/builtin/builtin_env.c
-Error (line 61): function env_treat_flag has 32 lines
-Norme: ./src/builtin/builtin_unset.c
-Norme: ./src/builtin/builtin_unsetenv.c
-Norme: ./src/builtin/builtin_setenv.c
-Error (line 15): wrong number of spaces in preprocessor line
-Norme: ./src/builtin/error_msg.c
-Norme: ./src/builtin/is_builtin.c
-Norme: ./src/builtin/builtin_read.c
-Norme: ./src/completion/c_arrow.c
-Norme: ./src/builtin/builtin_math.c
-Norme: ./src/completion/c_find_abspath.c
-Norme: ./src/completion/c_find_binary.c
-Norme: ./src/completion/c_find_env.c
-Norme: ./src/completion/c_clear.c
-Norme: ./src/completion/c_match.c
-Norme: ./src/completion/c_init.c
-Norme: ./src/completion/c_find_files.c
-Norme: ./src/completion/c_misc.c
-Norme: ./src/completion/c_match_glob.c
-Error (line 19): function c_replace_globbing has 27 lines
-Norme: ./src/completion/c_match_update.c
-Norme: ./src/completion/c_parser.c
-Norme: ./src/completion/c_output.c
-Norme: ./src/completion/c_sizing.c
-Norme: ./src/completion/c_terminal.c
-Norme: ./src/completion/c_printer.c
-Norme: ./src/exec/bad_fd.c
-Norme: ./src/completion/completion.c
-Norme: ./src/exec/error_badidentifier.c
-Norme: ./src/exec/ast_free.c
-Norme: ./src/exec/exec_ampersand.c
-Norme: ./src/exec/exec_and_if.c
-Norme: ./src/exec/exec_bang.c
-Norme: ./src/exec/exec_else.c
-Norme: ./src/exec/exec_elif.c
-Norme: ./src/exec/exec_case_branch.c
-Norme: ./src/exec/exec_pipe.c
-Norme: ./src/exec/exec_or_if.c
-Norme: ./src/exec/exec_semi.c
-Norme: ./src/exec/exec_var.c
-Norme: ./src/exec/exec_reset.c
-Norme: ./src/exec/fd_is_valid.c
-Norme: ./src/completion/c_pathsolver.c
-Norme: ./src/exec/exec_leaf.c
-Error (line 55): bad indentation
-Norme: ./src/exec/mark_process_status.c
-Norme: ./src/exec/is_function.c
-Error (line 31, col 3): missing space after break
-Norme: ./src/exec/ft_findexec.c
-Norme: ./src/exec/pfree_cmd.c
-Norme: ./src/exec/pfree_func.c
-Norme: ./src/exec/pfree_cond.c
-Norme: ./src/exec/ft_exec.c
-Norme: ./src/exec/pfree_subshell.c
-Norme: ./src/exec/node_copy.c
-Norme: ./src/exec/pfree_list.c
-Norme: ./src/exec/plaunch_brace.c
-Norme: ./src/exec/plaunch_empty.c
-Norme: ./src/exec/plaunch_builtin.c
-Norme: ./src/exec/plaunch_case.c
-Norme: ./src/exec/plaunch_if.c
-Error (line 19): comment not well formatted
-Error (line 19): comment not well placed
-Norme: ./src/exec/plaunch_subshell.c
-Norme: ./src/exec/plaunch_function.c
-Error (line 15): spaces at the end of line
-Error (line 29): spaces at the end of line
-Error (line 29, col 19): bad character after ;
-Norme: ./src/exec/plaunch_for.c
-Norme: ./src/exec/plaunch_while.c
-Norme: ./src/exec/plaunch_file.c
-Norme: ./src/exec/plaunch_until.c
-Norme: ./src/exec/process_resetfds.c
-Error (line 25): comment not well formatted
-Error (line 25): bad indentation
-Error (line 25): line has 146 characters
-Error (line 25): comment not well placed
-Error (line 26): comment not well formatted
-Error (line 26): bad indentation
-Error (line 26): comment not well placed
-Error (line 27): bad indentation
-Error (line 28): comment not well formatted
-Error (line 28): comment not well placed
-Error (line 29): comment not well formatted
-Error (line 29): comment not well placed
-Error (line 30): comment not well formatted
-Error (line 30): comment not well placed
-Norme: ./src/exec/process_setgroup.c
-Norme: ./src/exec/process_launch.c
-Error (line 49): comment not well formatted
-Error (line 49): comment not well placed
-Error (line 50): comment not well formatted
-Error (line 50): comment not well placed
-Error (line 67): bad indentation
-Norme: ./src/exec/process_setsig.c
-Norme: ./src/exec/pset_brace.c
-Norme: ./src/exec/process_redirect.c
-Norme: ./src/exec/pset_case.c
-Norme: ./src/exec/pset_for.c
-Norme: ./src/exec/pset_if.c
-Norme: ./src/exec/pset_subshell.c
-Norme: ./src/exec/pset_until.c
-Norme: ./src/exec/process_set.c
-Error (line 47): function process_set has 26 lines
-Norme: ./src/exec/pset_while.c
-Norme: ./src/exec/redir_free.c
-Norme: ./src/exec/pset_cmd.c
-Norme: ./src/exec/redirect_dgreat.c
-Norme: ./src/exec/redir_copy.c
-Norme: ./src/exec/redirect_great.c
-Norme: ./src/exec/redirect_dless.c
-Norme: ./src/exec/redirect_less.c
-Norme: ./src/exec/redirect_greatand.c
-Norme: ./src/exec/set_exitstatus.c
-Norme: ./src/exec/redirect_lessand.c
-Norme: ./src/exec/token_to_argv.c
-Norme: ./src/glob/esc_print.c
-Norme: ./src/glob/dir_glob.c
-Norme: ./src/glob/command_getoutput.c
-Error: global scope bad aligned
-Error (line 47): line has 83 characters
-Error (line 52): function execute_command has 26 lines
-Norme: ./src/glob/expand_home.c
-Norme: ./src/glob/expand_esc.c
-Norme: ./src/glob/ft_strsplit_esc.c
-Error (line 69): line has 84 characters
-Norme: ./src/glob/expand_brace.c
-Norme: ./src/glob/expand_var.c
-Norme: ./src/glob/gen_tab_esc.c
-Norme: ./src/glob/is_char_esc.c
-Norme: ./src/glob/ft_strsplit_spe.c
-Norme: ./src/glob/tab_esc_copy.c
-Norme: ./src/glob/word_is_assignment.c
-Norme: ./src/glob/glob.c
-Norme: ./src/hash_table/hash.c
-Norme: ./src/hash_table/ft_add_hash.c
-Norme: ./src/hash_table/hash_str.c
-Norme: ./src/hash_table/hash_free.c
-Norme: ./src/hash_table/is_hash.c
-Norme: ./src/history/add_str_in_history.c
-Norme: ./src/glob/expand_bquote.c
-Error: 6 functions in the file
-Norme: ./src/history/history.c
-Norme: ./src/history/history_parsing_toolz_2.c
-Norme: ./src/history/history_parsing_toolz.c
-Norme: ./src/history/list_toolz.c
-Norme: ./src/glob/match_pattern.c
-Error (line 75): line has 82 characters
-Norme: ./src/history/history_parsing.c
-Norme: ./src/job_control/builtin_bg.c
-Norme: ./src/job_control/do_job_notification.c
-Norme: ./src/job_control/builtin_fg.c
-Error (line 15): function builtin_fg has 31 lines
-Norme: ./src/job_control/has_running_job.c
-Norme: ./src/history/surch_in_history.c
-Norme: ./src/job_control/has_stopped_job.c
-Norme: ./src/job_control/job_cmp_id.c
-Norme: ./src/job_control/job_format.c
-Norme: ./src/job_control/job_addprocess.c
-Error (line 27): comment not well formatted
-Error (line 27): comment not well placed
-Norme: ./src/job_control/job_free.c
-Norme: ./src/job_control/builtin_jobs.c
-Norme: ./src/job_control/job_format_head.c
-Norme: ./src/job_control/job_getprocess.c
-Norme: ./src/job_control/job_hup_all.c
-Norme: ./src/job_control/job_is_completed.c
-Norme: ./src/job_control/job_is_stopped.c
-Norme: ./src/job_control/job_notify_change.c
-Norme: ./src/job_control/job_getrank.c
-Norme: ./src/job_control/job_run.c
-Norme: ./src/job_control/job_notify_new.c
-Norme: ./src/job_control/job_update_id.c
-Norme: ./src/job_control/job_remove.c
-Norme: ./src/job_control/job_update_status.c
-Norme: ./src/job_control/pprint_brace.c
-Norme: ./src/job_control/mark_job_as_running.c
-Norme: ./src/job_control/pprint_case.c
-Norme: ./src/job_control/pprint_cmd.c
-Norme: ./src/job_control/pprint_for.c
-Norme: ./src/job_control/pprint_function.c
-Norme: ./src/job_control/pprint_if.c
-Norme: ./src/job_control/pprint_until.c
-Norme: ./src/job_control/pprint_subshell.c
-Norme: ./src/job_control/pprint_while.c
-Norme: ./src/job_control/job_wait.c
-Norme: ./src/job_control/process_cmp_pid.c
-Norme: ./src/job_control/put_job_in_background.c
-Norme: ./src/job_control/process_free.c
-Norme: ./src/job_control/sigchld_handler.c
-Norme: ./src/job_control/sigint_handler.c
-Norme: ./src/job_control/sigtstp_handler.c
-Norme: ./src/job_control/sigttou_handler.c
-Norme: ./src/job_control/sigttin_handler.c
-Norme: ./src/lexer/get_lexer_stack.c
-Norme: ./src/job_control/put_job_in_foreground.c
-Norme: ./src/lexer/do_lexer_routine.c
-Error (line 15): function do_lexer_routine has 27 lines
-Error (line 24): missing newline after if
-Error (line 24): spaces at the end of line
-Error (line 28): spaces at the end of line
-Norme: ./src/lexer/get_state_redir.c
-Norme: ./src/lexer/get_state_global.c
-Norme: ./src/lexer/insert_newline.c
-Norme: ./src/lexer/isrw_delim.c
-Error (line 15): spaces at the end of line
-Error (line 19): spaces at the end of line
-Norme: ./src/lexer/keep_last_type.c
-Error (line 22): spaces at the end of line
-Error (line 22, col 0): no newline after block
-Norme: ./src/lexer/get_reserved_words.c
-Error (line 41): spaces at the end of line
-Norme: ./src/lexer/lexer_backslash.c
-Norme: ./src/job_control/process_format.c
-Norme: ./src/lexer/lexer_default.c
-Norme: ./src/lexer/lexer_destroy.c
-Norme: ./src/lexer/lexer_bquote.c
-Norme: ./src/lexer/lexer_curly_braces.c
-Norme: ./src/lexer/lexer_delim.c
-Norme: ./src/lexer/lexer_end.c
-Norme: ./src/lexer/lexer_heredoc.c
-Norme: ./src/lexer/lexer_init.c
-Norme: ./src/lexer/lexer_great.c
-Norme: ./src/lexer/lexer_newline.c
-Norme: ./src/lexer/lexer_dquote.c
-Norme: ./src/lexer/lexer_less.c
-Norme: ./src/lexer/lexer_lex.c
-Norme: ./src/lexer/lexer_paren.c
-Norme: ./src/lexer/lexer_quote.c
-Norme: ./src/lexer/lexer_number.c
-Norme: ./src/lexer/token_cmp_type.c
-Norme: ./src/lexer/lexer_word.c
-Norme: ./src/lexer/lexer_sep.c
-Norme: ./src/lexer/token_free.c
-Norme: ./src/lexer/token_print.c
-Norme: ./src/lexer/token_init.c
-Norme: ./src/lexer/token_append.c
-Norme: ./src/line_editing/control_features.c
-Norme: ./src/line_editing/completion.c
-Norme: ./src/line_editing/home_end.c
-Norme: ./src/line_editing/copy_cut_paste.c
-Error (line 40): function ft_v has 26 lines
-Norme: ./src/line_editing/init_line.c
-Norme: ./src/line_editing/init_history.c
-Norme: ./src/line_editing/init_termcaps.c
-Norme: ./src/line_editing/ft_prompt.c
-Norme: ./src/line_editing/get_key.c
-Norme: ./src/line_editing/move_left_and_right.c
-Norme: ./src/line_editing/move_up_and_down.c
-Norme: ./src/line_editing/readline.c
-Error (line 15): function readline has 27 lines
-Norme: ./src/line_editing/resize.c
-Norme: ./src/line_editing/queue.c
-Norme: ./src/main/data_exit.c
-Norme: ./src/line_editing/print_and_del.c
-Norme: ./src/main/data_singleton.c
-Norme: ./src/line_editing/move_to_word.c
-Norme: ./src/main/data_init.c
-Error (line 15, col 14): global named environ is not well prefixed
-Error (line 46): function data_init has 30 lines
-Error (line 68): comment not well formatted
-Error (line 68): bad indentation
-Error (line 68): comment not well placed
-Error (line 70): comment not well formatted
-Error (line 70): comment not well placed
-Norme: ./src/main/main.c
-Norme: ./src/parser/add_bang.c
-Norme: ./src/main/ft_putast.c
-Error (line 15): function ft_putast has 83 lines
-Error (line 15): declarations must be followed by one empty line in ft_putast
-Error (line 19): spaces at the end of line
-Error (line 52, col 21): missing space around ==
-Norme: ./src/main/shell_init.c
-Error (line 31): function get_input_fd has 30 lines
-Norme: ./src/parser/add_case.c
-Norme: ./src/parser/add_cmd.c
-Norme: ./src/parser/add_condition.c
-Norme: ./src/parser/add_number.c
-Norme: ./src/parser/add_loop.c
-Norme: ./src/parser/add_sep.c
-Norme: ./src/parser/add_func.c
-Error (line 97, col 3): missing space after break
-Error (line 100): spaces at the end of line
-Error (line 120): must begin only by tabulations
-Norme: ./src/parser/add_subshell.c
-Norme: ./src/parser/do_parser_routine.c
-Norme: ./src/parser/build_tree.c
-Norme: ./src/parser/error_syntax.c
-Norme: ./src/parser/add_redir.c
-Norme: ./src/parser/heredoc_parser.c
-Norme: ./src/parser/ft_parse.c
-Norme: ./src/parser/parser_init.c
-Norme: ./src/parser/parser_destroy.c
-Norme: ./src/parser/pop_stack.c
-Norme: ./src/parser/push_stack.c
-Norme: ./src/parser/redir_init.c
-Norme: ./src/parser/stack_init.c
-Norme: ./src/parser/sym_free.c
-Norme: ./src/parser/tree_func_free.c
-Norme: ./src/parser/tree_wrapper.c
-Norme: ./src/parser/produce_sym.c
-Norme: ./src/parser/aggregate_sym.c
-Norme: ./src/parser/eval_sym.c
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	deleted:    libft/objs/btree/btree_apply_by_level.d
+	deleted:    libft/objs/btree/btree_apply_infix.d
+	deleted:    libft/objs/btree/btree_apply_prefix.d
+	deleted:    libft/objs/btree/btree_apply_suffix.d
+	deleted:    libft/objs/btree/btree_create_node.d
+	deleted:    libft/objs/btree/btree_del.d
+	deleted:    libft/objs/btree/btree_delone.d
+	deleted:    libft/objs/btree/btree_insert_data.d
+	deleted:    libft/objs/btree/btree_level_count.d
+	deleted:    libft/objs/btree/btree_map.d
+	deleted:    libft/objs/btree/btree_print.d
+	deleted:    libft/objs/btree/btree_search_item.d
+	deleted:    libft/objs/char/ft_isalnum.d
+	deleted:    libft/objs/char/ft_isalpha.d
+	deleted:    libft/objs/char/ft_isascii.d
+	deleted:    libft/objs/char/ft_isdigit.d
+	deleted:    libft/objs/char/ft_isprint.d
+	deleted:    libft/objs/char/ft_tolower.d
+	deleted:    libft/objs/char/ft_toupper.d
+	deleted:    libft/objs/cliopts/cliopts_get.d
+	deleted:    libft/objs/cliopts/cliopts_has.d
+	deleted:    libft/objs/color/ft_color_mk.d
+	deleted:    libft/objs/color/ft_color_mkif.d
+	deleted:    libft/objs/color/ft_color_reset.d
+	deleted:    libft/objs/color/ft_color_set.d
+	deleted:    libft/objs/dlst/ft_dlstadd_after.d
+	deleted:    libft/objs/dlst/ft_dlstadd_before.d
+	deleted:    libft/objs/dlst/ft_dlstdel.d
+	deleted:    libft/objs/dlst/ft_dlstdelone.d
+	deleted:    libft/objs/dlst/ft_dlstlast.d
+	deleted:    libft/objs/dlst/ft_dlstnew.d
+	deleted:    libft/objs/dlst/ft_dlstrtostr.d
+	deleted:    libft/objs/dlst/ft_dlstsize.d
+	deleted:    libft/objs/error/error.d
+	deleted:    libft/objs/ft_printf/ft_conversion.d
+	deleted:    libft/objs/ft_printf/ft_fmt_simplify.d
+	deleted:    libft/objs/ft_printf/ft_fmt_validate_conv.d
+	deleted:    libft/objs/ft_printf/ft_fmt_validate_flags.d
+	deleted:    libft/objs/ft_printf/ft_fmt_validate_mod.d
+	deleted:    libft/objs/ft_printf/ft_printf.d
+	deleted:    libft/objs/ft_printf/ft_printf_color.d
+	deleted:    libft/objs/ft_printf/ft_printf_parse.d
+	deleted:    libft/objs/ft_printf/ft_transform.d
+	deleted:    libft/objs/ft_printf/ft_vprintf.d
+	deleted:    libft/objs/ft_printf/lib_fmt.d
+	deleted:    libft/objs/ft_printf/lib_fmt_error.d
+	deleted:    libft/objs/ft_printf/lib_pad.d
+	deleted:    libft/objs/ft_printf/lib_pad_sharp.d
+	deleted:    libft/objs/get_next_line/get_next_line.d
+	deleted:    libft/objs/lst/ft_id.d
+	deleted:    libft/objs/lst/ft_lst_at.d
+	deleted:    libft/objs/lst/ft_lst_bfree.d
+	deleted:    libft/objs/lst/ft_lst_cfree.d
+	deleted:    libft/objs/lst/ft_lst_delif.d
+	deleted:    libft/objs/lst/ft_lst_delsub.d
+	deleted:    libft/objs/lst/ft_lst_filter.d
+	deleted:    libft/objs/lst/ft_lst_find.d
+	deleted:    libft/objs/lst/ft_lst_merge.d
+	deleted:    libft/objs/lst/ft_lst_order_delsub.d
+	deleted:    libft/objs/lst/ft_lst_print.d
+	deleted:    libft/objs/lst/ft_lst_print2.d
+	deleted:    libft/objs/lst/ft_lst_removeif.d
+	deleted:    libft/objs/lst/ft_lst_reverse.d
+	deleted:    libft/objs/lst/ft_lst_size.d
+	deleted:    libft/objs/lst/ft_lst_sorted_insert.d
+	deleted:    libft/objs/lst/ft_lst_sorted_merge.d
+	deleted:    libft/objs/lst/ft_lstadd.d
+	deleted:    libft/objs/lst/ft_lstdel.d
+	deleted:    libft/objs/lst/ft_lstdelone.d
+	deleted:    libft/objs/lst/ft_lsteadd.d
+	deleted:    libft/objs/lst/ft_lstiter.d
+	deleted:    libft/objs/lst/ft_lstlast.d
+	deleted:    libft/objs/lst/ft_lstmap.d
+	deleted:    libft/objs/lst/ft_lstnadd.d
+	deleted:    libft/objs/lst/ft_lstnew.d
+	deleted:    libft/objs/lst/ft_lstnew_range.d
+	deleted:    libft/objs/lst/ft_lstsort.d
+	deleted:    libft/objs/lst/pop.d
+	deleted:    libft/objs/lst/push.d
+	deleted:    libft/objs/math/ft_addrcmp.d
+	deleted:    libft/objs/math/ft_ilen.d
+	deleted:    libft/objs/math/ft_ilen_base.d
+	deleted:    libft/objs/math/ft_itoa.d
+	deleted:    libft/objs/math/ft_itoa_base.d
+	deleted:    libft/objs/math/ft_lllen.d
+	deleted:    libft/objs/math/ft_lllen_base.d
+	deleted:    libft/objs/math/ft_lltoa_base.d
+	deleted:    libft/objs/math/ft_uilen.d
+	deleted:    libft/objs/math/ft_uitoa_base.d
+	deleted:    libft/objs/math/ft_ulltoa_base.d
+	deleted:    libft/objs/math/id.d
+	deleted:    libft/objs/mem/ft_bzero.d
+	deleted:    libft/objs/mem/ft_malloc.d
+	deleted:    libft/objs/mem/ft_memalloc.d
+	deleted:    libft/objs/mem/ft_memccpy.d
+	deleted:    libft/objs/mem/ft_memchr.d
+	deleted:    libft/objs/mem/ft_memcmp.d
+	deleted:    libft/objs/mem/ft_memcpy.d
+	deleted:    libft/objs/mem/ft_memdel.d
+	deleted:    libft/objs/mem/ft_memmove.d
+	deleted:    libft/objs/mem/ft_memset.d
+	deleted:    libft/objs/mem/ft_realloc.d
+	deleted:    libft/objs/path/ft_path_notdir.d
+	deleted:    libft/objs/printing/ft_putchar.d
+	deleted:    libft/objs/printing/ft_putendl.d
+	deleted:    libft/objs/printing/ft_putnbr.d
+	deleted:    libft/objs/printing/ft_putstr.d
+	deleted:    libft/objs/sstr/ft_sstradd.d
+	deleted:    libft/objs/sstr/ft_sstrcat.d
+	deleted:    libft/objs/sstr/ft_sstrdel.d
+	deleted:    libft/objs/sstr/ft_sstrdup.d
+	deleted:    libft/objs/sstr/ft_sstrfree.d
+	deleted:    libft/objs/sstr/ft_sstrprint.d
+	deleted:    libft/objs/sstr/ft_sstrprint_fd.d
+	deleted:    libft/objs/sstr/ft_sstrsort.d
+	deleted:    libft/objs/sstr/ft_sstrstr.d
+	deleted:    libft/objs/str/ft_atoi.d
+	deleted:    libft/objs/str/ft_convert_base.d
+	deleted:    libft/objs/str/ft_putaddr_fd.d
+	deleted:    libft/objs/str/ft_split_whitespaces.d
+	deleted:    libft/objs/str/ft_str3join.d
+	deleted:    libft/objs/str/ft_strappend.d
+	deleted:    libft/objs/str/ft_strbetween.d
+	deleted:    libft/objs/str/ft_strcat.d
+	deleted:    libft/objs/str/ft_strcatf.d
+	deleted:    libft/objs/str/ft_strchr.d
+	deleted:    libft/objs/str/ft_strchrcpy.d
+	deleted:    libft/objs/str/ft_strclr.d
+	deleted:    libft/objs/str/ft_strcmp.d
+	deleted:    libft/objs/str/ft_strcpy.d
+	deleted:    libft/objs/str/ft_strcspn.d
+	deleted:    libft/objs/str/ft_strcut.d
+	deleted:    libft/objs/str/ft_strdel.d
+	deleted:    libft/objs/str/ft_strdup.d
+	deleted:    libft/objs/str/ft_strdupchr.d
+	deleted:    libft/objs/str/ft_strduptr.d
+	deleted:    libft/objs/str/ft_strequ.d
+	deleted:    libft/objs/str/ft_strinsert.d
+	deleted:    libft/objs/str/ft_stris.d
+	deleted:    libft/objs/str/ft_striter.d
+	deleted:    libft/objs/str/ft_striteri.d
+	deleted:    libft/objs/str/ft_strjoin.d
+	deleted:    libft/objs/str/ft_strlcat.d
+	deleted:    libft/objs/str/ft_strlen.d
+	deleted:    libft/objs/str/ft_strlenchr.d
+	deleted:    libft/objs/str/ft_strmap.d
+	deleted:    libft/objs/str/ft_strmapi.d
+	deleted:    libft/objs/str/ft_strncat.d
+	deleted:    libft/objs/str/ft_strncmp.d
+	deleted:    libft/objs/str/ft_strncpy.d
+	deleted:    libft/objs/str/ft_strnequ.d
+	deleted:    libft/objs/str/ft_strnew.d
+	deleted:    libft/objs/str/ft_strnstr.d
+	deleted:    libft/objs/str/ft_strrchr.d
+	deleted:    libft/objs/str/ft_strreplace.d
+	deleted:    libft/objs/str/ft_strrev.d
+	deleted:    libft/objs/str/ft_strsplit.d
+	deleted:    libft/objs/str/ft_strstr.d
+	deleted:    libft/objs/str/ft_strsub.d
+	deleted:    libft/objs/str/ft_strtok.d
+	deleted:    libft/objs/str/ft_strtrim.d
+	deleted:    libft/objs/sys/dup2_close.d
+	deleted:    libft/objs/sys/fd_replace.d
+	deleted:    libft/objs/sys/ft_getenv.d
+	deleted:    libft/objs/sys/ft_xattr_count.d
+	deleted:    libft/objs/sys/ft_xattr_print.d
+	deleted:    libft/objs/time/ft_mytime_free.d
+	deleted:    libft/objs/time/ft_mytime_get.d
+	deleted:    libft/objs/time/ft_time_isrecent.d
+	deleted:    objs/builtin/bt_read_get.d
+	deleted:    objs/builtin/bt_read_term.d
+	deleted:    objs/builtin/builtin_cd.d
+	deleted:    objs/builtin/builtin_echo.d
+	deleted:    objs/builtin/builtin_env.d
+	deleted:    objs/builtin/builtin_exit.d
+	deleted:    objs/builtin/builtin_export.d
+	deleted:    objs/builtin/builtin_hash.d
+	deleted:    objs/builtin/builtin_history.d
+	deleted:    objs/builtin/builtin_math.d
+	deleted:    objs/builtin/builtin_read.d
+	deleted:    objs/builtin/builtin_return_status.d
+	deleted:    objs/builtin/builtin_setenv.d
+	deleted:    objs/builtin/builtin_unset.d
+	deleted:    objs/builtin/builtin_unsetenv.d
+	deleted:    objs/builtin/error_msg.d
+	deleted:    objs/builtin/is_builtin.d
+	deleted:    objs/completion/c_arrow.d
+	deleted:    objs/completion/c_clear.d
+	deleted:    objs/completion/c_find_abspath.d
+	deleted:    objs/completion/c_find_binary.d
+	deleted:    objs/completion/c_find_env.d
+	deleted:    objs/completion/c_find_files.d
+	deleted:    objs/completion/c_init.d
+	deleted:    objs/completion/c_match.d
+	deleted:    objs/completion/c_match_glob.d
+	deleted:    objs/completion/c_match_update.d
+	deleted:    objs/completion/c_misc.d
+	deleted:    objs/completion/c_output.d
+	deleted:    objs/completion/c_parser.d
+	deleted:    objs/completion/c_pathsolver.d
+	deleted:    objs/completion/c_printer.d
+	deleted:    objs/completion/c_sizing.d
+	deleted:    objs/completion/c_terminal.d
+	deleted:    objs/completion/completion.d
+	deleted:    objs/exec/ast_free.d
+	deleted:    objs/exec/bad_fd.d
+	deleted:    objs/exec/error_badidentifier.d
+	deleted:    objs/exec/exec_ampersand.d
+	deleted:    objs/exec/exec_and_if.d
+	deleted:    objs/exec/exec_bang.d
+	deleted:    objs/exec/exec_case_branch.d
+	deleted:    objs/exec/exec_elif.d
+	deleted:    objs/exec/exec_else.d
+	deleted:    objs/exec/exec_leaf.d
+	deleted:    objs/exec/exec_or_if.d
+	deleted:    objs/exec/exec_pipe.d
+	deleted:    objs/exec/exec_reset.d
+	deleted:    objs/exec/exec_semi.d
+	deleted:    objs/exec/exec_var.d
+	deleted:    objs/exec/fd_is_valid.d
+	deleted:    objs/exec/ft_exec.d
+	deleted:    objs/exec/ft_findexec.d
+	deleted:    objs/exec/is_function.d
+	deleted:    objs/exec/mark_process_status.d
+	deleted:    objs/exec/node_copy.d
+	deleted:    objs/exec/pfree_cmd.d
+	deleted:    objs/exec/pfree_cond.d
+	deleted:    objs/exec/pfree_func.d
+	deleted:    objs/exec/pfree_list.d
+	deleted:    objs/exec/pfree_subshell.d
+	deleted:    objs/exec/plaunch_brace.d
+	deleted:    objs/exec/plaunch_builtin.d
+	deleted:    objs/exec/plaunch_case.d
+	deleted:    objs/exec/plaunch_empty.d
+	deleted:    objs/exec/plaunch_file.d
+	deleted:    objs/exec/plaunch_for.d
+	deleted:    objs/exec/plaunch_function.d
+	deleted:    objs/exec/plaunch_if.d
+	deleted:    objs/exec/plaunch_subshell.d
+	deleted:    objs/exec/plaunch_until.d
+	deleted:    objs/exec/plaunch_while.d
+	deleted:    objs/exec/process_launch.d
+	deleted:    objs/exec/process_redirect.d
+	deleted:    objs/exec/process_resetfds.d
+	deleted:    objs/exec/process_set.d
+	deleted:    objs/exec/process_setgroup.d
+	deleted:    objs/exec/process_setsig.d
+	deleted:    objs/exec/pset_brace.d
+	deleted:    objs/exec/pset_case.d
+	deleted:    objs/exec/pset_cmd.d
+	deleted:    objs/exec/pset_for.d
+	deleted:    objs/exec/pset_if.d
+	deleted:    objs/exec/pset_subshell.d
+	deleted:    objs/exec/pset_until.d
+	deleted:    objs/exec/pset_while.d
+	deleted:    objs/exec/redir_copy.d
+	deleted:    objs/exec/redir_free.d
+	deleted:    objs/exec/redirect_dgreat.d
+	deleted:    objs/exec/redirect_dless.d
+	deleted:    objs/exec/redirect_great.d
+	deleted:    objs/exec/redirect_greatand.d
+	deleted:    objs/exec/redirect_less.d
+	deleted:    objs/exec/redirect_lessand.d
+	deleted:    objs/exec/set_exitstatus.d
+	deleted:    objs/exec/token_to_argv.d
+	deleted:    objs/glob/command_getoutput.d
+	deleted:    objs/glob/dir_glob.d
+	deleted:    objs/glob/esc_print.d
+	deleted:    objs/glob/expand_bquote.d
+	deleted:    objs/glob/expand_brace.d
+	deleted:    objs/glob/expand_esc.d
+	deleted:    objs/glob/expand_home.d
+	deleted:    objs/glob/expand_var.d
+	deleted:    objs/glob/ft_strsplit_esc.d
+	deleted:    objs/glob/ft_strsplit_spe.d
+	deleted:    objs/glob/gen_tab_esc.d
+	deleted:    objs/glob/glob.d
+	deleted:    objs/glob/is_char_esc.d
+	deleted:    objs/glob/lib_perso/ft_ld_back.d
+	deleted:    objs/glob/lib_perso/ft_ld_clear.d
+	deleted:    objs/glob/lib_perso/ft_ld_copy.d
+	deleted:    objs/glob/lib_perso/ft_ld_del.d
+	deleted:    objs/glob/lib_perso/ft_ld_front.d
+	deleted:    objs/glob/lib_perso/ft_ld_new.d
+	deleted:    objs/glob/lib_perso/ft_ld_order.d
+	deleted:    objs/glob/lib_perso/ft_ld_pushback.d
+	deleted:    objs/glob/lib_perso/ft_ld_pushfront.d
+	deleted:    objs/glob/lib_perso/ft_ld_reverse.d
+	deleted:    objs/glob/lib_perso/ft_ld_size.d
+	deleted:    objs/glob/lib_perso/ft_ld_swap.d
+	deleted:    objs/glob/lib_perso/ft_ld_to_tab.d
+	deleted:    objs/glob/lib_perso/ft_memrealloc.d
+	deleted:    objs/glob/lib_perso/ft_strjoinf.d
+	deleted:    objs/glob/lib_perso/ft_strsubf.d
+	deleted:    objs/glob/lib_perso/ft_tabdel.d
+	deleted:    objs/glob/lib_perso/ft_tablen.d
+	deleted:    objs/glob/match_pattern.d
+	deleted:    objs/glob/tab_esc_copy.d
+	deleted:    objs/glob/word_is_assignment.d
+	deleted:    objs/hash_table/ft_add_hash.d
+	deleted:    objs/hash_table/hash.d
+	deleted:    objs/hash_table/hash_free.d
+	deleted:    objs/hash_table/hash_str.d
+	deleted:    objs/hash_table/is_hash.d
+	deleted:    objs/history/add_str_in_history.d
+	deleted:    objs/history/history.d
+	deleted:    objs/history/history_parsing.d
+	deleted:    objs/history/history_parsing_toolz.d
+	deleted:    objs/history/history_parsing_toolz_2.d
+	deleted:    objs/history/list_toolz.d
+	deleted:    objs/history/surch_in_history.d
+	deleted:    objs/job_control/builtin_bg.d
+	deleted:    objs/job_control/builtin_fg.d
+	deleted:    objs/job_control/builtin_jobs.d
+	deleted:    objs/job_control/do_job_notification.d
+	deleted:    objs/job_control/has_running_job.d
+	deleted:    objs/job_control/has_stopped_job.d
+	deleted:    objs/job_control/job_addprocess.d
+	deleted:    objs/job_control/job_cmp_id.d
+	deleted:    objs/job_control/job_format.d
+	deleted:    objs/job_control/job_format_head.d
+	deleted:    objs/job_control/job_free.d
+	deleted:    objs/job_control/job_getprocess.d
+	deleted:    objs/job_control/job_getrank.d
+	deleted:    objs/job_control/job_hup_all.d
+	deleted:    objs/job_control/job_is_completed.d
+	deleted:    objs/job_control/job_is_stopped.d
+	deleted:    objs/job_control/job_notify_change.d
+	deleted:    objs/job_control/job_notify_new.d
+	deleted:    objs/job_control/job_remove.d
+	deleted:    objs/job_control/job_run.d
+	deleted:    objs/job_control/job_update_id.d
+	deleted:    objs/job_control/job_update_status.d
+	deleted:    objs/job_control/job_wait.d
+	deleted:    objs/job_control/mark_job_as_running.d
+	deleted:    objs/job_control/pprint_brace.d
+	deleted:    objs/job_control/pprint_case.d
+	deleted:    objs/job_control/pprint_cmd.d
+	deleted:    objs/job_control/pprint_for.d
+	deleted:    objs/job_control/pprint_function.d
+	deleted:    objs/job_control/pprint_if.d
+	deleted:    objs/job_control/pprint_subshell.d
+	deleted:    objs/job_control/pprint_until.d
+	deleted:    objs/job_control/pprint_while.d
+	deleted:    objs/job_control/process_cmp_pid.d
+	deleted:    objs/job_control/process_format.d
+	deleted:    objs/job_control/process_free.d
+	deleted:    objs/job_control/put_job_in_background.d
+	deleted:    objs/job_control/put_job_in_foreground.d
+	deleted:    objs/job_control/sigchld_handler.d
+	deleted:    objs/job_control/sigint_handler.d
+	deleted:    objs/job_control/sigtstp_handler.d
+	deleted:    objs/job_control/sigttin_handler.d
+	deleted:    objs/job_control/sigttou_handler.d
+	deleted:    objs/lexer/do_lexer_routine.d
+	deleted:    objs/lexer/get_lexer_stack.d
+	deleted:    objs/lexer/get_reserved_words.d
+	deleted:    objs/lexer/get_state_global.d
+	deleted:    objs/lexer/get_state_redir.d
+	deleted:    objs/lexer/insert_newline.d
+	deleted:    objs/lexer/isrw_delim.d
+	deleted:    objs/lexer/keep_last_type.d
+	deleted:    objs/lexer/lexer_backslash.d
+	deleted:    objs/lexer/lexer_bquote.d
+	deleted:    objs/lexer/lexer_curly_braces.d
+	deleted:    objs/lexer/lexer_default.d
+	deleted:    objs/lexer/lexer_delim.d
+	deleted:    objs/lexer/lexer_destroy.d
+	deleted:    objs/lexer/lexer_dquote.d
+	deleted:    objs/lexer/lexer_end.d
+	deleted:    objs/lexer/lexer_great.d
+	deleted:    objs/lexer/lexer_heredoc.d
+	deleted:    objs/lexer/lexer_init.d
+	deleted:    objs/lexer/lexer_less.d
+	deleted:    objs/lexer/lexer_lex.d
+	deleted:    objs/lexer/lexer_newline.d
+	deleted:    objs/lexer/lexer_number.d
+	deleted:    objs/lexer/lexer_paren.d
+	deleted:    objs/lexer/lexer_quote.d
+	deleted:    objs/lexer/lexer_sep.d
+	deleted:    objs/lexer/lexer_word.d
+	deleted:    objs/lexer/token_append.d
+	deleted:    objs/lexer/token_cmp_type.d
+	deleted:    objs/lexer/token_free.d
+	deleted:    objs/lexer/token_init.d
+	deleted:    objs/lexer/token_print.d
+	deleted:    objs/line_editing/completion.d
+	deleted:    objs/line_editing/control_features.d
+	deleted:    objs/line_editing/copy_cut_paste.d
+	deleted:    objs/line_editing/ft_prompt.d
+	deleted:    objs/line_editing/get_key.d
+	deleted:    objs/line_editing/home_end.d
+	deleted:    objs/line_editing/init_history.d
+	deleted:    objs/line_editing/init_line.d
+	deleted:    objs/line_editing/init_termcaps.d
+	deleted:    objs/line_editing/lib_line_editing/ft_nb_line.d
+	deleted:    objs/line_editing/lib_line_editing/tool_line.d
+	deleted:    objs/line_editing/lib_line_editing/tool_line_2.d
+	deleted:    objs/line_editing/lib_line_editing/toolz.d
+	deleted:    objs/line_editing/lib_line_editing/toolz2.d
+	deleted:    objs/line_editing/lib_line_editing/toolz_parseur.d
+	deleted:    objs/line_editing/lib_line_editing/toolz_termcaps.d
+	deleted:    objs/line_editing/move_left_and_right.d
+	deleted:    objs/line_editing/move_to_word.d
+	deleted:    objs/line_editing/move_up_and_down.d
+	deleted:    objs/line_editing/print_and_del.d
+	deleted:    objs/line_editing/queue.d
+	deleted:    objs/line_editing/readline.d
+	deleted:    objs/line_editing/resize.d
+	deleted:    objs/main/data_exit.d
+	deleted:    objs/main/data_init.d
+	deleted:    objs/main/data_singleton.d
+	deleted:    objs/main/ft_putast.d
+	deleted:    objs/main/main.d
+	deleted:    objs/main/shell_init.d
+	deleted:    objs/parser/add_bang.d
+	deleted:    objs/parser/add_case.d
+	deleted:    objs/parser/add_cmd.d
+	deleted:    objs/parser/add_condition.d
+	deleted:    objs/parser/add_func.d
+	deleted:    objs/parser/add_loop.d
+	deleted:    objs/parser/add_number.d
+	deleted:    objs/parser/add_redir.d
+	deleted:    objs/parser/add_sep.d
+	deleted:    objs/parser/add_subshell.d
+	deleted:    objs/parser/aggregate_sym.d
+	deleted:    objs/parser/build_tree.d
+	deleted:    objs/parser/do_parser_routine.d
+	deleted:    objs/parser/error_syntax.d
+	deleted:    objs/parser/eval_sym.d
+	deleted:    objs/parser/ft_parse.d
+	deleted:    objs/parser/heredoc_parser.d
+	deleted:    objs/parser/parser_destroy.d
+	deleted:    objs/parser/parser_init.d
+	deleted:    objs/parser/pop_stack.d
+	deleted:    objs/parser/produce_sym.d
+	deleted:    objs/parser/push_stack.d
+	deleted:    objs/parser/read_stack.d
+	deleted:    objs/parser/redir_init.d
+	deleted:    objs/parser/stack_init.d
+	deleted:    objs/parser/sym_free.d
+	deleted:    objs/parser/tree_func_free.d
+	deleted:    objs/parser/tree_wrapper.d
+	modified:   src/parser/add_bang.c
+	modified:   src/parser/add_case.c
+	modified:   src/parser/add_condition.c
+	modified:   src/parser/add_loop.c
+	modified:   src/parser/add_number.c
+	modified:   src/parser/add_sep.c
+	modified:   src/parser/add_subshell.c
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   log
+
