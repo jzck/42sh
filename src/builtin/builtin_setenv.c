@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-#define	SETERR_0	"setenv: invalid variable name"
+#define	SETERR_0	"%s: %s: invalid variable name"
 
 static int	assign_var(char *const av[], char ***env)
 {
@@ -59,7 +59,7 @@ int			builtin_setenv(const char *path,
 		ret = word_is_assignment((char *[]){av[1], (esc + 1)});
 		ft_strdel(&esc);
 		if (!ret && ft_strcmp(av[1], "?"))
-			return (SH_ERR(SETERR_0));
+			return (SH_ERR(SETERR_0, av[0], av[1]));
 		assign_var(av, env);
 	}
 	return (envp ? builtin_return_status(0, 0) : 0);

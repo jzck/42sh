@@ -57,7 +57,7 @@ int					builtin_export(
 		else
 			equal = ft_getenv(data_singleton()->local_var, *av);
 		equal ? equal++ : equal;
-		builtin_setenv("internal", (char*[]){"global", *av, equal}, NULL);
+		builtin_setenv("internal", (char*[]){"export", *av, equal}, NULL);
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}
