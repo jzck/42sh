@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 19:26:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:51:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_prodmatch			g_prodmatch[] =
 	{TK_WORD, TK_PIPE, CMD_NAME},
 	{TK_WORD, AND_OR, CMD_NAME},
 	{TK_WORD, AND_OR_MAJOR, CMD_NAME},
+	{TK_WORD, TK_PAREN_CLOSE, CMD_NAME},
 	{TK_WORD, TK_WHILE, CMD_NAME},
 	{TK_WORD, TK_UNTIL, CMD_NAME},
 	{TK_WORD, TK_DO, CMD_NAME},
