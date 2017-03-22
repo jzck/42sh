@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 15:49:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:02:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int			c_matching(t_data *s, t_comp *c)
 	char	*current_word;
 
 	current_word = c_current_words();
-	if (ft_strchr(c->rcmd, '/'))
+	if (ft_strchr(current_word, '/'))
 		c_seek_abs_path(c, current_word);
-	else if (ft_strchr(c->rcmd, '$'))
+	else if (ft_strchr(current_word, '$'))
 		c_seek_env(c, current_word);
-	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')))
+	else if (current_word[0] != '.' && !(ft_strchr(c->rcmd, ' ')))
 		c_seek_binary(s, c);
 	else
 		c_seek_files(s, c, current_word);
