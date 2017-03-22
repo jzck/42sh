@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 12:58:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 14:21:45 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ static int	c_chevron(t_comp *c)
 static char	*c_current_words(t_comp *c)
 {
 	size_t	pos;
-	size_t	input_len;
 
 	pos = c->ircmd;
-	input_len = ft_strlen(data_singleton()->line.input);
-	if (pos >= ft_strlen(c->rcmd))
-		pos = ft_strlen(c->rcmd) - (input_len - pos + 1);
 	while (pos && c->rcmd[pos] != ' ' && c->rcmd[pos] != '<'
 	&& c->rcmd[pos] != '>' && c->rcmd[pos] != '\n')
 		--pos;
