@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:13:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 22:07:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		token_print(t_list *lst);
 int			reduce_parens(t_list **alst, char *str);
 int			bquotes_expand(t_list **alst);
 char		*command_getoutput(char *command);
-int			command_setoutput(char *const av[], char **env);
 
 int			ft_is_delim(char c);
 int			ft_is_delim_list(char c);
