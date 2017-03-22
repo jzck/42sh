@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 18:09:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:32:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int		data_init(int ac, char **av);
 void	data_exit(void);
 int		get_c_arg(char ***av, t_data *data);
 
+void	shell_resetfds(void);
+void	shell_resetsig(void);
 /* void	content_free(void *data, size_t content_size); */
 
 char	*ft_putast(void *node);

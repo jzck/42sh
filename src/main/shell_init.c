@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 18:12:27 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:08:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,8 @@ static int			interactive_settings(void)
 	shell_pgid = &data->jobc.shell_pgid;
 	while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 		kill(-*shell_pgid, SIGTTIN);
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, SIG_DFL);
 	*shell_pgid = getpid();
+	shell_resetsig();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
 		ft_dprintf(2,

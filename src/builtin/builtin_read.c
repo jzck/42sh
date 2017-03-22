@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:16:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 16:50:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 t_cliopts	g_read_opts[] =
 {
-	{'d', NULL, READ_OPT_LD, 0, bt_read_getdelim},
-	{'n', NULL, READ_OPT_LN, 0, bt_read_getnchars},
-	{'p', NULL, READ_OPT_LP, 0, bt_read_getprompt},
-	{'r', NULL, READ_OPT_LR, 0, NULL},
-	{'s', NULL, READ_OPT_LS, 0, NULL},
-	{'t', NULL, READ_OPT_LT, 0, bt_read_gettimeout},
-	{'u', NULL, READ_OPT_LU, 0, bt_read_getfd},
+	{'d', NULL, BT_READ_LD, 0, bt_read_getdelim},
+	{'n', NULL, BT_READ_LN, 0, bt_read_getnchars},
+	{'p', NULL, BT_READ_LP, 0, bt_read_getprompt},
+	{'r', NULL, BT_READ_LR, 0, NULL},
+	{'s', NULL, BT_READ_LS, 0, NULL},
+	{'t', NULL, BT_READ_LT, 0, bt_read_gettimeout},
+	{'u', NULL, BT_READ_LU, 0, bt_read_getfd},
 	{0, 0, 0, 0, 0},
 };
 
@@ -38,6 +38,8 @@ int			bt_read_init(t_read *data, char **av)
 	data->input = NULL;
 	if ((cliopts_get(av, g_read_opts, data)))
 		return (ft_perror() ? 2 : 2);
+	if (isatty(STDIN))
+		data->opts |= BT_READ_INTER;
 	if (bt_read_terminit(data) < 0)
 		return (-1);
 	return (0);
@@ -52,7 +54,7 @@ int			bt_read_loop(t_read *data)
 
 	esc = 0;
 	i = 0;
-	if (data->prompt)
+	if (data->prompt && data->opts & BT_READ_INTER)
 		ft_printf(data->prompt);
 	while (42)
 	{
@@ -61,11 +63,12 @@ int			bt_read_loop(t_read *data)
 		buf[ret] = 0;
 		if (!esc && *buf == data->delim)
 			break ;
-		esc = esc ? 0 : !(data->opts & READ_OPT_LR) && (*buf == '\\');
+		esc = esc ? 0 : !(data->opts & BT_READ_LR) && (*buf == '\\');
 		ft_strappend(&data->input, buf);
-		if (*buf == '\n' && !(data->opts & (READ_OPT_LR | READ_OPT_LS)))
+		if (*buf == '\n' && !(data->opts &
+					(BT_READ_LR | BT_READ_LS | BT_READ_INTER)))
 			ft_putstr("> ");
-		if ((data->opts & READ_OPT_LN) && ++i >= data->nchars)
+		if ((data->opts & BT_READ_LN) && ++i >= data->nchars)
 			break ;
 	}
 	return (0);

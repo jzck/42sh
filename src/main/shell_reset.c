@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_resetfds.c                                 :+:      :+:    :+:   */
+/*   shell_reset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/09 14:51:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 20:54:20 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/22 16:07:14 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/22 16:25:14 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_resetfds(t_process *p)
+void	shell_resetsig(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGCHLD, SIG_DFL);
+}
+
+void	shell_resetfds(void)
 {
 	t_exec	*exec;
 	int		i;
 
-	(void)p;
 	exec = &data_singleton()->exec;
 	i = -1;
 	while (++i < 10)
