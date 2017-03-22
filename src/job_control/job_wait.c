@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 11:49:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:31:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:29:38 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int		job_wait(int id)
 	{
 		if ((pid = waitpid(-j->pgid, &status, WUNTRACED)) == -1
 				&& errno != ECHILD)
-			ft_dprintf(2, "{red}%s: waitpid error errno=%i{eoc}\n",
-					SHELL_NAME, errno);
-		DG("wait trigger pid=%i", pid);
+			SH_ERR("waitpid(): %s", strerror(errno));
 		if (pid <= 1 || mark_process_status(pid, status)
 			|| job_is_stopped(j)
 			|| job_is_completed(j))
