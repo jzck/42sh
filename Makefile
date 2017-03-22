@@ -13,7 +13,7 @@
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror #-fvisibility=hidden# -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden -fsanitize=address
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)

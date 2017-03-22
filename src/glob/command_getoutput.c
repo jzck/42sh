@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 18:15:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 22:25:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,55 +27,6 @@ static char		*manage_output(int *fds)
 	}
 	close(fds[PIPE_READ]);
 	return (output);
-}
-
-static char		*manage_command(char *const av_cmd[])
-{
-	char	*command;
-	int		i;
-
-	if (!av_cmd)
-		return (NULL);
-	i = -1;
-	command = NULL;
-	while (av_cmd[++i])
-	{
-		if (!command)
-			command = ft_str3join("\"", av_cmd[i], "\"");
-		else
-			command = ft_strjoinf(command, ft_str3join("\"", av_cmd[i], "\""), 3);
-	}
-	return (command);
-}
-
-static void		execute_command(char *const av[], char **env)
-{
-	t_list		*token;
-	t_btree		*ast;
-	t_data		*data;
-	char		*command;
-
-	token = NULL;
-	ast = NULL;
-	data = data_singleton();
-	data->env = env;
-	data->opts &= ~SH_INTERACTIVE;
-	data->opts &= ~SH_OPTS_JOBC;
-	command = manage_command(av);
-	DG("DO THE EXEC");
-	if (do_lexer_routine(&token, command))
-	{
-		ft_dprintf(2, "{red}%s: syntax error in command substitution{eoc}\n",
-				SHELL_NAME);
-		exit(1);
-	}
-	if (do_parser_routine(&token, &ast) <= 0)
-	{
-		ft_dprintf(2, "{red}%s: parse error in command substitution{eoc}\n",
-				SHELL_NAME);
-		exit(1);
-	}
-	exit(data_singleton()->parser.state == SUCCESS && ft_exec(&ast) < 0);
 }
 
 char			*command_getoutput(char *command)
@@ -100,16 +51,4 @@ char			*command_getoutput(char *command)
 	}
 	waitpid(pid, &ret, WUNTRACED);
 	return (manage_output(fds));
-}
-
-int			command_setoutput(char *const av[], char **env)
-{
-	int			pid;
-
-	if (!av)
-		return (0);
-	pid = 0;
-	if (!(pid = process_fork(NULL)))
-		execute_command(av, env);
-	return (pid);
 }

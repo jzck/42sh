@@ -6,19 +6,11 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 15:43:34 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 23:23:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	set_var(char *stream, char **var, char **value)
-{
-	*var = ft_strdupchr(stream, '=');
-	stream += ft_strlenchr(stream, '=') + 1;
-	*value = ft_strdup(stream);
-	return (0);
-}
 
 int			exec_var(t_btree **ast)
 {
@@ -26,12 +18,16 @@ int			exec_var(t_btree **ast)
 	char		**av;
 	char		*var;
 	char		*value;
+	char		*equal;
 
 	node = (*ast)->item;
-	av = token_to_argv(node->data.cmd.token, 1);
-	set_var(av[0], &var, &value);
-	if (ft_getenv(data_singleton()->env, var))
+	if (!(av = token_to_argv(node->data.cmd.token, 1)))
 		return (0);
+	var = av[0];
+	if ((equal = ft_strchr(av[0], '=')))
+		*equal = 0;
+	value = equal ? equal + 1 : NULL;
 	builtin_setenv("internal", (char*[]){"local", var, value, 0}, NULL);
+	ft_sstrfree(av);
 	return (0);
 }
