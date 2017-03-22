@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 20:59:35 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:14:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ void			sigwinch_resize(int sig);
 size_t			ft_hist_len(void);
 void			underline_right(char **str, size_t *pos, size_t pos_ref);
 void			underline_left(char **str, size_t *pos, size_t pos_ref);
+void			reset_term(char **str, size_t *pos);
+void			reset_and_remove_term(char **str, size_t *pos, char *copy_tmp);
+int				reset_term_hard(void);
 
 int				ft_read_stdin(char **input);
 
