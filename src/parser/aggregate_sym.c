@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 19:18:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:54:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_aggrematch		g_aggrematch[] =
 	{TK_DONE, COMPOUND_LIST, DO_GROUP, TK_DO},
 	{TK_ESAC, TK_IN, CASE_CLAUSE, TK_CASE},
 	{TK_ESAC, CASE_LIST_NS, CASE_CLAUSE, TK_CASE},
+	{TK_PAREN_CLOSE, SEMI_SUBSHELL, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, COMPOUND_LIST, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, CMD_SUPERIOR, SUBSHELL, TK_PAREN_OPEN},
 	{TK_PAREN_CLOSE, PIPE_SEMI_SEQUENCE, SUBSHELL, TK_PAREN_OPEN},
@@ -220,7 +221,9 @@ t_aggrematch		g_aggrematch[] =
 	{COMPOUND_LIST, CASE_LIST_NS, CASE_LIST_NS, CASE_LIST_NS},
 	{CLOSE_LIST, PATTERN, CASE_LIST_NS, PATTERN_CASE},
 	{CLOSE_LIST, FUNC_NAME, FUNCTION_DEFINITION, FUNC_NAME},
+	{SUBSHELL, TK_PAREN_OPEN, SEMI_SUBSHELL, 0},
 	{SUBSHELL, ALL, COMPOUND_COMMAND, 0},
+	{BRACE_CLAUSE, TK_LBRACE, SEMI_BRACE, 0},
 	{BRACE_CLAUSE, ALL, COMPOUND_COMMAND, 0},
 	{COMPOUND_COMMAND, FUNC_NAME, COMMAND, FUNC_NAME},
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE},
@@ -379,15 +382,20 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 		return (1);
 	i = -1;
 	head = (*stack)->content;
+	DG("aggregate head %s && sym %s",
+	read_state(*head), read_state(*new_sym));
 	while (g_aggrematch[++i].top)
 		if (*new_sym == g_aggrematch[i].top
 			&& MATCH_STACK(*head, g_aggrematch[i].under))
 		{
+			
+			DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
 			*new_sym = g_aggrematch[i].new_sym;
 			if (g_aggrematch[i].erase_sym)
 			{
 				pop_stack(stack, g_aggrematch[i].erase_sym);
 				head = (*stack)->content;
+				DG("stack after pop: %s", read_state(*head));
 			}
 			if (eval_sym(stack, *new_sym) && !(*state = ERROR))
 				return (1);
