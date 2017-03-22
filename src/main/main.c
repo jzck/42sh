@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 17:13:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:25:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 			return (ret);
 		if (do_lexer_routine(token, stream) > 0)
 			continue ;
-		token_print(*token);
-		exit(1);
+		/* token_print(*token); */
 		if ((ret = do_parser_routine(token, ast)) == 1
 			&& SH_NO_INTERACTIVE(data->opts))
 			return (ret);

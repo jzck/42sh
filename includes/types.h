@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 10:38:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:22:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SH_IS_INTERACTIVE(b)	(b & SH_INTERACTIVE)
 # define SH_NO_INTERACTIVE(b)	!(b & SH_INTERACTIVE)
 
-# define SH_MSG_NOJOBC	"no job-control"
+# define SH_MSG_NOJOBC			"no job-control"
 
 typedef long long				t_type;
 typedef long long				t_flag;
@@ -87,8 +87,6 @@ typedef struct s_stackmatch		t_stackmatch;
 typedef struct s_errormatch		t_errormatch;
 typedef struct s_treematch		t_treematch;
 typedef struct s_distrostree	t_distrostree;
-
-t_data		*data_singleton();
 
 enum	e_sym
 {
