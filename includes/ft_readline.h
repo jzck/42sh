@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 10:02:04 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 18:02:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ typedef struct	s_list_history
 
 typedef struct	s_line
 {
-	char					*input;
 	int						fd;
-	char					*copy_tmp;
+	char					*input;
 	size_t					pos;
+	char					*copy_tmp;
+	size_t					pos_tmp;
 	int						prompt_size;
 	int						list_size;
 	char					opt;

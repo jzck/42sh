@@ -6,36 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 16:49:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 20:52:24 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_strdupi_space(char const *s)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-		++i;
-	if (s[i] == '\n')
-		++i;
-	if (!(str = (char *)ft_malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	if (str)
-	{
-		str[i] = '\0';
-		--i;
-		while (i >= 0)
-		{
-			str[i] = s[i];
-			--i;
-		}
-	}
-	return (str);
-}
 
 int			ft_v(char **str, size_t *pos)
 {
@@ -66,39 +41,151 @@ int			ft_v(char **str, size_t *pos)
 	return (0);
 }
 
-int			ft_x(char **str, size_t *pos)
+static void	reset_term(char **str, size_t *pos)
 {
-	int		i;
-	char	**tmp;
+	size_t pos_ref;
 
-	tmp = &data_singleton()->line.copy_tmp;
-	if (!*str)
-		return (0);
-	if (*tmp)
-		ft_strdel(tmp);
-	if (!(*tmp = ft_strdupi_space(&(*str)[*pos])))
-		return (-1);
-	i = ft_strlen(*tmp) - 1;
-	while (i >= 0)
+	pos_ref = *pos;
+	if (*pos)
 	{
-		if (!(*str = ft_remove_imput(*str, *pos + i)))
-			return (-1);
-		--i;
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
 	}
 	ft_puttermcaps("cd");
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_putnc('\b', *pos - pos_ref);
+	(*pos) = pos_ref;
+}
+
+static void	underline_right(char **str, size_t *pos, size_t pos_ref)
+{
+	if (!(*pos < ft_strlen(*str)))
+		return ;
+	if (*pos >= pos_ref)
+	{
+		ft_puttermcaps("mr");
+		data_singleton()->line.copy_tmp = ft_realloc_imput(data_singleton()->line.copy_tmp, (*str)[*pos], data_singleton()->line.pos_tmp);
+		ft_putchar((*str)[*pos]);
+		ft_puttermcaps("me");
+		++(data_singleton()->line.pos_tmp);
+		++(*pos);
+	}
+	else
+	{
+		data_singleton()->line.copy_tmp = ft_remove_imput(data_singleton()->line.copy_tmp, data_singleton()->line.pos_tmp);
+		ft_putchar((*str)[*pos]);
+		if (data_singleton()->line.pos_tmp)
+			--(data_singleton()->line.pos_tmp);
+		++(*pos);
+	}
+}
+
+static void	underline_left(char **str, size_t *pos, size_t pos_ref)
+{
+	if (!*pos)
+		return ;
+	if (*pos > pos_ref)
+	{
+		--(*pos);
+		ft_putchar('\b');
+		ft_putchar((*str)[*pos]);
+		ft_putchar('\b');
+		data_singleton()->line.copy_tmp = ft_remove_imput(data_singleton()->line.copy_tmp, data_singleton()->line.pos_tmp);
+		if (data_singleton()->line.pos_tmp)
+			--(data_singleton()->line.pos_tmp);
+	}
+	else
+	{
+		data_singleton()->line.pos_tmp = 0;
+		--(*pos);
+		ft_putchar('\b');
+		ft_puttermcaps("mr");
+		data_singleton()->line.copy_tmp = ft_realloc_imput(data_singleton()->line.copy_tmp, (*str)[*pos], data_singleton()->line.pos_tmp);
+		ft_putchar((*str)[*pos]);
+		ft_puttermcaps("me");
+		ft_putchar('\b');
+	}
+}
+
+static void	reset_and_remove_term(char **str, size_t *pos, char *copy_tmp)
+{
+	size_t pos_ref;
+
+	pos_ref = *pos;
+	if (!data_singleton()->line.pos_tmp)
+		pos_ref += ft_strlen(data_singleton()->line.copy_tmp);
+	while (*copy_tmp)
+	{
+		--pos_ref;
+		*str = ft_remove_imput(*str, pos_ref);
+		++copy_tmp;
+	}
+	if (*pos)
+	{
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
+	}
+	ft_puttermcaps("cd");
+	ft_current_str(*str, *pos);
+	ft_get_next_str(*str, pos);
+	ft_putnc('\b', *pos - pos_ref);
+ 	(*pos) = pos_ref;
+}
+
+int			ft_x(char **str, size_t *pos)
+{
+	int		ret;
+	size_t	pos_ref;
+
+	pos_ref = *pos;
+	ft_strdel(&data_singleton()->line.copy_tmp);
+	data_singleton()->line.pos_tmp = 0;
+	if (!*str)
+		return (0);
+	while (42)
+	{
+		ret = 0;
+		if (read(STDIN, &ret, sizeof(int)) < 0)
+			return (-1);
+		if ((*str)[*pos] == '\n')
+			return (0);
+		if (ret == FLECHE_GAUCHE)
+			underline_left(str, pos, pos_ref);
+		else if (ret == FLECHE_DROITE)
+			underline_right(str, pos, pos_ref);
+		else
+			break ;
+	}
+	if (data_singleton()->line.copy_tmp && *data_singleton()->line.copy_tmp)
+		reset_and_remove_term(str, pos, data_singleton()->line.copy_tmp);
 	return (0);
 }
 
 int			ft_c(char **str, size_t *pos)
 {
-	char	**tmp;
+	int		ret;
+	size_t	pos_ref;
 
+	pos_ref = *pos;
+	ft_strdel(&data_singleton()->line.copy_tmp);
+	data_singleton()->line.pos_tmp = 0;
 	if (!*str)
 		return (0);
-	tmp = &data_singleton()->line.copy_tmp;
-	if (*tmp)
-		ft_strdel(tmp);
-	if (!(*tmp = ft_strdupi_space(*str + *pos)))
-		return (-1);
+	while (42)
+	{
+		ret = 0;
+		if (read(STDIN, &ret, sizeof(int)) < 0)
+			return (-1);
+		if ((*str)[*pos] == '\n')
+			return (0);
+		if (ret == FLECHE_GAUCHE)
+			underline_left(str, pos, pos_ref);
+		else if (ret == FLECHE_DROITE)
+			underline_right(str, pos, pos_ref);
+		else
+			break ;
+	}
+	reset_term(str, pos);
 	return (0);
 }
