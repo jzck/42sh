@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 19:17:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:36:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,6 @@ enum	e_sym
 	OPEN_FUNC,
 	CLOSE_FUNC,
 	CLOSE_LIST,
-	SEMI_SUBSHELL,
-	SEMI_BRACE,
 	REDIR,
 	CMD,
 	HEREDOCDATA,

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 16:52:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:21:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_list		*is_already_func(t_btree **new)
 		ret = (new_name && new_name[0] && old_name && old_name[0]
 			&& !ft_strcmp(new_name[0], old_name[0])) ? 0 : 1;
 		ft_tabdel(&old_name);
-		tmp = tmp->next;
+		tmp = (ret) ? tmp->next : tmp;
 	}
 	ft_tabdel(&new_name);
 	if (!ret)
@@ -116,8 +116,10 @@ int			add_one_func(t_btree **ast, t_list **lst)
 	(void)lst;
 	func_ast = btree_map(*ast, &node_copy);
 	if ((old_func = is_already_func(&func_ast)))
+	{
 		ft_lst_delif(&data_singleton()->lst_func,
 			old_func->content, &ft_addrcmp, &tree_func_free);
+	}
 	ft_lsteadd(&data_singleton()->lst_func, ft_lstnew(&func_ast, sizeof(*ast)));
 	return (0);
 }

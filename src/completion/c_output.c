@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 13:10:38 by alao              #+#    #+#             */
-/*   Updated: 2017/03/21 14:37:14 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 18:20:29 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,22 @@ int				c_updater(t_comp *c, char *select)
 {
 	char		*tmp;
 	char		*rt;
+	char		*alter;
 
 	tmp = NULL;
 	rt = NULL;
+	alter = ft_add_escape(select, ' ');
 	if (c->match)
 		tmp = ft_strsub(c->rcmd, 0, ft_strlen(c->rcmd) - ft_strlen(c->match));
 	else
 		tmp = ft_strdup(c->rcmd);
-	rt = ft_strjoin(tmp, select);
+	rt = ft_strjoin(tmp, alter);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
 	c->rcmd = ft_strdup(rt);
 	c_updater_rcmd(c);
 	rt ? ft_memdel((void *)&rt) : (0);
+	alter ? ft_memdel((void *)&alter) : (0);
 	c_clear(data_singleton());
 	return (1);
 }

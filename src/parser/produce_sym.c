@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 16:34:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 19:26:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ t_prodmatch			g_prodmatch[] =
 	{TK_ASSIGNMENT_WORD, TK_ELIF, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, TK_ELSE, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
-	{TK_ASSIGNMENT_WORD, CMD_NAME, CMD_PREFIX},
-	{TK_ASSIGNMENT_WORD, CMD_SUPERIOR, CMD_PREFIX},
-	{TK_ASSIGNMENT_WORD, COMPOUND_LIST, CMD_PREFIX},
+	{TK_ASSIGNMENT_WORD, CMD_NAME, CMD_SUFFIX},
+	{TK_ASSIGNMENT_WORD, CMD_SUPERIOR, CMD_SUFFIX},
+	{TK_ASSIGNMENT_WORD, COMPOUND_LIST, CMD_SUFFIX},
 	{TK_ASSIGNMENT_WORD, COMPLETE_CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, AND_OR, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, AND_OR_MAJOR, CMD_PREFIX},
-	{TK_ASSIGNMENT_WORD, PIPE_SEMI_SEQUENCE, CMD_PREFIX},
+	{TK_ASSIGNMENT_WORD, PIPE_SEMI_SEQUENCE, CMD_SUFFIX},
 	{TK_ASSIGNMENT_WORD, SEQUENCE, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, COMPLETE_COMMANDS, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, CMD_WORD, CMD_SUFFIX},
