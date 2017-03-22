@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 22:02:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 23:59:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int				main(int ac, char **av)
 	t_btree		*ast;
 
 	g_argv = av;
+	DG("----------------");
 	setlocale(LC_ALL, "");
 	if (shell_init(ac, av) != 0)
 		return (1);
