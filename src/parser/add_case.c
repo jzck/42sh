@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/15 01:09:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:30:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		iscase(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP || node->type == TK_PIPE)
+			|| node->type == TK_AMP || node->type == TK_PIPE
+			|| node->type == TK_AND_IF || node->type == TK_OR_IF)
 			&& iscase(&(*ast)->right, lst) == 1)
 			return (1);
 		if ((node->type == TK_CASE || node->type == TK_PAREN_OPEN)
