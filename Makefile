@@ -268,6 +268,7 @@ line_editing/queue.c\
 line_editing/readline.c\
 line_editing/resize.c\
 line_editing/underline_function.c\
+line_editing/underline_reset.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\

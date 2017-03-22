@@ -6,53 +6,11 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 20:58:12 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:14:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	reset_term(char **str, size_t *pos)
-{
-	size_t pos_ref;
-
-	pos_ref = *pos;
-	if (*pos)
-	{
-		--(*pos);
-		ft_get_beggin_with_curs(*str, pos);
-	}
-	ft_puttermcaps("cd");
-	ft_current_str(*str, *pos);
-	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref;
-}
-
-static void	reset_and_remove_term(char **str, size_t *pos, char *copy_tmp)
-{
-	size_t pos_ref;
-
-	pos_ref = *pos;
-	if (!data_singleton()->line.pos_tmp)
-		pos_ref += ft_strlen(data_singleton()->line.copy_tmp);
-	while (*copy_tmp)
-	{
-		--pos_ref;
-		*str = ft_remove_imput(*str, pos_ref);
-		++copy_tmp;
-	}
-	if (*pos)
-	{
-		--(*pos);
-		ft_get_beggin_with_curs(*str, pos);
-	}
-	ft_puttermcaps("cd");
-	ft_current_str(*str, *pos);
-	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref;
-}
 
 int			ft_x(char **str, size_t *pos)
 {
@@ -70,7 +28,7 @@ int			ft_x(char **str, size_t *pos)
 		if (read(STDIN, &ret, sizeof(int)) < 0)
 			return (-1);
 		if ((*str)[*pos] == '\n')
-			return (0);
+			return (reset_term_hard());
 		if (ret == FLECHE_GAUCHE)
 			underline_left(str, pos, pos_ref);
 		else if (ret == FLECHE_DROITE)
@@ -99,7 +57,7 @@ int			ft_c(char **str, size_t *pos)
 		if (read(STDIN, &ret, sizeof(int)) < 0)
 			return (-1);
 		if ((*str)[*pos] == '\n')
-			return (0);
+			return (reset_term_hard());
 		if (ret == FLECHE_GAUCHE)
 			underline_left(str, pos, pos_ref);
 		else if (ret == FLECHE_DROITE)
