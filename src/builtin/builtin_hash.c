@@ -44,7 +44,7 @@ int			builtin_hash(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!av || ft_hash_opt(av))
-		return (builtin_return_status(0, 1));
+		return (1);
 	i = 0;
 	while (i < MAX_HASH)
 	{
@@ -52,5 +52,5 @@ int			builtin_hash(const char *path, char *const av[], char *const envp[])
 			ft_hash_lst_print(g_hash[i]);
 		++i;
 	}
-	return (builtin_return_status(0, 0));
+	return (0);
 }

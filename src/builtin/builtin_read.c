@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 #define US_READ "read [-ers] [-u fd] [-t timeout] [-p prompt]"
 #define US_READ_1 "[-n nchars] [-d delim] [name ...]"
 
@@ -25,11 +26,6 @@ t_cliopts	g_read_opts[] =
 	{'u', NULL, READ_OPT_LU, 0, bt_read_getfd},
 	{0, 0, 0, 0, 0},
 };
-
-void		bt_read_usage(void)
-{
-	SH_ERR("usage: read %s %s\n", US_READ, US_READ_1);
-}
 
 int			bt_read_init(t_read *data, char **av)
 {
@@ -115,8 +111,8 @@ int			builtin_read(const char *path, char *const av[], char *const envp[])
 	if (ret == -1)
 		exit(1);
 	if (ret != 0)
-		bt_read_usage();
+		SH_ERR("usage: read %s %s\n", US_READ, US_READ_1);
 	if (ret != 2)
 		bt_read_exit(&data);
-	return (builtin_return_status(0, ret));
+	return (ret);
 }

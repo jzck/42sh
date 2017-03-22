@@ -19,20 +19,10 @@ void	process_resetfds(t_process *p)
 
 	(void)p;
 	exec = &data_singleton()->exec;
-	i = 0;
-	while (i < 10)
+	i = -1;
+	while (++i < 10)
 	{
-		/* if (i!=3) //JACK SOME PB HERE  on close la sortie debug en forcant le close sur tous les fd... ne risque-t-on pas autre chose ??!!! */
-		/* { */
-			close(i++);
-		/* } */
-		/* else */
-		/* 	i++; */
+		if (exec->fd_save[i] != -1)
+			dup2(exec->fd_save[i], i);
 	}
-	if (exec->fd_save[0] != -1)
-		dup2(exec->fd_save[0], STDIN);
-	if (exec->fd_save[1] != -1)
-		dup2(exec->fd_save[1], STDOUT);
-	if (exec->fd_save[2] != -1)
-		dup2(exec->fd_save[2], STDERR);
 }

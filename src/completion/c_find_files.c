@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/21 14:53:21 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 12:57:02 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			c_seek_files(t_data *s, t_comp *c, char *current_word)
 	if (c->rcmd[0] == '.')
 	{
 		c->cpath = ft_strdup("./");
-		c->match = ft_strdup(".");
+		c->match = ft_strdup(current_word);
 	}
 	if (c->cpath == NULL)
 	{

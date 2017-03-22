@@ -131,7 +131,7 @@ struct	s_job
 struct	s_exec
 {
 	t_job		job;
-	int			fd_save[3];
+	int			fd_save[10];
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;
@@ -140,7 +140,7 @@ struct	s_exec
 };
 
 int		exec_reset(void);
-int		do_the_muther_forker(t_process *p);
+int		process_fork(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
 void	process_reset(t_process *p);

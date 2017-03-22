@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/21 17:18:57 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/22 14:59:33 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden #-fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror #-fvisibility=hidden# -fsanitize=address
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -40,7 +40,6 @@ builtin/builtin_hash.c\
 builtin/builtin_history.c\
 builtin/builtin_math.c\
 builtin/builtin_read.c\
-builtin/builtin_return_status.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\

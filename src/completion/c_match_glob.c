@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 13:40:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 14:51:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 ** Recreate the command from the globbing module responds.
 */
 
-static void			c_replace_globbing(char **glob, size_t start)
+static void			c_replace_globbing(char **glob, size_t start, size_t pos)
 {
 	char			*ref_next;
 	char			*ref_mid;
 	char			*ref_prev;
 	char			*str;
-	size_t			pos;
 
 	str = data_singleton()->line.input;
-	pos = data_singleton()->line.pos;
 	while (str[pos] && str[pos] != ' ')
 		++pos;
 	while (str[pos] && str[pos] == ' ')
@@ -103,7 +101,7 @@ int					c_glob_matching(void)
 	if ((pos = c_glob_pos(NULL, 0)) == -1)
 		return (0);
 	current_word = ft_strdupi_w(str + pos);
-	if (current_word[0] == '$')
+	if (current_word[0] == '$' || current_word[0] == '~')
 	{
 		free(current_word);
 		return (0);
@@ -113,6 +111,6 @@ int					c_glob_matching(void)
 	ss_glob = glob(current_word, glob_echap, glob_echap, 1);
 	if (c_check_glob(ss_glob, current_word, glob_echap, pos))
 		return (0);
-	c_replace_globbing(ss_glob, pos);
+	c_replace_globbing(ss_glob, pos, data_singleton()->line.pos);
 	return (1);
 }
