@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/20 18:14:35 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 12:44:00 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 /*
 ** Failsafe by checking if the nearby char are not a < or > for aggregation.
 */
-
+/*
 static int	c_chevron(t_comp *c)
 {
 	size_t	pos;
+	size_t	input_len;
 
 	pos = c->ircmd;
+	input_len = ft_strlen(data_singleton()->line.input);
 	if (pos >= ft_strlen(c->rcmd))
-		pos = ft_strlen(c->rcmd) - (ft_strlen(data_singleton()->line.input)
-																		- pos);
+		pos = ft_strlen(c->rcmd) - (input_len - pos);
 	while (pos)
 	{
 		if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
@@ -33,7 +34,7 @@ static int	c_chevron(t_comp *c)
 	if (c->rcmd[pos] == '<' || c->rcmd[pos] == '>')
 		return (1);
 	return (0);
-}
+}*/
 
 /*
 ** Seek the current word.
@@ -42,11 +43,12 @@ static int	c_chevron(t_comp *c)
 static char	*c_current_words(t_comp *c)
 {
 	size_t	pos;
+	size_t	input_len;
 
 	pos = c->ircmd;
+	input_len = ft_strlen(data_singleton()->line.input);
 	if (pos >= ft_strlen(c->rcmd))
-		pos = ft_strlen(c->rcmd) -
-					(ft_strlen(data_singleton()->line.input) - pos + 1);
+		pos = ft_strlen(c->rcmd) - (input_len - pos + 1);
 	while (pos && c->rcmd[pos] != ' ')
 		--pos;
 	if (c->rcmd[pos] == ' ')
@@ -67,7 +69,8 @@ int			c_matching(t_data *s, t_comp *c)
 		c_seek_abs_path(c, current_word);
 	else if (ft_strchr(c->rcmd, '$'))
 		c_seek_env(c, current_word);
-	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')) && !c_chevron(c))
+		else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')))
+//	else if (c->rcmd[0] != '.' && !(ft_strchr(c->rcmd, ' ')) && !c_chevron(c))
 		c_seek_binary(s, c);
 	else
 		c_seek_files(s, c, current_word);
