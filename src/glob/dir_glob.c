@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 23:14:19 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/22 21:59:49 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int				dir_research(t_glob *gl, char *p,
 	}
 	if ((ft_strlen(p) <= 1 || p[ft_strlen(p) - 1] != '.') && is_directory(p))
 	{
-		dir = opendir(p);
+		if (!(dir = opendir(p)))
+			return (0);
 		while ((in = readdir(dir)))
 			dir_list_content(gl,
 					(char *[2]){p, in->d_name}, pat, mode[0]);

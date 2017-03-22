@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 16:29:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 21:32:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		error_launch(char *error_ori, char *error_type, int error_code)
 {
-	SH_ERR("%s: %s%s", SHELL_NAME, error_ori, error_type);
+	SH_ERR("%s%s", error_ori, error_type);
 	exit(error_code);
 }
 
