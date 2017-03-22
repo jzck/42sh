@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/21 00:51:01 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:51:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,15 @@ int				plaunch_for(t_process *p)
 	var = ((char **)temp->content)[0];
 	if (!word_is_assignment(temp->content))
 		return (error_badidentifier(var));
-	temp = temp->next;
-	while (temp)
+	i = 0;
+	av = token_to_argv(temp, 1);
+	while (av[++i])
 	{
-		i = -1;
-		av = token_to_argv(temp, 1);
-		while (av[++i])
-		{
-			builtin_setenv("setenv", (char*[]){"local", var, av[i], 0},
-					NULL);
-			ft_exec(&p->data.d_for.content);
-		}
-		temp = temp->next;
+		builtin_setenv("setenv", (char*[]){"local", var, av[i], 0},
+				NULL);
+		ft_exec(&p->data.d_for.content);
 	}
+	ft_tabdel(&av);
+	sleep(10);
 	return (0);
 }
