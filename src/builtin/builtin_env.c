@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
+/*   Updated: 2017/03/22 17:17:28 by jhalford         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 #define ENV_USAGE	"env [-i] [name=value]... [utility [argument...]]"
@@ -51,10 +63,10 @@ int			builtin_env(const char *path,
 		if (!(path = ft_strchr(data.av_data[0], '/') ?
 			ft_strdup(data.av_data[0]) : ft_hash(data.av_data[0]))
 			|| access(path, F_OK) != 0)
-			exit (SH_ERR(ENV_NOFILE, data.av_data[0]));
+			exit(SH_ERR(ENV_NOFILE, data.av_data[0]));
 		stat(path, &buf);
 		if (S_ISDIR(buf.st_mode) || access(path, X_OK) != 0)
-			exit (SH_ERR(ENV_NOPERM, data.av_data[0]));
+			exit(SH_ERR(ENV_NOPERM, data.av_data[0]));
 		execve(path, data.av_data, data.custom_env);
 	}
 	waitpid(pid, &status, 0);

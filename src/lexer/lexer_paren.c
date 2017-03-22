@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 17:37:15 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/08 12:14:09 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:16:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int		lexer_paren(t_list **alst, t_lexer *lexer)
 		token->type = TK_PAREN_OPEN;
 		push(&lexer->stack, PAREN);
 	}
-	else if (get_lexer_stack(*lexer))
+	else
 	{
 		token->type = TK_PAREN_CLOSE;
-		pop(&lexer->stack);
+		if (get_lexer_stack(*lexer) == PAREN)
+			pop(&lexer->stack);
 	}
 	lexer->pos++;
 	lexer->state = DEFAULT;

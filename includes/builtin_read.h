@@ -6,29 +6,30 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:34:47 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:25:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_READ_H
 # define BUILTIN_READ_H
 
-# define READ_OPT_LA	(1 << 0)
-# define READ_OPT_LD	(1 << 1)
-# define READ_OPT_LE	(1 << 2)
-# define READ_OPT_LI	(1 << 3)
-# define READ_OPT_LN	(1 << 4)
-# define READ_OPT_UN	(1 << 5)
-# define READ_OPT_LP	(1 << 6)
-# define READ_OPT_LR	(1 << 7)
-# define READ_OPT_LS	(1 << 8)
-# define READ_OPT_LT	(1 << 9)
-# define READ_OPT_LU	(1 << 10)
+# define BT_READ_LA		(1 << 0)
+# define BT_READ_LD		(1 << 1)
+# define BT_READ_LE		(1 << 2)
+# define BT_READ_LI		(1 << 3)
+# define BT_READ_LN		(1 << 4)
+# define BT_READ_UN		(1 << 5)
+# define BT_READ_LP		(1 << 6)
+# define BT_READ_LR		(1 << 7)
+# define BT_READ_LS		(1 << 8)
+# define BT_READ_LT		(1 << 9)
+# define BT_READ_LU		(1 << 10)
+# define BT_READ_INTER	(1 << 11)
 
 typedef	struct s_read		t_read;
 typedef	struct s_readopt	t_readopt;
 
-struct	s_read
+struct			s_read
 {
 	t_flag		opts;
 	char		**names;

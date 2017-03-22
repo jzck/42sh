@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:40:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:24:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define JOBS_OPT_L		(1 << 0)
 
-struct	s_jobc
+struct		s_jobc
 {
 	t_list			*first_job;
 	pid_t			shell_pgid;
@@ -75,9 +75,11 @@ void		sigttou_handler(int signo);
 
 int			process_cmp_pid(t_process *p, pid_t *pid);
 void		process_format(t_list **p, int firstp, int opts);
+
 /*
 ** Mapping pour afficher les process
 */
+
 void		pprint(t_process *p);
 int			pprint_subshell(t_process *p);;
 int			pprint_brace(t_process *p);

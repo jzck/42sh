@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 14:30:07 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 14:42:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:30:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 	(void)envp;
 	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
-		ft_dprintf(2, "{red}fg: %s{eoc}\n", SH_MSG_NOJOBC);
+		SH_ERR("fg: %s", SH_MSG_NOJOBC);
 		return (-1);
 	}
 	jobc = &data_singleton()->jobc;
@@ -33,7 +33,7 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 		if ((jlist = ft_lst_find(jobc->first_job, &id, job_cmp_id)))
 			job_run(jlist->content, 1);
 		else
-			ft_dprintf(2, "{red}fg: job not found: [%i]{eoc}\n", id);
+			SH_ERR("{red}fg: job not found: [%i]", id);
 	}
 	else
 	{
@@ -42,7 +42,7 @@ int		builtin_fg(const char *path, char *const av[], char *const envp[])
 		else if ((jlist = ft_lst_find(jobc->first_job, &rank[1], job_cmp_id)))
 			job_run(jlist->content, 1);
 		else
-			ft_dprintf(2, "{red}fg: no current job{eoc}\n");
+			SH_ERR("fg: no current job");
 	}
 	return (0);
 }

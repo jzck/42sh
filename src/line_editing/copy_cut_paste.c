@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 18:11:14 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:49:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,16 @@ int			ft_v(char **str, size_t *pos)
 	int		i;
 	char	*tmp;
 
-	tmp = data_singleton()->line.copy_tmp;
 	i = -1;
 	tmp_pos = *pos;
+	tmp = data_singleton()->line.copy_tmp;
 	if (!*str || !tmp)
 		return (0);
 	while (tmp[++i])
 	{
 		if (ft_strlen(*str) > SIZE_LINE)
 			break ;
-		if (!(*str = ft_realloc_imput(*str, tmp[i], *pos + i)))
-			return (-1);
+		*str = ft_realloc_imput(*str, tmp[i], *pos + i);
 	}
 	if (*pos)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_replace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:32:26 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 16:42:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:22:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int			fd_replace(int fd1, int fd2)
 {
 	if (fd1 != fd2)
-		return(dup2_close(fd1, fd2));
+		return (dup2_close(fd1, fd2));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:05:55 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:11:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 16:40:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		process_format(t_list **plist, int firstp, int opts)
 
 	p = (*plist)->content;
 	if (!firstp)
-		ft_printf("       ");
+		ft_putstr("     ");
 	if (opts & JOBS_OPT_L)
 		ft_printf("%i ", p->pid);
 	process_format_state(p);
