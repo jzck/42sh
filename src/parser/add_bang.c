@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 14:57:45 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 18:11:11 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:34:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int		isbang(t_btree **ast, t_list **lst)
 	{
 		node = (*ast)->item;
 		if ((node->type == TK_NEWLINE || node->type == TK_SEMI
-			|| node->type == TK_AMP) && isbang(&(*ast)->right, lst) == 1)
+			|| node->type == TK_AMP || node->type == TK_AND_IF
+			|| node->type == TK_OR_IF || node->type == TK_PIPE)
+			&& isbang(&(*ast)->right, lst) == 1)
 			return (1);
 		if (node->type == TK_BANG && node->full == 0)
 			return (1);
@@ -44,7 +46,8 @@ int		isbang_sep(t_btree **ast, t_list **lst)
 			|| token->type == TK_OR_IF) && node->type == TK_BANG
 			&& node->nest == 0)
 			node->full = 1;
-		if (token->type == TK_PIPE && node->type == TK_BANG && node->full == 0)
+		if (token->type == TK_PIPE && node->type == TK_BANG
+			&& node->full == 0)
 			return (1);
 	}
 	return (0);
