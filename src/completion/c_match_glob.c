@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 13:40:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 11:52:18 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 ** Recreate the command from the globbing module responds.
 */
 
-static void			c_replace_globbing(char **glob, size_t start)
+static void			c_replace_globbing(char **glob, size_t start, size_t pos)
 {
 	char			*ref_next;
 	char			*ref_mid;
 	char			*ref_prev;
 	char			*str;
-	size_t			pos;
 
 	str = data_singleton()->line.input;
-	pos = data_singleton()->line.pos;
 	while (str[pos] && str[pos] != ' ')
 		++pos;
 	while (str[pos] && str[pos] == ' ')
@@ -113,6 +111,6 @@ int					c_glob_matching(void)
 	ss_glob = glob(current_word, glob_echap, glob_echap, 1);
 	if (c_check_glob(ss_glob, current_word, glob_echap, pos))
 		return (0);
-	c_replace_globbing(ss_glob, pos);
+	c_replace_globbing(ss_glob, pos, data_singleton()->line.pos);
 	return (1);
 }
