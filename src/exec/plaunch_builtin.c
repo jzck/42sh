@@ -14,8 +14,8 @@
 
 int		plaunch_builtin(t_process *p)
 {
-	return ((*p->data.cmd.execf)(
+	return (*p->data.cmd.execf)(
 				p->data.cmd.path,
 				p->data.cmd.av,
-				data_singleton()->env));
+				data_singleton()->env);
 }

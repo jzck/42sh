@@ -25,5 +25,5 @@ int		builtin_echo(const char *path, char *const av[], char *const envp[])
 			ft_putchar(' ');
 	}
 	ft_putchar('\n');
-	return (builtin_return_status(0, 0));
+	return (0);
 }

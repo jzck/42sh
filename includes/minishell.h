@@ -67,7 +67,7 @@ int		data_init(int ac, char **av);
 void	data_exit(void);
 int		get_c_arg(char ***av, t_data *data);
 
-void		content_free(void *data, size_t content_size);
+/* void	content_free(void *data, size_t content_size); */
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

@@ -14,7 +14,7 @@
 
 static void		error_launch(char *error_ori, char *error_type, int error_code)
 {
-	ft_dprintf(2, "{red}%s: %s%s{eoc}\n", SHELL_NAME, error_ori, error_type);
+	SH_ERR("%s: %s%s", SHELL_NAME, error_ori, error_type);
 	exit(error_code);
 }
 

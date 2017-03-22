@@ -35,5 +35,5 @@ int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 		}
 		i++;
 	}
-	return (builtin_return_status(0, 0));
+	return (0);
 }

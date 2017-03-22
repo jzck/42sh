@@ -38,9 +38,8 @@ int				exec_leaf(t_btree **ast)
 	if (p.type >= PROCESS_MAX)
 		return (1);
 	p.map = g_process_map[p.type];
-	if (!(process_launch(&p)))
+	if (process_launch(&p))
 	{
-		DG("check");
 		job_addprocess(&p);
 		if (IS_PIPEEND(p))
 		{
@@ -51,7 +50,5 @@ int				exec_leaf(t_btree **ast)
 			job->pgid = 0;
 		}
 	}
-	else
-DG("WHY HERE?");
 	return (0);
 }

@@ -23,7 +23,7 @@ int		builtin_history(const char *path, char *const av[], char *const envp[])
 	head = data_singleton()->line.list_end;
 	len = 1;
 	if (!head)
-		return (builtin_return_status(0, 0));
+		return (0);
 	if (head && !head->str)
 		head = head->next;
 	while (head && head->str)
@@ -34,5 +34,5 @@ int		builtin_history(const char *path, char *const av[], char *const envp[])
 		++len;
 		head = head->next;
 	}
-	return (builtin_return_status(0, 0));
+	return (0);
 }

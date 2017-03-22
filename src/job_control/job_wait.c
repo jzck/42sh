@@ -30,6 +30,7 @@ int		job_wait(int id)
 				&& errno != ECHILD)
 			ft_dprintf(2, "{red}%s: waitpid error errno=%i{eoc}\n",
 					SHELL_NAME, errno);
+		DG("wait trigger pid=%i", pid);
 		if (pid <= 1 || mark_process_status(pid, status)
 			|| job_is_stopped(j)
 			|| job_is_completed(j))
