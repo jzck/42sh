@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 20:04:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/01/26 11:33:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 11:56:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ void		ft_realloc_str_history_3(char **str, size_t pos, char *s)
 	if (new_str3)
 	{
 		new_str2 = ft_strjoin(new_str, new_str3);
-		free(new_str);
 		new_str3 = ft_strjoin(new_str2, (*str) + pos + ft_strlen(s) + 2);
 		free(new_str2);
 	}
-	else
-		new_str3 = ft_strjoin(new_str, (*str) + pos + ft_strlen(s) + 2);
-	free(s);
-	free(*str);
+	free(new_str);
+	ft_strdel(str);
 	*str = new_str3;
+	free(s);
 }
