@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 22:16:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 00:30:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define TOUCHE_F5 892427035
 # define TOUCHE_F6 925981467
 
-# define SIZE_LINE 16000
+# define SIZE_LINE 16384
 
 # define CORRUPT 1
 
@@ -127,11 +127,14 @@ int				ft_nb_of_line(char *str, size_t pos);
 int				ft_get_size_prev(char *str, size_t pos);
 void			sigwinch_resize(int sig);
 size_t			ft_hist_len(void);
-void			underline_right(char **str, size_t *pos, size_t pos_ref);
-void			underline_left(char **str, size_t *pos, size_t pos_ref);
+
+int				underline_right(char **str, size_t *pos, size_t pos_ref);
+int				underline_left(char **str, size_t *pos, size_t pos_ref);
+void			underline_home(char **str, size_t *pos, size_t pos_ref);
+void			underline_end(char **str, size_t *pos, size_t pos_ref);
+void			underline_check_end_of_line(char *str, size_t pos);
 void			reset_term(char **str, size_t *pos);
 void			reset_and_remove_term(char **str, size_t *pos, char *copy_tmp);
-int				reset_term_hard(void);
 
 int				ft_read_stdin(char **input);
 

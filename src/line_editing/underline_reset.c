@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:14:07 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 21:16:24 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 23:40:39 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	reset_term(char **str, size_t *pos)
 {
-	size_t pos_ref;
+	size_t	pos_ref;
 
 	pos_ref = *pos;
 	if (*pos)
@@ -26,39 +26,30 @@ void	reset_term(char **str, size_t *pos)
 	ft_current_str(*str, *pos);
 	ft_get_next_str(*str, pos);
 	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref;
+	(*pos) = pos_ref + (((*str)[*pos]) ? 1 : 0);
 }
 
 void	reset_and_remove_term(char **str, size_t *pos, char *copy_tmp)
 {
-	size_t pos_ref;
+	size_t	pos_ref;
 
 	pos_ref = *pos;
 	if (!data_singleton()->line.pos_tmp)
 		pos_ref += ft_strlen(data_singleton()->line.copy_tmp);
+	if (*pos)
+	{
+		--(*pos);
+		ft_get_beggin_with_curs(*str, pos);
+	}
 	while (*copy_tmp)
 	{
 		--pos_ref;
 		*str = ft_remove_imput(*str, pos_ref);
 		++copy_tmp;
 	}
-	if (*pos)
-	{
-		--(*pos);
-		ft_get_beggin_with_curs(*str, pos);
-	}
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *pos);
 	ft_get_next_str(*str, pos);
 	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref;
-}
-
-int	reset_term_hard(void)
-{
-	ft_putnc('\b', ft_strlen(data_singleton()->line.copy_tmp));
-	ft_putstr(data_singleton()->line.copy_tmp);
-	ft_strdel(&data_singleton()->line.copy_tmp);
-	data_singleton()->line.pos_tmp = 0;
-	return (0);
+	(*pos) = pos_ref + (((*str)[*pos]) ? 1 : 0);
 }

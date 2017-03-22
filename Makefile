@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/23 00:25:53 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/23 00:29:22 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -267,8 +267,12 @@ line_editing/print_and_del.c\
 line_editing/queue.c\
 line_editing/readline.c\
 line_editing/resize.c\
+line_editing/underline_end.c\
 line_editing/underline_function.c\
+line_editing/underline_home.c\
+line_editing/underline_left.c\
 line_editing/underline_reset.c\
+line_editing/underline_right.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\

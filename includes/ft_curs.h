@@ -6,7 +6,7 @@
 /*   By: sbenning <sbenning@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 16:34:51 by sbenning          #+#    #+#             */
-/*   Updated: 2017/03/20 12:33:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 00:03:16 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_curs	t_curs;
 ** Cursor data : cursor's coordonate and windows size
 */
 
-struct	s_curs
+struct					s_curs
 {
 	int					co;
 	int					li;
