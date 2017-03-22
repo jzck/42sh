@@ -6,11 +6,12 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 16:08:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:36:07 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define SHELL_USAGE	"42sh [-c command | [<]script] [--no-jobcontrol]"
 
 static t_cliopts	g_opts[] =
 {
@@ -42,16 +43,12 @@ static int			get_input_fd(t_data *data)
 	}
 	else if ((file = *data->av_data))
 	{
-		DG("file=%s", file);
 		if (stat(file, &buf) < 0)
-			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
-					data->argv[0], file);
+			SH_ERR("%s: No such file or directory", file);
 		else if (S_ISDIR(buf.st_mode))
-			ft_printf("{red}%s: %s: is a directory\n{eoc}", data->argv[0],
-					file);
+			SH_ERR("%s: is a directory", file);
 		else if ((fds[PIPE_READ] = open(file, O_RDONLY | O_CLOEXEC)) < 0)
-			ft_printf("{red}%s: %s: No such file or directory\n{eoc}",
-					data->argv[0], file);
+			SH_ERR("%s: No such file or directory", file);
 	}
 	else
 		return (STDIN);
@@ -75,18 +72,11 @@ static int			interactive_settings(void)
 	shell_resetsig();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
-		ft_dprintf(2,
-				"{red}Couldnt put the shell in it's own process group{eoc}\n");
+		SH_ERR("setpgid(): %s", strerror(errno));
 		return (-1);
 	}
 	tcsetpgrp(STDIN, *shell_pgid);
 	tcgetattr(STDIN, &data->jobc.shell_tmodes);
-	return (0);
-}
-
-static int			usage(void)
-{
-	ft_dprintf(2, "usage: 42sh [-c command | [<]script] [--no-jobcontrol]\n");
 	return (0);
 }
 
@@ -99,8 +89,8 @@ int					shell_init(int ac, char **av)
 		return (-1);
 	if (cliopts_get(av, g_opts, data))
 	{
-		usage();
-		return (ft_perror());
+		ft_perror();
+		return (SH_ERR("usage: %s", SHELL_USAGE));
 	}
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);

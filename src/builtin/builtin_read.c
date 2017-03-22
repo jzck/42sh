@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 16:50:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:21:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			bt_read_loop(t_read *data)
 
 	esc = 0;
 	i = 0;
-	if (data->prompt && data->opts & BT_READ_INTER)
+	if (data->prompt && (data->opts & BT_READ_INTER))
 		ft_printf(data->prompt);
 	while (42)
 	{

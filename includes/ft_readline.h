@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 17:53:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:21:28 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # include <time.h>
 # include <dirent.h>
 # include <locale.h>
-
-# include "ft_input.h"
 
 # define FLECHE_HAUT 4283163
 # define FLECHE_BAS 4348699

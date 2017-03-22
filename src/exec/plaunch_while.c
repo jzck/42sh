@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 18:01:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:23:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int				plaunch_while(t_process *p)
 
 	ret = 0;
 	ft_exec(&p->data.d_while.condition);
-	signal(SIGINT, sigint_handler);
 	while (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
 	{
 		ft_exec(&p->data.d_while.content);
