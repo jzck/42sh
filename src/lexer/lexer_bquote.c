@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 22:03:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 21:01:50 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 23:58:33 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int		lexer_bquote(t_list **alst, t_lexer *lexer)
 		if (get_lexer_stack(*lexer) != BQUOTE)
 			push(&lexer->stack, lexer->state);
 		else
-			lexer->state = pop(&lexer->stack) == DQUOTE ? DQUOTE : DEFAULT;
+		{
+			lexer->state = pop(&lexer->stack) &&
+				get_lexer_stack(*lexer) == DQUOTE ? DQUOTE : DEFAULT;
+			DG("going back into state: %i", lexer->state);
+		}
 	}
 	else if (lexer->str[lexer->pos] == '\\' && (back = 1))
 	{
