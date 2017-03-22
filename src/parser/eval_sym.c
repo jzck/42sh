@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 16:56:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 18:14:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,7 +578,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_PAREN_CLOSE, COMPOUND_LIST},
 	{TK_PAREN_CLOSE, FUNC_NAME},
 	{TK_PAREN_CLOSE, OPEN_FUNC},
-	{TK_PAREN_CLOSE, SEMI_SUBSHELL},
+	{TK_PAREN_CLOSE, SUBSHELL},
 	{TK_RBRACE, TK_SEMI},
 	{TK_RBRACE, END_COMMAND},
 	{TK_RBRACE, SEPARATOR_OP},
@@ -1048,7 +1048,6 @@ t_stackmatch	g_stackmatch[] =
 	{SUBSHELL, COMPLETE_CONDITION},
 	{SUBSHELL, CONDITION},
 	{SUBSHELL, AND_OR_MAJOR},
-	{SEMI_SUBSHELL, TK_PAREN_OPEN},
 	{COMPOUND_COMMAND, LINEBREAK},
 	{COMPOUND_COMMAND, TK_PAREN_OPEN},
 	{COMPOUND_COMMAND, TK_LBRACE},
