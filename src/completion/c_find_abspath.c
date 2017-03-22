@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 16:54:59 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 15:14:41 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 20:21:43 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void		c_seek_abs_path(t_comp *c, char *current_word)
 	if (current_word[0] == '~')
 	{
 		tmp = c->cpath;
-		c->cpath = ft_str3join(getenv("PWD"), "/", c->cpath + 2);
+		c->cpath = ft_str3join(getenv("HOME"), "/", c->cpath + 2);
 		free(tmp);
 	}
 	!c->match ? c->match = ft_strdupi_w(ft_strrchr(c->rcmd, '/') + 1) : 0;
 	c_parser(c, c->cpath, c->match);
+	DG("cpath [%s] match [%s]", c->cpath, c->match);
 	if (c->lst == NULL || c->lst == c->lst->prev)
 		c_exclusion_folder(c);
 }
