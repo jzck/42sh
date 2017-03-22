@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 16:11:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 16:56:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,6 +578,7 @@ t_stackmatch	g_stackmatch[] =
 	{TK_PAREN_CLOSE, COMPOUND_LIST},
 	{TK_PAREN_CLOSE, FUNC_NAME},
 	{TK_PAREN_CLOSE, OPEN_FUNC},
+	{TK_PAREN_CLOSE, SEMI_SUBSHELL},
 	{TK_RBRACE, TK_SEMI},
 	{TK_RBRACE, END_COMMAND},
 	{TK_RBRACE, SEPARATOR_OP},
@@ -1047,6 +1048,7 @@ t_stackmatch	g_stackmatch[] =
 	{SUBSHELL, COMPLETE_CONDITION},
 	{SUBSHELL, CONDITION},
 	{SUBSHELL, AND_OR_MAJOR},
+	{SEMI_SUBSHELL, TK_PAREN_OPEN},
 	{COMPOUND_COMMAND, LINEBREAK},
 	{COMPOUND_COMMAND, TK_PAREN_OPEN},
 	{COMPOUND_COMMAND, TK_LBRACE},
@@ -1271,6 +1273,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 		return (1);
 	head = (*stack)->content;
 	i = 0;
+	DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
 	while (g_stackmatch[i].top)
 	{
 		if (new_sym == g_stackmatch[i].top && *head == g_stackmatch[i].under)

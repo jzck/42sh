@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 12:15:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/03 18:18:14 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/22 17:22:51 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/22 17:25:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +36,10 @@ struct	s_parser
 
 struct	s_aggrematch
 {
-	t_sym 	top;
-	t_sym 	under;
-	t_sym 	new_sym;
-	int	erase_sym;
+	t_sym	top;
+	t_sym	under;
+	t_sym	new_sym;
+	int		erase_sym;
 };
 
 struct	s_prodmatch
@@ -64,7 +65,7 @@ int		do_parser_routine(t_list **token, t_btree **ast);
 void	parser_init(t_parser *parser);
 void	parser_destroy(t_parser *parser);
 int		stack_init(t_parser *parser);
-int		redir_init(t_type type, t_redir *redir);   
+int		redir_init(t_type type, t_redir *redir);
 int		ft_parse(t_btree **ast, t_list **token, t_parser *parser);
 
 int		produce_sym(t_list **stack, t_sym *new_sym, t_list **lst);
@@ -82,15 +83,10 @@ int		error_eof(void);
 int		ft_read_stack(t_sym *stack);
 char	*read_state(t_sym current);
 
-/*
- * Build AST - rewriting
- *
-*/
-
 struct	s_treematch
 {
 	t_type	type;
-	int	(*add)(t_btree **ast, t_list **lst);
+	int		(*add)(t_btree **ast, t_list **lst);
 };
 
 int		build_tree(t_btree **ast, t_list **lst);
@@ -145,7 +141,7 @@ int		superflous_token(t_btree **ast, t_list **list);
 void	sym_free(void *data, size_t size);
 void	tree_func_free(void *data, size_t content_size);
 
-struct s_distrostree
+struct	s_distrostree
 {
 	int	(*test)(t_btree **ast, t_list **lst);
 	int	(*add)(t_btree **ast, t_list **lst);

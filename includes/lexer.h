@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 16:44:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/22 17:25:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "types.h"
 
-enum	e_lexstate
+enum		e_lexstate
 {
 	DEFAULT,
 	PAREN,
@@ -37,7 +37,7 @@ enum	e_lexstate
 	END,
 };
 
-struct	s_token
+struct		s_token
 {
 	t_type			type;
 	char			*data;
@@ -46,7 +46,7 @@ struct	s_token
 	int				size;
 };
 
-struct	s_lexer
+struct		s_lexer
 {
 	char		*str;
 	int			pos;
@@ -55,7 +55,7 @@ struct	s_lexer
 	t_list		*heredoc_stack;
 };
 
-struct	s_rvwords
+struct		s_rvwords
 {
 	char	*word;
 	int		type;
