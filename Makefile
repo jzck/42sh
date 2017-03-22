@@ -40,7 +40,6 @@ builtin/builtin_hash.c\
 builtin/builtin_history.c\
 builtin/builtin_math.c\
 builtin/builtin_read.c\
-builtin/builtin_return_status.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\

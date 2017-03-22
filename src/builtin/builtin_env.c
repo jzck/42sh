@@ -59,6 +59,6 @@ int			builtin_env(const char *path,
 	}
 	waitpid(pid, &status, 0);
 	ft_sstrfree(data.custom_env);
+	tcsetpgrp(STDIN, data_singleton()->jobc.shell_pgid);
 	return (0);
-	/* return (builtin_return_status(pid, 0)); */
 }

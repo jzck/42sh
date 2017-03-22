@@ -23,9 +23,6 @@ void	process_resetfds(t_process *p)
 	while (++i < 10)
 	{
 		if (exec->fd_save[i] != -1)
-		{
-			DG("dup2(%i, %i)", exec->fd_save[i], i);
 			dup2(exec->fd_save[i], i);
-		}
 	}
 }

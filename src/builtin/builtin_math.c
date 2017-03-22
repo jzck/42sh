@@ -90,19 +90,19 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!av || !av[1] || !av[2] || !av[3] || av[4])
-		return (builtin_return_status(0, SH_ERR(MATHERR_0)));
+		return (SH_ERR(MATHERR_0));
 	init_math(&var, &value, &operator, &operand);
 	var = av[1];
 	if (get_value(var, &value))
-		return (builtin_return_status(0, 1));
+		return (1);
 	operator = av[2];
 	if (ft_strlen(operator) != 1 || !(ft_strchr("+-/*%", operator[0])))
-		return (builtin_return_status(0, SH_ERR(MATHERR_2)));
+		return (SH_ERR(MATHERR_2));
 	operand = av[3];
 	if (!ft_stris(operand, &ft_isdigit))
-		return (builtin_return_status(0, SH_ERR(MATHERR_3)));
+		return (SH_ERR(MATHERR_3));
 	if (do_math(&value, operator, operand))
-		return (builtin_return_status(0, 1));
+		return (1);
 	builtin_setenv("setenv", (char *[]){"local", var, value, 0}, NULL);
-	return (builtin_return_status(0, 0));
+	return (0);
 }

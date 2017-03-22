@@ -42,14 +42,12 @@ int		process_launch(t_process *p)
 			&& p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
 	{
 		if (process_redirect(p))
-		{
 			set_exitstatus(1, 1);
-			return (0);
-		}
-		set_exitstatus(p->map.launch(p), 1);
+		else
+			set_exitstatus(p->map.launch(p), 1);
 		process_resetfds(p);
 		process_free(p, 0);
-		return (1);
+		return (0);
 	}
 	p->pid = process_fork(p);
 	process_setgroup(p, p->pid);
@@ -57,5 +55,5 @@ int		process_launch(t_process *p)
 		close(p->fdin);
 	if (p->fdout != STDOUT)
 		close(p->fdout);
-	return (0);
+	return (1);
 }

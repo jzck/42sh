@@ -114,5 +114,5 @@ int			builtin_read(const char *path, char *const av[], char *const envp[])
 		SH_ERR("usage: read %s %s\n", US_READ, US_READ_1);
 	if (ret != 2)
 		bt_read_exit(&data);
-	return (builtin_return_status(0, ret));
+	return (ret);
 }
