@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 20:41:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/22 16:24:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int			process_set(t_process *p, t_btree *ast)
 	p->fdout = fds[PIPE_WRITE];
 	p->pid = 0;
 	exec->fdin = fds[PIPE_READ];
-	if (!ast)
-		return (0);
-	p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir,
+	if (ast)
+		p->redirs = ft_lstmap(((t_astnode *)ast->item)->data.cmd.redir,
 																&redir_copy);
-	return (process_set_spec(p, ast));
+	return ((!ast) ? 0 : process_set_spec(p, ast));
 }
