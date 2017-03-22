@@ -267,8 +267,12 @@ line_editing/print_and_del.c\
 line_editing/queue.c\
 line_editing/readline.c\
 line_editing/resize.c\
+line_editing/underline_end.c\
 line_editing/underline_function.c\
+line_editing/underline_home.c\
+line_editing/underline_left.c\
 line_editing/underline_reset.c\
+line_editing/underline_right.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
