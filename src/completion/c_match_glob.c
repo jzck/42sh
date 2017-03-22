@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 14:51:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 00:06:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int			c_check_glob(char **ss_glob, char *current_word,
 	str = data_singleton()->line.input;
 	free(current_word);
 	free(glob_echap);
-	if (!*ss_glob || !**ss_glob ||
+	if (!ss_glob || !*ss_glob || !**ss_glob ||
 	!ft_strncmp(str + pos, *ss_glob, ft_strlen(*ss_glob)))
 	{
 		ft_sstrfree(ss_glob);
