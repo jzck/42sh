@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 16:54:59 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 14:47:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:14:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		c_seek_abs_path(t_comp *c, char *current_word)
 	char	*tmp;
 	int		len;
 
-	len = ft_strrchr(c->rcmd, '/') - current_word + 1;
+	len = ft_strrchr(current_word, '/') - current_word + 1;
 	if (len < 0)
 		return ;
 	if (c->cpath)
