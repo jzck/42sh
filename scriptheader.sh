@@ -1,10 +1,16 @@
 #!/bin/sh
 
-function elem_in_array()
+word=$(git status -s | sed 's/.* //')
+red="\033[38;5;1m"
+gre="\033[38;5;2m"
+cya="\033[38;5;6m"
+res="\033[0m"
+
+elem_in_array ()
 {
 	for cur in $2
 	do
-		if [ "$1" == "$cur" ]
+		if [ "$1" = "$cur" ]
 		then
 			echo "1"
 			return 1
@@ -14,7 +20,7 @@ function elem_in_array()
 	return 0
 }
 
-function array_in_array()
+array_in_array ()
 {
 	for cur in $1
 	do
@@ -29,11 +35,29 @@ function array_in_array()
 	return 1
 }
 
-word=$(git status -s | sed 's/.* //')
-red="\033[38;5;1m"
-gre="\033[38;5;2m"
-cya="\033[38;5;6m"
-res="\033[0m"
+confirm ()
+{
+	# call with a prompt string or use a default
+	echo "$cya${1:-Are you sure? [y/N]}$res"
+	read -r -p " " response
+	case "$response" in
+		[yY][eE][sS]|[yY]) 
+			true
+			;;
+		*)
+			false
+			;;
+	esac
+}
+
+do_checkout ()
+{
+	i_tmp=$(echo $i | sed 's/\//_/g')
+	cp $i "$HOME/Documents/.$i_tmp.back"
+	git checkout $i
+	echo "$gre D - O - N - E $res"
+	echo "$cya $i was checked out. A copy still exist in $HOME/Documents/.$i_tmp.back$res\n"
+}
 
 for i in $word
 do
@@ -52,15 +76,10 @@ do
 					then
 						echo "\n$cya CHANGES on $i :$res"
 						echo "$diff"
-						echo "$cya Are you sure?$res"
-						read -r -p " [y/N]" response
-						if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+						confirm
+						if [ $? -eq 0 ]
 						then
-							i_tmp=$(echo $i | sed 's/\//_/g')
-							cp $i "$HOME/Documents/.$i_tmp.back"
-							git checkout $i
-							echo "$gre D - O - N - E $res"
-							echo "$cya $i was checked out. A copy still exist in $HOME/Documents/.$i_tmp.back$res\n"
+							do_checkout
 						else
 							echo "$cya Nothing done for $i$res\n"
 						fi

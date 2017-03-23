@@ -34,6 +34,8 @@ t_lexstate		get_state_global(t_lexer *lexer)
 		|| (((c == '{' && cn == ' ') || (c == '}' && cl == ' '))
 			&& (ret = CURLY_BRACKETS))
 		|| ((c == 0) && (ret = END)))
+	{
 		;
+	}
 	return (ret);
 }
