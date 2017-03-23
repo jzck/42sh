@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 12:41:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 21:10:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 06:29:11 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			pset_cmd(t_process *p, t_btree *ast)
 		return ((p->type = PROCESS_EMPTY) ? 0 : 0);
 	if ((func = is_function(p)))
 	{
+		ft_tabdel(&p->data.cmd.av);
 		p->data.function.content = func;
 		p->type = PROCESS_FUNCTION;
 	}
