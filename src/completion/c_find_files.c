@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:31:21 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 16:02:18 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 15:42:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ int			c_seek_files(t_data *s, t_comp *c, char *current_word)
 		if (c->match && ft_strequ(c->match, c->lst->name))
 			c_exclusion_folder(c);
 	}
+	c_lst_id(c);
 	return (0);
 }

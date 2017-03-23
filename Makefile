@@ -215,6 +215,7 @@ job_control/sigttin_handler.c\
 job_control/sigttou_handler.c\
 lexer/do_lexer_routine.c\
 lexer/get_lexer_stack.c\
+lexer/get_lexer_stack2.c\
 lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\

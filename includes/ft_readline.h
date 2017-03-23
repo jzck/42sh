@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 11:45:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:16:57 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,14 @@ typedef struct	s_key
 	int		(*f)(char **str, size_t *pos);
 }				t_key;
 
+typedef struct	s_cpy
+{
+	int		value;
+	int		(*f)(char **str, size_t *pos, size_t pos_ref);
+}				t_cpy;
+
 extern t_key			g_keys[];
+extern t_cpy			g_cpy[];
 
 void			ft_reset_tab(char *tabl);
 void			ft_putnc(char c, int n);
@@ -130,13 +137,13 @@ size_t			ft_hist_len(void);
 
 int				underline_right(char **str, size_t *pos, size_t pos_ref);
 int				underline_left(char **str, size_t *pos, size_t pos_ref);
-void			underline_home(char **str, size_t *pos, size_t pos_ref);
-void			underline_end(char **str, size_t *pos, size_t pos_ref);
+int				underline_home(char **str, size_t *pos, size_t pos_ref);
+int				underline_end(char **str, size_t *pos, size_t pos_ref);
+int				underline_down(char **str, size_t *pos, size_t pos_ref);
+int				underline_up(char **str, size_t *pos, size_t pos_ref);
 void			underline_check_end_of_line(char *str, size_t pos);
 void			reset_term(char **str, size_t *pos);
 void			reset_and_remove_term(char **str, size_t *pos, char *copy_tmp);
-void			underline_down(char **str, size_t *pos, size_t pos_ref);
-void			underline_up(char **str, size_t *pos, size_t pos_ref);
 
 int				ft_read_stdin(char **input);
 

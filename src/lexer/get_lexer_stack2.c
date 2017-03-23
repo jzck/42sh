@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sstrsort.c                                      :+:      :+:    :+:   */
+/*   get_lexer_stack2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 18:03:37 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/23 14:40:25 by gwojda           ###   ########.fr       */
+/*   Created: 2017/03/23 15:15:46 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/23 16:12:26 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_sstrsort(char **list, int (*cmp)())
+int		get_lexer_stack2(t_lexer lexer)
 {
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (list[i] && list[i + 1])
-	{
-		if ((*cmp)(list[i], list[i + 1]) > 0)
-		{
-			tmp = list[i];
-			list[i] = list[i + 1];
-			list[i + 1] = tmp;
-			i = 0;
-		}
-		else
-			i++;
-	}
+	if (!(lexer.stack && lexer.stack->next))
+		return (0);
+	return (*(int*)lexer.stack->next->content);
 }

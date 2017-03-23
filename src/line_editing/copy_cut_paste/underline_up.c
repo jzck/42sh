@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 11:35:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 11:39:49 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:22:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	underline_up(char **str, size_t *pos, size_t pos_ref)
+int		underline_up(char **str, size_t *pos, size_t pos_ref)
 {
 	size_t	pos_tmp;
 	int		i;
@@ -33,4 +33,5 @@ void	underline_up(char **str, size_t *pos, size_t pos_ref)
 		--i;
 	}
 	*pos = pos_tmp;
+	return (0);
 }
