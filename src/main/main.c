@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 00:28:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:39:07 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int				main(int ac, char **av)
 
 	g_argv = av;
 	DG("----------------");
-	setlocale(LC_ALL, "");
 	if (shell_init(ac, av) != 0)
 		return (1);
 	token = NULL;
