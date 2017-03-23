@@ -6,13 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 11:43:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 11:45:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:21:46 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	underline_down(char **str, size_t *pos, size_t pos_ref)
+int		underline_down(char **str, size_t *pos, size_t pos_ref)
 {
 	size_t	pos_tmp;
 	int		i;
@@ -36,4 +36,5 @@ void	underline_down(char **str, size_t *pos, size_t pos_ref)
 		underline_left(str, pos, pos_ref);
 		--pos_tmp;
 	}
+	return (0);
 }

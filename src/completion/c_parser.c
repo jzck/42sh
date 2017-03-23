@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 15:42:30 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:12:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		c_lst_id(t_comp *c)
 			break ;
 	}
 }
+
 /*
 ** Add the matching element to the list
 */
