@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 12:07:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/17 20:17:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:39:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			lexer_word(t_list **alst, t_lexer *lexer)
 			&& word_is_assignment((char *[]){token->data, (char *)token->esc}))
 	{
 		token->type = TK_ASSIGNMENT_WORD;
-		token_append(token, lexer, 0, 0);
+		token_append(token, lexer, 1, 0);
 		lexer->pos++;
 	}
 	else
