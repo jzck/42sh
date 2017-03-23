@@ -6,11 +6,10 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:48:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 16:45:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 06:36:05 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "minishell.h"
 
 int		process_setgroup(t_process *p, pid_t pid)
