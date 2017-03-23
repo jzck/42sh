@@ -72,6 +72,7 @@ exec/exec_bang.c\
 exec/exec_case_branch.c\
 exec/exec_elif.c\
 exec/exec_else.c\
+exec/exec_func.c\
 exec/exec_leaf.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 17:40:35 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 16:06:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			process_redirect(t_process *p)
 	while (redirs)
 	{
 		redir = redirs->content;
+		DG("redir type is %s", read_state(redir->type));
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
 		i = -1;
