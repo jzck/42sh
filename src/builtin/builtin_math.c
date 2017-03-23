@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:56:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 17:16:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 		return (SH_ERR(MATHERR_3, operand));
 	if (!(value = do_math(value, operator, operand)))
 		return (1);
-	builtin_setenv("setenv", (char *[]){"math", av[1], value, 0}, NULL);
+	builtin_setenv("setenv", (char *[]){"local", av[1], value, 0}, NULL);
 	ft_strdel(&value);
 	return (0);
 }
