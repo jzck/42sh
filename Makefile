@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/23 17:01:20 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/23 18:17:44 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
