@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 16:28:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:52:38 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			ft_x(char **str, size_t *pos)
 		while (g_cpy[i].value && g_cpy[i].value != ret)
 			++i;
 		if (g_cpy[i].value && (ret = g_cpy[i].f(str, pos, pos_ref)))
-			return (ret);
+			return (0);
 		else
 			break ;
 	}
@@ -72,7 +72,7 @@ int			ft_c(char **str, size_t *pos)
 		while (g_cpy[i].value && g_cpy[i].value != ret)
 			++i;
 		if (g_cpy[i].value && (ret = g_cpy[i].f(str, pos, pos_ref)))
-			return (ret);
+			return (0);
 		else if (!g_cpy[i].value)
 			break ;
 	}
