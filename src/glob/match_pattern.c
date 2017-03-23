@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:30:23 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/14 23:25:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:16:08 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static int		match_star(t_glob *gl, char *str, char *full_word)
 	char	*fix;
 	char	*pat;
 
-	if (gl->pat[1] == '*' &&
-			!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1))
+	if (!is_char_esc(gl->esc, ((char **)gl->m_pat->content)[0], gl->pat + 1)
+			&& gl->pat[1] == '*')
 	{
 		while (gl->pat[1] == '*')
 			++gl->pat;

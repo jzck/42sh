@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 22:25:49 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:19:23 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char		*manage_output(int *fds)
 
 	output = NULL;
 	close(fds[PIPE_WRITE]);
-	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)) > 0) {
+	while ((ret = read(fds[PIPE_READ], buf, BUF_SIZE)) > 0)
+	{
 		buf[ret] = 0;
 		ft_strappend(&output, buf);
 	}
@@ -51,4 +52,17 @@ char			*command_getoutput(char *command)
 	}
 	waitpid(pid, &ret, WUNTRACED);
 	return (manage_output(fds));
+}
+
+char			*get_output(char *command)
+{
+	char	*output;
+	int		len;
+
+	if (!(output = command_getoutput(command)))
+		return (NULL);
+	len = ft_strlen(output);
+	while (len && output[--len] == '\n')
+		output[len] = '\0';
+	return (output);
 }

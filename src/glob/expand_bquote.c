@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 19:24:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:20:10 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ static void					expand_all_bquote(t_bquote *me, char *content,
 					ft_strlen(me->s2)}),
 				calc_expand_esc(me->esc2, ft_strlen(me->s1),
 					(int[2]){ft_strlen(content), 1},
-					(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+					(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid) + 1,
 					ft_strlen(me->s2)}),
 				0));
 }
 
-static void					init_expand(t_bquote *me, char *content, int esc)
+static void					init_expand(t_bquote *me, char *content, int doifs)
 {
 	char			*ifs;
 	char			*content2;
 
-	ifs = esc ? NULL : ft_getenv(data_singleton()->local_var, "IFS");
+	ifs = doifs ? ft_getenv(data_singleton()->local_var, "IFS") : NULL;
 	content = ft_strtok(content, ifs);
 	if (!content || !(content2 = ft_strtok(NULL, ifs)))
 	{
 		ft_ld_pushfront(me->wk, gen_tab(ft_strjoinf(ft_strjoin(me->s1, content),
 						me->s2, 1),
 	calc_expand_esc(me->esc, ft_strlen(me->s1), (int[2]){ft_strlen(content), 1},
-	(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid), ft_strlen(me->s2)}),
+	(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid) + 1, ft_strlen(me->s2)}),
 	calc_expand_esc(me->esc2, ft_strlen(me->s1),
 						(int[2]){ft_strlen(content), 1},
-						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid),
+						(int[2]){ft_strlen(me->s1) + ft_strlen(me->mid) + 1,
 						ft_strlen(me->s2)}), 0));
 	}
 	else
@@ -65,19 +65,6 @@ static void					init_expand(t_bquote *me, char *content, int esc)
 						(int[2]){ft_strlen(content), 1}, (int[2]){0, 0}), 0));
 		expand_all_bquote(me, content2, ifs);
 	}
-}
-
-static char					*get_output(char *command)
-{
-	char	*output;
-	int		len;
-
-	if (!(output = command_getoutput(command)))
-		return (NULL);
-	len = ft_strlen(output);
-	while (output[--len] == '\n')
-		output[len] = '\0';
-	return (output);
 }
 
 static int					search_bquote(t_bquote *me)
@@ -98,7 +85,7 @@ static int					search_bquote(t_bquote *me)
 			me->s2 = ft_strdup(me->str + 1);
 			if ((content = get_output(me->mid)))
 				init_expand(me, content,
-						is_char_esc(me->esc, CH(*me->wk)[0], sta));
+						!is_char_esc(me->esc, CH(*me->wk)[0], sta));
 			ft_strdel(&me->mid);
 			ft_strdel(&me->s1);
 			ft_strdel(&me->s2);
@@ -109,12 +96,13 @@ static int					search_bquote(t_bquote *me)
 	return (0);
 }
 
-void						delete(t_ld **tmp, t_ld **src)
+static int					delete(t_ld **tmp, t_ld **src)
 {
 	if (*tmp == *src)
 		ft_ld_del(src, &ft_tabdel);
 	else
 		ft_ld_del(tmp, &ft_tabdel);
+	return (1);
 }
 
 void						expand_bquote(t_glob *gl)
@@ -129,15 +117,15 @@ void						expand_bquote(t_glob *gl)
 	while ((gl->m_pat = ft_ld_front(gl->m_pat)) && do_it)
 	{
 		do_it = 0;
-		while (gl->m_pat && !do_it)
+		while (gl->m_pat)
 		{
 			me.wk = &gl->m_pat;
 			me.esc = UCH(gl->m_pat)[1];
 			me.esc2 = UCH(gl->m_pat)[2];
 			me.str = CH(gl->m_pat)[0] - 1;
 			if ((tmp = gl->m_pat) &&
-					(do_it = search_bquote(&me)) == 1)
-				delete(&tmp, &gl->m_pat);
+					(do_it = search_bquote(&me)) && delete(&tmp, &gl->m_pat))
+				continue;
 			if (!gl->m_pat || !gl->m_pat->next)
 				break ;
 			gl->m_pat = gl->m_pat->next;
