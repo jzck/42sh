@@ -25,8 +25,8 @@ static char	*do_math(char *value, char operator, char *operand)
 
 	ope1 = ft_atoi(value);
 	ope2 = ft_atoi(operand);
-	DG("value %s -> %i", value, ope1);
-	DG("operand %s -> %i", operand, ope2);
+	DG("value %s -> %li", value, ope1);
+	DG("operand %s -> %li", operand, ope2);
 	if ((operator == '/') && ope2 == 0)
 		return (SH_ERR(MATHERR_4) ? NULL : NULL);
 	if ((operator == '%') && ope2 == 0)
@@ -36,7 +36,7 @@ static char	*do_math(char *value, char operator, char *operand)
 	ope1 = (operator == '/') ? ope1 / ope2 : ope1;
 	ope1 = (operator == '*') ? ope1 * ope2 : ope1;
 	ope1 = (operator == '%') ? ope1 % ope2 : ope1;
-	DG("output=%s (%i)", ft_itoa(ope1), ope1);
+	DG("output=%s (%li)", ft_itoa(ope1), ope1);
 	return (ft_itoa(ope1));
 }
 
