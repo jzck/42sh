@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/23 01:59:31 by wescande         ###   ########.fr        #
+#    Updated: 2017/03/23 03:25:35 by wescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror  -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror #-fvisibility=hidden #-fsanitize=address
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -267,8 +267,12 @@ line_editing/print_and_del.c\
 line_editing/queue.c\
 line_editing/readline.c\
 line_editing/resize.c\
+line_editing/underline_end.c\
 line_editing/underline_function.c\
+line_editing/underline_home.c\
+line_editing/underline_left.c\
 line_editing/underline_reset.c\
+line_editing/underline_right.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\

@@ -6,36 +6,34 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 19:37:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:15:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define FUNCERR_0	SHELL_NAME ":maximum nested function level reached"
+#define FUNCERR_0	":maximum nested function level reached"
+#define FUNC_LVL	200
 
 int				plaunch_function(t_process *p)
 {
-	char		*temp;
-	char		*func_lvl;
-	int			value;
+	static int 	protection= 0;
 
-	func_lvl = ft_sstrstr(data_singleton()->env, "FUNC_LVL");
-	if ((temp = func_lvl))
-	{
-		func_lvl += ft_strlenchr(func_lvl, '=') + 1;
-		if ((value = ft_atoi(func_lvl)) >= 199)
-		{
-			ft_strdel(&temp);
-			return (SH_ERR(FUNCERR_0));
-		}
-		value += 1;
-	}
-	else
-		value = 0;
+	if (ft_atoi(ft_getenv(data_singleton()->env, "FUNC_LVL"))  > 10)
+		return(SH_ERR(FUNCERR_0));
+
+	if (protection >= FUNC_LVL)
+		return(SH_ERR(FUNCERR_0));
+	protection++;
+
+// jack faut qu on parle
 	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL",
-		ft_itoa(value), 0}, NULL);
+		ft_itoa(ft_atoi(ft_getenv(data_singleton()->env, "FUNC_LVL")) + 1),
+		NULL}, NULL);
 	ft_exec(&p->data.function.content);
-	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL", "0", 0}, NULL);
+	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL",
+		ft_itoa(ft_atoi(ft_getenv(data_singleton()->env, "FUNC_LVL")) - 1),
+		NULL}, NULL);
+	protection--;
 	return (ft_atoi(ft_getenv(data_singleton()->env, "?")));
 }
