@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 23:53:57 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 11:44:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int			ft_x(char **str, size_t *pos)
 			underline_home(str, pos, pos_ref);
 		else if (ret == TOUCHE_END)
 			underline_end(str, pos, pos_ref);
+		else if (ret == FLECHE_HAUT)
+			underline_up(str, pos, pos_ref);
+		else if (ret == FLECHE_BAS)
+			underline_down(str, pos, pos_ref);
 		else if (ret != FLECHE_DROITE && ret != FLECHE_GAUCHE)
 			break ;
 	}
@@ -66,6 +70,10 @@ int			ft_c(char **str, size_t *pos)
 			underline_home(str, pos, pos_ref);
 		else if (ret == TOUCHE_END)
 			underline_end(str, pos, pos_ref);
+		else if (ret == FLECHE_HAUT)
+			underline_up(str, pos, pos_ref);
+		else if (ret == FLECHE_BAS)
+			underline_down(str, pos, pos_ref);
 		else if (ret != FLECHE_DROITE && ret != FLECHE_GAUCHE)
 			break ;
 	}

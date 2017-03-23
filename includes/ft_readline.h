@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:35:44 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 00:30:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 11:45:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ void			underline_end(char **str, size_t *pos, size_t pos_ref);
 void			underline_check_end_of_line(char *str, size_t pos);
 void			reset_term(char **str, size_t *pos);
 void			reset_and_remove_term(char **str, size_t *pos, char *copy_tmp);
+void			underline_down(char **str, size_t *pos, size_t pos_ref);
+void			underline_up(char **str, size_t *pos, size_t pos_ref);
 
 int				ft_read_stdin(char **input);
 
