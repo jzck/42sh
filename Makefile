@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/23 03:25:35 by wescande         ###   ########.fr        #
+#    Updated: 2017/03/23 16:37:26 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror #-fvisibility=hidden #-fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -fvisibility=hidden -fsanitize=address
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -72,6 +72,7 @@ exec/exec_bang.c\
 exec/exec_case_branch.c\
 exec/exec_elif.c\
 exec/exec_else.c\
+exec/exec_func.c\
 exec/exec_leaf.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
@@ -214,6 +215,7 @@ job_control/sigttin_handler.c\
 job_control/sigttou_handler.c\
 lexer/do_lexer_routine.c\
 lexer/get_lexer_stack.c\
+lexer/get_lexer_stack2.c\
 lexer/get_reserved_words.c\
 lexer/get_state_global.c\
 lexer/get_state_redir.c\

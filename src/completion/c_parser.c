@@ -6,11 +6,33 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/21 14:46:39 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:12:05 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
+
+void		c_lst_id(t_comp *c)
+{
+	t_clst	*lst;
+	int		i;
+
+	i = 1;
+	lst = c->lst;
+	if (!lst)
+		return ;
+	lst->cursor = 1;
+	if (!lst)
+		return ;
+	while (1)
+	{
+		lst->id = i;
+		lst = lst->next;
+		++i;
+		if (lst == c->lst)
+			break ;
+	}
+}
 
 /*
 ** Add the matching element to the list
@@ -18,21 +40,29 @@
 
 void		c_add_to_lst(t_comp *c, t_clst *node)
 {
+	t_clst	*lst;
+
+	lst = c->lst;
 	if (c->lst == NULL)
 	{
 		c->lst = node;
 		node->next = node;
 		node->prev = node;
-		node->cursor = 1;
-		node->id = 1;
 	}
 	else
 	{
-		node->id = c->lst->prev->id + 1;
-		c->lst->prev->next = node;
-		node->prev = c->lst->prev;
-		node->next = c->lst;
-		c->lst->prev = node;
+		while (ft_strcmp(lst->name, node->name) < 0)
+		{
+			lst = lst->next;
+			if (lst == c->lst)
+				break ;
+		}
+		lst->prev->next = node;
+		node->prev = lst->prev;
+		node->next = lst;
+		lst->prev = node;
+		if (lst == c->lst && ft_strcmp(lst->name, node->name) > 0)
+			c->lst = node;
 	}
 }
 

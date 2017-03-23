@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 22:17:10 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 18:23:04 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/23 16:11:29 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t	ft_strxchr(char *str, char c)
 	size_t		rt;
 
 	rt = 0;
-	while(*str)
+	while (*str)
 	{
 		if (*str == c)
 			rt++;
@@ -34,7 +34,7 @@ static size_t	ft_strxchr(char *str, char c)
 ** Add escape char \ for char to_escape.
 */
 
-char		*ft_add_escape(char *str, char to_escape)
+char			*ft_add_escape(char *str, char to_escape)
 {
 	char	*rt;
 	int		i;
@@ -65,7 +65,7 @@ char		*ft_add_escape(char *str, char to_escape)
 ** Support: Return the size of a char**.
 */
 
-int			ft_sstrlen(char **s)
+int				ft_sstrlen(char **s)
 {
 	int		i;
 
@@ -79,7 +79,7 @@ int			ft_sstrlen(char **s)
 ** Support: Tranform a char** as char* with char*sep in between.
 */
 
-char		*ft_sstrtostr(char **s, char *sep)
+char			*ft_sstrtostr(char **s, char *sep)
 {
 	char	*tmp;
 	char	*tmp2;

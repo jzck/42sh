@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 01:08:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 15:06:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static char	*do_math(char *value, char operator, char *operand)
 
 	ope1 = ft_atoi(value);
 	ope2 = ft_atoi(operand);
-	DG("value %s -> %li", value, ope1);
-	DG("operand %s -> %li", operand, ope2);
 	if ((operator == '/') && ope2 == 0)
 		return (SH_ERR(MATHERR_4) ? NULL : NULL);
 	if ((operator == '%') && ope2 == 0)
@@ -36,7 +34,6 @@ static char	*do_math(char *value, char operator, char *operand)
 	ope1 = (operator == '/') ? ope1 / ope2 : ope1;
 	ope1 = (operator == '*') ? ope1 * ope2 : ope1;
 	ope1 = (operator == '%') ? ope1 % ope2 : ope1;
-	DG("output=%s (%li)", ft_itoa(ope1), ope1);
 	return (ft_itoa(ope1));
 }
 
@@ -48,8 +45,10 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
-	if (!av || !av[1] || !av[2] || !av[3] || av[4])
+	DG();
+	if (!av || !av[0] || !av[1] || !av[2] || !av[3] || av[4])
 		return (SH_ERR(MATHERR_0));
+	DG();
 	value = ft_getenv(data_singleton()->local_var, av[1]);
 	operator = av[2][0];
 	if (!(ft_strchr("+-/*%", operator)))

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:38:36 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 21:50:06 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/23 16:28:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,7 @@ void		*node_copy(void *data)
 	new->full = old->full;
 	new->type = old->type;
 	new->pattern = old->pattern;
-	if (old->type == CMD || old->type == TK_ASSIGNMENT_WORD)
-	{
-		new->data.cmd.redir = ft_lstmap(old->data.cmd.redir, &redir_copy);
-		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
-	}
-	if (old->type == TK_FOR || old->type == TK_PAREN_OPEN
-		|| old->type == TK_CASE || old->type == FNAME)
-		new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
+	new->data.cmd.redir = ft_lstmap(old->data.cmd.redir, &redir_copy);
+	new->data.cmd.token = ft_ld_copy(old->data.cmd.token, &tab_esc_copy);
 	return (new);
 }

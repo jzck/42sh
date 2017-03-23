@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 22:54:28 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 23:08:58 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:25:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	reset_term_hard(void)
 	ft_putnc('\b', ft_strlen(data_singleton()->line.copy_tmp));
 	ft_strdel(&data_singleton()->line.copy_tmp);
 	data_singleton()->line.pos_tmp = 0;
-	return (0);
+	return (1);
 }
 
 static void	left_abs(char **str, size_t *pos)
@@ -27,10 +27,12 @@ static void	left_abs(char **str, size_t *pos)
 	ft_putchar('\b');
 	data_singleton()->line.pos_tmp = 0;
 	ft_puttermcaps("mr");
+	ft_putstr("\x1b[38;5;196m");
 	data_singleton()->line.copy_tmp = ft_realloc_imput(data_singleton()->
 	line.copy_tmp, (*str)[*pos], data_singleton()->line.pos_tmp);
 	ft_putchar((*str)[*pos]);
 	underline_check_end_of_line(*str, *pos + 1);
+	ft_putstr("\033[22;37m");
 	ft_puttermcaps("me");
 	ft_putchar('\b');
 }
@@ -51,12 +53,12 @@ static void	left_mv_back(char **str, size_t *pos)
 int			underline_left(char **str, size_t *pos, size_t pos_ref)
 {
 	if (!*pos)
-		return (1);
+		return (0);
 	if ((*str)[*pos - 1] == '\n')
 		return (reset_term_hard());
 	if (*pos > pos_ref)
 		left_mv_back(str, pos);
 	else
 		left_abs(str, pos);
-	return (1);
+	return (0);
 }

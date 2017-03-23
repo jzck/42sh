@@ -6,16 +6,28 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 11:44:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:28:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_cpy			g_cpy[] =
+{
+	{FLECHE_GAUCHE	, &underline_left	},
+	{FLECHE_DROITE	, &underline_right	},
+	{FLECHE_HAUT	, &underline_up		},
+	{FLECHE_BAS		, &underline_down	},
+	{TOUCHE_HOME	, &underline_home	},
+	{TOUCHE_END		, &underline_end	},
+	{0				, 0					},
+};
+
 int			ft_x(char **str, size_t *pos)
 {
-	int		ret;
 	size_t	pos_ref;
+	int		ret;
+	int		i;
 
 	pos_ref = *pos;
 	ft_strdel(&data_singleton()->line.copy_tmp);
@@ -25,21 +37,14 @@ int			ft_x(char **str, size_t *pos)
 	while (42)
 	{
 		ret = 0;
+		i = 0;
 		if (read(STDIN, &ret, sizeof(int)) < 0)
 			return (-1);
-		if (ret == FLECHE_GAUCHE && !underline_left(str, pos, pos_ref))
-			return (0);
-		else if (ret == FLECHE_DROITE && !underline_right(str, pos, pos_ref))
-			return (0);
-		else if (ret == TOUCHE_HOME)
-			underline_home(str, pos, pos_ref);
-		else if (ret == TOUCHE_END)
-			underline_end(str, pos, pos_ref);
-		else if (ret == FLECHE_HAUT)
-			underline_up(str, pos, pos_ref);
-		else if (ret == FLECHE_BAS)
-			underline_down(str, pos, pos_ref);
-		else if (ret != FLECHE_DROITE && ret != FLECHE_GAUCHE)
+		while (g_cpy[i].value && g_cpy[i].value != ret)
+			++i;
+		if (g_cpy[i].value && (ret = g_cpy[i].f(str, pos, pos_ref)))
+			return (ret);
+		else
 			break ;
 	}
 	if (data_singleton()->line.copy_tmp && *data_singleton()->line.copy_tmp)
@@ -49,8 +54,9 @@ int			ft_x(char **str, size_t *pos)
 
 int			ft_c(char **str, size_t *pos)
 {
-	int		ret;
 	size_t	pos_ref;
+	int		ret;
+	int		i;
 
 	pos_ref = *pos;
 	ft_strdel(&data_singleton()->line.copy_tmp);
@@ -60,21 +66,14 @@ int			ft_c(char **str, size_t *pos)
 	while (42)
 	{
 		ret = 0;
+		i = 0;
 		if (read(STDIN, &ret, sizeof(int)) < 0)
 			return (-1);
-		if (ret == FLECHE_GAUCHE && !underline_left(str, pos, pos_ref))
-			return (0);
-		else if (ret == FLECHE_DROITE && !underline_right(str, pos, pos_ref))
-			return (0);
-		else if (ret == TOUCHE_HOME)
-			underline_home(str, pos, pos_ref);
-		else if (ret == TOUCHE_END)
-			underline_end(str, pos, pos_ref);
-		else if (ret == FLECHE_HAUT)
-			underline_up(str, pos, pos_ref);
-		else if (ret == FLECHE_BAS)
-			underline_down(str, pos, pos_ref);
-		else if (ret != FLECHE_DROITE && ret != FLECHE_GAUCHE)
+		while (g_cpy[i].value && g_cpy[i].value != ret)
+			++i;
+		if (g_cpy[i].value && (ret = g_cpy[i].f(str, pos, pos_ref)))
+			return (ret);
+		else if (!g_cpy[i].value)
 			break ;
 	}
 	reset_term(str, pos);
