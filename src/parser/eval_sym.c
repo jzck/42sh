@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 19:00:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:04:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -842,6 +842,21 @@ t_stackmatch	g_stackmatch[] =
 	{COMPLETE_CONDITION, COMPLETE_COMMANDS},
 	{COMPLETE_CONDITION, COMPLETE_CONDITION},
 	{COMPLETE_CONDITION, SEQUENCE},
+	{COMPLETE_CONDITION, TK_WHILE},
+	{COMPLETE_CONDITION, TK_UNTIL},
+	{COMPLETE_CONDITION, TK_DO},
+	{COMPLETE_CONDITION, TK_IF},
+	{COMPLETE_CONDITION, TK_ELIF},
+	{COMPLETE_CONDITION, TK_THEN},
+	{COMPLETE_CONDITION, TK_ELSE},
+	{COMPLETE_CONDITION, COMPOUND_LIST},
+	{COMPLETE_CONDITION, CASE_LIST_NS},
+	{COMPLETE_CONDITION, TK_BANG},
+	{COMPLETE_CONDITION, SEPARATOR_OP},
+	{COMPLETE_CONDITION, NEWLINE_LIST},
+	{COMPLETE_CONDITION, AND_OR_MAJOR},
+	{COMPLETE_CONDITION, CASE_LIST_NS},
+	{COMPLETE_CONDITION, FUNC_NAME},
 	{FNAME, LINEBREAK},
 	{FNAME, TK_PAREN_OPEN},
 	{FNAME, TK_LBRACE},

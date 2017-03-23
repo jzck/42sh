@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/23 06:19:27 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:57:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int				data_init(int ac, char **av)
 	data->lst_func = NULL;
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
-	/* if (!ft_getenv(data_singleton()->env, "FUNC_LVL")) */
-	/* 	builtin_setenv("setenv", (char *[]){"env", "FUNC_LVL", "-1", */
-		/* NULL}, NULL); */
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 	{
 		term_name = "dumb";
