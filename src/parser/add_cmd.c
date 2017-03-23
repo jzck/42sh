@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:29:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:49:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_distrostree		g_distrostree[] =
+static t_distrostree		g_distrostree[] =
 {
 	{&superflous_token, &add_null},
 	{&isloop, &add_loop_cmd},

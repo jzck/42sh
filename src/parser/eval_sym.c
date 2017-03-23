@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:04:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:48:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_stackmatch	g_stackmatch[] =
+static t_stackmatch		g_stackmatch[] =
 {
 	{TK_WORD, CMD_SUFFIX},
 	{TK_WORD, TK_PIPE},

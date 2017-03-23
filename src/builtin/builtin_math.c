@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 18:54:00 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 15:06:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/23 16:56:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define MATHERR_0	"usage: math variable operator(+-/*%) operand"
+#define MATHERR_0	"usage: math variable operator(add/sub/mul/div/mod) operand"
 #define MATHERR_2	"math: %c: invalid operator"
 #define MATHERR_3	"math: %s: operand must be digits only"
 #define MATHERR_4	"math: division by 0"
@@ -45,10 +45,8 @@ int			builtin_math(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
-	DG();
 	if (!av || !av[0] || !av[1] || !av[2] || !av[3] || av[4])
 		return (SH_ERR(MATHERR_0));
-	DG();
 	value = ft_getenv(data_singleton()->local_var, av[1]);
 	operator = av[2][0];
 	if (!(ft_strchr("+-/*%", operator)))
