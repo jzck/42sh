@@ -6,12 +6,13 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 15:50:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 12:29:40 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:35:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
+void		c_lst_id(t_comp *c);
 /*
 ** Create a new list node and add it by calling c_add_to_lst.
 */
@@ -50,5 +51,6 @@ int			c_seek_env(t_comp *c, char *current_word)
 			c_addnode(c, ft_strndup(env[i], ft_strchr(env[i], '=') - env[i]));
 		++i;
 	}
+	c_lst_id(c);
 	return (0);
 }
