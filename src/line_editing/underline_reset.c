@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:14:07 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 23:40:39 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 11:06:25 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	reset_term(char **str, size_t *pos)
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *pos);
 	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref + (((*str)[*pos]) ? 1 : 0);
+	ft_putnc('\b', *pos - pos_ref + (((*str)[*pos]) ? 1 : 0));
+	(*pos) = pos_ref;
 }
 
 void	reset_and_remove_term(char **str, size_t *pos, char *copy_tmp)
@@ -50,6 +50,6 @@ void	reset_and_remove_term(char **str, size_t *pos, char *copy_tmp)
 	ft_puttermcaps("cd");
 	ft_current_str(*str, *pos);
 	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - pos_ref);
-	(*pos) = pos_ref + (((*str)[*pos]) ? 1 : 0);
+	ft_putnc('\b', *pos - pos_ref + (((*str)[*pos]) ? 1 : 0));
+	(*pos) = pos_ref;
 }
