@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/19 18:07:11 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/23 10:52:08 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ static int	promt_git_status(int fd)
 	if (!get_next_line(fd, &tmp))
 		ft_printf("\x1b[38;5;83m ✓ ");
 	else
-	{
 		ft_printf("\x1b[38;5;1m ✗ ");
-		ft_strdel(&tmp);
-	}
+	ft_strdel(&tmp);
 	while (get_next_line(fd, &tmp) > 0)
 		ft_strdel(&tmp);
 	ft_strdel(&tmp);
