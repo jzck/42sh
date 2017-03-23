@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:30:57 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 15:41:12 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 19:07:52 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			c_seek_binary(t_data *s, t_comp *c)
 		c_parser(c, paths[i++], c->rcmd);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	paths ? ft_sstrfree(paths) : (0);
-	c_lst_id(c);
+	c_lst_id(data_singleton()->comp);
 	return (0);
 }

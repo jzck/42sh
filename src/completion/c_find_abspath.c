@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 16:54:59 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 15:42:37 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 19:07:47 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void		c_seek_abs_path(t_comp *c, char *current_word)
 	c_parser(c, c->cpath, c->match);
 	if (c->lst == NULL || c->lst == c->lst->prev)
 		c_exclusion_folder(c);
-	c_lst_id(c);
+	c_lst_id(data_singleton()->comp);
 }

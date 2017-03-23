@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 16:12:05 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 19:05:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void		c_lst_id(t_comp *c)
 	int		i;
 
 	i = 1;
-	lst = c->lst;
-	if (!lst)
+	if (!c || !c->lst)
 		return ;
+	lst = c->lst;
 	lst->cursor = 1;
 	if (!lst)
 		return ;

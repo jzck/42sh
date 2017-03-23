@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 15:50:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 15:41:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 19:07:56 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int			c_seek_env(t_comp *c, char *current_word)
 			c_addnode(c, ft_strndup(env[i], ft_strchr(env[i], '=') - env[i]));
 		++i;
 	}
-	c_lst_id(c);
+	c_lst_id(data_singleton()->comp);
 	return (0);
 }
