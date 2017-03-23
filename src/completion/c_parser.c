@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:52:07 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 15:34:53 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 15:42:30 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ int			c_parser(t_comp *c, char *path, char *name)
 	while ((dirc = readdir(rep)))
 		c_storing(c, dirc->d_name, dirc->d_type);
 	closedir(rep);
-	c_lst_id(c);
 	return (0);
 }

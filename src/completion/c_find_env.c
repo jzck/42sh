@@ -6,13 +6,12 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 15:50:24 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 15:35:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/23 15:41:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
-void		c_lst_id(t_comp *c);
 /*
 ** Create a new list node and add it by calling c_add_to_lst.
 */

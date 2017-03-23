@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 18:19:43 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:41:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,6 @@ int					c_exclusion_folder(t_comp *c);
 int					ft_sstrlen(char **s);
 char				*ft_sstrtostr(char **s, char *sep);
 char				*ft_add_escape(char *str, char to_escape);
+void				c_lst_id(t_comp *c);
 
 #endif
