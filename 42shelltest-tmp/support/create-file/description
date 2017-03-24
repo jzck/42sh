@@ -1,1 +1,0 @@
-A binary that creates file named argv[1] + "_FILE" If argv[1] is not set, the file is named "TOKEN_FILE"

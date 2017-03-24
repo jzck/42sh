@@ -1,5 +1,0 @@
-while [ -f ${GLOBAL_TOKEN}_FILE ]
-do
-	./write_on_stdout_and_stderr ${GLOBAL_TOKEN}_stdout ${GLOBAL_TOKEN}_stderr | ./read_on_stdin
-	./delete-file ${GLOBAL_TOKEN}_FILE
-done

@@ -1,1 +1,0 @@
-The purpose of this test is to check that the symbol tilde `~` followed by the symbol slash `/` may be expanded with the environment variable HOME.
