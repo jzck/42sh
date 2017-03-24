@@ -1,3 +1,0 @@
-Parsing test.
-The purpose of this test is to check that using more than two pipe symbols `|` is detected as an error.
-The Shell should display an error and exit with a error status code.

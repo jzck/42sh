@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:12:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:11:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int					get_c_arg(char ***av, t_data *data)
 	return (0);
 }
 
-static int			get_input_fd(t_data *data)
+static int			get_input_fd(t_data *data, char *file)
 {
 	static int	fds[2] = {-1, STDIN};
-	char		*file;
 	struct stat	buf;
 
 	if (data->opts & SH_OPTS_LC && (file = data->c_arg))
@@ -80,12 +79,12 @@ static int			interactive_settings(void)
 	return (0);
 }
 
-int					shell_init(int ac, char **av)
+int					shell_init(int ac, char **av, char **env)
 {
 	t_data	*data;
 
 	data = data_singleton();
-	if (data_init(ac, av) < 0)
+	if (data_init(ac, av, env) < 0)
 		return (-1);
 	if (cliopts_get(av, g_opts, data))
 	{
@@ -94,7 +93,7 @@ int					shell_init(int ac, char **av)
 	}
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
-	if ((data->fd = get_input_fd(data)) < 0)
+	if ((data->fd = get_input_fd(data, NULL)) < 0)
 		return (-1);
 	if (SH_IS_INTERACTIVE(data->opts) && interactive_settings() < 0)
 		return (-1);

@@ -1,1 +1,0 @@
-The purpose of this test is to check that the symbol tilde `~` is not expanded with the environment variable OLDPWD when not followed by the symbol `/`.

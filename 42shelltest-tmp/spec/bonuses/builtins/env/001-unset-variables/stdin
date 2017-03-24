@@ -1,1 +1,0 @@
-env -u HOME -u PATH -u TESTVARIABLE ./display_env

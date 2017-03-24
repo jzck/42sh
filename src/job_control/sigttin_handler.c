@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sigttin_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:14:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/01/22 17:22:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:24:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void	sigttin_handler(int signo)
 {
 	(void)signo;
-	DG("got SIGTTIN, pid=%i, pgid=%i", getpid(), getpgrp());
 }

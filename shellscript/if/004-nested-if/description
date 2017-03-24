@@ -1,1 +1,0 @@
-The purpose of this test is to check that a if control flow nested in a if control flow does result in one execution of the compound list

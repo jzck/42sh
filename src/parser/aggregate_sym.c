@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:48:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:23:26 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,16 +397,3 @@ int			aggregate_sym(t_list **stack, t_sym *new_sym, t_parstate *state)
 		}
 	return (0);
 }
-
-/*
-** DG("aggregate head %s && sym %s",
-** read_state(*head), read_state(*new_sym));
-*/
-
-/*
-** DG("MATCH : %s", read_state(g_aggrematch[i].new_sym));
-*/
-
-/*
-** DG("stack after pop: %s", read_state(*head));
-*/

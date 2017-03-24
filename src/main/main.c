@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 18:23:39 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:25:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int		do_readline_routine(char **stream)
 			|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
 	ret = readline(has_prompt, stream);
 	if (ret == -1)
+	{
+		ft_strdel(stream);
 		exit(1);
+	}
 	if (ret == 1 && data->parser.state == UNDEFINED)
 		error_eof();
 	return (ret);
@@ -60,7 +63,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 	return (0);
 }
 
-int				main(int ac, char **av)
+int				main(int ac, char **av, char **env)
 {
 	int			ret;
 	t_data		*data;
@@ -68,8 +71,7 @@ int				main(int ac, char **av)
 	t_btree		*ast;
 
 	g_argv = av;
-	DG("----------------");
-	if (shell_init(ac, av) != 0)
+	if (shell_init(ac, av, env) != 0)
 		return (1);
 	token = NULL;
 	ast = NULL;

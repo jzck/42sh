@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 20:25:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/16 20:43:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:15:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	lexer_destroy(t_lexer *lexer)
 	ft_strdel(&lexer->str);
 	lexer->pos = 0;
 	lexer->state = 0;
-	lexer->stack = NULL;
+	ft_lstdel(&lexer->stack, ft_lst_cfree);
 	lexer->heredoc_stack = NULL;
 }

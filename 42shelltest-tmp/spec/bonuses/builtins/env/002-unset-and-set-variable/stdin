@@ -1,1 +1,0 @@
-env -u HOME TESTVARIABLE=${GLOBAL_TOKEN} ./display_env

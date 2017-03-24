@@ -1,2 +1,0 @@
-${GLOBAL_TOKEN}_VARIABLE=${GLOBAL_TOKEN}_VALUE ./display_env
-./display_env
