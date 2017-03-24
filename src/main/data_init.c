@@ -6,13 +6,35 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/23 14:57:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 13:51:24 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern char	**environ;
+
+static int		path_binary_save(char *binary)
+{
+	char	*directory;
+
+	if (binary[0] != '/')
+	{
+		if (!(directory = getcwd(NULL, 0)))
+			return (1);
+		while (binary[0] == '.' && binary[1] == '/')
+			binary += 2;
+		binary = ft_strjoin(
+				directory[ft_strlen(directory) - 1] != '/' ? "/" : "", binary);
+		binary = ft_strjoinf(directory, binary, 3);
+	}
+	else
+		binary = ft_strdup(binary);
+	if (access(binary, F_OK | X_OK))
+		return (1);
+	data_singleton()->binary = binary;
+	return (0);
+}
 
 static int		localenv_init(void)
 {
@@ -67,14 +89,15 @@ int				data_init(int ac, char **av)
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
-	{
 		term_name = "dumb";
-		/* ft_dprintf(2, "{red}TERM not set\n{eoc}"); */
-		/* return (-1); */
-	}
 	if (tgetent(NULL, term_name) != 1)
 	{
 		ft_dprintf(2, "{red}TERM name is not a tty\n{eoc}");
+		return (-1);
+	}
+	if (path_binary_save(av[0]))
+	{
+		ft_dprintf(2, "{red}Failed to resolve binary name\n{eoc}");
 		return (-1);
 	}
 	return (0);
