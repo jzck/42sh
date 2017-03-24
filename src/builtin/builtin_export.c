@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 15:11:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:33:00 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ int					builtin_export(
 	char		*equal;
 	t_btexport	data;
 
-	(void)envp;
 	(void)path;
 	data.flag = 0;
 	if (cliopts_get((char**)av, g_export_opts, &data))
-		ft_perror("export");
+		return (ft_perror("export") ? 1 : 1);
 	if (data.flag & BT_EXPORT_LP)
 		return (bt_export_print());
 	av = data.av_data;
+	if (!(data.flag = 0) && !*av)
+		bt_export_print();
 	while (*av)
 	{
 		equal = ft_strchr(*av, '=');
 		if (equal)
-			*equal = 0;
+			*(equal++) = 0;
 		else
 			equal = ft_getenv(data_singleton()->local_var, *av);
-		equal ? equal++ : equal;
-		builtin_setenv("internal", (char*[]){"export", *av, equal}, NULL);
+		data.flag += builtin_setenv("internal", (char*[]){"export", *av, equal}, envp);
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}
-	return (0);
+	return (data.flag ? 1 : 0);
 }
