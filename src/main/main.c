@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 14:55:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 15:18:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		do_readline_routine(char **stream)
 
 	data = data_singleton();
 	has_prompt = !(get_lexer_stack(data->lexer)
-		|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
+			|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
 	ret = readline(has_prompt, stream);
 	if (ret == -1)
 		exit(1);
@@ -43,10 +43,9 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 			return (ret);
 		if (do_lexer_routine(token, stream) > 0)
 			continue ;
-		token_print(*token);
 		if ((ret = do_parser_routine(token, ast)) == 1
-			&& SH_NO_INTERACTIVE(data->opts))
-		 return (ret);
+				&& SH_NO_INTERACTIVE(data->opts))
+			return (ret);
 		else if (ret > 0)
 			break ;
 	}

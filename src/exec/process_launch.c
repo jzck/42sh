@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:26:53 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:56:32 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		process_launch(t_process *p)
 		if (process_redirect(p))
 			set_exitstatus(1, 1);
 		else
-			set_exitstatus(p->map.launch(p), 1);
+			p->map.launch(p);
 		shell_resetfds();
 		shell_resetsig();
 		process_free(p, 0);
