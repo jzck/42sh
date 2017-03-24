@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:38:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 18:12:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:39:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		esc_print(char *str, unsigned char *esc)
+void		esc_print(int fd, char *str, unsigned char *esc)
 {
 	char *cur;
 
@@ -20,10 +20,10 @@ void		esc_print(char *str, unsigned char *esc)
 	while (*cur)
 	{
 		if (is_char_esc(esc, str, cur))
-			ft_printf("\\%c", *cur);
+			ft_dprintf(fd, "\\%c", *cur);
 		else
-			ft_printf("%c", *cur);
+			ft_dprintf(fd, "%c", *cur);
 		++cur;
 	}
-	ft_printf("\n");
+	ft_dprintf(fd, "\n");
 }
