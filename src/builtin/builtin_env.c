@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 15:11:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:59:00 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 t_cliopts	g_env_opts[] =
 {
-	{'i', NULL, BT_ENV_LI, 0, bt_env_geti},
+	{'i', NULL, BT_ENV_LI, 0, NULL},
 	{0, 0, 0, 0, 0},
 };
 
-int			bt_env_geti(char ***av, t_env_data *data)
+int			bt_env_getcustom(char ***av, t_env_data *data)
 {
 	if (!av || !*av || !data)
 		return (1);
@@ -31,7 +31,6 @@ int			bt_env_geti(char ***av, t_env_data *data)
 		data->custom_env = ft_sstradd(data->custom_env, **av);
 		++(*av);
 	}
-	--(*av);
 	return (0);
 }
 
@@ -39,9 +38,19 @@ static int	bt_env_parse(t_env_data *data, char **av)
 {
 	data->flag = 0;
 	data->av_data = NULL;
-	data->custom_env = NULL;
+	DG();
 	if (cliopts_get(av, g_env_opts, data))
 		return (1);
+	DG();
+	data->custom_env = NULL;
+	bt_env_getcustom(&data->av_data, data);
+	DG();
+	if (!(data->flag & BT_ENV_LI))
+	{
+		DG("no -i");
+		data->custom_env = ft_sstrmerge(data_singleton()->env, data->custom_env);
+	}
+	DG();
 	return (0);
 }
 
@@ -55,11 +64,18 @@ int			builtin_env(const char *path,
 
 	(void)envp;
 	if (bt_env_parse(&data, (char**)argv))
-		return (ft_perror("env") && SH_ERR("usage: %s", ENV_USAGE) ? 0 : 0);
-	else if (!*data.av_data)
-		return (builtin_setenv(NULL, (char*[]){"setenv", 0}, NULL));
+		return (ft_perror("env") && SH_ERR("usage: %s", ENV_USAGE));
+	DG();
+	if (!*data.av_data)
+	{
+		DG();
+		ft_sstrprint(data.custom_env, '\n');
+		ft_putchar('\n');
+		return (0);
+	}
 	else if ((pid = fork()) == 0)
 	{
+		DG();
 		if (!(path = ft_strchr(data.av_data[0], '/') ?
 			ft_strdup(data.av_data[0]) : ft_hash(data.av_data[0]))
 			|| access(path, F_OK) != 0)

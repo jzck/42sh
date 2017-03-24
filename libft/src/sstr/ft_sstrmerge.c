@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_great.c                                   :+:      :+:    :+:   */
+/*   ft_sstrmerge.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 16:58:17 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/24 17:40:50 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/24 18:05:08 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		redirect_great(t_redir *redir)
+char	**ft_sstrmerge(char **s1, char **s2)
 {
-	int		fdold;
-	int		fdnew;
+	char	**out;
 
-	fdnew = redir->n;
-	if ((fdold = open(redir->word,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
-		exit(1);
-	dup2_close(fdold, fdnew);
-	return (0);
+	out = ft_sstrdup(s1);
+	if (!s2)
+		return (out);
+	while (*s2)
+	{
+		out = ft_sstradd(out, *s2);
+		s2++;
+	}
+	return (out);
 }

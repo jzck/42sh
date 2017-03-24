@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 15:30:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:23:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 		else if (ret > 0)
 			break ;
 	}
+	/* btree_print(3, *ast, ft_putast); */
+	/* exit(1); */
 	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
 		exit(1);
 	else if (data->parser.state != SUCCESS)

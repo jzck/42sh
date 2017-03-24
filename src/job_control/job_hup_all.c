@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:37:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:40:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:54:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@ void	job_hup_all(void)
 	while (jlist)
 	{
 		job = jlist->content;
-		DG("gonna SIGHUP %i", job->pgid);
-		builtin_jobs(NULL, NULL, NULL);
 		if (job->pgid != 1)
 			kill(-job->pgid, SIGHUP);
-		DG("after SIGHUP %i", job->pgid);
 		jlist = jlist->next;
 	}
 }
