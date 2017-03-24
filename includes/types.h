@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 19:36:55 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 16:21:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_ld				t_ld;
 **	Execution types
 */
 
-typedef int		 				t_condition;
+typedef int						t_condition;
 typedef struct s_job			t_job;
 typedef struct s_process		t_process;
 typedef int						(t_execf)(const char *path,
@@ -67,8 +67,6 @@ typedef union u_process_data	t_process_data;
 typedef	struct s_process_map	t_process_map;
 typedef struct s_data_cond		t_data_while;
 typedef struct s_data_cond		t_data_if;
-typedef struct s_data_cond		t_data_if;
-
 
 /*
 **	Parser types

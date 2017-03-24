@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:07:50 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:17:40 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		process_format(t_list **p, int firstp, int opts);
 */
 
 void		pprint(t_process *p);
-int			pprint_subshell(t_process *p);;
+int			pprint_subshell(t_process *p);
 int			pprint_brace(t_process *p);
 int			pprint_while(t_process *p);
 int			pprint_if(t_process *p);

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 15:03:02 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/24 15:30:13 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 16:22:13 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ int			builtin_func(const char *path,
 	if (!argv || !argv[0] || argv[1])
 		return (SH_ERR("usage: %s", FUNC_USAGE) ? 1 : 1);
 	list = data_singleton()->lst_func;
-	DG();
-	int toto = 0;
 	while (list)
 	{
-	DG(">>>>>>>%d", toto++);
 		if (!(ast = list->content))
 			return (SH_ERR("unexpected error"));
 		name = token_to_argv(((t_astnode *)(*ast)->item)->data.cmd.token, 1);

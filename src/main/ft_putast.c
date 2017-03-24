@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_type.c                                        :+:      :+:    :+:   */
+/*   ft_putast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:18:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/14 22:11:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:28:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_putast(void *nodein)
 {
 	t_astnode	*node;
 	node = nodein;
-	
+
 	if (node->type == TK_BANG)
 		return ("TK_BANG");
 	if (node->type == TK_DSEMI)
