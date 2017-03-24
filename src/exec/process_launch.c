@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 18:22:16 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 20:02:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,28 @@ int		process_fork(t_process *p)
 int		process_launch(t_process *p)
 {
 	p->state = PROCESS_RUNNING;
-	if (IS_PIPESINGLE(*p)
-			&& p->type != PROCESS_FILE && p->type != PROCESS_SUBSHELL)
+	if (!IS_PIPESINGLE(*p)
+			|| p->type == PROCESS_FILE
+			|| p->type == PROCESS_SUBSHELL)
 	{
-		if (process_redirect(p))
-			set_exitstatus(1, 1);
-		else
-		{
-			exec_reset();
-			p->map.launch(p);
-		}
-		shell_resetfds();
-		shell_resetsig();
-		process_free(p, 0);
-		return (0);
+		p->pid = process_fork(p);
+		process_setgroup(p, p->pid);
+		if (p->fdin != STDIN)
+			close(p->fdin);
+		if (p->fdout != STDOUT)
+			close(p->fdout);
+		return (1);
 	}
-	p->pid = process_fork(p);
-	process_setgroup(p, p->pid);
-	if (p->fdin != STDIN)
-		close(p->fdin);
-	if (p->fdout != STDOUT)
-		close(p->fdout);
-	return (1);
+	if (process_redirect(p))
+		set_exitstatus(1, 1);
+	else
+	{
+		exec_pushfds();
+		p->map.launch(p);
+	}
+	exec_popfds();
+	shell_resetfds();
+	shell_resetsig();
+	process_free(p, 0);
+	return (0);
 }

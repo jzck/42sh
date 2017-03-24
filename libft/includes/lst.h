@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:27:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/11 16:18:00 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 20:09:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list	t_list;
 
 int		pop(t_list **lst);
 t_list	*push(t_list **stack, int elem);
+int		top(t_list *top);
 
 t_list	*ft_lstnew(void const *content, size_t content_size);
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));

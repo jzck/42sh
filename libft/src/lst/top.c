@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd_replace.c                                       :+:      :+:    :+:   */
+/*   top.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/21 16:32:26 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 22:59:28 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/24 20:04:27 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/24 20:09:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			fd_replace(int fd1, int fd2)
+int		top(t_list *top)
 {
-	if (fd1 != fd2)
-		return (dup2_close(fd1, fd2));
-	return (0);
+	return (top ? *(int*)top->content : 0);
 }

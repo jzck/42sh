@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 18:17:02 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:48:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!SH_HAS_JOBC(data_singleton()->opts))
+	{
+		DG("no job control :(");
 		return (SH_ERR("jobs: %s", SH_MSG_NOJOBC));
+	}
 	do_job_notification();
 	ft_bzero(&data, sizeof(t_data_template));
 	if (cliopts_get((char**)av, g_jobs_opts, &data))

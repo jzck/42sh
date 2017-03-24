@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 16:07:28 by jhalford          #+#    #+#             */
-/*   Updated: 2017/02/07 16:15:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:33:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		dup2_close(int fd1, int fd2)
 {
-	if (dup2(fd1, fd2))
+	if (dup2(fd1, fd2) < 0)
 		return (-1);
-	if (close(fd1))
+	if (close(fd1) < 0)
 		return (-1);
 	return (0);
 }

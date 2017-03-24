@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:28:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 23:03:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 #define CDERR_1 "cd: no such file or directory: %s"
 #define CDERR_2 "cd: HOME not set"
 #define CDERR_3 "cd: too many arguments{eoc}"
+
+static g_cliopts	g_cdotps =
+{
+	{'P', NULL, CD_OPT_P, CD_OPT_L, NULL},
+	{'L', NULL, CD_OPT_L, CD_OPT_P, NULL},
+	{0, NULL, 0, 0, NULL},
+}
 
 static char		*builtin_cd_special(char *const av[], char *const env[])
 {
@@ -44,30 +51,13 @@ static char		*builtin_cd_special(char *const av[], char *const env[])
 	return (target);
 }
 
-static int		builtin_cd_opts(char *const av[], int *opts)
+void			setwd(char *var)
 {
-	int		i;
-	int		j;
+	char	*cwd;
 
-	i = 1;
-	if (av)
-		while (av[i] && av[i][0] == '-' && av[i][1])
-		{
-			j = 0;
-			while (av[i][++j])
-			{
-				if (av[i][j] == 'P')
-					*opts = CDOPT_P;
-				else if (av[i][j] == 'L')
-					*opts = CDOPT_L;
-				else if (av[i][j] == '-')
-					return (i + 1);
-				else
-					return (i);
-			}
-			++i;
-		}
-	return (i);
+	cwd = getcwd(NULL, 0);
+	builtin_setenv(path, (char*[4]){"setenv", var, cwd, NULL}, envp);
+	free(cwd);
 }
 
 int				builtin_cd(const char *path,
@@ -76,15 +66,13 @@ int				builtin_cd(const char *path,
 	int		i;
 	int		opts;
 	char	*target;
-	char	*cwd;
 
-	opts = CDOPT_L;
+	data->flag = CD_OPT_L;
+	if (cliopts(av, g_cdopts, &data))
 	i = builtin_cd_opts(av, &opts);
+	setwd("OLDPWD");
 	if (!(target = builtin_cd_special(av + i, envp)))
 		return (1);
-	cwd = getcwd(NULL, 0);
-	builtin_setenv(path, (char*[4]){"setenv", "OLDPWD", cwd, NULL}, envp);
-	free(cwd);
 	if (chdir(target))
 	{
 		SH_ERR(CDERR_1, target);
@@ -92,9 +80,7 @@ int				builtin_cd(const char *path,
 	}
 	else if (target != av[i])
 		ft_printf("%s\n", target);
-	cwd = getcwd(NULL, 0);
-	builtin_setenv(path, (char*[4]){"setenv", "PWD", cwd, NULL}, envp);
-	free(cwd);
+	setwd("PWD");
 	if (!ft_strcmp(*(av + i), "-"))
 		free(target);
 	return (0);

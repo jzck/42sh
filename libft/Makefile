@@ -108,6 +108,7 @@ lst/ft_lstnew_range.c\
 lst/ft_lstsort.c\
 lst/pop.c\
 lst/push.c\
+lst/top.c\
 math/ft_addrcmp.c\
 math/ft_ilen.c\
 math/ft_ilen_base.c\
