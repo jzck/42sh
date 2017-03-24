@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:37:40 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 17:22:42 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 18:24:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	job_hup_all(void)
 	while (jlist)
 	{
 		job = jlist->content;
-		builtin_jobs(NULL, NULL, NULL);
 		if (job->pgid != 1)
 			kill(-job->pgid, SIGHUP);
 		jlist = jlist->next;

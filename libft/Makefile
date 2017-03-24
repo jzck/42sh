@@ -141,6 +141,7 @@ sstr/ft_sstrcat.c\
 sstr/ft_sstrdel.c\
 sstr/ft_sstrdup.c\
 sstr/ft_sstrfree.c\
+sstr/ft_sstrmerge.c\
 sstr/ft_sstrprint.c\
 sstr/ft_sstrprint_fd.c\
 sstr/ft_sstrsort.c\
