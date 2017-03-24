@@ -6,14 +6,14 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 19:21:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:10:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 #define US_READ "read [-ers] [-u fd] [-t timeout] [-p prompt]"
-#define US_READ_1 "[-n nchars] [-d delim] [name ...]"
+#define US_READ_1 " [-n nchars] [-d delim] [name ...]"
 
 t_cliopts	g_read_opts[] =
 {
@@ -36,12 +36,12 @@ int			bt_read_init(t_read *data, char **av)
 	data->fd = 0;
 	data->timeout = 0;
 	data->input = NULL;
-	if ((cliopts_get(av, g_read_opts, data)))
-		return (ft_perror() ? 2 : 2);
 	if (isatty(STDIN))
 		data->opts |= BT_READ_INTER;
 	if (bt_read_terminit(data) < 0)
-		return (-1);
+		exit (1);
+	if ((cliopts_get(av, g_read_opts, data)))
+		return (ft_perror("read"));
 	return (0);
 }
 
@@ -89,7 +89,8 @@ int			bt_read_assign(t_read *data)
 	tok = ft_strtok(input, ifs);
 	while (*names)
 	{
-		builtin_setenv("setenv", (char*[]){"setenv", *names, tok}, NULL);
+		if (!(builtin_setenv("setenv", (char*[]){"read", *names, tok}, NULL)))
+			return (1);
 		ifs = names[1] ? ifs : NULL;
 		tok = ft_strtok(NULL, ifs);
 		names++;
@@ -106,16 +107,11 @@ int			builtin_read(const char *path, char *const av[], char *const envp[])
 	(void)envp;
 	ret = 0;
 	if ((ret = bt_read_init(&data, (char **)av)) != 0)
-		;
+		SH_ERR("usage: %s%s", US_READ, US_READ_1);
 	else if ((ret = bt_read_loop(&data)))
 		;
-	else if (data.input && bt_read_assign(&data))
-		ret = 1;
-	if (ret == -1)
-		exit(1);
-	if (ret != 0)
-		SH_ERR("usage: read %s %s\n", US_READ, US_READ_1);
-	if (ret != 2)
-		bt_read_exit(&data);
+	else if (data.input && (ret = bt_read_assign(&data)))
+		;
+	bt_read_exit(&data);
 	return (ret);
 }

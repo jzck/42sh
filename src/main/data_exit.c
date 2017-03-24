@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:48:41 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:55:08 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	data_exit(void)
 	ft_lstdel(&data->lst_func, &tree_func_free);
 	ft_save_termios(-1);
 	ft_free_hash_table();
-	free_history_list(data_singleton()->line.list_beg);
+	free_history_list(data->line.list_beg);
 	free(data_singleton());
 }

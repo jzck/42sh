@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:04:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/20 15:50:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:02:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int					cliopts_get(char **av, t_cliopts opt_map[], void *data)
 	while (av && *av)
 	{
 		if (ft_strcmp(*av, "--") == 0)
-			return (0);
+		{
+			av++;
+			break ;
+		}
 		else if ((*av)[0] == '-' && (*av)[1] == '-')
 		{
 			if (cliopts_parse_long(&av, opt_map, data))

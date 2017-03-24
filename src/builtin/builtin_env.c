@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 17:17:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:11:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			builtin_env(const char *path,
 
 	(void)envp;
 	if (bt_env_parse(&data, (char**)argv))
-		return (ft_perror() && SH_ERR("usage: %s", ENV_USAGE) ? 0 : 0);
+		return (ft_perror("env") && SH_ERR("usage: %s", ENV_USAGE) ? 0 : 0);
 	else if (!*data.av_data)
 		return (builtin_setenv(NULL, (char*[]){"setenv", 0}, NULL));
 	else if ((pid = fork()) == 0)

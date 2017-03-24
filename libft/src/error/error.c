@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 16:47:00 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/15 20:45:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:36:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int		error_set(int n, ...)
 	return (g_errnum);
 }
 
-int		ft_perror(void)
+int		ft_perror(char *utility)
 {
-	ft_dprintf(2, "{red}%s: %s{eoc}\n", g_argv[0], g_errmsg);
+	ft_dprintf(2, "{red}%s: %s{eoc}\n", utility ? utility : g_argv[0], g_errmsg);
 	return (g_errnum);
 }
