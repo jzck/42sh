@@ -58,8 +58,11 @@ do_checkout ()
 	i_tmp=$(echo $i | sed 's/\//_/g')
 	cp $i "$HOME/Documents/.$i_tmp.back"
 	git checkout $i
-	echo "$gre D - O - N - E $res"
-	echo "$cya $i was checked out. A copy still exist in $HOME/Documents/.$i_tmp.back$res\n"
+	if [ $verbose -eq 1 ]
+	then
+		echo "$gre D - O - N - E $res"
+		echo "$cya $i was checked out. A copy still exist in $HOME/Documents/.$i_tmp.back$res\n"
+	fi
 }
 
 if [ $verbose -eq 1 ]
