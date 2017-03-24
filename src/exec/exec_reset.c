@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:26:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:06:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			exec_reset_job(t_job *job)
 {
 	job->id = 0;
 	job->pgid = 0;
-	job->attrs = JOB_NOTIFIED;
+	job->attrs = 0;
 	job->first_process = NULL;
 	return (0);
 }
