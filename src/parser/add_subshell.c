@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:41:50 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 15:32:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:02:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			add_subshell_cmd(t_btree **ast, t_list **lst)
 	if (((token->type == TK_PAREN_CLOSE && node->type == SUBSHELL)
 	|| (token->type == TK_RBRACE && node->type == TK_LBRACE)) && node->nest > 0)
 		node->nest--;
-	else if (token->type == TK_PAREN_CLOSE && node->type == SUBSHELL
+	if (token->type == TK_PAREN_CLOSE && node->type == SUBSHELL
 	&& node->nest == 0)
 		return ((node->full = 1));
 	else if (token->type == TK_RBRACE && node->type == TK_LBRACE

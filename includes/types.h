@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 17:00:06 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:10:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ enum	e_sym
 	OPEN_FUNC,
 	CLOSE_FUNC,
 	CLOSE_LIST,
+	OTHER,
 	REDIR,
 	CMD,
 	HEREDOCDATA,

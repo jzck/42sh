@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:49:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:56:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static int			add_data_node(t_btree **ast, t_list **lst)
 	if ((token->type == TK_WORD || token->type == TK_NAME)
 		&& (node->type == TK_CASE || node->type == TK_PAREN_OPEN))
 		node->pattern = 1;
+	if (token->type == SUBSHELL || token->type == TK_LBRACE)
+		node->nest = 1;
 	return (0);
 }
 

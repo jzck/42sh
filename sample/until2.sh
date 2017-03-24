@@ -4,13 +4,8 @@ do
 	TWO=0
 	while [ $TWO -le 10 ]
 	do
-		THREE=0
-		while [ $THREE -le 10 ]
-		do
-			echo world 
-			((THREE++))
-		done
-		((TWO++))
+		echo world 
+		math TWO + 1;
 	done
-	((ONE++))
+	math ONE + 1;
 done > file1
