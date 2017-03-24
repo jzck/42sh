@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 19:33:00 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 23:32:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int					builtin_export(
 			*(equal++) = 0;
 		else
 			equal = ft_getenv(data_singleton()->local_var, *av);
-		data.flag += builtin_setenv("internal", (char*[]){"export", *av, equal}, envp);
+		data.flag += builtin_setenv("internal", (char*[]){"export", *av,
+			equal}, envp);
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}

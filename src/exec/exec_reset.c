@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 20:09:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 23:29:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			exec_reset_job(t_job *job)
 	return (0);
 }
 
-int			exec_pushfds()
+int			exec_pushfds(void)
 {
 	int		i;
 	t_exec	*exec;
@@ -34,7 +34,7 @@ int			exec_pushfds()
 	return (0);
 }
 
-int			exec_popfds()
+int			exec_popfds(void)
 {
 	int		i;
 	t_exec	*exec;

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 19:25:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 23:26:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1296,5 +1296,3 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 	}
 	return (1);
 }
-
-//DG("eval head %s && sym %s", read_state(*head), read_state(new_sym));
