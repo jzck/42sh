@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 18:41:14 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 20:09:13 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,38 @@ int			exec_reset_job(t_job *job)
 	return (0);
 }
 
+int			exec_pushfds()
+{
+	int		i;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	i = -1;
+	while (++i < 10)
+		push(&(exec->fd_save[i]), fcntl(i, F_DUPFD_CLOEXEC, 10));
+	return (0);
+}
+
+int			exec_popfds()
+{
+	int		i;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	i = -1;
+	while (++i < 10)
+		pop(&exec->fd_save[i]);
+	return (0);
+}
+
 int			exec_reset(void)
 {
-	t_exec	*exec;
 	t_jobc	*jobc;
-	int		i;
+	t_exec	*exec;
 
 	exec = &data_singleton()->exec;
 	jobc = &data_singleton()->jobc;
-	i = -1;
-	while (++i < 10)
-		exec->fd_save[i] = fcntl(i, F_DUPFD_CLOEXEC, 10);
+	exec_pushfds();
 	exec->op_stack = NULL;
 	exec->fdin = STDIN;
 	exec->attrs = 0;

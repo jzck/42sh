@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:07:14 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 17:49:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 20:09:29 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void	shell_resetfds(void)
 {
 	t_exec	*exec;
 	int		i;
+	int		fd;
 
 	exec = &data_singleton()->exec;
 	i = -1;
 	while (++i < 10)
 	{
-		if (exec->fd_save[i] != -1)
-			dup2(exec->fd_save[i], i);
+		fd = top(exec->fd_save[i]);
+		if (fd != -1)
+			dup2(fd, i);
 	}
 }

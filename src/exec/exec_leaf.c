@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 15:47:30 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/24 19:14:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:24:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int				exec_leaf(t_btree **ast)
 		job_addprocess(&p);
 		if (IS_PIPEEND(p))
 		{
-			DG("end of pipe");
 			if (JOB_IS_FG(job->attrs))
 				put_job_in_foreground(job, 0);
 			else
