@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 18:55:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:23:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 			return (ret);
 		if (do_lexer_routine(token, stream) > 0)
 			continue ;
-		/* token_print(*token); */
-		/* exit(1); */
 		if ((ret = do_parser_routine(token, ast)) == 1
 				&& SH_NO_INTERACTIVE(data->opts))
 			return (ret);
 		else if (ret > 0)
 			break ;
 	}
-	btree_print(3, *ast, ft_putast);
-	/* exit(1); */
 	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
 		exit(1);
 	else if (data->parser.state != SUCCESS)
@@ -73,7 +69,6 @@ int				main(int ac, char **av, char **env)
 	t_btree		*ast;
 
 	g_argv = av;
-	DG("----------------------");
 	if (shell_init(ac, av, env) != 0)
 		return (1);
 	token = NULL;

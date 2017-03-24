@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/23 03:18:41 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:38:35 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct	s_bquote
 */
 char			**glob(char *str, unsigned char *esc,
 										unsigned char *dbl_esc, int do_match);
-void			esc_print(char *str, unsigned char *esc);
+void			esc_print(int fd, char *str, unsigned char *esc);
 int				word_is_assignment(char **content);
 void			*tab_esc_copy(void *content);
 char			*get_output(char *command);
