@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:10:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 16:23:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			bt_read_init(t_read *data, char **av)
 	if (isatty(STDIN))
 		data->opts |= BT_READ_INTER;
 	if (bt_read_terminit(data) < 0)
-		exit (1);
+		exit(1);
 	if ((cliopts_get(av, g_read_opts, data)))
 		return (ft_perror("read"));
 	return (0);

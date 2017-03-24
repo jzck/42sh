@@ -36,6 +36,7 @@ builtin/builtin_echo.c\
 builtin/builtin_env.c\
 builtin/builtin_exit.c\
 builtin/builtin_export.c\
+builtin/builtin_func.c\
 builtin/builtin_hash.c\
 builtin/builtin_history.c\
 builtin/builtin_math.c\
