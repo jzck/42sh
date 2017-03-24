@@ -6,11 +6,14 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 19:33:00 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 23:18:44 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#define BT_EXPORT_LP	(1 << 0)
+#define READ_USAGE		"usage: export [name[=value] ...] or export -p"
 
 static t_cliopts	g_export_opts[] =
 {
@@ -44,7 +47,7 @@ int					builtin_export(
 	(void)path;
 	data.flag = 0;
 	if (cliopts_get((char**)av, g_export_opts, &data))
-		return (ft_perror("export") ? 1 : 1);
+		return (ft_perror("export") && SH_ERR(READ_USAGE));
 	if (data.flag & BT_EXPORT_LP)
 		return (bt_export_print());
 	av = data.av_data;
