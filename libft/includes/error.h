@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 15:34:21 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:05:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:11:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ extern int	g_errnum;
 extern char	**g_argv;
 
 int		error_set(int n, ...);
-int		ft_perror(void);
+int		ft_perror(char *utility);
 
 #endif

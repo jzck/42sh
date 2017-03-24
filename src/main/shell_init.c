@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 19:36:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:12:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int					shell_init(int ac, char **av)
 		return (-1);
 	if (cliopts_get(av, g_opts, data))
 	{
-		ft_perror();
+		ft_perror(NULL);
 		return (SH_ERR("usage: %s", SHELL_USAGE));
 	}
 	if (!isatty(STDIN) || *data->av_data)

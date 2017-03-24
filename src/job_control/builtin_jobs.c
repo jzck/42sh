@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 14:08:12 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:12:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 	}
 	ft_bzero(&data, sizeof(t_data_template));
 	if (cliopts_get((char**)av, g_jobs_opts, &data))
-		return (ft_perror());
+		return (ft_perror("jobs"));
 	if (!*data.av_data)
 		bt_jobs_all(data.flag);
 	else if (bt_jobs_spec(data.av_data, data.flag))
