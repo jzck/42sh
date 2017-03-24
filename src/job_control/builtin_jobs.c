@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 15:15:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:35:04 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 
 	(void)path;
 	(void)envp;
+	ft_bzero(&data, sizeof(t_data_template));
+	do_job_notification();
 	if (!SH_HAS_JOBC(data_singleton()->opts))
 	{
 		SH_ERR("jobs: %s", SH_MSG_NOJOBC);
