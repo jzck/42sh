@@ -23,7 +23,10 @@ static int		do_readline_routine(char **stream)
 			|| data->parser.state == UNDEFINED || data->lexer.state == HEREDOC);
 	ret = readline(has_prompt, stream);
 	if (ret == -1)
+	{
+		ft_strdel(stream);
 		exit(1);
+	}
 	if (ret == 1 && data->parser.state == UNDEFINED)
 		error_eof();
 	return (ret);
