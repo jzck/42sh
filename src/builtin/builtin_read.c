@@ -109,9 +109,13 @@ int			builtin_read(const char *path, char *const av[], char *const envp[])
 	if ((ret = bt_read_init(&data, (char **)av)) != 0)
 		SH_ERR("usage: %s%s", US_READ, US_READ_1);
 	else if ((ret = bt_read_loop(&data)))
+	{
 		;
+	}
 	else if (data.input && (ret = bt_read_assign(&data)))
+	{
 		;
+	}
 	bt_read_exit(&data);
 	return (ret);
 }
