@@ -6,13 +6,11 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 16:27:51 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:12:51 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern char	**environ;
 
 static int		path_binary_save(char *binary)
 {
@@ -68,7 +66,7 @@ static int		shlvl_inc(void)
 	return (0);
 }
 
-int				data_init(int ac, char **av)
+int				data_init(int ac, char **av, char **env)
 {
 	t_data	*data;
 	char	*term_name;
@@ -76,7 +74,7 @@ int				data_init(int ac, char **av)
 	data = data_singleton();
 	data->argc = ac;
 	data->argv = ft_sstrdup(av);
-	data->env = ft_sstrdup(environ);
+	data->env = ft_sstrdup(env);
 	data->c_arg = NULL;
 	set_exitstatus(0, 1);
 	localenv_init();
@@ -91,14 +89,8 @@ int				data_init(int ac, char **av)
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		term_name = "dumb";
 	if (tgetent(NULL, term_name) != 1)
-	{
-		SH_ERR("TERM name is not a tty");
-		return (-1);
-	}
+		return (SH_ERR("TERM name is not a tty") ? -1 : -1);
 	if (path_binary_save(av[0]))
-	{
-		SH_ERR("Failed to resolve binary name");
-		return (-1);
-	}
+		return (SH_ERR("Failed to resolve binary name") ? -1 : -1);
 	return (0);
 }

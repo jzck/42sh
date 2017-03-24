@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 15:30:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:11:37 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 	return (0);
 }
 
-int				main(int ac, char **av)
+int				main(int ac, char **av, char **env)
 {
 	int			ret;
 	t_data		*data;
@@ -67,7 +67,7 @@ int				main(int ac, char **av)
 
 	g_argv = av;
 	DG("----------------");
-	if (shell_init(ac, av) != 0)
+	if (shell_init(ac, av, env) != 0)
 		return (1);
 	token = NULL;
 	ast = NULL;

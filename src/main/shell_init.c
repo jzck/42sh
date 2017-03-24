@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 17:05:29 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:11:20 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ static int			interactive_settings(void)
 	return (0);
 }
 
-int					shell_init(int ac, char **av)
+int					shell_init(int ac, char **av, char **env)
 {
 	t_data	*data;
 
 	data = data_singleton();
-	if (data_init(ac, av) < 0)
+	if (data_init(ac, av, env) < 0)
 		return (-1);
 	if (cliopts_get(av, g_opts, data))
 	{

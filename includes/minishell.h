@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 13:35:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:11:16 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ struct	s_data
 };
 
 t_data	*data_singleton();
-int		shell_init(int ac, char **av);
+int		shell_init(int ac, char **av, char **env);
 void	shell_exit(void);
-int		data_init(int ac, char **av);
+int		data_init(int ac, char **av, char **env);
 void	data_exit(void);
 int		get_c_arg(char ***av, t_data *data);
 
