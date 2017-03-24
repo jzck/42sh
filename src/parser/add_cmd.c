@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:49:15 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 16:56:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 19:25:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int			emblematic_token(t_btree **ast, t_list **lst)
 			return (0);
 		if (node->type != TK_DO && node->type != TK_THEN
 			&& node->type != CMD && node->type != REDIR
-			&& node->type != TK_ASSIGNMENT_WORD && node->type != TK_FOR)
+			&& node->type != TK_FOR)
 			return (1);
 	}
 	return (0);
