@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 19:44:25 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/23 03:19:23 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:47:25 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char			*command_getoutput(char *command)
 	{
 		close(fds[PIPE_READ]);
 		dup2_close(fds[PIPE_WRITE], STDOUT);
-		av = ft_sstradd(NULL, data_singleton()->argv[0]);
+		av = ft_sstradd(NULL, data_singleton()->binary);
 		av = ft_sstradd(av, "-c");
 		av = ft_sstradd(av, command);
-		execve(data_singleton()->argv[0], av, data_singleton()->env);
+		execve(data_singleton()->binary, av, data_singleton()->env);
 		exit(1);
 	}
 	waitpid(pid, &ret, WUNTRACED);

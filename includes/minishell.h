@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 17:29:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 13:35:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ struct	s_data
 	t_jobc		jobc;
 	char		**local_var;
 	t_list		*lst_func;
+	char		*binary;
 };
 
 t_data	*data_singleton();
