@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 19:20:40 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:44:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int			exec_var(t_btree **ast)
 	value = equal ? equal + 1 : NULL;
 	builtin_setenv("internal", (char*[]){"local", var, value, 0}, NULL);
 	ft_sstrfree(av);
+	ft_exec(&(*ast)->right);
 	return (0);
 }
