@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/18 19:18:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 15:02:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 			parser->state = SUCCESS;
 		else
 			parser->state = UNDEFINED;
+		btree_print(STDBUG, *ast, &ft_putast);
 		build_tree(ast, token);
 		if ((end_instruction(&parser->stack) && !(*token)->next))
 			insert_linebreak(token);

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 20:42:13 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/22 15:30:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 15:17:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int		add_case_cmd(t_btree **ast, t_list **lst)
 		node->nest++;
 	if (token->type == TK_ESAC && (node->type == TK_PAREN_OPEN
 		|| node->type == TK_CASE) && node->nest > 0)
-		return ((node->nest--));
+		node->nest--;
 	else if (token->type == TK_DSEMI && node->type == TK_PAREN_OPEN
 		&& node->nest == 0)
 		return ((node->full = 1));
-	else if ((token->type == TK_ESAC)
-		&& node->nest == 0)
+	else if ((token->type == TK_ESAC) && node->nest == 0
+		&& (node->type == TK_CASE || node->type == TK_PAREN_OPEN))
 		return ((node->full = 1));
 	else if (token->type == TK_PAREN_CLOSE)
 		return (0);

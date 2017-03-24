@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/24 12:02:21 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/24 14:53:07 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,6 @@ completion/c_terminal.c\
 completion/completion.c\
 exec/ast_free.c\
 exec/bad_fd.c\
-exec/error_badidentifier.c\
 exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_bang.c\
