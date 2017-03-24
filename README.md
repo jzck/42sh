@@ -23,12 +23,12 @@ Optional feature (five of theses are mandatory to validate the project):
 - Dynamical autocompletion.
 
 Optional feature highly appreciated:
-- Job Control and builtins `job`, `fg`, `bg`and operand `&`.
+- Job Control and builtins `job`, `fg`, `bg` and operand `&`.
 - Shell Scripting.
 
-## shell / subshell
+## Shell / Subshell
 
-## line editing
+## Line editing
 
 Keys|Functions|
 :-:|:--
@@ -39,7 +39,7 @@ Keys|Functions|
 <kbd>Ctrl</kbd>+<kbd>C</kbd>|Terminate/Kill current foreground process.
 <kbd>Ctrl</kbd>+<kbd>Z</kbd>|Suspend/Stop current foreground process.
 
-## history
+## History
 
 Keys|Functions|
 :-:|:--
@@ -51,8 +51,43 @@ Keys|Functions|
 `!name`|Search for a command beginning with `name`.
 `!?name`|Search for a command which contain `name`.
 
-## autocompletion
-## globbing
-## hash table
-## job control
+## Autocompletion
+
+Autocompletion works with binary, path and env variable.
+Output is colored upon type.
+Using arrows to navigate is supported.
+Autorefreshing with a new input from the user: modification of the list of possibility.
+
+Commands|Functions|
+:-:|:--
+`$> l[tab]`|Search for binary.
+`$> ls s[tab]`|Search for path/files.
+`$> $[tab]`|Search for variables in `env`.
+
+## Globbing
+
+Pattern|Behavior|
+:-:|:--
+`*`|Everything.
+`**`|Match directory and sub-directory.
+`?`|Single char.
+`[a-z]`|Match range from `a` to `z`.
+`[!a-z]` `[^a-z]`|Exclude range from `a` to `z`.
+`{ab, ac}`|Match `ab` or `ac`.
+
+## Hash table
+
+Commands|Functions|
+:-:|:--
+`hash`|List the content of the hash table.
+`hash -r`|Clear the memory of the hash table.
+
+## Job Control
+
+Commands|Functions|
+:-:|:--
+`jobs`|List all the current running jobs.
+`fg`|Bring the most recent process to foreground.
+`fg n`|Bring the specified jobs to foreground where `n` is the numerical value of the process found in `jobs`.
+
 ## scripting
