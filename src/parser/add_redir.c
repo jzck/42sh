@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_file.c                                         :+:      :+:    :+:   */
+/*   add_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 16:39:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 15:55:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:24:01 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int			add_redir_word(t_btree **ast, t_list **lst)
 
 	token = (*lst)->content;
 	node = (*ast)->item;
-	DG("node type is %s", read_state(node->type));
 	if (node->data.cmd.redir)
 	{
 		redir = (ft_lstlast(node->data.cmd.redir))->content;
@@ -112,7 +111,6 @@ int			add_redir_type(t_btree **ast, t_list **lst)
 		gen_node(ast);
 	token = (*lst)->content;
 	node = (*ast)->item;
-	DG("node type is %s", read_state(node->type));
 	if (!(node->type == TK_IO_NUMBER))
 	{
 		redir_init(token->type, &redir);

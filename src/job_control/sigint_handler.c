@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sigint_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:14:47 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:17:42 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:24:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,4 @@ void	sigint_handler(int signo)
 {
 	(void)signo;
 	set_exitstatus(1, 1);
-	DG("pid:%i got SIGINT", getpid());
 }

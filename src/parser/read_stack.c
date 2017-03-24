@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/20 14:59:23 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:25:03 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ char		*read_state(t_sym current)
 
 int			ft_read_stack(t_sym *stack)
 {
-	DG("read stack :");
 	while (*stack)
 		DG("%s", read_state(*stack--));
 	return (0);
@@ -236,7 +235,5 @@ int			ft_show_heredoc_data(t_astnode *node)
 	redir = (node->data.cmd.redir)->content;
 	if (redir->type != TK_DLESS)
 		return (1);
-	DG("heredoc_data=[%s] @ %p", redir->heredoc_data, redir->heredoc_data);
-	DG("redir @ %p", redir);
 	return (0);
 }
