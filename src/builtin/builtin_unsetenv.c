@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:29:17 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/23 18:24:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 22:59:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		builtin_unsetenv(const char *path, char *const av[], char *const envp[])
 		while (*env && (*env)[j])
 		{
 			if (ft_strcmp((*env)[j], av[i]) == '='
-				&& ft_strlen(av[1]) == ft_strlenchr((*env)[i], '='))
+				&& ft_strlen(av[i]) == ft_strlenchr((*env)[j], '='))
 				ft_sstrdel(*env, j);
 			else
 				j++;
