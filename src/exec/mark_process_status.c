@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 14:05:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:28:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		mark_process_status(pid_t pid, int status)
 {
 	t_list		*plist;
 	t_process	*p;
+	int			signo;
 
 	if ((plist = job_getprocess(pid)))
 	{
@@ -26,8 +27,11 @@ int		mark_process_status(pid_t pid, int status)
 		else
 		{
 			p->state = PROCESS_COMPLETED;
-			if (WIFSIGNALED(status) && WTERMSIG(status) != SIGPIPE)
-				ft_dprintf(2, "%s\n", strsignal((WTERMSIG(status))));
+			if (WIFSIGNALED(status) && (signo = WTERMSIG(status)))
+			{
+				if (signo != SIGPIPE && signo != SIGINT)
+					ft_dprintf(2, "%s\n", strsignal(signo));
+			}
 		}
 		return (0);
 	}
