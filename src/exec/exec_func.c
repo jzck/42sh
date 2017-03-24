@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:25:23 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:27:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:36:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int			exec_func(t_btree **ast)
 	t_btree	*func_ast;
 	t_list	*old_func;
 
+	DG();
 	func_ast = btree_map(*ast, &node_copy);
 	if ((old_func = is_already_func(&func_ast)))
 	{

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 15:01:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:02:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int	check_cache(t_token *token, int cache)
 	if (token->type == TK_PAREN_OPEN && cache != TK_IN && cache != TK_DSEMI
 		&& cache != TK_WORD)
 		token->type = SUBSHELL;
+	if (token->type == TK_PAREN_CLOSE && cache == TK_PAREN_OPEN)
+		token->type = OTHER;
 	return (0);
 }
 
