@@ -1,4 +1,4 @@
-[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m                                  
+[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m                    
 
 ----------------------------------------------------------------
 
@@ -11,10 +11,10 @@
 [38;5;239m  01: export PATH=""[0m
 
   STDIN:
-[38;5;239m  01: write_on_stdout "TOKEN201703241735"[0m
+[38;5;239m  01: write_on_stdout "TOKEN201703242314"[0m
 
   STDOUT:
-[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703241735`[0m
+[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703242314`[0m
 [38;5;239m  (no output)[0m
 
   STDERR:
@@ -79,15 +79,15 @@
   05: SHELL=/bin/zsh
   06: HOMEBREW_TEMP=/tmp/ariard/Homebrew/Temp
   07: TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0002_2m000khn/T/
-  08: Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.LmcFivfwkY/Render
+  08: Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.UJksyURLXc/Render
   09: TERM_PROGRAM_VERSION=3.0.10
-  10: TERM_SESSION_ID=w0t0p1:D3D230F7-7E75-4A5C-B793-6A5C4DAD3F83
+  10: TERM_SESSION_ID=w0t0p0:162D7F62-BEB1-405A-B3D5-E18A8A96E577
   11: ZSH=/Users/ariard/.oh-my-zsh
   12: USER=ariard
-  13: SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.u4JR4EZzBG/Listeners
+  13: SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.zEo8Maujhn/Listeners
   14: __CF_USER_TEXT_ENCODING=0x4A15:0x0:0x0
   15: PAGER=less
-  16: TMUX=/private/tmp/tmux-18965/default,73780,2
+  16: TMUX=/private/tmp/tmux-18965/default,22653,2
   17: HOMEBREW_CACHE=/tmp/ariard/Homebrew/Caches
   18: LSCOLORS=Gxfxcxdxbxegedabagacad
   19: PATH=/Users/ariard/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki://Users/ariard/local/bin
@@ -101,7 +101,7 @@
   27: SHLVL=4
   28: HOME=/Users/ariard
   29: COLORFGBG=7;0
-  30: ITERM_SESSION_ID=w0t0p1:D3D230F7-7E75-4A5C-B793-6A5C4DAD3F83
+  30: ITERM_SESSION_ID=w0t0p0:162D7F62-BEB1-405A-B3D5-E18A8A96E577
   31: LOGNAME=ariard
   32: LESS=-R
   33: LC_CTYPE=en_US.UTF-8
@@ -144,15 +144,15 @@
   05: SHELL=/bin/zsh
   06: HOMEBREW_TEMP=/tmp/ariard/Homebrew/Temp
   07: TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0002_2m000khn/T/
-  08: Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.LmcFivfwkY/Render
+  08: Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.UJksyURLXc/Render
   09: TERM_PROGRAM_VERSION=3.0.10
-  10: TERM_SESSION_ID=w0t0p1:D3D230F7-7E75-4A5C-B793-6A5C4DAD3F83
+  10: TERM_SESSION_ID=w0t0p0:162D7F62-BEB1-405A-B3D5-E18A8A96E577
   11: ZSH=/Users/ariard/.oh-my-zsh
   12: USER=ariard
-  13: SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.u4JR4EZzBG/Listeners
+  13: SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.zEo8Maujhn/Listeners
   14: __CF_USER_TEXT_ENCODING=0x4A15:0x0:0x0
   15: PAGER=less
-  16: TMUX=/private/tmp/tmux-18965/default,73780,2
+  16: TMUX=/private/tmp/tmux-18965/default,22653,2
   17: HOMEBREW_CACHE=/tmp/ariard/Homebrew/Caches
   18: LSCOLORS=Gxfxcxdxbxegedabagacad
   19: PATH=/Users/ariard/.brew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki://Users/ariard/local/bin
@@ -166,7 +166,7 @@
   27: SHLVL=4
   28: HOME=/Users/ariard
   29: COLORFGBG=7;0
-  30: ITERM_SESSION_ID=w0t0p1:D3D230F7-7E75-4A5C-B793-6A5C4DAD3F83
+  30: ITERM_SESSION_ID=w0t0p0:162D7F62-BEB1-405A-B3D5-E18A8A96E577
   31: LOGNAME=ariard
   32: LESS=-R
   33: LC_CTYPE=en_US.UTF-8
@@ -261,26 +261,24 @@
 
 ----------------------------------------------------------------
 
-[37;1mminishell/builtins/env/005-set-variables[0m [31m[38;5;160m(FAILED)[0m
+[37;1mminishell/builtins/cd/options/002-oldpwd[0m [31m[38;5;160m(FAILED)[0m
 
   Description:
-[38;5;239m  The purpose of this test is to check that the builtin `env` can modify or set multiple environment variables before executing the given command.[0m
-
-  Before test:
-[38;5;239m  01: export VARTEST1="OLD_VALUE"[0m
+[38;5;239m  The purpose of this test is to check that using `-` as first argument with the builtin `cd` results in moving the previous current directory.[0m
 
   STDIN:
-[38;5;239m  01: env VARTEST1=TOKEN201703241735_1 VARTEST2=TOKEN201703241735_2 VARTEST3=TOKEN201703241735_3 ./display_env[0m
+[38;5;239m  01: cd /
+  02: cd -
+  03: /Users/ariard/Projects/42sh/42ShellTester/tmp/display_pwd[0m
 
   STDOUT:
-[31m[38;5;160m  FAILURE    expected_to match_regex `VARTEST1=TOKEN201703241735_1`[0m
-[31m[38;5;160m  FAILURE    expected_to match_regex `VARTEST2=TOKEN201703241735_2`[0m
-[31m[38;5;160m  FAILURE    expected_to match_regex `VARTEST3=TOKEN201703241735_3`[0m
-[38;5;239m  (no output)[0m
+[31m[38;5;160m  FAILURE    expected_to match_regex `PWD:/Users/ariard/Projects/42sh/42ShellTester/tmp:PWD`[0m
+[38;5;239m  01: /Users/ariard
+  02: PWD:/Users/ariard:PWD[0m
 
   STDERR:
-[31m[38;5;160m  FAILURE    expected_to be_empty[0m
-[38;5;239m  01: ../../42sh: env: VARTEST1=TOKEN201703241735_1: No such file or directory[0m
+[31m[38;5;34m  SUCCESS    expected_to be_empty[0m
+[38;5;239m  (no output)[0m
 
 ----------------------------------------------------------------
 
@@ -308,31 +306,6 @@
 
 ----------------------------------------------------------------
 
-[37;1mminishell/builtins/env/errors/002-illegal-option[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using the builtin `env` with an invalid option results in an error and failure exit status.[0m
-
-  Before test:
-[38;5;239m  01: rm -f -- "-w"[0m
-
-  STDIN:
-[38;5;239m  01: env -w[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[31m[38;5;34m  SUCCESS    expected_to_not be_empty[0m
-[31m[38;5;34m  SUCCESS    might match_regex `([Ii]nvalid|[Ii]llegal) (option|argument)`[0m
-[38;5;239m  01: env: invalid option -w
-  02: ../../42sh: usage: env [-i] [name=value]... [utility [argument...]][0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-----------------------------------------------------------------
-
 [37;1mminishell/builtins/exit/errors/001-too-many-args[0m [31m[38;5;160m(FAILED)[0m
 
   Description:
@@ -340,10 +313,10 @@
 
   STDIN:
 [38;5;239m  01: exit 21 42
-  02: ./write_on_stdout TOKEN201703241735[0m
+  02: ./write_on_stdout TOKEN201703242314[0m
 
   STDOUT:
-[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703241735`[0m
+[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703242314`[0m
 [38;5;239m  (no output)[0m
 
   STDERR:
@@ -354,209 +327,6 @@
   MISC:
 [31m[38;5;160m  FAILURE    expected_to exit_with_status `0`[0m
 
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/exit/errors/002-non-numeric-argument[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a non-numeric argument with the builtin `exit` results in the Shell termination and an error on standard error.[0m
-
-  STDIN:
-[38;5;239m  01: exit abc
-  02: ./write_on_stdout TOKEN201703241735[0m
-
-  STDOUT:
-[31m[38;5;34m  SUCCESS    expected_to_not match_regex `TOKEN201703241735`[0m
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[31m[38;5;34m  SUCCESS    might_not be_empty[0m
-[31m[38;5;34m  SUCCESS    might match_regex `[Nn]umeric argument required`[0m
-[38;5;239m  01: ../../42sh: exit: numeric argument required[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/mixed/001-setenv-unsetenv[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that setting and unsetting environment variable with the builtins `setenv` and `unsetenv` (or `export` and `unset`) works together.[0m
-
-  Before test:
-[38;5;239m  01: # unset all environment variables
-  02: for VARIABLE in $(env | awk 'BEGIN {FS="="} {print $1}'); do unset "${VARIABLE}"; done;[0m
-
-  STDIN:
-[38;5;239m  01: setenv TEST1
-  02: setenv TEST2
-  03: unsetenv TEST1
-  04: unsetenv TEST2
-  05: ./display_env
-  06: 
-  07: export TEST1
-  08: export TEST2
-  09: unset TEST1
-  10: unset TEST2
-  11: ./display_env[0m
-
-  STDOUT:
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `TEST1=`[0m
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `TEST2=`[0m
-[38;5;239m  01: ------------------------------
-  02: _=../../42sh
-  03: ?=0
-  04: SHLVL=1
-  05: TEST1=
-  06: TEST2=
-  07: ------------------------------
-  08: TOTAL ENVIRONMENT VARIABLES: 5
-  09: ------------------------------
-  10: _=../../42sh
-  11: ?=0
-  12: SHLVL=1
-  13: TEST1=
-  14: TEST2=
-  15: ------------------------------
-  16: TOTAL ENVIRONMENT VARIABLES: 5[0m
-
-  STDERR:
-[38;5;239m  (no output)[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/setenv/004-invalid-identifier[0m [31m[1;33m(WARNING)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a wrong variable name with the builtin `setenv` (or `export`) results in error.[0m
-
-  STDIN:
-[38;5;239m  01: setenv 42
-  02: export 42[0m
-
-  STDOUT:
-[31m[38;5;34m  SUCCESS    might be_empty[0m
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[31m[38;5;34m  SUCCESS    expected_to_not be_empty[0m
-[31m[1;33m  WARNING    might match_regex `(not.*identifier|must begin.*letter)`[0m
-[38;5;239m  01: ../../42sh: setenv: 42: invalid variable name
-  02: ../../42sh: export: 42: invalid variable name[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/unsetenv/001-unsetenv-first-elem[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  This test was made to control if the Head of the env list was set correctly.
-  So we unset all the environment variables inside the tester environment and set a new one.
-  Thereafter we are unseting inside the tested shell. We are using env to check if the last head was remove correctly.[0m
-
-  Before test:
-[38;5;239m  01: # unset all environment variables
-  02: for VARIABLE in $(env | awk 'BEGIN {FS="="} {print $1}'); do unset "${VARIABLE}"; done;
-  03: 
-  04: export VARTEST="TOKEN201703241735"[0m
-
-  STDIN:
-[38;5;239m  01: unsetenv VARTEST
-  02: unset VARTEST
-  03: ./display_env[0m
-
-  STDOUT:
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `VARTEST=`[0m
-[38;5;239m  01: ------------------------------
-  02: VARTEST=TOKEN201703241735
-  03: _=../../42sh
-  04: ?=0
-  05: SHLVL=1
-  06: ------------------------------
-  07: TOTAL ENVIRONMENT VARIABLES: 4[0m
-
-  STDERR:
-[38;5;239m  (no output)[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/unsetenv/002-unsetenv-mult-envp[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  This test was made to check if we can unset multiple arguments.
-  So we unset all the environment variables inside the tester environment and set a 3 new variables.
-  Thereafter we are unseting all of them inside the tested shell.[0m
-
-  Before test:
-[38;5;239m  01: # unset all environment ariables
-  02: for VARIABLE in $(env | awk 'BEGIN {FS="="} {print $1}'); do unset "${VARIABLE}"; done;
-  03: 
-  04: export ONE="TOKEN201703241735_1"
-  05: export TWO="TOKEN201703241735_2"
-  06: export THREE="TOKEN201703241735_3"[0m
-
-  STDIN:
-[38;5;239m  01: unsetenv ONE
-  02: unsetenv TWO
-  03: unsetenv THREE
-  04: unset ONE
-  05: unset TWO
-  06: unset THREE
-  07: ./display_env[0m
-
-  STDOUT:
-[31m[38;5;34m  SUCCESS    expected_to_not match_regex `ONE=`[0m
-[31m[38;5;34m  SUCCESS    expected_to_not match_regex `TWO=`[0m
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `THREE=`[0m
-[38;5;239m  01: ------------------------------
-  02: THREE=TOKEN201703241735_3
-  03: _=../../42sh
-  04: ?=0
-  05: SHLVL=1
-  06: ------------------------------
-  07: TOTAL ENVIRONMENT VARIABLES: 4[0m
-
-  STDERR:
-[38;5;239m  (no output)[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/unsetenv/003-unsetenv-mult-envp-inline[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  This test was made to check if we can unset multiple arguments INLINE.
-  So we unset all the environment variables inside the tester environment and set a 3 new variables.
-  Thereafter we are unseting all of them INLINE inside the tested shell.[0m
-
-  Before test:
-[38;5;239m  01: # unset all variables
-  02: for VARIABLE in $(env | awk 'BEGIN {FS="="} {print $1}'); do unset "${VARIABLE}"; done;
-  03: 
-  04: export ONE="TOKEN201703241735_1"
-  05: export TWO="TOKEN201703241735_2"
-  06: export THREE="TOKEN201703241735_3"[0m
-
-  STDIN:
-[38;5;239m  01: unsetenv ONE TWO THREE
-  02: unset ONE TWO THREE
-  03: ./display_env[0m
-
-  STDOUT:
-[31m[38;5;34m  SUCCESS    expected_to_not match_regex `ONE=`[0m
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `TWO=`[0m
-[31m[38;5;160m  FAILURE    expected_to_not match_regex `THREE=`[0m
-[38;5;239m  01: ------------------------------
-  02: THREE=TOKEN201703241735_3
-  03: TWO=TOKEN201703241735_2
-  04: _=../../42sh
-  05: ?=0
-  06: SHLVL=1
-  07: ------------------------------
-  08: TOTAL ENVIRONMENT VARIABLES: 5[0m
-
-  STDERR:
-[38;5;239m  (no output)[0m
-
 Total tests: 54
-Total failed tests: 12
+Total failed tests: 6
 Total pending tests: 0

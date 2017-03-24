@@ -6,14 +6,14 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 23:18:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 00:57:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 #define BT_EXPORT_LP	(1 << 0)
-#define READ_USAGE		"usage: export [name[=value] ...] or export -p"
+#define EXPORT_USAGE		"usage: export [name[=value] ...] or export -p"
 
 static t_cliopts	g_export_opts[] =
 {
@@ -47,7 +47,7 @@ int					builtin_export(
 	(void)path;
 	data.flag = 0;
 	if (cliopts_get((char**)av, g_export_opts, &data))
-		return (ft_perror("export") && SH_ERR(READ_USAGE));
+		return (ft_perror("export") && SH_ERR(EXPORT_USAGE));
 	if (data.flag & BT_EXPORT_LP)
 		return (bt_export_print());
 	av = data.av_data;
@@ -60,7 +60,8 @@ int					builtin_export(
 			*(equal++) = 0;
 		else
 			equal = ft_getenv(data_singleton()->local_var, *av);
-		data.flag += builtin_setenv("internal", (char*[]){"export", *av, equal}, envp);
+		data.flag += builtin_setenv("internal", (char*[]){"export", *av,
+			equal}, envp);
 		builtin_unsetenv("internal", (char*[]){"local", *av, NULL}, NULL);
 		av++;
 	}

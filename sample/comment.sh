@@ -1,2 +1,2 @@
-ls | cat 
-pwd ; cd
+ls # Da comment
+pwd
