@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 13:51:24 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 16:27:51 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ int				data_init(int ac, char **av)
 		term_name = "dumb";
 	if (tgetent(NULL, term_name) != 1)
 	{
-		ft_dprintf(2, "{red}TERM name is not a tty\n{eoc}");
+		SH_ERR("TERM name is not a tty");
 		return (-1);
 	}
 	if (path_binary_save(av[0]))
 	{
-		ft_dprintf(2, "{red}Failed to resolve binary name\n{eoc}");
+		SH_ERR("Failed to resolve binary name");
 		return (-1);
 	}
 	return (0);

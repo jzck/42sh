@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 16:47:00 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:36:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 16:22:55 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		error_set(int n, ...)
 
 int		ft_perror(char *utility)
 {
-	ft_dprintf(2, "{red}%s: %s{eoc}\n", utility ? utility : g_argv[0], g_errmsg);
+	ft_dprintf(2, "{red}%s: %s{eoc}\n", utility ? utility : g_argv[0],
+																	g_errmsg);
 	return (g_errnum);
 }
