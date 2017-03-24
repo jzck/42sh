@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 15:40:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 19:20:40 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			exec_var(t_btree **ast)
 	char		*equal;
 
 	node = (*ast)->item;
+	pop(&data_singleton()->exec.op_stack);
 	if (!(av = token_to_argv(node->data.cmd.token, 1)))
 		return (0);
 	var = av[0];
