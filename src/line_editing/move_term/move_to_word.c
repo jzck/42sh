@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 11:12:09 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 12:33:43 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 12:12:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	ft_found_prev_word_2(int i, char *str, size_t *pos)
 		++(*pos);
 	}
 	(*pos) -= i;
+	(*pos) -= ((ft_nb_last_line(str, *pos) == 0) ? 1 : 0);
 }
 
 int			ft_found_prev_word(char **str, size_t *pos)
