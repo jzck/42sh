@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 16:52:38 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/24 11:57:45 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			ft_x(char **str, size_t *pos)
 			++i;
 		if (g_cpy[i].value && (ret = g_cpy[i].f(str, pos, pos_ref)))
 			return (0);
-		else
+		else if (!g_cpy[i].value)
 			break ;
 	}
 	if (data_singleton()->line.copy_tmp && *data_singleton()->line.copy_tmp)
