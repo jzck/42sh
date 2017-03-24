@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 17:11:37 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:24:04 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int				main(int ac, char **av, char **env)
 	t_btree		*ast;
 
 	g_argv = av;
-	DG("----------------");
 	if (shell_init(ac, av, env) != 0)
 		return (1);
 	token = NULL;

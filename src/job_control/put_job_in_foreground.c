@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:58:36 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 16:32:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:26:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		put_job_in_foreground(t_job *j, int cont)
 		tcsetattr(STDIN, TCSADRAIN, &j->tmodes);
 		if (kill(-j->pgid, SIGCONT) < 0)
 			DG("kill(SIGCONT) failed");
+		//msg d'erreur a changer ici
 	}
 	job_wait(j->id);
 	if (SH_IS_INTERACTIVE(data_singleton()->opts))

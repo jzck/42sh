@@ -1,5 +1,0 @@
-while [ -f ${GLOBAL_TOKEN}_FILE ]
-do
-	./write_on_stdout ${GLOBAL_TOKEN}_stdout > ${GLOBAL_TOKEN}_OUTPUT
-	./delete-file ${GLOBAL_TOKEN}_FILE
-done

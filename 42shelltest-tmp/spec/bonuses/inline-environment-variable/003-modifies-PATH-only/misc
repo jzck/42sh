@@ -1,2 +1,0 @@
-expected_to_not exit_with_status "42"
-expected_to_not exit_with_status "0"

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:04:18 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:51:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 17:22:18 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			process_redirect(t_process *p)
 	fd_replace(p->fdout, STDOUT);
 	while (redirs)
 	{
-		DG();
 		redir = redirs->content;
 		if (redir->n > 9)
 			return (bad_fd(redir->n));
