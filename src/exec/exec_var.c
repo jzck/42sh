@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 11:12:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 00:51:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 15:40:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int			exec_var(t_btree **ast)
 	char		*equal;
 
 	node = (*ast)->item;
-	DG("before");
 	if (!(av = token_to_argv(node->data.cmd.token, 1)))
 		return (0);
-	DG("after");
 	var = av[0];
 	if ((equal = ft_strchr(av[0], '=')))
 		*equal = 0;

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 03:23:59 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/23 16:35:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 16:53:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int				plaunch_function(t_process *p)
 {
 	static int	protection;
 
-	if (!protection)
-		protection = 0;
 	if (protection >= FUNC_LVL)
 		return (SH_ERR(FUNCERR_0));
 	protection++;
