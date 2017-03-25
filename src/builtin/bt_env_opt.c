@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 20:39:54 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 20:40:24 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 21:21:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ int			bt_env_opt_u(char *opt_arg, t_env_data *data)
 	}
 	return (0);
 }
-

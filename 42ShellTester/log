@@ -1,4 +1,4 @@
-[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[1;33m~[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m                            
+[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;160mx[0m[31m[38;5;160mx[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[1;33m~[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m[31m[38;5;34m.[0m                  
 
 ----------------------------------------------------------------
 
@@ -11,10 +11,10 @@
 [38;5;239m  01: export PATH=""[0m
 
   STDIN:
-[38;5;239m  01: write_on_stdout "TOKEN201703252040"[0m
+[38;5;239m  01: write_on_stdout "TOKEN201703252056"[0m
 
   STDOUT:
-[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703252040`[0m
+[31m[38;5;160m  FAILURE    expected_to match_regex `TOKEN201703252056`[0m
 [38;5;239m  (no output)[0m
 
   STDERR:
@@ -96,7 +96,7 @@
   22: LANG=en_US.UTF-8
   23: ITERM_PROFILE=Default
   24: XPC_FLAGS=0x0
-  25: TMUX_PANE=%16
+  25: TMUX_PANE=%21
   26: XPC_SERVICE_NAME=0
   27: SHLVL=4
   28: HOME=/Users/ariard
@@ -161,7 +161,7 @@
   22: LANG=en_US.UTF-8
   23: ITERM_PROFILE=Default
   24: XPC_FLAGS=0x0
-  25: TMUX_PANE=%16
+  25: TMUX_PANE=%21
   26: XPC_SERVICE_NAME=0
   27: SHLVL=4
   28: HOME=/Users/ariard
@@ -202,57 +202,7 @@
   STDERR:
 [31m[38;5;34m  SUCCESS    expected_to_not be_empty[0m
 [31m[1;33m  WARNING    might match_regex `[Nn]ot a directory`[0m
-[38;5;239m  01: ../../42sh: cd : ./not_a_directory: No such file or directory[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/cd/errors/002-not-a-directory-2[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a file name as first argument with the builtin `cd` results in a Shell termination with a failure exit status.[0m
-
-  Before test:
-[38;5;239m  01: touch "./not_a_directory"[0m
-
-  STDIN:
-[38;5;239m  01: cd not_a_directory[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[38;5;239m  01: ../../42sh: cd : ./not_a_directory: No such file or directory[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/cd/errors/004-permission-denied-2[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a directory without any permission as first argument with the builtin `cd` results in error and not changing current directory.[0m
-
-  Before test:
-[38;5;239m  01: if [ -d "./permission_denied" ]; then chmod 777 "./permission_denied"; fi
-  02: rm -rf "./permission_denied"
-  03: mkdir -m 0 "./permission_denied"[0m
-
-  STDIN:
-[38;5;239m  01: cd permission_denied[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[38;5;239m  01: ../../42sh: cd : ./permission_denied: Permission denied[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-  After test:
-[38;5;239m  01: if [ -d "./permission_denied" ]; then chmod 777 "./permission_denied"; fi
-  02: rm -rf "./permission_denied"[0m
+[38;5;239m  01: ../../42sh: cd : ./not_a_directory: Permission denied[0m
 
 ----------------------------------------------------------------
 
@@ -279,76 +229,6 @@
 [31m[38;5;34m  SUCCESS    expected_to_not be_empty[0m
 [31m[1;33m  WARNING    might match_regex `[Tt]oo many.*symbolic links`[0m
 [38;5;239m  01: ../../42sh: cd : ./symbolic_link1: No such file or directory[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/cd/errors/006-too-many-symbolic-links-encountered-2[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a symbolic link resulting in ELOOP error as first argument with the builtin `cd` results in a Shell termination with a failure exit status.[0m
-
-  Before test:
-[38;5;239m  01: rm -f "./symbolic_link1" "./symbolic_link2" "./symbolic_link3"
-  02: ln -s "./symbolic_link1" "./symbolic_link2"
-  03: ln -s "./symbolic_link2" "./symbolic_link3"
-  04: ln -s "./symbolic_link3" "./symbolic_link1"[0m
-
-  STDIN:
-[38;5;239m  01: cd symbolic_link1[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[38;5;239m  01: ../../42sh: cd : ./symbolic_link1: No such file or directory[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/cd/errors/008-no-such-file-or-directory-2[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a non-existing path as first argument with the builtin `cd` results in a Shell termination with an error status code.[0m
-
-  Before test:
-[38;5;239m  01: rm -f "./no_such_file_or_directory"[0m
-
-  STDIN:
-[38;5;239m  01: cd no_such_file_or_directory[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[38;5;239m  01: ../../42sh: cd : ./no_such_file_or_directory: No such file or directory[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
-
-----------------------------------------------------------------
-
-[37;1mminishell/builtins/cd/errors/010-no-such-file-or-directory-symlink-2[0m [31m[38;5;160m(FAILED)[0m
-
-  Description:
-[38;5;239m  The purpose of this test is to check that using a symbolic link that targets to a non-existing directory with the builtin `cd`  results in error and not changing current directory.[0m
-
-  Before test:
-[38;5;239m  01: rm -rf "./enoent_symlink" "./enoent_directory"
-  02: ln -s "./enoent_directory" "./enoent_symlink"[0m
-
-  STDIN:
-[38;5;239m  01: cd ./enoent_symlink[0m
-
-  STDOUT:
-[38;5;239m  (no output)[0m
-
-  STDERR:
-[38;5;239m  01: ../../42sh: cd : /Users/ariard/Projects/42sh/42ShellTester/tmp/./enoent_symlink: No such file or directory[0m
-
-  MISC:
-[31m[38;5;160m  FAILURE    expected_to_not exit_with_status `0`[0m
 
 ----------------------------------------------------------------
 
@@ -393,7 +273,7 @@
   21: LANG=en_US.UTF-8
   22: ITERM_PROFILE=Default
   23: XPC_FLAGS=0x0
-  24: TMUX_PANE=%16
+  24: TMUX_PANE=%21
   25: XPC_SERVICE_NAME=0
   26: SHLVL=4
   27: HOME=/Users/ariard
@@ -403,16 +283,16 @@
   31: LESS=-R
   32: LC_CTYPE=en_US.UTF-8
   33: TMUX_PLUGIN_MANAGER_PATH=/Users/ariard/.tmux/plugins/
-  34: OLDPWD=/Users/ariard/Projects/42sh/42ShellTester/tmp/sub_directory
+  34: OLDPWD=/Users/ariard/Projects/42sh/42ShellTester
   35: _=../../42sh
-  36: ?=0
+  36: ?=73
   37: ------------------------------
   38: TOTAL ENVIRONMENT VARIABLES: 35[0m
 
   STDERR:
 [31m[1;33m  WARNING    might be_empty[0m
-[38;5;239m  01: ../../42sh: cd : ./sub_directory_link: Permission denied
-  02: ../../42sh: cd : ./sub_sub_directory_link: Permission denied[0m
+[38;5;239m  01: ../../42sh: cd : ./sub_directory_link: Symlink not resolved
+  02: ../../42sh: cd : ./sub_sub_directory_link: Symlink not resolved[0m
 
 ----------------------------------------------------------------
 
@@ -447,11 +327,11 @@
 
   STDIN:
 [38;5;239m  01: exit 21 42
-  02: ./write_on_stdout TOKEN201703252040[0m
+  02: ./write_on_stdout TOKEN201703252056[0m
 
   STDOUT:
-[31m[38;5;34m  SUCCESS    expected_to match_regex `TOKEN201703252040`[0m
-[38;5;239m  01: TOKEN201703252040[0m
+[31m[38;5;34m  SUCCESS    expected_to match_regex `TOKEN201703252056`[0m
+[38;5;239m  01: TOKEN201703252056[0m
 
   STDERR:
 [31m[38;5;34m  SUCCESS    expected_to_not be_empty[0m
@@ -462,5 +342,5 @@
 [31m[38;5;34m  SUCCESS    expected_to exit_with_status `0`[0m
 
 Total tests: 54
-Total failed tests: 8
+Total failed tests: 3
 Total pending tests: 0

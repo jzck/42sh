@@ -30,9 +30,8 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
-builtin/bt_cd_getpath.c\
 builtin/bt_cd_process_dotdot.c\
-builtin/bt_cd_process_symlink.c\
+builtin/bt_env_get.c\
 builtin/bt_env_opt.c\
 builtin/bt_read_get.c\
 builtin/bt_read_term.c\
