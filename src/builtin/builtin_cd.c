@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 20:43:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:52:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int					builtin_cd(const char *path, char *const av[],
 	oldpwd = getcwd(NULL, 0);
 	if (HAS_CDOPT_P(data.flag) && !(ret = bt_cd_process_symlink(target)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
-	else if (!(ret = bt_cd_process_dotdot(target)))
+	else if (!ret && !(ret = bt_cd_process_dotdot(target)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
 	free(target);
 	free(oldpwd);
