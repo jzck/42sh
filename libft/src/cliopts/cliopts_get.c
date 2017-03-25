@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:04:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:02:09 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:00:35 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,12 @@ static char			*check_required(char ***av, char *arg)
 {
 	char	*ret;
 
-	DG("%p, av", av);
-	DG("%p, *av", *av);
-	DG("%p, arg", arg);
-	DG("%s, *arg", arg);
 	if (!av || !*av)
 		return (NULL);
 	if (!arg || !*arg || !*(arg + 1))
 		return (*++(*av));
 	ret = arg + 1;
 	return (ret);
-}
-
-static t_cliopts	*get_map_long(t_cliopts opt_map[], char *arg)
-{
-	int		i;
-
-	i = -1;
-	while (opt_map[++i].c)
-		if (!ft_strcmp(opt_map[i].str, arg))
-			return (&opt_map[i]);
-	return (NULL);
-}
-
-static t_cliopts	*get_map_short(t_cliopts opt_map[], char arg)
-{
-	int		i;
-
-	i = -1;
-	while (opt_map[++i].c)
-		if (opt_map[i].c == arg)
-			return (&opt_map[i]);
-	return (NULL);
 }
 
 static int			cliopts_parse_short(
@@ -67,8 +41,10 @@ static int			cliopts_parse_short(
 	i = -1;
 	while (arg[++i] && !(tmp = NULL))
 	{
-		if (!(map = get_map_short(opt_map, arg[i])))
+		if (!(map = cliopts_getmap_short(opt_map, arg[i])))
 			return (ERR_SET(E_CO_INV, arg[i]));
+		((t_data_template*)data)->flag |= map->flag_on;
+		((t_data_template*)data)->flag &= ~map->flag_off;
 		if (map->get)
 		{
 			if (map->arg_required && !(tmp = check_required(av, arg + i)))
@@ -79,8 +55,6 @@ static int			cliopts_parse_short(
 			if (map->arg_required)
 				break ;
 		}
-		((t_data_template*)data)->flag |= map->flag_on;
-		((t_data_template*)data)->flag &= ~map->flag_off;
 	}
 	return (++(*av) ? 0 : 0);
 }
@@ -94,7 +68,7 @@ static int			cliopts_parse_long(
 
 	arg = **av + 2;
 	tmp = NULL;
-	if (!(map = get_map_long(opt_map, arg)))
+	if (!(map = cliopts_getmap_long(opt_map, arg)))
 		return (ERR_SET(E_CO_INVL, arg));
 	((t_data_template*)data)->flag |= map->flag_on;
 	((t_data_template*)data)->flag &= ~map->flag_off;

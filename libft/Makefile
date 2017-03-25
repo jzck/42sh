@@ -49,7 +49,7 @@ char/ft_isprint.c\
 char/ft_tolower.c\
 char/ft_toupper.c\
 cliopts/cliopts_get.c\
-cliopts/cliopts_has.c\
+cliopts/cliopts_getmap.c\
 color/ft_color_mk.c\
 color/ft_color_mkif.c\
 color/ft_color_reset.c\

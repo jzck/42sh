@@ -13,7 +13,7 @@
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror #-fvisibility=hidden
+FLAGS		=	-Wall -Wextra -Werror -fsanitize=address#-fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -48,7 +48,6 @@ builtin/builtin_read.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\
 builtin/builtin_unsetenv.c\
-builtin/error_msg.c\
 builtin/is_builtin.c\
 completion/c_arrow.c\
 completion/c_clear.c\

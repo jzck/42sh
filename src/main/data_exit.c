@@ -19,6 +19,7 @@ void	data_exit(void)
 	data = data_singleton();
 	ft_strdel(&data->line.input);
 	ft_strdel(&data->binary);
+	exec_popfds();
 	ft_sstrfree(data->env);
 	ft_sstrfree(data->local_var);
 	ft_sstrfree(data->argv);

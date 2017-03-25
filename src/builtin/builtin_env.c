@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 02:10:38 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:10:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #define ENV_USAGE	"env [-i] [name=value]... [utility [argument...]]"
 #define ENV_NOFILE	"env: %s: No such file or directory"
 #define ENV_NOPERM	"env: %s: Permission denied"
-/* # define BT_ENV_LI		(1 << 0) */
-/* # define BT_ENV_LU		(1 << 1) */
 
 static t_cliopts	g_env_opts[] =
 {
