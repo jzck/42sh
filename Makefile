@@ -6,15 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/25 20:26:47 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/25 21:38:21 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	42sh
+NAME		=	minishell
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
-FLAGS		=	-Wall -Wextra -Werror #-fsanitize=address#-fvisibility=hidden
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -282,7 +281,6 @@ line_editing/resize.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
-main/ft_putast.c\
 main/main.c\
 main/shell_init.c\
 main/shell_reset.c\
@@ -308,7 +306,6 @@ parser/parser_init.c\
 parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
-parser/read_stack.c\
 parser/redir_init.c\
 parser/stack_init.c\
 parser/sym_free.c\
