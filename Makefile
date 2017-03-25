@@ -246,7 +246,6 @@ lexer/token_append.c\
 lexer/token_cmp_type.c\
 lexer/token_free.c\
 lexer/token_init.c\
-lexer/token_print.c\
 line_editing/control_features.c\
 line_editing/copy_cut_paste/copy_cut_paste.c\
 line_editing/copy_cut_paste/underline_down.c\
