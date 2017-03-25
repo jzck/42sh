@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:22:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:18:54 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:59:53 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ struct	s_data_template
 };
 
 int		cliopts_get(char **av, t_cliopts opt_map[], void *data);
+t_cliopts	*cliopts_getmap_long(t_cliopts opt_map[], char *arg);
+t_cliopts	*cliopts_getmap_short(t_cliopts opt_map[], char arg);
 int		cliopts_has(char **av, char c);
 
 #endif
