@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 15:14:55 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 17:07:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 19:51:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int			bt_cd_process_symlink(char *target)
 	char		buffer[PATH_MAX + 1];
 
 	ft_bzero(buffer, PATH_MAX + 1);
+	if (!is_directory(target))
+		return (SH_ERR(CDERR_4, target));
 	if (!access(target, R_OK))
 		return (SH_ERR(CDERR_3, target));
 	if (chdir(target))
