@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 23:33:03 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:39:55 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 t_cliopts	g_jobs_opts[] =
 {
-	{'l', NULL, JOBS_OPT_L, 0, NULL},
-	{0, 0, 0, 0, 0},
+	{'l', NULL, JOBS_OPT_L, 0, NULL, 0},
+	{0, 0, 0, 0, 0, 0},
 };
 
 static void	bt_jobs_all(int opts)

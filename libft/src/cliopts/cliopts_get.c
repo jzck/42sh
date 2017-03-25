@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:04:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:19:12 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 02:02:09 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ static char			*check_required(char ***av, char *arg)
 {
 	char	*ret;
 
+	DG("%p, av", av);
+	DG("%p, *av", *av);
+	DG("%p, arg", arg);
+	DG("%s, *arg", arg);
 	if (!av || !*av)
 		return (NULL);
-	if (!arg || !*arg)
+	if (!arg || !*arg || !*(arg + 1))
 		return (*++(*av));
 	ret = arg + 1;
 	return (ret);
@@ -72,8 +76,8 @@ static int			cliopts_parse_short(
 			tmp = tmp ? tmp : **av;
 			if ((map->get)(tmp, data))
 				return (ERR_SET(E_CO_MISS, *arg));
-			if (map->arg_required && !(*(arg += ft_strlen(arg))))
-				++(*av);
+			if (map->arg_required)
+				break ;
 		}
 		((t_data_template*)data)->flag |= map->flag_on;
 		((t_data_template*)data)->flag &= ~map->flag_off;
@@ -100,7 +104,6 @@ static int			cliopts_parse_long(
 			return (ERR_SET(E_CO_MISS, *arg));
 		if ((map->get)(tmp, data))
 			return (ERR_SET(E_CO_MISSL, arg));
-		++(*av);
 	}
 	++(*av);
 	return (0);

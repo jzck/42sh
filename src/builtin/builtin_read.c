@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 23:30:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:28:33 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 t_cliopts	g_read_opts[] =
 {
-	{'d', NULL, BT_READ_LD, 0, bt_read_getdelim},
-	{'n', NULL, BT_READ_LN, 0, bt_read_getnchars},
-	{'p', NULL, BT_READ_LP, 0, bt_read_getprompt},
-	{'r', NULL, BT_READ_LR, 0, NULL},
-	{'s', NULL, BT_READ_LS, 0, NULL},
-	{'t', NULL, BT_READ_LT, 0, bt_read_gettimeout},
-	{'u', NULL, BT_READ_LU, 0, bt_read_getfd},
-	{0, 0, 0, 0, 0},
+	{'d', NULL, BT_READ_LD, 0, bt_read_getdelim, 1},
+	{'n', NULL, BT_READ_LN, 0, bt_read_getnchars, 1},
+	{'p', NULL, BT_READ_LP, 0, bt_read_getprompt, 1},
+	{'r', NULL, BT_READ_LR, 0, NULL, 0},
+	{'s', NULL, BT_READ_LS, 0, NULL, 0},
+	{'t', NULL, BT_READ_LT, 0, bt_read_gettimeout, 1},
+	{'u', NULL, BT_READ_LU, 0, bt_read_getfd, 1},
+	{0, 0, 0, 0, 0, 0},
 };
 
 int			bt_read_init(t_read *data, char **av)

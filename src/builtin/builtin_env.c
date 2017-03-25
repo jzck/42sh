@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 01:19:51 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 02:10:38 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #define ENV_USAGE	"env [-i] [name=value]... [utility [argument...]]"
 #define ENV_NOFILE	"env: %s: No such file or directory"
 #define ENV_NOPERM	"env: %s: Permission denied"
-# define BT_ENV_LI		(1 << 0)
-# define BT_ENV_LU		(1 << 1)
+/* # define BT_ENV_LI		(1 << 0) */
+/* # define BT_ENV_LU		(1 << 1) */
 
 static t_cliopts	g_env_opts[] =
 {
 	{'i', NULL, 0, 0, &bt_env_opt_i, 0},
 	{'u', NULL, 0, 0, &bt_env_opt_u, 1},
-	{0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0},
 };
 
 int			bt_env_opt_i(char *opt_arg, t_env_data *data)
@@ -32,53 +32,20 @@ int			bt_env_opt_i(char *opt_arg, t_env_data *data)
 	return (0);
 }
 
-static void		env_freeone(char **env, char *arg)
-{
-	int		i;
-	char	*tmp;
-
-	while (env && *env && (i = -1))
-	{
-		if (ft_strcmp(*env, arg) == '='
-				&& ft_strlen(arg) == ft_strlenchr(*env, '='))
-		{
-			tmp = *env;
-			while (*env)
-			{
-				*env = *(env + 1);
-				++env;
-			}
-			ft_strdel(&tmp);
-			return ;
-		}
-		++env;
-	}
-}
-
 int			bt_env_opt_u(char *opt_arg, t_env_data *data)
 {
+	DG();
 	int		i;
-	char	*tmp;
 	char	**env;
-	char	**tmp_env;
 
-	env = data->custom_env;
-	while (env && *env && (i = -1))
+	if (!(env = data->custom_env))
+		return (0);
+	i = -1;
+	while (env[++i])
 	{
-		if (ft_strcmp(*env, opt_arg) == '='
-				&& ft_strlen(opt_arg) == ft_strlenchr(*env, '='))
-		{
-			tmp = *env;
-			tmp_env = env + 1;
-			while (*env)
-			{
-				*env = *(env + 1);
-				++env;
-			}
-			env = tmp_env;
-			ft_strdel(&tmp);
-		}
-		++env;
+		if (ft_strcmp(env[i], opt_arg) == '='
+				&& ft_strlen(opt_arg) == ft_strlenchr(env[i], '='))
+			ft_sstrdel(env, i);
 	}
 	return (0);
 }
@@ -103,9 +70,16 @@ static int			bt_env_parse(t_env_data *data, char **av)
 	if (cliopts_get(av, g_env_opts, data))
 		return (1);
 	bt_env_getcustom(&data->av_data, data);
-	if (!(data->flag & BT_ENV_LI))
+	return (0);
+}
+
+int					display_env(char **av)
+{
+	if (av && *av)
 	{
-		data->custom_env = ft_sstrmerge(data_singleton()->env, data->custom_env);
+		ft_sstrprint(av, '\n');
+		ft_putchar('\n');
+		ft_tabdel(&av);
 	}
 	return (0);
 }
@@ -121,10 +95,7 @@ int					builtin_env(const char *path,
 	if (bt_env_parse(&dat, (char**)argv))
 		return (ft_perror("env") && SH_ERR("usage: %s", ENV_USAGE));
 	if (!*dat.av_data)
-	{
-		ft_sstrprint(dat.custom_env, '\n');
-		return (ft_putchar('\n') * 0);
-	}
+		return (display_env(dat.custom_env));
 	else if ((pid = fork()) == 0)
 	{
 		if (!(path = ft_strchr(dat.av_data[0], '/') ? ft_strdup(dat.av_data[0])

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 18:57:17 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:41:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 static t_cliopts	g_opts[] =
 {
-	{'c', NULL, SH_OPTS_LC, SH_OPTS_JOBC | SH_INTERACTIVE, get_c_arg},
-	{-1, "no-jobcontrol", 0, SH_OPTS_JOBC, NULL},
-	{0, 0, 0, 0, 0},
+	{'c', NULL, SH_OPTS_LC, SH_OPTS_JOBC | SH_INTERACTIVE, get_c_arg, 1},
+	{-1, "no-jobcontrol", 0, SH_OPTS_JOBC, NULL, 0},
+	{0, 0, 0, 0, 0, 0},
 };
 
-int					get_c_arg(char ***av, t_data *data)
+int					get_c_arg(char *opt_arg, t_data *data)
 {
-	if (!av || !*av)
+	if (!opt_arg)
 		return (1);
 	if (data)
-		data->c_arg = **av;
+		data->c_arg = opt_arg;
 	return (0);
 }
 

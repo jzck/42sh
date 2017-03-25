@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:36:44 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:24:42 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ struct termios	bt_read_term(int init);
 int				bt_read_terminit(t_read *data);
 int				bt_read_exit(t_read *data);
 
-int				bt_read_getdelim(char ***argv, t_read *data);
-int				bt_read_getnchars(char ***argv, t_read *data);
-int				bt_read_getprompt(char ***argv, t_read *data);
-int				bt_read_gettimeout(char ***argv, t_read *data);
-int				bt_read_getfd(char ***argv, t_read *data);
+int				bt_read_getdelim(char *opt_arg, t_read *data);
+int				bt_read_getnchars(char *opt_arg, t_read *data);
+int				bt_read_getprompt(char *opt_arg, t_read *data);
+int				bt_read_gettimeout(char *opt_argv, t_read *data);
+int				bt_read_getfd(char *opt_arg, t_read *data);
 
 #endif
