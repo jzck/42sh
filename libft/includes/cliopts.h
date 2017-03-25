@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:22:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 23:20:58 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:18:54 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ struct	s_cliopts
 	t_flag	flag_on;
 	t_flag	flag_off;
 	int		(*get)();
+	int		arg_required:1;
 };
 
 struct	s_data_template

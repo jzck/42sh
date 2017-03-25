@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 11:39:37 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 00:57:26 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:39:34 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 static t_cliopts	g_export_opts[] =
 {
-	{'p', NULL, BT_EXPORT_LP, 0, NULL},
-	{0, NULL, 0, 0, NULL},
+	{'p', NULL, BT_EXPORT_LP, 0, NULL, 0},
+	{0, NULL, 0, 0, NULL, 0},
 };
 
 int					bt_export_print(void)
