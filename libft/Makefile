@@ -192,6 +192,7 @@ str/ft_strstr.c\
 str/ft_strsub.c\
 str/ft_strtok.c\
 str/ft_strtrim.c\
+sys/create_directory.c\
 sys/dup2_close.c\
 sys/fd_replace.c\
 sys/ft_getenv.c\

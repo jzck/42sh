@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 00:52:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 02:05:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static char		*bt_cd_target(char *arg)
 		DG("doing -");
 		if (!(target = ft_getenv(data_singleton()->env, "OLDPWD")))
 			SH_ERR(CDERR_2, "OLDPWD");
-		DG("found OLDPWD %s", target);
 	}
 	else
 		target = arg;
