@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_new_cd.c                                   :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 02:00:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 17:08:31 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/25 19:45:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ static t_cliopts	g_cdopts[] =
 	{0, NULL, 0, 0, NULL, 0},
 };
 
-static char		*cd_operand_exist(char *arg)
+static char			*cd_operand_exist(char *arg)
 {
 	char	*target;
 
+	target = NULL;
 	if (!arg)
 	{
-		if (!(target = ft_getenv(data_singleton()->env, "HOME")))
-			SH_ERR(CDERR_0, "HOME");
+		if (!(target = ft_strdup(ft_getenv(data_singleton()->env, "HOME"))))
+			SH_ERR(CDERR_1, "HOME");
 	}
-	else
-		target = arg;
 	return (target);
 }
 
@@ -48,20 +47,22 @@ static char			*cd_operand_begin(char *arg)
 	if (arg && arg[0])
 	{
 		if (arg[0] == '/')
-			target = arg;	
-		else if (arg[0] == '.')
+			target = ft_strdup(arg);
+		else if (!ft_strncmp(arg, "./", 2) || !ft_strncmp(arg, "../", 3)
+			|| !ft_strcmp(arg, ".") || !ft_strcmp(arg, ".."))
 			target = ft_str3join(ft_getenv(data_singleton()->env,
 				"PWD"), "/", arg); 
-		else if (ft_strcmp(arg, "-") == 0)
+		else if (!ft_strcmp(arg, "-"))
 		{
-			 if (!(target = ft_getenv(data_singleton()->env, "OLDPWD")))
+			 if (!(target = ft_strdup(ft_getenv(data_singleton()->env,
+				"OLDPWD"))))
 				 SH_ERR(CDERR_1, "OLDPWD");
 		}
 		else
 			target = bt_cd_get_cdpath(arg);
 	}		
 	else
-		target = arg;
+		target = NULL;
 	return (target);
 }		   		
 
@@ -77,29 +78,27 @@ void			setwd(char *var)
 int					builtin_cd(const char *path, char *const av[],
 					char *const envp[])
 {
+	char			*oldpwd;
 	char			*target;
 	t_data_template	data;
 
 	(void)envp;
 	(void)path;
 	data.flag = CD_OPT_L;
-	DG();
 	if (cliopts_get((char **)av, g_cdopts, &data))
 		return (1);
-	DG("after parsing opt");
 	if (data.av_data[0] && data.av_data[1])
-		return (SH_ERR(CD_USAGE));
+		return (SH_ERR(CDERR_0) && SH_ERR(CD_USAGE));
 	if (!(target = cd_operand_exist(*data.av_data)))
-		return (1);
-	DG();
-	return (0);
-	setwd("OLDPWD");
-	if (!target)
 		target = cd_operand_begin(*data.av_data);
-	if (HAS_CDOPT_P(data.flag)) 
-		bt_cd_process_symlink(target);
-	else
-		bt_cd_process_dotdot(target);	
+	if (!target)
+		target = ft_strdup(*data.av_data);
+	oldpwd = getcwd(NULL, 0);
+	DG("target is %s", target);
+	if (HAS_CDOPT_P(data.flag) && !bt_cd_process_symlink(target))
+		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
+	else if (!bt_cd_process_dotdot(target))
+		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
 	free(target);
 	return (0);
 }
