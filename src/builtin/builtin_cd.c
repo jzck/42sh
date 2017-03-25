@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 21:19:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 21:23:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int					builtin_cd(const char *path, char *const av[],
 	if (!(target = cd_operand_exist(*data.av_data)))
 		target = cd_operand_begin(*data.av_data);
 	oldpwd = getcwd(NULL, 0);
-	if (ret = bt_cd_process_dotdot(target))
+	if ((ret = bt_cd_process_dotdot(target)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
 	free(target);
 	free(oldpwd);
