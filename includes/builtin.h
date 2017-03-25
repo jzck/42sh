@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:18:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 04:09:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ int		builtin_math(const char *path, char *const av[], char *const envp[]);
 int		builtin_func(const char *path, char *const av[], char *const envp[]);
 
 int		bt_env_geti(char ***av, t_env_data *data);
+
+int		get_cdpath(char *arg);
+int		process_dotdot(char *target);
+int		process_symlink(char *target);
+
 int		error_msg(char *msg);
 
 #endif
