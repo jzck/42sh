@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:54:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 20:03:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:43:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int			bt_cd_process_dotdot(char *target)
 {
-	DG();
 	if (!is_directory(target))
 		return (SH_ERR(CDERR_7, target));
 	if (access(target, R_OK) < 0)
@@ -25,5 +24,5 @@ int			bt_cd_process_dotdot(char *target)
 	if (chdir(target))
 		return (SH_ERR(CDERR_7, target));
 	setwd("PWD");
-	return (0);	
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:18:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 20:13:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:24:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char		*create_directory(const char *path, const char *old_pathnames)
 		new_pathnames += ft_strlen(new_pathnames) + 1;
 	}
 	ft_strdel(&temp);
+	DG("newdir %s", newdir);
 	return (newdir);
 }

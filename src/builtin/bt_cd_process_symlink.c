@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 15:14:55 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 19:51:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:38:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			bt_cd_process_symlink(char *target)
 	if (chdir(target))
 		return (SH_ERR(CDERR_4, target));
 	setwd("PWD");
-	if (readlink(target, buffer,  PATH_MAX + 1) < 0)
+	if (readlink(target, buffer, PATH_MAX + 1) < 0)
 		return (SH_ERR(CDERR_5, target));
 	else if (ft_strlen(buffer) > 0)
 		builtin_setenv(NULL, (char*[]){"cd", "PWD", buffer, NULL}, NULL);

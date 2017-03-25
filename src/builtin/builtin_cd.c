@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 20:02:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:43:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ static char			*cd_operand_begin(char *arg)
 		else if (!ft_strncmp(arg, "./", 2) || !ft_strncmp(arg, "../", 3)
 			|| !ft_strcmp(arg, ".") || !ft_strcmp(arg, ".."))
 			target = ft_str3join(ft_getenv(data_singleton()->env,
-				"PWD"), "/", arg); 
+				"PWD"), "/", arg);
 		else if (!ft_strcmp(arg, "-"))
 		{
-			 if (!(target = ft_strdup(ft_getenv(data_singleton()->env,
+			if (!(target = ft_strdup(ft_getenv(data_singleton()->env,
 				"OLDPWD"))))
-				 SH_ERR(CDERR_1, "OLDPWD");
+				SH_ERR(CDERR_1, "OLDPWD");
 		}
 		else
-			target = bt_cd_get_cdpath(arg);
-	}		
+			target = ft_str3join(".", "/", arg);
+	}
 	else
 		target = arg;
 	return (target);
-}		   		
+}
 
-void			setwd(char *var)
+void				setwd(char *var)
 {
 	char	*cwd;
 
@@ -81,10 +81,12 @@ int					builtin_cd(const char *path, char *const av[],
 	char			*oldpwd;
 	char			*target;
 	t_data_template	data;
+	int				ret;
 
 	(void)envp;
 	(void)path;
 	data.flag = CD_OPT_L;
+	ret = 0;
 	if (cliopts_get((char **)av, g_cdopts, &data))
 		return (1);
 	if (data.av_data[0] && data.av_data[1])
@@ -92,12 +94,11 @@ int					builtin_cd(const char *path, char *const av[],
 	if (!(target = cd_operand_exist(*data.av_data)))
 		target = cd_operand_begin(*data.av_data);
 	oldpwd = getcwd(NULL, 0);
-	DG("target is %s", target);
-	if (HAS_CDOPT_P(data.flag) && !bt_cd_process_symlink(target))
+	if (HAS_CDOPT_P(data.flag) && !(ret = bt_cd_process_symlink(target)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
-	else if (!bt_cd_process_dotdot(target))
+	else if (!(ret = bt_cd_process_dotdot(target)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
 	free(target);
 	free(oldpwd);
-	return (0);
+	return (ret);
 }
