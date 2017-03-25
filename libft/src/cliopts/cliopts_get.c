@@ -21,10 +21,6 @@ static char			*check_required(char ***av, char *arg)
 {
 	char	*ret;
 
-	DG("%p, av", av);
-	DG("%p, *av", *av);
-	DG("%p, arg", arg);
-	DG("%s, *arg", arg);
 	if (!av || !*av)
 		return (NULL);
 	if (!arg || !*arg || !*(arg + 1))
@@ -69,6 +65,8 @@ static int			cliopts_parse_short(
 	{
 		if (!(map = get_map_short(opt_map, arg[i])))
 			return (ERR_SET(E_CO_INV, arg[i]));
+		((t_data_template*)data)->flag |= map->flag_on;
+		((t_data_template*)data)->flag &= ~map->flag_off;
 		if (map->get)
 		{
 			if (map->arg_required && !(tmp = check_required(av, arg + i)))
@@ -77,10 +75,8 @@ static int			cliopts_parse_short(
 			if ((map->get)(tmp, data))
 				return (ERR_SET(E_CO_MISS, *arg));
 			if (map->arg_required)
-				arg += ft_strlen(arg) - 1;
+				break ;
 		}
-		((t_data_template*)data)->flag |= map->flag_on;
-		((t_data_template*)data)->flag &= ~map->flag_off;
 	}
 	return (++(*av) ? 0 : 0);
 }
