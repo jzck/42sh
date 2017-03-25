@@ -6,13 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/25 19:49:22 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/25 20:26:47 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
+FLAGS		=	-Wall -Wextra -Werror
 FLAGS		=	-Wall -Wextra -Werror #-fsanitize=address#-fvisibility=hidden
 D_FLAGS		=	-g
 
@@ -32,6 +33,7 @@ SRC_BASE	=	\
 builtin/bt_cd_getpath.c\
 builtin/bt_cd_process_dotdot.c\
 builtin/bt_cd_process_symlink.c\
+builtin/bt_env_opt.c\
 builtin/bt_read_get.c\
 builtin/bt_read_term.c\
 builtin/builtin_cd.c\

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 15:10:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 20:40:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,6 @@ static t_cliopts	g_env_opts[] =
 	{'u', NULL, 0, 0, &bt_env_opt_u, 1},
 	{0, 0, 0, 0, 0, 0},
 };
-
-int			bt_env_opt_i(char *opt_arg, t_env_data *data)
-{
-	(void)opt_arg;
-	ft_tabdel(&data->custom_env);
-	return (0);
-}
-
-int			bt_env_opt_u(char *opt_arg, t_env_data *data)
-{
-	DG();
-	int		i;
-	char	**env;
-
-	if (!(env = data->custom_env))
-		return (0);
-	i = -1;
-	while (env[++i])
-	{
-		if (ft_strcmp(env[i], opt_arg) == '='
-				&& ft_strlen(opt_arg) == ft_strlenchr(env[i], '='))
-			ft_sstrdel(env, i);
-	}
-	return (0);
-}
 
 static int			bt_env_getcustom(char ***av, t_env_data *data)
 {
