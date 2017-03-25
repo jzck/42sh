@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:08:44 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:18:37 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "libft.h"
 # include "builtin_read.h"
 
-# define BT_EXPORT_LP	(1 << 0)
 
 
 struct	s_env_data

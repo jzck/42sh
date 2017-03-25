@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 23:43:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 16:51:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/24 23:23:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			add_func_cmd(t_btree **ast, t_list **lst)
 	if ((token->type == TK_CASE || token->type == TK_WHILE
 		|| token->type == TK_IF || token->type == TK_UNTIL
 		|| token->type == TK_FOR || token->type == SUBSHELL
-		|| token->type == TK_LBRACE || token->type == TK_PAREN_OPEN) 
+		|| token->type == TK_LBRACE || token->type == TK_PAREN_OPEN)
 		&& node->type == FNAME)
 		node->nest++;
 	if ((token->type == TK_DONE || token->type == TK_ESAC

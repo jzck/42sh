@@ -6,11 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 17:43:01 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 18:48:46 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/24 23:33:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#define JOBS_USAGE	"usage: jobs [-l] [id ...]"
 
 t_cliopts	g_jobs_opts[] =
 {
@@ -67,14 +69,11 @@ int			builtin_jobs(const char *path, char *const av[], char *const envp[])
 	(void)path;
 	(void)envp;
 	if (!SH_HAS_JOBC(data_singleton()->opts))
-	{
-		DG("no job control :(");
 		return (SH_ERR("jobs: %s", SH_MSG_NOJOBC));
-	}
 	do_job_notification();
 	ft_bzero(&data, sizeof(t_data_template));
 	if (cliopts_get((char**)av, g_jobs_opts, &data))
-		return (ft_perror("jobs"));
+		return (ft_perror("jobs") && SH_ERR(JOBS_USAGE));
 	if (!*data.av_data)
 		bt_jobs_all(data.flag);
 	else if (bt_jobs_spec(data.av_data, data.flag))
