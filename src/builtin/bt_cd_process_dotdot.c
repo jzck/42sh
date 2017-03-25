@@ -12,18 +12,22 @@
 
 #include "minishell.h"
 
-#define CDERR_6	"cd : %s: Permission denied"
-#define CDERR_7 "cd : %s: No such file or directory"
+#define CDERR_0		"cd : %s: No such file or directory"
+#define CDERR_1		"cd : %s: Permission denied"
+#define CDERR_2		"cd : %s: Not a directory"
+#define CDERR_3		"cd : unable to proceed: %s"
 
 int			bt_cd_process_dotdot(char *target)
 {
 	DG();
+	if (access(target, F_OK))
+		return (SH_ERR(CDERR_0, target));
+	if (access(target, X_OK))
+		return (SH_ERR(CDERR_1, target));
 	if (!is_directory(target))
-		return (SH_ERR(CDERR_7, target));
-	if (access(target, R_OK) < 0)
-		return (SH_ERR(CDERR_6, target));
+		return (SH_ERR(CDERR_2, target));
 	if (chdir(target))
-		return (SH_ERR(CDERR_7, target));
+		return (SH_ERR(CDERR_3, target));
 	setwd("PWD");
 	return (0);	
 }
