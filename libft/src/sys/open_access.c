@@ -6,19 +6,11 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 01:10:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:02:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 02:19:58 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int		is_directory(const char *path)
-{
-	struct stat		path_stat;
-
-	stat(path, &path_stat);
-	return (S_ISDIR(path_stat.st_mode));
-}
 
 int		open_access(char *file, t_flag a_flag, t_flag o_flag, t_flag o_perm)
 {
