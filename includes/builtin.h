@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 23:17:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:55:42 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "types.h"
 # include "libft.h"
 # include "builtin_read.h"
-
 
 # define BT_ENV_LI		(1 << 0)
 # define BT_ENV_LU		(1 << 1)

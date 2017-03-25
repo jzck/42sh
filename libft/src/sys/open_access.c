@@ -6,13 +6,13 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 01:10:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:53:59 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 02:02:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				is_directory(const char *path)
+int		is_directory(const char *path)
 {
 	struct stat		path_stat;
 

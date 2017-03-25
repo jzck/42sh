@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:49:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:35:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:56:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@
 # include <stdlib.h>
 # include <time.h>
 
-typedef struct s_stos	t_stos;
-typedef struct s_stof	t_stof;
-typedef struct s_itof	t_itof;
-typedef long long		t_flag;
-typedef long long		t_type;
-
+# include "ft_types.h"
 # include "error.h"
 # include "color.h"
 # include "cliopts.h"
