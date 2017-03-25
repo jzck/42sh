@@ -25,10 +25,15 @@ static t_cliopts	g_env_opts[] =
 
 static int			bt_env_getcustom(char ***av, t_env_data *data)
 {
+	char	**split;
+
 	if (!av || !*av || !data)
 		return (1);
 	while (**av && ft_strchr(**av, '='))
 	{
+		split = ft_strsplit(**av, '=');
+		bt_env_opt_u(split[0], data);
+		ft_tabdel(&split);
 		data->custom_env = ft_sstradd(data->custom_env, **av);
 		++(*av);
 	}
