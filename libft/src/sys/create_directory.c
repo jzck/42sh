@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:18:18 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 18:43:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:13:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char		*create_directory(const char *path, const char *old_pathnames)
 	char	*temp;
 	char	*semi;
 
+	if (!path || !old_pathnames)
+		return (NULL);
 	new_pathnames = ft_strdup(old_pathnames);
 	temp = new_pathnames;
 	while (new_pathnames)

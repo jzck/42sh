@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:54:22 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 19:44:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:03:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int			bt_cd_process_dotdot(char *target)
 {
+	DG();
 	if (!is_directory(target))
 		return (SH_ERR(CDERR_7, target));
 	if (access(target, R_OK) < 0)

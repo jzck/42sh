@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 19:45:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 20:02:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char			*cd_operand_begin(char *arg)
 			target = bt_cd_get_cdpath(arg);
 	}		
 	else
-		target = NULL;
+		target = arg;
 	return (target);
 }		   		
 
@@ -91,8 +91,6 @@ int					builtin_cd(const char *path, char *const av[],
 		return (SH_ERR(CDERR_0) && SH_ERR(CD_USAGE));
 	if (!(target = cd_operand_exist(*data.av_data)))
 		target = cd_operand_begin(*data.av_data);
-	if (!target)
-		target = ft_strdup(*data.av_data);
 	oldpwd = getcwd(NULL, 0);
 	DG("target is %s", target);
 	if (HAS_CDOPT_P(data.flag) && !bt_cd_process_symlink(target))
@@ -100,5 +98,6 @@ int					builtin_cd(const char *path, char *const av[],
 	else if (!bt_cd_process_dotdot(target))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
 	free(target);
+	free(oldpwd);
 	return (0);
 }
