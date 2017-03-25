@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 18:00:03 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 04:00:30 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 21:29:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		bt_read_getdelim(char *opt_arg, t_read *data)
 		return (1);
 	if (data)
 		data->delim = *opt_arg;
-	DG("delim=%c", data->delim);
 	return (0);
 }
 
