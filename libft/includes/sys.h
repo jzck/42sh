@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:24:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/21 16:33:01 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:42:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,18 @@
 
 # include <sys/types.h>
 # include <sys/xattr.h>
+# include <sys/acl.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 int		ft_xattr_print(char *path);
 int		ft_xattr_count(char *path);
+
 char	*ft_getenv(char **env, char *key);
+
+int		open_access(char *file, t_flag a_flag, t_flag o_flag, t_flag o_perm);
+int		is_directory(const char *path);
+
 int		dup2_close(int fd1, int fd2);
 int		fd_replace(int fd1, int fd2);
 

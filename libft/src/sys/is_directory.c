@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_less.c                                    :+:      :+:    :+:   */
+/*   is_directory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:49:52 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/25 01:40:31 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/25 01:42:02 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		redirect_less(t_redir *redir)
+int				is_directory(const char *path)
 {
-	int		fdold;
-	int		fdnew;
+	struct stat		path_stat;
 
-	fdnew = redir->n;
-	if ((fdold = open_access(redir->word, W_OK,
-					O_RDONLY, 0)) != 0)
-		return (ft_perror(NULL));
-	dup2(fdold, fdnew);
-	return (0);
+	stat(path, &path_stat);
+	return (S_ISDIR(path_stat.st_mode));
 }

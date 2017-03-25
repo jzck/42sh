@@ -6,19 +6,11 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:07:16 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 21:59:49 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:39:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int				is_directory(const char *path)
-{
-	struct stat		path_stat;
-
-	stat(path, &path_stat);
-	return (S_ISDIR(path_stat.st_mode));
-}
 
 static void		dir_list_content(t_glob *gl, char **str, char *pat,
 		int recursive)
