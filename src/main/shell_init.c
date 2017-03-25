@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define SHELL_USAGE	"42sh [-c command | [<]script] [--no-jobcontrol]"
+#define SHELL_USAGE1	"usage: 42sh [--no-jobcontrol]"
+#define SHELL_USAGE2	"   or  42sh -c command"
+#define SHELL_USAGE3	"   or  42sh script"
 
 static t_cliopts	g_opts[] =
 {
@@ -87,7 +89,10 @@ int					shell_init(int ac, char **av, char **env)
 	if (data_init(ac, av, env) < 0)
 		return (-1);
 	if (cliopts_get(av, g_opts, data))
-		return (ft_perror(NULL) && SH_ERR("usage: %s", SHELL_USAGE));
+		return (ft_perror(NULL)
+				&& SH_ERR("%s", SHELL_USAGE1)
+				&& SH_ERR("%s", SHELL_USAGE2)
+				&& SH_ERR("%s", SHELL_USAGE3));
 	if (!isatty(STDIN) || *data->av_data)
 		data->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
 	if ((data->fd = get_input_fd(data, NULL)) < 0)
