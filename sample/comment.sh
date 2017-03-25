@@ -1,2 +1,0 @@
-ls # Da comment
-pwd
