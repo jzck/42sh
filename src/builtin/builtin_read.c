@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 04:19:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:10:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int			bt_read_loop(t_read *data)
 	i = 0;
 	if (data->prompt && (data->flag & BT_READ_INTER))
 		ft_printf(data->prompt);
-	DG("nchars; %i, opts=%b", data->nchars, data->flag);
 	while (42)
 	{
 		if ((ret = read(data->fd, buf, 1)) <= 0)
@@ -69,7 +68,6 @@ int			bt_read_loop(t_read *data)
 		if (*buf == '\n' && !(data->flag &
 					(BT_READ_LR | BT_READ_LS | BT_READ_INTER)))
 			ft_putstr("> ");
-		DG("%i/%i", i, data->nchars);
 		if ((data->flag & BT_READ_LN) && ++i >= data->nchars)
 			break ;
 	}
