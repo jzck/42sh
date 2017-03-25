@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 15:13:06 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 01:08:44 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 # define BT_EXPORT_LP	(1 << 0)
 
-# define BT_ENV_LI		(1 << 0)
-# define BT_ENV_LU		(1 << 1)
 
 struct	s_env_data
 {
@@ -36,6 +34,8 @@ int		builtin_return_status(int ret, int status);
 int		builtin_export(const char *path, char *const av[], char *const envp[]);
 int		builtin_unset(const char *path, char *const av[], char *const envp[]);
 int		builtin_env(const char *path, char *const argv[], char *const envp[]);
+int		bt_env_opt_u(char *opt_arg, t_env_data *data);
+int		bt_env_opt_i(char *opt_arg, t_env_data *data);
 int		builtin_echo(const char *path, char *const argv[], char *const envp[]);
 int		builtin_cd(const char *path, char *const argv[], char *const envp[]);
 int		builtin_exit(const char *path, char *const argv[], char *const envp[]);
