@@ -89,7 +89,7 @@ int			ft_del(char **str, size_t *pos)
 	size_t	tmp;
 
 	tmp = *pos;
-	if (!(*str && *pos < ft_strlen(*str) + 1))
+	if (!(*str && *pos < ft_strlen(*str)))
 		return (0);
 	if (!(*str = ft_remove_imput(*str, tmp)))
 		return (-1);
