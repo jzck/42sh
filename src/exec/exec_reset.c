@@ -62,3 +62,19 @@ int			exec_reset(void)
 	jobc->current_id = 1;
 	return (0);
 }
+
+int			exec_destroy(void)
+{
+	int		i;
+	t_jobc	*jobc;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	jobc = &data_singleton()->jobc;
+	ft_lstdel(&exec->op_stack, ft_lst_cfree);
+	ft_lstdel(&jobc->first_job, job_free);
+	i = -1;
+	while (++i < 10)
+		ft_lstdel(&exec->fd_save[i], ft_lst_cfree);
+	return (0);
+}
