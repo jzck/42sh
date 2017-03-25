@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:02:39 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:24:42 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 04:03:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct s_readopt	t_readopt;
 
 struct			s_read
 {
-	t_flag		opts;
+	t_flag		flag;
 	char		**names;
 	char		delim;
 	int			nchars;

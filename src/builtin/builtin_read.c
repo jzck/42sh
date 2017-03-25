@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:28:33 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 04:19:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cliopts	g_read_opts[] =
 
 int			bt_read_init(t_read *data, char **av)
 {
-	data->opts = 0;
+	data->flag = 0;
 	data->delim = '\n';
 	data->nchars = -1;
 	data->prompt = NULL;
@@ -37,11 +37,11 @@ int			bt_read_init(t_read *data, char **av)
 	data->timeout = 0;
 	data->input = NULL;
 	if (isatty(STDIN))
-		data->opts |= BT_READ_INTER;
-	if (bt_read_terminit(data) < 0)
-		exit(1);
+		data->flag |= BT_READ_INTER;
 	if ((cliopts_get(av, g_read_opts, data)))
 		return (ft_perror("read"));
+	if (bt_read_terminit(data) < 0)
+		exit(1);
 	return (0);
 }
 
@@ -54,8 +54,9 @@ int			bt_read_loop(t_read *data)
 
 	esc = 0;
 	i = 0;
-	if (data->prompt && (data->opts & BT_READ_INTER))
+	if (data->prompt && (data->flag & BT_READ_INTER))
 		ft_printf(data->prompt);
+	DG("nchars; %i, opts=%b", data->nchars, data->flag);
 	while (42)
 	{
 		if ((ret = read(data->fd, buf, 1)) <= 0)
@@ -63,12 +64,13 @@ int			bt_read_loop(t_read *data)
 		buf[ret] = 0;
 		if (!esc && *buf == data->delim)
 			break ;
-		esc = esc ? 0 : !(data->opts & BT_READ_LR) && (*buf == '\\');
+		esc = esc ? 0 : !(data->flag & BT_READ_LR) && (*buf == '\\');
 		ft_strappend(&data->input, buf);
-		if (*buf == '\n' && !(data->opts &
+		if (*buf == '\n' && !(data->flag &
 					(BT_READ_LR | BT_READ_LS | BT_READ_INTER)))
 			ft_putstr("> ");
-		if ((data->opts & BT_READ_LN) && ++i >= data->nchars)
+		DG("%i/%i", i, data->nchars);
+		if ((data->flag & BT_READ_LN) && ++i >= data->nchars)
 			break ;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:18 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/24 18:38:35 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 03:22:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,6 @@ void			esc_print(int fd, char *str, unsigned char *esc);
 int				word_is_assignment(char **content);
 void			*tab_esc_copy(void *content);
 char			*get_output(char *command);
-
-/*
-** return TRUE if path file is a directory.
-*/
-
-int				is_directory(const char *path);
 
 /*
 ** return TRUE if char at str_pos in ini_str is escape.

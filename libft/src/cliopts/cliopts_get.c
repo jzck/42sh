@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 20:04:04 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:02:09 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 04:06:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int			cliopts_parse_short(
 			if ((map->get)(tmp, data))
 				return (ERR_SET(E_CO_MISS, *arg));
 			if (map->arg_required)
-				break ;
+				arg += ft_strlen(arg) - 1;
 		}
 		((t_data_template*)data)->flag |= map->flag_on;
 		((t_data_template*)data)->flag &= ~map->flag_off;
