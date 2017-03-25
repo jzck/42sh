@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 16:49:30 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/25 17:18:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int		readline(int has_prompt, char **input)
 		return (ret);
 	}
 	readline_init(has_prompt);
+	DG("readline stind");
 	ret = ft_read_stdin(input);
+	DG("after stdin");
 	if (ret < 0)
 		return (ret);
 	if (data_singleton()->line.input)

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 02:00:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 16:59:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 17:08:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,16 @@ int					builtin_cd(const char *path, char *const av[],
 	(void)envp;
 	(void)path;
 	data.flag = CD_OPT_L;
+	DG();
 	if (cliopts_get((char **)av, g_cdopts, &data))
 		return (1);
+	DG("after parsing opt");
 	if (data.av_data[0] && data.av_data[1])
 		return (SH_ERR(CD_USAGE));
 	if (!(target = cd_operand_exist(*data.av_data)))
 		return (1);
+	DG();
+	return (0);
 	setwd("OLDPWD");
 	if (!target)
 		target = cd_operand_begin(*data.av_data);
