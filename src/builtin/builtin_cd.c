@@ -1,50 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   builtin_new_cd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 04:09:23 by ariard           ###   ########.fr       */
+/*   Created: 2017/03/25 02:00:40 by ariard            #+#    #+#             */
+/*   Updated: 2017/03/25 16:59:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define BT_CD_L		(1 << 0)
-#define BT_CD_P		(1 << 1)
+#define CD_OPT_L	(1 << 0)
+#define CD_OPT_P	(1 << 1)
+#define HAS_CDOPT_P(x) (x & CD_OPT_P)
+#define HAS_CDOPT_L(x) (x & CD_OPT_L)
 #define CD_USAGE	"usage: cd [-L|-P] [dir]"
-#define CDERR_1		"cd: no such file or directory: %s"
-#define CDERR_2		"cd: %s not set"
-#define CDERR_3		"cd: too many arguments"
+#define CDERR_0		"cd: too many arguments"
+#define CDERR_1		"cd %s not set"
 
 static t_cliopts	g_cdopts[] =
 {
-	{'P', NULL, BT_CD_P, BT_CD_L, NULL, 0},
-	{'L', NULL, BT_CD_L, BT_CD_P, NULL, 0},
+	{'P', NULL, CD_OPT_P, CD_OPT_L, NULL, 0},
+	{'L', NULL, CD_OPT_L, CD_OPT_P, NULL, 0},
 	{0, NULL, 0, 0, NULL, 0},
 };
 
-static char		*bt_cd_target(char *arg)
+static char		*cd_operand_exist(char *arg)
 {
 	char	*target;
 
 	if (!arg)
 	{
 		if (!(target = ft_getenv(data_singleton()->env, "HOME")))
-			SH_ERR(CDERR_2, "HOME");
-	}
-	else if (ft_strcmp(arg, "-") == 0)
-	{
-		DG("doing -");
-		if (!(target = ft_getenv(data_singleton()->env, "OLDPWD")))
-			SH_ERR(CDERR_2, "OLDPWD");
+			SH_ERR(CDERR_0, "HOME");
 	}
 	else
 		target = arg;
 	return (target);
 }
+
+static char			*cd_operand_begin(char *arg)
+{
+	char	*target;
+
+	if (arg && arg[0])
+	{
+		if (arg[0] == '/')
+			target = arg;	
+		else if (arg[0] == '.')
+			target = ft_str3join(ft_getenv(data_singleton()->env,
+				"PWD"), "/", arg); 
+		else if (ft_strcmp(arg, "-") == 0)
+		{
+			 if (!(target = ft_getenv(data_singleton()->env, "OLDPWD")))
+				 SH_ERR(CDERR_1, "OLDPWD");
+		}
+		else
+			target = bt_cd_get_cdpath(arg);
+	}		
+	else
+		target = arg;
+	return (target);
+}		   		
 
 void			setwd(char *var)
 {
@@ -55,26 +74,28 @@ void			setwd(char *var)
 	free(cwd);
 }
 
-int				builtin_cd(const char *path,
-							char *const av[], char *const envp[])
+int					builtin_cd(const char *path, char *const av[],
+					char *const envp[])
 {
 	char			*target;
 	t_data_template	data;
 
-	(void)path;
 	(void)envp;
-	data.flag = BT_CD_L;
-	if (cliopts_get((char**)av, g_cdopts, &data))
-		return (ft_perror("cd") && SH_ERR(CD_USAGE));
+	(void)path;
+	data.flag = CD_OPT_L;
+	if (cliopts_get((char **)av, g_cdopts, &data))
+		return (1);
 	if (data.av_data[0] && data.av_data[1])
-		return (SH_ERR(CDERR_3) && SH_ERR(CD_USAGE));
-	if (!(target = bt_cd_target(*data.av_data)))
+		return (SH_ERR(CD_USAGE));
+	if (!(target = cd_operand_exist(*data.av_data)))
 		return (1);
 	setwd("OLDPWD");
-	if (chdir(target))
-		return (SH_ERR(CDERR_1, target));
-	else if (target != *data.av_data)
-		ft_printf("%s\n", target);
-	setwd("PWD");
+	if (!target)
+		target = cd_operand_begin(*data.av_data);
+	if (HAS_CDOPT_P(data.flag)) 
+		bt_cd_process_symlink(target);
+	else
+		bt_cd_process_dotdot(target);	
+	free(target);
 	return (0);
 }

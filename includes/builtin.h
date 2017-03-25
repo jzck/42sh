@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 22:59:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 04:09:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 16:49:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int		builtin_func(const char *path, char *const av[], char *const envp[]);
 
 int		bt_env_geti(char ***av, t_env_data *data);
 
-int		get_cdpath(char *arg);
-int		process_dotdot(char *target);
-int		process_symlink(char *target);
-
-int		error_msg(char *msg);
+void	setwd(char *var);
+char	*bt_cd_get_cdpath(char *arg);
+int		bt_cd_process_dotdot(char *target);
+int		bt_cd_process_symlink(char *target);
 
 #endif

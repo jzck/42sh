@@ -29,6 +29,9 @@ INC_DIR		=	includes/
 OBJ_DIR		=	objs/
 
 SRC_BASE	=	\
+builtin/bt_cd_getpath.c\
+builtin/bt_cd_process_dotdot.c\
+builtin/bt_cd_process_symlink.c\
 builtin/bt_read_get.c\
 builtin/bt_read_term.c\
 builtin/builtin_cd.c\
@@ -40,6 +43,7 @@ builtin/builtin_func.c\
 builtin/builtin_hash.c\
 builtin/builtin_history.c\
 builtin/builtin_math.c\
+builtin/builtin_new_cd.c\
 builtin/builtin_read.c\
 builtin/builtin_setenv.c\
 builtin/builtin_unset.c\

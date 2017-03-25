@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:41:33 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:44:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <limits.h>
 
 # include "../libft/includes/libft.h"
 # include "types.h"

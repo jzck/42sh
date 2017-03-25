@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:52:52 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 04:05:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 16:49:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			get_cdpath(char *arg)
+char		*bt_cd_get_cdpath(char *arg)
 {
 	char	*cdpath;
 	char	*target;
