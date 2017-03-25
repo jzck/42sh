@@ -197,6 +197,8 @@ sys/fd_replace.c\
 sys/ft_getenv.c\
 sys/ft_xattr_count.c\
 sys/ft_xattr_print.c\
+sys/is_directory.c\
+sys/open_access.c\
 time/ft_mytime_free.c\
 time/ft_mytime_get.c\
 time/ft_time_isrecent.c
