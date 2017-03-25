@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:57:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:05:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/25 04:09:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 static t_cliopts	g_cdopts[] =
 {
-	{'P', NULL, BT_CD_P, BT_CD_L, NULL},
-	{'L', NULL, BT_CD_L, BT_CD_P, NULL},
-	{0, NULL, 0, 0, NULL},
+	{'P', NULL, BT_CD_P, BT_CD_L, NULL, 0},
+	{'L', NULL, BT_CD_L, BT_CD_P, NULL, 0},
+	{0, NULL, 0, 0, NULL, 0},
 };
 
 static char		*bt_cd_target(char *arg)
