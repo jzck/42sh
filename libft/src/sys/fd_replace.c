@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:32:26 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 22:59:28 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:18:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int			fd_replace(int fd1, int fd2)
 {
 	if (fd1 != fd2)
 		return (dup2_close(fd1, fd2));
-	return (0);
+	return (-1);
 }

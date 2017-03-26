@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 22:10:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:33:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@ int			exec_destroy(t_exec *exec)
 	ft_lstdel(&exec->op_stack, ft_lst_cfree);
 	ft_lstdel(&jobc->first_job, job_free);
 	i = -1;
-	while (++i < 10)
-		ft_lstdel(&exec->fd_save[i], ft_lst_cfree);
 	return (0);
 }

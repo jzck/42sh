@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 22:13:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 01:01:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int		process_launch(t_process *p)
 	{
 		exec_pushfds();
 		p->map.launch(p);
+		exec_popfds();
+		shell_resetfds();
+		shell_resetsig();
 	}
-	exec_popfds();
-	shell_resetfds();
-	shell_resetsig();
 	process_free(p, 0);
 	return (0);
 }
