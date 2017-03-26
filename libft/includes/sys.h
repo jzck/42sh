@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 17:24:23 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 15:12:52 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:05:25 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ int		ft_xattr_count(char *path);
 
 char	*ft_getenv(char **env, char *key);
 
-int		open_access(char *file, t_flag a_flag, t_flag o_flag, t_flag o_perm);
+int		try_access(char *file, int exists, t_flag a_flag);
 int		is_directory(const char *path);
 char	*create_directory(const char *path, const char *old_pathnames);
 
 int		dup2_close(int fd1, int fd2);
 int		fd_replace(int fd1, int fd2);
+int		fd_minor(int fd, int minor);
 
 #endif

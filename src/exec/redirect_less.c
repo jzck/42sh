@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 18:25:38 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 01:02:30 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		redirect_less(t_redir *redir)
 	int		fdnew;
 
 	fdnew = redir->n;
-	if ((fdold = open_access(redir->word, F_OK | W_OK,
-					O_RDONLY, 0)) < 0)
+	if ((try_access(redir->word, 1, R_OK)) != 0)
 		return (ft_perror(NULL));
-	dup2(fdold, fdnew);
+	if ((fdold = open(redir->word, O_RDONLY, 0644)) < 0)
+		exit (1);
+	fd_replace(fdold, fdnew);
 	return (0);
 }

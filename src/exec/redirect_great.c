@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 22:03:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 02:25:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:36:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		redirect_great(t_redir *redir)
 	int		fdnew;
 
 	fdnew = redir->n;
-	if ((fdold = open_access(redir->word, R_OK,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+	if ((try_access(redir->word, 0, W_OK)))
 		return (ft_perror(NULL));
+	if ((fdold = open(redir->word, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+		exit (1);
 	fd_replace(fdold, fdnew);
 	return (0);
 }
