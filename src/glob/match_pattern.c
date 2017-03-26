@@ -113,7 +113,7 @@ int				match_pattern(t_glob *gl, char *str, char *full_word)
 			if (*str != *gl->pat)
 				return (0);
 		}
-		else if (*gl->pat == '?')
+		else if (*gl->pat == '?' && *str)
 			;
 		else if (*gl->pat == '[')
 		{
