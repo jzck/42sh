@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 21:28:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:59:23 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:13:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int			exec_init(t_exec *exec)
 	int		i;
 
 	jobc = &data_singleton()->jobc;
+	job_init(&exec->job);
 	i = -1;
 	while (++i < 10)
 		exec->fd_save[i] = NULL;
 	exec_pushfds();
-	exec->op_stack = NULL;
-	exec->fdin = STDIN;
 	exec->attrs = 0;
-	job_init(&exec->job);
+	exec->fdin = STDIN;
+	exec->op_stack = NULL;
 	jobc->first_job = NULL;
 	jobc->current_id = 1;
 	return (0);
