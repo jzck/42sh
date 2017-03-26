@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:09:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:25:05 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:14:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		pop(t_list **lst)
 	t_list	*top;
 	int		item;
 
-	if (!(lst || *lst))
+	if (!(lst && *lst))
 		return (0);
 	top = *lst;
 	item = top ? *(int*)top->content : 0;

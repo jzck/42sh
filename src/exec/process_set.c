@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 19:19:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 22:14:09 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int	process_set_spec(t_process *p, t_btree *ast)
 	int			i;
 	t_astnode	*item;
 
-	i = -1;
 	if (!ast)
 		return (0);
 	item = ast->item;
+	i = -1;
 	while (g_setprocessmap[++i].id)
 		if (item->type == g_setprocessmap[i].id)
 		{
@@ -70,5 +70,5 @@ int			process_set(t_process *p, t_btree *ast)
 	if (ast)
 		p->redirs = ft_lstmap(
 				((t_astnode *)ast->item)->data.cmd.redir, &redir_copy);
-	return ((!ast) ? 0 : process_set_spec(p, ast));
+	return (process_set_spec(p, ast));
 }
