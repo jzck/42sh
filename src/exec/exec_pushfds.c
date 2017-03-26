@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_print.c                                     :+:      :+:    :+:   */
+/*   exec_pushfds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 11:09:27 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:25:21 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/26 21:31:46 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/26 21:34:27 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lst_print(t_list *list, void (*printer)())
+int			exec_pushfds(void)
 {
-	while (list)
-	{
-		ft_putstr("[");
-		(*printer)(list->content);
-		ft_putstr("]->");
-		list = list->next;
-	}
-	ft_putendl("X\n");
+	int		i;
+	t_exec	*exec;
+
+	exec = &data_singleton()->exec;
+	i = -1;
+	while (++i < 10)
+		push(&(exec->fd_save[i]), fcntl(i, F_DUPFD_CLOEXEC, 10));
+	return (0);
 }

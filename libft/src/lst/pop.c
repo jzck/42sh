@@ -6,7 +6,7 @@
 /*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:09:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 20:05:13 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 21:25:05 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int		pop(t_list **lst)
 	t_list	*top;
 	int		item;
 
+	if (!(lst || *lst))
+		return (0);
 	top = *lst;
 	item = top ? *(int*)top->content : 0;
-	if (lst && *lst)
-		*lst = (*lst)->next;
+	*lst = (*lst)->next;
 	ft_lstdelone(&top, ft_lst_cfree);
 	return (item);
 }

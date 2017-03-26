@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 20:02:54 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 21:39:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int		process_fork(t_process *p)
 		exit(1);
 	process_setgroup(p, 0);
 	process_setsig();
-	exec_destroy();
-	exec_reset();
+	exec_destroy(&data_singleton()->exec);
 	data_singleton()->opts &= ~SH_INTERACTIVE;
 	data_singleton()->opts &= ~SH_OPTS_JOBC;
 	exit(p->map.launch(p));

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 20:27:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 21:40:48 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	data_exit(void)
 	data = data_singleton();
 	ft_strdel(&data->line.input);
 	ft_strdel(&data->binary);
-	/* exec_popfds(); */
+	exec_popfds();
 	ft_sstrfree(data->env);
 	ft_sstrfree(data->local_var);
 	ft_sstrfree(data->argv);
 	lexer_destroy(&data->lexer);
 	parser_destroy(&data->parser);
-	exec_destroy();
+	exec_destroy(&data->exec);
 	ft_lstdel(&data->lst_func, &tree_func_free);
 	ft_save_termios(-1);
 	ft_free_hash_table();

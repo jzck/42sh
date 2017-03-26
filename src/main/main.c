@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 20:12:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/26 21:37:49 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int				main(int ac, char **av, char **env)
 		ret = handle_instruction(&token, &ast);
 		lexer_destroy(&data->lexer);
 		parser_destroy(&data->parser);
-		ft_lstdel(&data_singleton()->exec.op_stack, &ft_lst_cfree);
+		exec_destroy(&data->exec);
+		/* ft_lstdel(&data_singleton()->exec.op_stack, &ft_lst_cfree); */
 		ft_lstdel(&token, &token_free);
 		btree_del(&ast, &ast_free);
 		if (ret == 1)
