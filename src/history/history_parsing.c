@@ -19,7 +19,7 @@ static int	history_parsing_nb_and_previous(char *str, int *i)
 	if (!ft_strncmp("!!", str + *i, 2))
 	{
 		ft_realloc_str_history(&(data_singleton()->line.input), *i, 0, 2);
-		++(*i);
+		(*i) += 2;
 		return (1);
 	}
 	else if (str[*i + 1] == '-' && ft_isdigit(str[*i + 2]) &&
@@ -38,7 +38,7 @@ static int	check_validity(char *str, int i)
 {
 	if (i && str[i - 1] == '\\')
 		return (0);
-	else if (str[i + 1] == '"')
+	else if (!str[i + 1] || str[i + 1] == '"')
 		return (0);
 	return (1);
 		
@@ -97,22 +97,21 @@ int			ft_history_parsing(int has_prompt, char **input)
 	i = 0;
 	quote = 0;
 	boolean = 0;
-	if (!data_singleton()->line.input)
-		return (0);
 	while (data_singleton()->line.input && data_singleton()->line.input[i])
 	{
 		if (data_singleton()->line.input[i] == '\'')
 			quote = quote ? 0 : 1;
-		else if (!quote && data_singleton()->line.input[i] == '!')
+		if (!quote && data_singleton()->line.input[i] == '!')
 		{
 			boolean = 1;
 			if (!history_parsing_nb_and_name(data_singleton()->line.input, &i))
 				boolean = 0;
 			else
-				break ;
+				i = -1;
 		}
 		++i;
 	}
+	*input = data_singleton()->line.input;
 	if (boolean)
 		return (rematch_history_parsing(has_prompt, input));
 	return (0);
