@@ -140,6 +140,7 @@ struct	s_exec
 };
 
 int		exec_reset(void);
+int		exec_destroy(void);
 int		exec_pushfds();
 int		exec_popfds();
 int		process_fork(t_process *p);

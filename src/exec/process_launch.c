@@ -26,6 +26,7 @@ int		process_fork(t_process *p)
 		exit(1);
 	process_setgroup(p, 0);
 	process_setsig();
+	exec_destroy();
 	exec_reset();
 	data_singleton()->opts &= ~SH_INTERACTIVE;
 	data_singleton()->opts &= ~SH_OPTS_JOBC;

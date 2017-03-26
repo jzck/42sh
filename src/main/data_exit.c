@@ -19,13 +19,13 @@ void	data_exit(void)
 	data = data_singleton();
 	ft_strdel(&data->line.input);
 	ft_strdel(&data->binary);
-	exec_popfds();
+	/* exec_popfds(); */
 	ft_sstrfree(data->env);
 	ft_sstrfree(data->local_var);
 	ft_sstrfree(data->argv);
 	lexer_destroy(&data->lexer);
 	parser_destroy(&data->parser);
-	ft_lstdel(&data->jobc.first_job, &job_free);
+	exec_destroy();
 	ft_lstdel(&data->lst_func, &tree_func_free);
 	ft_save_termios(-1);
 	ft_free_hash_table();

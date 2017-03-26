@@ -19,6 +19,10 @@
 #define CD_USAGE	"usage: cd [-L|-P] [dir]"
 #define CDERR_0		"cd: too many arguments"
 #define CDERR_1		"cd %s not set"
+#define CDERR_2		"cd : %s: No such file or directory"
+#define CDERR_3		"cd : %s: Permission denied"
+#define CDERR_4		"cd : %s: Not a directory"
+#define CDERR_5		"cd : unable to proceed: %s"
 
 static t_cliopts	g_cdopts[] =
 {
@@ -27,43 +31,42 @@ static t_cliopts	g_cdopts[] =
 	{0, NULL, 0, 0, NULL, 0},
 };
 
-static char			*cd_operand_exist(char *arg)
+int			cd_file_autorisations(char *target, int flag)
 {
-	char	*target;
-
-	target = NULL;
-	if (!arg)
-	{
-		if (!(target = ft_strdup(ft_getenv(data_singleton()->env, "HOME"))))
-			SH_ERR(CDERR_1, "HOME");
-	}
-	return (target);
+	(void)flag;
+	if (access(target, F_OK))
+		return (SH_ERR(CDERR_2, target));
+	if (!is_directory(target))
+		return (SH_ERR(CDERR_3, target));
+	if (access(target, X_OK))
+		return (SH_ERR(CDERR_4, target));
+	if (chdir(target))
+		return (SH_ERR(CDERR_5, target));
+	setwd("PWD");
+	return (0);
 }
 
-static char			*cd_operand_begin(char *arg)
+static char			*cd_operand_exist(char *arg)
 {
-	char	*target;
+	char	*tget;
 
-	if (arg && arg[0])
+	tget = NULL;
+	if (!arg)
 	{
-		if (arg[0] == '/')
-			target = ft_strdup(arg);
-		else if (!ft_strncmp(arg, "./", 2) || !ft_strncmp(arg, "../", 3)
-			|| !ft_strcmp(arg, ".") || !ft_strcmp(arg, ".."))
-			target = ft_str3join(ft_getenv(data_singleton()->env,
-				"PWD"), "/", arg);
-		else if (!ft_strcmp(arg, "-"))
-		{
-			if (!(target = ft_strdup(ft_getenv(data_singleton()->env,
-				"OLDPWD"))))
-				SH_ERR(CDERR_1, "OLDPWD");
-		}
-		else
-			target = ft_str3join(".", "/", arg);
+		if (!(tget = ft_strdup(ft_getenv(data_singleton()->env, "HOME"))))
+			return (SH_ERR(CDERR_1, "HOME") ? NULL : NULL);
 	}
 	else
-		target = arg;
-	return (target);
+	{
+		if (!ft_strcmp(arg, "-"))
+		{
+			if (!(tget = ft_strdup(ft_getenv(data_singleton()->env, "OLDPWD"))))
+				return (SH_ERR(CDERR_1, "OLDPWD") ? NULL : NULL);
+			return (tget);
+		}
+		return (tget = ft_strdup(arg));
+	}
+	return (tget);
 }
 
 void				setwd(char *var)
@@ -72,7 +75,7 @@ void				setwd(char *var)
 
 	cwd = getcwd(NULL, 0);
 	builtin_setenv(NULL, (char*[]){"cd", var, cwd, NULL}, NULL);
-	free(cwd);
+	ft_strdel(&cwd);
 }
 
 int					builtin_cd(const char *path, char *const av[],
@@ -86,17 +89,16 @@ int					builtin_cd(const char *path, char *const av[],
 	(void)envp;
 	(void)path;
 	data.flag = CD_OPT_L;
-	ret = 0;
 	if (cliopts_get((char **)av, g_cdopts, &data))
 		return (1);
 	if (data.av_data[0] && data.av_data[1])
 		return (SH_ERR(CDERR_0) && SH_ERR(CD_USAGE));
 	if (!(target = cd_operand_exist(*data.av_data)))
-		target = cd_operand_begin(*data.av_data);
+		return (1);
 	oldpwd = getcwd(NULL, 0);
-	if ((ret = bt_cd_process_dotdot(target)))
+	if (!(ret = cd_file_autorisations(target, data.flag)))
 		builtin_setenv(NULL, (char*[]){"cd", "OLDPWD", oldpwd, NULL}, NULL);
-	free(target);
-	free(oldpwd);
+	ft_strdel(&target);
+	ft_strdel(&oldpwd);
 	return (ret);
 }

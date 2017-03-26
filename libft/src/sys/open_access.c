@@ -23,8 +23,6 @@ int		open_access(char *file, t_flag a_flag, t_flag o_flag, t_flag o_perm)
 	if (access(file, F_OK) == 0 && access(file, a_flag) != 0)
 		return (-ERR_SET(E_SYS_NOPERM, file));
 	if ((fd = open(file, o_flag, o_perm)) < 0)
-	{
 		exit(1);
-	}
 	return (fd);
 }
