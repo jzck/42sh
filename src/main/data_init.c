@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:40:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/26 21:54:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int				data_init(int ac, char **av, char **env)
 	data->comp = NULL;
 	data->opts = SH_INTERACTIVE | SH_OPTS_JOBC;
 	data->lst_func = NULL;
-	exec_init(&data->exec);
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
+	exec_init(&data->exec);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		term_name = "dumb";
 	if (tgetent(NULL, term_name) != 1)
