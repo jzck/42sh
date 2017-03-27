@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 16:08:35 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 18:19:57 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 		else
 			push(&lexer->stack, DQUOTE);
 	}
-	else if (lexer->str[lexer->pos] == '\\')
+	else if (lexer->str[lexer->pos] == '\\' && lexer->str[lexer->pos + 1] == 0)
 	{
 		lexer->pos++;
 		if (lexer->str[lexer->pos] == 0)

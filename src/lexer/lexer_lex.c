@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:08:51 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 18:13:29 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:13:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		(*g_lexer[])(t_list **alst, t_lexer *lexer) =
 	&lexer_heredoc,
 	&lexer_newline,
 	&lexer_delim,
+	&lexer_bang,
 	&lexer_sep,
 	&lexer_word,
 	&lexer_number,

@@ -226,6 +226,7 @@ lexer/insert_newline.c\
 lexer/isrw_delim.c\
 lexer/keep_last_type.c\
 lexer/lexer_backslash.c\
+lexer/lexer_bang.c\
 lexer/lexer_bquote.c\
 lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\
