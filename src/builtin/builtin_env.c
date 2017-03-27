@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:20:31 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/25 20:40:41 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:52:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int					builtin_env(const char *path,
 
 	(void)envp;
 	if (bt_env_parse(&dat, (char**)argv))
+	{
+		ft_sstrfree(dat.custom_env);
 		return (ft_perror("env") && SH_ERR("usage: %s", ENV_USAGE));
+	}
 	if (!*dat.av_data)
 		return (display_env(dat.custom_env));
 	else if ((pid = fork()) == 0)
