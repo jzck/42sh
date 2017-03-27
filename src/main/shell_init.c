@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 18:08:56 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 19:41:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ int					shell_init(int ac, char **av, char **env)
 	if (SH_IS_INTERACTIVE(data->opts) && interactive_settings() < 0)
 		return (-1);
 	shell_fds_init();
+	shell_fds_push();
 	return (0);
 }

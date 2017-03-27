@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 12:36:10 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:45:49 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 19:41:50 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		redirect_dless(t_redir *redir)
 	str = redir->heredoc_data;
 	write(fds[PIPE_WRITE], str, ft_strlen(str));
 	close(fds[PIPE_WRITE]);
-	dup2(fds[PIPE_READ], redir->n);
-	close(fds[PIPE_READ]);
+	fd_replace(fds[PIPE_READ], redir->n);
 	return (0);
 }
