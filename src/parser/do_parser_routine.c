@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/27 21:02:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 21:43:44 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		do_parser_routine(t_list **token, t_btree **ast)
 	token_print(*token);
 	if (ft_parse(ast, token, &data->parser))
 		exit(1);
-	if (data->parser.state != ERROR && 
+	if (data->parser.state != ERROR &&
 		(data->lexer.state = data->parser.heredoc_queue ? HEREDOC : DEFAULT))
 		return (0);
 	if (data->parser.state == ERROR)

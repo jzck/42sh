@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/27 19:49:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 21:44:14 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ int				get_reserved_words(t_list *temp)
 		if (recognization_rvwords(pv_tk, ante_token))
 			match_words(token);
 		if (token && token->type == TK_BANG && is_bang(pv_tk))
-		{
-			DG("token type is %s", read_state(token->type));
 			token->type = TK_WORD;
-		}
 		if (ante_token && (ante_token->type == TK_CASE
 			|| ante_token->type == TK_FOR)
 			&& ft_strncmp(token->data, "in", 2) == 0)
