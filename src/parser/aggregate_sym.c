@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 23:26:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:23:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static t_aggrematch		g_aggrematch[] =
 	{NEWLINE_LIST, TK_ELIF, TK_ELIF, TK_ELIF},
 	{NEWLINE_LIST, TK_ELSE, TK_ELSE, TK_ELSE},
 	{NEWLINE_LIST, TK_WHILE, TK_WHILE, TK_WHILE},
+	{NEWLINE_LIST, LOOP, LOOP, LOOP},
 	{NEWLINE_LIST, TK_LBRACE, TK_LBRACE, TK_LBRACE},
 	{NEWLINE_LIST, TK_UNTIL, TK_UNTIL, TK_UNTIL},
 	{NEWLINE_LIST, CASE_LIST_NS, CASE_LIST_NS, CASE_LIST_NS},
@@ -148,6 +149,7 @@ static t_aggrematch		g_aggrematch[] =
 	{CMD_SUFFIX, CMD_WORD, SIMPLE_COMMAND, CMD_PREFIX},
 	{CMD_SUFFIX, CMD_NAME, SIMPLE_COMMAND, CMD_NAME},
 	{CMD_SUFFIX, CMD_SUPERIOR, CMD_SUPERIOR, CMD_SUPERIOR},
+	{CMD_SUFFIX, COMPOUND_LIST, COMPOUND_LIST, COMPOUND_LIST},
 	{CMD_SUFFIX, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{CMD_SUFFIX, PIPE_CLOSE_SEQUENCE, PIPE_CLOSE_SEQUENCE, PIPE_CLOSE_SEQUENCE},
 	{CMD_PREFIX, LINEBREAK, SIMPLE_COMMAND, 0},

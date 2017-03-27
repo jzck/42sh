@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 15:41:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:42:17 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define KP_D		4348699
 # define KP_L		4479771
 # define KP_R		4414235
+# define KP_T		9
+# define KP_TS		5921563
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
@@ -187,5 +189,6 @@ int					ft_sstrlen(char **s);
 char				*ft_sstrtostr(char **s, char *sep);
 char				*ft_add_escape(char *str, char to_escape);
 void				c_lst_id(t_comp *c);
+char				*c_strdupi(char *s, int (*f)(char));
 
 #endif

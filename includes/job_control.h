@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:55:09 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 03:11:08 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:01:12 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ struct		s_jobc
 	struct termios	shell_tmodes;
 };
 
+int			jobc_init(t_jobc *jobc);
 int			jobc_destroy(t_jobc *jobc);
 
 t_list		*job_getprocess(pid_t pid);

@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 12:45:06 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/24 11:57:45 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 16:59:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			ft_v(char **str, size_t *pos)
 	}
 	ft_current_str(*str, *pos);
 	ft_get_next_str(*str, pos);
-	ft_putnc('\b', *pos - tmp_pos);
+	ft_putnc('\b', *pos - tmp_pos + (((*str)[*pos]) ? 1 : 0));
 	*pos = tmp_pos;
 	return (0);
 }

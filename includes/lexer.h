@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:15:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/23 15:18:36 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:17:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum		e_lexstate
 	HEREDOC,
 	NEWLINE,
 	DELIM,
+	BANG,
 	SEP,
 	WORD,
 	NUMBER,
@@ -99,6 +100,7 @@ int			lexer_default(t_list **alst, t_lexer *lexer);
 int			lexer_newline(t_list **alst, t_lexer *lexer);
 int			lexer_heredoc(t_list **alst, t_lexer *lexer);
 int			lexer_delim(t_list **alst, t_lexer *lexer);
+int			lexer_bang(t_list **alst, t_lexer *lexer);
 int			lexer_sep(t_list **alst, t_lexer *lexer);
 int			lexer_word(t_list **alst, t_lexer *lexer);
 int			lexer_number(t_list **alst, t_lexer *lexer);

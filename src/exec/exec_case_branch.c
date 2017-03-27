@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 20:33:45 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/22 22:10:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 15:05:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			exec_case_branch(t_btree **ast)
 	if (av && (ft_strcmp(av[0], ((char **)exec->case_pattern)[0]) == 0))
 	{
 		exec->attrs |= EXEC_CASE_BRANCH;
+		ft_tabdel(&exec->case_pattern);
 		ft_exec(&(*ast)->right);
 	}
 	ft_tabdel(&av);

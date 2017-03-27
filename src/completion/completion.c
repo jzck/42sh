@@ -6,18 +6,18 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 18:58:47 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 18:08:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
 /*
-** Function to select the next item in the list if it has already been created
-** and if the key pressed is tab.
+** Function to select the next or previous item in the list if it has already
+** been created and if the key pressed is tab.
 */
 
-static void		c_next_item(t_comp *c)
+static void		c_mv_tab(t_comp *c, int next)
 {
 	t_clst		*ptr;
 
@@ -25,7 +25,10 @@ static void		c_next_item(t_comp *c)
 	while (!ptr->cursor)
 		ptr = ptr->next;
 	ptr->cursor = 0;
-	ptr->next->cursor = 1;
+	if (next)
+		ptr->next->cursor = 1;
+	else
+		ptr->prev->cursor = 1;
 }
 
 /*
@@ -117,8 +120,8 @@ int				completion(long int keypress)
 	else
 	{
 		c_term_resize(s->comp);
-		if (keypress == TOUCHE_TAB)
-			c_next_item(s->comp);
+		if (keypress == KP_T || keypress == KP_TS)
+			keypress == KP_T ? c_mv_tab(s->comp, 1) : c_mv_tab(s->comp, 0);
 		else if (c_keypress(s->comp, keypress))
 			return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 19:02:28 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 18:51:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	c_is_delim(char c)
 	return (0);
 }
 
-static char	*c_strdupi(char *s, int (*f)(char))
+char		*c_strdupi(char *s, int (*f)(char))
 {
 	int		i;
 	char	*str;
