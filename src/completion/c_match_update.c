@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/22 12:25:26 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/27 18:50:28 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int		c_refresh_match(t_comp *c, long int keypress)
 	kpconv[1] = '\0';
 	tmp = c->match ? ft_strjoin(c->match, kpconv) : ft_strdup(kpconv);
 	c->match ? ft_memdel((void *)&c->match) : (0);
-	c->match = ft_strdup(tmp);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	tmp = ft_strjoin(c->rcmd, kpconv);
 	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
@@ -57,12 +56,12 @@ int				c_rematch(t_comp *c, long int keypress)
 		c_term_clear(c);
 		c_refresh_match(c, keypress);
 		c_clear_lst(c);
+		ft_print(keypress, &s->line.input, &s->line.pos);
 		c_matching(s, c);
 		if (s->comp && c->lst == NULL)
 			c_clear(s);
 		else if (s->comp && c->lst == c->lst->next)
-			return (1);
-		ft_print(keypress, &s->line.input, &s->line.pos);
+			return (ft_putchar('\b') + 1);
 		return (1);
 	}
 	else
