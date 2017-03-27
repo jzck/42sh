@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/27 18:01:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:08:45 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	history_parsing_nb_and_name(char *str, int *i)
 				ft_strdupi_w(str + *i + 2));
 	else if (str[*i + 1] && str[*i + 1] != ' ')
 		ft_realloc_str_history_2(&(data_singleton()->line.input), *i,
-				ft_strdupi_w(str + *i + 1));
+				c_strdupi(str + *i + 1, hist_is_delim));
 	else
 		return (0);
 	return (1);
