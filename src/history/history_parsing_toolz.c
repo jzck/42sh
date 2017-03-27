@@ -6,11 +6,18 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:09:39 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/16 11:58:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:59:50 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			hist_is_delim(char c)
+{
+	if (c == ' ' || c == '"')
+		return (1);
+	return (0);
+}
 
 static char	*ft_nget_histo(size_t nb_his)
 {
