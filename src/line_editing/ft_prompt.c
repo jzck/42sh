@@ -19,7 +19,6 @@ static int	promt_git_status(int fd)
 	char	*line;
 
 	get_next_line(fd, &line);
-	close(fd);
 	tmp = line;
 	if (ft_strrchr(line, '/'))
 		line = ft_strdup(ft_strrchr(line, '/') + 1);
@@ -36,6 +35,7 @@ static int	promt_git_status(int fd)
 	ft_strdel(&tmp);
 	while (get_next_line(fd, &tmp) > 0)
 		ft_strdel(&tmp);
+	close(fd);
 	ft_strdel(&tmp);
 	return (len + 8);
 }
