@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/24 23:26:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:29:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -605,6 +605,7 @@ static t_stackmatch		g_stackmatch[] =
 	{NEWLINE_LIST, FOR_WORDLIST},
 	{NEWLINE_LIST, TK_IN},
 	{NEWLINE_LIST, TK_WHILE},
+	{NEWLINE_LIST, LOOP},
 	{NEWLINE_LIST, FUNC_NAME},
 	{NEWLINE_LIST, TK_UNTIL},
 	{NEWLINE_LIST, TK_IF},
