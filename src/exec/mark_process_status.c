@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 12:41:11 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 17:28:45 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:08:10 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int		mark_process_status(pid_t pid, int status)
 		}
 		return (0);
 	}
-	SH_ERR("No child process %d", pid);
+	SH_ERR("No child process %i", pid);
 	return (1);
 }

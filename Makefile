@@ -196,6 +196,7 @@ job_control/job_run.c\
 job_control/job_update_id.c\
 job_control/job_update_status.c\
 job_control/job_wait.c\
+job_control/jobc_destroy.c\
 job_control/mark_job_as_running.c\
 job_control/pprint_brace.c\
 job_control/pprint_case.c\
