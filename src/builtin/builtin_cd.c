@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 21:23:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 18:00:06 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_cliopts	g_cdopts[] =
 	{0, NULL, 0, 0, NULL, 0},
 };
 
-int			cd_file_autorisations(char *target, int flag)
+int					cd_file_autorisations(char *target, int flag)
 {
 	(void)flag;
 	if (access(target, F_OK))

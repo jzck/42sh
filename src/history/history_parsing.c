@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 11:39:47 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/22 12:09:59 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 18:01:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	check_validity(char *str, int i)
 	else if (!str[i + 1] || str[i + 1] == '"')
 		return (0);
 	return (1);
-		
 }
 
 static int	history_parsing_nb_and_name(char *str, int *i)
