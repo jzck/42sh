@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/23 15:41:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 09:30:01 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define KP_D		4348699
 # define KP_L		4479771
 # define KP_R		4414235
+# define KP_T		9
+# define KP_TS		5921563
 
 /*
 ** Autocompletion list for the valid candidates from the parser.
