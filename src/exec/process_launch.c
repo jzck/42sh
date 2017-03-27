@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 01:01:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:46:26 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@ int		process_fork(t_process *p)
 {
 	pid_t		pid;
 
+	if (!p)
+		return (0);
 	if ((pid = fork()) == -1)
 		exit(SH_ERR("fork(): %s", strerror(errno)));
-	else if (pid)
+	else if (pid != 0)
 		return (pid);
-	if (!p)
-		return (pid);
-	if (process_redirect(p))
-		exit(1);
-	process_setgroup(p, 0);
-	process_setsig();
 	exec_destroy(&data_singleton()->exec);
-	exec_init(&data_singleton()->exec);
-	data_singleton()->opts &= ~SH_INTERACTIVE;
-	data_singleton()->opts &= ~SH_OPTS_JOBC;
-	exit(p->map.launch(p));
+	jobc_destroy(&data_singleton()->jobc);
+	if ((pid = 1) && process_redirect(p) == 0)
+	{
+		shell_fds_push();
+		process_setgroup(p, 0);
+		process_setsig();
+		data_singleton()->opts &= ~(SH_INTERACTIVE | SH_OPTS_JOBC);
+		pid = p->map.launch(p);
+	}
+	shell_fds_destroy();
+	exit(pid);
 }
 
 int		process_launch(t_process *p)
@@ -52,12 +55,12 @@ int		process_launch(t_process *p)
 		set_exitstatus(1, 1);
 	else
 	{
-		exec_pushfds();
+		shell_fds_push();
 		p->map.launch(p);
-		exec_popfds();
-		shell_resetfds();
-		shell_resetsig();
+		shell_fds_pop();
 	}
+	shell_fds_reset();
+	shell_sig_reset();
 	process_free(p, 0);
 	return (0);
 }

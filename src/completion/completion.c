@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:50:33 by alao              #+#    #+#             */
-/*   Updated: 2017/03/27 09:30:40 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/27 17:11:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		c_mv_tab(t_comp *c, int next)
 		ptr->next->cursor = 1;
 	else
 		ptr->prev->cursor = 1;
-	}
+}
 
 /*
 ** Once the completion has been processed, this is the return point.

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:26:32 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:54:19 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:00:19 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				data_init(int ac, char **av, char **env)
 	lexer_init(&data->lexer);
 	parser_init(&data->parser);
 	exec_init(&data->exec);
+	jobc_init(&data->jobc);
 	if ((term_name = ft_getenv(data->env, "TERM")) == NULL)
 		term_name = "dumb";
 	if (tgetent(NULL, term_name) != 1)

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:23:59 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 01:41:36 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:13:41 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int			interactive_settings(void)
 	while (tcgetpgrp(STDIN) != (*shell_pgid = getpgrp()))
 		kill(-*shell_pgid, SIGTTIN);
 	*shell_pgid = getpid();
-	shell_resetsig();
+	shell_sig_reset();
 	if (setpgid(*shell_pgid, *shell_pgid))
 	{
 		SH_ERR("setpgid(): %s", strerror(errno));
@@ -99,5 +99,6 @@ int					shell_init(int ac, char **av, char **env)
 		return (-1);
 	if (SH_IS_INTERACTIVE(data->opts) && interactive_settings() < 0)
 		return (-1);
+	shell_fds_init();
 	return (0);
 }

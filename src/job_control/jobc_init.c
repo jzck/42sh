@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_popfds.c                                      :+:      :+:    :+:   */
+/*   jobc_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/26 21:31:05 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 00:58:34 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/27 15:59:03 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 16:01:41 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			exec_popfds(void)
+int			jobc_init(t_jobc *jobc)
 {
-	int		i;
-	int		fd;
-	t_exec	*exec;
-
-	exec = &data_singleton()->exec;
-	i = -1;
-	while (++i < 10)
-	{
-		fd = pop(&exec->fd_save[i]);
-		if (fd != -1)
-			close(fd);
-	}
+	jobc->first_job = NULL;
+	jobc->current_id = 1;
 	return (0);
 }

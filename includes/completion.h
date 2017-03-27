@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/27 09:30:01 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/27 17:42:17 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ int					ft_sstrlen(char **s);
 char				*ft_sstrtostr(char **s, char *sep);
 char				*ft_add_escape(char *str, char to_escape);
 void				c_lst_id(t_comp *c);
+char				*c_strdupi(char *s, int (*f)(char));
 
 #endif

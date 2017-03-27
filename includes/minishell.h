@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:07:44 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 15:44:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 15:55:04 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct	s_data
 	char		**argv;
 	t_line		line;
 	t_lexer		lexer;
+	t_list		*fd_save[10];
 	t_parser	parser;
 	t_comp		*comp;
 	t_exec		exec;
@@ -64,8 +65,14 @@ int		data_init(int ac, char **av, char **env);
 void	data_exit(void);
 int		get_c_arg(char *opt_arg, t_data *data);
 
-void	shell_resetfds(void);
-void	shell_resetsig(void);
+void	shell_sig_reset(void);
+
+void	shell_fds_init(void);
+void	shell_fds_destroy(void);
+int		shell_fds_pop(void);
+int		shell_fds_push(void);
+void	shell_fds_reset(void);
+void	shell_fds_destroy(void);
 
 char	*ft_putast(void *node);
 void	ft_putast2(void *node);

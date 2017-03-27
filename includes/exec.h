@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 21:39:33 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:46:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ struct	s_job
 struct	s_exec
 {
 	t_job		job;
-	t_list		*fd_save[10];
 	t_flag		attrs;
 	int			fdin;
 	t_list		*op_stack;
@@ -141,8 +140,6 @@ struct	s_exec
 
 int		exec_init(t_exec *exec);
 int		exec_destroy(t_exec *exec);
-int		exec_pushfds();
-int		exec_popfds();
 int		process_fork(t_process *p);
 int		process_setgroup(t_process *p, pid_t pid);
 void	process_setsig(void);
