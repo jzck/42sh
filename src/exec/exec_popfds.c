@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   exec_popfds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 11:09:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 22:14:17 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/26 21:31:05 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 00:58:34 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		pop(t_list **lst)
+int			exec_popfds(void)
 {
-	t_list	*top;
-	int		item;
+	int		i;
+	int		fd;
+	t_exec	*exec;
 
-	if (!(lst && *lst))
-		return (0);
-	top = *lst;
-	item = top ? *(int*)top->content : 0;
-	*lst = (*lst)->next;
-	ft_lstdelone(&top, ft_lst_cfree);
-	return (item);
+	exec = &data_singleton()->exec;
+	i = -1;
+	while (++i < 10)
+	{
+		fd = pop(&exec->fd_save[i]);
+		if (fd != -1)
+			close(fd);
+	}
+	return (0);
 }

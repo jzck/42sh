@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_backslash.c                                  :+:      :+:    :+:   */
+/*   open_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 02:16:36 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/25 01:10:56 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 02:54:39 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		lexer_backslash(t_list **alst, t_lexer *lexer)
+int		try_access(char *file, int exists, t_flag a_flag)
 {
-	t_token		*token;
-
-	token = (*alst)->content;
-	lexer->state = DEFAULT;
-	if (lexer->str[lexer->pos + 1] == 0)
-	{
-		lexer->str[lexer->pos] = 0;
-		push(&lexer->stack, BACKSLASH);
-		return (0);
-	}
-	lexer->pos++;
-	token_append(token, lexer, 1, 1);
-	lexer->pos++;
-	return (lexer_lex(alst, lexer));
+	if (exists && access(file, F_OK) != 0)
+		return (ERR_SET(E_SYS_NOFILE, file) * 0 - 1);
+	else if (is_directory(file))
+		return (ERR_SET(E_SYS_ISDIR, file) * 0 - 1);
+	else if (access(file, F_OK) == 0 && access(file, a_flag) != 0)
+		return (ERR_SET(E_SYS_NOPERM, file) * 0 - 1);
+	return (0);
 }

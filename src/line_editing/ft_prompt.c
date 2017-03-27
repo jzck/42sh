@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 13:51:33 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 10:52:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 01:00:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	promt_git_status(int fd)
 	char	*line;
 
 	get_next_line(fd, &line);
+	close(fd);
 	tmp = line;
 	if (ft_strrchr(line, '/'))
 		line = ft_strdup(ft_strrchr(line, '/') + 1);

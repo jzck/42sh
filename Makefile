@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/25 21:38:21 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/27 02:54:02 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,13 +70,16 @@ exec/exec_ampersand.c\
 exec/exec_and_if.c\
 exec/exec_bang.c\
 exec/exec_case_branch.c\
+exec/exec_destroy.c\
 exec/exec_elif.c\
 exec/exec_else.c\
 exec/exec_func.c\
+exec/exec_init.c\
 exec/exec_leaf.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
-exec/exec_reset.c\
+exec/exec_popfds.c\
+exec/exec_pushfds.c\
 exec/exec_semi.c\
 exec/exec_var.c\
 exec/fd_is_valid.c\

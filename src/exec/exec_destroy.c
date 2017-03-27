@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   exec_reset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhalford <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 11:09:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/26 22:14:17 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/08 14:31:42 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 00:33:31 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int		pop(t_list **lst)
+int			exec_destroy(t_exec *exec)
 {
-	t_list	*top;
-	int		item;
+	t_jobc	*jobc;
+	int		i;
 
-	if (!(lst && *lst))
+	if (!exec)
 		return (0);
-	top = *lst;
-	item = top ? *(int*)top->content : 0;
-	*lst = (*lst)->next;
-	ft_lstdelone(&top, ft_lst_cfree);
-	return (item);
+	jobc = &data_singleton()->jobc;
+	ft_lstdel(&exec->op_stack, ft_lst_cfree);
+	ft_lstdel(&jobc->first_job, job_free);
+	i = -1;
+	return (0);
 }

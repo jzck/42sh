@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 20:07:48 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:54:21 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ struct	s_exec
 	int			control_count;
 };
 
-int		exec_reset(void);
-int		exec_destroy(void);
+int		exec_init(t_exec *exec);
+int		exec_destroy(t_exec *exec);
 int		exec_pushfds();
 int		exec_popfds();
 int		process_fork(t_process *p);

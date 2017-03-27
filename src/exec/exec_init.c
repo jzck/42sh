@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_less.c                                    :+:      :+:    :+:   */
+/*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/06 22:09:53 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 02:56:59 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/26 21:28:09 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 02:55:43 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		redirect_less(t_redir *redir)
+int			job_init(t_job *job)
 {
-	int		fdold;
-	int		fdnew;
+	job->id = 0;
+	job->pgid = 0;
+	job->attrs = 0;
+	job->first_process = NULL;
+	tcgetattr(STDIN, &job->tmodes);
+	return (0);
+}
 
-	fdnew = redir->n;
-	if ((try_access(redir->word, 1, R_OK)) != 0)
-		return (ft_perror(NULL));
-	if ((fdold = open(redir->word, O_RDONLY, 0644)) < 0)
-		exit(1);
-	fd_replace(fdold, fdnew);
+int			exec_init(t_exec *exec)
+{
+	t_jobc	*jobc;
+	int		i;
+
+	jobc = &data_singleton()->jobc;
+	job_init(&exec->job);
+	i = -1;
+	while (++i < 10)
+		exec->fd_save[i] = NULL;
+	exec_pushfds();
+	exec->attrs = 0;
+	exec->fdin = STDIN;
+	exec->op_stack = NULL;
+	jobc->first_job = NULL;
+	jobc->current_id = 1;
 	return (0);
 }

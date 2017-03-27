@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 14:54:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 19:19:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 00:10:47 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int	process_set_spec(t_process *p, t_btree *ast)
 	int			i;
 	t_astnode	*item;
 
-	i = -1;
 	if (!ast)
 		return (0);
 	item = ast->item;
+	i = -1;
 	while (g_setprocessmap[++i].id)
 		if (item->type == g_setprocessmap[i].id)
 		{
@@ -58,17 +58,15 @@ int			process_set(t_process *p, t_btree *ast)
 	|| (EXEC_IS_OR_IF(exec->attrs)
 	&& ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0") == 0))
 		return (1);
-	fds[PIPE_WRITE] = STDOUT;
-	fds[PIPE_READ] = STDIN;
-	(op == TK_PIPE) ? pipe(fds) : (0);
 	exec->job.attrs |= (op == TK_AMP ? JOB_BG : 0);
 	p->fdin = exec->fdin;
-	p->to_close = fds[PIPE_READ];
-	p->fdout = fds[PIPE_WRITE];
+	(op == TK_PIPE) ? pipe(fds) : (0);
+	p->fdout = (op == TK_PIPE) ? fds[PIPE_WRITE] : STDOUT;
+	exec->fdin = (op == TK_PIPE) ? fds[PIPE_READ] : STDIN;
+	p->to_close = exec->fdin;
 	p->pid = 0;
-	exec->fdin = fds[PIPE_READ];
 	if (ast)
 		p->redirs = ft_lstmap(
 				((t_astnode *)ast->item)->data.cmd.redir, &redir_copy);
-	return ((!ast) ? 0 : process_set_spec(p, ast));
+	return (process_set_spec(p, ast));
 }
