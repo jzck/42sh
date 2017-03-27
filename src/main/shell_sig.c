@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pushfds.c                                     :+:      :+:    :+:   */
+/*   shell_sig_reset.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/26 21:31:46 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 00:58:25 by jhalford         ###   ########.fr       */
+/*   Created: 2017/03/27 15:35:01 by jhalford          #+#    #+#             */
+/*   Updated: 2017/03/27 15:35:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			exec_pushfds(void)
+void	shell_sig_reset(void)
 {
-	int		i;
-	int		fd;
-	t_exec	*exec;
-
-	exec = &data_singleton()->exec;
-	i = -1;
-	while (++i < 10)
-	{
-		fd = fcntl(i, F_DUPFD_CLOEXEC, 10);
-		push(&(exec->fd_save[i]), fd);
-	}
-	return (0);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGCHLD, SIG_DFL);
 }

@@ -78,8 +78,6 @@ exec/exec_init.c\
 exec/exec_leaf.c\
 exec/exec_or_if.c\
 exec/exec_pipe.c\
-exec/exec_popfds.c\
-exec/exec_pushfds.c\
 exec/exec_semi.c\
 exec/exec_var.c\
 exec/fd_is_valid.c\
@@ -197,6 +195,7 @@ job_control/job_update_id.c\
 job_control/job_update_status.c\
 job_control/job_wait.c\
 job_control/jobc_destroy.c\
+job_control/jobc_init.c\
 job_control/mark_job_as_running.c\
 job_control/pprint_brace.c\
 job_control/pprint_case.c\
@@ -286,8 +285,9 @@ main/data_init.c\
 main/data_singleton.c\
 main/ft_putast.c\
 main/main.c\
+main/shell_fds.c\
 main/shell_init.c\
-main/shell_reset.c\
+main/shell_sig.c\
 parser/add_bang.c\
 parser/add_case.c\
 parser/add_cmd.c\

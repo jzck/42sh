@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 01:01:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:04:22 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,16 @@ int		process_fork(t_process *p)
 	process_setgroup(p, 0);
 	process_setsig();
 	exec_destroy(&data_singleton()->exec);
-	exec_init(&data_singleton()->exec);
+	jobc_destroy(&data_singleton()->jobc);
+	if (p->type == PROCESS_FILE)
+		shell_fds_destroy();
+	else
+		shell_fds_push();
 	data_singleton()->opts &= ~SH_INTERACTIVE;
 	data_singleton()->opts &= ~SH_OPTS_JOBC;
-	exit(p->map.launch(p));
+	pid = p->map.launch(p);
+	shell_fds_destroy();
+	exit(pid);
 }
 
 int		process_launch(t_process *p)
@@ -52,12 +58,12 @@ int		process_launch(t_process *p)
 		set_exitstatus(1, 1);
 	else
 	{
-		exec_pushfds();
+		shell_fds_push();
 		p->map.launch(p);
-		exec_popfds();
-		shell_resetfds();
-		shell_resetsig();
+		shell_fds_pop();
 	}
+	shell_fds_reset();
+	shell_sig_reset();
 	process_free(p, 0);
 	return (0);
 }

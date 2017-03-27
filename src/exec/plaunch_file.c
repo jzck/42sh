@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 14:53:31 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/22 21:32:36 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:02:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				plaunch_file(t_process *p)
 		error_launch(p->data.cmd.av[0], ": is a directory", 126);
 	else if (access(p->data.cmd.path, X_OK) == -1)
 		error_launch("permission denied: ", p->data.cmd.av[0], 126);
-	(*p->data.cmd.execf)(
+	execve(
 			p->data.cmd.path,
 			p->data.cmd.av,
 			data_singleton()->env);
