@@ -1,2 +1,0 @@
-(ls | cat
-pwd ;  ls)
