@@ -6,7 +6,7 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/27 17:02:38 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/27 18:08:05 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -226,6 +226,7 @@ lexer/insert_newline.c\
 lexer/isrw_delim.c\
 lexer/keep_last_type.c\
 lexer/lexer_backslash.c\
+lexer/lexer_bang.c\
 lexer/lexer_bquote.c\
 lexer/lexer_curly_braces.c\
 lexer/lexer_default.c\

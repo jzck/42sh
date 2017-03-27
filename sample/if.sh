@@ -1,9 +1,25 @@
-if cat wef4eeef
+if false
 then
-	echo Conditon 1
-elif cat yulu
+	echo PERDU
+elif false
 then
-	echo Condition 2
+	echo PERDU
+elif true
+then
+	if false
+	then
+		echo PERDU
+	elif
+		echo GAGNE
+	fi > file
 else
-	echo Condition 3
+	echo PERDU
 fi
+cat -e file
+
+sleep 2
+echo
+echo "My sample :"
+sleep 2
+echo
+cat sample/if.sh

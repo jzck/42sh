@@ -8,3 +8,10 @@ echo aaa \
 	| (echo bbb 7; cat -e ;echo ccc 7) \
 	| (echo bbb 8; cat -e ;echo ccc 8) \
 	| (echo bbb 9; cat -e ;echo ccc 9)
+
+
+sleep 2
+echo "My sample :"
+echo
+sleep 2
+cat sample/subshell.sh

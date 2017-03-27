@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 15:32:13 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 15:57:21 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:02:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			shell_fds_pop(void)
 	return (0);
 }
 
-void	shell_fds_reset(void)
+void		shell_fds_reset(void)
 {
 	t_data	*data;
 	int		i;
@@ -72,7 +72,7 @@ void	shell_fds_reset(void)
 	}
 }
 
-void	shell_fds_destroy(void)
+void		shell_fds_destroy(void)
 {
 	t_data	*data;
 	int		i;

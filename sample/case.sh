@@ -1,8 +1,16 @@
-case van in
-	( "bus" ) echo Hello world ;;
-	( "velo" ) echo Comment va  ;;
-	( "van" ) case tutu in
-					( toto ) pwd ;;
-					( tutu ) ls ;;
+case toto in
+	( tutu ) echo PERDU ;;
+	( titi ) echo PERDU  ;;
+	( toto ) case lala in
+					( lolo ) echo PERDU ;;
+					( lala ) echo GAGNE ;;
 				esac ;;
-esac
+esac > file
+cat -e file
+
+sleep 2
+echo
+echo "My sample :"
+sleep 2
+echo
+cat sample/case.sh

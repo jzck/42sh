@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/23 16:47:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:22:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_ASSIGNMENT_WORD, NEWLINE_LIST, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, CMD_NAME, CMD_SUFFIX},
 	{TK_ASSIGNMENT_WORD, CMD_SUPERIOR, CMD_SUFFIX},
-	{TK_ASSIGNMENT_WORD, COMPOUND_LIST, CMD_SUFFIX},
+	{TK_ASSIGNMENT_WORD, COMPOUND_LIST, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, COMPLETE_CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, AND_OR, CMD_PREFIX},
@@ -94,6 +94,7 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_NEWLINE, TK_RBRACE, CMD_NAME},
 	{TK_NEWLINE, TK_IN, NEWLINE_LIST},
 	{TK_NEWLINE, TK_WHILE, NEWLINE_LIST},
+	{TK_NEWLINE, LOOP, NEWLINE_LIST},
 	{TK_NEWLINE, TK_UNTIL, NEWLINE_LIST},
 	{TK_NEWLINE, TK_FOR, NEWLINE_LIST},
 	{TK_NEWLINE, TK_IF, NEWLINE_LIST},

@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 16:04:32 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:02:20 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	data_exit(void)
 	t_data	*data;
 
 	data = data_singleton();
-	/* ft_strdel(&data->line.input); */
 	ft_strdel(&data->binary);
 	ft_sstrfree(data->env);
 	ft_sstrfree(data->local_var);
