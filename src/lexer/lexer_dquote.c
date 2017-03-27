@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 18:19:57 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:52:15 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 		lexer->pos++;
 		if (lexer->str[lexer->pos] == 0)
 			return (push(&lexer->stack, BACKSLASH) ? 0 : 0);
+		token_append(token, lexer, 1, 0);
 	}
 	else if (lexer->str[lexer->pos] == '`' && (lexer->state = BQUOTE))
 		return (lexer_lex(alst, lexer));
