@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 18:07:50 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 02:55:04 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:12:52 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	data_exit(void)
 	lexer_destroy(&data->lexer);
 	parser_destroy(&data->parser);
 	exec_destroy(&data->exec);
+	jobc_destroy(&data->jobc);
 	i = -1;
 	while (++i < 10)
 		ft_lstdel(&data->exec.fd_save[i], ft_lst_cfree);
