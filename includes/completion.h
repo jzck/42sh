@@ -6,7 +6,7 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 11:13:04 by alao              #+#    #+#             */
-/*   Updated: 2017/03/27 17:42:17 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/28 08:13:56 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,10 @@ void				c_printer(t_comp *c);
 ** c_exclusion_foldr : Check for match folder.
 **        ft_sstrlen : Return size of char **.
 **      ft_sstrtostr : Create char * from char ** with char *sep between.
+**     ft_add_escape : Add escape char to str.
+**          c_lst_id : Repair ID list.
+**        c_is_delim : Check char for specific one.
+**         c_strdupi : Dupe
 */
 
 int					c_clear(t_data *s);
@@ -189,6 +193,7 @@ int					ft_sstrlen(char **s);
 char				*ft_sstrtostr(char **s, char *sep);
 char				*ft_add_escape(char *str, char to_escape);
 void				c_lst_id(t_comp *c);
+int					c_is_delim(char c);
 char				*c_strdupi(char *s, int (*f)(char));
 
 #endif

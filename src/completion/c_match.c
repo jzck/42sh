@@ -6,18 +6,26 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 13:27:14 by alao              #+#    #+#             */
-/*   Updated: 2017/03/27 22:32:20 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/28 09:09:56 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	c_is_delim(char c)
+/*
+** Check char
+*/
+
+int			c_is_delim(char c)
 {
 	if (c == ' ' || c == '<' || c == '>' || c == '\n' || c == ';')
 		return (1);
 	return (0);
 }
+
+/*
+** strdupi
+*/
 
 char		*c_strdupi(char *s, int (*f)(char))
 {
