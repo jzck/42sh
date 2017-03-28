@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:29:57 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 18:11:51 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/27 19:53:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		lexer_sep(t_list **alst, t_lexer *lexer)
 	if (token->type)
 		return (lexer_lex(&(*alst)->next, lexer));
 	c = lexer->str[lexer->pos];
+	token_append(token, lexer, 0, 0);
 	lexer->pos++;
 	cn = lexer->str[lexer->pos];
 	if (c == '&')

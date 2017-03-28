@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 11:56:49 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 18:14:22 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/27 20:23:24 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		lexer_backslash(t_list **alst, t_lexer *lexer)
 		push(&lexer->stack, BACKSLASH);
 		return (0);
 	}
+	token->type = token->type ? token->type : TK_WORD;
 	lexer->pos++;
 	token_append(token, lexer, 1, 1);
 	lexer->pos++;
