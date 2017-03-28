@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 10:43:16 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/20 14:09:01 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/28 12:22:12 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	ft_modify_str(char *str_srch, size_t srch_pos, char **str,
 		*str = ft_strdup(*str);
 		ft_current_str(*str, *pos);
 		ft_get_next_str(*str, pos);
+		if ((*str)[*pos])
+			++(*pos);
 	}
 	free(str_srch);
 	return (0);
