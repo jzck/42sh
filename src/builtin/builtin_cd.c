@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:20:42 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/27 19:45:31 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:41:52 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #define CDERR_0		"cd: too many arguments"
 #define CDERR_1		"cd %s not set"
 #define CDERR_2		"cd : %s: No such file or directory"
-#define CDERR_3		"cd : %s: Permission denied"
-#define CDERR_4		"cd : %s: Not a directory"
+#define CDERR_3		"cd : %s: Not a directory"
+#define CDERR_4		"cd : %s: Permission denied"
 #define CDERR_5		"cd : unable to proceed: %s"
 
 static t_cliopts	g_cdopts[] =
