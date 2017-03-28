@@ -6,11 +6,27 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/27 18:50:28 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/28 08:14:15 by alao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
+
+static char	*c_current_words(void)
+{
+	size_t	pos;
+	char	*str;
+
+	pos = data_singleton()->line.pos;
+	str = data_singleton()->line.input;
+	if (pos && c_is_delim(str[pos]))
+		--pos;
+	while (pos && !c_is_delim(str[pos]))
+		--pos;
+	if (c_is_delim(str[pos]))
+		++pos;
+	return (c_strdupi(str + pos, &c_is_delim));
+}
 
 /*
 ** Recreate a c->match value by adding the new key pressed to it.
@@ -20,17 +36,22 @@ static int		c_refresh_match(t_comp *c, long int keypress)
 {
 	char		*tmp;
 	char		kpconv[2];
+	char		*dump;
 
 	kpconv[0] = (char)keypress;
 	kpconv[1] = '\0';
 	tmp = c->match ? ft_strjoin(c->match, kpconv) : ft_strdup(kpconv);
 	c->match ? ft_memdel((void *)&c->match) : (0);
+	dump = c_current_words();
+	if (!(ft_strchr(dump, '$')))
+		c->match = ft_strdup(tmp);
 	tmp ? ft_memdel((void *)&tmp) : (0);
 	tmp = ft_strjoin(c->rcmd, kpconv);
 	c->rcmd ? ft_memdel((void *)&c->rcmd) : (0);
 	c->rcmd = ft_strdup(tmp);
 	c->ircmd++;
 	tmp ? ft_memdel((void *)&tmp) : (0);
+	dump ? ft_memdel((void *)&dump) : (0);
 	return (0);
 }
 
