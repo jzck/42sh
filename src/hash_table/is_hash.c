@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+static char	*h_free_one(t_list **head, t_list *list, t_list *ref)
+{
+	if (!((*head)->next))
+		ft_lstdelone(head, &ft_hash_free);
+	else
+	{
+		ref->next = list->next;
+		ft_lstdelone(&list, &ft_hash_free);
+	}
+	return (NULL);
+}
+
 char	*ft_is_hash(char *cmd)
 {
 	t_list	*list;
@@ -25,12 +37,9 @@ char	*ft_is_hash(char *cmd)
 	{
 		if (!ft_strcmp(((t_hash *)list->content)->key, cmd))
 		{
-			if (access(((t_hash *)list->content)->path, X_OK))
-			{
-				ref->next = list->next;
-				ft_lstdelone(&list, &ft_hash_free);
-				return (NULL);
-			}
+			if (access(((t_hash *)list->content)->path,
+							X_OK | F_OK) < 0)
+				return (h_free_one(&g_hash[id], list, ref));
 			return (ft_strdup(((t_hash *)list->content)->path));
 		}
 		ref = list;
