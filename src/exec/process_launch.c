@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/28 15:36:13 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/28 20:29:23 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int		process_fork(t_process *p)
 int		process_launch(t_process *p)
 {
 	p->state = PROCESS_RUNNING;
-	if (!IS_PIPESINGLE(*p)
-			|| p->type == PROCESS_FILE
+	if (!IS_PIPESINGLE(*p) || p->type == PROCESS_FILE
 			|| p->type == PROCESS_SUBSHELL)
 	{
 		p->pid = process_fork(p);

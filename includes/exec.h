@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 20:29:56 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 15:46:34 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/28 20:22:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ struct	s_exec
 	int			fdin;
 	t_list		*op_stack;
 	char		**case_pattern;
-	int			control_count;
 };
 
 int		exec_init(t_exec *exec);

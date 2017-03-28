@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 00:49:20 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/24 14:52:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/28 20:29:55 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int				plaunch_for(t_process *p)
 		return (SH_ERR(FORERR_0, var));
 	i = 0;
 	av = token_to_argv(temp, 1);
+	data_singleton()->exec.job.attrs &= ~JOB_BG;
 	while (av[++i])
 	{
 		builtin_setenv("setenv", (char*[]){"local", var, av[i], 0},

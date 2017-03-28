@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:20:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/24 22:43:37 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/28 20:29:54 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int				plaunch_while(t_process *p)
 	int		ret;
 
 	ret = 0;
+	data_singleton()->exec.job.attrs &= ~JOB_BG;
 	ft_exec(&p->data.d_while.condition);
 	while (!(ft_strcmp(ft_getenv(data_singleton()->env, "?"), "0")))
 	{
