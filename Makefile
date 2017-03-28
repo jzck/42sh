@@ -6,11 +6,11 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/27 19:45:47 by jhalford         ###   ########.fr        #
+#    Updated: 2017/03/28 07:54:25 by jhalford         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	minishell
+NAME		=	21sh
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
