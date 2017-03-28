@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:21:19 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/27 19:45:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/28 16:13:56 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int		process_fork(t_process *p)
 {
 	pid_t		pid;
 
-	if (!p)
-		return (0);
 	if ((pid = fork()) == -1)
 		exit(SH_ERR("fork(): %s", strerror(errno)));
 	else if (pid != 0)
 		return (pid);
+	if (!p)
+		return (0);
 	exec_destroy(&data_singleton()->exec);
 	jobc_destroy(&data_singleton()->jobc);
 	if ((pid = 1) && process_redirect(p) == 0)
