@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 14:45:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/27 20:57:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/28 16:00:36 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ static int		do_readline_routine(char **stream)
 	return (ret);
 }
 
+static int		exec_instruction(t_btree **ast, char **stream)
+{
+	t_data		*data;
+
+	data = data_singleton();
+	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
+		ft_add_str_in_history(data->lexer.str);
+	else
+		ft_strdel(stream);
+	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
+		exit(1);
+	else if (data->parser.state != SUCCESS)
+		set_exitstatus(1, 1);
+	return (0);
+}
+
 static int		handle_instruction(t_list **token, t_btree **ast)
 {
 	int			ret;
@@ -52,13 +68,7 @@ static int		handle_instruction(t_list **token, t_btree **ast)
 		else if (ret > 0)
 			break ;
 	}
-	if (SH_IS_INTERACTIVE(data->opts) && data->lexer.str)
-		ft_add_str_in_history(data->lexer.str);
-	if (data->parser.state == SUCCESS && ft_exec(ast) < 0)
-		exit(1);
-	else if (data->parser.state != SUCCESS)
-		set_exitstatus(1, 1);
-	return (0);
+	return (exec_instruction(ast, &stream));
 }
 
 int				main(int ac, char **av, char **env)

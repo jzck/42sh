@@ -6,13 +6,13 @@
 /*   By: alao <alao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 12:03:30 by alao              #+#    #+#             */
-/*   Updated: 2017/03/28 08:14:15 by alao             ###   ########.fr       */
+/*   Updated: 2017/03/28 16:09:08 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "completion.h"
 
-static char	*c_current_words(void)
+static char		*c_current_words(void)
 {
 	size_t	pos;
 	char	*str;
