@@ -6,11 +6,22 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:58 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/17 11:51:32 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/29 17:45:36 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	check_end_right(char *str, size_t pos)
+{
+	if (!str)
+		return ;
+	if (ft_nb_last_line(str, pos) == 0)
+	{
+		ft_putchar(str[pos]);
+		ft_puttermcaps("le");
+	}
+}
 
 int			ft_move_right(char **str, size_t *pos)
 {
@@ -36,6 +47,7 @@ int			ft_move_right(char **str, size_t *pos)
 	{
 		ft_putchar((*str)[*pos]);
 		++(*pos);
+		check_end_right(*str, *pos);
 	}
 	return (0);
 }
