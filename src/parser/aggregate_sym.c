@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/27 17:23:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 13:42:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_aggrematch		g_aggrematch[] =
 	{LINEBREAK, CMD_SUPERIOR, SEPARATOR_OP, 0},
 	{LINEBREAK, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
 	{LINEBREAK, PIPE_CLOSE_SEQUENCE, PIPE_SEQUENCE, PIPE_CLOSE_SEQUENCE},
-	{LINEBREAK, COMPOUND_LIST, COMPOUND_LIST, COMPOUND_LIST},
+	{LINEBREAK, COMPOUND_LIST, PROGRAM, LINEBREAK},
 	{LINEBREAK, CASE_LIST_NS, CASE_LIST_NS, CASE_LIST_NS},
 	{NEWLINE_LIST, CMD_NAME, CMD_SUPERIOR, CMD_NAME},
 	{NEWLINE_LIST, SEQUENTIAL_SEP, SEQUENTIAL_SEP, SEQUENTIAL_SEP},
@@ -231,6 +231,8 @@ static t_aggrematch		g_aggrematch[] =
 	{AND_OR_MINOR, LINEBREAK, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, TK_PAREN_OPEN, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, TK_LBRACE, AND_OR_MAJOR, 0},
+	{AND_OR_MINOR, CMD_SUPERIOR, AND_OR_MAJOR, 0},
+	{AND_OR_MINOR, COMPOUND_LIST, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, COMPLETE_COMMANDS, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, AND_OR_MAJOR, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, TK_BANG, AND_OR_MAJOR, TK_BANG},
@@ -280,7 +282,7 @@ static t_aggrematch		g_aggrematch[] =
 	{COMPOUND_COMMAND, CONDITION, PIPE_CLOSE_SEQUENCE, 0},
 	{END_COMMAND, SEQUENCE, PIPE_SEQUENCE, SEQUENCE},
 	{END_COMMAND, PIPE_SEMI_SEQUENCE, PIPE_SEQUENCE, PIPE_SEMI_SEQUENCE},
-	{END_COMMAND, AND_OR_MAJOR, LIST, AND_OR_MAJOR},
+	{END_COMMAND, AND_OR_MAJOR, COMPOUND_LIST, AND_OR_MAJOR},
 	{END_COMMAND, TK_WHILE, PIPE_SEQUENCE, 0},
 	{END_COMMAND, TK_WHILE, PIPE_SEQUENCE, 0},
 	{END_COMMAND, TK_UNTIL, PIPE_SEQUENCE, 0},

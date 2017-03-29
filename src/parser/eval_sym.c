@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/27 21:03:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 13:42:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1114,6 +1114,8 @@ static t_stackmatch		g_stackmatch[] =
 	{AND_OR_MINOR, TK_BANG},
 	{AND_OR_MINOR, TK_PAREN_OPEN},
 	{AND_OR_MINOR, TK_LBRACE},
+	{AND_OR_MINOR, CMD_SUPERIOR},
+	{AND_OR_MINOR, COMPOUND_LIST},
 	{AND_OR_MINOR, COMPLETE_COMMANDS},
 	{AND_OR_MINOR, AND_OR_MAJOR},
 	{PIPE_SEQUENCE, TK_WHILE},

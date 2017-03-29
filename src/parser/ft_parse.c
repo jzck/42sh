@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 15:48:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 13:41:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int		end_instruction(t_list **stack)
 	t_sym		*head;
 
 	head = (*stack)->content;
-	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE
+	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE 
+		|| *head == COMPOUND_LIST
 		|| *head == COMPLETE_COMMANDS || *head == END_COMMAND)
 		return (1);
 	return (0);
