@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:32:10 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 16:43:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 17:03:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,10 @@ char		*read_state(t_sym current)
 		return ("TK_DO");
 	if (current == TK_DONE)
 		return ("TK_DONE");
+	if (current == AND_OR_MINOR)
+		return ("AND_OR_MINOR");
+	if (current == AND_OR_MAJOR)
+		return ("AND_OR_MAJOR");
 	if (current == TK_COMMAND)
 		return ("TK_COMMAND");
 	if (current == TK_AND_IF)

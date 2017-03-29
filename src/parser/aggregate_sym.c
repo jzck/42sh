@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 16:52:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 17:14:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,11 @@ static t_aggrematch		g_aggrematch[] =
 	{COMPOUND_COMMAND, FUNC_NAME, COMMAND, FUNC_NAME},
 	{AND_OR_MINOR, PIPE_SEMI_SEQUENCE, AND_OR_MAJOR, PIPE_SEMI_SEQUENCE},
 	{AND_OR_MINOR, PIPE_CLOSE_SEQUENCE, AND_OR_MAJOR, PIPE_CLOSE_SEQUENCE},
+	{AND_OR_MINOR, COMPLETE_CONDITION, AND_OR_MAJOR, 0},
+	{AND_OR_MINOR, TK_DO, AND_OR_MAJOR, 0},
+	{AND_OR_MINOR, TK_PAREN_CLOSE, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, LINEBREAK, AND_OR_MAJOR, 0},
-	{AND_OR_MINOR, TK_PAREN_OPEN, AND_OR_MAJOR, 0},
+	{AND_OR_MINOR, TK_PAREN_OPEN, AND_OR_MAJOR, 1},
 	{AND_OR_MINOR, TK_LBRACE, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, COMPOUND_LIST, AND_OR_MAJOR, 0},
 	{AND_OR_MINOR, COMPLETE_COMMANDS, AND_OR_MAJOR, 0},

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 16:53:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 17:14:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,7 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_IF, CONDITION},
 	{TK_IF, COMPOUND_LIST},
 	{TK_IF, CASE_LIST_NS},
+	{TK_IF, AND_OR_MAJOR},
 	{TK_THEN, CONDITION},
 	{TK_THEN, COMPOUND_LIST},
 	{TK_ELSE, COMPOUND_LIST},
@@ -315,6 +316,7 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_CASE, COMPOUND_LIST},
 	{TK_CASE, NEWLINE_LIST},
 	{TK_CASE, SEPARATOR_OP},
+	{TK_CASE, AND_OR_MAJOR},
 	{TK_CASE, SEQUENCE},
 	{TK_IN, TK_WORD},
 	{TK_IN, NAME},
@@ -343,6 +345,7 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_WHILE, TK_THEN},
 	{TK_WHILE, COMPLETE_CONDITION},
 	{TK_WHILE, CONDITION},
+	{TK_WHILE, AND_OR_MAJOR},
 	{TK_UNTIL, LINEBREAK},
 	{TK_UNTIL, TK_PAREN_OPEN},
 	{TK_UNTIL, TK_LBRACE},
@@ -365,6 +368,7 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_UNTIL, TK_PAREN_CLOSE},
 	{TK_UNTIL, COMPLETE_CONDITION},
 	{TK_UNTIL, CONDITION},
+	{TK_UNTIL, AND_OR_MAJOR},
 	{FUNC_NAME, LINEBREAK},
 	{FUNC_NAME, TK_BANG},
 	{FUNC_NAME, TK_PAREN_OPEN},
@@ -387,6 +391,7 @@ static t_stackmatch		g_stackmatch[] =
 	{FUNC_NAME, CONDITION},
 	{FUNC_NAME, COMPOUND_LIST},
 	{FUNC_NAME, CASE_LIST_NS},
+	{FUNC_NAME, AND_OR_MAJOR},
 	{TK_FOR, LINEBREAK},
 	{TK_FOR, TK_BANG},
 	{TK_FOR, TK_PAREN_OPEN},
@@ -409,6 +414,7 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_FOR, TK_PAREN_CLOSE},
 	{TK_FOR, COMPLETE_CONDITION},
 	{TK_FOR, CONDITION},
+	{TK_FOR, AND_OR_MAJOR},
 	{TK_LBRACE, COMPLETE_COMMANDS},
 	{TK_LBRACE, LINEBREAK},
 	{TK_LBRACE, TK_BANG},
@@ -1117,6 +1123,9 @@ static t_stackmatch		g_stackmatch[] =
 	{AND_OR_MINOR, COMPLETE_COMMANDS},
 	{AND_OR_MINOR, COMPOUND_LIST},
 	{AND_OR_MINOR, AND_OR_MAJOR},
+	{AND_OR_MINOR, COMPLETE_CONDITION},
+	{AND_OR_MINOR, TK_DO},
+	{AND_OR_MINOR, TK_PAREN_CLOSE},
 	{PIPE_SEQUENCE, TK_WHILE},
 	{PIPE_SEQUENCE, FUNC_NAME},
 	{PIPE_SEQUENCE, TK_UNTIL},
@@ -1291,6 +1300,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 		return (1);
 	head = (*stack)->content;
 	i = 0;
+	DG("eval %s && %s", read_state(*head), read_state(new_sym));
 	while (g_stackmatch[i].top)
 	{
 		if (new_sym == g_stackmatch[i].top && *head == g_stackmatch[i].under)
