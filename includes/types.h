@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/29 13:59:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 16:40:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,8 @@ enum	e_sym
 	OTHER,
 	REDIR,
 	CMD,
+	AND_OR_MAJOR,
+	AND_OR_MINOR,
 	HEREDOCDATA,
 	HEREDOC_DELIM,
 	ALL = 200,

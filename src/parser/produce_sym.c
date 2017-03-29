@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 16:20:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/27 17:22:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_WORD, TK_BANG, CMD_NAME},
 	{TK_WORD, TK_PIPE, CMD_NAME},
 	{TK_WORD, AND_OR, CMD_NAME},
+	{TK_WORD, AND_OR_MAJOR, CMD_NAME},
 	{TK_WORD, TK_PAREN_CLOSE, CMD_NAME},
 	{TK_WORD, TK_WHILE, CMD_NAME},
 	{TK_WORD, TK_UNTIL, CMD_NAME},
@@ -74,6 +75,7 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_ASSIGNMENT_WORD, COMPLETE_CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, CONDITION, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, AND_OR, CMD_PREFIX},
+	{TK_ASSIGNMENT_WORD, AND_OR_MAJOR, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, PIPE_SEMI_SEQUENCE, CMD_SUFFIX},
 	{TK_ASSIGNMENT_WORD, SEQUENCE, CMD_PREFIX},
 	{TK_ASSIGNMENT_WORD, COMPLETE_COMMANDS, CMD_PREFIX},
@@ -117,7 +119,6 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_NEWLINE, CONDITION, NEWLINE_LIST},
 	{TK_NEWLINE, FOR_WORDLIST, NEWLINE_LIST},
 	{TK_NEWLINE, SEQUENTIAL_SEP, NEWLINE_LIST},
-	{TK_NEWLINE, AND_OR, NEWLINE_LIST},
 	{TK_NEWLINE, PROGRAM, NEWLINE_LIST},
 	{TK_SEMI, CMD_SUPERIOR, SEPARATOR_OP},
 	{TK_SEMI, LIST, SEPARATOR_OP},
@@ -127,10 +128,6 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_AMP, LIST, SEPARATOR_OP},
 	{TK_AMP, PIPE_SEMI_SEQUENCE, SEPARATOR_OP},
 	{TK_AMP, PIPE_CLOSE_SEQUENCE, SEPARATOR_OP},
-	{TK_AND_IF, ALL, AND_OR},
-	{TK_OR_IF, ALL, AND_OR},
-	{TK_AND_IF, COMPLETE_CONDITION, OTHER},
-	{TK_OR_IF, COMPLETE_CONDITION, OTHER},
 	{0, 0, 0},
 };
 
@@ -146,11 +143,10 @@ int				produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 	head = (*stack)->content;
 	i = 0;
 	*new_sym = 0;
-	DG();
 	while (g_prodmatch[i].new_sym)
 	{
 		if (token->type == g_prodmatch[i].token
-			&& (*head == g_prodmatch[i].stack || g_prodmatch[i].stack == ALL))
+			&& *head == g_prodmatch[i].stack)
 			*new_sym = g_prodmatch[i].new_sym;
 		i++;
 	}
