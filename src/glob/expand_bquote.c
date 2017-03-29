@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 17:47:53 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/23 03:20:10 by wescande         ###   ########.fr       */
+/*   Updated: 2017/03/29 14:59:17 by wescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void					init_expand(t_bquote *me, char *content, int doifs)
 	char			*content2;
 
 	ifs = doifs ? ft_getenv(data_singleton()->local_var, "IFS") : NULL;
-	content = ft_strtok(content, ifs);
+	content = content ? ft_strtok(content, ifs) : content;
 	if (!content || !(content2 = ft_strtok(NULL, ifs)))
 	{
 		ft_ld_pushfront(me->wk, gen_tab(ft_strjoinf(ft_strjoin(me->s1, content),
@@ -83,9 +83,9 @@ static int					search_bquote(t_bquote *me)
 			me->mid = ft_strsub(sta, 1, me->str - sta - 1);
 			me->s1 = ft_strsub(CH(*me->wk)[0], 0, sta - CH(*me->wk)[0]);
 			me->s2 = ft_strdup(me->str + 1);
-			if ((content = get_output(me->mid)))
-				init_expand(me, content,
-						!is_char_esc(me->esc, CH(*me->wk)[0], sta));
+			content = get_output(me->mid);
+			init_expand(me, content,
+					!is_char_esc(me->esc, CH(*me->wk)[0], sta));
 			ft_strdel(&me->mid);
 			ft_strdel(&me->s1);
 			ft_strdel(&me->s2);
