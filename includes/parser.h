@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 17:22:51 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 13:29:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:42:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct	s_parser
 	t_list		*stack;
 	t_sym		*new_sym;
 	t_list		*heredoc_queue;
+	int			cache;
 };
 
 struct	s_aggrematch
@@ -89,7 +90,7 @@ struct	s_treematch
 	int		(*add)(t_btree **ast, t_list **lst);
 };
 
-int		build_tree(t_btree **ast, t_list **lst);
+int		build_tree(t_btree **ast, t_list **lst, t_parser *parser);
 
 int		add_sep(t_btree **ast, t_list **lst);
 int		add_cmd(t_btree **ast, t_list **lst);

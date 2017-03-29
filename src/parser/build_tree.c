@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:32:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 13:28:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:40:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,20 @@ static int	check_cache(t_token *token, int cache)
 	return (0);
 }
 
-int			build_tree(t_btree **ast, t_list **lst)
+int			build_tree(t_btree **ast, t_list **lst, t_parser *parser)	
 {
 	int				i;
-	static int		cache;
+//	static int		cache;
 	t_token			*token;
 
 	i = 0;
 	token = (*lst)->content;
-	check_cache(token, cache);
+	check_cache(token, parser->cache);
 	while (g_treematch[i].type)
 	{
-		if ((isseparator(token, cache) && g_treematch[i].type == token->type))
+		if ((isseparator(token, parser->cache) && g_treematch[i].type == token->type))
 		{
-			cache = token->type;
+			parser->cache = token->type;
 			return (g_treematch[i].add(ast, lst));
 		}
 		i++;
