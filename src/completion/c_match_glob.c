@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/23 00:06:08 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/29 13:33:32 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ static int			c_glob_pos(char *str, size_t pos)
 	pos = data_singleton()->line.pos;
 	if (!str)
 		return (-1);
-	if (pos && str[pos] == ' ')
+	if (pos && (str[pos] == ' ' || str[pos] == ';'))
 		--pos;
-	while (pos && str[pos] != ' ')
+	while (pos && str[pos] != ' ' && str[pos] != ';')
 		--pos;
-	if (str[pos] == ' ')
+	if (str[pos] == ' ' || str[pos] == ';')
 		++pos;
 	return (pos);
 }
