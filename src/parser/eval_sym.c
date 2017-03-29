@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 15:31:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:52:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1245,20 +1245,17 @@ static t_stackmatch		g_stackmatch[] =
 	{PIPELINE, SEPARATOR_OP},
 	{PIPELINE, AND_OR},
 	{PIPELINE, NEWLINE_LIST},
-	{AND_OR, TK_DO},
 	{AND_OR, TK_PAREN_CLOSE},
 	{AND_OR, TK_WHILE},
 	{AND_OR, TK_UNTIL},
 	{AND_OR, TK_IF},
 	{AND_OR, TK_ELIF},
-	{AND_OR, TK_THEN},
 	{AND_OR, TK_ELSE},
 	{AND_OR, CMD_SUPERIOR},
 	{AND_OR, COMPOUND_LIST},
 	{AND_OR, PIPE_SEMI_SEQUENCE},
 	{AND_OR, PIPE_CLOSE_SEQUENCE},
 	{AND_OR, CASE_LIST_NS},
-	{AND_OR, COMPLETE_CONDITION},
 	{AND_OR, CONDITION},
 	{AND_OR, LINEBREAK},
 	{AND_OR, TK_BANG},

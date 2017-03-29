@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 19:30:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 13:29:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:42:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	parser_destroy(t_parser *parser)
 	ft_lstdel(&parser->heredoc_queue, &ft_lst_cfree);
 	free(parser->new_sym);
 	parser->new_sym = NULL;
+	parser->cache = 0;
 }
