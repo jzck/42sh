@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 14:32:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:19:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,13 +282,15 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_FI, CMD_SUPERIOR},
 	{TK_FI, END_COMMAND},
 	{TK_FI, CONDITION},
-	{TK_DO, CMD_SUPERIOR},
 	{TK_FI, COMPLETE_CONDITION},
+	{TK_FI, COMPLETE_COMMANDS},
+	{TK_DO, CMD_SUPERIOR},
 	{TK_DO, COMPOUND_LIST},
 	{TK_DO, NAME},
 	{TK_DO, SEQUENTIAL_SEP},
 	{TK_DONE, CMD_SUPERIOR},
 	{TK_DONE, COMPOUND_LIST},
+	{TK_DONE, COMPLETE_COMMANDS},
 	{TK_DONE, END_COMMAND},
 	{TK_CASE, LINEBREAK},
 	{TK_CASE, TK_BANG},
@@ -468,12 +470,13 @@ static t_stackmatch		g_stackmatch[] =
 	{TK_SEMI, IN},
 	{TK_SEMI, WORDLIST},
 	{TK_SEMI, LIST},
-	{TK_SEMI, TERM},
 	{TK_SEMI, CMD_NAME},
 	{TK_SEMI, PROGRAM},
 	{TK_SEMI, FOR_WORDLIST},
 	{TK_AMP, LIST},
 	{TK_AMP, TERM},
+	{TK_AMP, PROGRAM},
+	{TK_AMP, CMD_NAME},
 	{TK_PIPE, PATTERN},
 	{TK_PIPE, CMD_SUPERIOR},
 	{TK_PIPE, PIPE_SEMI_SEQUENCE},

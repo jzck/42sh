@@ -1,0 +1,2 @@
+might match_regex ${GLOBAL_TOKEN}_LEFT
+might_not match_regex ${GLOBAL_TOKEN}_RIGHT

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 14:30:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:19:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static t_aggrematch		g_aggrematch[] =
 	{TK_DSEMI, CMD_SUPERIOR, CLOSE_LIST, TK_PAREN_CLOSE},
 	{TK_DSEMI, PIPE_SEMI_SEQUENCE, CLOSE_LIST, TK_PAREN_CLOSE},
 	{TK_DSEMI, PIPE_CLOSE_SEQUENCE, CLOSE_LIST, TK_PAREN_CLOSE},
+	{TK_DSEMI, COMPOUND_LIST, CLOSE_LIST, TK_PAREN_CLOSE},
+	{TK_DSEMI, COMPLETE_COMMANDS, CLOSE_LIST, TK_PAREN_CLOSE},
 	{TK_PAREN_OPEN, TK_IN, PATTERN_CASE, 0},
 	{TK_PAREN_OPEN, CASE_LIST_NS, PATTERN_CASE, 0},
 	{TK_PAREN_OPEN, CMD_SUPERIOR, OPEN_FUNC, 0},
@@ -31,11 +33,13 @@ static t_aggrematch		g_aggrematch[] =
 	{TK_PIPE, PIPE_CLOSE_SEQUENCE, SEQUENCE, PIPE_CLOSE_SEQUENCE},
 	{TK_FI, ELSE_PART, IF_CLAUSE, TK_IF},
 	{TK_FI, COMPOUND_LIST, IF_CLAUSE, COMPLETE_CONDITION},
+	{TK_FI, COMPLETE_COMMANDS, IF_CLAUSE, COMPLETE_CONDITION},
 	{TK_FI, COMPLETE_CONDITION, IF_CLAUSE, COMPLETE_CONDITION},
 	{TK_FI, CONDITION, IF_CLAUSE, COMPLETE_CONDITION},
 	{TK_THEN, CONDITION, COMPLETE_CONDITION, CONDITION},
 	{TK_DONE, CMD_SUPERIOR, DO_GROUP, TK_DO},
 	{TK_DONE, COMPOUND_LIST, DO_GROUP, TK_DO},
+	{TK_DONE, COMPLETE_COMMANDS, DO_GROUP, TK_DO},
 	{TK_ESAC, TK_IN, CASE_CLAUSE, TK_CASE},
 	{TK_ESAC, CASE_LIST_NS, CASE_CLAUSE, TK_CASE},
 	{TK_PAREN_CLOSE, SUBSHELL, SUBSHELL, TK_PAREN_OPEN},
@@ -327,7 +331,7 @@ static t_aggrematch		g_aggrematch[] =
 	{PIPELINE, SEPARATOR_OP, AND_OR, 0},
 	{PIPELINE, COMPLETE_CONDITION, AND_OR, 0},
 	{PIPELINE, CONDITION, AND_OR, 0},
-	{PIPELINE, AND_OR, AND_OR, AND_OR},
+	{PIPELINE, AND_OR, COMPLETE_COMMANDS, 0},
 	{AND_OR, AND_OR, AND_OR, AND_OR},
 	{AND_OR, TK_DO, COMPOUND_LIST, 0},
 	{AND_OR, TK_PAREN_CLOSE, COMPOUND_LIST, 0},
