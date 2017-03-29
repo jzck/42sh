@@ -6,11 +6,11 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/29 11:03:41 by gwojda           ###   ########.fr        #
+#    Updated: 2017/03/29 11:09:04 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	21sh
+NAME		=	42sh
 
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror

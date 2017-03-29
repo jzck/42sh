@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 11:08:40 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/21 17:40:20 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/29 11:05:34 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*h_free_one(t_list **head, t_list *list, t_list *ref)
 	return (NULL);
 }
 
-char	*ft_is_hash(char *cmd)
+char		*ft_is_hash(char *cmd)
 {
 	t_list	*list;
 	t_list	*ref;
