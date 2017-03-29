@@ -6,7 +6,7 @@
 /*   By: gwojda <gwojda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:20:01 by gwojda            #+#    #+#             */
-/*   Updated: 2017/03/29 13:47:10 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/29 16:09:59 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					c_glob_matching(void)
 	if ((pos = c_glob_pos(NULL, 0)) == -1)
 		return (0);
 	current_word = ft_strdupi_w(str + pos);
-	if (current_word[0] == '$' || current_word[0] == '~')
+	if (current_word[0] == '~')
 	{
 		free(current_word);
 		return (0);

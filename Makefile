@@ -6,14 +6,14 @@
 #    By: wescande <wescande@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/29 21:32:58 by wescande          #+#    #+#              #
-#    Updated: 2017/03/28 23:16:21 by ariard           ###   ########.fr        #
+#    Updated: 2017/03/29 11:09:04 by gwojda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	42sh
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror #-fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror
 D_FLAGS		=	-g
 
 DELTA		=	$$(echo "$$(tput cols)-47"|bc)
@@ -248,7 +248,6 @@ lexer/token_append.c\
 lexer/token_cmp_type.c\
 lexer/token_free.c\
 lexer/token_init.c\
-lexer/token_print.c\
 line_editing/control_features.c\
 line_editing/copy_cut_paste/copy_cut_paste.c\
 line_editing/copy_cut_paste/underline_down.c\
@@ -283,7 +282,6 @@ line_editing/resize.c\
 main/data_exit.c\
 main/data_init.c\
 main/data_singleton.c\
-main/ft_putast.c\
 main/main.c\
 main/shell_fds.c\
 main/shell_init.c\
@@ -310,7 +308,6 @@ parser/parser_init.c\
 parser/pop_stack.c\
 parser/produce_sym.c\
 parser/push_stack.c\
-parser/read_stack.c\
 parser/redir_init.c\
 parser/stack_init.c\
 parser/sym_free.c\

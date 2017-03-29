@@ -6,7 +6,7 @@
 /*   By: wescande <wescande@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by wescande          #+#    #+#             */
-/*   Updated: 2017/03/27 21:43:44 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/28 07:50:46 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		do_parser_routine(t_list **token, t_btree **ast)
 		return (1);
 	if (data->parser.state == SUCCESS && stack_init(&data->parser))
 		exit(1);
-	token_print(*token);
 	if (ft_parse(ast, token, &data->parser))
 		exit(1);
 	if (data->parser.state != ERROR &&
