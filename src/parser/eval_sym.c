@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 15:19:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:31:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1256,6 +1256,7 @@ static t_stackmatch		g_stackmatch[] =
 	{AND_OR, CMD_SUPERIOR},
 	{AND_OR, COMPOUND_LIST},
 	{AND_OR, PIPE_SEMI_SEQUENCE},
+	{AND_OR, PIPE_CLOSE_SEQUENCE},
 	{AND_OR, CASE_LIST_NS},
 	{AND_OR, COMPLETE_CONDITION},
 	{AND_OR, CONDITION},
@@ -1285,7 +1286,6 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 		return (1);
 	head = (*stack)->content;
 	i = 0;
-	DG("eval %s &7 %s", read_state(*head), read_state(new_sym));
 	while (g_stackmatch[i].top)
 	{
 		if (new_sym == g_stackmatch[i].top && *head == g_stackmatch[i].under)
