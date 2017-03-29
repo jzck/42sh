@@ -6,13 +6,19 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:36:58 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/28 15:46:22 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:55:03 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		lexer_dquote(t_list **alst, t_lexer *lexer)
+static int		is_spec_dquote_esc(char c)
+{
+	return (c == '"' || c == '$' || c == '`'
+			|| c == '\\' || c == '!');
+}
+
+int				lexer_dquote(t_list **alst, t_lexer *lexer)
 {
 	t_token		*token;
 
@@ -25,10 +31,10 @@ int		lexer_dquote(t_list **alst, t_lexer *lexer)
 	{
 		if (lexer->str[++lexer->pos] == 0)
 			return (push(&lexer->stack, BACKSLASH) ? 0 : 0);
-		else if (lexer->str[lexer->pos] == '"')
+		else if (is_spec_dquote_esc(lexer->str[lexer->pos]))
 			token_append(token, lexer, 1, 1);
-		else
-			--lexer->pos;
+		else if (--lexer->pos || 1)
+			token_append(token, lexer, 1, 1);
 	}
 	else if (lexer->str[lexer->pos] == '`' && (lexer->state = BQUOTE))
 		return (lexer_lex(alst, lexer));
