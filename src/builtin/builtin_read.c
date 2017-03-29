@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:01:45 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/25 15:10:27 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/03/29 15:10:51 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int			bt_read_loop(t_read *data)
 		ft_printf(data->prompt);
 	while (42)
 	{
-		if ((ret = read(data->fd, buf, 1)) <= 0)
+		if ((ret = read(data->fd, buf, 4)) <= 0)
 			return (ret);
 		buf[ret] = 0;
+		ft_putchar(data->flag & BT_READ_LS ? 0 : *buf);
 		if (!esc && *buf == data->delim)
 			break ;
 		esc = esc ? 0 : !(data->flag & BT_READ_LR) && (*buf == '\\');
@@ -89,11 +90,10 @@ int			bt_read_assign(t_read *data)
 	tok = ft_strtok(input, ifs);
 	while (*names)
 	{
-		if (!(builtin_setenv("setenv", (char*[]){"read", *names, tok}, NULL)))
+		if ((builtin_setenv("setenv", (char*[]){"read", *names, tok}, NULL)))
 			return (1);
-		ifs = names[1] ? ifs : NULL;
+		ifs = (++names)[1] ? ifs : NULL;
 		tok = ft_strtok(NULL, ifs);
-		names++;
 	}
 	return (0);
 }
