@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:58:34 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 14:31:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 16:20:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ static t_prodmatch			g_prodmatch[] =
 	{TK_AMP, PIPE_CLOSE_SEQUENCE, SEPARATOR_OP},
 	{TK_AND_IF, ALL, AND_OR},
 	{TK_OR_IF, ALL, AND_OR},
+	{TK_AND_IF, COMPLETE_CONDITION, OTHER},
+	{TK_OR_IF, COMPLETE_CONDITION, OTHER},
 	{0, 0, 0},
 };
 
@@ -144,6 +146,7 @@ int				produce_sym(t_list **stack, t_sym *new_sym, t_list **lst)
 	head = (*stack)->content;
 	i = 0;
 	*new_sym = 0;
+	DG();
 	while (g_prodmatch[i].new_sym)
 	{
 		if (token->type == g_prodmatch[i].token

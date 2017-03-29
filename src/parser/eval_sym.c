@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:11:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 15:52:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 16:19:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1249,6 +1249,7 @@ static t_stackmatch		g_stackmatch[] =
 	{AND_OR, TK_WHILE},
 	{AND_OR, TK_UNTIL},
 	{AND_OR, TK_IF},
+	{AND_OR, TK_THEN},
 	{AND_OR, TK_ELIF},
 	{AND_OR, TK_ELSE},
 	{AND_OR, CMD_SUPERIOR},
@@ -1257,6 +1258,7 @@ static t_stackmatch		g_stackmatch[] =
 	{AND_OR, PIPE_CLOSE_SEQUENCE},
 	{AND_OR, CASE_LIST_NS},
 	{AND_OR, CONDITION},
+	{AND_OR, COMPLETE_CONDITION},
 	{AND_OR, LINEBREAK},
 	{AND_OR, TK_BANG},
 	{AND_OR, TK_PAREN_OPEN},
@@ -1283,6 +1285,7 @@ int			eval_sym(t_list **stack, t_sym new_sym)
 		return (1);
 	head = (*stack)->content;
 	i = 0;
+	DG("eval %s && %s", read_state(*head), read_state(new_sym));
 	while (g_stackmatch[i].top)
 	{
 		if (new_sym == g_stackmatch[i].top && *head == g_stackmatch[i].under)

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 15:58:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 15:19:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 16:19:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,7 @@ static t_aggrematch		g_aggrematch[] =
 	{AND_OR, CASE_LIST_NS, CASE_LIST_NS, 0},
 	{AND_OR, COMPLETE_CONDITION, COMPOUND_LIST, 0},
 	{AND_OR, CONDITION, COMPOUND_LIST, 0},
+	{AND_OR, COMPLETE_CONDITION, COMPOUND_LIST, 0},
 	{AND_OR, SEPARATOR_OP, LIST, LIST},
 	{AND_OR, NEWLINE_LIST, LIST, 0},
 	{AND_OR, LINEBREAK, LIST, 0},
