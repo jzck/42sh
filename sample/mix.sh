@@ -27,4 +27,4 @@ echo
 echo "My sample :"
 sleep 3
 echo
-cat sample/mix/mix.sh
+cat sample/mix.sh

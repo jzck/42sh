@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/25 15:48:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:24:01 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	while (parser && token && *token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
+		DG("produce sym %s", read_state(*parser->new_sym));
 		if (parser->new_sym && eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))

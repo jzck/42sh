@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 00:07:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/27 21:44:14 by gwojda           ###   ########.fr       */
+/*   Updated: 2017/03/29 15:07:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int		recognization_rvwords(t_token *pv_tk, t_token *at_tk)
 		|| pv_tk->type == TK_ELIF || pv_tk->type == TK_ELSE
 		|| pv_tk->type == TK_DSEMI || pv_tk->type == TK_PAREN_OPEN
 		|| pv_tk->type == TK_LBRACE || pv_tk->type == TK_UNTIL)
-		|| pv_tk->type == TK_PAREN_CLOSE
+		|| pv_tk->type == TK_PAREN_CLOSE || pv_tk->type == TK_AND_IF
+		|| pv_tk->type == TK_OR_IF
 		|| (pv_tk->type == TK_PAREN_CLOSE && at_tk->type == TK_PAREN_OPEN));
 }
 

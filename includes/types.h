@@ -6,7 +6,7 @@
 /*   By: jhalford <jhalford@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 17:11:48 by jhalford          #+#    #+#             */
-/*   Updated: 2017/03/24 17:10:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 13:59:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,6 @@ enum	e_sym
 	PIPE_CLOSE_SEQUENCE,
 	CMD_SUPERIOR,
 	SEQUENCE,
-	AND_OR_MAJOR,
-	AND_OR_MINOR,
 	END_COMMAND,
 	CONDITION,
 	COMPLETE_CONDITION,
