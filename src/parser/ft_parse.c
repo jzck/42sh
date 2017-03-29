@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 16:17:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/03/29 13:41:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/03/29 14:27:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int		end_instruction(t_list **stack)
 
 	head = (*stack)->content;
 	if (*head == CMD_SUPERIOR || *head == PIPE_SEMI_SEQUENCE 
-		|| *head == COMPOUND_LIST
 		|| *head == COMPLETE_COMMANDS || *head == END_COMMAND)
 		return (1);
 	return (0);
@@ -41,6 +40,7 @@ int				ft_parse(t_btree **ast, t_list **token, t_parser *parser)
 	while (parser && token && *token)
 	{
 		produce_sym(&parser->stack, parser->new_sym, token);
+		DG("produce sym %s", read_state(*parser->new_sym));
 		if (parser->new_sym && eval_sym(&parser->stack, *parser->new_sym))
 			return ((parser->state = ERROR));
 		if (aggregate_sym(&parser->stack, parser->new_sym, &parser->state))
