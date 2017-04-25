@@ -2,7 +2,7 @@
 
 42sh school project.
 
-By alao, ariard, gwojda, jhalford, wescande.
+By alao, ariard, gwojda, jhalford, wescande.  
 Final note : 125/100, best grade possible.
 
 More than 10 000 lines of pure C, even the library was written by ourselves. No memory leaks, no crash were allowed. The most impressive project of the first cycle of 42 school cursus.
@@ -96,12 +96,12 @@ Commands|Functions|
 `fg n`|Bring the specified jobs to foreground where `n` is the numerical value of the process found in `jobs`.
 
 ## scripting
-`while compound-list ; do compound-list ; done`
-`until compound-list ; do compound-list ; done`
-`if compound-list ; then compound-list ; elif compound-list ; then compound-list ; else compound-list`
-`for i in list ; do compound-list ; done`
-`case pattern1 in ( pattern2 ) compound-list ;; ( pattern1) compound-list ;; esac`
-`{ compound-list }`
-`! command`
-`func() { compound-list }`
-`VAR="hello world"`
+`while compound-list ; do compound-list ; done`  
+`until compound-list ; do compound-list ; done`  
+`if compound-list ; then compound-list ; elif compound-list ; then compound-list ; else compound-list`  
+`for i in list ; do compound-list ; done`  
+`case pattern1 in ( pattern2 ) compound-list ;; ( pattern1) compound-list ;; esac`   
+`{ compound-list }`  
+`! command`  
+`func() { compound-list }`  
+`VAR="hello world"`  
