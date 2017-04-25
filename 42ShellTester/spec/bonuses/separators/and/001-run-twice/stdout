@@ -1,2 +1,0 @@
-might match_regex "${GLOBAL_TOKEN}_LEFT"
-might match_regex "${GLOBAL_TOKEN}_RIGHT"

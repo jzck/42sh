@@ -1,2 +1,0 @@
-env: invalid option -w
-../../42sh: usage: env [-i] [name=value]... [utility [argument...]]

@@ -1,2 +1,0 @@
-The purpose of this test is to check that the AND operator `&&` makes the right command to not be executed if the left one exits with an error status code.
-The Shell should exit with the status code of the executed command.

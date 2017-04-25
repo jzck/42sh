@@ -1,2 +1,0 @@
-expected_to match_regex "${GLOBAL_TOKEN}_FIRST"
-expected_to_not match_regex "${GLOBAL_TOKEN}_SECOND"

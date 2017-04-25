@@ -1,2 +1,0 @@
-export: invalid option -n
-../../42sh: usage: export [name[=value] ...] or export -p
