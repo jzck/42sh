@@ -3,7 +3,7 @@
 42sh school project.
 
 By alao, ariard, gwojda, jhalford, wescande.  
-Final note : 125/100, best grade possible.
+Final grade : 125/100
 
 More than 10 000 lines of pure C, even the library was written by ourselves. No memory leaks, no crash were allowed. The most impressive project of the first cycle of 42 school cursus.
 
